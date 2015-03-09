@@ -1,8 +1,7 @@
 # jprime
 
 TODO
-1)
-currently in the SecurityConfig this two lines are commented.. but should not BE
+1)currently in the SecurityConfig this two lines are commented.. but should not BE
 
   //.antMatchers("/admin/**").hasRole("ADMIN") // #6
            //.anyRequest().authenticated() // 7
