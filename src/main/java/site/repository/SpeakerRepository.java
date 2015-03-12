@@ -13,5 +13,7 @@ import site.model.User;
 public interface SpeakerRepository extends PagingAndSortingRepository<Speaker, Long> {
 
 	String NAME = "speakerRepository";
+	
+	
 
 }

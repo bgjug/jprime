@@ -21,6 +21,8 @@ IndexController should use this userFacade to set all sponsors/speakers/etc that
 5) NavController should get the articles in one tag (passed by param) and set this in the model + redirect to a jsp page
 that looks like blog.html 
 6) NavController should have one more method to display a single article (based on name)
-7)CFP form
+7) WYSIWYG editor for content http://www.sitepoint.com/html5-wysiwyg/
+7) Images resizer... https://code.google.com/p/thumbnailator/
+7) CFP form
 8) payment provider
 
