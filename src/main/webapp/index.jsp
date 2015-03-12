@@ -172,7 +172,7 @@
                             <li>
                                 <a class="active" href="index.html">Home</a>
                                 <ul class="dropdown">
-                                    <li><a class="active" href="index.html">Home Main Version</a>
+                                    <li><a class="active" href="/">Home Main Version</a>
                                     </li>
                                     <li><a href="index-01.html">Home Version 1</a>
                                     </li>

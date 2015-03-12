@@ -14,6 +14,10 @@ public class IndexController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
+		//find all sponsors
+//		model.addAttribute("sponsors",findedSponsors);
+		//find top speakers
+		
 		return PAGE_INDEX;
 	}
 

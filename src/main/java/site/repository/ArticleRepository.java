@@ -12,5 +12,5 @@ public interface ArticleRepository extends PagingAndSortingRepository<Article, L
 
 	String NAME = "articleRepository";
 
-	public Page<Article> findByTag(String tag, Pageable pagable);
+//	public Page<Article> findByTag(String tag, Pageable pagable);
 }

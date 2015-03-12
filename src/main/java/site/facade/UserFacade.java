@@ -52,7 +52,8 @@ public class UserFacade {
 	}
 	
 	public Page<Article> findArticlesByTag(String tag, Pageable pageable){
-		return articleRepository.findByTag(tag, pageable);
+		return null;//TODO
+//		return articleRepository.findByTag(tag, pageable);
 	}
 	
 	public Page<Speaker> findAllSpeakers(Pageable pageable){
