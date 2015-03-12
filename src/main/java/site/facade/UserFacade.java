@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 import site.model.Article;
 import site.model.Speaker;
 import site.model.Sponsor;
+import site.model.Submission;
 import site.repository.ArticleRepository;
 import site.repository.SpeakerRepository;
 import site.repository.SponsorRepository;
+import site.repository.SubmissionRepository;
 import site.repository.TagRepository;
 import site.repository.UserRepository;
 
@@ -42,8 +44,12 @@ public class UserFacade {
 	@Autowired
 	@Qualifier(TagRepository.NAME)
 	private TagRepository tagRepository;
-	
-	public Speaker findSpeaker(Long id){
+
+    @Autowired
+    @Qualifier(SubmissionRepository.NAME)
+    private SubmissionRepository submissionRepository;
+
+    public Speaker findSpeaker(Long id){
 		return speakerRepository.findOne(id);
 	}
 	
@@ -64,6 +70,8 @@ public class UserFacade {
 		return sponsorRepository.findAll(pageable);
 	}
 	
-	
+    public void	submitTalk(Submission submission) {
+        submissionRepository.save(submission);
+    }
 	
 }

@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.1.10.RELEASE</version>
+		<version>1.2.2.RELEASE</version>
 	</parent>
 
 	<dependencies>
@@ -132,7 +132,13 @@
 <!--             <artifactId>spring-security-config</artifactId> -->
 <!--         </dependency> -->
 
-		<dependency>
+        <!-- email -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.hazelcast</groupId>
             <artifactId>hazelcast</artifactId>
             <version>${hazelcast.version}</version>
@@ -153,16 +159,31 @@
             <version>${hazelcast.version}</version>
         </dependency>
 
-	</dependencies>
+        <!-- testing -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.restassured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
 
 	<properties>
 		<start-class>site.app.Application</start-class>
-		<spring.version>4.0.0.RELEASE</spring.version>
+		<spring.version>4.1.5.RELEASE</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-data-jpa.version>1.5.0.M1</spring-data-jpa.version>
 		<hibernate-entitymanager.version>4.3.0.Final</hibernate-entitymanager.version>
 		<jadira.version>3.1.0.CR10</jadira.version>
-		  <hazelcast.version>3.4</hazelcast.version>
+        <hazelcast.version>3.4</hazelcast.version>
+        <rest-assured.version>2.4.0</rest-assured.version>
 	</properties>
 
 	<build>

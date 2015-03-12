@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Email;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -23,6 +25,8 @@ public class User extends AbstractEntity {
 	private String lastName;
 	
 	@Column(unique = true)
+    @NotNull
+    @Email
 	private String email;
 	
 	private String phone;

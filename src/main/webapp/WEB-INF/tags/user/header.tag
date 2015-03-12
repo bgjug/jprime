@@ -70,7 +70,7 @@
                             <i class="fa fa-bars"></i>
                         </button>
                         <!-- End Toggle Nav Link For Mobiles -->
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="index.jsp">
                             <img alt="" src="images/margo.png">
                         </a>
                     </div>
@@ -109,19 +109,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="about.html">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="about.html">About</a>
-                                    </li>
-                                    <li><a href="services.html">Services</a>
-                                    </li>
-                                    <li><a href="right-sidebar.html">Right Sidebar</a>
-                                    </li>
-                                    <li><a href="left-sidebar.html">Left Sidebar</a>
-                                    </li>
-                                    <li><a href="404.html">404 Page</a>
-                                    </li>
-                                </ul>
+                                <a href="/cfp">Call for papers</a>
                             </li>
                             <li>
                                 <a href="#">Shortcodes</a>
