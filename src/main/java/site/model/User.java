@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-public class User extends AbstractEntity{
+public class User extends AbstractEntity {
 	/**
      * Default serial version uid.
      */
