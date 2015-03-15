@@ -114,6 +114,11 @@
                             <li>
                                 <a <c:if test='${"/proposal.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/cfp">Call for papers</a>
                             </li>
+                            <c:forEach var="tag" items="${tags}">
+                                <li>
+                                    <a href="/nav/${tag.name}"><c:out value="${tag.name}"/></a>
+                                </li>
+                            </c:forEach>
                             <%--
                             <li>
                                 <a href="#">Shortcodes</a>

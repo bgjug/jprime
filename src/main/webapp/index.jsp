@@ -50,10 +50,10 @@
                         <img class="img-responsive" src="images/slider/bg1.jpg" alt="slider">
                         <div class="slider-content">
                             <div class="col-md-12 text-center">
-                                <h2 class="animated2 white">
+                                <h2 class="animated2 white"  style="text-shadow: 3px 3px black;">
                         		  <span><strong>jPrime</strong></span>
                         	    </h2>
-                                <h3 class="animated3 white">
+                                <h3 class="animated3 white"  style="text-shadow: 2px 2px black;">
                             		<span>Java prime time in Sofia</span>
                             	</h3>
                                 <p class="animated4"><a href="#" class="slider btn btn-primary">Check Now</a>
@@ -66,10 +66,10 @@
                         <img class="img-responsive" src="images/slider/bg2.jpg" alt="slider">
                         <div class="slider-content">
                             <div class="col-md-12 text-center">
-                                <h2 class="animated4 white" style="text-shadow: 1px 1px black;">
+                                <h2 class="animated4 white" style="text-shadow: 3px 3px black;">
                                 <span><strong>jPrime</strong> wants YOU </span>
                             </h2>
-                                <h3 class="animated5 white" style="text-shadow: 1px 1px black;">
+                                <h3 class="animated5 white" style="text-shadow: 2px 2px black;">
                             	<span>Register now</span>
                             </h3>
                                 <p class="animated6"><a href="#" class="slider btn btn-primary">Buy Tickets</a>
@@ -82,10 +82,10 @@
                         <img class="img-responsive" src="images/slider/bg3.jpg" alt="slider">
                         <div class="slider-content">
                             <div class="col-md-12 text-center">
-                                <h2 class="animated7 white">
+                                <h2 class="animated7 white" style="text-shadow: 3px 3px black;">
                                 <span>Become a <strong>Sponsor</strong></span>
                             </h2>
-                                <h3 class="animated8 white">
+                                <h3 class="animated8 white" style="text-shadow: 2px 2px black;">
                             	<span>Why you are waiting</span>
                             </h3>
                                 <div class="">
@@ -117,7 +117,7 @@
 
         <!-- Start Big Heading -->
 		<div class="big-title text-center">
-			<h1><strong>Organizators</strong></h1>
+			<h1><strong>This conference is brought to you by</strong></h1>
 		</div>
 		<!-- End Big Heading -->
 
@@ -127,42 +127,27 @@
 
 				<!-- Client 1 -->
 				<div class="client-item item">
-					<a href="#"><img src="images/c1.png" alt="" /></a>
+					<a href="http://java-bg.org/"><img src="images/bg-jug.png" alt="Bulgarian JUG" /></a>
 				</div>
 
 				<!-- Client 2 -->
 				<div class="client-item item">
-					<a href="#"><img src="images/c2.png" alt="" /></a>
+					<a href="http://www.vmware.com"><img src="images/vmware.png" alt="VMware" /></a>
 				</div>
 
 				<!-- Client 3 -->
 				<div class="client-item item">
-					<a href="#"><img src="images/c3.png" alt="" /></a>
+					<a href="http://www.softwareag.com"><img src="images/softwareag.png" alt="Software AG" /></a>
 				</div>
 
 				<!-- Client 4 -->
 				<div class="client-item item">
-					<a href="#"><img src="images/c4.png" alt="" /></a>
+					<a href="http://www.sap.com"><img src="images/sap.png" alt="SAP" /></a>
 				</div>
 
 				<!-- Client 5 -->
 				<div class="client-item item">
-					<a href="#"><img src="images/c5.png" alt="" /></a>
-				</div>
-
-				<!-- Client 6 -->
-				<div class="client-item item">
-					<a href="#"><img src="images/c6.png" alt="" /></a>
-				</div>
-
-				<!-- Client 7 -->
-				<div class="client-item item">
-					<a href="#"><img src="images/c7.png" alt="" /></a>
-				</div>
-
-				<!-- Client 8 -->
-				<div class="client-item item">
-					<a href="#"><img src="images/c8.png" alt="" /></a>
+					<a href="#"><img src="images/experian.png" alt="Experian" /></a>
 				</div>
 
 			</div>
@@ -223,132 +208,9 @@
                     <br/><br/>jPrime features a combination of great international speakers along with the best presenters from Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning, hacking, networking and fun.</p>
 
 
-                <!-- Start Recent Projects Carousel -->
-                <ul id="portfolio-list" data-animated="fadeIn">
-                    <li>
-                        <img src="images/Portfolio/1.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Town winter 2013</span>
-                            <p class="body">web develpment, design</p>
-                        </div>
-                        <a href="#"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/Portfolio/2.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Quarterly Musashino</span>
-                            <p class="body">web develpment, design</p>
-                        </div>
-                        <a href="#"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/Portfolio/3.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Mainichi April 2014</span>
-                            <p class="body">web develpment, design</p>
-                        </div>
-                        <a href="#"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/Portfolio/4.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Shitamachi Rocket</span>
-                            <p class="body">web develpment, design</p>
-                        </div>
-                        <a href="#"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/Portfolio/5.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Majesty express vol. 01</span>
-                            <p class="body">web develpment, design</p>
-                        </div>
-                        <a href="#"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/Portfolio/6.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Monocle issue 69</span>
-                            <p class="body">web develpment, design</p>
-                        </div>
-                        <a href="#"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/Portfolio/7.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Monocle issue 69</span>
-                            <p class="body">web develpment, design</p>
-                        </div>
-                        <a href="#"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/Portfolio/8.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Monocle issue 69</span>
-                            <p class="body">web develpment, design</p>
-                        </div>
-                        <a href="#"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/Portfolio/9.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Monocle issue 69</span>
-                            <p class="body">web develpment, design</p>
-                        </div>
-                        <a href="#"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/Portfolio/10.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Monocle issue 69</span>
-                            <p class="body">web develpment, design</p>
-                        </div>
-                        <a href="#"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/Portfolio/11.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Monocle issue 69</span>
-                            <p class="body">web develpment, design</p>
-                        </div>
-                        <a href="#"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/Portfolio/12.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Monocle issue 69</span>
-                            <p class="body">web develpment, design</p>
-                        </div>
-                        <a href="#"><i class="more">+</i></a>
-
-                    </li>
-                </ul>
-
-                <!-- End Recent Projects Carousel -->
-
-
 
         </div>
         <!-- End Portfolio Section -->
-
-
-
-
-
-
-
-
 
         <!-- Start Testimonials Section -->
         <div>
@@ -691,45 +553,6 @@
         <!-- End Team Member Section -->
 
 
-        <div id="parallax-one" class="parallax" style="background-image:url(images/parallax/bg-02.jpg);">
-            <div class="parallax-text-container-1">
-              <div class="parallax-text-item">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-3 col-md-3">
-                      <div class="counter-item">
-                        <i class="fa fa-cloud-upload"></i>
-                        <div class="timer" id="item1" data-to="991" data-speed="5000"></div>
-                        <h5>Files uploaded</h5>
-                      </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-3 col-md-3">
-                      <div class="counter-item">
-                        <i class="fa fa-check"></i>
-                        <div class="timer" id="item2" data-to="7394" data-speed="5000"></div>
-                        <h5>Projects completed</h5>
-                      </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-3 col-md-3">
-                      <div class="counter-item">
-                        <i class="fa fa-code"></i>
-                        <div class="timer" id="item3" data-to="18745" data-speed="5000"></div>
-                        <h5>Lines of code written</h5>
-                      </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-3 col-md-3">
-                      <div class="counter-item">
-                        <i class="fa fa-male"></i>
-                        <div class="timer" id="item4" data-to="8423" data-speed="5000"></div>
-                        <h5>Happy clients</h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
 
 
             <!-- Start Pricing Table Section -->
@@ -753,47 +576,45 @@
                         <div class="col-md-3 col-sm-3 col-xs-12">
                             <div class="pricing-table">
 							<div class="plan-name">
-								<h3>Basic</h3>
+								<h3>Platinum</h3>
 							</div>
 							<div class="plan-price">
-								<div class="price-value">$49<span>.00</span></div>
-								<div class="interval">per month</div>
+								<div class="price-value">1500<span>.00</span> EUR</div>
 							</div>
 							<div class="plan-list">
 								<ul>
-									<li><strong>40 GB</strong> Storage</li>
-									<li><strong>40GB</strong> Transfer</li>
-									<li><strong>10</strong> Domains</li>
-									<li><strong>20</strong> Projects</li>
-									<li><strong>Free</strong> installation</li>
+									<li><strong>9</strong> free passes</li>
+									<li><strong>20%</strong> discount of passes</li>
+									<li><strong>Booth</strong> at the conference hall</li>
+                                    <li><strong>Free</strong> raffle sponsorship</li>
+									<li><strong>2</strong> banners in the conference rooms</li>
+                                    <li><strong>1</strong> invite for the speaker dinner</li>
 								</ul>
 							</div>
 							<div class="plan-signup">
-								<a href="#" class="btn-system btn-small">Sign Up Now</a>
+								<a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn-system btn-small">Sign Up Now</a>
 							</div>
 						</div>
                         </div>
 
 						<div class="col-md-3 col-sm-3 col-xs-12">
-                            <div class="pricing-table highlight-plan">
+                            <div class="pricing-table">
 							<div class="plan-name">
-								<h3>Advanced</h3>
+								<h3>Gold</h3>
 							</div>
 							<div class="plan-price">
-								<div class="price-value">$99<span>.00</span></div>
-								<div class="interval">per month</div>
+								<div class="price-value">1000<span>.00</span> EUR</div>
 							</div>
 							<div class="plan-list">
 								<ul>
-									<li><strong>40 GB</strong> Storage</li>
-									<li><strong>40GB</strong> Transfer</li>
-									<li><strong>10</strong> Domains</li>
-									<li><strong>20</strong> Projects</li>
-									<li><strong>Free</strong> installation</li>
+                                    <li><strong>6</strong> free passes</li>
+                                    <li><strong>10%</strong> discount of passes</li>
+                                    <li><strong>Booth</strong> at the conference hall</li>
+                                    <li><strong>1</strong> banner in the conference rooms</li>
 								</ul>
 							</div>
 							<div class="plan-signup">
-								<a href="#" class="btn-system btn-small border-btn">Sign Up Now</a>
+								<a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn-system btn-small">Sign Up Now</a>
 							</div>
 						</div>
                         </div>
@@ -802,52 +623,23 @@
                         <div class="col-md-3 col-sm-3 col-xs-12">
                             <div class="pricing-table">
 							<div class="plan-name">
-								<h3>Professional</h3>
+								<h3>Silver</h3>
 							</div>
 							<div class="plan-price">
-								<div class="price-value">$199<span>.00</span></div>
-								<div class="interval">per month</div>
+								<div class="price-value">500<span>.00</span> EUR</div>
 							</div>
 							<div class="plan-list">
 								<ul>
-									<li><strong>40 GB</strong> Storage</li>
-									<li><strong>40GB</strong> Transfer</li>
-									<li><strong>10</strong> Domains</li>
-									<li><strong>20</strong> Projects</li>
-									<li><strong>Free</strong> installation</li>
+                                    <li><strong>3</strong> free passes</li>
+                                    <li><strong>10%</strong> discount of passes</li>
+                                    <li><strong>1</strong> banner in the conference rooms</li>
 								</ul>
 							</div>
 							<div class="plan-signup">
-								<a href="#" class="btn-system btn-small">Sign Up Now</a>
+								<a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn-system btn-small">Sign Up Now</a>
 							</div>
 						</div>
                         </div>
-
-
-                        <div class="col-md-3 col-sm-3 col-xs-12">
-                            <div class="pricing-table">
-							<div class="plan-name">
-								<h3>Extreme</h3>
-							</div>
-							<div class="plan-price">
-								<div class="price-value">$299<span>.00</span></div>
-								<div class="interval">per month</div>
-							</div>
-							<div class="plan-list">
-								<ul>
-									<li><strong>40 GB</strong> Storage</li>
-									<li><strong>40GB</strong> Transfer</li>
-									<li><strong>10</strong> Domains</li>
-									<li><strong>20</strong> Projects</li>
-									<li><strong>Free</strong> installation</li>
-								</ul>
-							</div>
-							<div class="plan-signup">
-								<a href="#" class="btn-system btn-small">Sign Up Now</a>
-							</div>
-						</div>
-                        </div>
-
 
 					</div>
                     </div>
@@ -862,59 +654,53 @@
         <div class="container">
             <div class="row">
 
-                <!-- Start Big Heading -->
-		<div class="big-title text-center">
-			<h1><strong>Sponsors</strong></h1>
-			<p class="title-desc">Our Sponsors</p>
-		</div>
-		<!-- End Big Heading -->
-
 		<!--Start Clients Carousel-->
+        <div class="big-title text-center">
+            <h1><strong>Platinum</strong> Sponsors</h1>
+        </div>
+
 		<div class="our-clients">
 			<div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
 
-				<!-- Client 1 -->
-				<div class="client-item item">
-					<a href="#"><img src="images/c1.png" alt="" /></a>
-				</div>
-
-				<!-- Client 2 -->
-				<div class="client-item item">
-					<a href="#"><img src="images/c2.png" alt="" /></a>
-				</div>
-
-				<!-- Client 3 -->
-				<div class="client-item item">
-					<a href="#"><img src="images/c3.png" alt="" /></a>
-				</div>
-
-				<!-- Client 4 -->
-				<div class="client-item item">
-					<a href="#"><img src="images/c4.png" alt="" /></a>
-				</div>
-
-				<!-- Client 5 -->
-				<div class="client-item item">
-					<a href="#"><img src="images/c5.png" alt="" /></a>
-				</div>
-
-				<!-- Client 6 -->
-				<div class="client-item item">
-					<a href="#"><img src="images/c6.png" alt="" /></a>
-				</div>
-
-				<!-- Client 7 -->
-				<div class="client-item item">
-					<a href="#"><img src="images/c7.png" alt="" /></a>
-				</div>
-
-				<!-- Client 8 -->
-				<div class="client-item item">
-					<a href="#"><img src="images/c8.png" alt="" /></a>
-				</div>
+                <c:forEach var="sponsor" items="${platinumSponsors}">
+                    <div class="client-item item">
+                        <a href="${sponsor.companyWebsite}"><img src="data:image/png;bytes,${sponsor.logo}" alt="${sponsor.companyName}" /></a>
+                    </div>
+                </c:forEach>
 
 			</div>
 		</div>
+
+        <div class="big-title text-center">
+            <h1><strong>Gold</strong> Sponsors</h1>
+        </div>
+
+        <div class="our-clients">
+            <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
+
+                <c:forEach var="sponsor" items="${goldSponsors}">
+                    <div class="client-item item">
+                        <a href="${sponsor.companyWebsite}"><img src="images/c1.png" alt="data:image/png;bytes,${sponsor.logo}" /></a>
+                    </div>
+                </c:forEach>
+
+            </div>
+        </div>
+        <div class="big-title text-center">
+            <h1><strong>Silver</strong> Sponsors</h1>
+        </div>
+
+        <div class="our-clients">
+            <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
+
+                <c:forEach var="sponsor" items="${silverSponsors}">
+                    <div class="client-item item">
+                        <a href="${sponsor.companyWebsite}"><img src="data:image/png;bytes,${sponsor.logo}" alt="${sponsor.companyName}" /></a>
+                    </div>
+                </c:forEach>
+
+            </div>
+        </div>
 		<!-- End Clients Carousel -->
             </div><!-- .row -->
         </div><!-- .container -->

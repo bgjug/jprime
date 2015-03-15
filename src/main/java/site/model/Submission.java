@@ -62,4 +62,28 @@ public class Submission extends AbstractEntity {
     public void setSpeaker(Speaker speaker) {
         this.speaker = speaker;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Submission))
+            return false;
+
+        Submission that = (Submission) o;
+
+        if (!speaker.equals(that.speaker))
+            return false;
+        if (!title.equals(that.title))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title.hashCode();
+        result = 31 * result + speaker.hashCode();
+        return result;
+    }
 }

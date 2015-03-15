@@ -50,7 +50,7 @@
 			</dl>
 			<dl>
 				<dt>
-					<label for="package">package ( type SILVER, PLATINUM, DIAMOND)</label>
+					<label for="package">package ( type SILVER, GOLD, PLATINUM)</label>
 				</dt>
 				<dd>
 					<form:input path="sponsorPackage" />
