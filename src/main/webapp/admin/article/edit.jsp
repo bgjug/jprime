@@ -12,9 +12,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="/js/niceforms.js"></script>
+    <link rel="stylesheet" href="/js/tinyeditor/style.css" />
+    <script type="text/javascript" src="/js/tinyeditor/tinyeditor.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css" />
-</head>
+
+    <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: "#text",
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table contextmenu paste"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+    </script></head>
 <body>
 	<admin:menu/>
 	<form:form commandName="article" method="post"
@@ -45,7 +59,7 @@
 					<label for="text">Text</label>
 				</dt>
 				<dd>
-					<form:textarea path="text" cols="70" rows="20" />
+					<form:textarea path="text" cols="70" rows="20" id="text" />
 				</dd>
 			</dl>
 			<dl>
@@ -62,5 +76,7 @@
 		</fieldset>
 
 	</form:form>
+
+
 </body>
 </html>
