@@ -148,9 +148,9 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="blog.html">Blog</a>
+                                <a href="nav">Blog</a>
                                 <ul class="dropdown">
-                                    <li><a href="blog.html">Blog - right Sidebar</a>
+                                    <li><a href="nav">Blog - right Sidebar</a>
                                     </li>
                                     <li><a href="blog-left-sidebar.html">Blog - Left Sidebar</a>
                                     </li>

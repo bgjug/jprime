@@ -19,6 +19,8 @@ import site.repository.SubmissionRepository;
 import site.repository.TagRepository;
 import site.repository.UserRepository;
 
+import java.util.List;
+
 @Service(UserFacade.NAME)
 @Transactional
 public class UserFacade {
@@ -56,7 +58,15 @@ public class UserFacade {
 	public Article findArticle(Long id){
 		return articleRepository.findOne(id);
 	}
-	
+
+    public Page<Article> allArticles(Pageable pageable){
+        return articleRepository.findAll(pageable);
+    }
+
+    public Article getArticleById(long id){
+        return articleRepository.findOne(id);
+    }
+
 	public Page<Article> findArticlesByTag(String tag, Pageable pageable){
 		return null;//TODO
 //		return articleRepository.findByTag(tag, pageable);

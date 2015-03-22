@@ -1,15 +1,11 @@
 package site.model;
 
+import org.hibernate.Hibernate;
+
 import java.util.Collection;
 import java.util.HashSet;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Index;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -25,13 +21,16 @@ public class Article extends AbstractEntity{
 	private String description;
 	
 	@NotNull
+    @Lob
+    @Column(length=10000)
 	private String text;
 	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "author", nullable = true, referencedColumnName = "id")
     private User author;
-	
-	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Tag.class)
+
+    //Changed to eager, session problems! TODO:rethink!
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Tag.class)
     @JoinTable(name = "tags_articles", joinColumns = @JoinColumn(name = "article_pk"), inverseJoinColumns = @JoinColumn(name = "tag_pk"), indexes = {
                     @Index(columnList = "article_pk") })
     private Collection<Tag> tags = new HashSet<>();
@@ -69,10 +68,11 @@ public class Article extends AbstractEntity{
 	}
 
 	public Collection<Tag> getTags() {
-		return tags;
+        return tags;
 	}
 
 	public void setTags(Collection<Tag> tags) {
 		this.tags = tags;
 	}
 }
+

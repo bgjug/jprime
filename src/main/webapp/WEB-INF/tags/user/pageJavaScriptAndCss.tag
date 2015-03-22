@@ -48,5 +48,12 @@
     <script type="text/javascript" src="js/mediaelement-and-player.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
+
+
     <!--[if IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <!-- text shortener -->
+    <script type="text/javascript" src="js/jquery.truncate.js"></script>
+
+
