@@ -110,120 +110,67 @@
         </section>
         <!-- End Home Page Slider -->
 
+       <!-- Start Client/Partner Section -->
+        <div class="section">
+        <div class="container">
+            <div class="row">
 
-        <!-- Start Services Section -->
-        <div class="section service">
-        	
-        	<!-- Start Big Heading -->
-            <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                <h1><strong>Organizators</strong></h1>
-            </div>
-            <!-- End Big Heading -->
-        
-            <div class="container">
-                <div class="row">
+        <!-- Start Big Heading -->
+		<div class="big-title text-center">
+			<h1><strong>Organizators</strong></h1>
+		</div>
+		<!-- End Big Heading -->
 
-                    <!-- Start Service Icon 1 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="01">
-                        <div class="service-icon">
-                            <i class="fa fa-leaf icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>High Quality Theme</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
+		<!--Start Clients Carousel-->
+		<div class="our-clients">
+			<div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
 
-                        </div>
-                    </div>
-                    <!-- End Service Icon 1 -->
+				<!-- Client 1 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c1.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 2 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="02">
-                        <div class="service-icon">
-                            <i class="fa fa-desktop icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Full Responsive</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 2 -->
+				<!-- Client 2 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c2.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 3 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="03">
-                        <div class="service-icon">
-                            <i class="fa fa-eye icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Retina Display Ready</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 3 -->
+				<!-- Client 3 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c3.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 4 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="04">
-                        <div class="service-icon">
-                            <i class="fa fa-code icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Clean Modern Code</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 4 -->
+				<!-- Client 4 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c4.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 5 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="05">
-                        <div class="service-icon">
-                            <i class="fa fa-rocket icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Fast & Light Theme</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 5 -->
+				<!-- Client 5 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c5.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 6 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="06">
-                        <div class="service-icon">
-                            <i class="fa fa-css3 icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Css3 Transitions</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 6 -->
+				<!-- Client 6 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c6.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 7 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="07">
-                        <div class="service-icon">
-                            <i class="fa fa-download icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Free Updates</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 7 -->
+				<!-- Client 7 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c7.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 8 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="08">
-                        <div class="service-icon">
-                            <i class="fa fa-umbrella icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Help & Support</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 8 -->
+				<!-- Client 8 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c8.png" alt="" /></a>
+				</div>
 
-                </div><!-- .row -->
-            </div><!-- .container -->
+			</div>
+		</div>
+		<!-- End Clients Carousel -->
+            </div><!-- .row -->
+        </div><!-- .container -->
         </div>
-        <!-- End Services Section -->
 
 
 		<%--
