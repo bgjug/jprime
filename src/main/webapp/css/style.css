@@ -567,7 +567,7 @@ ul.social-list li:last-child a i {
 
 .navbar-brand {
 	position: relative;
-	padding: 27px 0;
+	padding: 10px 0;
 	margin: 0!important;
 	transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;

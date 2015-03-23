@@ -71,7 +71,7 @@
                         </button>
                         <!-- End Toggle Nav Link For Mobiles -->
                         <a class="navbar-brand" href="index.jsp">
-                            <img alt="" src="images/margo.png">
+                            <img alt="" src="images/jprime-small.png">
                         </a>
                     </div>
                     <div class="navbar-collapse collapse">
