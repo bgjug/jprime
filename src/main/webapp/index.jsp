@@ -11,7 +11,7 @@
 <head>
 
     <!-- Basic -->
-    <title>Margo | Home</title>
+    <title>jPrime | Home</title>
 
     <!-- Define Charset -->
     <meta charset="utf-8">
@@ -20,8 +20,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Page Description and Author -->
-    <meta name="description" content="Margo - Responsive HTML5 Template">
-    <meta name="author" content="iThemesLab">
 
     <user:pageJavaScriptAndCss/>
 </head>
@@ -53,10 +51,10 @@
                         <div class="slider-content">
                             <div class="col-md-12 text-center">
                                 <h2 class="animated2">
-                        		  <span>Welcome to <strong>Margo</strong></span>
+                        		  <span><strong>jPrime</strong></span>
                         	    </h2>
                                 <h3 class="animated3">
-                            		<span>The ultimate aim of your business</span>
+                            		<span>Java prime time in Sofia</span>
                             	</h3>
                                 <p class="animated4"><a href="#" class="slider btn btn-primary">Check Now</a>
                                 </p>
@@ -69,7 +67,7 @@
                         <div class="slider-content">
                             <div class="col-md-12 text-center">
                                 <h2 class="animated4">
-                                <span><strong>jPrime</strong> for the highest</span>
+                                <span><strong>jPrime</strong> wants YOU </span>
                             </h2>
                                 <h3 class="animated5">
                             	<span>Register now</span>
@@ -115,6 +113,13 @@
 
         <!-- Start Services Section -->
         <div class="section service">
+        	
+        	<!-- Start Big Heading -->
+            <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
+                <h1><strong>Organizators</strong></h1>
+            </div>
+            <!-- End Big Heading -->
+        
             <div class="container">
                 <div class="row">
 
@@ -221,6 +226,7 @@
         <!-- End Services Section -->
 
 
+		<%--
         <!-- Start Purchase Section -->
         <div class="section purchase">
             <div class="container">
@@ -252,11 +258,7 @@
             </div><!-- .container -->
         </div>
         <!-- End Purchase Section -->
-
-
-
-
-
+ 		--%>
 
 
 
@@ -266,12 +268,12 @@
 
                 <!-- Start Big Heading -->
                 <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                    <h1>This is Our Latest <strong>Work</strong></h1>
+                    <h1>About <strong>jPrime</strong></h1>
                 </div>
                 <!-- End Big Heading -->
 
-                <p class="text-center">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                    <br/>veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
+                <p class="text-center">jPrime is a one day conference with talks on Java, various languages on the JVM, mobile, web and best practices. <br/> It is held on 27th May 2015 in Sofia Event Center. It's run by the Bulgarian Java User Group and backed by the biggest companies in the city.
+                    <br/><br/>jPrime features a combination of great international speakers along with the best presenters from Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning, hacking, networking and fun.</p>
 
 
                 <!-- Start Recent Projects Carousel -->
@@ -916,7 +918,7 @@
                 <!-- Start Big Heading -->
 		<div class="big-title text-center">
 			<h1><strong>Sponsors</strong></h1>
-			<p class="title-desc">Partners We Work With</p>
+			<p class="title-desc">Our Sponsors</p>
 		</div>
 		<!-- End Big Heading -->
 
