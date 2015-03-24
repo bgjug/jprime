@@ -1,4 +1,5 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Start Header Section -->
         <div class="hidden-header"></div>
         <header class="clearfix">
@@ -10,11 +11,11 @@
                         <div class="col-md-7">
                             <!-- Start Contact Info -->
                             <ul class="contact-details">
-                                <li><a href="#"><i class="fa fa-map-marker"></i> House-54/A, London, UK</a>
+                                <li><a href="https://goo.gl/maps/fTo45" target="_blank"><i class="fa fa-map-marker"></i> Cherni Vrah 100, Sofia, Bulgaria</a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-envelope-o"></i> info@yourcompany.com</a>
+                                <li><a href="mailto:info@jprime.io"><i class="fa fa-envelope-o"></i> info@jprime.io</a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-phone"></i> +12 345 678 000</a>
+                                <li><a href="#"><i class="fa fa-phone"></i> +359 883 111 111</a>
                                 </li>
                             </ul>
                             <!-- End Contact Info -->
@@ -70,11 +71,12 @@
                             <i class="fa fa-bars"></i>
                         </button>
                         <!-- End Toggle Nav Link For Mobiles -->
-                        <a class="navbar-brand" href="index.jsp">
+                        <a class="navbar-brand" href="/">
                             <img alt="" src="images/jprime-small.png">
                         </a>
                     </div>
                     <div class="navbar-collapse collapse">
+                        <%--
                         <!-- Stat Search -->
                         <div class="search-side">
                             <a href="#" class="show-search"><i class="fa fa-search"></i></a>
@@ -85,10 +87,11 @@
                             </div>
                         </div>
                         <!-- End Search -->
+                         --%>
                         <!-- Start Navigation List -->
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a class="active" href="/">Home</a>
+                                <a <c:if test='${"/index.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/">Home </a>
                                 <%--<ul class="dropdown">
                                     <li><a class="active" href="/">Home Main Version</a>
                                     </li>
@@ -109,7 +112,7 @@
                                 </ul> --%>
                             </li>
                             <li>
-                                <a href="/cfp">Call for papers</a>
+                                <a <c:if test='${"/proposal.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/cfp">Call for papers</a>
                             </li>
                             <%--
                             <li>
@@ -158,9 +161,10 @@
                                     <li><a href="single-post.html">Blog Single Post</a>
                                     </li>
                                 </ul>
-                            </li> --%>
+                            </li> 
                             <li><a href="contact.html">Contact</a>
                             </li>
+                            --%>
                         </ul>
                         <!-- End Navigation List -->
                     </div>

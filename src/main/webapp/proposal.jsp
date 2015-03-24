@@ -35,7 +35,7 @@ pageEncoding="UTF-8"%>
         <user:header/>
 
 
-
+<%--
 <!-- Start Page Banner -->
 <div class="page-banner">
  <div class="container">
@@ -55,7 +55,7 @@ pageEncoding="UTF-8"%>
 </div>
 </div>
 <!-- End Page Banner -->
-
+ --%>
 
 
 
@@ -67,7 +67,8 @@ pageEncoding="UTF-8"%>
 
     <!-- Start Single Post Area -->
     <div class="blog-post gallery-post">
-
+	
+	<%--
       <!-- Start Single Post (Gallery Slider) -->
       <div class="post-head">
        <div class="touch-slider post-slider">
@@ -92,6 +93,7 @@ pageEncoding="UTF-8"%>
       </div>
     </div>
     <!-- End Single Post (Gallery) -->
+     --%>
 
     <!-- Start Single Post Content -->
     <div class="post-content">
@@ -187,9 +189,10 @@ pageEncoding="UTF-8"%>
 
 
 
+
 <!-- Sidebar -->
 <div class="col-md-3 sidebar right-sidebar">
-
+<%-- we will list SPONSORS and ORGANIZATORS here 
 <!-- Sponsors -->
 <div class="widget widget-popular-posts">
  <h4>Popular Post <span class="head-line"></span></h4>
@@ -244,7 +247,7 @@ pageEncoding="UTF-8"%>
    <a href="#">Google</a>
  </div>
 </div>
-
+ --%>
 </div>
 <!--End sidebar-->
 
