@@ -165,7 +165,7 @@ pageEncoding="UTF-8"%>
                 </dl>
                 <dl>
                     <dt>
-                        <label for="file">Picture</label>
+                        <label for="file">Your photo ( preferred size 280x326 px )</label>
                     </dt>
                     <dd>
                         <input name="file" type="file" />
