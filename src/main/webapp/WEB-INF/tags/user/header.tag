@@ -71,7 +71,7 @@
                         </button>
                         <!-- End Toggle Nav Link For Mobiles -->
                         <a class="navbar-brand" href="index.jsp">
-                            <img alt="" src="images/margo.png">
+                            <img alt="" src="images/jprime-small.png">
                         </a>
                     </div>
                     <div class="navbar-collapse collapse">
@@ -88,8 +88,8 @@
                         <!-- Start Navigation List -->
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a class="active" href="index.html">Home</a>
-                                <ul class="dropdown">
+                                <a class="active" href="/">Home</a>
+                                <%--<ul class="dropdown">
                                     <li><a class="active" href="/">Home Main Version</a>
                                     </li>
                                     <li><a href="index-01.html">Home Version 1</a>
@@ -106,11 +106,12 @@
                                     </li>
                                     <li><a href="index-07.html">Home Version 7</a>
                                     </li>
-                                </ul>
+                                </ul> --%>
                             </li>
                             <li>
                                 <a href="/cfp">Call for papers</a>
                             </li>
+                            <%--
                             <li>
                                 <a href="#">Shortcodes</a>
                                 <ul class="dropdown">
@@ -157,7 +158,7 @@
                                     <li><a href="single-post.html">Blog Single Post</a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --%>
                             <li><a href="contact.html">Contact</a>
                             </li>
                         </ul>

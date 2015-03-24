@@ -11,7 +11,7 @@
 <head>
 
     <!-- Basic -->
-    <title>Margo | Home</title>
+    <title>jPrime | Home</title>
 
     <!-- Define Charset -->
     <meta charset="utf-8">
@@ -20,8 +20,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Page Description and Author -->
-    <meta name="description" content="Margo - Responsive HTML5 Template">
-    <meta name="author" content="iThemesLab">
 
     <user:pageJavaScriptAndCss/>
 </head>
@@ -52,11 +50,11 @@
                         <img class="img-responsive" src="images/slider/bg1.jpg" alt="slider">
                         <div class="slider-content">
                             <div class="col-md-12 text-center">
-                                <h2 class="animated2">
-                        		  <span>Welcome to <strong>Margo</strong></span>
+                                <h2 class="animated2 white">
+                        		  <span><strong>jPrime</strong></span>
                         	    </h2>
-                                <h3 class="animated3">
-                            		<span>The ultimate aim of your business</span>
+                                <h3 class="animated3 white">
+                            		<span>Java prime time in Sofia</span>
                             	</h3>
                                 <p class="animated4"><a href="#" class="slider btn btn-primary">Check Now</a>
                                 </p>
@@ -68,10 +66,10 @@
                         <img class="img-responsive" src="images/slider/bg2.jpg" alt="slider">
                         <div class="slider-content">
                             <div class="col-md-12 text-center">
-                                <h2 class="animated4">
-                                <span><strong>jPrime</strong> for the highest</span>
+                                <h2 class="animated4 white" style="text-shadow: 1px 1px black;">
+                                <span><strong>jPrime</strong> wants YOU </span>
                             </h2>
-                                <h3 class="animated5">
+                                <h3 class="animated5 white" style="text-shadow: 1px 1px black;">
                             	<span>Register now</span>
                             </h3>
                                 <p class="animated6"><a href="#" class="slider btn btn-primary">Buy Tickets</a>
@@ -112,115 +110,70 @@
         </section>
         <!-- End Home Page Slider -->
 
+       <!-- Start Client/Partner Section -->
+        <div class="section">
+        <div class="container">
+            <div class="row">
 
-        <!-- Start Services Section -->
-        <div class="section service">
-            <div class="container">
-                <div class="row">
+        <!-- Start Big Heading -->
+		<div class="big-title text-center">
+			<h1><strong>Organizators</strong></h1>
+		</div>
+		<!-- End Big Heading -->
 
-                    <!-- Start Service Icon 1 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="01">
-                        <div class="service-icon">
-                            <i class="fa fa-leaf icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>High Quality Theme</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
+		<!--Start Clients Carousel-->
+		<div class="our-clients">
+			<div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
 
-                        </div>
-                    </div>
-                    <!-- End Service Icon 1 -->
+				<!-- Client 1 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c1.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 2 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="02">
-                        <div class="service-icon">
-                            <i class="fa fa-desktop icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Full Responsive</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 2 -->
+				<!-- Client 2 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c2.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 3 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="03">
-                        <div class="service-icon">
-                            <i class="fa fa-eye icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Retina Display Ready</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 3 -->
+				<!-- Client 3 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c3.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 4 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="04">
-                        <div class="service-icon">
-                            <i class="fa fa-code icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Clean Modern Code</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 4 -->
+				<!-- Client 4 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c4.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 5 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="05">
-                        <div class="service-icon">
-                            <i class="fa fa-rocket icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Fast & Light Theme</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 5 -->
+				<!-- Client 5 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c5.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 6 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="06">
-                        <div class="service-icon">
-                            <i class="fa fa-css3 icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Css3 Transitions</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 6 -->
+				<!-- Client 6 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c6.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 7 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="07">
-                        <div class="service-icon">
-                            <i class="fa fa-download icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Free Updates</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 7 -->
+				<!-- Client 7 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c7.png" alt="" /></a>
+				</div>
 
-                    <!-- Start Service Icon 8 -->
-                    <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="08">
-                        <div class="service-icon">
-                            <i class="fa fa-umbrella icon-large"></i>
-                        </div>
-                        <div class="service-content">
-                            <h4>Help & Support</h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-                        </div>
-                    </div>
-                    <!-- End Service Icon 8 -->
+				<!-- Client 8 -->
+				<div class="client-item item">
+					<a href="#"><img src="images/c8.png" alt="" /></a>
+				</div>
 
-                </div><!-- .row -->
-            </div><!-- .container -->
+			</div>
+		</div>
+		<!-- End Clients Carousel -->
+            </div><!-- .row -->
+        </div><!-- .container -->
         </div>
-        <!-- End Services Section -->
 
 
+		<%--
         <!-- Start Purchase Section -->
         <div class="section purchase">
             <div class="container">
@@ -252,11 +205,7 @@
             </div><!-- .container -->
         </div>
         <!-- End Purchase Section -->
-
-
-
-
-
+ 		--%>
 
 
 
@@ -266,12 +215,12 @@
 
                 <!-- Start Big Heading -->
                 <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                    <h1>This is Our Latest <strong>Work</strong></h1>
+                    <h1>About <strong>jPrime</strong></h1>
                 </div>
                 <!-- End Big Heading -->
 
-                <p class="text-center">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                    <br/>veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
+                <p class="text-center">jPrime is a one day conference with talks on Java, various languages on the JVM, mobile, web and best practices. <br/> It is held on 27th May 2015 in Sofia Event Center. It's run by the Bulgarian Java User Group and backed by the biggest companies in the city.
+                    <br/><br/>jPrime features a combination of great international speakers along with the best presenters from Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning, hacking, networking and fun.</p>
 
 
                 <!-- Start Recent Projects Carousel -->
@@ -916,7 +865,7 @@
                 <!-- Start Big Heading -->
 		<div class="big-title text-center">
 			<h1><strong>Sponsors</strong></h1>
-			<p class="title-desc">Partners We Work With</p>
+			<p class="title-desc">Our Sponsors</p>
 		</div>
 		<!-- End Big Heading -->
 
