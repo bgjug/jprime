@@ -49,7 +49,7 @@
                     <c:forEach var="article" items="${articles.content}">
                         <!-- Start Post -->
                         <div class="blog-post image-post">
-                            <!-- Post Thumb -->
+                            <!-- Post Thumb
                             <div class="post-head">
                                 <a class="lightbox" title="This is an image title" href="images/blog-01.jpg">
                                     <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
