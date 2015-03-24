@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row footer-widgets">
 
-
+             <%--
             <!-- Start Subscribe & Social Links Widget -->
             <div class="col-md-3 col-xs-12">
                 <div class="footer-widget mail-subscribe-widget">
@@ -149,7 +149,7 @@
 
 
         </div><!-- .row -->
-
+ 		--%>
         <!-- Start Copyright -->
         <div class="copyright-section">
             <div class="row">
@@ -157,14 +157,14 @@
                     <p>&copy; 2014 Margo -  All Rights Reserved <a href="http://graygrids.com">GrayGrids</a> </p>
                 </div><!-- .col-md-6 -->
                 <div class="col-md-6">
-                    <ul class="footer-nav">
+                    <%-- <ul class="footer-nav">
                         <li><a href="#">Sitemap</a>
                         </li>
                         <li><a href="#">Privacy Policy</a>
                         </li>
                         <li><a href="#">Contact</a>
                         </li>
-                    </ul>
+                    </ul> --%>
                 </div><!-- .col-md-6 -->
             </div><!-- .row -->
         </div>

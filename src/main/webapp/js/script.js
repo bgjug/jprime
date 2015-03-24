@@ -498,7 +498,7 @@ $(document).ready(function ($) {
 				if (/iPhone|iPod|BlackBerry/i.test(navigator.userAgent) || $(window).width() < 479 ){
 					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 0 + "px", 'padding-bottom' : 0 + "px" })
 				}else{
-					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 1 + "px", 'padding-bottom' : 1 + "px" })
+					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 20 + "px", 'padding-bottom' : 20 + "px" })
 					$('.search-side').css({ 'margin-top' : -7 + "px" });
 				};
 
@@ -511,7 +511,7 @@ $(document).ready(function ($) {
 				if (/iPhone|iPod|BlackBerry/i.test(navigator.userAgent) || $(window).width() < 479 ){
 					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 0 + "px", 'padding-bottom' : 0 + "px" })
 				}else{
-					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 1 + "px", 'padding-bottom' : 1 + "px" })
+					$('.navbar-default .navbar-nav > li > a').css({ 'padding-top' : 28 + "px", 'padding-bottom' : 28 + "px" })
 					$('.search-side').css({ 'margin-top' : 0  + "px" });
 				};
 

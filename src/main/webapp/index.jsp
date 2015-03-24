@@ -50,10 +50,10 @@
                         <img class="img-responsive" src="images/slider/bg1.jpg" alt="slider">
                         <div class="slider-content">
                             <div class="col-md-12 text-center">
-                                <h2 class="animated2">
+                                <h2 class="animated2 white">
                         		  <span><strong>jPrime</strong></span>
                         	    </h2>
-                                <h3 class="animated3">
+                                <h3 class="animated3 white">
                             		<span>Java prime time in Sofia</span>
                             	</h3>
                                 <p class="animated4"><a href="#" class="slider btn btn-primary">Check Now</a>
@@ -66,10 +66,10 @@
                         <img class="img-responsive" src="images/slider/bg2.jpg" alt="slider">
                         <div class="slider-content">
                             <div class="col-md-12 text-center">
-                                <h2 class="animated4">
+                                <h2 class="animated4 white" style="text-shadow: 1px 1px black;">
                                 <span><strong>jPrime</strong> wants YOU </span>
                             </h2>
-                                <h3 class="animated5">
+                                <h3 class="animated5 white" style="text-shadow: 1px 1px black;">
                             	<span>Register now</span>
                             </h3>
                                 <p class="animated6"><a href="#" class="slider btn btn-primary">Buy Tickets</a>
