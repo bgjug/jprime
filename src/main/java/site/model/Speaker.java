@@ -88,7 +88,7 @@ public class Speaker extends User {
 
         Speaker speaker = (Speaker) o;
 
-        if (!twitter.equals(speaker.twitter))
+        if (twitter != null && !twitter.equals(speaker.twitter))
             return false;
 
         return true;

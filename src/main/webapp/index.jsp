@@ -147,7 +147,7 @@
 
 				<!-- Client 5 -->
 				<div class="client-item item">
-					<a href="#"><img src="images/experian.png" alt="Experian" /></a>
+					<a href="http://www.experian.bg"><img src="images/experian.png" alt="Experian" /></a>
 				</div>
 
 			</div>

@@ -97,7 +97,6 @@ pageEncoding="UTF-8"%>
 
     <!-- Start Single Post Content -->
     <div class="post-content">
-     <div class="post-type"><i class="fa fa-picture-o"></i></div>
      <h2>Submit your poposal</h2>
 
         <form:form commandName="submission" method="post"
@@ -121,6 +120,14 @@ pageEncoding="UTF-8"%>
                     </dt>
                     <dd>
                         <form:textarea path="description"  cols="70" rows="5"/>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>
+                        <label for="level">Session level</label>
+                    </dt>
+                    <dd>
+                        <form:select path="level" items="${levels}"/>
                     </dd>
                 </dl>
                 <dl>
@@ -173,7 +180,7 @@ pageEncoding="UTF-8"%>
                 </dl>
                 <sec:csrfInput />
                 <form:hidden path="id" />
-                <button type="submit">Save</button>
+                <button type="submit">Submit</button>
             </fieldset>
 
         </form:form>

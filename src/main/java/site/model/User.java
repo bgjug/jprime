@@ -83,11 +83,11 @@ public class User extends AbstractEntity {
 
         User user = (User) o;
 
-        if (!email.equals(user.email))
+        if (email != null && !email.equals(user.email))
             return false;
-        if (!firstName.equals(user.firstName))
+        if (firstName != null && !firstName.equals(user.firstName))
             return false;
-        if (!lastName.equals(user.lastName))
+        if (lastName != null && !lastName.equals(user.lastName))
             return false;
 
         return true;
