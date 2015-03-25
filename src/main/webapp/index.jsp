@@ -142,7 +142,7 @@
 
 				<!-- Client 4 -->
 				<div class="client-item item">
-					<a href="http://www.sap.com"><img src="images/sap.png" alt="SAP" /></a>
+					<a href="http://www.sap.com/bulgaria"><img src="images/sap.png" alt="SAP" /></a>
 				</div>
 
 				<!-- Client 5 -->
@@ -664,7 +664,7 @@
 
                 <c:forEach var="sponsor" items="${platinumSponsors}">
                     <div class="client-item item">
-                        <a href="${sponsor.companyWebsite}"><img src="data:image/png;bytes,${sponsor.logo}" alt="${sponsor.companyName}" /></a>
+                        <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}" /></a>
                     </div>
                 </c:forEach>
 
@@ -680,7 +680,7 @@
 
                 <c:forEach var="sponsor" items="${goldSponsors}">
                     <div class="client-item item">
-                        <a href="${sponsor.companyWebsite}"><img src="images/c1.png" alt="data:image/png;bytes,${sponsor.logo}" /></a>
+                        <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}" /></a>
                     </div>
                 </c:forEach>
 
@@ -695,7 +695,7 @@
 
                 <c:forEach var="sponsor" items="${silverSponsors}">
                     <div class="client-item item">
-                        <a href="${sponsor.companyWebsite}"><img src="data:image/png;bytes,${sponsor.logo}" alt="${sponsor.companyName}" /></a>
+                        <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}"/></a>
                     </div>
                 </c:forEach>
 

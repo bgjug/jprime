@@ -29,7 +29,7 @@
 				<tr>
 					<td>${sponsor.companyName}</td>
 					<td>${sponsor.sponsorPackage }</td>
-					<td><img src="/admin/sponsor/logo/${sponsor.id}"/></td>
+					<td><img src="/image/sponsor/${sponsor.id}"/></td>
 					<td>
 						<span style="float:left;"><a href="/admin/sponsor/edit/${sponsor.id}">Edit</a></span> &nbsp; 
 						<span style="float:right;"><a href="/admin/sponsor/remove/${sponsor.id}"> Remove </a></span> 
