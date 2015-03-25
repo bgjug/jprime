@@ -77,15 +77,8 @@ public class SpeakerController {
 	
 	@Transactional
 	@RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
-	public String remove(@PathVariable("itemId") Long itemId, Model model){
-		adminFacade.deleteSpeaker(itemId);
-		return "redirect:/admin/speaker/view";
-	}
-	
-	@RequestMapping(value = "/picture/{itemId}")
-	@ResponseBody
-	public byte[] showLogo(@PathVariable("itemId") Long itemId)  {
-		return adminFacade.findOneSpeaker(itemId).getPicture();
-	}
-	
+	public String remove(@PathVariable("itemId") Long itemId, Model model) {
+        adminFacade.deleteSpeaker(itemId);
+        return "redirect:/admin/speaker/view";
+    }
 }

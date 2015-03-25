@@ -77,4 +77,27 @@ public class Speaker extends User {
         this.submissions = submissions;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Speaker))
+            return false;
+        if (!super.equals(o))
+            return false;
+
+        Speaker speaker = (Speaker) o;
+
+        if (!twitter.equals(speaker.twitter))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + twitter.hashCode();
+        return result;
+    }
 }

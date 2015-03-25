@@ -78,11 +78,5 @@ public class SponsorController {
 		adminFacade.deleteSponsor(itemId);
 		return "redirect:/admin/sponsor/view";
 	}
-	
-	@RequestMapping(value = "/logo/{itemId}")
-	@ResponseBody
-	public byte[] showLogo(@PathVariable("itemId") Long itemId)  {
-		return adminFacade.findOneSponsor(itemId).getLogo();
-	}
-	
+
 }

@@ -74,4 +74,30 @@ public class User extends AbstractEntity {
 		this.phone = phone;
 	}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof User))
+            return false;
+
+        User user = (User) o;
+
+        if (!email.equals(user.email))
+            return false;
+        if (!firstName.equals(user.firstName))
+            return false;
+        if (!lastName.equals(user.lastName))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + email.hashCode();
+        return result;
+    }
 }

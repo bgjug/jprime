@@ -22,14 +22,14 @@ public class MailFacade {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendEmail(String to, String subject, String messgeText) throws MessagingException {
+    public void sendEmail(String to, String subject, String messageText) throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
         helper.setFrom(from);
         helper.setTo(to);
         helper.setSubject(subject);
-        helper.setText(messgeText, true);
+        helper.setText(messageText, true);
 
         mailSender.send(mimeMessage);
     }
