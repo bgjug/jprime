@@ -72,7 +72,7 @@
                                 <h3 class="animated5 white" style="text-shadow: 2px 2px black;">
                             	<span>Register now</span>
                             </h3>
-                                <p class="animated6"><a href="#" class="slider btn btn-primary">Buy Tickets</a>
+                                <p class="animated6"><a href="/tickets" class="slider btn btn-primary">Buy Tickets</a>
                                 </p>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                             	<span>Why you are waiting</span>
                             </h3>
                                 <div class="">
-                                    <a class="animated4 slider btn btn-primary btn-min-block" href="#">Become Sponsor</a><a class="animated4 slider btn btn-default btn-min-block" href="#sponsors">Learn More</a>
+                                    <a class="animated4 slider btn btn-primary btn-min-block" href="#sponsors">Become Sponsor</a><a class="animated4 slider btn btn-default btn-min-block" href="#sponsors">Learn More</a>
                                 </div>
                             </div>
                         </div>
@@ -475,7 +475,7 @@
 								</ul>
 							</div>
 							<div class="plan-signup">
-								<a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn-system btn-small">Sign Up Now</a>
+								<a href="mailto:conference@jprime.io?subject=gold sponsorship" class="btn-system btn-small">Sign Up Now</a>
 							</div>
 						</div>
                         </div>
@@ -497,7 +497,7 @@
 								</ul>
 							</div>
 							<div class="plan-signup">
-								<a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn-system btn-small">Sign Up Now</a>
+								<a href="mailto:conference@jprime.io?subject=silver sponsorship" class="btn-system btn-small">Sign Up Now</a>
 							</div>
 						</div>
                         </div>
