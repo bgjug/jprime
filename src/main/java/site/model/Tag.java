@@ -1,14 +1,9 @@
 package site.model;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.Collection;
 import java.util.HashSet;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Index;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Tag extends AbstractEntity {
@@ -19,11 +14,17 @@ public class Tag extends AbstractEntity {
 	
 	private String name;
 
-	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Article.class)
-	@JoinTable(name = "tags_articles", joinColumns = @JoinColumn(name = "tag_pk"), inverseJoinColumns = @JoinColumn(name = "article_pk"), indexes = { @Index(columnList = "tag_pk") })
+	@ManyToMany(mappedBy = "tags")
 	private Collection<Article> articles = new HashSet<>();
 
-	public String getName() {
+    public Tag() {
+    }
+
+    public Tag(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
 		return name;
 	}
 
@@ -39,4 +40,23 @@ public class Tag extends AbstractEntity {
 		this.articles = articles;
 	}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Tag))
+            return false;
+
+        Tag tag = (Tag) o;
+
+        if (!name.equals(tag.name))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 }

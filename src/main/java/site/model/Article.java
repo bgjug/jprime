@@ -1,16 +1,17 @@
 package site.model;
 
-import java.util.Collection;
-import java.util.HashSet;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 public class Article extends AbstractEntity{
@@ -25,18 +26,29 @@ public class Article extends AbstractEntity{
 	private String description;
 	
 	@NotNull
+    @Lob
+    @Column(length=10000)
 	private String text;
 	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "author", nullable = true, referencedColumnName = "id")
     private User author;
-	
-	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Tag.class)
+
+    //Changed to eager, session problems! TODO:rethink!
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Tag.class)
     @JoinTable(name = "tags_articles", joinColumns = @JoinColumn(name = "article_pk"), inverseJoinColumns = @JoinColumn(name = "tag_pk"), indexes = {
                     @Index(columnList = "article_pk") })
     private Collection<Tag> tags = new HashSet<>();
-	
-	public String getTitle() {
+
+    public Article() {
+    }
+
+    public Article(String title, String text) {
+        this.title = title;
+        this.text = text;
+    }
+
+    public String getTitle() {
 		return title;
 	}
 
@@ -69,10 +81,35 @@ public class Article extends AbstractEntity{
 	}
 
 	public Collection<Tag> getTags() {
-		return tags;
+        return tags;
 	}
 
 	public void setTags(Collection<Tag> tags) {
 		this.tags = tags;
 	}
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Article))
+            return false;
+
+        Article article = (Article) o;
+
+        if (!title.equals(article.title))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return title.hashCode();
+    }
 }
+

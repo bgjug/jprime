@@ -6,17 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import site.model.Article;
 import site.model.Speaker;
 import site.model.Sponsor;
+import site.model.Submission;
+import site.model.SubmissionStatus;
 import site.model.Tag;
 import site.model.User;
 import site.repository.ArticleRepository;
 import site.repository.SpeakerRepository;
 import site.repository.SponsorRepository;
+import site.repository.SubmissionRepository;
 import site.repository.TagRepository;
 import site.repository.UserRepository;
 
@@ -45,6 +47,10 @@ public class AdminFacade {
 	@Autowired
 	@Qualifier(TagRepository.NAME)
 	private TagRepository tagRepository;
+
+    @Autowired
+    @Qualifier(SubmissionRepository.NAME)
+    private SubmissionRepository submissionRepository;
 	
 	/* article repo */
 	
@@ -140,5 +146,21 @@ public class AdminFacade {
 	public Tag saveTag(Tag tag){
 		return tagRepository.save(tag);
 	}
-	
+
+    public Iterable<Submission> findAllSubmissions() {
+        return submissionRepository.findAll();
+    }
+
+    public void acceptSubmission(Submission submission) {
+        changeStatusTo(submission, SubmissionStatus.ACCEPTED);
+    }
+
+    public void rejectSubmission(Submission submission) {
+        changeStatusTo(submission, SubmissionStatus.REJECTED);
+    }
+
+    private void changeStatusTo(Submission submission, SubmissionStatus status) {
+        submission.setStatus(status);
+        submissionRepository.save(submission);
+    }
 }

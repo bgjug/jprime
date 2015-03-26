@@ -22,7 +22,8 @@ IndexController should use this userFacade to set all sponsors/speakers/etc that
 that looks like blog.html 
 6) NavController should have one more method to display a single article (based on name)
 7) WYSIWYG editor for content http://www.sitepoint.com/html5-wysiwyg/
-7) Images resizer... https://code.google.com/p/thumbnailator/
-7) CFP form
-8) payment provider
-9)test
+7) PREVIEW OF ARTICLE 
+7) Images resizer... https://code.google.com/p/thumbnailator/ (IVO)
+7) (IVAN)  CFP form
+8) payment provider (epay.bg)
+
