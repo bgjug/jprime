@@ -56,8 +56,7 @@
                                 <h3 class="animated3 white"  style="text-shadow: 2px 2px black;">
                             		<span>Java prime time in Sofia</span>
                             	</h3>
-                                <p class="animated4"><a href="#" class="slider btn btn-primary">Check Now</a>
-                                </p>
+                                <p class="animated4"><a href="/cfp" class="slider btn btn-primary">Submit a talk</a>
                             </div>
                         </div>
                     </div>
@@ -72,7 +71,7 @@
                                 <h3 class="animated5 white" style="text-shadow: 2px 2px black;">
                             	<span>Register now</span>
                             </h3>
-                                <p class="animated6"><a href="/tickets" class="slider btn btn-primary">Buy Tickets</a>
+                                <p class="animated6"><a href="/tickets" class="slider btn btn-primary">Register</a>
                                 </p>
                             </div>
                         </div>
@@ -204,214 +203,216 @@
                 </div>
                 <!-- End Big Heading -->
 
-                <p class="text-center">jPrime is a one day conference with talks on Java, various languages on the JVM, mobile, web and best practices. <br/> It is held on 27th May 2015 in Sofia Event Center. It's run by the Bulgarian Java User Group and backed by the biggest companies in the city.
+                <p class="text-center">jPrime is a one day conference with talks on Java, various languages on the JVM, mobile, web and best practices. <br/> It is held on <strong>27th May 2015</strong> in Sofia Event Center. It's run by the Bulgarian Java User Group and backed by the biggest companies in the city.
                     <br/><br/>jPrime features a combination of great international speakers along with the best presenters from Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning, hacking, networking and fun.</p>
         </div>
         <!-- End Portfolio Section -->
 
         <!-- Start Team Member Section -->
-        <%--<div class="section" style="background:#fff;">--%>
-            <%--<div class="container">--%>
+<%--
+        <div class="section" style="background:#fff;">
+            <div class="container">
 
-                    <%--<!-- Start Big Heading -->--%>
-                    <%--<div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">--%>
-                        <%--<h1>Some of the <strong>Speakers</strong></h1>--%>
-                    <%--</div>--%>
-                    <%--<!-- End Big Heading -->--%>
+                    <!-- Start Big Heading -->
+                    <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
+                        <h1>Some of the <strong>Speakers</strong></h1>
+                    </div>
+                    <!-- End Big Heading -->
 
-                    <%--<!-- Start Team Members -->--%>
-                    <%--<div class="row">--%>
+                    <!-- Start Team Members -->
+                    <div class="row">
 
-                        <%--<!-- Start Memebr 1 -->--%>
-                        <%--<div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="03">--%>
-                            <%--<div class="team-member modern">--%>
-                                <%--<!-- Memebr Photo, Name & Position -->--%>
-                                <%--<div class="member-photo">--%>
-                                    <%--<img alt="" src="images/team/face_1.png" />--%>
-                                    <%--<div class="member-name">John Doe <span>Developer</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Memebr Words -->--%>
-                                <%--<div class="member-info">--%>
-                                    <%--<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat.</p>--%>
-                                <%--</div>--%>
-                                <%--<!-- Start Progress Bar 1 -->--%>
-                                <%--<div class="progress-label">Photoshop</div>--%>
-                                <%--<div class="progress">--%>
-                                    <%--<div class="progress-bar progress-bar-primary" data-progress-animation="96%" data-appear-animation-delay="400">--%>
-                                        <%--<span class="percentage">96%</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Start Progress Bar 2 -->--%>
-                                <%--<div class="progress-label">Logo Design</div>--%>
-                                <%--<div class="progress">--%>
-                                    <%--<div class="progress-bar progress-bar-primary" data-progress-animation="88%" data-appear-animation-delay="800">--%>
-                                        <%--<span class="percentage">88%</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Start Progress Bar 3 -->--%>
-                                <%--<div class="progress-label">Vectors Design</div>--%>
-                                <%--<div class="progress">--%>
-                                    <%--<div class="progress-bar progress-bar-primary" data-progress-animation="100%" data-appear-animation-delay="1200">--%>
-                                        <%--<span class="percentage">100%</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Memebr Social Links -->--%>
-                                <%--<div class="member-socail">--%>
-                                    <%--<a class="twitter" href="#"><i class="fa fa-twitter"></i></a>--%>
-                                    <%--<a class="gplus" href="#"><i class="fa fa-google-plus"></i></a>--%>
-                                    <%--<a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>--%>
-                                    <%--<a class="flickr" href="#"><i class="fa fa-flickr"></i></a>--%>
-                                    <%--<a class="mail" href="#"><i class="fa fa-envelope"></i></a>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                        <%--<!-- End Memebr 1 -->--%>
+                        <!-- Start Memebr 1 -->
+                        <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="03">
+                            <div class="team-member modern">
+                                <!-- Memebr Photo, Name & Position -->
+                                <div class="member-photo">
+                                    <img alt="" src="images/team/face_1.png" />
+                                    <div class="member-name">John Doe <span>Developer</span>
+                                    </div>
+                                </div>
+                                <!-- Memebr Words -->
+                                <div class="member-info">
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat.</p>
+                                </div>
+                                <!-- Start Progress Bar 1 -->
+                                <div class="progress-label">Photoshop</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" data-progress-animation="96%" data-appear-animation-delay="400">
+                                        <span class="percentage">96%</span>
+                                    </div>
+                                </div>
+                                <!-- Start Progress Bar 2 -->
+                                <div class="progress-label">Logo Design</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" data-progress-animation="88%" data-appear-animation-delay="800">
+                                        <span class="percentage">88%</span>
+                                    </div>
+                                </div>
+                                <!-- Start Progress Bar 3 -->
+                                <div class="progress-label">Vectors Design</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" data-progress-animation="100%" data-appear-animation-delay="1200">
+                                        <span class="percentage">100%</span>
+                                    </div>
+                                </div>
+                                <!-- Memebr Social Links -->
+                                <div class="member-socail">
+                                    <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                                    <a class="gplus" href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a class="flickr" href="#"><i class="fa fa-flickr"></i></a>
+                                    <a class="mail" href="#"><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Memebr 1 -->
 
-                        <%--<!-- Start Memebr 2 -->--%>
-                        <%--<div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="04">--%>
-                            <%--<div class="team-member modern">--%>
-                                <%--<!-- Memebr Photo, Name & Position -->--%>
-                                <%--<div class="member-photo">--%>
-                                    <%--<img alt="" src="images/team/face_2.png" />--%>
-                                    <%--<div class="member-name">Silly Sally <span>Developer</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Memebr Words -->--%>
-                                <%--<div class="member-info">--%>
-                                    <%--<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat.</p>--%>
-                                <%--</div>--%>
-                                <%--<!-- Start Progress Bar 1 -->--%>
-                                <%--<div class="progress-label">Photoshop</div>--%>
-                                <%--<div class="progress">--%>
-                                    <%--<div class="progress-bar progress-bar-primary" data-progress-animation="96%" data-appear-animation-delay="400">--%>
-                                        <%--<span class="percentage">96%</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Start Progress Bar 2 -->--%>
-                                <%--<div class="progress-label">Logo Design</div>--%>
-                                <%--<div class="progress">--%>
-                                    <%--<div class="progress-bar progress-bar-primary" data-progress-animation="88%" data-appear-animation-delay="800">--%>
-                                        <%--<span class="percentage">88%</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Start Progress Bar 3 -->--%>
-                                <%--<div class="progress-label">Vectors Design</div>--%>
-                                <%--<div class="progress">--%>
-                                    <%--<div class="progress-bar progress-bar-primary" data-progress-animation="100%" data-appear-animation-delay="1200">--%>
-                                        <%--<span class="percentage">100%</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Memebr Social Links -->--%>
-                                <%--<div class="member-socail">--%>
-                                    <%--<a class="twitter" href="#"><i class="fa fa-twitter"></i></a>--%>
-                                    <%--<a class="gplus" href="#"><i class="fa fa-google-plus"></i></a>--%>
-                                    <%--<a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>--%>
-                                    <%--<a class="flickr" href="#"><i class="fa fa-flickr"></i></a>--%>
-                                    <%--<a class="mail" href="#"><i class="fa fa-envelope"></i></a>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                        <%--<!-- End Memebr 2 -->--%>
+                        <!-- Start Memebr 2 -->
+                        <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="04">
+                            <div class="team-member modern">
+                                <!-- Memebr Photo, Name & Position -->
+                                <div class="member-photo">
+                                    <img alt="" src="images/team/face_2.png" />
+                                    <div class="member-name">Silly Sally <span>Developer</span>
+                                    </div>
+                                </div>
+                                <!-- Memebr Words -->
+                                <div class="member-info">
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat.</p>
+                                </div>
+                                <!-- Start Progress Bar 1 -->
+                                <div class="progress-label">Photoshop</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" data-progress-animation="96%" data-appear-animation-delay="400">
+                                        <span class="percentage">96%</span>
+                                    </div>
+                                </div>
+                                <!-- Start Progress Bar 2 -->
+                                <div class="progress-label">Logo Design</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" data-progress-animation="88%" data-appear-animation-delay="800">
+                                        <span class="percentage">88%</span>
+                                    </div>
+                                </div>
+                                <!-- Start Progress Bar 3 -->
+                                <div class="progress-label">Vectors Design</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" data-progress-animation="100%" data-appear-animation-delay="1200">
+                                        <span class="percentage">100%</span>
+                                    </div>
+                                </div>
+                                <!-- Memebr Social Links -->
+                                <div class="member-socail">
+                                    <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                                    <a class="gplus" href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a class="flickr" href="#"><i class="fa fa-flickr"></i></a>
+                                    <a class="mail" href="#"><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Memebr 2 -->
 
-                        <%--<!-- Start Memebr 3 -->--%>
-                        <%--<div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="05">--%>
-                            <%--<div class="team-member modern">--%>
-                                <%--<!-- Memebr Photo, Name & Position -->--%>
-                                <%--<div class="member-photo">--%>
-                                    <%--<img alt="" src="images/team/face_3.png" />--%>
-                                    <%--<div class="member-name">Chris John <span>Developer</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Memebr Words -->--%>
-                                <%--<div class="member-info">--%>
-                                    <%--<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat.</p>--%>
-                                <%--</div>--%>
-                                <%--<!-- Start Progress Bar 1 -->--%>
-                                <%--<div class="progress-label">Photoshop</div>--%>
-                                <%--<div class="progress">--%>
-                                    <%--<div class="progress-bar progress-bar-primary" data-progress-animation="96%" data-appear-animation-delay="400">--%>
-                                        <%--<span class="percentage">96%</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Start Progress Bar 2 -->--%>
-                                <%--<div class="progress-label">Logo Design</div>--%>
-                                <%--<div class="progress">--%>
-                                    <%--<div class="progress-bar progress-bar-primary" data-progress-animation="94%" data-appear-animation-delay="800">--%>
-                                        <%--<span class="percentage">94%</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Start Progress Bar 3 -->--%>
-                                <%--<div class="progress-label">Vectors Design</div>--%>
-                                <%--<div class="progress">--%>
-                                    <%--<div class="progress-bar progress-bar-primary" data-progress-animation="90%" data-appear-animation-delay="1200">--%>
-                                        <%--<span class="percentage">90%</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Memebr Social Links -->--%>
-                                <%--<div class="member-socail">--%>
-                                    <%--<a class="twitter" href="#"><i class="fa fa-twitter"></i></a>--%>
-                                    <%--<a class="gplus" href="#"><i class="fa fa-google-plus"></i></a>--%>
-                                    <%--<a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>--%>
-                                    <%--<a class="flickr" href="#"><i class="fa fa-flickr"></i></a>--%>
-                                    <%--<a class="mail" href="#"><i class="fa fa-envelope"></i></a>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                        <%--<!-- End Memebr 3 -->--%>
+                        <!-- Start Memebr 3 -->
+                        <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="05">
+                            <div class="team-member modern">
+                                <!-- Memebr Photo, Name & Position -->
+                                <div class="member-photo">
+                                    <img alt="" src="images/team/face_3.png" />
+                                    <div class="member-name">Chris John <span>Developer</span>
+                                    </div>
+                                </div>
+                                <!-- Memebr Words -->
+                                <div class="member-info">
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat.</p>
+                                </div>
+                                <!-- Start Progress Bar 1 -->
+                                <div class="progress-label">Photoshop</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" data-progress-animation="96%" data-appear-animation-delay="400">
+                                        <span class="percentage">96%</span>
+                                    </div>
+                                </div>
+                                <!-- Start Progress Bar 2 -->
+                                <div class="progress-label">Logo Design</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" data-progress-animation="94%" data-appear-animation-delay="800">
+                                        <span class="percentage">94%</span>
+                                    </div>
+                                </div>
+                                <!-- Start Progress Bar 3 -->
+                                <div class="progress-label">Vectors Design</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" data-progress-animation="90%" data-appear-animation-delay="1200">
+                                        <span class="percentage">90%</span>
+                                    </div>
+                                </div>
+                                <!-- Memebr Social Links -->
+                                <div class="member-socail">
+                                    <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                                    <a class="gplus" href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a class="flickr" href="#"><i class="fa fa-flickr"></i></a>
+                                    <a class="mail" href="#"><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Memebr 3 -->
 
-                        <%--<!-- Start Memebr 4 -->--%>
-                        <%--<div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="06">--%>
-                            <%--<div class="team-member modern">--%>
-                                <%--<!-- Memebr Photo, Name & Position -->--%>
-                                <%--<div class="member-photo">--%>
-                                    <%--<img alt="" src="images/team/face_4.png" />--%>
-                                    <%--<div class="member-name">Sara John <span>Developer</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Memebr Words -->--%>
-                                <%--<div class="member-info">--%>
-                                    <%--<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat.</p>--%>
-                                <%--</div>--%>
-                                <%--<!-- Start Progress Bar 1 -->--%>
-                                <%--<div class="progress-label">Photoshop</div>--%>
-                                <%--<div class="progress">--%>
-                                    <%--<div class="progress-bar progress-bar-primary" data-progress-animation="96%" data-appear-animation-delay="400">--%>
-                                        <%--<span class="percentage">96%</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Start Progress Bar 2 -->--%>
-                                <%--<div class="progress-label">Logo Design</div>--%>
-                                <%--<div class="progress">--%>
-                                    <%--<div class="progress-bar progress-bar-primary" data-progress-animation="85%" data-appear-animation-delay="800">--%>
-                                        <%--<span class="percentage">85%</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Start Progress Bar 3 -->--%>
-                                <%--<div class="progress-label">Vectors Design</div>--%>
-                                <%--<div class="progress">--%>
-                                    <%--<div class="progress-bar progress-bar-primary" data-progress-animation="100%" data-appear-animation-delay="1200">--%>
-                                        <%--<span class="percentage">100%</span>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<!-- Memebr Social Links -->--%>
-                                <%--<div class="member-socail">--%>
-                                    <%--<a class="twitter" href="#"><i class="fa fa-twitter"></i></a>--%>
-                                    <%--<a class="gplus" href="#"><i class="fa fa-google-plus"></i></a>--%>
-                                    <%--<a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>--%>
-                                    <%--<a class="flickr" href="#"><i class="fa fa-flickr"></i></a>--%>
-                                    <%--<a class="mail" href="#"><i class="fa fa-envelope"></i></a>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                        <%--<!-- End Memebr 4 -->--%>
+                        <!-- Start Memebr 4 -->
+                        <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="06">
+                            <div class="team-member modern">
+                                <!-- Memebr Photo, Name & Position -->
+                                <div class="member-photo">
+                                    <img alt="" src="images/team/face_4.png" />
+                                    <div class="member-name">Sara John <span>Developer</span>
+                                    </div>
+                                </div>
+                                <!-- Memebr Words -->
+                                <div class="member-info">
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore fugiat.</p>
+                                </div>
+                                <!-- Start Progress Bar 1 -->
+                                <div class="progress-label">Photoshop</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" data-progress-animation="96%" data-appear-animation-delay="400">
+                                        <span class="percentage">96%</span>
+                                    </div>
+                                </div>
+                                <!-- Start Progress Bar 2 -->
+                                <div class="progress-label">Logo Design</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" data-progress-animation="85%" data-appear-animation-delay="800">
+                                        <span class="percentage">85%</span>
+                                    </div>
+                                </div>
+                                <!-- Start Progress Bar 3 -->
+                                <div class="progress-label">Vectors Design</div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" data-progress-animation="100%" data-appear-animation-delay="1200">
+                                        <span class="percentage">100%</span>
+                                    </div>
+                                </div>
+                                <!-- Memebr Social Links -->
+                                <div class="member-socail">
+                                    <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                                    <a class="gplus" href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a class="flickr" href="#"><i class="fa fa-flickr"></i></a>
+                                    <a class="mail" href="#"><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Memebr 4 -->
 
-                    <%--</div>--%>
-                    <%--<!-- End Team Members -->--%>
+                    </div>
+                    <!-- End Team Members -->
 
-            <%--</div><!-- .container -->--%>
-        <%--</div>--%>
-        <%--<!-- End Team Member Section -->--%>
+            </div><!-- .container -->
+        </div>
+        <!-- End Team Member Section -->
+--%>
 
 
 
@@ -507,8 +508,7 @@
                 </div>
             <!-- End Pricing Table Section -->
 
-
-
+<%--
 
         <!-- Start Client/Partner Section -->
         <div class="partner">
@@ -567,6 +567,7 @@
         </div><!-- .container -->
         </div>
         <!-- End Client/Partner Section -->
+--%>
 
         <user:footer/>
 

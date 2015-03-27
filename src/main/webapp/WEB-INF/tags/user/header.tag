@@ -88,7 +88,7 @@
                                 <a <c:if test='${"/proposal.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/cfp">Call for papers</a>
                             </li>
                             <li>
-                                <a <c:if test='${"/tickets.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/tickets">Buy tickets</a>
+                                <a <c:if test='${"/tickets.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/tickets">Register</a>
                             </li>
                             <c:forEach var="tag" items="${tags}">
                                 <li>
