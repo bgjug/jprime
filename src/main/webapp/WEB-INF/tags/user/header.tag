@@ -16,7 +16,7 @@
                                 <li><a href="mailto:conference@jprime.io"><i class="fa fa-envelope-o"></i> conference@jprime.io</a>
                                 </li>
                                 <li><a href="#"><i class="fa fa-phone"></i> +359 887 749 325</a>
-                                <   /li>
+                                </li>
                             </ul>
                             <!-- End Contact Info -->
                         </div><!-- .col-md-6 -->
