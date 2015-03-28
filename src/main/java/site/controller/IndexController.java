@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import site.facade.UserFacade;
 import site.model.Article;
 import site.model.Sponsor;
@@ -26,7 +27,7 @@ public class IndexController {
     @Qualifier(UserFacade.NAME)
     private UserFacade userFacade;
 
-	@RequestMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 
         // TODO find top speakers

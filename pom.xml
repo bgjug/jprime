@@ -1,136 +1,85 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.bgjug</groupId>
-	<artifactId>site</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<name>Bulgarian Java User Group web site</name>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.bgjug</groupId>
+    <artifactId>site</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>Bulgarian Java User Group web site</name>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.2.RELEASE</version>
-	</parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.2.2.RELEASE</version>
+    </parent>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		
-		<dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+            <!--mihail: exists in tomcat-->
+            <!--<scope>provided</scope>-->
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+        </dependency>
+
+
+        <dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.zaxxer</groupId>
-			<artifactId>HikariCP</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		
-		<!--  I need this to make entities auditable -->
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aspects</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jadira.usertype</groupId>
-			<artifactId>usertype.core</artifactId>
-			<version>${jadira.version}</version>
-		</dependency>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
 
-		<!-- make jsp to work ;) -->
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<!-- jstl is a "must" :)) -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
-		<!--  spring security -->
-		 <dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!--TODO mihail: hikariCP stays here. I couldn't make it use it (I'm missing something). Now it uses either tomcat's pool or commons' pool-->
+
+		<!--  I need this to make entities auditable -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jadira.usertype</groupId>
+            <artifactId>usertype.core</artifactId>
+            <version>${jadira.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <!--mihail: exists in tomcat-->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+
+        <!--  spring security -->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-		</dependency>
-<!-- 		<dependency> -->
-<!--             <groupId>org.springframework.security</groupId> -->
-<!--             <artifactId>spring-security-acl</artifactId> -->
-<!--             <exclusions> -->
-<!--                 <exclusion> -->
-<!--                     <groupId>org.springframework</groupId> -->
-<!--                     <artifactId>spring-jdbc</artifactId> -->
-<!--                 </exclusion> -->
-<!--                 <exclusion> -->
-<!--                     <groupId>org.springframework</groupId> -->
-<!--                     <artifactId>spring-aop</artifactId> -->
-<!--                 </exclusion> -->
-<!--                 <exclusion> -->
-<!--                     <groupId>org.springframework</groupId> -->
-<!--                     <artifactId>spring-tx</artifactId> -->
-<!--                 </exclusion> -->
-<!--             </exclusions> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>org.springframework.security</groupId> -->
-<!--             <artifactId>spring-security-web</artifactId> -->
-<!--             <exclusions> -->
-<!--                 <exclusion> -->
-<!--                     <groupId>org.springframework</groupId> -->
-<!--                     <artifactId>spring-jdbc</artifactId> -->
-<!--                 </exclusion> -->
-<!--             </exclusions> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>org.springframework.security</groupId> -->
-<!--             <artifactId>spring-security-taglibs</artifactId> -->
-<!--             <exclusions> -->
-<!--                 <exclusion> -->
-<!--                     <groupId>org.springframework.security</groupId> -->
-<!--                     <artifactId>spring-security-web</artifactId> -->
-<!--                 </exclusion> -->
-<!--             </exclusions> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>org.springframework.security</groupId> -->
-<!--             <artifactId>spring-security-openid</artifactId> -->
-<!--             <exclusions> -->
-<!--                 <exclusion> -->
-<!--                     <groupId>commons-logging</groupId> -->
-<!--                     <artifactId>commons-logging</artifactId> -->
-<!--                 </exclusion> -->
-<!--                 <exclusion> -->
-<!--                     <groupId>org.apache.httpcomponents</groupId> -->
-<!--                     <artifactId>httpclient</artifactId> -->
-<!--                 </exclusion> -->
-<!--             </exclusions> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>org.springframework.security</groupId> -->
-<!--             <artifactId>spring-security-config</artifactId> -->
-<!--         </dependency> -->
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+        </dependency>
 
         <!-- email -->
         <dependency>
@@ -140,22 +89,7 @@
 
         <dependency>
             <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast</artifactId>
-            <version>${hazelcast.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast-spring</artifactId>
-            <version>${hazelcast.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.hazelcast</groupId>
             <artifactId>hazelcast-hibernate4</artifactId>
-            <version>${hazelcast.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast-jca</artifactId>
             <version>${hazelcast.version}</version>
         </dependency>
 
@@ -166,42 +100,75 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2-database.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
-	<properties>
-		<start-class>site.app.Application</start-class>
-		<spring.version>4.1.5.RELEASE</spring.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-data-jpa.version>1.5.0.M1</spring-data-jpa.version>
-		<hibernate-entitymanager.version>4.3.0.Final</hibernate-entitymanager.version>
-		<jadira.version>3.1.0.CR10</jadira.version>
+    <!--mihail: a profile that has the spring-boot:run plugin and a couple of dependencies, so that-->
+    <!--spring-boot:run will work with an embedded tomcat. This profile is activated by default so that-->
+    <!--no extra conf is needed. when we deploy on the server, we deactivate the profile, because we don't-->
+    <!--want these dependencies in the war.-->
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>run.as.spring-boot.run</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-jasper</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>com.zaxxer</groupId>
+                    <artifactId>HikariCP</artifactId>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <properties>
+        <start-class>site.app.Application</start-class>
+        <spring.version>4.1.5.RELEASE</spring.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-data-jpa.version>1.5.0.M1</spring-data-jpa.version>
+        <hibernate-entitymanager.version>4.3.0.Final</hibernate-entitymanager.version>
+        <jadira.version>3.1.0.CR10</jadira.version>
         <hazelcast.version>3.4</hazelcast.version>
         <rest-assured.version>2.4.0</rest-assured.version>
         <h2-database.version>1.3.156</h2-database.version>
-	</properties>
+    </properties>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
-
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
