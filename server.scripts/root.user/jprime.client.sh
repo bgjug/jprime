@@ -16,11 +16,13 @@ case "$1" in
 		systemctl status jprime
 		;;
 	update)
-               	sudo -u jprime ~jprime/jprime.service.sh rebuild
+	    sudo -u jprime ~jprime/jprime.service.sh rebuild
 		if [ $? -eq 0 ]; then
-			systemctl stop jprime
+			echo Stoppping service;
+			$0 stop
 			sudo -u jprime ~jprime/jprime.service.sh redeploy
-	               	systemctl start jprime
+	        echo Starting service
+			$0 start
 		else
 			echo "BUILD FAILED; REDEPLOY WAS NOT PERFORMED"
 		fi
