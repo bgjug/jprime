@@ -10,13 +10,12 @@ case $1 in
 		exit 1;
 		;;
 	rebuild)
-		pushd .
+#		pushd .
 		cd $SOURCE_ROOT
+		git pull --dry-run | grep -q -v 'Already up-to-date.' && changed=1 || changed=0; if [ $changed -eq 0 ]; then echo NOTHING CHANGED, WILL FAIL THE BUILD; exit 1; fi
 		git pull
 		/usr/bin/mvn clean package -P \!run.as.spring-boot.run -DskipTests=true
-		#export BUILD_STATUS_CODE=$?
-		#echo $BUILD_STATUS_CODE
-		popd #this changes the $? FIXME TODO
+#		popd #this changes the $? FIXME TODO
 		;;
 	manual)
 		. ~/jprime/java.opts.conf
