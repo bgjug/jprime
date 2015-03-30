@@ -1,4 +1,8 @@
     <%@ tag language="java" pageEncoding="UTF-8"%>
+
+    <!-- mihail: icon -->
+    <link rel="icon" type="image/png"
+          href="../../../images/icons/cup.white.transparent.png" />
     
     <!-- Bootstrap CSS  -->
     <link rel="stylesheet" href="asset/css/bootstrap.min.css" type="text/css" media="screen">
