@@ -12,7 +12,7 @@ case $1 in
 	rebuild)
 #		pushd .
 		cd $SOURCE_ROOT
-		git pull --dry-run | grep -q -v 'Already up-to-date.' && changed=1 || changed=0; if [ $changed -eq 0 ]; then echo NOTHING CHANGED, WILL FAIL THE BUILD; exit 1; fi
+		git pull -v --dry-run 2>&1 | grep "up to date" && changed=0 || changed=1; if [ $changed -eq 0 ]; then echo NOTHING CHANGED, WILL FAIL THE BUILD; exit 1; else echo CHANGES FOUND; fi
 		git pull
 		/usr/bin/mvn clean package -P \!run.as.spring-boot.run -DskipTests=true
 #		popd #this changes the $? FIXME TODO
