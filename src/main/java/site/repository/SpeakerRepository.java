@@ -18,4 +18,7 @@ public interface SpeakerRepository extends PagingAndSortingRepository<Speaker, L
 
     @Query("SELECT s FROM Speaker s WHERE s.firstName = :firstName AND s.lastName = :lastName")
     public Speaker findSpeakerByName(@Param("firstName") String firstName, @Param("lastName") String lastName);
+
+    @Query("SELECT s FROM Speaker s WHERE s.featured = true")
+    public List<Speaker> findFeaturedSpeakers();
 }

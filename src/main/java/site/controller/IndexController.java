@@ -30,8 +30,6 @@ public class IndexController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 
-        // TODO find top speakers
-
         Map<SponsorPackage, List<Sponsor>> allSponsors = userFacade.findAllSponsors();
         model.addAttribute("platinumSponsors", allSponsors.getOrDefault(SponsorPackage.PLATINUM,
                 new ArrayList<>()));
@@ -40,6 +38,7 @@ public class IndexController {
         model.addAttribute("silverSponsors", allSponsors.getOrDefault(SponsorPackage.SILVER,
                 new ArrayList<>()));
         model.addAttribute("tags", userFacade.findAllTags());
+        model.addAttribute("featuredSpeakers", userFacade.findFeaturedSpeakers());
 		return PAGE_INDEX;
 	}
 

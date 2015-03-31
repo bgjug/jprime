@@ -1,6 +1,7 @@
 package site.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,6 +23,7 @@ public class Submission extends AbstractEntity {
     private String title;
 
     @NotNull
+    @Column(length = 3000)
     private String description;
 
     @Enumerated(EnumType.STRING)
