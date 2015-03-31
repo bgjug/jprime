@@ -43,7 +43,7 @@ public class IndexController {
                 new ArrayList<>()));
         model.addAttribute("tags", userFacade.findAllTags());
         List<Speaker> featuredSpeakers = userFacade.findFeaturedSpeakers();
-        logger.info("Found the following featured speakers: ", featuredSpeakers);
+        logger.info("Found the following featured speakers: " + featuredSpeakers);
         model.addAttribute("featuredSpeakers", featuredSpeakers);
 		return PAGE_INDEX;
 	}
