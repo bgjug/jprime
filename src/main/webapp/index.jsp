@@ -37,6 +37,10 @@
     <!-- Css3 Transitions Styles  -->
     <link rel="stylesheet" type="text/css" href="css/animate.css" media="screen">
 
+    <!-- Favicon -->
+
+    
+
     <!-- Color CSS Styles  -->
     <!-- <link rel="stylesheet" type="text/css" href="css/colors/red.css" title="red" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/colors/jade.css" title="jade" media="screen" />

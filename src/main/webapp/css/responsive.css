@@ -109,11 +109,16 @@
 	
 	.portfolio-4 .portfolio-item {
 		width: 49.99%!important;
-		padding-left: 15px;
+		padding-left: 0px;
 		padding-right: 15px;
 		margin-bottom: 30px;
 	}
 	
+	//отляво да видиме
+	.portfolio-item-content{
+		padding-left: 15px;
+	}
+
 	.projects-carousel {
 		width: 100% !important;
 	}

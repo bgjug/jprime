@@ -13,6 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="/js/niceforms.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
 <link rel="stylesheet" type="text/css" media="all"
 	href="/css/niceforms-default.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css" />
@@ -76,7 +77,7 @@
 			</dl>
 			<dl>
 				<dt>
-					<label for="headline">headline</label>
+					<label for="headline">Headline</label>
 				</dt>
 				<dd>
 					<form:textarea path="headline" cols="70" rows="5" />
