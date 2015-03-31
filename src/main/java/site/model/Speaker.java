@@ -1,5 +1,6 @@
 package site.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,7 +32,7 @@ public class Speaker extends User {
     @Lob
     private byte[] picture;
 
-    @OneToMany(mappedBy = "speaker", fetch = FetchType.LAZY, targetEntity = Submission.class)
+    @OneToMany(mappedBy = "speaker", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, targetEntity = Submission.class)
     private Set<Submission> submissions = new HashSet<>();
 
     public Speaker() {
