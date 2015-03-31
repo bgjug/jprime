@@ -35,9 +35,7 @@ public class IndexController {
         model.addAttribute("silverSponsors", allSponsors.getOrDefault(SponsorPackage.SILVER,
                 new ArrayList<>()));
         model.addAttribute("tags", userFacade.findAllTags());
-        List<Speaker> featuredSpeakers = userFacade.findFeaturedSpeakers();
-        System.out.println("Found the following featured speakers: " + featuredSpeakers);
-        model.addAttribute("featuredSpeakers", featuredSpeakers);
+        model.addAttribute("featuredSpeakers", userFacade.findFeaturedSpeakers());
 		return PAGE_INDEX;
 	}
 
