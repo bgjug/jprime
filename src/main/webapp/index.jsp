@@ -85,7 +85,7 @@
                                 <span>Become a <strong>Sponsor</strong></span>
                             </h2>
                                 <h3 class="animated8 white" style="text-shadow: 2px 2px black;">
-                            	<span>Why you are waiting</span>
+                            	<span>WHAT ARE YOU WAITING FOR</span>
                             </h3>
                                 <div class="">
                                     <a class="animated4 slider btn btn-primary btn-min-block" href="#sponsors">Become Sponsor</a><a class="animated4 slider btn btn-default btn-min-block" href="#sponsors">Learn More</a>
