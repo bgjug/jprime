@@ -26,6 +26,9 @@
                                 <li>
                                     <a class="twitter itl-tooltip" data-placement="bottom" title="Twitter" href="https://twitter.com/jPrimeConf"><i class="fa fa-twitter"></i></a>
                                 </li>
+                                <li>
+                                    <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" href="https://www.facebook.com/jprimeConf"><i class="fa fa-facebook"></i></a>
+                                </li>
                             </ul>
                             <!-- End Social Links -->
                         </div><!-- .col-md-6 -->
