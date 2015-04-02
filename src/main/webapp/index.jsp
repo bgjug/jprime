@@ -122,7 +122,7 @@
 
 		<!--Start Clients Carousel-->
 		<div class="our-clients">
-			<div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
+			<div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="6" data-navigation="true">
 
 				<!-- Client 1 -->
 				<div class="client-item item">
@@ -149,7 +149,12 @@
 					<a href="http://www.experian.bg"><img src="images/experian.png" alt="Experian" /></a>
 				</div>
 
-			</div>
+                <!-- Client 6 -->
+                <div class="client-item item">
+                    <a href="http://www.epam.com"><img src="images/epam.png" alt="EPAM" /></a>
+                </div>
+
+            </div>
 		</div>
 		<!-- End Clients Carousel -->
             </div><!-- .row -->
