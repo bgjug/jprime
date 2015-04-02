@@ -66,8 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      protected void configure(final HttpSecurity http) throws Exception {
 		 http
          .authorizeRequests()
-            //TODO Mihail: "/*" is ugly, because it should work with "/", but Tomcat's welcome list somehow interferes with this mapping
-           .antMatchers("/*","/login", "/cfp", "/tickets","/nav/**").permitAll()
+            //TODO Mihail: "/" only works if tomcat/conf/web.xml has index.jsp commented as a welcome page
+            //TODO if not, the controller will not be called and the jsp is not going to have any model object filled up.
            .antMatchers("/","/login","/about", "/nav/**", "/cfp", "/tickets", "/image/**").permitAll() // #4
            .antMatchers("/admin/**").hasRole("ADMIN") // #6
            .anyRequest().authenticated() // 7
