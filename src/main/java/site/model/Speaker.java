@@ -1,20 +1,15 @@
 package site.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Index;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import java.util.Set;
-import java.util.HashSet;
-
-import site.model.Submission;
-
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -25,17 +20,32 @@ public class Speaker extends User {
      */
     private static final long serialVersionUID = 1L;
 
+    @Column(length = 1024)
     private String bio;
 
     private String headline;
 
     private String twitter;
 
+    private Boolean featured = false;
+
     @Lob
     private byte[] picture;
 
-    @OneToMany(mappedBy = "speaker", fetch = FetchType.LAZY, targetEntity = Submission.class)
+    @OneToMany(mappedBy = "speaker", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, targetEntity = Submission.class)
     private Set<Submission> submissions = new HashSet<>();
+
+    public Speaker() {
+    }
+
+    public Speaker(String firstName, String lastName, String email, String headline, String twitter, boolean featured) {
+        setFirstName(firstName);
+        setLastName(lastName);
+        setEmail(email);
+        this.headline = headline;
+        this.twitter = twitter;
+        this.featured = featured;
+    }
 
     public byte[] getPicture() {
         return picture;
@@ -75,6 +85,14 @@ public class Speaker extends User {
 
     public void setSubmissions(final Set<Submission> submissions) {
         this.submissions = submissions;
+    }
+
+    public Boolean getFeatured() {
+        return featured;
+    }
+
+    public void setFeatured(Boolean featured) {
+        this.featured = featured;
     }
 
     @Override

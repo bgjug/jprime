@@ -82,6 +82,10 @@ public class UserFacade {
 		return speakerRepository.findAll(pageable);
 	}
 
+    public List<Speaker> findFeaturedSpeakers() {
+        return speakerRepository.findFeaturedSpeakers();
+    }
+
 	public Map<SponsorPackage, List<Sponsor>> findAllSponsors(){
         return sponsorRepository.findAll().stream().collect(groupingBy(Sponsor::getSponsorPackage));
     }

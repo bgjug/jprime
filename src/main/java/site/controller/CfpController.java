@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import site.facade.MailFacade;
 import site.facade.UserFacade;
 import site.model.SessionLevel;
+import site.model.Speaker;
 import site.model.Submission;
 import site.model.SubmissionStatus;
 
@@ -22,6 +23,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import static site.controller.Utils.fixTwitterHandle;
 
 /**
  * @author Ivan St. Ivanov
@@ -54,7 +57,8 @@ public class CfpController {
             return "/cfp";
         }
         submission.setStatus(SubmissionStatus.SUBMITTED);
-        if(!file.isEmpty()){
+        fixTwitterHandle(submission.getSpeaker());
+        if(!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
                 submission.getSpeaker().setPicture(bytes);

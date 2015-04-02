@@ -67,7 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 http
          .authorizeRequests()
             //TODO Mihail: "/*" is ugly, because it should work with "/", but Tomcat's welcome list somehow interferes with this mapping
-           .antMatchers("/*","/login", "/cfp", "/tickets","/nav/**").permitAll() // #4
+           .antMatchers("/*","/login", "/cfp", "/tickets","/nav/**").permitAll()
+           .antMatchers("/","/login","/about", "/nav/**", "/cfp", "/tickets", "/image/**").permitAll() // #4
            .antMatchers("/admin/**").hasRole("ADMIN") // #6
            .anyRequest().authenticated() // 7
            .and()

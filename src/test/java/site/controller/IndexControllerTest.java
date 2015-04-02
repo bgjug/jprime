@@ -13,11 +13,14 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
+import site.model.Speaker;
 import site.model.Sponsor;
 import site.model.SponsorPackage;
 import site.model.Tag;
 import site.repository.ArticleRepository;
+import site.repository.SpeakerRepository;
 import site.repository.SponsorRepository;
+import site.repository.SubmissionRepository;
 import site.repository.TagRepository;
 
 import java.io.File;
@@ -58,11 +61,21 @@ public class IndexControllerTest {
     @Qualifier(ArticleRepository.NAME)
     private ArticleRepository articleRepository;
 
+    @Autowired
+    @Qualifier(SpeakerRepository.NAME)
+    private SpeakerRepository speakerRepository;
+
+    @Autowired
+    @Qualifier(SubmissionRepository.NAME)
+    private SubmissionRepository submissionRepository;
+
     private Sponsor google;
     private Sponsor apple;
     private Sponsor sap;
     private Tag tag1;
     private Tag tag2;
+
+    private Speaker brianGoetz;
 
     @Before
     @Transactional
@@ -72,6 +85,8 @@ public class IndexControllerTest {
         articleRepository.deleteAll();
         tagRepository.deleteAll();
         sponsorRepository.deleteAll();
+        submissionRepository.deleteAll();
+        speakerRepository.deleteAll();
 
         google = new Sponsor(SponsorPackage.GOLD, "Google", "http://www.google.com", "sponsor@google.com");
         apple = new Sponsor(SponsorPackage.GOLD, "Apple", "http://www.apple.com", "sponsor@apple.com");
@@ -80,16 +95,23 @@ public class IndexControllerTest {
         sponsorRepository.save(google); sponsorRepository.save(apple); sponsorRepository.save(sap);
 
         tag1 = tagRepository.save(new Tag("tag1")); tag2 = tagRepository.save(new Tag("tag2"));
+
+        brianGoetz = new Speaker("Brian", "Goetz", "brian@oracle.com", "The Java Language Architect", "@briangoetz", true);
+        brianGoetz = speakerRepository.save(brianGoetz);
+
+        Speaker ivanIvanov = new Speaker("Ivan St.", "Ivanov", "ivan@jprime.io", "JBoss Forge", "@ivan_stefanov", false);
+        speakerRepository.save(ivanIvanov);
     }
 
     @Test
-    public void shouldContainSponsors() throws Exception {
+    public void controllerShouldContainRequiredData() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(IndexController.PAGE_INDEX))
                 .andExpect(model().attribute("platinumSponsors", contains(sap)))
                 .andExpect(model().attribute("goldSponsors", contains(google, apple)))
                 .andExpect(model().attribute("silverSponsors", hasSize(0)))
-                .andExpect(model().attribute("tags", containsInAnyOrder(tag1, tag2)));
+                .andExpect(model().attribute("tags", containsInAnyOrder(tag1, tag2)))
+                .andExpect(model().attribute("featuredSpeakers", contains(brianGoetz)));
     }
 }

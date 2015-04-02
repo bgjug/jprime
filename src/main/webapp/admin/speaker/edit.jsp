@@ -82,6 +82,14 @@
 					<form:textarea path="headline" cols="70" rows="5" />
 				</dd>
 			</dl>
+            <dl>
+                <dt>
+                    <label for="featured">featured</label>
+                </dt>
+                <dd>
+                    <form:checkbox path="featured"/>
+                </dd>
+            </dl>
 			<dl>
 				<dt>
 					<label for="file">Picture ( MUST be 280x326)</label>
