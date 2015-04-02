@@ -57,6 +57,8 @@ public class AdminFacade {
 	public Page<Article> findAllArticles(Pageable pageable){
 		return articleRepository.findAll(pageable);
 	}
+
+
 	
 	public Article findOneArticle(Long id){
 		return articleRepository.findOne(id);

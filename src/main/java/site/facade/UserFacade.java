@@ -50,10 +50,20 @@ public class UserFacade {
     @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
 
+    /**
+     * Speaker
+     * @param id
+     * @return
+     */
     public Speaker findSpeaker(Long id){
 		return speakerRepository.findOne(id);
 	}
 
+    /**
+     * Article
+     * @param id
+     * @return
+     */
 	public Article findArticle(Long id){
 		return articleRepository.findOne(id);
 	}
@@ -62,6 +72,9 @@ public class UserFacade {
         return articleRepository.findAll(pageable);
     }
 
+    public Page<Article> allPublishedArticles(Pageable pageable){
+        return articleRepository.findAllPublishedArticles(pageable);
+    }
     public Article getArticleById(long id){
         return articleRepository.findOne(id);
     }
