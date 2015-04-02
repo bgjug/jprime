@@ -12,7 +12,7 @@
 
     <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
     <!-- Basic -->
-    <title>Margo | Post</title>
+    <title>jPrime | Post</title>
 
     <!-- Define Charset -->
     <meta charset="utf-8">
