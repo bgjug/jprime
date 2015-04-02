@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
+<%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 
 <!doctype html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -48,7 +49,7 @@
                             <h2>${article.title}</h2>
                             <ul class="post-meta">
                                 <li>${article.author.firstName} ${article.author.lastName}</li>
-                                <li>${article.createdDate}</li>
+                                <li><li><joda:format value="${article.createdDate}" pattern="dd-MM-yyyy"/></li></li>
                             </ul>
                             <p>${article.text}</p>
 

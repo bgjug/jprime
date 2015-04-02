@@ -116,6 +116,14 @@ public class AdminFacade {
 	public User findOneUser(Long id){
 		return userRepository.findOne(id);
 	}
+
+    //currently used for admin TODO:to be fixed with normal authentication with spring
+    public User findUserByEmail(String email){
+        if(userRepository.findByEmail(email).size()>0) {
+            return userRepository.findByEmail(email).get(0);
+        }
+        return null;
+    }
 	
 	public void deleteUser(Long id){
 		userRepository.delete(id);

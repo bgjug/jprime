@@ -31,7 +31,7 @@ public class Article extends AbstractEntity{
 	private String text;
 	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "author", nullable = true, referencedColumnName = "id")
+    @JoinColumn(name = "author", referencedColumnName = "id")
     private User author;
 
     //Changed to eager, session problems! TODO:rethink!

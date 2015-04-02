@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
+<%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 
 <!doctype html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -10,7 +11,7 @@
 <head>
 	
     <!-- Basic -->
-    <title>Margo | Blog</title>
+    <title>jPrime | Blog</title>
 
     <!-- Define Charset -->
     <meta charset="utf-8">
@@ -62,7 +63,7 @@
                                 <h2><a href="#">${article.title}</a></h2>
                                 <ul class="post-meta">
                                     <li>By <a href="#">${article.author.firstName} ${article.author.lastName}</a></li>
-                                    <li>${article.createdDate}</li>
+                                    <li><joda:format value="${article.createdDate}" pattern="dd-MM-yyyy"/></li>
                                 </ul>
                                 <div class="truncArt">${article.text}</div>
                                 <a class="main-button" href="/nav/article/${article.id}">Read More <i class="fa fa-angle-right"></i></a>
