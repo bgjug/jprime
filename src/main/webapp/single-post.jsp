@@ -12,7 +12,7 @@
 
     <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
     <!-- Basic -->
-    <title>Margo | Single Post</title>
+    <title>Margo | Post</title>
 
     <!-- Define Charset -->
     <meta charset="utf-8">
@@ -42,14 +42,22 @@
             <div class="row blog-post-page">
                 <div class="col-md-9 blog-box">
 
+                    <c:if test="${empty article}">
+                        <div class="post-content">
+                            <h2>No article available</h2>
+                        </div>
+                    </c:if>
+
+                    <a href="" onclick="window.history.back()">Back</a><br/><br/>
                     <!-- Start Single Post Area -->
                     <div class="blog-post gallery-post">
                         <!-- Start Single Post Content -->
                         <div class="post-content">
                             <h2>${article.title}</h2>
                             <ul class="post-meta">
-                                <li>${article.author.firstName} ${article.author.lastName}</li>
-                                <li><li><joda:format value="${article.createdDate}" pattern="dd-MM-yyyy"/></li></li>
+                                <li>By <a href="#">${article.author.firstName} ${article.author.lastName}</a>  &nbsp;&nbsp;
+                                <joda:format value="${article.createdDate}" pattern="dd-MM-yyyy"/>
+                                </li>
                             </ul>
                             <p>${article.text}</p>
 
@@ -76,7 +84,8 @@
 
                     </div>
                     <!-- End Single Post Area -->
-
+                    <br/><br/>
+                    <a href="" onclick="window.history.back()">Back</a>
                     <!-- currently not needed!!
                     <!-- Start Comment Area
                     <div id="comments">

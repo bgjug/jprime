@@ -29,8 +29,9 @@
 					<td>${article.title}</td>
 					<td>${article.description }</td>
 					<td>
-						<span style="float:left;"><a href="/admin/article/edit/${article.id}">Edit</a></span> &nbsp; 
-						<span style="float:right;"><a href="/admin/article/remove/${article.id}"> Remove </a></span> 
+                        <span> <a href="/admin/article/view/${article.id}">Preview</a></span> &nbsp;&nbsp;&nbsp;
+                        <span><a href="/admin/article/edit/${article.id}">Edit</a></span> &nbsp;&nbsp;&nbsp;
+						<span><a href="/admin/article/remove/${article.id}"> Remove </a></span>
 					</td>
 				</tr>
 			</c:forEach>

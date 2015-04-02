@@ -65,10 +65,18 @@
         </dl>
         <dl>
             <dt>
-                <label for="tag">Tag</label>
+                <label for="tags">Tag</label>
             </dt>
             <dd>
                 <form:select path="tags" multiple="true" items="${tags}" itemLabel="name" itemValue="id"/>
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                <label for="published">Published</label>
+            </dt>
+            <dd>
+                <form:checkbox path="published" value="${published}" />
             </dd>
         </dl>
         <sec:csrfInput/>

@@ -28,7 +28,6 @@ public class NavController {
 	@RequestMapping("/nav/{tag}")
 	public String getByTag(@PathVariable("tag") final String tagName,
 			Pageable pageable, Model model) {
-		//TODO find all articles with this tag.
 		Page<Article> articles= userFacade.findArticlesByTag(tagName, pageable);
 		model.addAttribute("articles", articles);
 		// redirect to nav
@@ -37,7 +36,7 @@ public class NavController {
 
     @RequestMapping("/nav")
     public String index(Pageable pageable, Model model) {
-        Page<Article> articles= userFacade.allArticles(pageable);
+        Page<Article> articles= userFacade.allPublishedArticles(pageable);
         model.addAttribute("articles", articles);
         // redirect to nav
         return "/blog.jsp";
@@ -47,7 +46,10 @@ public class NavController {
     @RequestMapping("/nav/article/{id}")
     public String getById(@PathVariable("id") final long id, Model model) {
         Article article= userFacade.getArticleById(id);
-        model.addAttribute("article", article);
+        //security
+        if (article.isPublished()) {
+            model.addAttribute("article", article);
+        }
         return "/single-post.jsp";
     }
 

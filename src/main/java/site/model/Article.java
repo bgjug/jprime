@@ -24,6 +24,8 @@ public class Article extends AbstractEntity{
 	private String title;
 	
 	private String description;
+
+    private boolean published = false;
 	
 	@NotNull
     @Lob
@@ -90,6 +92,14 @@ public class Article extends AbstractEntity{
 
     public void addTag(Tag tag) {
         this.tags.add(tag);
+    }
+
+    public void setPublished(boolean published) {
+        this.published = published;
+    }
+
+    public boolean isPublished() {
+        return published;
     }
 
     @Override
