@@ -1,4 +1,4 @@
-package site.controller;
+package site.controller.util;
 
 import site.model.Speaker;
 
@@ -7,7 +7,7 @@ import site.model.Speaker;
  */
 public class Utils {
 
-    static Speaker fixTwitterHandle(Speaker speaker) {
+    public static Speaker fixTwitterHandle(Speaker speaker) {
         String twitterHandle = speaker.getTwitter();
         if (twitterHandle != null && twitterHandle.startsWith("@")) {
             speaker.setTwitter(twitterHandle.substring(1));

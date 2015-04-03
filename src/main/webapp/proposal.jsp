@@ -34,31 +34,6 @@ pageEncoding="UTF-8"%>
 
         <user:header/>
 
-
-<%--
-<!-- Start Page Banner -->
-<div class="page-banner">
- <div class="container">
-  <div class="row">
-   <div class="col-md-6">
-    <h2>Blog</h2>
-    <p>Blog Subtitle</p>
-  </div>
-  <div class="col-md-6">
-    <ul class="breadcrumbs">
-     <li><a href="#">Home</a></li>
-     <li><a href="#">Blog</a></li>
-     <li>Gallery Post With Nice Lightbox</li>
-   </ul>
- </div>
-</div>
-</div>
-</div>
-<!-- End Page Banner -->
- --%>
-
-
-
 <!-- Start Content -->
 <div id="content">
  <div class="container">
@@ -68,125 +43,11 @@ pageEncoding="UTF-8"%>
     <!-- Start Single Post Area -->
     <div class="blog-post gallery-post">
 	
-	<%--
-      <!-- Start Single Post (Gallery Slider) -->
-      <div class="post-head">
-       <div class="touch-slider post-slider">
-        <div class="item">
-          <a class="lightbox" title="This is an image title" href="images/blog-02.jpg" data-lightbox-gallery="gallery1">
-            <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
-            <img alt="" src="images/blog-02.jpg">
-          </a>
-        </div>
-        <div class="item">
-          <a class="lightbox" title="This is an image title" href="images/blog-03.jpg" data-lightbox-gallery="gallery1">
-            <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
-            <img alt="" src="images/blog-03.jpg">
-          </a>
-        </div>
-        <div class="item">
-          <a class="lightbox" title="This is an image title" href="images/blog-04.jpg" data-lightbox-gallery="gallery1">
-            <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
-            <img alt="" src="images/blog-04.jpg">
-          </a>
-        </div>
-      </div>
-    </div>
-    <!-- End Single Post (Gallery) -->
-     --%>
-
     <!-- Start Single Post Content -->
     <div class="post-content">
-     <h2>Submit your poposal</h2>
-
-        <form:form commandName="submission" method="post"
-                   action="/cfp" enctype="multipart/form-data">
-            <fieldset>
-                <legend>Add submission</legend>
-                <p>
-                    <form:errors />
-                </p>
-                <dl>
-                    <dt>
-                        <label for="title">Title</label>
-                    </dt>
-                    <dd>
-                        <form:input path="title" />
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <label for="description">Abstract</label>
-                    </dt>
-                    <dd>
-                        <form:textarea path="description"  cols="70" rows="5"/>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <label for="level">Session level</label>
-                    </dt>
-                    <dd>
-                        <form:select path="level" items="${levels}"/>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <label for="speaker.firstName">First Name</label>
-                    </dt>
-                    <dd>
-                        <form:input path="speaker.firstName" />
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <label for="speaker.lastName">Last Name</label>
-                    </dt>
-                    <dd>
-                        <form:input path="speaker.lastName" />
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <label for="speaker.email">Email</label>
-                    </dt>
-                    <dd>
-                        <form:input path="speaker.email" />
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <label for="speaker.twitter">Twitter</label>
-                    </dt>
-                    <dd>
-                        <form:input path="speaker.twitter" />
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <label for="speaker.bio">Bio</label>
-                    </dt>
-                    <dd>
-                        <form:textarea path="speaker.bio" cols="70" rows="5" />
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>
-                        <label for="file">Your photo ( preferred size 280x326 px )</label>
-                    </dt>
-                    <dd>
-                        <input name="file" type="file" />
-                    </dd>
-                </dl>
-                <sec:csrfInput />
-                <form:hidden path="id" />
-                <button type="submit">Submit</button>
-            </fieldset>
-
-        </form:form>
-
-
- </div>
+        <h2>Submit your proposal</h2>
+        <user:cfp action="/cfp"/>
+    </div>
  <!-- End Single Post Content -->
  
 </div>

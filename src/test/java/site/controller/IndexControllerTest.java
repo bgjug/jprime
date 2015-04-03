@@ -42,6 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
+@Transactional
 public class IndexControllerTest {
 
     @Autowired
@@ -78,15 +79,8 @@ public class IndexControllerTest {
     private Speaker brianGoetz;
 
     @Before
-    @Transactional
     public void setup() throws IOException {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-
-        articleRepository.deleteAll();
-        tagRepository.deleteAll();
-        sponsorRepository.deleteAll();
-        submissionRepository.deleteAll();
-        speakerRepository.deleteAll();
 
         google = new Sponsor(SponsorPackage.GOLD, "Google", "http://www.google.com", "sponsor@google.com");
         apple = new Sponsor(SponsorPackage.GOLD, "Apple", "http://www.apple.com", "sponsor@apple.com");
