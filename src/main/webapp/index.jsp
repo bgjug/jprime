@@ -254,7 +254,7 @@
                                         value="${speaker.headline}"/></span>
                                 </div>
                             </div>
-                            <div class="member-socail">
+                            <div class="member-socail" style="text-align: left">
                                 <a class="twitter" href="http://twitter.com/${speaker.twitter}"><i
                                         class="fa fa-twitter"></i></a>
                             </div>
