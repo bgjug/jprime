@@ -1,0 +1,131 @@
+.resize-container {
+    position: relative;
+    display: inline-block;
+    cursor: move;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: 
+}
+
+.resize-container img {
+    display: block;
+}
+
+.resize-container:hover img,
+.resize-container:active img {
+    outline: 2px dashed #00008B;
+}
+
+.resize-handle-ne,
+.resize-handle-se,
+.resize-handle-nw,
+.resize-handle-sw {
+    position: absolute;
+    display: block;
+    width: 15px;
+    height: 30px;
+    background: #00008B;
+    z-index: 999;
+}
+
+.resize-handle-nw {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+}
+
+.resize-handle-sw {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+}
+
+.resize-handle-ne {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+}
+
+.resize-handle-se {
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
+}
+
+.overlay {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -100px;
+	margin-top: -100px;
+	z-index: 999;
+	width: 281px;
+	height: 327px;
+    border: solid 2px #00008B;
+	box-sizing: content-box;
+	pointer-events: none;
+}
+
+.overlay:after,
+.overlay:before {
+	content: '';
+	position: absolute;
+	display: block;
+	width: 284px;
+	height: 40px;
+    border-left: dashed 2px #00008B;
+	border-right: dashed 2px #00008B;
+}
+
+.overlay:before {
+	top: 0;
+	margin-left: -2px;
+	margin-top: -40px;
+}
+
+.overlay:after {
+	bottom: 0;
+	margin-left: -2px;
+	margin-bottom: -40px;
+}
+
+.overlay-inner:after,
+.overlay-inner:before {
+	content: '';
+	position: absolute;
+	display: block;
+	width: 40px;
+	height: 330px;
+    border-top: dashed 2px #00008B;
+	border-bottom: dashed 2px #00008B;
+}
+
+.overlay-inner:before {
+	left: 0;
+	margin-left: -40px;
+	margin-top: -2px;
+}
+
+.overlay-inner:after{
+	right: 0;
+	margin-right: -40px;
+	margin-top: -2px;
+}
+
+.btn-crop {
+	position: absolute;
+	vertical-align: bottom;
+	right: 5px;
+	bottom: 5px;
+	padding: 6px 10px;
+	z-index: 999;
+	background-color: #00008B;
+	border: none;
+	border-radius: 5px;
+	color: #FFF8DC;
+}
+
+.btn-crop img {
+	vertical-align: middle;
+	margin-left: 8px;
+}
