@@ -2,8 +2,11 @@
     position: relative;
     display: inline-block;
     cursor: move;
-    margin: 10 auto;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: 
 }
+
 
 .resize-container img {
     display: block;
