@@ -157,8 +157,12 @@ public class AdminFacade {
 		return tagRepository.save(tag);
 	}
 
-    public Iterable<Submission> findAllSubmissions() {
-        return submissionRepository.findAll();
+    public Page<Submission> findAllSubmissions(Pageable pageable) {
+        return submissionRepository.findAll(pageable);
+    }
+
+    public Submission findOneSubmission(Long submissionId) {
+        return submissionRepository.findOne(submissionId);
     }
 
     public void acceptSubmission(Submission submission) {

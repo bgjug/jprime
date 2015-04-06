@@ -12,19 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import site.facade.MailFacade;
 import site.facade.UserFacade;
-import site.model.SessionLevel;
-import site.model.Speaker;
 import site.model.Submission;
-import site.model.SubmissionStatus;
 
-import javax.mail.MessagingException;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static site.controller.Utils.fixTwitterHandle;
+import static site.controller.util.CfpControllersHelper.buildCfpFormModel;
+import static site.controller.util.CfpControllersHelper.saveSubmission;
 
 /**
  * @author Ivan St. Ivanov
@@ -46,8 +41,7 @@ public class CfpController {
 
     @RequestMapping(value = "/cfp", method = RequestMethod.GET)
     public String submissionForm(Model model) {
-        model.addAttribute("submission", new Submission());
-        model.addAttribute("levels", SessionLevel.values());
+        buildCfpFormModel(model, new Submission());
         return PROPOSAL_JSP;
     }
 
@@ -56,25 +50,16 @@ public class CfpController {
         if (bindingResult.hasErrors()) {
             return "/cfp";
         }
-        submission.setStatus(SubmissionStatus.SUBMITTED);
-        fixTwitterHandle(submission.getSpeaker());
-        if(!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                submission.getSpeaker().setPicture(bytes);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        userFacade.submitTalk(submission);
+        saveSubmission(submission, file, userFacade);
         try {
             mailFacade.sendEmail(submission.getSpeaker().getEmail(), "jPrime talk proposal",
                     new String(Files.readAllBytes(Paths.get(getClass().getResource("/submissionContent.html").toURI()))));
-        } catch (MessagingException | IOException | URISyntaxException e) {
+        } catch (Exception e) {
             logger.error("Could not send confirmation email", e);
         }
 
         return "redirect:/";
     }
+
 
 }

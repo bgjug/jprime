@@ -27,7 +27,7 @@ public class Submission extends AbstractEntity {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private SubmissionStatus status;
+    private SubmissionStatus status = SubmissionStatus.SUBMITTED;
 
     @Enumerated(EnumType.STRING)
     private SessionLevel level;
@@ -35,6 +35,16 @@ public class Submission extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Speaker.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "speaker", nullable = false, referencedColumnName = "id")
     private Speaker speaker = new Speaker();
+
+    public Submission() {
+    }
+
+    public Submission(String title, String description, SessionLevel level, Speaker speaker) {
+        this.title = title;
+        this.description = description;
+        this.level = level;
+        this.speaker = speaker;
+    }
 
     public String getTitle() {
         return title;

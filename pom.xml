@@ -116,6 +116,11 @@
             <artifactId>hamcrest-core</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.186</version>
+        </dependency>
     </dependencies>
 
     <!--mihail: a profile that has the spring-boot:run plugin and a couple of dependencies, so that-->

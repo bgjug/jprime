@@ -31,7 +31,6 @@ public class TicketsControllerTest {
 
     private MockMvc mockMvc;
     @Before
-    @Transactional
     public void setup() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
