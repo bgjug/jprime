@@ -48,7 +48,7 @@ pageEncoding="UTF-8"%>
         <h2>Buy conference tickets</h2>
         <p>
         <p>The conference fee is <strong>50</strong>.00 EUR (VAT included).</p>
-        <p>For more information contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
+        <p>For registration contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
  </div>
  <!-- End Single Post Content -->
  
