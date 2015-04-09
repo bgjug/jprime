@@ -241,9 +241,9 @@
 
             <!-- Start Team Members -->
 
-            <div class="row" style="text-align: center">
+            <div class="row">
                 <c:forEach var="speaker" items="${featuredSpeakers}">
-                    <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="03" style="float: none; display: inline-block">
+                    <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="03" >
                         <div class="team-member modern">
                             <!-- Memebr Photo, Name & Position -->
                             <div class="member-photo">
