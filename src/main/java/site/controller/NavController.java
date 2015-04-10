@@ -53,4 +53,11 @@ public class NavController {
         return "/single-post.jsp";
     }
 
+    //read a single blog
+    @RequestMapping("/team")
+    public String showTeam(Model model) {
+        return "/team.jsp";
+    }
+
+
 }
