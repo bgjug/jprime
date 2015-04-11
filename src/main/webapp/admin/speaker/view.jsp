@@ -21,6 +21,7 @@
 		<table class="admin-table">
 			<tr>
 				<td><i>Name</i></td>
+                <td><i>Bio</i></td>
 				<td><i>Email</i></td>
 				<td><i>Phone</i></td>
 				<td><i>Twitter</i></td>
@@ -30,10 +31,11 @@
 			</tr>
 			<c:forEach var="speaker" items="${speakers.content}">
 				<tr>
-					<td>${speaker.firstName} <${speaker.lastName} </td>
-					<td>${speaker.email }</td>
-					<td>${speaker.phone }</td>
-					<td>${speaker.twitter }</td>
+					<td>${speaker.firstName} ${speaker.lastName} </td>
+                    <td>${speaker.bio}</td>
+                    <td>${speaker.email}</td>
+					<td>${speaker.phone}</td>
+					<td>${speaker.twitter}</td>
                     <td>${speaker.featured}</td>
 					<td><img src="/image/speaker/${speaker.id}"/></td>
 					<td>
