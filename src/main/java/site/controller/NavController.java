@@ -30,6 +30,7 @@ public class NavController {
 			Pageable pageable, Model model) {
 		Page<Article> articles= userFacade.findArticlesByTag(tagName, pageable);
 		model.addAttribute("articles", articles);
+		model.addAttribute("tags", userFacade.findAllTags());
 		// redirect to nav
 		return "/blog.jsp";
 	}
@@ -38,6 +39,7 @@ public class NavController {
     public String index(Pageable pageable, Model model) {
         Page<Article> articles= userFacade.allPublishedArticles(pageable);
         model.addAttribute("articles", articles);
+        model.addAttribute("tags", userFacade.findAllTags());
         // redirect to nav
         return "/blog.jsp";
     }
@@ -50,6 +52,7 @@ public class NavController {
         if (article.isPublished()) {
             model.addAttribute("article", article);
         }
+        model.addAttribute("tags", userFacade.findAllTags());
         return "/single-post.jsp";
     }
 

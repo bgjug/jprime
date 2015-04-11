@@ -44,6 +44,7 @@ public class CfpController {
 
     @RequestMapping(value = "/cfp", method = RequestMethod.GET)
     public String submissionForm(Model model) {
+    	model.addAttribute("tags", userFacade.findAllTags());
         buildCfpFormModel(model, new Submission());
         return PROPOSAL_JSP;
     }
