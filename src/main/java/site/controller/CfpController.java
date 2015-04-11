@@ -15,6 +15,8 @@ import site.facade.UserFacade;
 import site.model.Submission;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -30,6 +32,7 @@ public class CfpController {
     private static final Logger logger = Logger.getLogger(CfpController.class);
 
     static final String PROPOSAL_JSP = "/proposal.jsp";
+    public static final String JPRIME_CONF_MAIL_ADDRESS = "conference@jprime.io";
 
     @Autowired
     @Qualifier(UserFacade.NAME)
@@ -53,7 +56,10 @@ public class CfpController {
         saveSubmission(submission, file, userFacade);
         try {
             mailFacade.sendEmail(submission.getSpeaker().getEmail(), "jPrime talk proposal",
-                    new String(Files.readAllBytes(Paths.get(getClass().getResource("/submissionContent.html").toURI()))));
+                    loadMailContentTemplate("submissionContent.html"));
+            mailFacade.sendEmail(JPRIME_CONF_MAIL_ADDRESS, "New talk proposal",
+                    prepareNewSubmissionContent(submission, loadMailContentTemplate("newSubmission.html")
+            ));
         } catch (Exception e) {
             logger.error("Could not send confirmation email", e);
         }
@@ -61,5 +67,16 @@ public class CfpController {
         return "redirect:/";
     }
 
+    private String loadMailContentTemplate(String templateFileName)
+            throws IOException, URISyntaxException {
+        return new String(Files.readAllBytes(Paths.get(getClass().getResource("/" + templateFileName).toURI())));
+    }
+
+    private String prepareNewSubmissionContent(Submission submission, String template) {
+        return template.replace("{session.title}", submission.getTitle())
+                        .replace("{session.abstract}", submission.getDescription())
+                        .replace("{speaker.name}", submission.getSpeaker().getFirstName() + " " + submission.getSpeaker().getLastName())
+                        .replace("{speaker.bio}", submission.getSpeaker().getBio());
+    }
 
 }

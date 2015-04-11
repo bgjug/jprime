@@ -103,7 +103,7 @@
         <form:hidden path="id" />
         <form:hidden path="status" />
         <form:hidden path="speaker.id" />
-        <button type="submit">Save</button>
+        <button type="submit">Submit</button>
     </fieldset>
 
 </form:form>
