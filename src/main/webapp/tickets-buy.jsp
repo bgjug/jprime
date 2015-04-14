@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
@@ -24,6 +24,8 @@ pageEncoding="UTF-8"%>
   <!-- Page Description and Author -->
   <meta name="description" content="Margo - Responsive HTML5 Template">
   <meta name="author" content="ZoOm Arts">
+    <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
+
     <user:pageJavaScriptAndCss/>
 
 </head>
@@ -47,9 +49,21 @@ pageEncoding="UTF-8"%>
     <div class="post-content">
         <h2>Buy conference tickets</h2>
         <p>
-        <p>The conference fee is <strong>50</strong>.00 EUR (VAT included).</p>
-        <p>For registration contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
- </div>
+        <p>The conference fee is <strong>100</strong>.00 BGN (VAT included).</p>
+
+        <%--Buy a ticket:--%>
+        <%--<a href="/tickets/register">Buy</a>--%>
+        <form action="https://demo.epay.bg/" method=post>
+            <input type="hidden" name="PAGE" value="paylogin">
+            <input type="hidden" name="ENCODED" value="${ENCODED}">
+            <input type="hidden" name="CHECKSUM" value="${CHECKSUM}">
+            <input type="hidden" name="URL_OK" value="http://yahoo.com">
+            <input type="hidden" name="URL_CANCEL" value="http://cnn.com">
+            <input type="submit" value="Buy a ticket from epay.bg"/>
+        </form>
+
+        <p>In case of questions, contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
+</div>
  <!-- End Single Post Content -->
  
 </div>
