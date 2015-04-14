@@ -37,12 +37,6 @@ public class TicketsController {
     private RegistrantFacade registrantFacade;
 
     @RequestMapping(value = "/tickets", method = RequestMethod.GET)
-    public String goToTicketsIntroPage(Model model) {
-        model.addAttribute("tags", userFacade.findAllTags());
-        return TICKETS_JSP;
-    }
-
-    @RequestMapping(value = "/tickets/register", method = RequestMethod.GET)
     public String goToRegisterPage(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("registrant", new Registrant(1));
@@ -50,7 +44,7 @@ public class TicketsController {
     }
 
     @Transactional
-    @RequestMapping(value = "/tickets/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/tickets", method = RequestMethod.POST)
     public String register(Model model, @Valid final Registrant registrant, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return "/tickets-register.jsp";

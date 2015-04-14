@@ -11,7 +11,7 @@
 <!--[if (gte IE 9)|!(IE)]><html lang="en" class="no-js"> <![endif]-->
 <html lang="en">
 <head>
-  
+
   <!-- Basic -->
   <title>Buy conference tickets</title>
   
@@ -28,6 +28,36 @@
 
     <user:pageJavaScriptAndCss/>
 
+    <script type="text/javascript">
+        var appendVisitor = function() {
+            var visitorsFieldset = $("#visitorsFieldset");
+            var index = visitorsFieldset.find("dl").size();
+            var clone = visitorsFieldset.find("dl:last").clone();
+            clone.find("dd input").each(function(i) {
+                if (i == 0) {
+                    $(this).attr("id", "visitor" + index + ".name");
+                    $(this).attr("name", "visitor[" + index + "].name");
+                }
+                else {
+                    $(this).attr("id", "visitor" + index + ".email");
+                    $(this).attr("name", "visitor[" + index + "].email");
+                }
+            });
+            clone.find("dt label").each(function(i) {
+                if (i == 0) {
+                    $(this).attr("for", "visitor" + index + ".name");
+                }
+                else {
+                    $(this).attr("for", "visitor" + index + ".email");
+                }
+            });
+            visitorsFieldset.append(clone);
+        };
+
+        $(function() {
+            $("#newVisitor").click(appendVisitor);
+        });
+    </script>
 </head>
 <body>
 
@@ -52,49 +82,22 @@
         <p>The conference fee is <strong>100</strong>.00 BGN (VAT included).</p>
 
         Buy a ticket:
-
-        <form>
-            Kolko visitora batka?
-            <input name="visitorsCount" value="${param.visitorsCount}"/>
-            <input type="submit" value="tolkova"/>
-        </form>
-
         <form:form commandName="registrant" method="post"
-                   action="/tickets/register">
+                   action="/tickets">
             <p>
                 <form:errors/>
             </p>
-            <fieldset>
+            <fieldset id="visitorsFieldset">
                 <legend>Visitors</legend>
-            <c:choose>
-                <c:when test="${empty param.visitorsCount}">
-                    <dl>
-                        <dt><label for="visitors.name">Visitor name</label></dt>
-                        <dd><form:input path="visitors[0].name"/></dd>
-                    <%--</dl>--%>
-                    <%--<dl>--%>
-                        <dt><label for="visitors.email">Visitor email</label></dt>
-                        <dd><form:input path="visitors[0].email" /></dd>
-                    </dl>
-                </c:when>
-                <c:otherwise>
-                    <c:forEach varStatus="i" begin="0" end="${param.visitorsCount - 1}">
-                        <dl>
-                            <dt><label for="visitors.name">Visitor name</label></dt>
-                            <dd><form:input path="visitors[${i.count -1}].name"/></dd>
-                        </dl>
-                        <dl>
-                            <dt><label for="visitors.email">Visitor email</label></dt>
-                            <dd><form:input path="visitors[${i.count -1}].email" /></dd>
-                        </dl>
-                    </c:forEach>
-                </c:otherwise>
-            </c:choose>
-
-
+                <dl>
+                    <dt><label for="visitors[0].name">Visitor</label></dt>
+                    <dd><form:input path="visitors[0].name"/></dd>
+                    <dt><label for="visitors[0].email">Visitor email</label></dt>
+                    <dd><form:input path="visitors[0].email"/></dd>
+                </dl>
             </fieldset>
-
-            <fieldset>
+            <a id="newVisitor">Add new</a>
+            <fieldset id="invoiceFieldset">
                 <legend>Invoice information</legend>
                 <dl>
                     <dt><label for="name">Name</label></dt>
