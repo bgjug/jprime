@@ -48,6 +48,11 @@
         </dependency>
 
         <!--TODO mihail: hikariCP stays here. I couldn't make it use it (I'm missing something). Now it uses either tomcat's pool or commons' pool-->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <scope>compile</scope>
+        </dependency>
 
 		<!--  I need this to make entities auditable -->
         <dependency>
@@ -150,11 +155,6 @@
                 <dependency>
                     <groupId>org.apache.tomcat.embed</groupId>
                     <artifactId>tomcat-embed-jasper</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>com.zaxxer</groupId>
-                    <artifactId>HikariCP</artifactId>
-                    <scope>compile</scope>
                 </dependency>
             </dependencies>
         </profile>
