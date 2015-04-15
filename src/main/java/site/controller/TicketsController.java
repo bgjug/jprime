@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -81,5 +82,12 @@ public class TicketsController {
             System.out.println("FROM EPAY:"+entry.getKey()+ " " + entry.getValue() );
         }
         return "";
+    }
+
+
+    @RequestMapping(value = "/tickets/result/{r}", method = RequestMethod.GET)
+    public String result(@PathVariable("r") final String r, Model model) {
+        model.addAttribute("result", r.equals("ok"));
+        return "/tickets-result.jsp";
     }
 }
