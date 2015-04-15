@@ -21,9 +21,8 @@ public class Registrant extends AbstractEntity {
     private String mol;
     private String email;
 
-    public Registrant() {}
-    public Registrant(int numberOfVisitors) {
-        this.visitors = new ArrayList<>(numberOfVisitors);
+    public Registrant() {
+        this.visitors = new ArrayList<>();
     }
 
     public Registrant(boolean isCompany, String name, String address, String vatNumber, String mol, String email) {

@@ -24,6 +24,7 @@ pageEncoding="UTF-8"%>
   <!-- Page Description and Author -->
   <meta name="description" content="Margo - Responsive HTML5 Template">
   <meta name="author" content="ZoOm Arts">
+
     <user:pageJavaScriptAndCss/>
 
 </head>

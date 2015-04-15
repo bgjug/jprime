@@ -24,34 +24,61 @@
   <!-- Page Description and Author -->
   <meta name="description" content="Margo - Responsive HTML5 Template">
   <meta name="author" content="ZoOm Arts">
+
+
     <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
 
     <user:pageJavaScriptAndCss/>
 
+    <!--validation-->
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+
+
     <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#visitorsForm').validate({ // initialize the plugin
+                rules: {
+                    'visitors[0].name': {
+                        required: true,
+                        minlength: 5
+                    },
+                    'visitors[0].email': {
+                        required: true,
+                        email: true
+                    }
+                }
+            });
+        });
+
+
         var appendVisitor = function() {
             var visitorsFieldset = $("#visitorsFieldset");
             var index = visitorsFieldset.find("dl").size();
             var clone = visitorsFieldset.find("dl:last").clone();
+            clone.find("dd label").remove();
             clone.find("dd input").each(function(i) {
                 if (i == 0) {
-                    $(this).attr("id", "visitor" + index + ".name");
-                    $(this).attr("name", "visitor[" + index + "].name");
+                    $(this).attr("id", "visitors" + index + ".name");
+                    $(this).attr("name", "visitors[" + index + "].name");
                 }
                 else {
-                    $(this).attr("id", "visitor" + index + ".email");
-                    $(this).attr("name", "visitor[" + index + "].email");
+                    $(this).attr("id", "visitors" + index + ".email");
+                    $(this).attr("name", "visitors[" + index + "].email");
                 }
             });
             clone.find("dt label").each(function(i) {
                 if (i == 0) {
-                    $(this).attr("for", "visitor" + index + ".name");
+                    $(this).attr("for", "visitors" + index + ".name");
                 }
                 else {
-                    $(this).attr("for", "visitor" + index + ".email");
+                    $(this).attr("for", "visitors" + index + ".email");
                 }
             });
             visitorsFieldset.append(clone);
+            $("#visitors" + index + "\\.name").rules("add",{required: true,minlength: 5});
+            $("#visitors" + index + "\\.email").rules("add",{required: true,email: true});
         };
 
         $(function() {
@@ -83,7 +110,7 @@
 
         Buy a ticket:
         <form:form commandName="registrant" method="post"
-                   action="/tickets">
+                   action="/tickets" id="visitorsForm">
             <p>
                 <form:errors/>
             </p>

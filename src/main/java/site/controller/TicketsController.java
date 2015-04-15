@@ -39,7 +39,7 @@ public class TicketsController {
     @RequestMapping(value = "/tickets", method = RequestMethod.GET)
     public String goToRegisterPage(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
-        model.addAttribute("registrant", new Registrant(1));
+        model.addAttribute("registrant", new Registrant());
         return "/tickets-register.jsp";
     }
 
