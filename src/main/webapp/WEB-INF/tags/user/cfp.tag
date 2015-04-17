@@ -85,14 +85,6 @@
         </dl>
         <dl>
             <dt>
-                <label for="speaker.featured">featured</label>
-            </dt>
-            <dd>
-                <form:checkbox path="speaker.featured"/>
-            </dd>
-        </dl>
-        <dl>
-            <dt>
                 <label for="file">Picture ( MUST be 280x326)</label>
             </dt>
             <dd>
