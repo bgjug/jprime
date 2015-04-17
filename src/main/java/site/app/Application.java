@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -27,6 +28,7 @@ import java.util.Properties;
  * http://docs.spring.io/spring-boot/docs/current/reference/html/howto-traditional-deployment.html
  */
 @Configuration
+@ConfigurationProperties//mihail: so that the conf properties are supplied here
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "site")
 @EnableTransactionManagement
@@ -103,37 +105,37 @@ public class Application  extends SpringBootServletInitializer {
 //    }
 
 
-//    @Value("${spring.datasource.username}")
-//    private String user;
-//
-//    @Value("${spring.datasource.password}")
-//    private String password;
-//
-//    @Value("${spring.datasource.url}")
-//    private String dataSourceUrl;
-//
-//    @Value("${spring.datasource.driverClassName}")
-//    private String driverClassName;
-//
-////    @Value("${spring.datasource.connectionTestQuery}")
-////    private String connectionTestQuery;
-//
-//    @Bean
-//    public DataSource primaryDataSource() {
-//        Properties dsProps = new Properties();
-//        dsProps.setProperty("url", dataSourceUrl);
-//        dsProps.setProperty("user", user);
-//        dsProps.setProperty("password", password);
-//
-//        Properties configProps = new Properties();
-////        configProps.setProperty("connectionTestQuery", connectionTestQuery);
-//        configProps.setProperty("driverClassName", driverClassName);
-//        configProps.setProperty("jdbcUrl", dataSourceUrl);
-//
-//        HikariConfig hc = new HikariConfig(configProps);
-//        hc.setDataSourceProperties(dsProps);
-////        hc.setMetricRegistry(metricRegistry);
-//        return new HikariDataSource(hc);
-//    }
+    @Value("${spring.datasource.username}")
+    private String user;
+
+    @Value("${spring.datasource.password}")
+    private String password;
+
+    @Value("${spring.datasource.url}")
+    private String dataSourceUrl;
+
+    @Value("${spring.datasource.driver-class-name}")
+    private String driverClassName;
+
+    @Bean
+    public DataSource primaryDataSource() {
+
+        System.out.println("MIHAIL: "+user);
+        System.out.println("MIHAIL: "+password);
+        System.out.println("MIHAIL: "+dataSourceUrl);
+        System.out.println("MIHAIL: "+driverClassName);
+        Properties dsProps = new Properties();
+        dsProps.setProperty("url", dataSourceUrl);
+        dsProps.setProperty("user", user);
+        dsProps.setProperty("password", password);
+
+        Properties configProps = new Properties();
+        configProps.setProperty("driverClassName", driverClassName);
+        configProps.setProperty("jdbcUrl", dataSourceUrl);
+
+        HikariConfig hc = new HikariConfig(configProps);
+        hc.setDataSourceProperties(dsProps);
+        return new HikariDataSource(hc);
+    }
 
 }
