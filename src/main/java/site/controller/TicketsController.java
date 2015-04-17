@@ -26,7 +26,7 @@ import java.util.Map;
 public class TicketsController {
 
 
-    static final String TICKETS_JSP = "/tickets-intro.jsp";
+    static final String TICKETS_JSP = "/tickets-register.jsp";
 
     @Autowired
     @Qualifier(UserFacade.NAME)
@@ -40,14 +40,14 @@ public class TicketsController {
     public String goToRegisterPage(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("registrant", new Registrant(1));
-        return "/tickets-register.jsp";
+        return TICKETS_JSP;
     }
 
     @Transactional
     @RequestMapping(value = "/tickets", method = RequestMethod.POST)
     public String register(Model model, @Valid final Registrant registrant, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
-            return "/tickets-register.jsp";
+            return TICKETS_JSP;
         }
 
         registrantFacade.save(registrant);
