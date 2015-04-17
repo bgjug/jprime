@@ -20,14 +20,11 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static site.controller.util.CfpControllersHelper.buildCfpFormModel;
-import static site.controller.util.CfpControllersHelper.saveSubmission;
-
 /**
  * @author Ivan St. Ivanov
  */
 @Controller
-public class CfpController {
+public class CfpController extends AbstractCfpController {
 
     private static final Logger logger = Logger.getLogger(CfpController.class);
 

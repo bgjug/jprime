@@ -24,17 +24,14 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static site.controller.util.CfpControllersHelper.buildCfpFormModel;
-import static site.controller.util.CfpControllersHelper.saveSubmission;
-
 /**
  * @author Ivan St. Ivanov
  */
 @Controller
 @RequestMapping("/admin/submission")
-public class SubmissionAdminController {
+public class AdminCfpController extends AbstractCfpController {
 
-    private static final Logger logger = Logger.getLogger(SubmissionAdminController.class);
+    private static final Logger logger = Logger.getLogger(AdminCfpController.class);
 
     static final String ADMIN_SUBMISSION_VIEW_JSP = "/admin/submission/view.jsp";
     static final String ADMIN_SUBMISSION_EDIT_JSP = "/admin/submission/edit.jsp";
