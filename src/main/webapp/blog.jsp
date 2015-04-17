@@ -66,7 +66,7 @@
                                     <joda:format value="${article.createdDate}" pattern="dd-MM-yyyy"/>
                                 </ul>
                                 <div class="truncArt">${article.text}</div>
-                                <a class="main-button" href="/nav/article/${article.id}">Read More <i class="fa fa-angle-right"></i></a>
+                                <br/><br/><a class="main-button" href="/nav/article/${article.id}">Read More <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                         <!-- End Post -->
