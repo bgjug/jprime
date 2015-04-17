@@ -1,5 +1,9 @@
 package site.app;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,12 +11,16 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * to make this deployable as war, this is necessary:
@@ -78,5 +86,54 @@ public class Application  extends SpringBootServletInitializer {
 //		linkRepository.save(link);
 //		 context.close();
 	}
+
+
+//    private DataSource dataSource() {
+//        final HikariDataSource ds = new HikariDataSource();
+//        ds.setMaximumPoolSize(100);
+//        ds.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
+//        ds.addDataSourceProperty("url", url);
+//        ds.addDataSourceProperty("user", username);
+//        ds.addDataSourceProperty("password", password);
+//        ds.addDataSourceProperty("cachePrepStmts", true);
+//        ds.addDataSourceProperty("prepStmtCacheSize", 250);
+//        ds.addDataSourceProperty("prepStmtCacheSqlLimit", 2048);
+//        ds.addDataSourceProperty("useServerPrepStmts", true);
+//        return ds;
+//    }
+
+
+//    @Value("${spring.datasource.username}")
+//    private String user;
+//
+//    @Value("${spring.datasource.password}")
+//    private String password;
+//
+//    @Value("${spring.datasource.url}")
+//    private String dataSourceUrl;
+//
+//    @Value("${spring.datasource.driverClassName}")
+//    private String driverClassName;
+//
+////    @Value("${spring.datasource.connectionTestQuery}")
+////    private String connectionTestQuery;
+//
+//    @Bean
+//    public DataSource primaryDataSource() {
+//        Properties dsProps = new Properties();
+//        dsProps.setProperty("url", dataSourceUrl);
+//        dsProps.setProperty("user", user);
+//        dsProps.setProperty("password", password);
+//
+//        Properties configProps = new Properties();
+////        configProps.setProperty("connectionTestQuery", connectionTestQuery);
+//        configProps.setProperty("driverClassName", driverClassName);
+//        configProps.setProperty("jdbcUrl", dataSourceUrl);
+//
+//        HikariConfig hc = new HikariConfig(configProps);
+//        hc.setDataSourceProperties(dsProps);
+////        hc.setMetricRegistry(metricRegistry);
+//        return new HikariDataSource(hc);
+//    }
 
 }
