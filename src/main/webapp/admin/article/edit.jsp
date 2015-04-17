@@ -17,6 +17,32 @@
     <link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css"/>
 
+<%--
+COMMENTING BECAUSE IT SIMPLY DOESNT WORK.
+GUYS PLEASE STOP USE PRODUCTS THAT DONT WORK.
+
+WHy it doesnt work :
+
+example .. paste the following HTML snippet in CODE VIEW :
+
+<div class="col-md-3 col-sm-6 col-xs-12 animated fadeIn delay-03" data-animation="fadeIn" data-animation-delay="03">
+    <div class="team-member modern">
+        <!-- Memebr Photo, Name & Position -->
+        <div class="member-photo">
+            <img alt="" src="/image/speaker/3">
+
+            <div class="member-name">Heinz&nbsp;Kabutz<span>The Java Specialist</span>
+            </div>
+        </div>
+        <div class="member-socail" style="text-align: left">
+            <a class="twitter" href="http://twitter.com/heinzkabutz"><i class="fa fa-twitter"></i></a>
+        </div>
+    </div>
+</div>
+
+THIS SNIPPET IS TAKEN FROM THE HOMEPAGE... SAVE ... EDIT again ... check the HTML is changed.. 
+PLEASE DONT INCLUDE CRAPS in the project
+
     <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
     <script type="text/javascript">
         tinymce.init({
@@ -29,6 +55,7 @@
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
         });
     </script>
+     --%>
 </head>
 <body>
 <admin:menu/>
