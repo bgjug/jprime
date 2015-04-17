@@ -79,12 +79,12 @@ public class EpayUtil {
         return Base64.getEncoder().encodeToString(result);
     }
 
-    public static String getEpayENCODED(int numberOfTickets) {
+    public static String getEpayENCODED(int numberOfTickets, long facNo) {
         String description = numberOfTickets == 1 ? "One jPrime.io ticket" : numberOfTickets+" jPrime.io tickets";
         String stuff = "" +
                 "MIN="+ EpayUtil.EPAY_KIN +"\r\n" +
                 "EMAIL=mihail@sty.bz\r\n" +
-                "INVOICE=123456\r\n" +
+                "INVOICE="+facNo+"\r\n" +
                 "AMOUNT="+(numberOfTickets*100)+"\r\n" +
                 "CURRENCY=BGN\r\n" +
                 "EXP_TIME=01.08.2020\r\n" +

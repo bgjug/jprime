@@ -97,12 +97,13 @@ public class RegistrantFacade {
 //        submissionRepository.save(submission);
 //    }
 
-    public void save(Registrant registrant) {
+    public Registrant save(Registrant registrant) {
+
         //todo: mihail this is fucking ugly
         for(Visitor visitor:registrant.getVisitors()) {
             visitor.setRegistrant(registrant);
         }
 
-        registrantRepository.save(registrant);
+        return registrantRepository.save(registrant);
     }
 }

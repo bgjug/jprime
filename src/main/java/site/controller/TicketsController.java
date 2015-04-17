@@ -51,21 +51,22 @@ public class TicketsController {
             return "/tickets-register.jsp";
         }
 
-        registrantFacade.save(registrant);
+        Registrant savedRegistrant = registrantFacade.save(registrant);
 
         model.addAttribute("tags", userFacade.findAllTags());
 //        model.addAttribute("registrant", registrant);
-        prepareEpay(model, registrant);
+        prepareEpay(model, savedRegistrant);
         return "/tickets-buy.jsp";
     }
 
 //    @RequestMapping(value = "/tickets/buy", method = RequestMethod.GET)
     public String prepareEpay(Model model, Registrant registrant) {
-//        Registrant registrant = model.
-        String epayENCODED = EpayUtil.getEpayENCODED(registrant.getVisitors().size());
+        String epayENCODED = EpayUtil.getEpayENCODED(registrant.getVisitors().size(), registrant.getFacNo());
         String epayCHECKSUM = EpayUtil.getEpayCHECKSUM(epayENCODED);
         model.addAttribute("ENCODED", epayENCODED);
         model.addAttribute("CHECKSUM", epayCHECKSUM);
+//        model.addAttribute("facNo", registrant.getFacNo());
+        model.addAttribute("epayUrl", EpayUtil.EPAY_URL);
 
         model.addAttribute("tags", userFacade.findAllTags());
         return "/tickets/buy";

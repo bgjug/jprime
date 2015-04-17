@@ -20,6 +20,10 @@ public class Registrant extends AbstractEntity {
     private String vatNumber;
     private String mol;
     private String email;
+    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="facNoSequence")
+    @SequenceGenerator(name="facNoSequence",sequenceName="facNoSequence",allocationSize=1, initialValue = 100001)
+//    @TableGenerator(name="facNoSequence", initialValue=1000001, allocationSize=10)
+    private long facNo;//invoice number
 
     public Registrant() {
         this.visitors = new ArrayList<>();
@@ -89,4 +93,13 @@ public class Registrant extends AbstractEntity {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public long getFacNo() {
+        return facNo;
+    }
+
+    public void setFacNo(long facNo) {
+        this.facNo = facNo;
+    }
+
 }

@@ -53,7 +53,7 @@
 
         <%--Buy a ticket:--%>
         <%--<a href="/tickets/register">Buy</a>--%>
-        <form action="https://demo.epay.bg/" method=post>
+        <form action="${epayUrl}" method=post>
             <input type="hidden" name="PAGE" value="paylogin">
             <input type="hidden" name="ENCODED" value="${ENCODED}">
             <input type="hidden" name="CHECKSUM" value="${CHECKSUM}">
