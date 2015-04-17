@@ -98,6 +98,10 @@ public class UserFacade {
     public List<Speaker> findFeaturedSpeakers() {
         return speakerRepository.findFeaturedSpeakers();
     }
+    
+    public Speaker findSpeaker(String email) {
+        return speakerRepository.findByEmail(email);
+    }
 
 	public Map<SponsorPackage, List<Sponsor>> findAllSponsors(){
         return sponsorRepository.findAll().stream().collect(groupingBy(Sponsor::getSponsorPackage));

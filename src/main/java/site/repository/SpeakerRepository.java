@@ -21,4 +21,6 @@ public interface SpeakerRepository extends PagingAndSortingRepository<Speaker, L
 
     @Query("SELECT s FROM Speaker s WHERE s.featured = true")
     public List<Speaker> findFeaturedSpeakers();
+    
+    public Speaker findByEmail(String email);
 }
