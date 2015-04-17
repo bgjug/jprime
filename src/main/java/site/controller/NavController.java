@@ -5,12 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import site.facade.UserFacade;
 import site.model.Article;
 
@@ -48,6 +50,18 @@ public class NavController {
     @RequestMapping("/nav/article/{id}")
     public String getById(@PathVariable("id") final long id, Model model) {
         Article article= userFacade.getArticleById(id);
+        //security
+        if (article.isPublished()) {
+            model.addAttribute("article", article);
+        }
+        model.addAttribute("tags", userFacade.findAllTags());
+        return "/single-post.jsp";
+    }
+    
+    @RequestMapping("/nav/article")
+	public String getById(@RequestParam(required = true) final String title,
+			Model model) {
+        Article article= userFacade.getArticleByTitle(title);
         //security
         if (article.isPublished()) {
             model.addAttribute("article", article);

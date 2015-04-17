@@ -247,7 +247,10 @@
             <div class="row">
                 <c:forEach var="speaker" items="${featuredSpeakers}">
                     <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="03" >
-                        <div class="team-member modern">
+                    	<c:url var="speakerUrl" value="/nav/article">
+                    		<c:param name="title" value="${speaker.firstName} ${speaker.lastName}"/>
+                    	</c:url>
+                        <a href="${speakerUrl}"><div class="team-member modern">
                             <!-- Memebr Photo, Name & Position -->
                             <div class="member-photo">
                                 <img alt="" src="/image/speaker/${speaker.id}"/>
@@ -262,6 +265,7 @@
                                         class="fa fa-twitter"></i></a>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </c:forEach>
             </div>

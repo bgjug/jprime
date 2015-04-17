@@ -78,6 +78,10 @@ public class UserFacade {
     public Article getArticleById(long id){
         return articleRepository.findOne(id);
     }
+    
+    public Article getArticleByTitle(String title){
+        return articleRepository.findByTitle(title);
+    }
 
 	public List<Article> findArticlesByTag(String tagName){
 		return articleRepository.findByTag(tagName);

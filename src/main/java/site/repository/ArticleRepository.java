@@ -29,4 +29,6 @@ public interface ArticleRepository extends PagingAndSortingRepository<Article, L
 
     @Query(SELECT_PUBLISHED_ARTICLES)
     Page<Article> findAllPublishedArticles(Pageable pageable);
+    
+    Article findByTitle(String title);
 }
