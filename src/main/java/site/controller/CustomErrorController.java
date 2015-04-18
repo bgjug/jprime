@@ -2,6 +2,7 @@ package site.controller;
 
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +17,13 @@ public class CustomErrorController implements ErrorController {
         resp.sendRedirect("/404");
     }
 
+    @RequestMapping(value = "/404")
+    public String errorPage(Model model) throws IOException {
+        return "/404.jsp";
+    }
 
     @Override
     public String getErrorPath() {
-        return "/error";
+        return "/404";
     }
 }
