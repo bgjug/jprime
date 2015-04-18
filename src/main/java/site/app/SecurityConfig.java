@@ -18,30 +18,30 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	public ApplicationContext context;
+    @Autowired
+    public ApplicationContext context;
 
-	@Autowired
+    @Autowired
     private Environment environment;
-	
-	@Override
-	public void configure(final WebSecurity web) throws Exception {
-		web
-			.ignoring()
-				.antMatchers("/asset/**")
-				.antMatchers("/css/**")
-				.antMatchers("/fonts/**")
-				.antMatchers("/images/**")
-				.antMatchers("/js/**");
-	}
-	
-	@Autowired
+
+    @Override
+    public void configure(final WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/asset/**")
+                .antMatchers("/css/**")
+                .antMatchers("/fonts/**")
+                .antMatchers("/images/**")
+                .antMatchers("/js/**");
+    }
+
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .inMemoryAuthentication()
+                .inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER")
                 .and()
-                .withUser("admin").password(environment.getProperty("admin.password")).roles("ADMIN","USER");
+                .withUser("admin").password(environment.getProperty("admin.password")).roles("ADMIN", "USER");
 //	        auth.authenticationProvider(new AuthenticationProvider() {
 //	            @Override
 //	            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -62,23 +62,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //	        });
     }
 
-	 @Override
-     protected void configure(final HttpSecurity http) throws Exception {
-		 http
-         .authorizeRequests()
-            //TODO Mihail: "/" only works if tomcat/conf/web.xml has index.jsp commented as a welcome page
-            //TODO if not, the controller will not be called and the jsp is not going to have any model object filled up.
-           .antMatchers("/","/login","/about", "/nav/**", "/cfp", "/tickets", "/tickets/register", "tickets/buy",  "/image/**","/team").permitAll() // #4
-           .antMatchers("/admin/**").hasRole("ADMIN") // #6
-           .anyRequest().authenticated() // 7
-           .and()
-       .formLogin()  // #8
-           .loginPage("/login") // #9
-           .permitAll(); // #5
-	 }
-	 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Override
+    protected void configure(final HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                        //TODO Mihail: "/" only works if tomcat/conf/web.xml has index.jsp commented as a welcome page
+                        //TODO if not, the controller will not be called and the jsp is not going to have any model object filled up.
+                .antMatchers("/", "/login", "/about", "/nav/**", "/cfp", "/tickets/**", "/image/**", "/team", "/404").permitAll() // #4
+                .antMatchers("/admin/**").hasRole("ADMIN") // #6
+                .anyRequest().authenticated() // 7
+                .and()
+                .formLogin()  // #8
+                .loginPage("/login") // #9
+                .permitAll(); // #5
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
