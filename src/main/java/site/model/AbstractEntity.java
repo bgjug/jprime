@@ -91,7 +91,5 @@ public abstract class AbstractEntity implements Auditable<String, Long>{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-
 }
 

@@ -1,5 +1,9 @@
 package site.model;
 
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +24,35 @@ public class Registrant extends AbstractEntity {
     private String vatNumber;
     private String mol;
     private String email;
-    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="facNoSequence")
-    @SequenceGenerator(name="facNoSequence",sequenceName="facNoSequence",allocationSize=1, initialValue = 100001)
-//    @TableGenerator(name="facNoSequence", initialValue=1000001, allocationSize=10)
-    private long facNo;//invoice number
+    @Generated(GenerationTime.INSERT)
+    private long invoiceNumber;//invoice number
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private InvoiceNumberGenerator invoice;//invoice number
+//
+//    @Entity
+//    public static class InvoiceNumberGenerator{
+//        @GeneratedValue(strategy=GenerationType.TABLE,generator="facNoSequence")
+//        @TableGenerator(name="facNoSequence", initialValue=1000001, allocationSize=10)
+////        @SequenceGenerator(name="facNoSequence",sequenceName="facNoSequence",allocationSize=1, initialValue = 100001)
+//        @Id
+//        private int number;
+//
+//        public int getNumber() {
+//            return number;
+//        }
+//
+//        public void setNumber(int number) {
+//            this.number = number;
+//        }
+//    }
+//    public InvoiceNumberGenerator getInvoice() {
+//        return invoice;
+//    }
+//
+//    public void setInvoice(InvoiceNumberGenerator invoice) {
+//        this.invoice = invoice;
+//    }
 
     public Registrant() {
         this.visitors = new ArrayList<>();
@@ -94,12 +123,12 @@ public class Registrant extends AbstractEntity {
         this.email = email;
     }
 
-    public long getFacNo() {
-        return facNo;
+    public long getInvoiceNumber() {
+        return invoiceNumber;
     }
 
-    public void setFacNo(long facNo) {
-        this.facNo = facNo;
+    public void setInvoiceNumber(long invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 
 }

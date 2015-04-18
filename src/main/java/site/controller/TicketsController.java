@@ -61,7 +61,7 @@ public class TicketsController {
 
 //    @RequestMapping(value = "/tickets/buy", method = RequestMethod.GET)
     public String prepareEpay(Model model, Registrant registrant) {
-        String epayENCODED = EpayUtil.getEpayENCODED(registrant.getVisitors().size(), registrant.getFacNo());
+        String epayENCODED = EpayUtil.getEpayENCODED(registrant.getVisitors().size(), registrant.getInvoiceNumber());
         String epayCHECKSUM = EpayUtil.getEpayCHECKSUM(epayENCODED);
         model.addAttribute("ENCODED", epayENCODED);
         model.addAttribute("CHECKSUM", epayCHECKSUM);
