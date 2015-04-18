@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.springframework.web.bind.annotation.ResponseBody;
 import site.controller.util.EpayUtil;
 import site.facade.RegistrantFacade;
 import site.facade.UserFacade;
@@ -74,11 +75,9 @@ public class TicketsController {
 
     /**
      * Receiving data from epay.bg
-     *
-     * @param model
-     * @return
      */
     @RequestMapping(value = "/tickets/from.epay", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
     public String register12(HttpServletRequest request) {
         Map<String, String[]> parameters = request.getParameterMap();
 
@@ -91,21 +90,7 @@ public class TicketsController {
 //        for(Map.Entry entry: model.asMap().entrySet()) {
 //            System.out.println("FROM EPAY:"+entry.getKey()+ " " + entry.getValue() );
 //        }
-        return "";
-    }
-
-    /**
-     * Receiving data from epay.bg
-     *
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "/tickets/fromepay", method = {RequestMethod.GET, RequestMethod.POST})
-    public String register1(Model model) {
-        for (Map.Entry entry : model.asMap().entrySet()) {
-            System.out.println("FROM EPAY:" + entry.getKey() + " " + entry.getValue());
-        }
-        return "";
+        return "OK";
     }
 
 
