@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import site.facade.UserFacade;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.Map;
 
 /**
@@ -36,9 +37,16 @@ public class TicketsController {
     /**
      * Receiving data from epay.bg
      */
-    @RequestMapping(value = "/tickets/from.epay", method = RequestMethod.POST)
+    @RequestMapping(value = "/tickets/from.epay", method = {RequestMethod.POST, RequestMethod.HEAD})
     @ResponseBody//we return the string literal
     public String receiveFromEpay(HttpServletRequest request) {
+        System.out.println("HEADERS");
+        Enumeration<String> headers = request.getHeaderNames();
+        for(String header = headers.nextElement(); headers.hasMoreElements(); ) {
+            System.out.println(header+" -> "+request.getHeader(header));
+        }
+
+        System.out.println("PARAMS");
         Map<String, String[]> parameters = request.getParameterMap();
 
         for (String key : parameters.keySet()) {
