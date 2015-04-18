@@ -90,10 +90,10 @@ public class InvoiceData {
     }
 
     public Double getTotalPriceVAT(){
-        return price*passQty;
+        return price*passQty*0.2;
     }
 
     public Double getTotalPriceWithVAT(){
-        return price*passQty;
+        return price*passQty*1.2;
     }
 }
