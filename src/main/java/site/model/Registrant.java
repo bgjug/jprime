@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * A legal entity (or person) that BUYS the tickets.
+ *
  * @author Mihail Stoynov
  */
 @Entity
@@ -24,35 +25,35 @@ public class Registrant extends AbstractEntity {
     private String vatNumber;
     private String mol;
     private String email;
-    @Generated(GenerationTime.INSERT)
+//    @Generated(GenerationTime.INSERT)
     private long invoiceNumber;//invoice number
 
-//    @OneToOne(cascade = CascadeType.ALL)
+    //    @OneToOne(cascade = CascadeType.ALL)
 //    private InvoiceNumberGenerator invoice;//invoice number
 //
-//    @Entity
-//    public static class InvoiceNumberGenerator{
-//        @GeneratedValue(strategy=GenerationType.TABLE,generator="facNoSequence")
-//        @TableGenerator(name="facNoSequence", initialValue=1000001, allocationSize=10)
-////        @SequenceGenerator(name="facNoSequence",sequenceName="facNoSequence",allocationSize=1, initialValue = 100001)
-//        @Id
-//        private int number;
-//
-//        public int getNumber() {
-//            return number;
-//        }
-//
-//        public void setNumber(int number) {
-//            this.number = number;
-//        }
-//    }
-//    public InvoiceNumberGenerator getInvoice() {
-//        return invoice;
-//    }
-//
-//    public void setInvoice(InvoiceNumberGenerator invoice) {
-//        this.invoice = invoice;
-//    }
+    @Entity
+    public static class InvoiceNumberGenerator {
+        @Id
+        @GeneratedValue
+        private int id;
+        private long counter;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public long getCounter() {
+            return counter;
+        }
+
+        public void setCounter(long counter) {
+            this.counter = counter;
+        }
+    }
 
     public Registrant() {
         this.visitors = new ArrayList<>();
@@ -130,5 +131,4 @@ public class Registrant extends AbstractEntity {
     public void setInvoiceNumber(long invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
     }
-
 }

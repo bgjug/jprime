@@ -14,6 +14,7 @@ import site.facade.RegistrantFacade;
 import site.facade.UserFacade;
 import site.model.Registrant;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Map;
@@ -25,7 +26,6 @@ import java.util.Map;
  */
 @Controller
 public class TicketsController {
-
 
     static final String TICKETS_JSP = "/tickets-intro.jsp";
 
@@ -47,7 +47,7 @@ public class TicketsController {
     @Transactional
     @RequestMapping(value = "/tickets", method = RequestMethod.POST)
     public String register(Model model, @Valid final Registrant registrant, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "/tickets-register.jsp";
         }
 
@@ -59,7 +59,7 @@ public class TicketsController {
         return "/tickets-buy.jsp";
     }
 
-//    @RequestMapping(value = "/tickets/buy", method = RequestMethod.GET)
+    //    @RequestMapping(value = "/tickets/buy", method = RequestMethod.GET)
     public String prepareEpay(Model model, Registrant registrant) {
         String epayENCODED = EpayUtil.getEpayENCODED(registrant.getVisitors().size(), registrant.getInvoiceNumber());
         String epayCHECKSUM = EpayUtil.getEpayCHECKSUM(epayENCODED);
@@ -74,13 +74,36 @@ public class TicketsController {
 
     /**
      * Receiving data from epay.bg
+     *
      * @param model
      * @return
      */
-    @RequestMapping(value = "/tickets/from.epay", method = RequestMethod.POST)
-    public String register(Model model) {
-        for(Map.Entry entry: model.asMap().entrySet()) {
-            System.out.println("FROM EPAY:"+entry.getKey()+ " " + entry.getValue() );
+    @RequestMapping(value = "/tickets/from.epay", method = {RequestMethod.GET, RequestMethod.POST})
+    public String register12(HttpServletRequest request) {
+        Map<String, String[]> parameters = request.getParameterMap();
+
+        for (String key : parameters.keySet()) {
+            System.out.print(key);
+            String[] vals = parameters.get(key);
+            for (String val : vals)
+                System.out.println(" -> " + val);
+        }
+//        for(Map.Entry entry: model.asMap().entrySet()) {
+//            System.out.println("FROM EPAY:"+entry.getKey()+ " " + entry.getValue() );
+//        }
+        return "";
+    }
+
+    /**
+     * Receiving data from epay.bg
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/tickets/fromepay", method = {RequestMethod.GET, RequestMethod.POST})
+    public String register1(Model model) {
+        for (Map.Entry entry : model.asMap().entrySet()) {
+            System.out.println("FROM EPAY:" + entry.getKey() + " " + entry.getValue());
         }
         return "";
     }

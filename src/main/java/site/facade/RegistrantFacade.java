@@ -2,108 +2,57 @@ package site.facade;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import site.model.*;
 import site.repository.*;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Map;
-
-import static java.util.stream.Collectors.groupingBy;
 
 @Service(RegistrantFacade.NAME)
 @Transactional
 public class RegistrantFacade {
 
 	public static final String NAME = "registrantFacade";
-	
-	@Autowired
-	@Qualifier(RegistrantRepository.NAME)
-	private RegistrantRepository registrantRepository;
-//
-//	@Autowired
-//	@Qualifier(SpeakerRepository.NAME)
-//	private SpeakerRepository speakerRepository;
-//
-//	@Autowired
-//	@Qualifier(SponsorRepository.NAME)
-//	private SponsorRepository sponsorRepository;
-//
-//	@Autowired
-//	@Qualifier(TagRepository.NAME)
-//	private TagRepository tagRepository;
-//
-//    @Autowired
-//    @Qualifier(SubmissionRepository.NAME)
-//    private SubmissionRepository submissionRepository;
 
-//    /**
-//     * Speaker
-//     * @param id
-//     * @return
-//     */
-//    public Speaker findSpeaker(Long id){
-//		return speakerRepository.findOne(id);
-//	}
-//
-//    /**
-//     * Article
-//     * @param id
-//     * @return
-//     */
-//	public Article findArticle(Long id){
-//		return articleRepository.findOne(id);
-//	}
-//
-//    public Page<Article> allArticles(Pageable pageable){
-//        return articleRepository.findAll(pageable);
-//    }
-//
-//    public Page<Article> allPublishedArticles(Pageable pageable){
-//        return articleRepository.findAllPublishedArticles(pageable);
-//    }
-//    public Article getArticleById(long id){
-//        return articleRepository.findOne(id);
-//    }
-//
-//	public List<Article> findArticlesByTag(String tagName){
-//		return articleRepository.findByTag(tagName);
-//	}
-//
-//    public Page<Article> findArticlesByTag(String tagName, Pageable pageable) {
-//        return articleRepository.findByTag(tagName, pageable);
-//    }
-//
-//    public List<Tag> findAllTags() {
-//        return tagRepository.findAll();
-//    }
-//
-//	public Page<Speaker> findAllSpeakers(Pageable pageable){
-//		return speakerRepository.findAll(pageable);
-//	}
-//
-//    public List<Speaker> findFeaturedSpeakers() {
-//        return speakerRepository.findFeaturedSpeakers();
-//    }
-//
-//	public Map<SponsorPackage, List<Sponsor>> findAllSponsors(){
-//        return sponsorRepository.findAll().stream().collect(groupingBy(Sponsor::getSponsorPackage));
-//    }
+    @Autowired
+    @Qualifier(RegistrantRepository.NAME)
+    private RegistrantRepository registrantRepository;
+    @Autowired
+    @Qualifier(RegistrantInvoiceNumberGeneratorRepository.NAME)
+    private RegistrantInvoiceNumberGeneratorRepository registrantInvoiceNumberGeneratorRepository;
 
-//    public void	save(Submission submission) {
-//        submissionRepository.save(submission);
-//    }
+    public synchronized Registrant save(Registrant registrant) {
+        long counter = getInvoiceNumber();
+        registrant.setInvoiceNumber(counter);
 
-    public Registrant save(Registrant registrant) {
-
-        //todo: mihail this is fucking ugly
+        //todo: mihail this is not optimal, but for now it works
         for(Visitor visitor:registrant.getVisitors()) {
             visitor.setRegistrant(registrant);
         }
 
         return registrantRepository.save(registrant);
+    }
+
+    private long getInvoiceNumber() {
+        //mihail: get the invoice number from the other table
+        long count = registrantInvoiceNumberGeneratorRepository.count();
+        if(count > 1) {
+            throw new JprimeException("Mihail: InvoiceNumberGenerator table has more than one row. Fix that");
+        }
+
+        Registrant.InvoiceNumberGenerator generator;
+        if(count == 0) {
+            generator = new Registrant.InvoiceNumberGenerator();
+            generator.setCounter(1000001);
+            generator = registrantInvoiceNumberGeneratorRepository.save(generator);
+        } else {
+            generator = registrantInvoiceNumberGeneratorRepository.findFirstByOrderByIdAsc();
+        }
+
+
+        long counter = generator.getCounter();
+        generator.setCounter(counter+1);
+        registrantInvoiceNumberGeneratorRepository.save(generator);
+        return counter;
     }
 }
