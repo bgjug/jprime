@@ -47,7 +47,7 @@ function backup_sql {
 
 function copy_files {
 	## get the files
-	sftp -r -P$SSH_PO   RT $SSH_USER@$SSH_HOST:$FILES_TO_COPY ./
+	sftp -r -P$SSH_PORT $SSH_USER@$SSH_HOST:$FILES_TO_COPY ./
 	if [ $? -ne 0 ]; then
 		echo SFTP did not work fine
 		exit 1;
