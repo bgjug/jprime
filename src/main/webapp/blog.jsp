@@ -29,7 +29,7 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
-            $('.truncArt p').truncate({length:200})
+            $('.truncArt').truncate({length:800})
         });
     </script>
 </head>
@@ -50,7 +50,7 @@
 
                     <c:forEach var="article" items="${articles.content}">
                         <!-- Start Post -->
-                        <div class="blog-post image-post"  style="clear:both;">
+                        <div class="blog-post image-post"  style="clear:both;margin-bottom: 100px;">
                             <!-- Post Thumb
                             <div class="post-head">
                                 <a class="lightbox" title="This is an image title" href="images/blog-01.jpg">
@@ -60,6 +60,7 @@
                             </div>
                             <!-- Post Content -->
                             <div class="post-content">
+                            	<br/><br/>
                                 <h2><a href="#">${article.title}</a></h2>
                                 <ul class="post-meta">
                                     By <a href="#">${article.author.firstName} ${article.author.lastName}</a>  &nbsp;&nbsp;
@@ -69,6 +70,7 @@
                                 <a class="main-button" href="/nav/article/${article.id}">Read More <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
+                        
                         <!-- End Post -->
                     </c:forEach>
 
