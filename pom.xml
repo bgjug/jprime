@@ -131,6 +131,19 @@
             <version>1.4.186</version>
         </dependency>
 
+        <!--invoice export-->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>3.7.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>eclipse</groupId>
+                    <artifactId>jdtcore</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
     </dependencies>
 
     <!--mihail: a profile that has the spring-boot:run plugin and a couple of dependencies, so that-->
