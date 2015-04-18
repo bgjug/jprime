@@ -23,7 +23,7 @@
                 <label for="description">Abstract</label>
             </dt>
             <dd>
-                <form:textarea path="description"  cols="70" rows="5"/>
+                <form:textarea path="description"  style="width:80%" rows="5"/>
             </dd>
         </dl>
         <dl>
@@ -71,7 +71,7 @@
                 <label for="speaker.bio">Bio</label>
             </dt>
             <dd>
-                <form:textarea path="speaker.bio" cols="70" rows="5" />
+                <form:textarea path="speaker.bio" style="width:80%" rows="5" />
             </dd>
         </dl>
         <dl>
