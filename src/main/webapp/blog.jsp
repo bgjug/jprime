@@ -29,7 +29,7 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
-            $('.truncArt').truncate({length:800})
+            $('.truncArt').truncate({length:1500})
         });
     </script>
 </head>
