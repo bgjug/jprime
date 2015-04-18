@@ -47,6 +47,8 @@ pageEncoding="UTF-8"%>
     <!-- Start Single Post Content -->
     <div class="post-content">
         <h2>Submit your proposal</h2>
+        <br>Call for paper closes on <strong>3rd of May</strong>
+        <p>
         <user:cfp action="/cfp"/>
     </div>
  <!-- End Single Post Content -->

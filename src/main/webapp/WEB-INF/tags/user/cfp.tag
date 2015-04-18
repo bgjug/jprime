@@ -7,7 +7,6 @@
 <form:form commandName="submission" method="post"
            action="${action}" enctype="multipart/form-data">
     <fieldset>
-        <legend>Add Submission</legend>
         <p>
             <form:errors />
         </p>
@@ -73,14 +72,6 @@
             </dt>
             <dd>
                 <form:textarea path="speaker.bio" cols="70" rows="5" />
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                <label for="speaker.headline">headline</label>
-            </dt>
-            <dd>
-                <form:textarea path="speaker.headline" cols="70" rows="5" />
             </dd>
         </dl>
         <dl>
