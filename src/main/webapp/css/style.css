@@ -3462,7 +3462,7 @@ and (min-width : 551px){
 .blog-post {
     margin-bottom: 40px;
 	padding-bottom: 40px;
-	border-bottom: 1px solid #eee;
+#	border-bottom: 1px solid #eee;
 }
 
 .blog-post .post-head {

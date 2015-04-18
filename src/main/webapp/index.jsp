@@ -246,7 +246,7 @@
 
             <div class="row">
                 <c:forEach var="speaker" items="${featuredSpeakers}">
-                    <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="03" >
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                     	<c:url var="speakerUrl" value="/nav/article">
                     		<c:param name="title" value="${speaker.firstName} ${speaker.lastName}"/>
                     	</c:url>

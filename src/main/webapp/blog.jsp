@@ -29,7 +29,7 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
-            $('.truncArt').truncate({length:200})
+            $('.truncArt p').truncate({length:200})
         });
     </script>
 </head>
@@ -50,7 +50,7 @@
 
                     <c:forEach var="article" items="${articles.content}">
                         <!-- Start Post -->
-                        <div class="blog-post image-post">
+                        <div class="blog-post image-post"  style="clear:both;">
                             <!-- Post Thumb
                             <div class="post-head">
                                 <a class="lightbox" title="This is an image title" href="images/blog-01.jpg">
@@ -66,7 +66,7 @@
                                     <joda:format value="${article.createdDate}" pattern="dd-MM-yyyy"/>
                                 </ul>
                                 <div class="truncArt">${article.text}</div>
-                                <br/><br/><a class="main-button" href="/nav/article/${article.id}">Read More <i class="fa fa-angle-right"></i></a>
+                                <a class="main-button" href="/nav/article/${article.id}">Read More <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                         <!-- End Post -->
