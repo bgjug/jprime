@@ -37,12 +37,14 @@ public class TicketsController {
     /**
      * Receiving data from epay.bg
      */
-    @RequestMapping(value = "/tickets/from.epay", method = {RequestMethod.POST, RequestMethod.HEAD})
+    @RequestMapping(value = "/tickets/from.epay", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.HEAD})
     @ResponseBody//we return the string literal
     public String receiveFromEpay(HttpServletRequest request) {
+        System.out.println("EPAY");
         System.out.println("HEADERS");
         Enumeration<String> headers = request.getHeaderNames();
-        for(String header = headers.nextElement(); headers.hasMoreElements(); ) {
+        while(headers.hasMoreElements()) {
+            String header = headers.nextElement();
             System.out.println(header+" -> "+request.getHeader(header));
         }
 
@@ -55,9 +57,6 @@ public class TicketsController {
             for (String val : vals)
                 System.out.println(" -> " + val);
         }
-//        for(Map.Entry entry: model.asMap().entrySet()) {
-//            System.out.println("FROM EPAY:"+entry.getKey()+ " " + entry.getValue() );
-//        }
         return "OK";
     }
 
