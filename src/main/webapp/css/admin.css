@@ -27,18 +27,6 @@
 	padding: 0px;
 }
 
-.info_space{
-	float: left;
-	width: 400px;
-}
-
-.upload_space{
-	float: right;
-	width: 400px;
-	height: 600px;
-	display: inline-block;
-}
-
 .admin-table tr:last-child td:last-child {
 	-moz-border-radius-bottomright: 0px;
 	-webkit-border-bottom-right-radius: 0px;
@@ -50,8 +38,6 @@
 	-webkit-border-top-left-radius: 0px;
 	border-top-left-radius: 0px;
 }
-
-.
 
 .admin-table table tr:first-child td:last-child {
 	-moz-border-radius-topright: 0px;

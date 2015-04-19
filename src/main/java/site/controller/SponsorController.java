@@ -1,7 +1,15 @@
 package site.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -47,7 +55,8 @@ public class SponsorController {
 		}
 		if(!file.isEmpty()){
 			try {
-                byte[] bytes = file.getBytes();
+				//TODO thumbnail sponsor logo
+				byte[] bytes = file.getBytes();
                 sponsor.setLogo(bytes);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -78,11 +87,5 @@ public class SponsorController {
 		adminFacade.deleteSponsor(itemId);
 		return "redirect:/admin/sponsor/view";
 	}
-	
-	@RequestMapping(value = "/logo/{itemId}")
-	@ResponseBody
-	public byte[] showLogo(@PathVariable("itemId") Long itemId)  {
-		return adminFacade.findOneSponsor(itemId).getLogo();
-	}
-	
+
 }

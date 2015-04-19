@@ -1,19 +1,41 @@
 package site.controller;
 
-import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import site.facade.UserFacade;
+import site.model.Speaker;
+import site.model.Sponsor;
+import site.model.SponsorPackage;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class IndexController {
-	
-	private static final Logger logger = Logger.getLogger(IndexController.class);
 
-	private static final String PAGE_INDEX = "index.jsp";
+	static final String PAGE_INDEX = "index.jsp";
 
-	@RequestMapping("/")
+    @Autowired
+    @Qualifier(UserFacade.NAME)
+    private UserFacade userFacade;
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
+
+        Map<SponsorPackage, List<Sponsor>> allSponsors = userFacade.findAllSponsors();
+        model.addAttribute("platinumSponsors", allSponsors.getOrDefault(SponsorPackage.PLATINUM,
+                new ArrayList<>()));
+        model.addAttribute("goldSponsors", allSponsors.getOrDefault(SponsorPackage.GOLD,
+                new ArrayList<>()));
+        model.addAttribute("silverSponsors", allSponsors.getOrDefault(SponsorPackage.SILVER,
+                new ArrayList<>()));
+        model.addAttribute("tags", userFacade.findAllTags());
+        model.addAttribute("featuredSpeakers", userFacade.findFeaturedSpeakers());
 		return PAGE_INDEX;
 	}
 

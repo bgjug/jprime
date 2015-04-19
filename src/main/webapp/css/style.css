@@ -42,7 +42,7 @@
 /*------------------------------------------*/
 body {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 13px;
+	font-size: 15px;
     line-height: 21px;
 	font-weight: 300;
 	color: #888;
@@ -124,7 +124,7 @@ h6 {
 
 p {
     color: #888;
-    font-size: 13px;
+    font-size: 15px;
     font-family: 'Open Sans', sans-serif;
     line-height: 22px;
     margin: 0;
@@ -567,7 +567,7 @@ ul.social-list li:last-child a i {
 
 .navbar-brand {
 	position: relative;
-	padding: 27px 0;
+	padding: 10px 0;
 	margin: 0!important;
 	transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
@@ -1068,7 +1068,7 @@ ul.breadcrumbs li a {
 }
 
 label {
-	font-size: 13px;
+	font-size: 15px;
 	color: #aaa;
 	font-weight: 300;
 	cursor: pointer;
@@ -1221,7 +1221,7 @@ input[type="submit"] {
 
 .clients-carousel .client-item a {
 	display: block;
-	padding: 12px 0;
+	padding: 2px 0;
 	text-align: center;
 }
 
@@ -1423,7 +1423,7 @@ input[type="submit"] {
 }
 
 .panel-title {
-	font-size: 13px;
+	font-size: 15px;
 	font-weight: 600;
 }
 

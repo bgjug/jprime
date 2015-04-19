@@ -6,17 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import site.model.Article;
 import site.model.Speaker;
 import site.model.Sponsor;
+import site.model.Submission;
+import site.model.SubmissionStatus;
 import site.model.Tag;
 import site.model.User;
 import site.repository.ArticleRepository;
 import site.repository.SpeakerRepository;
 import site.repository.SponsorRepository;
+import site.repository.SubmissionRepository;
 import site.repository.TagRepository;
 import site.repository.UserRepository;
 
@@ -45,12 +47,18 @@ public class AdminFacade {
 	@Autowired
 	@Qualifier(TagRepository.NAME)
 	private TagRepository tagRepository;
+
+    @Autowired
+    @Qualifier(SubmissionRepository.NAME)
+    private SubmissionRepository submissionRepository;
 	
 	/* article repo */
 	
 	public Page<Article> findAllArticles(Pageable pageable){
 		return articleRepository.findAll(pageable);
 	}
+
+
 	
 	public Article findOneArticle(Long id){
 		return articleRepository.findOne(id);
@@ -110,6 +118,14 @@ public class AdminFacade {
 	public User findOneUser(Long id){
 		return userRepository.findOne(id);
 	}
+
+    //currently used for admin TODO:to be fixed with normal authentication with spring
+    public User findUserByEmail(String email){
+        if(userRepository.findByEmail(email).size()>0) {
+            return userRepository.findByEmail(email).get(0);
+        }
+        return null;
+    }
 	
 	public void deleteUser(Long id){
 		userRepository.delete(id);
@@ -140,5 +156,25 @@ public class AdminFacade {
 	public Tag saveTag(Tag tag){
 		return tagRepository.save(tag);
 	}
-	
+
+    public Page<Submission> findAllSubmissions(Pageable pageable) {
+        return submissionRepository.findAll(pageable);
+    }
+
+    public Submission findOneSubmission(Long submissionId) {
+        return submissionRepository.findOne(submissionId);
+    }
+
+    public void acceptSubmission(Submission submission) {
+        changeStatusTo(submission, SubmissionStatus.ACCEPTED);
+    }
+
+    public void rejectSubmission(Submission submission) {
+        changeStatusTo(submission, SubmissionStatus.REJECTED);
+    }
+
+    private void changeStatusTo(Submission submission, SubmissionStatus status) {
+        submission.setStatus(status);
+        submissionRepository.save(submission);
+    }
 }

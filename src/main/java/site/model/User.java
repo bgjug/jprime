@@ -8,11 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Email;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-public class User extends AbstractEntity{
+public class User extends AbstractEntity {
 	/**
      * Default serial version uid.
      */
@@ -23,6 +25,8 @@ public class User extends AbstractEntity{
 	private String lastName;
 	
 	@Column(unique = true)
+    @NotNull
+    @Email
 	private String email;
 	
 	private String phone;
@@ -70,4 +74,30 @@ public class User extends AbstractEntity{
 		this.phone = phone;
 	}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof User))
+            return false;
+
+        User user = (User) o;
+
+        if (email != null && !email.equals(user.email))
+            return false;
+        if (firstName != null && !firstName.equals(user.firstName))
+            return false;
+        if (lastName != null && !lastName.equals(user.lastName))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + email.hashCode();
+        return result;
+    }
 }

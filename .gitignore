@@ -21,3 +21,4 @@ target/
 *.swp
 .idea
 .forge_settings
+.DS_Store

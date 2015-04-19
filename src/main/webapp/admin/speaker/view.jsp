@@ -24,6 +24,7 @@
 				<td><i>Email</i></td>
 				<td><i>Phone</i></td>
 				<td><i>Twitter</i></td>
+                <td><i>Featured?</i></td>
 				<td><i>Picture</i></td>
 				<td><i>Operations</i></td>
 			</tr>
@@ -33,7 +34,8 @@
 					<td>${speaker.email }</td>
 					<td>${speaker.phone }</td>
 					<td>${speaker.twitter }</td>
-					<td><img src="/admin/speaker/picture/${speaker.id}"/></td>
+                    <td>${speaker.featured}</td>
+					<td><img src="/image/speaker/${speaker.id}"/></td>
 					<td>
 						<span style="float:left;"><a href="/admin/speaker/edit/${speaker.id}">Edit</a></span> &nbsp; 
 						<span style="float:right;"><a href="/admin/speaker/remove/${speaker.id}"> Remove </a></span> 

@@ -2,6 +2,9 @@ package site.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,6 +14,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * to make this deployable as war, this is necessary:
+ * http://docs.spring.io/spring-boot/docs/current/reference/html/howto-traditional-deployment.html
+ */
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "site")
@@ -19,9 +26,16 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan(basePackages="site.model")
 @EnableJpaAuditing
 @EnableSpringDataWebSupport
-public class Application {
-	
-	public static void main(String[] args) {
+@SpringBootApplication//mihail: so that it can be run as war file
+public class Application  extends SpringBootServletInitializer {
+
+    /** mihail: so that it can be run as war file */
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
+    }
+
+    public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
 //		System.out.println("Let's inspect the beans provided by Spring Boot:");
 //

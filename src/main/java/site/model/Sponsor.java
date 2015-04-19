@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
+import java.util.Objects;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -23,8 +24,17 @@ public class Sponsor extends User {
 	
 	private String description;
 
+    public Sponsor() {
+    }
 
-	public SponsorPackage getSponsorPackage() {
+    public Sponsor(SponsorPackage sponsorPackage, String companyName, String companyWebsite, String email) {
+        this.sponsorPackage = sponsorPackage;
+        this.companyName = companyName;
+        this.companyWebsite = companyWebsite;
+        setEmail(email);
+    }
+
+    public SponsorPackage getSponsorPackage() {
 		return sponsorPackage;
 	}
 
@@ -63,4 +73,26 @@ public class Sponsor extends User {
 	public void setLogo(byte[] logo) {
 		this.logo = logo;
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Sponsor))
+            return false;
+
+        Sponsor sponsor = (Sponsor) o;
+
+        if (!companyName.equals(sponsor.companyName))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 31;
+        result = 31 * result + companyName.hashCode();
+        return result;
+    }
 }
