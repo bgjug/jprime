@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.bind.annotation.ResponseBody;
+import site.controller.util.EpayRaw;
+import site.controller.util.EpayResponse;
 import site.controller.util.EpayUtil;
 import site.facade.RegistrantFacade;
 import site.facade.UserFacade;
+import site.model.JprimeException;
 import site.model.Registrant;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,10 +65,9 @@ public class TicketsController {
 
     //    @RequestMapping(value = "/tickets/buy", method = RequestMethod.GET)
     public String prepareEpay(Model model, Registrant registrant) {
-        String epayENCODED = EpayUtil.getEpayENCODED(registrant.getVisitors().size(), registrant.getInvoiceNumber());
-        String epayCHECKSUM = EpayUtil.getEpayCHECKSUM(epayENCODED);
-        model.addAttribute("ENCODED", epayENCODED);
-        model.addAttribute("CHECKSUM", epayCHECKSUM);
+        EpayRaw epayRaw = EpayUtil.encrypt(registrant.getVisitors().size(), registrant.getInvoiceNumber());
+        model.addAttribute("ENCODED", epayRaw.getEncoded());
+        model.addAttribute("CHECKSUM", epayRaw.getChecksum());
 //        model.addAttribute("facNo", registrant.getFacNo());
         model.addAttribute("epayUrl", EpayUtil.EPAY_URL);
 
@@ -73,26 +75,40 @@ public class TicketsController {
         return "/tickets/buy";
     }
 
+
     /**
      * Receiving data from epay.bg
      */
-    @RequestMapping(value = "/tickets/from.epay", method = {RequestMethod.GET, RequestMethod.POST})
-    @ResponseBody
-    public String register12(HttpServletRequest request) {
-        Map<String, String[]> parameters = request.getParameterMap();
-
-        for (String key : parameters.keySet()) {
-            System.out.print(key);
-            String[] vals = parameters.get(key);
-            for (String val : vals)
-                System.out.println(" -> " + val);
-        }
-//        for(Map.Entry entry: model.asMap().entrySet()) {
-//            System.out.println("FROM EPAY:"+entry.getKey()+ " " + entry.getValue() );
+    @RequestMapping(value = "/tickets/from.epay", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.HEAD})
+    @ResponseBody//we return the string literal
+    public String receiveFromEpay(HttpServletRequest request) {
+        System.out.println("EPAY");
+//        System.out.println("HEADERS");
+//        Enumeration<String> headers = request.getHeaderNames();
+//        while(headers.hasMoreElements()) {
+//            String header = headers.nextElement();
+//            System.out.println(header+" -> "+request.getHeader(header));
 //        }
-        return "OK";
-    }
 
+//        System.out.println("PARAMS");
+        Map<String, String[]> parameters = request.getParameterMap();
+//
+//        for (String key : parameters.keySet()) {
+//            System.out.print(key);
+//            String[] vals = parameters.get(key);
+//            for (String val : vals)
+//                System.out.println(" -> " + val);
+//        }
+        try {
+            String encoded = parameters.get("encoded")[0];
+            String checksum = parameters.get("checksum")[0];
+            EpayRaw epayRaw = new EpayRaw(checksum, encoded);
+            EpayResponse response = EpayUtil.decrypt(epayRaw);
+            return response.getEpayAnswer();
+        } catch (Throwable t) {
+            throw new JprimeException("epay response parsing failed", t);
+        }
+    }
 
     @RequestMapping(value = "/tickets/result/{r}", method = RequestMethod.GET)
     public String result(@PathVariable("r") final String r, Model model) {

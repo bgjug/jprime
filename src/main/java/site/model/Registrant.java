@@ -3,6 +3,7 @@ package site.model;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import site.controller.util.EpayResponse;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,10 +28,9 @@ public class Registrant extends AbstractEntity {
     private String email;
 //    @Generated(GenerationTime.INSERT)
     private long invoiceNumber;//invoice number
+    @Embedded
+    private EpayResponse epayResponse;
 
-    //    @OneToOne(cascade = CascadeType.ALL)
-//    private InvoiceNumberGenerator invoice;//invoice number
-//
     @Entity
     public static class InvoiceNumberGenerator {
         @Id
@@ -130,5 +130,17 @@ public class Registrant extends AbstractEntity {
 
     public void setInvoiceNumber(long invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
+    }
+
+    public EpayResponse getEpayResponse() {
+        return epayResponse;
+    }
+
+    public void setEpayResponse(EpayResponse epayResponse) {
+        this.epayResponse = epayResponse;
+    }
+
+    public void setIsCompany(boolean isCompany) {
+        this.isCompany = isCompany;
     }
 }
