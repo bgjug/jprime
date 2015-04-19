@@ -93,6 +93,9 @@
                             <li>
                                 <a <c:if test='${"/tickets.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/tickets">Register</a>
                             </li>
+                            <li>
+                                <a <c:if test='${"/team.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/team">The Team</a>
+                            </li>
                             <c:forEach var="tag" items="${tags}">
                                 <li>
                                     <a href="/nav/${tag.name}"><c:out value="${tag.name}"/></a>
