@@ -94,6 +94,11 @@ public class TicketsController {
             System.out.println("EPAY: "+epayResponse);
 
             Registrant registrant = registrantFacade.findByInvoiceNumber(epayResponse.getInvoiceNumber());
+            if(registrant == null) {
+                //we don't have that invoiceNumber in the database, probably testing
+                System.out.println("InvoiceNumber "+epayResponse.getInvoiceNumber()+" missing in DB, return OK, so that epay will stop bugging me");
+                return "INVOICE=" + epayResponse.getInvoiceNumber() + ":STATUS=OK";
+            }
             registrant.setEpayResponse(epayResponse);
             registrant = registrantFacade.save(registrant);
             createPDFAndSendToEmail(registrant);
