@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.bind.annotation.ResponseBody;
-import site.controller.util.EpayRaw;
-import site.controller.util.EpayResponse;
-import site.controller.util.EpayUtil;
+import site.controller.epay.EpayRaw;
+import site.controller.epay.EpayResponse;
+import site.controller.epay.EpayUtil;
 import site.facade.RegistrantFacade;
 import site.facade.UserFacade;
 import site.model.JprimeException;
@@ -83,28 +83,18 @@ public class TicketsController {
     @ResponseBody//we return the string literal
     public String receiveFromEpay(HttpServletRequest request) {
         System.out.println("EPAY");
-//        System.out.println("HEADERS");
-//        Enumeration<String> headers = request.getHeaderNames();
-//        while(headers.hasMoreElements()) {
-//            String header = headers.nextElement();
-//            System.out.println(header+" -> "+request.getHeader(header));
-//        }
-
-//        System.out.println("PARAMS");
         Map<String, String[]> parameters = request.getParameterMap();
-//
-//        for (String key : parameters.keySet()) {
-//            System.out.print(key);
-//            String[] vals = parameters.get(key);
-//            for (String val : vals)
-//                System.out.println(" -> " + val);
-//        }
         try {
             String encoded = parameters.get("encoded")[0];
             String checksum = parameters.get("checksum")[0];
             EpayRaw epayRaw = new EpayRaw(checksum, encoded);
-            EpayResponse response = EpayUtil.decrypt(epayRaw);
-            return response.getEpayAnswer();
+            EpayResponse epayResponse = EpayUtil.decrypt(epayRaw);
+
+            Registrant registrant = registrantFacade.findByInvoiceNumber(epayResponse.getInvoiceNumber());
+            registrant.setEpayResponse(epayResponse);
+            registrant = registrantFacade.save(registrant);
+            createPDFAndSendToEmail(registrant);
+            return epayResponse.getEpayAnswer();
         } catch (Throwable t) {
             throw new JprimeException("epay response parsing failed", t);
         }
@@ -114,5 +104,17 @@ public class TicketsController {
     public String result(@PathVariable("r") final String r, Model model) {
         model.addAttribute("result", r.equals("ok"));
         return "/tickets-result.jsp";
+    }
+
+    //TODO
+    private void createPDFAndSendToEmail(Registrant registrant) {
+        //TODO create PDF for registrant
+        registrant.getName();//ime na firmata
+        registrant.getMol();//mol
+        registrant.getAddress();//address
+        registrant.getVatNumber();//BULSTAT
+
+        //SEND TO THIS EMAIL
+        registrant.getEmail();
     }
 }

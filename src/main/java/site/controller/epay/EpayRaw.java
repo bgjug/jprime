@@ -1,4 +1,4 @@
-package site.controller.util;
+package site.controller.epay;
 
 /**
  * Carries the ENCODED and CHECKSUM fields, that epay can read

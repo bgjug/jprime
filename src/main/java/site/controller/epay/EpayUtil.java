@@ -1,4 +1,4 @@
-package site.controller.util;
+package site.controller.epay;
 
 import site.model.JprimeException;
 

@@ -1,9 +1,7 @@
 package site.model;
 
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
-import site.controller.util.EpayResponse;
+import site.controller.epay.EpayResponse;
 
 import javax.persistence.*;
 import java.util.ArrayList;

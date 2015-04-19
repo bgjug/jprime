@@ -21,6 +21,11 @@ public class RegistrantFacade {
     @Qualifier(RegistrantInvoiceNumberGeneratorRepository.NAME)
     private RegistrantInvoiceNumberGeneratorRepository registrantInvoiceNumberGeneratorRepository;
 
+    public Registrant findByInvoiceNumber(long invoiceNumber){
+        return registrantRepository.findByInvoiceNumber(invoiceNumber);
+    }
+
+
     public synchronized Registrant save(Registrant registrant) {
         long counter = getInvoiceNumber();
         registrant.setInvoiceNumber(counter);
@@ -48,7 +53,6 @@ public class RegistrantFacade {
         } else {
             generator = registrantInvoiceNumberGeneratorRepository.findFirstByOrderByIdAsc();
         }
-
 
         long counter = generator.getCounter();
         generator.setCounter(counter+1);
