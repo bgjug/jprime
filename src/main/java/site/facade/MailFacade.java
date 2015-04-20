@@ -33,4 +33,8 @@ public class MailFacade {
 
         mailSender.send(mimeMessage);
     }
+
+    public void sendEmail(String to, String subject, String messageText, byte[] pdf) {
+        // TODO
+    }
 }

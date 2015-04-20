@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import site.controller.epay.EpayRaw;
 import site.controller.epay.EpayResponse;
 import site.controller.epay.EpayUtil;
+import site.controller.invoice.InvoiceData;
+import site.controller.invoice.InvoiceExporter;
+import site.facade.MailFacade;
 import site.facade.RegistrantFacade;
 import site.facade.UserFacade;
 import site.model.JprimeException;
@@ -21,7 +24,9 @@ import site.model.Visitor;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Enumeration;import java.util.Map;
 
 /**
  * @author Mihail
@@ -30,11 +35,16 @@ import java.util.Map;
 public class TicketsController {
 
     static final String TICKETS_JSP = "/tickets.jsp";
-    public static final String TICKETS_EPAY_REGISTER_JSP = "/tickets-epay-register.jsp";
+    public static final String TICKETS_EPAY_REGISTER_JSP = "/tickets-epay-register.jsp";    @Autowired
+    @Qualifier(MailFacade.NAME)
+    private MailFacade mailFacade;
 
     @Autowired
     @Qualifier(UserFacade.NAME)
     private UserFacade userFacade;
+
+    @Autowired
+    private InvoiceExporter invoiceExporter;
 
     @Autowired
     @Qualifier(RegistrantFacade.NAME)
@@ -51,7 +61,7 @@ public class TicketsController {
     public String goToRegisterPage(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("registrant", new Registrant());
-        return TICKETS_EPAY_REGISTER_JSP;
+		return TICKETS_EPAY_REGISTER_JSP;
     }
 
     @Transactional
@@ -63,8 +73,7 @@ public class TicketsController {
 
         if (!registrant.isCompany()) {
             handlePersonalRegistrant(registrant);
-        }
-        Registrant savedRegistrant = registrantFacade.save(registrant);
+        }        Registrant savedRegistrant = registrantFacade.save(registrant);
 
         model.addAttribute("tags", userFacade.findAllTags());
 //        model.addAttribute("registrant", registrant);
@@ -110,7 +119,8 @@ public class TicketsController {
             }
             registrant.setEpayResponse(epayResponse);
             registrant = registrantFacade.save(registrant);
-            createPDFAndSendToEmail(registrant);
+            byte[] pdf = createPDF(registrant);
+            sendPDF(registrant, pdf);
             return epayResponse.getEpayAnswer();
         } catch (Throwable t) {
             throw new JprimeException("epay response parsing failed", t);
@@ -124,15 +134,36 @@ public class TicketsController {
         return "/tickets-epay-result.jsp";
     }
 
-    //TODO
-    private void createPDFAndSendToEmail(Registrant registrant) {
-        //TODO create PDF for registrant
-        registrant.getName();//ime na firmata
-        registrant.getMol();//mol
-        registrant.getAddress();//address
-        registrant.getVatNumber();//BULSTAT
+    private byte[] createPDF(Registrant registrant) throws Exception {
+        String regName = registrant.getName(); // company name
 
-        //SEND TO THIS EMAIL
-        registrant.getEmail();
+        // FIXME: set MOL in PDF
+        String regMol = registrant.getMol(); // company mol
+        String regAddress = registrant.getAddress(); //company address
+        String regVat = registrant.getVatNumber(); //company BULSTAT
+        int qty = registrant.getVisitors().size();
+
+        InvoiceData data = new InvoiceData();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        data.setInvoiceDate(dateFormat.format(Calendar.getInstance().getTime()));
+        data.setInvoiceNumber(String.valueOf(registrant.getInvoiceNumber()));
+        data.setClient(regName);
+        data.setClientAddress(regAddress);
+        data.setClientEIK(regVat);
+
+        // FIXME: append country code ?
+        data.setClientVAT("BG" + registrant.getVatNumber());
+        data.setPassQty(qty);
+        data.setPrice(Double.valueOf(qty*100));
+
+        byte[] pdf = invoiceExporter.exportInvoice(data);
+        return pdf;
+    }
+
+    private void sendPDF(Registrant registrant, byte[] pdf) {
+        String email = registrant.getEmail();
+        mailFacade.sendEmail(email, "JPrime.io invoice",
+                "Thank you for registering to JPrime. Your invoice is attached as part of this mail.", pdf);
     }
 }
