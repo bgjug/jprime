@@ -31,7 +31,7 @@
     <user:pageJavaScriptAndCss/>
 
     <!--validation-->
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
 
 
     <script type="text/javascript">
@@ -81,8 +81,17 @@
             $("#visitors" + index + "\\.email").rules("add",{required: true,email: true});
         };
 
+        var issueInvoiceHandler = function() {
+            if (this.checked) {
+                $("#invoiceFieldset").show();
+            } else {
+                $("#invoiceFieldset").hide();
+            }
+        };
+
         $(function() {
             $("#newVisitor").click(appendVisitor);
+            $("#isCompany").click(issueInvoiceHandler);
         });
     </script>
 </head>
@@ -124,6 +133,9 @@
                 </dl>
             </fieldset>
             <a id="newVisitor">Add new</a>
+            <br><br>
+            <form:checkbox path="company" label=" Issue invoice" id="isCompany" checked="true"/>
+            <br><br>
             <fieldset id="invoiceFieldset">
                 <legend>Invoice information</legend>
                 <dl>
@@ -139,17 +151,17 @@
                     <dd><form:input path="vatNumber" /></dd>
                 </dl>
                 <dl>
-                    <dt><label for="mol">MOL</label></dt>
+                    <dt><label for="mol">Accountable person (MOL)</label></dt>
                     <dd><form:input path="mol" /></dd>
                 </dl>
                 <dl>
                     <dt><label for="email">email</label></dt>
                     <dd><form:input path="email" /></dd>
                 </dl>
-                <sec:csrfInput/>
-                <form:hidden path="id"/>
-                <button type="submit">Save</button>
             </fieldset>
+            <sec:csrfInput/>
+            <form:hidden path="id"/>
+            <button type="submit">Save</button>
 
         </form:form>
 

@@ -16,14 +16,14 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Registrant extends AbstractEntity {
 
-    @OneToMany(mappedBy = "registrant", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "registrant", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Visitor> visitors;
     private boolean isCompany;
-    private String name;
+    private String name = "";
     private String address;
     private String vatNumber;
     private String mol;
-    private String email;
+    private String email = "";
 //    @Generated(GenerationTime.INSERT)
     @Column(unique = true)
     private long invoiceNumber;//invoice number
@@ -139,7 +139,39 @@ public class Registrant extends AbstractEntity {
         this.epayResponse = epayResponse;
     }
 
-    public void setIsCompany(boolean isCompany) {
-        this.isCompany = isCompany;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Registrant))
+            return false;
+
+        Registrant that = (Registrant) o;
+
+        if (isCompany != that.isCompany)
+            return false;
+        if (address != null ? !address.equals(that.address) : that.address != null)
+            return false;
+        if (!email.equals(that.email))
+            return false;
+        if (mol != null ? !mol.equals(that.mol) : that.mol != null)
+            return false;
+        if (!name.equals(that.name))
+            return false;
+        if (vatNumber != null ? !vatNumber.equals(that.vatNumber) : that.vatNumber != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (isCompany ? 1 : 0);
+        result = 31 * result + name.hashCode();
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (vatNumber != null ? vatNumber.hashCode() : 0);
+        result = 31 * result + (mol != null ? mol.hashCode() : 0);
+        result = 31 * result + email.hashCode();
+        return result;
     }
 }

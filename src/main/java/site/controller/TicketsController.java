@@ -8,7 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import org.springframework.web.bind.annotation.ResponseBody;
 import site.controller.epay.EpayRaw;
 import site.controller.epay.EpayResponse;
@@ -17,11 +16,11 @@ import site.facade.RegistrantFacade;
 import site.facade.UserFacade;
 import site.model.JprimeException;
 import site.model.Registrant;
+import site.model.Visitor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.Enumeration;
 import java.util.Map;
 
 /**
@@ -31,7 +30,8 @@ import java.util.Map;
 public class TicketsController {
 
     static final String TICKETS_JSP = "/tickets.jsp";
-    
+    public static final String TICKETS_EPAY_REGISTER_JSP = "/tickets-epay-register.jsp";
+
     @Autowired
     @Qualifier(UserFacade.NAME)
     private UserFacade userFacade;
@@ -51,25 +51,34 @@ public class TicketsController {
     public String goToRegisterPage(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("registrant", new Registrant());
-        return "/tickets-epay-register.jsp";
+        return TICKETS_EPAY_REGISTER_JSP;
     }
 
     @Transactional
     @RequestMapping(value = "/tickets/epay", method = RequestMethod.POST)
     public String register(Model model, @Valid final Registrant registrant, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/tickets-epay-register.jsp";
+            return TICKETS_EPAY_REGISTER_JSP;
         }
 
+        if (!registrant.isCompany()) {
+            handlePersonalRegistrant(registrant);
+        }
         Registrant savedRegistrant = registrantFacade.save(registrant);
 
         model.addAttribute("tags", userFacade.findAllTags());
 //        model.addAttribute("registrant", registrant);
         prepareEpay(model, savedRegistrant);
-        return "/tickets-epay-buy.jsp";
+        return "redirect:/tickets/buy";
     }
 
-    //    @RequestMapping(value = "/tickets/buy", method = RequestMethod.GET)
+    private void handlePersonalRegistrant(Registrant registrant) {
+        Visitor firstVisitor = registrant.getVisitors().get(0);
+        registrant.setName(firstVisitor.getName());
+        registrant.setEmail(firstVisitor.getEmail());
+    }
+
+    @RequestMapping(value = "/tickets/buy", method = RequestMethod.GET)
     public String prepareEpay(Model model, Registrant registrant) {
         EpayRaw epayRaw = EpayUtil.encrypt(registrant.getVisitors().size(), registrant.getInvoiceNumber());
         model.addAttribute("ENCODED", epayRaw.getEncoded());
@@ -78,7 +87,7 @@ public class TicketsController {
         model.addAttribute("epayUrl", EpayUtil.EPAY_URL);
 
         model.addAttribute("tags", userFacade.findAllTags());
-        return "/tickets/buy";
+        return "/tickets-epay-buy.jsp";
     }
 
     /** Receiving data from epay.bg (back channel) */
