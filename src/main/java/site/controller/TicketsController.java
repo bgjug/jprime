@@ -25,9 +25,6 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
@@ -94,7 +91,8 @@ public class TicketsController {
 
     @RequestMapping(value = "/tickets/buy", method = RequestMethod.GET)
     public String prepareEpay(Model model, Registrant registrant) {
-        EpayRaw demoEpayRaw = EpayUtil.encrypt(registrant.getVisitors().size(), registrant.getEpayInvoiceNumber(), false, 0);
+        EpayRaw demoEpayRaw = EpayUtil.encrypt(registrant.getVisitors().size(),
+                registrant.getEpayInvoiceNumber(), false, 0);
         model.addAttribute("DEMO_ENCODED", demoEpayRaw.getEncoded());
         model.addAttribute("DEMO_CHECKSUM", demoEpayRaw.getChecksum());
         model.addAttribute("DEMO_epayUrl", demoEpayRaw.getEpayUrl());
@@ -152,8 +150,6 @@ public class TicketsController {
         // 2) fix setting of client VAT - add field in JSP
         // 3) test pdf generation and email sending
 
-        // FIXME: set MOL in PDF
-
         String regMol = registrant.getMol(); // company mol
         String regAddress = registrant.getAddress(); //company address
         String regVat = registrant.getVatNumber(); //company DDS number
@@ -167,22 +163,27 @@ public class TicketsController {
         data.setClient(regName);
         data.setClientAddress(regAddress);
         data.setClientEIK(regVat);
+        data.setMol(regMol);
 
-        // FIXME: append country code ?
-        data.setClientVAT("BG" + registrant.getVatNumber());
+        String vatNumber = registrant.getVatNumber();
+        if (vatNumber != null) {
+            if (!vatNumber.startsWith("BG")) {
+                vatNumber = "BG" + vatNumber;
+            }
+            data.setClientVAT(vatNumber);
+        } else {
+            data.setClientVAT("");
+        }
         data.setPassQty(qty);
-        data.setPrice(Double.valueOf(qty * 100));
+        data.setPrice(100d);
 
-        byte[] pdf = invoiceExporter.exportInvoice(data, registrant.isCompany());
-        FileOutputStream fos = new FileOutputStream("c:\\test.pdf");
-        fos.write(pdf);
-
-        return pdf;
+        return invoiceExporter.exportInvoice(data, registrant.isCompany());
     }
 
     private void sendPDF(Registrant registrant, byte[] pdf) throws MessagingException {
         String email = registrant.getEmail();
         mailFacade.sendInvoice(email, "JPrime.io invoice",
-                "Thank you for registering to JPrime. Your invoice is attached as part of this mail.", pdf);
+                "Thank you for registering to JPrime. Your invoice is attached as part of this mail.",
+                pdf);
     }
 }

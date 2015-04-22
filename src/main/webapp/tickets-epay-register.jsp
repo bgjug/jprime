@@ -53,9 +53,6 @@
                     'address': {
                         required: true
                     },
-                    'vatNumber': {
-                        required: true
-                    },
                     'eik': {
                         required: true
                     },

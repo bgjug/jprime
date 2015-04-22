@@ -17,6 +17,8 @@ public class InvoiceData {
 
     private String clientVAT;
 
+    private String mol;
+
     private Integer passQty;
 
     private Double price;
@@ -86,14 +88,22 @@ public class InvoiceData {
     }
 
     public Double getTotalPrice(){
-        return price*passQty;
+        return price*passQty/1.2;
     }
 
     public Double getTotalPriceVAT(){
-        return price*passQty*0.2;
+        return getTotalPriceWithVAT() - getTotalPrice();
     }
 
     public Double getTotalPriceWithVAT(){
-        return price*passQty*1.2;
+        return price*passQty;
+    }
+
+    public String getMol() {
+        return mol;
+    }
+
+    public void setMol(String mol) {
+        this.mol = mol;
     }
 }
