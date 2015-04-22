@@ -27,7 +27,7 @@ public class Registrant extends AbstractEntity {
 //    @Generated(GenerationTime.INSERT)
     @Column(unique = true)
     private long epayInvoiceNumber;//the one for epay
-    @Column(unique = true)
+    @Column(unique = false)//because initially it is zero
     private long realInvoiceNumber;//the real one, only after they pay
     @Embedded
     private EpayResponse epayResponse;
