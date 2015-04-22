@@ -26,7 +26,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Enumeration;import java.util.Map;
+import java.util.Map;
 
 /**
  * @author Mihail
@@ -76,9 +76,8 @@ public class TicketsController {
         }        Registrant savedRegistrant = registrantFacade.save(registrant);
 
         model.addAttribute("tags", userFacade.findAllTags());
-//        model.addAttribute("registrant", registrant);
         prepareEpay(model, savedRegistrant);
-        return "redirect:/tickets/buy";
+        return prepareEpay(model, savedRegistrant);
     }
 
     private void handlePersonalRegistrant(Registrant registrant) {
@@ -89,11 +88,15 @@ public class TicketsController {
 
     @RequestMapping(value = "/tickets/buy", method = RequestMethod.GET)
     public String prepareEpay(Model model, Registrant registrant) {
-        EpayRaw epayRaw = EpayUtil.encrypt(registrant.getVisitors().size(), registrant.getInvoiceNumber());
+        EpayRaw demoEpayRaw = EpayUtil.encrypt(registrant.getVisitors().size(), registrant.getEpayInvoiceNumber(), false, 0);
+        model.addAttribute("DEMO_ENCODED", demoEpayRaw.getEncoded());
+        model.addAttribute("DEMO_CHECKSUM", demoEpayRaw.getChecksum());
+        model.addAttribute("DEMO_epayUrl", demoEpayRaw.getEpayUrl());
+
+        EpayRaw epayRaw = EpayUtil.encrypt(registrant.getVisitors().size(), registrant.getEpayInvoiceNumber(), true, 1);
         model.addAttribute("ENCODED", epayRaw.getEncoded());
         model.addAttribute("CHECKSUM", epayRaw.getChecksum());
-//        model.addAttribute("facNo", registrant.getFacNo());
-        model.addAttribute("epayUrl", EpayUtil.EPAY_URL);
+        model.addAttribute("epayUrl", epayRaw.getEpayUrl());
 
         model.addAttribute("tags", userFacade.findAllTags());
         return "/tickets-epay-buy.jsp";
@@ -107,7 +110,7 @@ public class TicketsController {
         try {
             String encoded = parameters.get("encoded")[0];
             String checksum = parameters.get("checksum")[0];
-            EpayRaw epayRaw = new EpayRaw(checksum, encoded);
+            EpayRaw epayRaw = new EpayRaw(checksum, encoded, null);
             EpayResponse epayResponse = EpayUtil.decrypt(epayRaw);
             System.out.println("EPAY: "+epayResponse);
 
@@ -147,7 +150,7 @@ public class TicketsController {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         data.setInvoiceDate(dateFormat.format(Calendar.getInstance().getTime()));
-        data.setInvoiceNumber(String.valueOf(registrant.getInvoiceNumber()));
+        data.setInvoiceNumber(String.valueOf(registrant.getRealInvoiceNumber()));
         data.setClient(regName);
         data.setClientAddress(regAddress);
         data.setClientEIK(regVat);

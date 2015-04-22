@@ -32,20 +32,25 @@ public class EpayUtil {
     private static final String EPAY_KEY;
     private static final Mac HMAC;//for HMAC
     private static final String EPAY_KIN;
-    public static final String EPAY_URL;
+    private static final String EPAY_URL;
 
-    /** Mihail: if the <code>epay.key</code> param is supplied, we switch to real epay transactions. If not, we use demo. */
+    private static final String DEMO_EPAY_KEY;
+    private static final Mac DEMO_HMAC;//for HMAC
+    private static final String DEMO_EPAY_KIN;
+    private static final String DEMO_EPAY_URL;
+
+
+    /** Mihail:  we init the real and demo epay data. */
     static {
-        if (System.getProperty("epay.key") != null) {
-            EPAY_KEY = System.getProperty("epay.key");
-            EPAY_KIN = "8323189568";
-            EPAY_URL = "https://www.epay.bg/";
-        } else {
-            EPAY_KEY = "KQUND3A923RX7PEW3WI9CAEK4YGWBEVIO2ASJELWUUM24R0SNGFFW02CA7GC0BMY";//demo key
-            EPAY_KIN = "D990264495";
-            EPAY_URL = "https://demo.epay.bg/";
-        }
+        EPAY_KEY = System.getProperty("epay.key")!=null?System.getProperty("epay.key"):"some fake data";
+        EPAY_KIN = "8323189568";
+        EPAY_URL = "https://www.epay.bg/";
         HMAC = _prepareHmac(EPAY_KEY);
+
+        DEMO_EPAY_KEY = "KQUND3A923RX7PEW3WI9CAEK4YGWBEVIO2ASJELWUUM24R0SNGFFW02CA7GC0BMY";//demo key
+        DEMO_EPAY_KIN = "D990264495";
+        DEMO_EPAY_URL = "https://demo.epay.bg/";
+        DEMO_HMAC = _prepareHmac(DEMO_EPAY_KEY);
     }
 
     /** used only by the static initializer */
@@ -71,9 +76,14 @@ public class EpayUtil {
         return new String(hexChars);
     }
 
-    /** Used by the controller */
-    private static String getChecksum(String encoded) {
-        byte[] encrypted = HMAC.doFinal(encoded.getBytes());
+    /**
+     * Get the encrypted checksum.
+     * @param encoded the encoded text (base64)
+     * @param real encrypt for real or for demo site
+     * @return
+     */
+    private static String getChecksum(String encoded, boolean real) {
+        byte[] encrypted = (real?HMAC:DEMO_HMAC).doFinal(encoded.getBytes());
         String checksum = bytesToHex(encrypted);
         return checksum;
     }
@@ -89,20 +99,28 @@ public class EpayUtil {
 //        return BASE64_ENCODER.encodeToString(result);
 //    }
 
-    public static EpayRaw encrypt(int numberOfTickets, long facNo) {
+    /**
+     * Epay payload is prepared
+     * @param numberOfTickets how many tickets
+     * @param facNo
+     * @param isReal if payload should be real or demo
+     * @param overrideAmount if != 0, then use this amount, for testing purposes
+     * @return
+     */
+    public static EpayRaw encrypt(int numberOfTickets, long facNo, boolean isReal, int overrideAmount) {
         String description = numberOfTickets == 1 ? "One jPrime.io ticket" : numberOfTickets+" jPrime.io tickets";
         String message = "" +
-                "MIN="+ EpayUtil.EPAY_KIN +"\r\n" +
+                "MIN="+ (isReal?EPAY_KIN:DEMO_EPAY_KIN) +"\r\n" +
                 "EMAIL=mihail@sty.bz\r\n" +
                 "INVOICE="+facNo+"\r\n" +
-                "AMOUNT="+(numberOfTickets*100)+"\r\n" +
+                "AMOUNT="+(overrideAmount==0?(numberOfTickets*100):overrideAmount)+"\r\n" +
                 "CURRENCY=BGN\r\n" +
                 "EXP_TIME=01.08.2020\r\n" +
                 "DESCR="+description+"\r\n" +
                 "ENCODING=utf-8";
         String encoded = BASE64_ENCODER.encodeToString(message.getBytes());
-        String checksum = getChecksum(encoded);
-        return new EpayRaw(checksum, encoded);
+        String checksum = getChecksum(encoded, isReal);
+        return new EpayRaw(checksum, encoded, isReal?EPAY_URL:DEMO_EPAY_URL);
     }
 
 
@@ -122,15 +140,27 @@ public class EpayUtil {
         }
     }
 
-
+    /**
+     * Decrypt the payload from epay coming from the backchannel.
+     * @param epayRaw
+     * @return
+     */
     public static EpayResponse decrypt(EpayRaw epayRaw) {
         EpayResponse epayResponse = new EpayResponse();
         epayResponse.setEncoded(epayRaw.getEncoded());
         epayResponse.setChecksum(epayRaw.getChecksum());
 
         {//isValid
-            String computedChecksum = getChecksum(epayRaw.getEncoded());
+            //we might get an answer from demo or real site
+            boolean isReal = true;
+            String computedChecksum = getChecksum(epayRaw.getEncoded(), true);//with real
             boolean isMessageValid = epayRaw.getChecksum().equals(computedChecksum);
+
+            if(!isMessageValid) {//try with demo
+                computedChecksum = getChecksum(epayRaw.getEncoded(), false);//with demo
+                isMessageValid = epayRaw.getChecksum().equals(computedChecksum);
+            }
+
             epayResponse.setIsValid(isMessageValid);
         }
 
@@ -178,26 +208,28 @@ public class EpayUtil {
     /** some testing goes here */
     @Deprecated
     public static void main(String[] args) throws Throwable {
+        _prepareHmac("fdajs");
+
 //        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 //        System.out.println(simpleDateFormat.parse("20150419024853"));
 
         EpayRaw[] raws = {
-                new EpayRaw("1b00c25445a469109c90707a320fbf8e1bb46ad7", "SU5WT0lDRT0xMDAwMDA2OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDIyMTExOlNUQU49MDI2NDU5OkJDT0RFPTAyNjQ1OQo="),
-                new EpayRaw("912cfa49a7b224d6e135b1877287752634228404", "SU5WT0lDRT0xMDAwMDA3OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDI0ODUzOlNUQU49MDI2NDYwOkJDT0RFPTAyNjQ2MAo="),
+                new EpayRaw("1b00c25445a469109c90707a320fbf8e1bb46ad7", "SU5WT0lDRT0xMDAwMDA2OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDIyMTExOlNUQU49MDI2NDU5OkJDT0RFPTAyNjQ1OQo=", ""),
+                new EpayRaw("912cfa49a7b224d6e135b1877287752634228404", "SU5WT0lDRT0xMDAwMDA3OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDI0ODUzOlNUQU49MDI2NDYwOkJDT0RFPTAyNjQ2MAo=", ""),
 //                new EpayRaw("", ""),
-                new EpayRaw("1e15557afe359f68b7ad6808790c8349a4e7f8f9", "SU5WT0lDRT0xMDAwMDA0OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDIwODQwOlNUQU49MDI2NDU4OkJDT0RFPTAyNjQ1OAo="),
-                new EpayRaw("4870abcf604b1d23430fa845d69d14802683941d", "SU5WT0lDRT0xMDAwMDA3OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDI0ODUzOlNUQU49MDI2NDYwOkJDT0RFPTAyNjQ2MApJTlZPSUNFPTEwMDAwMDQ6U1RBVFVTPVBBSUQ6UEFZX1RJTUU9MjAxNTA0MTkwMjA4NDA6U1RBTj0wMjY0NTg6QkNPREU9MDI2NDU4Cg=="),
-                new EpayRaw("af847695d723b99635dce7eed2bf742c3e372667", "SU5WT0lDRT0xMDAwMDAzOlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE4MjE0NDQzOlNUQU49MDI2NDU1OkJDT0RFPTAyNjQ1NQo="),
-                new EpayRaw("2188d3bc0d771dde5667a6c176761ad29628efcd", "SU5WT0lDRT0xMDAwMDAyOlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE4MTcwMTQ3OlNUQU49MDI2NDU0OkJDT0RFPTAyNjQ1NAo="),
-                new EpayRaw("e5060a24086c9a25a928c6b803ba22ea81dfbe25", "SU5WT0lDRT0xMjM0NTY6U1RBVFVTPVBBSUQ6UEFZX1RJTUU9MjAxNTA0MTQyMjIyMDc6U1RBTj0wMjYzNjA6QkNPREU9MDI2MzYwCg=="),
-//                new EpayRaw("", ""),
-//                new EpayRaw("", ""),
+                new EpayRaw("1e15557afe359f68b7ad6808790c8349a4e7f8f9", "SU5WT0lDRT0xMDAwMDA0OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDIwODQwOlNUQU49MDI2NDU4OkJDT0RFPTAyNjQ1OAo=", ""),
+                new EpayRaw("4870abcf604b1d23430fa845d69d14802683941d", "SU5WT0lDRT0xMDAwMDA3OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDI0ODUzOlNUQU49MDI2NDYwOkJDT0RFPTAyNjQ2MApJTlZPSUNFPTEwMDAwMDQ6U1RBVFVTPVBBSUQ6UEFZX1RJTUU9MjAxNTA0MTkwMjA4NDA6U1RBTj0wMjY0NTg6QkNPREU9MDI2NDU4Cg==", ""),
+                new EpayRaw("af847695d723b99635dce7eed2bf742c3e372667", "SU5WT0lDRT0xMDAwMDAzOlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE4MjE0NDQzOlNUQU49MDI2NDU1OkJDT0RFPTAyNjQ1NQo=", ""),
+                new EpayRaw("2188d3bc0d771dde5667a6c176761ad29628efcd", "SU5WT0lDRT0xMDAwMDAyOlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE4MTcwMTQ3OlNUQU49MDI2NDU0OkJDT0RFPTAyNjQ1NAo=", ""),
+                new EpayRaw("e5060a24086c9a25a928c6b803ba22ea81dfbe25", "SU5WT0lDRT0xMjM0NTY6U1RBVFVTPVBBSUQ6UEFZX1RJTUU9MjAxNTA0MTQyMjIyMDc6U1RBTj0wMjYzNjA6QkNPREU9MDI2MzYwCg==", ""),
 //                new EpayRaw("", ""),
 //                new EpayRaw("", ""),
 //                new EpayRaw("", ""),
 //                new EpayRaw("", ""),
-                new EpayRaw("e5060a24086c9a25a928c6b803ba22ea81dfbe25__", "SU5WT0lDRT0xMjM0NTY6U1RBVFVTPVBBSUQ6UEFZX1RJTUU9MjAxNTA0MTQyMjIyMDc6U1RBTj0wMjYzNjA6QkNPREU9MDI2MzYwCg=="),
-                new EpayRaw("e5060a24086c9a25a928c6b803ba22ea81dfbe25", "SU5WT0lDRT0xMjM0NTY6U1RBVFVTPVBBSUQ6UEFZX1RJTUU9MjAxNTA0MTQyMjIyMDc6U1RBTj0wMjYzNjA6QkNPREU9MDI2MzYwCg==fff"),
+//                new EpayRaw("", ""),
+//                new EpayRaw("", ""),
+                new EpayRaw("e5060a24086c9a25a928c6b803ba22ea81dfbe25__", "SU5WT0lDRT0xMjM0NTY6U1RBVFVTPVBBSUQ6UEFZX1RJTUU9MjAxNTA0MTQyMjIyMDc6U1RBTj0wMjYzNjA6QkNPREU9MDI2MzYwCg==", ""),
+                new EpayRaw("e5060a24086c9a25a928c6b803ba22ea81dfbe25", "SU5WT0lDRT0xMjM0NTY6U1RBVFVTPVBBSUQ6UEFZX1RJTUU9MjAxNTA0MTQyMjIyMDc6U1RBTj0wMjYzNjA6QkNPREU9MDI2MzYwCg==fff", ""),
 //                new EpayRaw("", ""),
         };
 

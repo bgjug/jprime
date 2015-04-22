@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * What epay sends us on the back channel.
- * @author Mihail
+ * @author Mihail Stoynov
  */
 @Embeddable//because it's used in Registrant
 public class EpayResponse extends EpayRaw {

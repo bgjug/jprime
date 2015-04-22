@@ -53,13 +53,39 @@
 
         <%--Buy a ticket:--%>
         <%--<a href="/tickets/register">Buy</a>--%>
+        <form action="${DEMO_epayUrl}" method=post>
+            <input type="hidden" name="PAGE" value="paylogin">
+            <input type="hidden" name="ENCODED" value="${DEMO_ENCODED}">
+            <input type="hidden" name="CHECKSUM" value="${DEMO_CHECKSUM}">
+            <input type="hidden" name="URL_OK" value="http://jprime.io/tickets/result/ok">
+            <input type="hidden" name="URL_CANCEL" value="http://jprime.io/tickets/result/ok">
+            <input type="submit" value="DEMO Buy a ticket from epay.bg (if you have an epay account)"/>
+        </form>
+        <form action="${DEMO_epayUrl}" method=post>
+            <input type="hidden" name="PAGE" value="credit_paydirect">
+            <input type="hidden" name="LANG" value="en">
+            <input type="hidden" name="ENCODED" value="${DEMO_ENCODED}">
+            <input type="hidden" name="CHECKSUM" value="${DEMO_CHECKSUM}">
+            <input type="hidden" name="URL_OK" value="http://jprime.io/tickets/result/ok">
+            <input type="hidden" name="URL_CANCEL" value="http://jprime.io/tickets/result/ok">
+            <input type="submit" value="DEMO Buy a ticket from epay.bg (if you want to pay with a credit card directly)"/>
+        </form>
         <form action="${epayUrl}" method=post>
             <input type="hidden" name="PAGE" value="paylogin">
             <input type="hidden" name="ENCODED" value="${ENCODED}">
             <input type="hidden" name="CHECKSUM" value="${CHECKSUM}">
             <input type="hidden" name="URL_OK" value="http://jprime.io/tickets/result/ok">
             <input type="hidden" name="URL_CANCEL" value="http://jprime.io/tickets/result/ok">
-            <input type="submit" value="Buy a ticket from epay.bg"/>
+            <input type="submit" value="REAL (1lv) Buy a ticket from epay.bg (if you have an epay account)"/>
+        </form>
+        <form action="${epayUrl}" method=post>
+            <input type="hidden" name="PAGE" value="credit_paydirect">
+            <input type="hidden" name="LANG" value="en">
+            <input type="hidden" name="ENCODED" value="${ENCODED}">
+            <input type="hidden" name="CHECKSUM" value="${CHECKSUM}">
+            <input type="hidden" name="URL_OK" value="http://jprime.io/tickets/result/ok">
+            <input type="hidden" name="URL_CANCEL" value="http://jprime.io/tickets/result/ok">
+            <input type="submit" value="REAL (1lv) Buy a ticket from epay.bg (if you want to pay with a credit card directly)"/>
         </form>
 
         <p>In case of questions, contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>

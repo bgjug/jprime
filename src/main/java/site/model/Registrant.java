@@ -26,12 +26,44 @@ public class Registrant extends AbstractEntity {
     private String email = "";
 //    @Generated(GenerationTime.INSERT)
     @Column(unique = true)
-    private long invoiceNumber;//invoice number
+    private long epayInvoiceNumber;//the one for epay
+    @Column(unique = true)
+    private long realInvoiceNumber;//the real one, only after they pay
     @Embedded
     private EpayResponse epayResponse;
 
+    /** the entity that generates the unique invoice numbers for epay */
     @Entity
-    public static class InvoiceNumberGenerator {
+    public static class EpayInvoiceNumberGenerator {
+        @Id
+        @GeneratedValue
+        private int id;
+        private long counter;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public long getCounter() {
+            return counter;
+        }
+
+        public void setCounter(long counter) {
+            this.counter = counter;
+        }
+    }
+
+    /**
+     * The {@link site.model.Registrant.EpayInvoiceNumberGenerator} generates unique invoice numbers, but one user can
+     * generate too many of these. I have decided to implement another invoice generator, that generates a number only
+     * wneh a user pays up. The REAL invoice generator. This number is different from the one from the epay generator.
+     */
+    @Entity
+    public static class RealInvoiceNumberGenerator {
         @Id
         @GeneratedValue
         private int id;
@@ -123,12 +155,20 @@ public class Registrant extends AbstractEntity {
         this.email = email;
     }
 
-    public long getInvoiceNumber() {
-        return invoiceNumber;
+    public long getEpayInvoiceNumber() {
+        return epayInvoiceNumber;
     }
 
-    public void setInvoiceNumber(long invoiceNumber) {
-        this.invoiceNumber = invoiceNumber;
+    public void setEpayInvoiceNumber(long epayInvoiceNumber) {
+        this.epayInvoiceNumber = epayInvoiceNumber;
+    }
+
+    public long getRealInvoiceNumber() {
+        return realInvoiceNumber;
+    }
+
+    public void setRealInvoiceNumber(long realInvoiceNumber) {
+        this.realInvoiceNumber = realInvoiceNumber;
     }
 
     public EpayResponse getEpayResponse() {
