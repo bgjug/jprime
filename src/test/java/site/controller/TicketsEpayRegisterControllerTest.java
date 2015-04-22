@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
-import site.facade.RegistrantFacade;
 import site.model.Registrant;
 import site.repository.RegistrantRepository;
 
@@ -28,7 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static site.controller.TicketsController.TICKETS_EPAY_REGISTER_JSP;
+import static site.controller.TicketsController.*;
 
 /**
  * @author Ivan St. Ivanov
@@ -37,7 +36,7 @@ import static site.controller.TicketsController.TICKETS_EPAY_REGISTER_JSP;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @Transactional
-public class TicketsEpayRegisterController {
+public class TicketsEpayRegisterControllerTest {
 
     @Autowired
     private WebApplicationContext wac;
@@ -67,9 +66,8 @@ public class TicketsEpayRegisterController {
                 .param("visitors[0].name", "John Doe")
                 .param("visitors[0].email", "john@example.com")
                 .param("company", "false"))
-                .andExpect(status().isFound())
-                .andExpect(result -> assertThat(result.getResponse().getRedirectedUrl(),
-                        Is.is("/tickets/buy")));
+                .andExpect(status().isOk())
+                .andExpect(view().name(TICKETS_EPAY_BUY_JSP));
         List<Registrant> allRegistrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(allRegistrants.size(), is(1));
         Registrant registrant = allRegistrants.get(0);
@@ -89,12 +87,12 @@ public class TicketsEpayRegisterController {
                 .param("company", "true")
                 .param("name", "Adams Family")
                 .param("address", "0001 Cemetery Lane")
+                .param("eik", "123456")
                 .param("vatNumber", "666")
                 .param("mol", "Gomez Adams")
                 .param("email", "gomez@adams.com"))
-                .andExpect(status().isFound())
-                .andExpect(result -> assertThat(result.getResponse().getRedirectedUrl(),
-                        Is.is("/tickets/buy")));
+                .andExpect(status().isOk())
+                .andExpect(view().name(TICKETS_EPAY_BUY_JSP));
         List<Registrant> allRegistrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(allRegistrants.size(), is(1));
         Registrant registrant = allRegistrants.get(0);
@@ -103,6 +101,7 @@ public class TicketsEpayRegisterController {
         assertThat("Adams Family", is(registrant.getName()));
         assertThat("0001 Cemetery Lane", is(registrant.getAddress()));
         assertThat("666", is(registrant.getVatNumber()));
+        assertThat("123456", is(registrant.getEik()));
         assertThat("Gomez Adams", is(registrant.getMol()));
         assertThat(true, is(registrant.isCompany()));
         assertThat(1, is(registrant.getVisitors().size()));
@@ -123,9 +122,8 @@ public class TicketsEpayRegisterController {
                 .param("vatNumber", "666")
                 .param("mol", "Gomez Adams")
                 .param("email", "gomez@adams.com"))
-                .andExpect(status().isFound())
-                .andExpect(result -> assertThat(result.getResponse().getRedirectedUrl(),
-                        Is.is("/tickets/buy")));
+                .andExpect(status().isOk())
+                .andExpect(view().name(TICKETS_EPAY_BUY_JSP));
         List<Registrant> allRegistrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(allRegistrants.size(), is(1));
         Registrant registrant = allRegistrants.get(0);

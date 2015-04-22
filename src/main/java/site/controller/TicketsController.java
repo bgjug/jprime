@@ -39,7 +39,9 @@ import java.util.Map;
 public class TicketsController {
 
     static final String TICKETS_JSP = "/tickets.jsp";
-    public static final String TICKETS_EPAY_REGISTER_JSP = "/tickets-epay-register.jsp";    @Autowired
+    public static final String TICKETS_EPAY_REGISTER_JSP = "/tickets-epay-register.jsp";
+    public static final String TICKETS_EPAY_BUY_JSP = "/tickets-epay-buy.jsp";
+    @Autowired
     @Qualifier(MailFacade.NAME)
     private MailFacade mailFacade;
 
@@ -103,7 +105,7 @@ public class TicketsController {
         model.addAttribute("epayUrl", epayRaw.getEpayUrl());
 
         model.addAttribute("tags", userFacade.findAllTags());
-        return "/tickets-epay-buy.jsp";
+        return TICKETS_EPAY_BUY_JSP;
     }
 
     /** Receiving data from epay.bg (back channel) */

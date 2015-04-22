@@ -147,15 +147,19 @@
                     <dd><form:input path="address" /></dd>
                 </dl>
                 <dl>
-                    <dt><label for="vatNumber">VAT</label></dt>
+                    <dt><label for="vatNumber">VAT registration number</label></dt>
                     <dd><form:input path="vatNumber" /></dd>
+                </dl>
+                <dl>
+                    <dt><label for="vatNumber">Unified Identity Code (EIK)</label></dt>
+                    <dd><form:input path="eik" /></dd>
                 </dl>
                 <dl>
                     <dt><label for="mol">Accountable person (MOL)</label></dt>
                     <dd><form:input path="mol" /></dd>
                 </dl>
                 <dl>
-                    <dt><label for="email">email</label></dt>
+                    <dt><label for="email">e-mail</label></dt>
                     <dd><form:input path="email" /></dd>
                 </dl>
             </fieldset>

@@ -24,6 +24,7 @@ public class Registrant extends AbstractEntity {
     private String vatNumber;
     private String mol;
     private String email = "";
+    private String eik;
 //    @Generated(GenerationTime.INSERT)
     @Column(unique = true)
     private long epayInvoiceNumber;//the one for epay
@@ -145,6 +146,14 @@ public class Registrant extends AbstractEntity {
 
     public void setMol(String mol) {
         this.mol = mol;
+    }
+
+    public String getEik() {
+        return eik;
+    }
+
+    public void setEik(String eik) {
+        this.eik = eik;
     }
 
     public String getEmail() {
