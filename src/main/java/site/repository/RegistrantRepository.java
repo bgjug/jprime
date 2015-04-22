@@ -23,5 +23,5 @@ public interface RegistrantRepository extends PagingAndSortingRepository<Registr
 
 //    @Query(SELECT_PUBLISHED_ARTICLES)
 //    Page<Article> findAllPublishedArticles(Pageable pageable);
-	Registrant findByInvoiceNumber(long epayInvoiceNumber);
+	Registrant findByEpayInvoiceNumber(long epayInvoiceNumber);
 }
