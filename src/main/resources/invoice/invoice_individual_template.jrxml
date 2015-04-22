@@ -18,17 +18,16 @@
 		<band height="79">
 			<image>
 				<reportElement x="0" y="0" width="111" height="79"/>
-				<imageExpression><![CDATA["invoice/jprime.png"]]></imageExpression>
+				<imageExpression class="java.lang.String"><![CDATA["invoice/jprime.png"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="452" y="0" width="111" height="79"/>
-				<imageExpression><![CDATA["invoice/bg-jug.png"]]></imageExpression>
+				<imageExpression class="java.lang.String"><![CDATA["invoice/bg-jug.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="111" y="25" width="341" height="26"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" lineSpacing="Single">
 					<font size="18"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[JPrime 2015]]></text>
 			</staticText>
@@ -38,27 +37,21 @@
 		<band height="380">
 			<textField>
 				<reportElement x="0" y="9" width="555" height="21"/>
-				<textElement textAlignment="Center">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Invoice No. "+ $F{invoiceNumber}+ " / "+$F{invoiceDate}]]></textFieldExpression>
+				<textElement textAlignment="Center" lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Invoice No. "+ $F{invoiceNumber}+ " / "+$F{invoiceDate}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="48" width="259" height="74"/>
-				<textElement>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
+				<textElement lineSpacing="Single"/>
 				<text><![CDATA[Bulgarian Java User Group
 Address: Bulgaria, 1574 Sofia, Hristo Smirnenski 20, vh. B, ap. 50
 EIK: 176830373
-MOL: Mihail Stojnov ]]></text>
+MOL: Mihail Stojnov]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="316" y="48" width="239" height="74"/>
-				<textElement>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{client}+"\nEGN: 999999999999999"]]></textFieldExpression>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{client}+"\nEGN: 999999999999999"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="162" width="23" height="20"/>
@@ -69,9 +62,7 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
 				<text><![CDATA[No.]]></text>
 			</staticText>
 			<staticText>
@@ -83,9 +74,7 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
 				<text><![CDATA[Description]]></text>
 			</staticText>
 			<staticText>
@@ -97,9 +86,7 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
 				<text><![CDATA[Quantity]]></text>
 			</staticText>
 			<staticText>
@@ -111,9 +98,7 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
 				<text><![CDATA[Price]]></text>
 			</staticText>
 			<staticText>
@@ -125,9 +110,7 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
 				<text><![CDATA[Total price]]></text>
 			</staticText>
 			<staticText>
@@ -139,9 +122,7 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
 				<text><![CDATA[1.]]></text>
 			</staticText>
 			<staticText>
@@ -153,9 +134,7 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
 				<text><![CDATA[JPrime 2015 conference pass]]></text>
 			</staticText>
 			<textField>
@@ -167,10 +146,8 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{passQty}]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{passQty}]]></textFieldExpression>
 			</textField>
 			<textField pattern="##0.00" isBlankWhenNull="true">
 				<reportElement x="316" y="182" width="111" height="20"/>
@@ -181,11 +158,10 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font isBold="true"/>
-					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{price}]]></textFieldExpression>
 			</textField>
 			<textField pattern="##0.00">
 				<reportElement x="427" y="182" width="128" height="20"/>
@@ -196,10 +172,8 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{totalPrice}]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{totalPrice}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="316" y="202" width="111" height="20"/>
@@ -210,9 +184,7 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
 				<text><![CDATA[Total price]]></text>
 			</staticText>
 			<textField pattern="##0.00">
@@ -224,10 +196,8 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{totalPrice}]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{totalPrice}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="316" y="222" width="111" height="20"/>
@@ -238,9 +208,7 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
 				<text><![CDATA[VAT 20%]]></text>
 			</staticText>
 			<staticText>
@@ -252,9 +220,7 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
 				<text><![CDATA[Total price with VAT]]></text>
 			</staticText>
 			<textField pattern="##0.00">
@@ -266,10 +232,8 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{totalPriceVAT}]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{totalPriceVAT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="##0.00">
 				<reportElement x="427" y="242" width="128" height="20"/>
@@ -280,17 +244,13 @@ MOL: Mihail Stojnov ]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{totalPriceWithVAT}]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{totalPriceWithVAT}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="378" y="318" width="177" height="21"/>
-				<textElement textAlignment="Center">
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Sofia,  "+$F{invoiceDate}]]></textFieldExpression>
+				<textElement textAlignment="Center" lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Sofia,  "+$F{invoiceDate}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -301,14 +261,12 @@ MOL: Mihail Stojnov ]]></text>
 			</line>
 			<staticText>
 				<reportElement x="349" y="26" width="135" height="20"/>
-				<textElement>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
+				<textElement lineSpacing="Single"/>
 				<text><![CDATA[Bulgarian Java User Group]]></text>
 			</staticText>
 			<image>
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="111" height="54"/>
-				<imageExpression><![CDATA["/Users/c00l/mihail.stoynov/myProjects/2014_BGJUG/IDEA/jprime.master/src/main/resources/invoice/sty.png"]]></imageExpression>
+				<imageExpression class="java.lang.String"><![CDATA["/Users/c00l/mihail.stoynov/myProjects/2014_BGJUG/IDEA/jprime.master/src/main/resources/invoice/sty.png"]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>
