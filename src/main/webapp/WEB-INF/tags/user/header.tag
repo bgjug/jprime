@@ -29,6 +29,12 @@
                                 <li>
                                     <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" href="https://www.facebook.com/jprimeConf"><i class="fa fa-facebook"></i></a>
                                 </li>
+                                <li>
+                                    <a class="google itl-tooltip" data-placement="bottom" title="Google" href="https://plus.google.com/u/2/108212814919981345652/posts"><i class="fa fa-google"></i></a>
+                                </li>
+                                <li>
+                                    <a class="linkedin itl-tooltip" data-placement="bottom" title="Linkedin" href="https://www.linkedin.com/groups/jPrime-8290432"><i class="fa fa-linkedin"></i></a>
+                                </li>
                             </ul>
                             <!-- End Social Links -->
                         </div><!-- .col-md-6 -->
