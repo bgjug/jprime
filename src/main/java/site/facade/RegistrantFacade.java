@@ -29,7 +29,7 @@ public class RegistrantFacade {
     private RegistrantRealInvoiceNumberGeneratorRepository registrantRealInvoiceNumberGeneratorRepository;
 
     public Registrant findByInvoiceNumber(long invoiceNumber){
-        return registrantRepository.findByInvoiceNumber(invoiceNumber);
+        return registrantRepository.findByEpayInvoiceNumber(invoiceNumber);
     }
 
 
