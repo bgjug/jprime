@@ -73,8 +73,15 @@ public class NavController {
     //read a single blog
     @RequestMapping("/team")
     public String showTeam(Model model) {
+        model.addAttribute("tags", userFacade.findAllTags());
         return "/team.jsp";
     }
 
+    //read a single blog
+    @RequestMapping("/venue")
+    public String showVenue(Model model) {
+        model.addAttribute("tags", userFacade.findAllTags());
+        return "/venue.jsp";
+    }
 
 }

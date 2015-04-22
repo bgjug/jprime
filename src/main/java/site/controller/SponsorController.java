@@ -44,6 +44,7 @@ public class SponsorController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(@Valid final Sponsor sponsor, BindingResult bindingResult, @RequestParam("file") MultipartFile file){
 		if(bindingResult.hasErrors()){
+			System.out.println(bindingResult.getAllErrors());
 			return "/admin/sponsor/edit.jsp";
 		}
 		if(!file.isEmpty()){

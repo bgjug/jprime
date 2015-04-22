@@ -22,6 +22,7 @@
     <!-- Page Description and Author -->
 
     <user:pageJavaScriptAndCss/>
+
 </head>
 
 <body>
@@ -227,8 +228,6 @@
             Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning,
             hacking, networking and fun.</p>
 
-        <center><iframe src="https://www.google.com/maps/embed?pb=!1m0!3m2!1sru!2sbg!4v1429266821187!6m8!1m7!1sipo8Sl0qHi8AAAQfDR2bcQ!2m2!1d42.657808!2d23.315222!3f307.9207157147706!4f-10.178049410940872!5f0.7820865974627469" width="80%" height="450" frameborder="0" style="border:0"></iframe></center>
-    	<center><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11736.674105662074!2d23.314898!3d42.657784!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x968e1b14857aa12d!2z0J_QkNCg0JDQlNCQ0JnQoSDQptCV0J3QotCq0KA!5e0!3m2!1sbg!2sbg!4v1429266435259&style=saturation:-75|gamma:1.07|hue:0xffe500" width="80%" height="500" frameborder="0" style="border:0"></iframe></center>
     </div>
     <!-- End Portfolio Section -->
     
@@ -273,7 +272,6 @@
         <!-- .container -->
     </div>
     <!-- End Team Member Section -->
-
 
     <!-- Start Pricing Table Section -->
     <div class=" section pricing-section" id="sponsors">
@@ -370,66 +368,68 @@
     </div>
     <!-- End Pricing Table Section -->
 
-    <%--
 
-            <!-- Start Client/Partner Section -->
-            <div class="partner">
-            <div class="container">
-                <div class="row">
+    <!-- Start Client/Partner Section -->
+    <div class="partner">
+        <div class="container">
+            <div class="row">
+                <%--
+                            <!--Start Clients Carousel-->
+                            <div class="big-title text-center">
+                                <h1><strong>Platinum</strong> Sponsors</h1>
+                            </div>
 
-            <!--Start Clients Carousel-->
-            <div class="big-title text-center">
-                <h1><strong>Platinum</strong> Sponsors</h1>
-            </div>
+                            <div class="our-clients">
+                                <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
 
-            <div class="our-clients">
-                <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
+                                    <c:forEach var="sponsor" items="${platinumSponsors}">
+                                        <div class="client-item item">
+                                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}" /></a>
+                                        </div>
+                                    </c:forEach>
 
-                    <c:forEach var="sponsor" items="${platinumSponsors}">
-                        <div class="client-item item">
-                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}" /></a>
-                        </div>
-                    </c:forEach>
-
+                                </div>
+                            </div>
+                --%>
+                <div class="big-title text-center">
+                    <h1><strong>Gold</strong> Sponsors</h1>
                 </div>
-            </div>
 
-            <div class="big-title text-center">
-                <h1><strong>Gold</strong> Sponsors</h1>
-            </div>
+                <div class="our-clients text-center" style="text-align: center">
+                    <div class="clients-carousel custom-carousel touch-carousel navigation-3">
 
-            <div class="our-clients">
-                <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
+                        <c:forEach var="sponsor" items="${goldSponsors}">
+                            <div class="client-item item" style="float: none; display: inline-block">
+                                <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}" /></a>
+                            </div>
+                        </c:forEach>
 
-                    <c:forEach var="sponsor" items="${goldSponsors}">
-                        <div class="client-item item">
-                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}" /></a>
-                        </div>
-                    </c:forEach>
-
+                    </div>
                 </div>
-            </div>
-            <div class="big-title text-center">
-                <h1><strong>Silver</strong> Sponsors</h1>
-            </div>
 
-            <div class="our-clients">
-                <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
+                <%--
+                            <div class="big-title text-center">
+                                <h1><strong>Silver</strong> Sponsors</h1>
+                            </div>
 
-                    <c:forEach var="sponsor" items="${silverSponsors}">
-                        <div class="client-item item">
-                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}"/></a>
-                        </div>
-                    </c:forEach>
+                            <div class="our-clients">
+                                <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
 
-                </div>
-            </div>
-            <!-- End Clients Carousel -->
-                </div><!-- .row -->
-            </div><!-- .container -->
-            </div>
-            <!-- End Client/Partner Section -->
-    --%>
+                                    <c:forEach var="sponsor" items="${silverSponsors}">
+                                        <div class="client-item item">
+                                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}"/></a>
+                                        </div>
+                                    </c:forEach>
+
+                                </div>
+                            </div>
+                           --%>
+                <!-- End Clients Carousel -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div>
+    <!-- End Client/Partner Section -->
+
 
     <user:footer/>
 

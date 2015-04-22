@@ -48,6 +48,15 @@
 					<form:input path="companyWebsite" />
 				</dd>
 			</dl>
+			</dl>
+			<dl>
+				<dt>
+					<label for="email">Email</label>
+				</dt>
+				<dd>
+					<form:input path="email" />
+				</dd>
+			</dl>
 			<dl>
 				<dt>
 					<label for="package">package ( type SILVER, GOLD, PLATINUM)</label>
