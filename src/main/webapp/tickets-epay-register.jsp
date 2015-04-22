@@ -41,15 +41,33 @@
             $('#visitorsForm').validate({ // initialize the plugin
                 rules: {
                     'visitors[0].name': {
-                        required: true,
-                        minlength: 5
+                        required: true
                     },
                     'visitors[0].email': {
                         required: true,
                         email: true
+                    },
+                    'name': {
+                        required: true
+                    },
+                    'address': {
+                        required: true
+                    },
+                    'vatNumber': {
+                        required: true
+                    },
+                    'eik': {
+                        required: true
+                    },
+                    'mol': {
+                        required: true
+                    },
+                    'email': {
+                        required: true,
+                        email: true
                     }
                 }
-            });
+            })
         });
 
 
@@ -151,7 +169,7 @@
                     <dd><form:input path="vatNumber" /></dd>
                 </dl>
                 <dl>
-                    <dt><label for="vatNumber">Unified Identity Code (EIK)</label></dt>
+                    <dt><label for="eik">Unified Identity Code (EIK)</label></dt>
                     <dd><form:input path="eik" /></dd>
                 </dl>
                 <dl>
