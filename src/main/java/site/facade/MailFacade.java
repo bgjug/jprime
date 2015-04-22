@@ -1,13 +1,17 @@
 package site.facade;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 /**
  * @author Ivan St. Ivanov
@@ -15,6 +19,8 @@ import javax.mail.internet.MimeMessage;
 @Service(MailFacade.NAME)
 public class MailFacade {
     public static final String NAME = "mailFacade";
+
+    private static final Logger logger = Logger.getLogger(MailFacade.class);
 
     @Value("${spring.mail.username}")
     private String from;
@@ -34,7 +40,19 @@ public class MailFacade {
         mailSender.send(mimeMessage);
     }
 
-    public void sendEmail(String to, String subject, String messageText, byte[] pdf) {
-        // TODO
+    public void sendInvoice(String to, String subject, String messageText, byte[] pdf) throws MessagingException {
+        ByteArrayResource bais = null;
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+
+        helper.setFrom(from);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(messageText, true);
+
+        bais = new ByteArrayResource(pdf);
+        helper.addAttachment("invoice.pdf", bais);
+
+        mailSender.send(mimeMessage);
     }
 }

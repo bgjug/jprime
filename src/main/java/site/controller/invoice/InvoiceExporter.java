@@ -23,9 +23,15 @@ import java.util.Map;
 public class InvoiceExporter {
 
 
-    public byte[] exportInvoice(InvoiceData data) throws Exception{
+    public byte[] exportInvoice(InvoiceData data, boolean isCompany) throws Exception{
 
-        InputStream reportTemplate = getClass().getResourceAsStream("/invoice/invoicetemplate.jrxml");
+
+        InputStream reportTemplate = null;
+        if (isCompany) {
+            reportTemplate = getClass().getResourceAsStream("/invoice/invoice_company_template.jrxml");
+        } else {
+            reportTemplate = getClass().getResourceAsStream("/invoice/invoice_individual_template.jrxml");
+        }
         ByteArrayOutputStream result = new ByteArrayOutputStream();
 
         ArrayList<InvoiceData> exportList = new ArrayList<>();
@@ -62,6 +68,6 @@ public class InvoiceExporter {
         data.setPassQty(5);
         data.setPrice(55.5);
 
-        Files.write(Paths.get("/Users/mitia/Desktop/result.pdf"), new InvoiceExporter().exportInvoice(data));
+        Files.write(Paths.get("C:\\result.pdf"), new InvoiceExporter().exportInvoice(data, false));
     }
 }

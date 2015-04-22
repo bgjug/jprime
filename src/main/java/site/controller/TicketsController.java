@@ -21,9 +21,13 @@ import site.model.JprimeException;
 import site.model.Registrant;
 import site.model.Visitor;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
@@ -140,10 +144,17 @@ public class TicketsController {
     private byte[] createPDF(Registrant registrant) throws Exception {
         String regName = registrant.getName(); // company name
 
+        // TODOs
+        // 0) implement flow for registrant (append name and 999999999999999 for EGN)
+        // 1) append MOL to company pdf
+        // 2) fix setting of client VAT - add field in JSP
+        // 3) test pdf generation and email sending
+
         // FIXME: set MOL in PDF
+
         String regMol = registrant.getMol(); // company mol
         String regAddress = registrant.getAddress(); //company address
-        String regVat = registrant.getVatNumber(); //company BULSTAT
+        String regVat = registrant.getVatNumber(); //company DDS number
         int qty = registrant.getVisitors().size();
 
         InvoiceData data = new InvoiceData();
@@ -158,15 +169,18 @@ public class TicketsController {
         // FIXME: append country code ?
         data.setClientVAT("BG" + registrant.getVatNumber());
         data.setPassQty(qty);
-        data.setPrice(Double.valueOf(qty*100));
+        data.setPrice(Double.valueOf(qty * 100));
 
-        byte[] pdf = invoiceExporter.exportInvoice(data);
+        byte[] pdf = invoiceExporter.exportInvoice(data, registrant.isCompany());
+        FileOutputStream fos = new FileOutputStream("c:\\test.pdf");
+        fos.write(pdf);
+
         return pdf;
     }
 
-    private void sendPDF(Registrant registrant, byte[] pdf) {
+    private void sendPDF(Registrant registrant, byte[] pdf) throws MessagingException {
         String email = registrant.getEmail();
-        mailFacade.sendEmail(email, "JPrime.io invoice",
+        mailFacade.sendInvoice(email, "JPrime.io invoice",
                 "Thank you for registering to JPrime. Your invoice is attached as part of this mail.", pdf);
     }
 }
