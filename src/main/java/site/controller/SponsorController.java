@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.AdminFacade;
+import site.model.Speaker;
 import site.model.Sponsor;
 
 
@@ -52,6 +53,12 @@ public class SponsorController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+		} else { //empty file is it edit?
+			if(sponsor.getId()!= null){
+				Sponsor oldSponsor = adminFacade.findOneSponsor(sponsor.getId());
+				byte[] oldImage = oldSponsor.getLogo();
+				sponsor.setLogo(oldImage);
+			}
 		}
 		this.adminFacade.saveSponsor(sponsor);
 		

@@ -55,6 +55,12 @@ public class SpeakerController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+		} else { //empty file is it edit?
+			if(speaker.getId()!= null){
+				Speaker oldSpeaker = adminFacade.findOneSpeaker(speaker.getId());
+				byte[] oldImage = oldSpeaker.getPicture();
+				speaker.setPicture(oldImage);
+			}
 		}
 		this.adminFacade.saveSpeaker(speaker);
 		
