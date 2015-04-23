@@ -18,7 +18,7 @@ import javax.mail.internet.MimeMessage;
 public class MailFacade {
     public static final String NAME = "mailFacade";
 
-    @Value("${spring.mail.user}")
+    @Value("${spring.mail.username}")
     private String emailAddress;
 
     @Autowired
