@@ -97,7 +97,7 @@ public class TicketsController {
         model.addAttribute("DEMO_CHECKSUM", demoEpayRaw.getChecksum());
         model.addAttribute("DEMO_epayUrl", demoEpayRaw.getEpayUrl());
 
-        EpayRaw epayRaw = EpayUtil.encrypt(registrant.getVisitors().size(), registrant.getEpayInvoiceNumber(), true, 0);
+        EpayRaw epayRaw = EpayUtil.encrypt(registrant.getVisitors().size(), registrant.getEpayInvoiceNumber(), true, 1);
         model.addAttribute("ENCODED", epayRaw.getEncoded());
         model.addAttribute("CHECKSUM", epayRaw.getChecksum());
         model.addAttribute("epayUrl", epayRaw.getEpayUrl());
