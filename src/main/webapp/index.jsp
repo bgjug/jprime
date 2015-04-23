@@ -78,7 +78,7 @@
                                 <span>Register now</span>
                             </h3>
 
-                            <p class="animated6"><a href="/tickets" class="slider btn btn-primary">Register</a>
+                            <p class="animated6"><a href="/tickets/epay" class="slider btn btn-primary">Register</a>
                             </p>
                         </div>
                     </div>
