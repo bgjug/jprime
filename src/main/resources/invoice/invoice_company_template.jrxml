@@ -44,10 +44,11 @@
 			<staticText>
 				<reportElement x="0" y="48" width="259" height="74"/>
 				<textElement lineSpacing="Single"/>
-				<text><![CDATA[Bulgarian Java User Group
-Address: Bulgaria, 1574 Sofia, Hristo Smirnenski 20, vh. B, ap. 50
-EIK: 176830373
-MOL: Mihail Stojnov]]></text>
+				<text><![CDATA[STY Consulting Ltd.
+Address: Bulgaria, 1172 Sofia, Dianabad 5A
+EIK: 200800814
+VAT: BG200800814
+MOL: Mihail Stoynov]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="316" y="48" width="239" height="74"/>
