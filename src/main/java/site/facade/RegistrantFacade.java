@@ -28,7 +28,7 @@ public class RegistrantFacade {
     @Qualifier(RegistrantRealInvoiceNumberGeneratorRepository.NAME)
     private RegistrantRealInvoiceNumberGeneratorRepository registrantRealInvoiceNumberGeneratorRepository;
 
-    public Registrant findByInvoiceNumber(long invoiceNumber){
+    public Registrant findByEpayInvoiceNumber(long invoiceNumber){
         return registrantRepository.findByEpayInvoiceNumber(invoiceNumber);
     }
 

@@ -118,10 +118,16 @@ public class TicketsController {
             EpayResponse epayResponse = EpayUtil.decrypt(epayRaw);
             System.out.println("EPAY: "+epayResponse);
 
-            Registrant registrant = registrantFacade.findByInvoiceNumber(epayResponse.getInvoiceNumber());
+            Registrant registrant = registrantFacade.findByEpayInvoiceNumber(epayResponse.getInvoiceNumber());
             if(registrant == null) {
                 //we don't have that invoiceNumber in the database, probably testing
-                System.out.println("InvoiceNumber "+epayResponse.getInvoiceNumber()+" missing in DB, return OK, so that epay will stop bugging me");
+                System.out.println("EPAY:    InvoiceNumber "+epayResponse.getInvoiceNumber()+" missing in DB, return OK, so that epay will stop bugging me");
+                return "INVOICE=" + epayResponse.getInvoiceNumber() + ":STATUS=OK";
+            }
+
+            if(registrant.getEpayResponse().getStatus().equals(EpayResponse.Status.PAID)) {
+                //so this guy already received an invoice, but epay is still bugging me
+                System.out.println("EPAY:    InvoiceNumber "+epayResponse.getInvoiceNumber()+" already PAID in database, why is epay still bugging me?");
                 return "INVOICE=" + epayResponse.getInvoiceNumber() + ":STATUS=OK";
             }
             registrant.setEpayResponse(epayResponse);
@@ -179,4 +185,5 @@ public class TicketsController {
                 "Thank you for registering to JPrime. Your invoice is attached as part of this mail.",
                 pdf);
     }
+
 }
