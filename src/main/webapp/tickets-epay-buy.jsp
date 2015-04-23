@@ -57,7 +57,7 @@
             <input type="hidden" name="CHECKSUM" value="${CHECKSUM}">
             <input type="hidden" name="URL_OK" value="http://jprime.io/tickets/result/ok">
             <input type="hidden" name="URL_CANCEL" value="http://jprime.io/tickets/result/ok">
-            <input type="submit" value="REAL (1lv) Pay with Epay.bg"/>
+            <input type="submit" value="Pay with Epay.bg"/>
         </form>
         <form action="${epayUrl}" method=post>
             <input type="hidden" name="PAGE" value="credit_paydirect">
@@ -66,7 +66,7 @@
             <input type="hidden" name="CHECKSUM" value="${CHECKSUM}">
             <input type="hidden" name="URL_OK" value="http://jprime.io/tickets/result/ok">
             <input type="hidden" name="URL_CANCEL" value="http://jprime.io/tickets/result/ok">
-            <input type="submit" value="REAL (1lv) Pay with a credit card"/>
+            <input type="submit" value="Pay with a credit card"/>
         </form>
 
         <p>In case of questions, contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
