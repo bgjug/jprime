@@ -118,7 +118,8 @@ public class TicketsController {
             EpayResponse epayResponse = EpayUtil.decrypt(epayRaw);
             System.out.println("EPAY: "+epayResponse);
 
-            Registrant registrant = registrantFacade.findByEpayInvoiceNumber(epayResponse.getInvoiceNumber());
+            Registrant registrant = registrantFacade.findByEpayInvoiceNumber(
+                    epayResponse.getInvoiceNumber());
             if(registrant == null) {
                 //we don't have that invoiceNumber in the database, probably testing
                 System.out.println("EPAY:    InvoiceNumber "+epayResponse.getInvoiceNumber()+" missing in DB, return OK, so that epay will stop bugging me");
@@ -184,6 +185,9 @@ public class TicketsController {
         mailFacade.sendInvoice(email, "JPrime.io invoice",
                 "Thank you for registering to JPrime. Your invoice is attached as part of this mail.",
                 pdf);
+        String registrations = registrant.getVisitors().toString();
+        mailFacade.sendInvoice("conference@jprime.io", "JPrime.io invoice",
+                "We got some registrations: " + registrations, pdf);
     }
 
 }
