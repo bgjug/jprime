@@ -1,6 +1,5 @@
 package site.controller;
 
-import net.sf.jasperreports.engine.util.FileBufferedOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -26,14 +25,8 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -98,7 +91,8 @@ public class TicketsController {
 
     @RequestMapping(value = "/tickets/buy", method = RequestMethod.GET)
     public String prepareEpay(Model model, Registrant registrant) {
-        EpayRaw demoEpayRaw = EpayUtil.encrypt(registrant.getVisitors().size(), registrant.getEpayInvoiceNumber(), false, 0);
+        EpayRaw demoEpayRaw = EpayUtil.encrypt(registrant.getVisitors().size(),
+                registrant.getEpayInvoiceNumber(), false, 0);
         model.addAttribute("DEMO_ENCODED", demoEpayRaw.getEncoded());
         model.addAttribute("DEMO_CHECKSUM", demoEpayRaw.getChecksum());
         model.addAttribute("DEMO_epayUrl", demoEpayRaw.getEpayUrl());
@@ -184,22 +178,5 @@ public class TicketsController {
         mailFacade.sendInvoice(email, "JPrime.io invoice",
                 "Thank you for registering to JPrime. Your invoice is attached as part of this mail.",
                 pdf);
-    }
-
-    public static void main(String[] args) throws Exception {
-        System.out.println(new File(".").getCanonicalPath());
-        TicketsController ticketsController = new TicketsController();
-        ticketsController.invoiceExporter = new InvoiceExporter();
-        Registrant registrant = new Registrant(true, "STY", "Dianabad", "123456", "Mihail Stoynov",
-                "mihail@jprime.io");
-        registrant.setEik("123456");
-        Visitor ivan = new Visitor(registrant, "Ivan St. Ivanov", "ivan_st_ivanov@yahoo.com");
-        Visitor misho = new Visitor(registrant, "Mihail Stoynov", "mihail@jprime.io");
-        List<Visitor> visitors = new ArrayList<>();
-        visitors.add(ivan);
-        visitors.add(misho);
-        registrant.setVisitors(visitors);
-        OutputStream os = new FileOutputStream("/tmp/misho.pdf");
-        os.write(ticketsController.createPDF(registrant));
     }
 }

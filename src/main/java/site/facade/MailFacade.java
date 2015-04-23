@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 
 /**
  * @author Ivan St. Ivanov
@@ -22,8 +20,11 @@ public class MailFacade {
 
     private static final Logger logger = Logger.getLogger(MailFacade.class);
 
-    @Value("${spring.mail.username}")
-    private String from;
+    @Value("${spring.mail.cfp}")
+    private String cfpEmailAddress;
+
+    @Value("${spring.mail.tickets}")
+    private String ticketsEmailAddress;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -32,7 +33,7 @@ public class MailFacade {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-        helper.setFrom(from);
+        helper.setFrom(cfpEmailAddress);
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(messageText, true);
@@ -45,7 +46,7 @@ public class MailFacade {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-        helper.setFrom(from);
+        helper.setFrom(ticketsEmailAddress);
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(messageText, true);
