@@ -18,13 +18,8 @@ import javax.mail.internet.MimeMessage;
 public class MailFacade {
     public static final String NAME = "mailFacade";
 
-    private static final Logger logger = Logger.getLogger(MailFacade.class);
-
-    @Value("${spring.mail.cfp}")
-    private String cfpEmailAddress;
-
-    @Value("${spring.mail.tickets}")
-    private String ticketsEmailAddress;
+    @Value("${spring.mail.user}")
+    private String emailAddress;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -33,7 +28,7 @@ public class MailFacade {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-        helper.setFrom(cfpEmailAddress);
+        helper.setFrom(emailAddress);
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(messageText, true);
@@ -46,7 +41,7 @@ public class MailFacade {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-        helper.setFrom(ticketsEmailAddress);
+        helper.setFrom(emailAddress);
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(messageText, true);
