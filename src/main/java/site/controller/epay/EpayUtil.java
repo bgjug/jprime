@@ -88,17 +88,6 @@ public class EpayUtil {
         return checksum;
     }
 
-//    /** Used by the controller */
-//    private static String getEpayCHECKSUM(String encoded) {
-//        return getChecksum(encoded);
-//    }
-
-//    /** Not needed, left for debugging purposes. Epay uses hex, not base64 (but they don't say that, assholes). */
-//    private static String getHmacAsBase64(String input) {
-//        byte[] result = HMAC.doFinal(input.getBytes());
-//        return BASE64_ENCODER.encodeToString(result);
-//    }
-
     /**
      * Epay payload is prepared
      * @param numberOfTickets how many tickets
@@ -122,14 +111,6 @@ public class EpayUtil {
         String checksum = getChecksum(encoded, isReal);
         return new EpayRaw(checksum, encoded, isReal?EPAY_URL:DEMO_EPAY_URL);
     }
-
-
-
-
-
-
-
-
 
     /////Methods for checking payment
     private static String base64Decode(String base64) {
@@ -155,11 +136,6 @@ public class EpayUtil {
             boolean isReal = true;
             String computedChecksum = getChecksum(epayRaw.getEncoded(), true);//with real
             boolean isMessageValid = epayRaw.getChecksum().equals(computedChecksum);
-
-            if(!isMessageValid) {//try with demo
-                computedChecksum = getChecksum(epayRaw.getEncoded(), false);//with demo
-                isMessageValid = epayRaw.getChecksum().equals(computedChecksum);
-            }
 
             epayResponse.setIsValid(isMessageValid);
         }
@@ -202,81 +178,6 @@ public class EpayUtil {
         } catch (Throwable t) {
             throw new JprimeException("parsing failed", t);
         }
-    }
-
-
-    /** some testing goes here */
-    @Deprecated
-    public static void main(String[] args) throws Throwable {
-        _prepareHmac("fdajs");
-
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-//        System.out.println(simpleDateFormat.parse("20150419024853"));
-
-        EpayRaw[] raws = {
-                new EpayRaw("1b00c25445a469109c90707a320fbf8e1bb46ad7", "SU5WT0lDRT0xMDAwMDA2OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDIyMTExOlNUQU49MDI2NDU5OkJDT0RFPTAyNjQ1OQo=", ""),
-                new EpayRaw("912cfa49a7b224d6e135b1877287752634228404", "SU5WT0lDRT0xMDAwMDA3OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDI0ODUzOlNUQU49MDI2NDYwOkJDT0RFPTAyNjQ2MAo=", ""),
-//                new EpayRaw("", ""),
-                new EpayRaw("1e15557afe359f68b7ad6808790c8349a4e7f8f9", "SU5WT0lDRT0xMDAwMDA0OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDIwODQwOlNUQU49MDI2NDU4OkJDT0RFPTAyNjQ1OAo=", ""),
-                new EpayRaw("4870abcf604b1d23430fa845d69d14802683941d", "SU5WT0lDRT0xMDAwMDA3OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDI0ODUzOlNUQU49MDI2NDYwOkJDT0RFPTAyNjQ2MApJTlZPSUNFPTEwMDAwMDQ6U1RBVFVTPVBBSUQ6UEFZX1RJTUU9MjAxNTA0MTkwMjA4NDA6U1RBTj0wMjY0NTg6QkNPREU9MDI2NDU4Cg==", ""),
-                new EpayRaw("af847695d723b99635dce7eed2bf742c3e372667", "SU5WT0lDRT0xMDAwMDAzOlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE4MjE0NDQzOlNUQU49MDI2NDU1OkJDT0RFPTAyNjQ1NQo=", ""),
-                new EpayRaw("2188d3bc0d771dde5667a6c176761ad29628efcd", "SU5WT0lDRT0xMDAwMDAyOlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE4MTcwMTQ3OlNUQU49MDI2NDU0OkJDT0RFPTAyNjQ1NAo=", ""),
-                new EpayRaw("e5060a24086c9a25a928c6b803ba22ea81dfbe25", "SU5WT0lDRT0xMjM0NTY6U1RBVFVTPVBBSUQ6UEFZX1RJTUU9MjAxNTA0MTQyMjIyMDc6U1RBTj0wMjYzNjA6QkNPREU9MDI2MzYwCg==", ""),
-//                new EpayRaw("", ""),
-//                new EpayRaw("", ""),
-//                new EpayRaw("", ""),
-//                new EpayRaw("", ""),
-//                new EpayRaw("", ""),
-//                new EpayRaw("", ""),
-                new EpayRaw("e5060a24086c9a25a928c6b803ba22ea81dfbe25__", "SU5WT0lDRT0xMjM0NTY6U1RBVFVTPVBBSUQ6UEFZX1RJTUU9MjAxNTA0MTQyMjIyMDc6U1RBTj0wMjYzNjA6QkNPREU9MDI2MzYwCg==", ""),
-                new EpayRaw("e5060a24086c9a25a928c6b803ba22ea81dfbe25", "SU5WT0lDRT0xMjM0NTY6U1RBVFVTPVBBSUQ6UEFZX1RJTUU9MjAxNTA0MTQyMjIyMDc6U1RBTj0wMjYzNjA6QkNPREU9MDI2MzYwCg==fff", ""),
-//                new EpayRaw("", ""),
-        };
-
-        for (EpayRaw raw : raws) {
-            EpayResponse epayResponse = EpayUtil.decrypt(raw);
-            System.out.println(epayResponse);
-        }
-
-//
-//        {//message from epay
-//            String encoded = "SU5WT0lDRT0xMDAwMDA3OlNUQVRVUz1QQUlEOlBBWV9USU1FPTIwMTUwNDE5MDI0ODUzOlNUQU49MDI2NDYwOkJDT0RFPTAyNjQ2MAo=";
-//            String decoded = base64Decode(encoded);
-//            String checksum = "912cfa49a7b224d6e135b1877287752634228404";
-//            String computedChecksum = getChecksum(encoded);
-//            boolean isValidMessage;
-//            if(checksum.equals(computedChecksum)) {
-//                isValidMessage = true;
-//                System.out.println("Validated message from EPAY: "+decoded);
-//            } else {
-//                isValidMessage = false;
-//                System.out.println("INVALID message from EPAY: "+decoded);
-//            }
-//            System.out.println(checksum);
-//            System.out.println(computedChecksum);
-//            System.out.println(isValidMessage);
-//        }
-    }
-    {//testing epay
-
-//        String decoded = "MIN=D990264495\r\n" +
-//                "EMAIL=mihail@sty.bz\r\n" +
-//                "INVOICE=123456\r\n" +
-//                "AMOUNT=200\r\n" +
-//                "CURRENCY=BGN\r\n" +
-//                "EXP_TIME=01.08.2020\r\n" +
-//                "DESCR=jPrime ticket\r\n" +
-//                "ENCODING=utf-8";
-//        String encoded = "TUlOPUQ5OTAyNjQ0OTUNCkVNQUlMPW1paGFpbEBzdHkuYnoNCklOVk9JQ0U9MTIzNDU2DQpBTU9VTlQ9MjAwDQpDVVJSRU5DWT1CR04NCkVYUF9USU1FPTAxLjA4LjIwMjANCkRFU0NSPVRlc3QgKG9wdGlvbmFsIGRlc2NyaXB0aW9uIDEwMCBzeW1ib2xzKQ0KRU5DT0RJTkc9dXRmLTg=";
-//        byte[] result = getHmacAsByteArray(encoded);
-//
-////        System.out.println(bytesToHex(encoded)));
-//        System.out.println(bytesToHex(result));
-//        System.out.println(getHmacAsBase64(encoded));
-//        System.out.println(getHmacAsBase64(decoded));
-//
-////        System.out.println("["+System.getProperty("epay.key"));
-//    }
     }
 }
 
