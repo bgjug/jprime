@@ -42,7 +42,7 @@
                 <h1>The <strong>Team</strong></h1>
             </div>
             <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="03" style="width: 230px">
+                    <div class="col-md-3 col-sm-6 col-xs-12" style="width: 230px">
                         <div class="team-member modern">
                             <!-- Memebr Photo, Name & Position -->
                             <div class="member-photo">
@@ -60,7 +60,7 @@
                             Ivan is doing his PhD in the area of cloud multi-tenancy in the University of National and World Economy in Sofia. He is teaching Java, Java EE and SOA in three Universities in Sofia.
                         </div>
                     </div>
-                <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="03" style="width: 230px">
+                <div class="col-md-3 col-sm-6 col-xs-12" style="width: 230px">
                     <div class="team-member modern">
                         <!-- Memebr Photo, Name & Position -->
                         <div class="member-photo">
@@ -77,7 +77,7 @@
                         He’s big enthusiast of distributed multinational, multi location software development. At his free time he’s trying to contribute to OpenJDK and supports his own opensource project. His latest passion is Oracles Javascript runtime on JVM – Nashorn.
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="03" style="width: 230px">
+                <div class="col-md-3 col-sm-6 col-xs-12" style="width: 230px">
                     <div class="team-member modern">
                         <!-- Memebr Photo, Name & Position -->
                         <div class="member-photo">
@@ -93,7 +93,7 @@
                         Mihail is a security and software consultant, trainer and author. His resume includes projects in companies like Saudi Aramco, Boeing, HP, Siemens, USAF, several foreign banks and government entities. Mihail is the co-author of 6 books on software, and has 10 years of training experience in local and foreign companies and most of the local universities.
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="03" style="width: 230px">
+                <div class="col-md-3 col-sm-6 col-xs-12" style="width: 230px">
                     <div class="team-member modern">
                         <!-- Memebr Photo, Name & Position -->
                         <div class="member-photo">
@@ -109,7 +109,7 @@
                         Martin is a Java enthusiast. He is a graduate of Computer Science from the University of Sofia. He is also a certified Java professional (SCJP6) and a certified IBM cloud computing solution advisor. His areas of interest include the wide range of Java-related technologies (such as Servlets, JSP, JAXB, JAXP, JMS, JMX, JAX-RS, JAX-WS, Hibernate, Spring Framework, Liferay Portal and Eclipse RCP), cloud computing technologies, cloud-based software architectures, enterprise application integration, relational and NoSQL databases. You can reach him for any Java and FOSS-related topics (especially Eclipse and the OpenJDK).
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12" data-animation="fadeIn" data-animation-delay="03" style="width: 230px">
+                <div class="col-md-3 col-sm-6 col-xs-12" style="width: 230px">
                     <div class="team-member modern">
                         <!-- Memebr Photo, Name & Position -->
                         <div class="member-photo">
