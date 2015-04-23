@@ -125,7 +125,7 @@ public class TicketsController {
                 return "INVOICE=" + epayResponse.getInvoiceNumber() + ":STATUS=OK";
             }
 
-            if(registrant.getEpayResponse().getStatus().equals(EpayResponse.Status.PAID)) {
+            if(registrant.getEpayResponse() != null && registrant.getEpayResponse().getStatus().equals(EpayResponse.Status.PAID)) {
                 //so this guy already received an invoice, but epay is still bugging me
                 System.out.println("EPAY:    InvoiceNumber "+epayResponse.getInvoiceNumber()+" already PAID in database, why is epay still bugging me?");
                 return "INVOICE=" + epayResponse.getInvoiceNumber() + ":STATUS=OK";
