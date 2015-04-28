@@ -373,24 +373,26 @@
     <div class="partner">
         <div class="container">
             <div class="row">
-                <%--
-                            <!--Start Clients Carousel-->
-                            <div class="big-title text-center">
-                                <h1><strong>Platinum</strong> Sponsors</h1>
+
+                <!--Start Clients Carousel-->
+                <div class="big-title text-center">
+                    <h1><strong>Platinum</strong> Sponsors</h1>
+                </div>
+
+                <div class="our-clients">
+                    <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5"
+                         data-navigation="true">
+
+                        <c:forEach var="sponsor" items="${platinumSponsors}">
+                            <div class="client-item item">
+                                <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}"
+                                                                         alt="${sponsor.companyName}"/></a>
                             </div>
+                        </c:forEach>
 
-                            <div class="our-clients">
-                                <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
+                    </div>
+                </div>
 
-                                    <c:forEach var="sponsor" items="${platinumSponsors}">
-                                        <div class="client-item item">
-                                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}" /></a>
-                                        </div>
-                                    </c:forEach>
-
-                                </div>
-                            </div>
-                --%>
                 <div class="big-title text-center">
                     <h1><strong>Gold</strong> Sponsors</h1>
                 </div>
