@@ -76,8 +76,9 @@ public class TicketsController {
 
         if (!registrant.isCompany()) {
             handlePersonalRegistrant(registrant);
-        }        Registrant savedRegistrant = registrantFacade.save(registrant);
+        }
 
+        Registrant savedRegistrant = registrantFacade.save(registrant);
         model.addAttribute("tags", userFacade.findAllTags());
         prepareEpay(model, savedRegistrant);
         return prepareEpay(model, savedRegistrant);

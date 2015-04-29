@@ -47,6 +47,9 @@
                         required: true,
                         email: true
                     },
+                    'visitors[0].company': {
+                            required: true
+                    },
                     'name': {
                         required: true
                     },
@@ -94,6 +97,7 @@
             visitorsFieldset.append(clone);
             $("#visitors" + index + "\\.name").rules("add",{required: true,minlength: 5});
             $("#visitors" + index + "\\.email").rules("add",{required: true,email: true});
+            $("#visitors" + index + "\\.company").rules("add",{required: true});
         };
 
         var issueInvoiceHandler = function() {
@@ -145,6 +149,8 @@
                     <dd><form:input path="visitors[0].name"/></dd>
                     <dt><label for="visitors[0].email">Visitor email</label></dt>
                     <dd><form:input path="visitors[0].email"/></dd>
+                    <dt><label for="visitors[0].company">Visitor company</label></dt>
+                    <dd><form:input path="visitors[0].company"/></dd>
                 </dl>
             </fieldset>
             <a id="newVisitor">Add new</a>
