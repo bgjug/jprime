@@ -8,19 +8,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import site.model.Article;
-import site.model.Speaker;
-import site.model.Sponsor;
-import site.model.Submission;
-import site.model.SubmissionStatus;
-import site.model.Tag;
-import site.model.User;
-import site.repository.ArticleRepository;
-import site.repository.SpeakerRepository;
-import site.repository.SponsorRepository;
-import site.repository.SubmissionRepository;
-import site.repository.TagRepository;
-import site.repository.UserRepository;
+import site.model.*;
+import site.repository.*;
+
+import java.util.List;
 
 @Service(AdminFacade.NAME)
 @Transactional
@@ -51,9 +42,16 @@ public class AdminFacade {
     @Autowired
     @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
-	
+
+	@Autowired
+	@Qualifier(VisitorRepository.NAME)
+	private VisitorRepository visitorRepository;
+
+	@Autowired
+	@Qualifier(RegistrantRepository.NAME)
+	private RegistrantRepository registrantRepository;
+
 	/* article repo */
-	
 	public Page<Article> findAllArticles(Pageable pageable){
 		return articleRepository.findAll(pageable);
 	}
@@ -177,4 +175,48 @@ public class AdminFacade {
         submission.setStatus(status);
         submissionRepository.save(submission);
     }
+
+	/* visitors repo */
+	public Page<Visitor> findAllVisitors(Pageable pageable){
+		return visitorRepository.findAll(pageable);
+	}
+
+	public Iterable<Visitor> findAllNewestVisitors(){
+		return visitorRepository.findAllNewestUsers();
+	}
+
+	public Visitor findOneVisitor(Long id){
+		return visitorRepository.findOne(id);
+	}
+
+	public void deleteVisitor(Long id){
+
+		Visitor visitor = visitorRepository.findOne(id);
+		Registrant registrant = visitor.getRegistrant();
+		registrant.getVisitors().remove(visitor);
+		visitorRepository.delete(visitor);
+		if (registrant.getEmail().equals(visitor.getEmail())&&registrant.getName().equals(visitor.getName())){
+			registrantRepository.delete(registrant);
+		}else {
+			registrantRepository.save(registrant);
+		}
+
+	}
+
+	public Visitor saveVisitor(Visitor visitor){
+		return visitorRepository.save(visitor);
+	}
+
+	/* registrants repo*/
+	public Page<Registrant> findAllRegistrants(Pageable pageable){
+		return registrantRepository.findAll(pageable);
+	}
+
+	public Registrant saveRegistrant(Registrant registrant){
+		return registrantRepository.save(registrant);
+	}
+
+	public Iterable<Registrant> findAllRegistrants(){
+		return registrantRepository.findAll();
+	}
 }

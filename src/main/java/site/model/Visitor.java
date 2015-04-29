@@ -1,9 +1,6 @@
 package site.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * A person visiting the conference.
@@ -17,7 +14,11 @@ public class Visitor extends AbstractEntity {
     private Registrant registrant;
     private String name;
     private String email;
+
     private String company;
+
+    @Enumerated(EnumType.STRING)
+    private VisitorStatus status;
 
     public Visitor() {}
 
@@ -62,6 +63,16 @@ public class Visitor extends AbstractEntity {
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public VisitorStatus getStatus() {
+        //some fuzzy logic here: if registrant has payed EPAY invоice it means the the visitor has payed
+        if(registrant!=null && registrant.getRealInvoiceNumber()!=0) return VisitorStatus.PAYED;
+        return status;
+    }
+
+    public void setStatus(VisitorStatus status) {
+        this.status = status;
     }
 
     @Override

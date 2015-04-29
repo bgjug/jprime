@@ -30,9 +30,10 @@ public class Registrant extends AbstractEntity {
     private long epayInvoiceNumber;//the one for epay
     @Column(unique = false)//because initially it is zero
     private long realInvoiceNumber;//the real one, only after they pay
-    @Column(unique = false)//because might not always be initialized
-    private long proformaInvoiceNumber;
+    @Column(unique = false, nullable = false)//because might not always be initialized
+    private Long proformaInvoiceNumber;
     private PaymentType paymentType;
+
     @Embedded
     private EpayResponse epayResponse;
 
