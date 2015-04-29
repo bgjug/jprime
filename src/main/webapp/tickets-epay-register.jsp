@@ -67,10 +67,19 @@
             })
         });
 
+        var checkQty=function(){
+            var size = $("#visitorsFieldset").find("dl").size()+1;
+            if(size>1) {
+                $("#removeVisitor").show();
+            }else{
+                $("#removeVisitor").hide();
+            }
+        }
 
         var appendVisitor = function() {
             var visitorsFieldset = $("#visitorsFieldset");
             var index = visitorsFieldset.find("dl").size();
+            checkQty();
             var clone = visitorsFieldset.find("dl:last").clone();
             clone.find("dd label").remove();
             clone.find("dd input").each(function(i) {
@@ -96,6 +105,15 @@
             $("#visitors" + index + "\\.email").rules("add",{required: true,email: true});
         };
 
+        var removeVisitor = function() {
+            var visitorsFieldset = $("#visitorsFieldset");
+            checkQty();
+            var size = visitorsFieldset.find("dl").size()+1;
+            if(size>1) {
+                visitorsFieldset.find("dl:last").remove();
+            }
+        };
+
         var issueInvoiceHandler = function() {
             if (this.checked) {
                 $("#invoiceFieldset").show();
@@ -106,6 +124,8 @@
 
         $(function() {
             $("#newVisitor").click(appendVisitor);
+            $("#removeVisitor").hide();
+            $("#removeVisitor").click(removeVisitor);
             $("#isCompany").click(issueInvoiceHandler);
         });
     </script>
@@ -147,7 +167,8 @@
                     <dd><form:input path="visitors[0].email"/></dd>
                 </dl>
             </fieldset>
-            <a id="newVisitor">Add new</a>
+            <a id="newVisitor">Add new</a>&nbsp;&nbsp;
+            <a id="removeVisitor">Remove last</a>
             <br><br>
             <form:checkbox path="company" label=" Issue invoice" id="isCompany" checked="true"/>
             <br><br>

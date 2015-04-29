@@ -27,7 +27,10 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * @author Mihail
@@ -74,11 +77,17 @@ public class TicketsController {
             return TICKETS_EPAY_REGISTER_JSP;
         }
 
+        //check empty users, server side validation
+        List<Visitor> toBeRemoved = registrant.getVisitors().stream().filter(v -> v.getEmail() == null || v.getEmail().isEmpty() || v.getName() == null || v.getName().isEmpty()).collect(Collectors.toList());
+        registrant.getVisitors().removeAll(toBeRemoved);
+
+
         if (!registrant.isCompany()) {
             handlePersonalRegistrant(registrant);
         }        Registrant savedRegistrant = registrantFacade.save(registrant);
 
         model.addAttribute("tags", userFacade.findAllTags());
+        // Question to Mihail: why double call?
         prepareEpay(model, savedRegistrant);
         return prepareEpay(model, savedRegistrant);
     }
