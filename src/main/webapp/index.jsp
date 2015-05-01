@@ -62,7 +62,7 @@
                             </h3>
 
                             <!-- Change that to 'Our Agenda' once we have the agenda
-                            <p class="animated4"><a href="/cfp" class="slider btn btn-primary">Submit a talk</a> ->
+                            <p class="animated4"><a href="/cfp" class="slider btn btn-primary">Submit a talk</a> -->
                         </div>
                     </div>
                 </div>
