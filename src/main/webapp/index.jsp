@@ -409,23 +409,23 @@
                     </div>
                 </div>
 
-                <%--
-                            <div class="big-title text-center">
-                                <h1><strong>Silver</strong> Sponsors</h1>
+                <div class="big-title text-center">
+                    <h1><strong>Silver</strong> Sponsors</h1>
+                </div>
+
+                <div class="our-clients">
+                    <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5"
+                         data-navigation="true">
+
+                        <c:forEach var="sponsor" items="${silverSponsors}">
+                            <div class="client-item item">
+                                <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}"
+                                                                         alt="${sponsor.companyName}"/></a>
                             </div>
+                        </c:forEach>
 
-                            <div class="our-clients">
-                                <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5" data-navigation="true">
-
-                                    <c:forEach var="sponsor" items="${silverSponsors}">
-                                        <div class="client-item item">
-                                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}"/></a>
-                                        </div>
-                                    </c:forEach>
-
-                                </div>
-                            </div>
-                           --%>
+                    </div>
+                </div>
                 <!-- End Clients Carousel -->
             </div><!-- .row -->
         </div><!-- .container -->
