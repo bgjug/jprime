@@ -17,13 +17,15 @@ public class Visitor extends AbstractEntity {
     private Registrant registrant;
     private String name;
     private String email;
+    private String company;
 
     public Visitor() {}
 
-    public Visitor(Registrant invoiceTo, String name, String email) {
+    public Visitor(Registrant invoiceTo, String name, String email,String company) {
         this.registrant = invoiceTo;
         this.name = name;
         this.email = email;
+        this.company = company;
     }
 
     public Registrant getRegistrant() {
@@ -48,6 +50,14 @@ public class Visitor extends AbstractEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     @Override

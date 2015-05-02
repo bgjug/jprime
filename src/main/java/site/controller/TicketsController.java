@@ -84,8 +84,9 @@ public class TicketsController {
 
         if (!registrant.isCompany()) {
             handlePersonalRegistrant(registrant);
-        }        Registrant savedRegistrant = registrantFacade.save(registrant);
+        }
 
+        Registrant savedRegistrant = registrantFacade.save(registrant);
         model.addAttribute("tags", userFacade.findAllTags());
         // Question to Mihail: why double call?
         prepareEpay(model, savedRegistrant);
