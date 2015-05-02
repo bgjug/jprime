@@ -108,6 +108,8 @@ PLEASE DONT INCLUDE CRAPS in the project
         </dl>
         <sec:csrfInput/>
         <form:hidden path="id"/>
+        <form:hidden path="createdDate"/>
+        <form:hidden path="createdBy"/>
         <button type="submit">Save</button>
     </fieldset>
 

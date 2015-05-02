@@ -84,6 +84,8 @@
         </dl>
         <sec:csrfInput />
         <form:hidden path="id" />
+        <form:hidden path="createdDate"/>
+        <form:hidden path="createdBy"/>
         <form:hidden path="status" />
         <form:hidden path="speaker.id" />
         <button type="submit">Submit</button>
