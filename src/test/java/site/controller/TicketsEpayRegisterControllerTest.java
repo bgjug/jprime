@@ -65,6 +65,7 @@ public class TicketsEpayRegisterControllerTest {
         mockMvc.perform(post("/tickets/epay")
                 .param("visitors[0].name", "John Doe")
                 .param("visitors[0].email", "john@example.com")
+                .param("visitors[0].company", "Example")
                 .param("company", "false"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(TICKETS_EPAY_BUY_JSP));
@@ -77,6 +78,7 @@ public class TicketsEpayRegisterControllerTest {
         assertThat(1, is(registrant.getVisitors().size()));
         assertThat("John Doe", is(registrant.getVisitors().get(0).getName()));
         assertThat("john@example.com", is(registrant.getVisitors().get(0).getEmail()));
+        assertThat("Example", is(registrant.getVisitors().get(0).getCompany()));
     }
 
     @Test
@@ -84,6 +86,7 @@ public class TicketsEpayRegisterControllerTest {
         mockMvc.perform(post("/tickets/epay")
                 .param("visitors[0].name", "John Doe")
                 .param("visitors[0].email", "john@example.com")
+                .param("visitors[0].company", "Example")
                 .param("company", "true")
                 .param("name", "Adams Family")
                 .param("address", "0001 Cemetery Lane")
@@ -107,6 +110,7 @@ public class TicketsEpayRegisterControllerTest {
         assertThat(1, is(registrant.getVisitors().size()));
         assertThat("John Doe", is(registrant.getVisitors().get(0).getName()));
         assertThat("john@example.com", is(registrant.getVisitors().get(0).getEmail()));
+        assertThat("Example", is(registrant.getVisitors().get(0).getCompany()));
     }
 
     @Test
