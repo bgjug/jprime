@@ -14,6 +14,8 @@
 	<field name="totalPrice" class="java.lang.Double"/>
 	<field name="totalPriceVAT" class="java.lang.Double"/>
 	<field name="totalPriceWithVAT" class="java.lang.Double"/>
+	<field name="paymentType" class="java.lang.String"/>
+	<field name="invoiceType" class="java.lang.String"/>
 	<title>
 		<band height="79">
 			<image>
@@ -24,13 +26,13 @@
 				<reportElement x="452" y="0" width="111" height="79"/>
 				<imageExpression class="java.lang.String"><![CDATA["invoice/bg-jug.png"]]></imageExpression>
 			</image>
-			<staticText>
-				<reportElement x="111" y="25" width="341" height="26"/>
-				<textElement textAlignment="Center" lineSpacing="Single">
+			<textField>
+				<reportElement x="111" y="0" width="341" height="79"/>
+				<textElement lineSpacing="Single">
 					<font size="18"/>
 				</textElement>
-				<text><![CDATA[JPrime 2015]]></text>
-			</staticText>
+				<textFieldExpression class="java.lang.String"><![CDATA["JPrime 2015\nInvoice\n"+$F{invoiceType}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<detail>
@@ -47,7 +49,8 @@
 Address: Bulgaria, 1172 Sofia, Dianabad 5A
 EIK: 200800814
 VAT: BG200800814
-MOL: Mihail Stoynov]]></text>
+MOL: Mihail Stoynov
+IBAN: BG60UNCR70001522105142]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="316" y="48" width="239" height="74"/>
@@ -88,7 +91,7 @@ MOL: Mihail Stoynov]]></text>
 					<rightPen lineWidth="0.25"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single"/>
-				<text><![CDATA[Quantity]]></text>
+				<text><![CDATA[Quantity (pcs.)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="316" y="162" width="111" height="20"/>
@@ -253,6 +256,30 @@ MOL: Mihail Stoynov]]></text>
 				<textElement textAlignment="Center" lineSpacing="Single"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["Sofia,  "+$F{invoiceDate}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="23" y="242" width="266" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Payment type:"+$F{paymentType}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="23" y="226" width="279" height="16"/>
+				<textElement lineSpacing="Single"/>
+				<text><![CDATA[All prices are in BGN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="339" width="176" height="41"/>
+				<textElement lineSpacing="Single"/>
+				<text><![CDATA[Stamping and signing are not necessary elements according to law]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="262" width="341" height="79"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[JPrime 2015
+Invoice
+$F{invoiceType}]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<pageFooter>

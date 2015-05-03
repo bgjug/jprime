@@ -66,7 +66,7 @@ public class InvoiceExporter {
         data.setClientEIK("2464387775");
         data.setClientVAT("BG2464387775");
         data.setPassQty(5);
-        data.setPrice(55.5);
+//        data.setPrice(55.5);
 
         Files.write(Paths.get("C:\\result.pdf"), new InvoiceExporter().exportInvoice(data, false));
     }

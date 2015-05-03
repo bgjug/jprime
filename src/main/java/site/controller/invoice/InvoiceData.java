@@ -1,27 +1,36 @@
 package site.controller.invoice;
 
 /**
- * Created by mitia on 10.04.15.
+ * DTO for the PDF
+ * NOTE: Checkout some of the getters, some magic happens there
  */
 public class InvoiceData {
-
     private String invoiceNumber;
-
     private String invoiceDate;
-
+    private String invoiceType;
     private String client;
-
     private String clientAddress;
-
     private String clientEIK;
-
     private String clientVAT;
-
     private String mol;
-
     private Integer passQty;
+    private String paymentType;
 
-    private Double price;
+    public Double getPrice() {
+        return 83.34D;//one ticket without VAT
+    }
+
+    public Double getTotalPrice() {
+        return getPrice() * passQty ;
+    }
+
+    public Double getTotalPriceWithVAT() {
+        return 100D * passQty;
+    }
+
+    public Double getTotalPriceVAT() {
+        return getTotalPriceWithVAT() - getTotalPrice();
+    }
 
     public String getInvoiceNumber() {
         return invoiceNumber;
@@ -37,6 +46,14 @@ public class InvoiceData {
 
     public void setInvoiceDate(String invoiceDate) {
         this.invoiceDate = invoiceDate;
+    }
+
+    public String getInvoiceType() {
+        return invoiceType;
+    }
+
+    public void setInvoiceType(String invoiceType) {
+        this.invoiceType = invoiceType;
     }
 
     public String getClient() {
@@ -79,31 +96,19 @@ public class InvoiceData {
         this.passQty = passQty;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Double getTotalPrice(){
-        return price*passQty/1.2;
-    }
-
-    public Double getTotalPriceVAT(){
-        return getTotalPriceWithVAT() - getTotalPrice();
-    }
-
-    public Double getTotalPriceWithVAT(){
-        return price*passQty;
-    }
-
     public String getMol() {
         return mol;
     }
 
     public void setMol(String mol) {
         this.mol = mol;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
 }
