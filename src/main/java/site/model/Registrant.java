@@ -30,8 +30,23 @@ public class Registrant extends AbstractEntity {
     private long epayInvoiceNumber;//the one for epay
     @Column(unique = false)//because initially it is zero
     private long realInvoiceNumber;//the real one, only after they pay
+    @Column(unique = false)//because might not always be initialized
+    private long proformaInvoiceNumber;
+    private PaymentType paymentType;
     @Embedded
     private EpayResponse epayResponse;
+
+    public enum PaymentType {
+        EPAY_ACCOUNT("Pay with ePay account"), EPAY_CREDIT_CARD("Pay with a credit card"), BANK_TRANSFER("Pay with a bank transfer");
+        private String value;
+        private PaymentType(String theValue) {
+            this.value = theValue;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
 
     /** the entity that generates the unique invoice numbers for epay */
     @Entity
@@ -65,6 +80,31 @@ public class Registrant extends AbstractEntity {
      */
     @Entity
     public static class RealInvoiceNumberGenerator {
+        @Id
+        @GeneratedValue
+        private int id;
+        private long counter;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public long getCounter() {
+            return counter;
+        }
+
+        public void setCounter(long counter) {
+            this.counter = counter;
+        }
+    }
+
+    /** Generates proforma invoice numbers. */
+    @Entity
+    public static class ProformaInvoiceNumberGenerator {
         @Id
         @GeneratedValue
         private int id;
@@ -178,6 +218,22 @@ public class Registrant extends AbstractEntity {
 
     public void setRealInvoiceNumber(long realInvoiceNumber) {
         this.realInvoiceNumber = realInvoiceNumber;
+    }
+
+    public long getProformaInvoiceNumber() {
+        return proformaInvoiceNumber;
+    }
+
+    public void setProformaInvoiceNumber(long proformaInvoiceNumber) {
+        this.proformaInvoiceNumber = proformaInvoiceNumber;
+    }
+
+    public PaymentType getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(PaymentType paymentType) {
+        this.paymentType = paymentType;
     }
 
     public EpayResponse getEpayResponse() {

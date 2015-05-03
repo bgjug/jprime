@@ -73,7 +73,7 @@ public class UserFacade {
     }
 
     public Page<Article> allPublishedArticles(Pageable pageable){
-        return articleRepository.findAllPublishedArticles(pageable);
+        return articleRepository.findByPublishedTrueOrderByCreatedDateDesc(pageable);
     }
     public Article getArticleById(long id){
         return articleRepository.findOne(id);

@@ -1,6 +1,7 @@
 <%@ page trimDirectiveWhitespaces="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 
 <!doctype html>
@@ -380,7 +381,7 @@
                 </div>
 
                 <div class="our-clients">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5"
+                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(platinumSponsors)}" data-appeared-items="${fn:length(platinumSponsors)}"
                          data-navigation="true">
 
                         <c:forEach var="sponsor" items="${platinumSponsors}">
@@ -398,7 +399,8 @@
                 </div>
 
                 <div class="our-clients text-center" style="text-align: center">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-3">
+                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(goldSponsors)}" data-appeared-items="${fn:length(goldSponsors)}"
+                         data-navigation="true">
 
                         <c:forEach var="sponsor" items="${goldSponsors}">
                             <div class="client-item item" style="float: none; display: inline-block">
@@ -414,7 +416,7 @@
                 </div>
 
                 <div class="our-clients">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="5"
+                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(silverSponsors)}" data-appeared-items="${fn:length(silverSponsors)}"
                          data-navigation="true">
 
                         <c:forEach var="sponsor" items="${silverSponsors}">

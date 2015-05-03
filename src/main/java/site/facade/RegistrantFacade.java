@@ -7,6 +7,7 @@ import site.model.JprimeException;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.repository.RegistrantEpayInvoiceNumberGeneratorRepository;
+import site.repository.RegistrantProformaInvoiceNumberGeneratorRepository;
 import site.repository.RegistrantRealInvoiceNumberGeneratorRepository;
 import site.repository.RegistrantRepository;
 
@@ -27,22 +28,30 @@ public class RegistrantFacade {
     @Autowired
     @Qualifier(RegistrantRealInvoiceNumberGeneratorRepository.NAME)
     private RegistrantRealInvoiceNumberGeneratorRepository registrantRealInvoiceNumberGeneratorRepository;
+    @Autowired
+    @Qualifier(RegistrantProformaInvoiceNumberGeneratorRepository.NAME)
+    private RegistrantProformaInvoiceNumberGeneratorRepository registrantProformaInvoiceNumberGeneratorRepository;
 
     public Registrant findByEpayInvoiceNumber(long invoiceNumber){
         return registrantRepository.findByEpayInvoiceNumber(invoiceNumber);
     }
 
-
+    /** Complicated */
     public synchronized Registrant save(Registrant registrant) {
-        if(registrant.getEpayInvoiceNumber()==0) {//only if new registrant
-            long counter = getEpayInvoiceNumber();
-            registrant.setEpayInvoiceNumber(counter);
-        }
+        if(registrant.getPaymentType().equals(Registrant.PaymentType.BANK_TRANSFER)) {
+            long counter = getProformaInvoiceNumber();
+            registrant.setProformaInvoiceNumber(counter);
+        } else {
+            if(registrant.getEpayInvoiceNumber()==0) {//only if new registrant
+                long counter = getEpayInvoiceNumber();
+                registrant.setEpayInvoiceNumber(counter);
+            }
 
-        //only if registrant has the epay info. now a real invoice number must be produced
-        if(registrant.getEpayResponse() != null && registrant.getRealInvoiceNumber() == 0) {
-            long counter = getRealInvoiceNumber();
-            registrant.setRealInvoiceNumber(counter);
+            //only if registrant has the epay info. now a real invoice number must be produced
+            if(registrant.getEpayResponse() != null && registrant.getRealInvoiceNumber() == 0) {
+                long counter = getRealInvoiceNumber();
+                registrant.setRealInvoiceNumber(counter);
+            }
         }
 
         //todo: mihail this is not optimal, but for now it works
@@ -94,6 +103,27 @@ public class RegistrantFacade {
         long counter = realInvoiceNumberGenerator.getCounter();
         realInvoiceNumberGenerator.setCounter(counter + 1);
         registrantRealInvoiceNumberGeneratorRepository.save(realInvoiceNumberGenerator);
+        return counter;
+    }
+    private long getProformaInvoiceNumber() {
+        //mihail: get the invoice number from the other table
+        long count = registrantProformaInvoiceNumberGeneratorRepository.count();
+        if(count > 1) {
+            throw new JprimeException("Mihail: ProformaInvoiceNumberGenerator table has more than one row. Fix that");
+        }
+
+        Registrant.ProformaInvoiceNumberGenerator proformaInvoiceNumberGenerator;
+        if(count == 0) {
+            proformaInvoiceNumberGenerator = new Registrant.ProformaInvoiceNumberGenerator();
+            proformaInvoiceNumberGenerator.setCounter(71000001);
+            proformaInvoiceNumberGenerator = registrantProformaInvoiceNumberGeneratorRepository.save(proformaInvoiceNumberGenerator);
+        } else {
+            proformaInvoiceNumberGenerator = registrantProformaInvoiceNumberGeneratorRepository.findFirstByOrderByIdAsc();
+        }
+
+        long counter = proformaInvoiceNumberGenerator.getCounter();
+        proformaInvoiceNumberGenerator.setCounter(counter + 1);
+        registrantProformaInvoiceNumberGeneratorRepository.save(proformaInvoiceNumberGenerator);
         return counter;
     }
 }

@@ -5,6 +5,7 @@
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags"%>
 +<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!doctype html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -206,6 +207,12 @@
                     <dd><form:input path="email" /></dd>
                 </dl>
             </fieldset>
+            <dl>
+                <dt><label for="paymentType">Payment type</label></dt>
+                <dd><form:select path="paymentType">
+                    <form:options items="${enumValues}"/>
+                </form:select></dd>
+            </dl>
             <sec:csrfInput/>
             <form:hidden path="id"/>
             <button type="submit">Save</button>

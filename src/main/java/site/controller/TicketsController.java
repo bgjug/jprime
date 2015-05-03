@@ -70,9 +70,16 @@ public class TicketsController {
 		return TICKETS_EPAY_REGISTER_JSP;
     }
 
+    /**
+     * User submitted the form.
+     * @param model
+     * @param registrant
+     * @param bindingResult
+     * @return
+     */
     @Transactional
     @RequestMapping(value = "/tickets/epay", method = RequestMethod.POST)
-    public String register(Model model, @Valid final Registrant registrant, BindingResult bindingResult) {
+    public String register(Model model, @Valid final Registrant registrant, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             return TICKETS_EPAY_REGISTER_JSP;
         }
@@ -87,20 +94,29 @@ public class TicketsController {
         }
 
         Registrant savedRegistrant = registrantFacade.save(registrant);
+
         model.addAttribute("tags", userFacade.findAllTags());
-        // Question to Mihail: why double call?
-        prepareEpay(model, savedRegistrant);
-        return prepareEpay(model, savedRegistrant);
+
+        if(savedRegistrant.getPaymentType().equals(Registrant.PaymentType.BANK_TRANSFER)) {
+            byte[] pdf = createPDF(savedRegistrant);
+            sendPDF(savedRegistrant, pdf);
+            return result("ok", model);
+        } else {
+            prepareEpay(model, savedRegistrant);
+            return TICKETS_EPAY_BUY_JSP;
+        }
     }
 
+    /** if registrant info is not filled, copy it from the first visitor */
     private void handlePersonalRegistrant(Registrant registrant) {
         Visitor firstVisitor = registrant.getVisitors().get(0);
         registrant.setName(firstVisitor.getName());
         registrant.setEmail(firstVisitor.getEmail());
     }
 
+    /** encrypt the data and set the fields in the form */
     @RequestMapping(value = "/tickets/buy", method = RequestMethod.GET)
-    public String prepareEpay(Model model, Registrant registrant) {
+    public void prepareEpay(Model model, Registrant registrant) {
         EpayRaw demoEpayRaw = EpayUtil.encrypt(registrant.getVisitors().size(),
                 registrant.getEpayInvoiceNumber(), false, 0);
         model.addAttribute("DEMO_ENCODED", demoEpayRaw.getEncoded());
@@ -113,7 +129,6 @@ public class TicketsController {
         model.addAttribute("epayUrl", epayRaw.getEpayUrl());
 
         model.addAttribute("tags", userFacade.findAllTags());
-        return TICKETS_EPAY_BUY_JSP;
     }
 
     /** Receiving data from epay.bg (back channel) */
@@ -166,14 +181,21 @@ public class TicketsController {
         int qty = registrant.getVisitors().size();
 
         InvoiceData data = new InvoiceData();
-
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         data.setInvoiceDate(dateFormat.format(Calendar.getInstance().getTime()));
-        data.setInvoiceNumber(String.valueOf(registrant.getRealInvoiceNumber()));
         data.setClient(regName);
         data.setClientAddress(regAddress);
         data.setClientEIK(regVat);
         data.setMol(regMol);
+        if(registrant.getPaymentType().equals(Registrant.PaymentType.BANK_TRANSFER)) {
+            data.setInvoiceType("Proforma");
+            data.setInvoiceNumber(String.valueOf(registrant.getProformaInvoiceNumber()));
+            data.setPaymentType("Bank Transfer");
+        } else {
+            data.setInvoiceType("Original");
+            data.setInvoiceNumber(String.valueOf(registrant.getRealInvoiceNumber()));
+            data.setPaymentType("ePay.bg");
+        }
 
         String vatNumber = registrant.getVatNumber();
         if (vatNumber != null) {
@@ -185,7 +207,6 @@ public class TicketsController {
             data.setClientVAT("");
         }
         data.setPassQty(qty);
-        data.setPrice(100d);
 
         return invoiceExporter.exportInvoice(data, registrant.isCompany());
     }
@@ -199,5 +220,4 @@ public class TicketsController {
         mailFacade.sendInvoice("conference@jprime.io", "JPrime.io invoice",
                 "We got some registrations: " + registrations, pdf);
     }
-
 }

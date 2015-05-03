@@ -14,7 +14,7 @@ import java.util.List;
 public interface ArticleRepository extends PagingAndSortingRepository<Article, Long> {
 
 	String NAME = "articleRepository";
-    String SELECT_ARTICLES_BY_TAG_STMT = "SELECT a FROM Article a JOIN a.tags t WHERE t.name = :tagName and a.published=true";
+    String SELECT_ARTICLES_BY_TAG_STMT = "SELECT a FROM Article a JOIN a.tags t WHERE t.name = :tagName and a.published=true ORDER BY a.createdDate DESC ";
 
     @Query(SELECT_ARTICLES_BY_TAG_STMT)
     List<Article> findByTag(@Param("tagName") String tagName);
@@ -27,8 +27,7 @@ public interface ArticleRepository extends PagingAndSortingRepository<Article, L
     @Query(SELECT_PUBLISHED_ARTICLES)
     List<Article> findAllPublished();
 
-    @Query(SELECT_PUBLISHED_ARTICLES)
-    Page<Article> findAllPublishedArticles(Pageable pageable);
+    Page<Article> findByPublishedTrueOrderByCreatedDateDesc(Pageable pageable);
     
     Article findByTitle(String title);
 }
