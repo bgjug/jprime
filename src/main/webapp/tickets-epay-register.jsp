@@ -208,14 +208,12 @@
                 </dl>
             </fieldset>
             <dl>
-                <dt><label for="paymentType">Payment type</label></dt>
-                <dd><form:select path="paymentType">
-                    <form:options items="${enumValues}"/>
-                </form:select></dd>
+                <dt><label for="paymentType">Pay with</label></dt>
+                <dd><form:select path="paymentType" items="${paymentTypes}"/></dd>
             </dl>
             <sec:csrfInput/>
             <form:hidden path="id"/>
-            <button type="submit">Save</button>
+            <button type="submit">Proceed</button>
 
         </form:form>
 

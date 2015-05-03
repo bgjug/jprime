@@ -66,7 +66,7 @@
             <input type="hidden" name="CHECKSUM" value="${CHECKSUM}">
             <input type="hidden" name="URL_OK" value="http://jprime.io/tickets/result/ok">
             <input type="hidden" name="URL_CANCEL" value="http://jprime.io/tickets/result/ok">
-            <input disabled type="submit" value="Pay with a credit card"/> We'll try to fix this in 24h
+            <!-- <input disabled type="submit" value="Pay with a credit card"/> We'll try to fix this in 24h -->
         </form>
 
         <p>In case of questions, contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>

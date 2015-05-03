@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +20,7 @@ import site.facade.MailFacade;
 import site.facade.RegistrantFacade;
 import site.facade.UserFacade;
 import site.model.JprimeException;
+import site.model.PaymentTypeEditor;
 import site.model.Registrant;
 import site.model.Visitor;
 
@@ -26,10 +29,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -67,15 +70,23 @@ public class TicketsController {
     public String goToRegisterPage(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("registrant", new Registrant());
+        model.addAttribute("paymentTypes", getPaymentTypes());
 		return TICKETS_EPAY_REGISTER_JSP;
+    }
+
+    private List<String> getPaymentTypes() {
+        return Arrays.stream(Registrant.PaymentType.values())
+                .map(Registrant.PaymentType::toString)
+                .collect(Collectors.toList());
+    }
+
+    @InitBinder
+    public void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
+        binder.registerCustomEditor(Registrant.PaymentType.class, new PaymentTypeEditor());
     }
 
     /**
      * User submitted the form.
-     * @param model
-     * @param registrant
-     * @param bindingResult
-     * @return
      */
     @Transactional
     @RequestMapping(value = "/tickets/epay", method = RequestMethod.POST)

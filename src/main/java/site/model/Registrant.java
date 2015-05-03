@@ -37,13 +37,15 @@ public class Registrant extends AbstractEntity {
     private EpayResponse epayResponse;
 
     public enum PaymentType {
-        EPAY_ACCOUNT("Pay with ePay account"), EPAY_CREDIT_CARD("Pay with a credit card"), BANK_TRANSFER("Pay with a bank transfer");
+        EPAY_ACCOUNT("ePay account"), BANK_TRANSFER("Direct bank transfer");
+
         private String value;
+
         private PaymentType(String theValue) {
             this.value = theValue;
         }
 
-        public String getValue() {
+        public String toString() {
             return value;
         }
     }
