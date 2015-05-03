@@ -169,6 +169,7 @@
                     <dd><form:input path="visitors[0].name"/></dd>
                     <dt><label for="visitors[0].email">Visitor email</label></dt>
                     <dd><form:input path="visitors[0].email"/></dd>
+                    <!-- see https://github.com/bgjug/jprime/issues/28 -->
                     <dt><label for="visitors[0].company">Visitor company</label></dt>
                     <dd><form:input path="visitors[0].company"/></dd>
                 </dl>

@@ -52,6 +52,10 @@ public class Visitor extends AbstractEntity {
         this.email = email;
     }
 
+    /**
+     * retrieves the company related to the visitor. <br />
+     * Check https://github.com/bgjug/jprime/issues/28
+     */
     public String getCompany() {
         return company;
     }
