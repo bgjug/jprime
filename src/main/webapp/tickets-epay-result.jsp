@@ -48,13 +48,13 @@
             <!-- Start Single Post Content -->
             <div class="post-content">
               <c:if test="${result}">
-                <h2>Thank you for buying tickets for JPrime conference</h2>
+                <h2>Thank you for registering for jPrime!</h2>
                 <br/><br/><br/>
               </c:if>
               <c:if test="${not result}">
                 <h2>There was a problem for purchasing the tickets</h2>
                 <br/>
-                <a href="/tickets">Try again?</a>
+                <a href="/tickets/epay">Try again?</a>
                 <br/><br/><br/>
               </c:if>
 
