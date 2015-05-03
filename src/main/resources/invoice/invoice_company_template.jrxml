@@ -31,7 +31,7 @@
 			</image>
 			<textField>
 				<reportElement x="111" y="0" width="341" height="79"/>
-				<textElement lineSpacing="Single">
+				<textElement textAlignment="Center" lineSpacing="Single">
 					<font size="18"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["JPrime 2015\nInvoice\n"+$F{invoiceType}]]></textFieldExpression>

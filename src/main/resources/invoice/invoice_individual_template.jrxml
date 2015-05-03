@@ -28,7 +28,7 @@
 			</image>
 			<textField>
 				<reportElement x="111" y="0" width="341" height="79"/>
-				<textElement lineSpacing="Single">
+				<textElement textAlignment="Center" lineSpacing="Single">
 					<font size="18"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["JPrime 2015\nInvoice\n"+$F{invoiceType}]]></textFieldExpression>
@@ -270,15 +270,6 @@ IBAN: BG60UNCR70001522105142]]></text>
 				<reportElement x="0" y="339" width="176" height="41"/>
 				<textElement lineSpacing="Single"/>
 				<text><![CDATA[Stamping and signing are not necessary elements according to law]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="86" y="262" width="341" height="79"/>
-				<textElement textAlignment="Center" lineSpacing="Single">
-					<font size="18"/>
-				</textElement>
-				<text><![CDATA[JPrime 2015
-Invoice
-$F{invoiceType}]]></text>
 			</staticText>
 		</band>
 	</detail>
