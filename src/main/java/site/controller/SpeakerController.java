@@ -1,10 +1,17 @@
 package site.controller;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import net.coobird.thumbnailator.Thumbnails;
+
+import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -51,7 +58,18 @@ public class SpeakerController {
 		if(!file.isEmpty()){
 			try {
                 byte[] bytes = file.getBytes();
-                speaker.setPicture(bytes);
+                InputStream in = new ByteArrayInputStream(bytes);
+                BufferedImage initialImage = ImageIO.read(in);
+                BufferedImage readyImage = null;
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                readyImage = Thumbnails.of(initialImage).size(280, 326)
+						.outputFormat("jpg").outputQuality(0.8)
+						.asBufferedImage();
+                ImageIO.write(readyImage, "jpg", baos);
+                baos.flush();
+                byte [] readyImageInBytes = baos.toByteArray();
+                baos.close();
+                speaker.setPicture(readyImageInBytes);
             } catch (Exception e) {
                 e.printStackTrace();
             }
