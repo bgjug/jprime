@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -49,6 +50,7 @@ public class InvoiceExporter {
                 parameters, beanColDataSource);
 
         JRPdfExporter pdfExporter = new JRPdfExporter();
+        pdfExporter.setParameter(JRExporterParameter.CHARACTER_ENCODING, "UTF-8");
         pdfExporter
                 .setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
         pdfExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, result);
@@ -61,13 +63,16 @@ public class InvoiceExporter {
         InvoiceData data = new InvoiceData();
         data.setInvoiceDate("27.05.2015");
         data.setInvoiceNumber("11234");
-        data.setClient("Some client");
-        data.setClientAddress("1111, Sofia, some street 1, some entrance, some floor, some appt");
+        data.setClient("някъв клиент");
+        data.setClientAddress("1111, Sofia, some улица 1, some entrance, some floor, some appt");
         data.setClientEIK("2464387775");
         data.setClientVAT("BG2464387775");
+        data.setMol("fda");
         data.setPassQty(5);
+        data.setInvoiceType("Proforma");
+        data.setPaymentType("пеймънт");
 //        data.setPrice(55.5);
 
-        Files.write(Paths.get("C:\\result.pdf"), new InvoiceExporter().exportInvoice(data, false));
+        Files.write(Paths.get("/tmp/result.pdf"), new InvoiceExporter().exportInvoice(data, true));
     }
 }

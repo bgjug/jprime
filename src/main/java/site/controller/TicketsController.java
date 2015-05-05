@@ -104,7 +104,9 @@ public class TicketsController {
             handlePersonalRegistrant(registrant);
         }
 
+        System.out.println("CYRILLIC CHECK (before save):" + registrant.getName());
         Registrant savedRegistrant = registrantFacade.save(registrant);
+        System.out.println("CYRILLIC CHECK (after save):" + savedRegistrant.getName());
 
         model.addAttribute("tags", userFacade.findAllTags());
 
@@ -190,7 +192,6 @@ public class TicketsController {
 
     private byte[] createPDF(Registrant registrant) throws Exception {
         String regName = registrant.getName(); // company name
-        System.out.println("CYRILLIC CHECK:"+regName);
         String regMol = registrant.getMol(); // company mol
         String regAddress = registrant.getAddress(); //company address
         String regVat = registrant.getVatNumber(); //company DDS number
