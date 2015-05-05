@@ -51,22 +51,21 @@
         <p>
         <p>The conference fee is <strong>100</strong>.00 BGN (VAT included).</p>
 
-        <form action="${epayUrl}" method=post>
+        <form action="${epayUrl}" method="post">
             <input type="hidden" name="PAGE" value="paylogin">
             <input type="hidden" name="ENCODED" value="${ENCODED}">
             <input type="hidden" name="CHECKSUM" value="${CHECKSUM}">
             <input type="hidden" name="URL_OK" value="http://jprime.io/tickets/result/ok">
-            <input type="hidden" name="URL_CANCEL" value="http://jprime.io/tickets/result/ok">
+            <input type="hidden" name="URL_CANCEL" value="http://jprime.io/tickets/result/fail">
             <input type="submit" value="Pay with Epay.bg"/>
         </form>
-        <form action="${epayUrl}" method=post>
-            <input type="hidden" name="PAGE" value="credit_paydirect">
-            <input type="hidden" name="LANG" value="en">
-            <input type="hidden" name="ENCODED" value="${ENCODED}">
-            <input type="hidden" name="CHECKSUM" value="${CHECKSUM}">
+        <form action="https://www.epay.bg/en/credit_wt.cgi" method="get">
+            <input type="hidden" name="cin" value="${credit_wt_kin}">
+            <input type="hidden" name="amount" value="${credit_wt_amount}">
+            <input type="hidden" name="descr" value="${credit_wt_description}">
             <input type="hidden" name="URL_OK" value="http://jprime.io/tickets/result/ok">
-            <input type="hidden" name="URL_CANCEL" value="http://jprime.io/tickets/result/ok">
-            <!-- <input disabled type="submit" value="Pay with a credit card"/> We'll try to fix this in 24h -->
+            <input type="hidden" name="URL_CANCEL" value="http://jprime.io/tickets/result/fail">
+            <input type="submit" value="Pay with a credit card"/>
         </form>
 
         <p>In case of questions, contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>

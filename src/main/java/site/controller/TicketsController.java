@@ -128,17 +128,21 @@ public class TicketsController {
     /** encrypt the data and set the fields in the form */
     @RequestMapping(value = "/tickets/buy", method = RequestMethod.GET)
     public void prepareEpay(Model model, Registrant registrant) {
-        EpayRaw demoEpayRaw = EpayUtil.encrypt(registrant.getVisitors().size(),
+        int numberOfTickets = registrant.getVisitors().size();
+        EpayRaw demoEpayRaw = EpayUtil.encrypt(numberOfTickets,
                 registrant.getEpayInvoiceNumber(), false, 0);
         model.addAttribute("DEMO_ENCODED", demoEpayRaw.getEncoded());
         model.addAttribute("DEMO_CHECKSUM", demoEpayRaw.getChecksum());
         model.addAttribute("DEMO_epayUrl", demoEpayRaw.getEpayUrl());
 
-        EpayRaw epayRaw = EpayUtil.encrypt(registrant.getVisitors().size(), registrant.getEpayInvoiceNumber(), true, 0);
+        EpayRaw epayRaw = EpayUtil.encrypt(numberOfTickets, registrant.getEpayInvoiceNumber(), true, 0);
         model.addAttribute("ENCODED", epayRaw.getEncoded());
         model.addAttribute("CHECKSUM", epayRaw.getChecksum());
         model.addAttribute("epayUrl", epayRaw.getEpayUrl());
 
+        model.addAttribute("credit_wt_kin", EpayUtil.EPAY_KIN);
+        model.addAttribute("credit_wt_amount", numberOfTickets*100);
+        model.addAttribute("credit_wt_description", numberOfTickets == 1 ? "One jPrime.io ticket" : numberOfTickets+" jPrime.io tickets");
         model.addAttribute("tags", userFacade.findAllTags());
     }
 

@@ -31,7 +31,7 @@ public class EpayUtil {
 
     private static final String EPAY_KEY;
     private static final Mac HMAC;//for HMAC
-    private static final String EPAY_KIN;
+    public static final String EPAY_KIN;
     private static final String EPAY_URL;
 
     private static final String DEMO_EPAY_KEY;
@@ -44,7 +44,7 @@ public class EpayUtil {
     static {
         EPAY_KEY = System.getProperty("epay.key")!=null?System.getProperty("epay.key"):"some fake data";
         EPAY_KIN = "8323189568";
-        EPAY_URL = "https://www.epay.bg/";
+        EPAY_URL = "https://www.epay.bg/v3main/paylogin";
         HMAC = _prepareHmac(EPAY_KEY);
 
         DEMO_EPAY_KEY = "KQUND3A923RX7PEW3WI9CAEK4YGWBEVIO2ASJELWUUM24R0SNGFFW02CA7GC0BMY";//demo key
