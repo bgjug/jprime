@@ -190,6 +190,7 @@ public class TicketsController {
 
     private byte[] createPDF(Registrant registrant) throws Exception {
         String regName = registrant.getName(); // company name
+        System.out.println("CYRILLIC CHECK:"+regName);
         String regMol = registrant.getMol(); // company mol
         String regAddress = registrant.getAddress(); //company address
         String regVat = registrant.getVatNumber(); //company DDS number
