@@ -142,7 +142,7 @@ public class TicketsController {
 
         model.addAttribute("credit_wt_kin", EpayUtil.EPAY_KIN);
         model.addAttribute("credit_wt_amount", numberOfTickets*100);
-        model.addAttribute("credit_wt_description", numberOfTickets == 1 ? "One jPrime.io ticket" : numberOfTickets+" jPrime.io tickets");
+        model.addAttribute("credit_wt_description", (numberOfTickets == 1 ? "One jPrime.io ticket" : numberOfTickets+" jPrime.io tickets")+", invoice number: "+registrant.getEpayInvoiceNumber());
         model.addAttribute("tags", userFacade.findAllTags());
     }
 
