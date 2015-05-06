@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.AdminFacade;
+import site.facade.ThumbnailService;
 import site.model.Speaker;
 import site.model.Sponsor;
 
@@ -29,6 +30,10 @@ public class SponsorController {
 	@Autowired
 	@Qualifier(AdminFacade.NAME)
 	private AdminFacade adminFacade;
+	
+	@Autowired
+	@Qualifier(ThumbnailService.NAME)
+	private ThumbnailService thumbnailService;
 	
 	@Transactional
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -50,7 +55,7 @@ public class SponsorController {
 		if(!file.isEmpty()){
 			try {
                 byte[] bytes = file.getBytes();
-                sponsor.setLogo(bytes);
+                sponsor.setLogo(thumbnailService.thumbImage(bytes, 180, 64));
             } catch (Exception e) {
                 e.printStackTrace();
             }
