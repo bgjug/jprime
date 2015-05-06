@@ -53,6 +53,7 @@ public class TicketsControllerTest {
                 .andExpect(model().attribute("registrant", new Registrant()))
                 .andExpect(model().attribute("paymentTypes", containsInAnyOrder(
                         Registrant.PaymentType.BANK_TRANSFER.toString(),
-                        Registrant.PaymentType.EPAY_ACCOUNT.toString())));
+                        Registrant.PaymentType.EPAY_ACCOUNT.toString(),
+                        Registrant.PaymentType.EPAY_CREDIT_CARD.toString())));
     }
 }

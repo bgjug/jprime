@@ -66,9 +66,10 @@ public class TicketsEpayRegisterControllerTest {
                 .param("visitors[0].name", "John Doe")
                 .param("visitors[0].email", "john@example.com")
                 .param("visitors[0].company", "Example")
+                .param("paymentType", Registrant.PaymentType.BANK_TRANSFER.toString())
                 .param("company", "false"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(TICKETS_EPAY_BUY_JSP));
+                .andExpect(view().name(TICKETS_EPAY_RESULT_JSP));
         List<Registrant> allRegistrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(allRegistrants.size(), is(1));
         Registrant registrant = allRegistrants.get(0);
@@ -93,7 +94,8 @@ public class TicketsEpayRegisterControllerTest {
                 .param("eik", "123456")
                 .param("vatNumber", "666")
                 .param("mol", "Gomez Adams")
-                .param("email", "gomez@adams.com"))
+                .param("email", "gomez@adams.com")
+                .param("paymentType", Registrant.PaymentType.EPAY_CREDIT_CARD.toString()))
                 .andExpect(status().isOk())
                 .andExpect(view().name(TICKETS_EPAY_BUY_JSP));
         List<Registrant> allRegistrants = (List<Registrant>) registrantRepository.findAll();
@@ -125,9 +127,10 @@ public class TicketsEpayRegisterControllerTest {
                 .param("address", "0001 Cemetery Lane")
                 .param("vatNumber", "666")
                 .param("mol", "Gomez Adams")
-                .param("email", "gomez@adams.com"))
+                .param("email", "gomez@adams.com")
+                .param("paymentType", Registrant.PaymentType.BANK_TRANSFER.toString()))
                 .andExpect(status().isOk())
-                .andExpect(view().name(TICKETS_EPAY_BUY_JSP));
+                .andExpect(view().name(TICKETS_EPAY_RESULT_JSP));
         List<Registrant> allRegistrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(allRegistrants.size(), is(1));
         Registrant registrant = allRegistrants.get(0);

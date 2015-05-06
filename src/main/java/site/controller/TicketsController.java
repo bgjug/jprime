@@ -1,5 +1,6 @@
 package site.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -41,9 +42,12 @@ import java.util.stream.Collectors;
 @Controller
 public class TicketsController {
 
+    private static final Logger logger = Logger.getLogger(TicketsController.class);
+
     static final String TICKETS_JSP = "/tickets.jsp";
     public static final String TICKETS_EPAY_REGISTER_JSP = "/tickets-epay-register.jsp";
     public static final String TICKETS_EPAY_BUY_JSP = "/tickets-epay-buy.jsp";
+    public static final String TICKETS_EPAY_RESULT_JSP = "/tickets-epay-result.jsp";
     @Autowired
     @Qualifier(MailFacade.NAME)
     private MailFacade mailFacade;
@@ -104,9 +108,7 @@ public class TicketsController {
             handlePersonalRegistrant(registrant);
         }
 
-        System.out.println("CYRILLIC CHECK (before save):" + registrant.getName());
         Registrant savedRegistrant = registrantFacade.save(registrant);
-        System.out.println("CYRILLIC CHECK (after save):" + savedRegistrant.getName());
 
         model.addAttribute("tags", userFacade.findAllTags());
 
@@ -187,7 +189,7 @@ public class TicketsController {
     @RequestMapping(value = "/tickets/result/{r}", method = RequestMethod.GET)
     public String result(@PathVariable("r") final String r, Model model) {
         model.addAttribute("result", r.equals("ok"));
-        return "/tickets-epay-result.jsp";
+        return TICKETS_EPAY_RESULT_JSP;
     }
 
     private byte[] createPDF(Registrant registrant) throws Exception {
@@ -229,12 +231,16 @@ public class TicketsController {
     }
 
     private void sendPDF(Registrant registrant, byte[] pdf) throws MessagingException {
-        String email = registrant.getEmail();
-        mailFacade.sendInvoice(email, "JPrime.io invoice",
-                "Thank you for registering to JPrime. Your invoice is attached as part of this mail.",
-                pdf);
-        String registrations = registrant.getVisitors().toString();
-        mailFacade.sendInvoice("conference@jprime.io", "JPrime.io invoice",
-                "We got some registrations: " + registrations, pdf);
+        try {
+            String email = registrant.getEmail();
+            mailFacade.sendInvoice(email, "JPrime.io invoice",
+                    "Thank you for registering to JPrime. Your invoice is attached as part of this mail.",
+                    pdf);
+            String registrations = registrant.getVisitors().toString();
+            mailFacade.sendInvoice("conference@jprime.io", "JPrime.io invoice",
+                    "We got some registrations: " + registrations, pdf);
+        } catch (Exception e) {
+            logger.error("Could not send confirmation email", e);
+        }
     }
 }
