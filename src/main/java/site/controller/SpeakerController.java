@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.AdminFacade;
+import site.facade.ThumbnailService;
 import site.model.Speaker;
 import site.repository.SpeakerRepository;
 
@@ -31,6 +32,10 @@ public class SpeakerController {
 	@Autowired
 	@Qualifier(AdminFacade.NAME)
 	private AdminFacade adminFacade;
+	
+	@Autowired
+	@Qualifier(ThumbnailService.NAME)
+	private ThumbnailService thumbnailService;
 	
 	@Transactional
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -51,7 +56,7 @@ public class SpeakerController {
 		if(!file.isEmpty()){
 			try {
                 byte[] bytes = file.getBytes();
-                speaker.setPicture(bytes);
+                speaker.setPicture(thumbnailService.thumbImage(bytes, 280, 326));
             } catch (Exception e) {
                 e.printStackTrace();
             }
