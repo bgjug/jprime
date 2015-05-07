@@ -195,7 +195,7 @@ public class AdminFacade {
 		Registrant registrant = visitor.getRegistrant();
 		registrant.getVisitors().remove(visitor);
 		visitorRepository.delete(visitor);
-		if (registrant.getEmail().equals(visitor.getEmail())&&registrant.getName().equals(visitor.getName())){
+		if (registrant.getEmail().equals(visitor.getEmail())&&registrant.getName().equals(visitor.getName())&&registrant.getVisitors().isEmpty()){
 			registrantRepository.delete(registrant);
 		}else {
 			registrantRepository.save(registrant);
