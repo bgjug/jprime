@@ -61,14 +61,14 @@ public class VisitorController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String edit(Model model) {
+    public String getNewVisitorForm(Model model) {
         model.addAttribute("visitor", new Visitor());
         model.addAttribute("statuses", VisitorStatus.values());
         return VISITOR_EDIT_JSP;
     }
 
     @RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
-    public String edit(@PathVariable("itemId") Long itemId, Model model) {
+    public String getEditVisitorForm(@PathVariable("itemId") Long itemId, Model model) {
         Visitor visitor = adminFacade.findOneVisitor(itemId);
         model.addAttribute("statuses", VisitorStatus.values());
         model.addAttribute("visitor", visitor);
