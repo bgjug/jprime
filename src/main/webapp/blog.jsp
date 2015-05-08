@@ -46,7 +46,7 @@
             <div class="row blog-page">
 
                 <!-- Start Blog Posts -->
-                <div class="col-md-9 blog-box">
+                <div class="col-md-11 blog-box">
 
                     <c:forEach var="article" items="${articles.content}">
                         <!-- Start Post -->

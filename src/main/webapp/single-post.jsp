@@ -40,7 +40,7 @@
     <div id="content">
         <div class="container">
             <div class="row blog-post-page">
-                <div class="col-md-9 blog-box">
+                <div class="col-md-11 blog-box">
 
                     <c:if test="${empty article}">
                         <div class="post-content">
