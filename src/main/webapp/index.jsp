@@ -234,12 +234,13 @@
     <!-- End Portfolio Section -->
     
     <!-- Start Team Member Section -->
+    <a name="speakers"></a>
     <div class="section" style="background:#fff;">
         <div class="container">
 
             <!-- Start Big Heading -->
             <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                <h1>Some of our <strong>Speakers</strong></h1>
+                <h1>Our <strong>Speakers</strong></h1>
             </div>
             <!-- End Big Heading -->
 

@@ -55,8 +55,8 @@
     <a name="info"></a>
     <p class="text-center"><br/> <strong>Useful</strong>&nbsp;information</p>
         <div id="content">
-            <div class="container" style="display: table">
-                <div class="row" style="display: table-cell;width:33%;padding: 20px">
+            <div class="container" style="vertical-align: top">
+                <div class="row" style="display: inline-block;max-width:33%;padding: 20px;vertical-align: top">
                     <div class="team-member modern">
 
                         <img alt="" src="/images/bulgaria.png"/><br/><br/>
@@ -71,7 +71,7 @@
                     </div>
                 </div>
 
-                <div class="row" style="display: table-cell;width:33%;padding: 20px">
+                <div class="row" style="display: inline-block;max-width:33%;padding: 20px;vertical-align: top">
                         <div class="team-member modern">
 
                             <img alt="" src="/images/apt.png"/><br/><br/>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
 
-                <div class="row" style="display: table-cell;padding: 20px">
+                <div class="row" style="display: inline-block;max-width:33%;padding: 20px;vertical-align: top">
                         <div class="team-member modern">
 
                             <img alt="" src="/images/hotel.png"/><br/><br/>
