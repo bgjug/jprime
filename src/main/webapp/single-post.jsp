@@ -57,7 +57,7 @@
                             <ul class="post-meta">
                                 <%--<li>By <a href="#">${article.author.firstName} ${article.author.lastName}</a>  &nbsp;&nbsp;
                                 <joda:format value="${article.createdDate}" pattern="dd-MM-yyyy"/>
-                                </li>%-->
+                                </li>--%>
                             </ul>
                             <p>${article.text}</p>
 
