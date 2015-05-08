@@ -30,11 +30,16 @@ public class NavController {
 	@RequestMapping("/nav/{tag}")
 	public String getByTag(@PathVariable("tag") final String tagName,
 			Pageable pageable, Model model) {
-		Page<Article> articles= userFacade.findArticlesByTag(tagName, pageable);
-		model.addAttribute("articles", articles);
 		model.addAttribute("tags", userFacade.findAllTags());
-		// redirect to nav
-		return "/blog.jsp";
+
+		Page<Article> articles= userFacade.findArticlesByTag(tagName, pageable);
+		if(articles.getTotalElements() > 1) {
+			model.addAttribute("articles", articles);
+			return "/blog.jsp";
+		} else { //just 1 for example Agenda will be such an article 1 article in a tag.. no need for paging and so on
+			model.addAttribute("article", articles.getContent().iterator().next());
+			return "/single-post.jsp";
+		}
 	}
 
     @RequestMapping("/nav")
