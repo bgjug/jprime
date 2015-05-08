@@ -149,7 +149,13 @@
             <artifactId>jasperreports-fonts</artifactId>
             <version>6.0.0</version>
         </dependency>
-
+		<!-- Thumbnail library -->
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		    <version>0.4.8</version>
+		</dependency>
+		
     </dependencies>
 
     <!--mihail: a profile that has the spring-boot:run plugin and a couple of dependencies, so that-->

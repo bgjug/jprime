@@ -1,7 +1,11 @@
 package site.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+
+import site.facade.ThumbnailService;
 import site.facade.UserFacade;
 import site.model.SessionLevel;
 import site.model.Speaker;
@@ -12,6 +16,10 @@ import site.model.Submission;
  */
 public class AbstractCfpController {
 
+	@Autowired
+	@Qualifier(ThumbnailService.NAME)
+	private ThumbnailService thumbnailService;
+	
     protected Model buildCfpFormModel(Model model, Submission submission) {
         model.addAttribute("submission", submission);
         model.addAttribute("levels", SessionLevel.values());
@@ -28,7 +36,7 @@ public class AbstractCfpController {
         } else if (!file.isEmpty()) { //new speaker.. file is required
             try {
                 byte[] bytes = file.getBytes();
-                submission.getSpeaker().setPicture(bytes);
+                submission.getSpeaker().setPicture(thumbnailService.thumbImage(bytes, 280, 326));
             } catch (Exception e) {
                 e.printStackTrace();
             }

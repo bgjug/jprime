@@ -38,6 +38,7 @@ public class RegistrantFacade {
 
     /** Complicated */
     public synchronized Registrant save(Registrant registrant) {
+
         if(registrant.getPaymentType().equals(Registrant.PaymentType.BANK_TRANSFER)) {
             long counter = getProformaInvoiceNumber();
             registrant.setProformaInvoiceNumber(counter);
@@ -52,8 +53,8 @@ public class RegistrantFacade {
                 long counter = getRealInvoiceNumber();
                 registrant.setRealInvoiceNumber(counter);
             }
-        }
 
+        }
         //todo: mihail this is not optimal, but for now it works
         for(Visitor visitor:registrant.getVisitors()) {
             visitor.setRegistrant(registrant);
