@@ -63,8 +63,8 @@
                             	<br/><br/>
                                 <h2><a href="#">${article.title}</a></h2>
                                 <ul class="post-meta">
-                                    By <a href="/nav/article/${article.id}">${article.author.firstName} ${article.author.lastName}</a>  &nbsp;&nbsp;
-                                    <joda:format value="${article.createdDate}" pattern="dd-MM-yyyy"/>
+                                   <%-- By <a href="/nav/article/${article.id}">${article.author.firstName} ${article.author.lastName}</a>  &nbsp;&nbsp;
+                                    <joda:format value="${article.createdDate}" pattern="dd-MM-yyyy"/>--%>
                                 </ul>
                                 <div class="truncArt">${article.text}</div>
                                 <a class="main-button" href="/nav/article/${article.id}">Read More <i class="fa fa-angle-right"></i></a>
