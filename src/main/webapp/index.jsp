@@ -61,8 +61,7 @@
                                 <span>Java prime time in Sofia</span>
                             </h3>
 
-                            <!-- Change that to 'Our Agenda' once we have the agenda
-                            <p class="animated4"><a href="/cfp" class="slider btn btn-primary">Submit a talk</a> -->
+                            <p class="animated4"><a href="/nav/Agenda" class="slider btn btn-primary">Our Agenda</a> 
                         </div>
                     </div>
                 </div>
