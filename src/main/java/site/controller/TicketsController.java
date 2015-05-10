@@ -24,6 +24,7 @@ import site.model.JprimeException;
 import site.model.PaymentTypeEditor;
 import site.model.Registrant;
 import site.model.Visitor;
+import site.model.VisitorStatus;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -102,7 +103,7 @@ public class TicketsController {
         //check empty users, server side validation
         List<Visitor> toBeRemoved = registrant.getVisitors().stream().filter(v -> v.getEmail() == null || v.getEmail().isEmpty() || v.getName() == null || v.getName().isEmpty()).collect(Collectors.toList());
         registrant.getVisitors().removeAll(toBeRemoved);
-
+        registrant.getVisitors().forEach(visitor -> visitor.setStatus(VisitorStatus.REQUESTING));
 
         if (!registrant.isCompany()) {
             handlePersonalRegistrant(registrant);

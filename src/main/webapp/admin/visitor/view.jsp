@@ -22,6 +22,7 @@
 			<tr>
 				<td><i>Name</i></td>
 				<td><i>Email</i></td>
+                <td><i>Company</i></td>
 				<td><i>Payed</i></td>
 				<td><i>Registrant</i></td>
 				<td><i>Invoice number</i></td>
@@ -31,6 +32,7 @@
 				<tr>
 					<td>${visitor.name}</td>
 					<td>${visitor.email}</td>
+                    <td>${visitor.company}</td>
 					<td>${visitor.status}</td>
 					<td>${visitor.registrant.name}</td>
 					<td>${not empty visitor.registrant and not empty visitor.registrant.realInvoiceNumber ?visitor.registrant.realInvoiceNumber:''}</td>

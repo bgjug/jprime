@@ -80,6 +80,7 @@ public class Visitor extends AbstractEntity {
         return "Visitor{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", company='" + company + '\'' +
                 '}';
     }
 }

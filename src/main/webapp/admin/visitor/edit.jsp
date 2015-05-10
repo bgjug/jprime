@@ -43,7 +43,14 @@
                 <form:input path="email"/>
             </dd>
         </dl>
-
+        <dl>
+            <dt>
+                <label for="email">Company</label>
+            </dt>
+            <dd>
+                <form:input path="company"/>
+            </dd>
+        </dl>
             <dl>
                 <dt>
                     <label for="status">Status</label>

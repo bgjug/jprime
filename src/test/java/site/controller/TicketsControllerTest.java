@@ -45,15 +45,4 @@ public class TicketsControllerTest {
                 .andExpect(view().name(TICKETS_JSP));
     }
 
-    @Test
-    public void getTicketsEpayShouldReturnEmptyRegistrantAndAllPaymentTypes() throws Exception {
-        mockMvc.perform(get("/tickets/epay"))
-                .andExpect(status().isOk())
-                .andExpect(view().name(TICKETS_EPAY_REGISTER_JSP))
-                .andExpect(model().attribute("registrant", new Registrant()))
-                .andExpect(model().attribute("paymentTypes", containsInAnyOrder(
-                        Registrant.PaymentType.BANK_TRANSFER.toString(),
-                        Registrant.PaymentType.EPAY_ACCOUNT.toString(),
-                        Registrant.PaymentType.EPAY_CREDIT_CARD.toString())));
-    }
 }

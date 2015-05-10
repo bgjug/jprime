@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
 import site.model.Registrant;
+import site.model.VisitorStatus;
 import site.repository.RegistrantRepository;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -113,6 +115,7 @@ public class TicketsEpayRegisterControllerTest {
         assertThat("John Doe", is(registrant.getVisitors().get(0).getName()));
         assertThat("john@example.com", is(registrant.getVisitors().get(0).getEmail()));
         assertThat("Example", is(registrant.getVisitors().get(0).getCompany()));
+        assertThat(VisitorStatus.REQUESTING, is(registrant.getVisitors().get(0).getStatus()));
     }
 
     @Test
@@ -137,5 +140,18 @@ public class TicketsEpayRegisterControllerTest {
         assertThat(2, is(registrant.getVisitors().size()));
         assertThat(registrant.getVisitors().get(0).getName(), anyOf(is("Morticia Adams"),
                 is("Lurch")));
+        assertThat(VisitorStatus.REQUESTING, is(registrant.getVisitors().get(0).getStatus()));
+    }
+
+    @Test
+    public void getTicketsEpayShouldReturnEmptyRegistrantAndAllPaymentTypes() throws Exception {
+        mockMvc.perform(get("/tickets/epay"))
+                .andExpect(status().isOk())
+                .andExpect(view().name(TICKETS_EPAY_REGISTER_JSP))
+                .andExpect(model().attribute("registrant", new Registrant()))
+                .andExpect(model().attribute("paymentTypes", containsInAnyOrder(
+                        Registrant.PaymentType.BANK_TRANSFER.toString(),
+                        Registrant.PaymentType.EPAY_ACCOUNT.toString(),
+                        Registrant.PaymentType.EPAY_CREDIT_CARD.toString())));
     }
 }
