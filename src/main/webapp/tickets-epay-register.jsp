@@ -78,7 +78,7 @@
             }else{
                 $("#removeVisitor").hide();
             }
-        }
+        };
 
         var appendVisitor = function() {
             var visitorsFieldset = $("#visitorsFieldset");
@@ -87,21 +87,32 @@
             var clone = visitorsFieldset.find("dl:last").clone();
             clone.find("dd label").remove();
             clone.find("dd input").each(function(i) {
-                if (i == 0) {
-                    $(this).attr("id", "visitors" + index + ".name");
-                    $(this).attr("name", "visitors[" + index + "].name");
-                }
-                else {
-                    $(this).attr("id", "visitors" + index + ".email");
-                    $(this).attr("name", "visitors[" + index + "].email");
+                switch (i) {
+                    case 0:
+                        $(this).attr("id", "visitors" + index + ".name");
+                        $(this).attr("name", "visitors[" + index + "].name");
+                        break;
+                    case 1:
+                        $(this).attr("id", "visitors" + index + ".email");
+                        $(this).attr("name", "visitors[" + index + "].email");
+                        break;
+                    case 2:
+                        $(this).attr("id", "visitors" + index + ".company");
+                        $(this).attr("name", "visitors[" + index + "].company");
+                        break;
                 }
             });
             clone.find("dt label").each(function(i) {
-                if (i == 0) {
-                    $(this).attr("for", "visitors" + index + ".name");
-                }
-                else {
-                    $(this).attr("for", "visitors" + index + ".email");
+                switch (i) {
+                    case 0:
+                        $(this).attr("for", "visitors" + index + ".name");
+                        break;
+                    case 1:
+                        $(this).attr("for", "visitors" + index + ".email");
+                        break;
+                    case 2:
+                        $(this).attr("for", "visitors" + index + ".company");
+                        break;
                 }
             });
             visitorsFieldset.append(clone);
