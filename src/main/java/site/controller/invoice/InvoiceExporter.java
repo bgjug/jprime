@@ -29,9 +29,9 @@ public class InvoiceExporter {
 
         InputStream reportTemplate = null;
         if (isCompany) {
-            reportTemplate = getClass().getResourceAsStream("/invoice/invoice_company_template.jrxml");
+            reportTemplate = getClass().getResourceAsStream("/invoice/invoice_company_template_bg.jrxml");
         } else {
-            reportTemplate = getClass().getResourceAsStream("/invoice/invoice_individual_template.jrxml");
+            reportTemplate = getClass().getResourceAsStream("/invoice/invoice_individual_template_bg.jrxml");
         }
         ByteArrayOutputStream result = new ByteArrayOutputStream();
 
@@ -69,10 +69,10 @@ public class InvoiceExporter {
         data.setClientVAT("BG2464387775");
         data.setMol("fda");
         data.setPassQty(5);
-        data.setInvoiceType("Proforma");
+        data.setInvoiceType("Проформа");
         data.setPaymentType("пеймънт");
 //        data.setPrice(55.5);
 
-        Files.write(Paths.get("/tmp/result.pdf"), new InvoiceExporter().exportInvoice(data, true));
+        Files.write(Paths.get("/tmp/result.pdf"), new InvoiceExporter().exportInvoice(data, false));
     }
 }

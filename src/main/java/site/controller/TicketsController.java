@@ -208,11 +208,11 @@ public class TicketsController {
         data.setClientEIK(regVat);
         data.setMol(regMol);
         if(registrant.getPaymentType().equals(Registrant.PaymentType.BANK_TRANSFER)) {
-            data.setInvoiceType("Proforma");
+            data.setInvoiceType("Проформа");//currently hardcoded
             data.setInvoiceNumber(String.valueOf(registrant.getProformaInvoiceNumber()));
-            data.setPaymentType("Bank Transfer");
+            data.setPaymentType("Банков превод");//currently hardcoded
         } else {
-            data.setInvoiceType("Original");
+            data.setInvoiceType("Оригинал");//currently hardcoded
             data.setInvoiceNumber(String.valueOf(registrant.getRealInvoiceNumber()));
             data.setPaymentType("ePay.bg");
         }
