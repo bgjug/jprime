@@ -15,6 +15,7 @@ import site.model.Visitor;
 import site.model.VisitorStatus;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author Mitia
@@ -36,7 +37,15 @@ public class VisitorController {
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String viewVisitors(Model model) {
-        model.addAttribute("visitors", adminFacade.findAllNewestVisitors());
+
+        List<Visitor> visitors = adminFacade.findAllNewestVisitors();
+        long payedCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.PAYED).count();
+        long requestingCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.REQUESTING).count();
+        long sponsoredCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.Sponsored).count();
+        model.addAttribute("visitors", visitors);
+        model.addAttribute("payedCount", payedCount);
+        model.addAttribute("requestingCount", requestingCount);
+        model.addAttribute("sponsoredCount", sponsoredCount);
         return VISITORS_JSP;
     }
 

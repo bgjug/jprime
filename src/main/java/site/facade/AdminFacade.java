@@ -181,7 +181,7 @@ public class AdminFacade {
 		return visitorRepository.findAll(pageable);
 	}
 
-	public Iterable<Visitor> findAllNewestVisitors(){
+	public List<Visitor> findAllNewestVisitors(){
 		return visitorRepository.findAllNewestUsers();
 	}
 
