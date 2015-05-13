@@ -5,60 +5,26 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin" %>
+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+    <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
     <script type="text/javascript" src="/js/niceforms.js"></script>
-    <link rel="stylesheet" href="/js/tinyeditor/style.css"/>
-    <script type="text/javascript" src="/js/tinyeditor/tinyeditor.js"></script>
+    <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
     <link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css"/>
 
-<%--
-COMMENTING BECAUSE IT SIMPLY DOESNT WORK.
-GUYS PLEASE STOP USE PRODUCTS THAT DONT WORK.
-
-WHy it doesnt work :
-
-example .. paste the following HTML snippet in CODE VIEW :
-
-<div class="col-md-3 col-sm-6 col-xs-12 animated fadeIn delay-03" data-animation="fadeIn" data-animation-delay="03">
-    <div class="team-member modern">
-        <!-- Memebr Photo, Name & Position -->
-        <div class="member-photo">
-            <img alt="" src="/image/speaker/3">
-
-            <div class="member-name">Heinz&nbsp;Kabutz<span>The Java Specialist</span>
-            </div>
-        </div>
-        <div class="member-socail" style="text-align: left">
-            <a class="twitter" href="http://twitter.com/heinzkabutz"><i class="fa fa-twitter"></i></a>
-        </div>
-    </div>
-</div>
-
-THIS SNIPPET IS TAKEN FROM THE HOMEPAGE... SAVE ... EDIT again ... check the HTML is changed.. 
-PLEASE DONT INCLUDE CRAPS in the project
-
-    <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
-    <script type="text/javascript">
-        tinymce.init({
-            selector: "#text",
-            plugins: [
-                "advlist autolink lists link image charmap print preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste"
-            ],
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-        });
-    </script>
-     --%>
+    <user:pageJavaScriptAndCss/>
 </head>
-<body>
+<body  style="background: #cccccc!important;">
 <admin:menu/>
+
+<div style="display: inline-block;width:45%">
 <form:form commandName="article" method="post"
            action="/admin/article/add">
     <fieldset>
@@ -71,7 +37,7 @@ PLEASE DONT INCLUDE CRAPS in the project
                 <label for="title">Title</label>
             </dt>
             <dd>
-                <form:input path="title"/>
+                <form:input path="title" id="title"/>
             </dd>
         </dl>
         <dl>
@@ -87,7 +53,7 @@ PLEASE DONT INCLUDE CRAPS in the project
                 <label for="text">Text</label>
             </dt>
             <dd>
-                <form:textarea path="text" cols="70" rows="20" id="text"/>
+                <form:textarea path="text"  cols="70" rows="20" id="text"/>
             </dd>
         </dl>
         <dl>
@@ -114,6 +80,37 @@ PLEASE DONT INCLUDE CRAPS in the project
     </fieldset>
 
 </form:form>
+</div>
+<div id="preview" style="display: inline-block; height:100%; vertical-align: top;border: 1px;background: white;padding:20px;width:45%">
+
+    <div class="blog-post gallery-post">
+        <div class="post-content">
+            <h2><span id="previewTitle"></span> </h2>
+
+            <p id="previewText"></p>
+
+            <div class="post-bottom clearfix">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        //init
+        $("#previewTitle").html($( "#title").val());
+        $("#previewText").html($( "#text").val());
+
+        $( "#text" ).on("change paste keyup", function() {
+            $("#previewText").html($( "#text").val());
+        });
+        $( "#title" ).on("change paste keyup", function() {
+            $("#previewTitle").html($( "#title").val());
+        });
+    });
+</script>
 
 
 </body>
