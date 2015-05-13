@@ -17,7 +17,7 @@ import java.util.List;
 public class Registrant extends AbstractEntity {
 
     @OneToMany(mappedBy = "registrant", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Visitor> visitors;
+    private List<Visitor> visitors = new ArrayList<>();
     private boolean isCompany;
     private String name = "";
     private String address;
@@ -131,16 +131,25 @@ public class Registrant extends AbstractEntity {
     }
 
     public Registrant() {
-        this.visitors = new ArrayList<>();
+    }
+
+    public Registrant(String name, String email) {
+        this(false, name, null, null, null, email);
     }
 
     public Registrant(boolean isCompany, String name, String address, String vatNumber, String mol, String email) {
+        this(isCompany, name, address, vatNumber, vatNumber, mol, email, PaymentType.BANK_TRANSFER);
+    }
+
+    public Registrant(boolean isCompany, String name, String address, String vatNumber, String eik, String mol, String email, PaymentType paymentType) {
         this.isCompany = isCompany;
         this.name = name;
         this.address = address;
         this.vatNumber = vatNumber;
+        this.eik = eik;
         this.mol = mol;
         this.email = email;
+        this.paymentType = paymentType;
     }
 
     public List<Visitor> getVisitors() {
@@ -223,11 +232,11 @@ public class Registrant extends AbstractEntity {
         this.realInvoiceNumber = realInvoiceNumber;
     }
 
-    public long getProformaInvoiceNumber() {
+    public Long getProformaInvoiceNumber() {
         return proformaInvoiceNumber;
     }
 
-    public void setProformaInvoiceNumber(long proformaInvoiceNumber) {
+    public void setProformaInvoiceNumber(Long proformaInvoiceNumber) {
         this.proformaInvoiceNumber = proformaInvoiceNumber;
     }
 

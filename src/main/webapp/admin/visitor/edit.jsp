@@ -62,6 +62,7 @@
             </dl>
         <sec:csrfInput/>
         <form:hidden path="id"/>
+        <form:hidden path="registrant.id"/>
         <button type="submit">Save</button>
     </fieldset>
 

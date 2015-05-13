@@ -219,4 +219,12 @@ public class AdminFacade {
 	public Iterable<Registrant> findAllRegistrants(){
 		return registrantRepository.findAll();
 	}
+
+    public Registrant findOneRegistrant(Long itemId) {
+        return registrantRepository.findOne(itemId);
+    }
+
+    public void deleteRegistrant(Long itemId) {
+        registrantRepository.delete(itemId);
+    }
 }

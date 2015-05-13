@@ -20,7 +20,9 @@ public class Visitor extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private VisitorStatus status;
 
-    public Visitor() {}
+    public Visitor() {
+        registrant = new Registrant();
+    }
 
     public Visitor(Registrant invoiceTo, String name, String email,String company) {
         this.registrant = invoiceTo;

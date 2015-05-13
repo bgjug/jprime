@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import site.facade.AdminFacade;
-import site.facade.RegistrantFacade;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.model.VisitorStatus;
@@ -30,10 +29,6 @@ public class VisitorController {
     @Autowired
     @Qualifier(AdminFacade.NAME)
     private AdminFacade adminFacade;
-
-    @Autowired
-    @Qualifier(RegistrantFacade.NAME)
-    private RegistrantFacade registrantFacade;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String viewVisitors(Model model) {
@@ -56,17 +51,22 @@ public class VisitorController {
         }
         //may be its better to use a set of registrants for sponsors?
 
-        if (visitor.getRegistrant() == null) {
-            Registrant registrant = new Registrant();
+        String redirectUrl = "redirect:/admin/visitor/view";
+        Registrant registrant = new Registrant();
+
+        if (visitor.getRegistrant().getId() == null) {
+            // This means that we came here from the visitors admin panel
             registrant.setName(visitor.getName());
             registrant.setEmail(visitor.getEmail());
-            visitor.setRegistrant(registrant);
-            registrant.getVisitors().add(visitor);
-            this.adminFacade.saveRegistrant(registrant);
         } else {
-            this.adminFacade.saveRegistrant(visitor.getRegistrant());
+            // This means that we came here from the registrant admin panel
+            registrant = adminFacade.findOneRegistrant(visitor.getRegistrant().getId());
+            redirectUrl = "redirect:/admin/registrant/edit/" + visitor.getRegistrant().getId();
         }
-        return "redirect:/admin/visitor/view";
+        visitor.setRegistrant(registrant);
+        registrant.getVisitors().add(visitor);
+        this.adminFacade.saveRegistrant(visitor.getRegistrant());
+        return redirectUrl;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -85,7 +85,7 @@ public class VisitorController {
     }
 
     @RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
-    public String remove(@PathVariable("itemId") Long itemId, Model model) {
+    public String remove(@PathVariable("itemId") Long itemId) {
         adminFacade.deleteVisitor(itemId);
         return "redirect:/admin/visitor/view";
     }
