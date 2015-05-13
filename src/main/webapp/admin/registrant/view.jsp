@@ -45,6 +45,9 @@
                 <td>
                     <span><a href="/admin/registrant/edit/${registrant.id}">Edit</a></span> &nbsp;&nbsp;&nbsp;
                     <span><a href="/admin/registrant/remove/${registrant.id}">Remove</a></span>
+                    <c:if test="${registrant.paymentType ne 'EPAY_ACCOUNT'}">
+                        <span><a href="/admin/invoice/${registrant.id}">Invoice</a></span>
+                    </c:if>
                 </td>
             </tr>
         </c:forEach>

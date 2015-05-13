@@ -77,6 +77,14 @@
     </dl>
     <dl>
         <dt>
+            <label for="eik">MOL</label>
+        </dt>
+        <dd>
+            <form:input path="mol"/>
+        </dd>
+    </dl>
+    <dl>
+        <dt>
             epay Invoice
         </dt>
         <dd>

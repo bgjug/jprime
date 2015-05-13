@@ -1,10 +1,19 @@
 package site.controller.invoice;
 
+import site.model.Registrant;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * DTO for the PDF
  * NOTE: Checkout some of the getters, some magic happens there
  */
 public class InvoiceData {
+
+    private static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(100D);
+    private static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);
+
     private String invoiceNumber;
     private String invoiceDate;
     private String invoiceType;
@@ -13,11 +22,21 @@ public class InvoiceData {
     private String clientEIK;
     private String clientVAT;
     private String mol;
+    private BigDecimal singlePriceWithVAT = DEFAULT_TICKET_PRICE;
     private Integer passQty;
     private String paymentType;
+    private String description = "";
+
+    public double getSinglePriceWithVAT() {
+        return singlePriceWithVAT.doubleValue();
+    }
+
+    public void setSinglePriceWithVAT(double singlePriceWithVAT) {
+        this.singlePriceWithVAT = BigDecimal.valueOf(singlePriceWithVAT);
+    }
 
     public Double getPrice() {
-        return 83.34D;//one ticket without VAT
+        return singlePriceWithVAT.divide(VAT_DECREASE_RATIO, 2, RoundingMode.UP).doubleValue();//one ticket without VAT
     }
 
     public Double getTotalPrice() {
@@ -25,7 +44,7 @@ public class InvoiceData {
     }
 
     public Double getTotalPriceWithVAT() {
-        return 100D * passQty;
+        return singlePriceWithVAT.doubleValue() * passQty;
     }
 
     public Double getTotalPriceVAT() {
@@ -110,5 +129,25 @@ public class InvoiceData {
 
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public static InvoiceData fromRegistrant(Registrant registrant) {
+        InvoiceData result = new InvoiceData();
+        result.setClient(registrant.getName());
+        result.setClientAddress(registrant.getAddress());
+        result.setClientEIK(registrant.getEik());
+        result.setClientVAT(registrant.getVatNumber());
+        result.setMol(registrant.getMol());
+        result.setPaymentType(registrant.getPaymentType().toString());
+        result.setPassQty(registrant.getVisitors().size());
+        return result;
     }
 }

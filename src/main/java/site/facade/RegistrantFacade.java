@@ -36,6 +36,10 @@ public class RegistrantFacade {
         return registrantRepository.findByEpayInvoiceNumber(invoiceNumber);
     }
 
+    public Registrant findById(long id) {
+        return registrantRepository.findOne(id);
+    }
+
     /** Complicated */
     public synchronized Registrant save(Registrant registrant) {
 
