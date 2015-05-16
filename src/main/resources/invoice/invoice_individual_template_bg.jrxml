@@ -16,6 +16,7 @@
 	<field name="totalPriceWithVAT" class="java.lang.Double"/>
 	<field name="paymentType" class="java.lang.String"/>
 	<field name="invoiceType" class="java.lang.String"/>
+    <field name="description" class="java.lang.String"/>
 	<title>
 		<band height="79">
 			<image>
@@ -147,7 +148,7 @@ IBAN: BG60UNCR70001522105142]]></text>
 				</textElement>
 				<text><![CDATA[1.]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="23" y="182" width="221" height="20"/>
 				<box>
 					<pen lineWidth="0.25"/>
@@ -159,8 +160,8 @@ IBAN: BG60UNCR70001522105142]]></text>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="DejaVu Sans" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[JPrime 2015 билет за конференция]]></text>
-			</staticText>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
 			<textField>
 				<reportElement x="244" y="182" width="72" height="20"/>
 				<box>
@@ -299,14 +300,14 @@ IBAN: BG60UNCR70001522105142]]></text>
 				<textElement lineSpacing="Single">
 					<font fontName="DejaVu Sans" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Тип плащане:"+$F{paymentType}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Тип плащане: "+$F{paymentType}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="23" y="226" width="279" height="16"/>
 				<textElement lineSpacing="Single">
 					<font fontName="DejaVu Sans" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[Всичките цени са Български Лева]]></text>
+				<text><![CDATA[Всичките цени са в Български Лева]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="339" width="176" height="41"/>

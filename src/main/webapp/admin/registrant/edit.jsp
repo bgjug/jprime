@@ -77,7 +77,7 @@
     </dl>
     <dl>
         <dt>
-            <label for="eik">MOL</label>
+            <label for="mol">MOL</label>
         </dt>
         <dd>
             <form:input path="mol"/>
@@ -118,6 +118,9 @@
     </dl>
     <sec:csrfInput/>
     <form:hidden path="id"/>
+    <form:hidden path="epayInvoiceNumber"/>
+    <form:hidden path="realInvoiceNumber"/>
+    <form:hidden path="proformaInvoiceNumber"/>
     <button type="submit">Save</button>
 </fieldset>
 </form:form>

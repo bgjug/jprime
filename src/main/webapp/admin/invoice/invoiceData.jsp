@@ -18,7 +18,7 @@
 <body>
 <admin:menu/>
 <form:form commandName="invoiceData" method="post"
-           action="/admin/invoice">
+           action="/admin/invoice/send">
     <fieldset>
         <legend>Invoice</legend>
         <p>
@@ -88,9 +88,20 @@
                 <c:out value="${invoiceData.paymentType}"/>
             </dd>
         </dl>
+        <dl>
+            <dt>
+                <label for="invoiceDate">Date</label>
+            </dt>
+            <dd>
+                <form:input path="invoiceDate"/>
+            </dd>
+        </dl>
         <sec:csrfInput/>
         <form:hidden path="passQty"/>
-        <button type="submit">Save</button>
+        <form:hidden path="paymentType"/>
+        <form:hidden path="invoiceNumber"/>
+        <form:hidden path="registrantId"/>
+        <button type="submit">Send</button>
     </fieldset>
 </form:form>
 </body>

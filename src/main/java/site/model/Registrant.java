@@ -38,16 +38,23 @@ public class Registrant extends AbstractEntity {
     private EpayResponse epayResponse;
 
     public enum PaymentType {
-        EPAY_ACCOUNT("ePay account"), EPAY_CREDIT_CARD("Bank card"), BANK_TRANSFER("Direct bank transfer");
+        EPAY_ACCOUNT("ePay account", "epay.bg"), EPAY_CREDIT_CARD("Bank card", "Банкова карта"),
+        BANK_TRANSFER("Direct bank transfer", "Банков превод");
 
         private String value;
+        private String bulgarianValue;
 
-        private PaymentType(String theValue) {
+        private PaymentType(String theValue, String bulgarianValue) {
             this.value = theValue;
+            this.bulgarianValue = bulgarianValue;
         }
 
         public String toString() {
             return value;
+        }
+
+        public String getBulgarianValue() {
+            return bulgarianValue;
         }
     }
 
@@ -185,6 +192,9 @@ public class Registrant extends AbstractEntity {
     }
 
     public String getVatNumber() {
+        if (vatNumber != null && !vatNumber.startsWith("BG")) {
+            return "BG" + vatNumber;
+        }
         return vatNumber;
     }
 

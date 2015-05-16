@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import site.model.JprimeException;
 import site.model.Registrant;
 import site.model.Visitor;
+import site.model.VisitorStatus;
 import site.repository.RegistrantEpayInvoiceNumberGeneratorRepository;
 import site.repository.RegistrantProformaInvoiceNumberGeneratorRepository;
 import site.repository.RegistrantRealInvoiceNumberGeneratorRepository;
@@ -54,8 +55,7 @@ public class RegistrantFacade {
 
             //only if registrant has the epay info. now a real invoice number must be produced
             if(registrant.getEpayResponse() != null && registrant.getRealInvoiceNumber() == 0) {
-                long counter = getRealInvoiceNumber();
-                registrant.setRealInvoiceNumber(counter);
+                generateInvoiceNumber(registrant);
             }
 
         }
@@ -65,6 +65,11 @@ public class RegistrantFacade {
         }
 
         return registrantRepository.save(registrant);
+    }
+
+    public void generateInvoiceNumber(Registrant registrant) {
+        long counter = getRealInvoiceNumber();
+        registrant.setRealInvoiceNumber(counter);
     }
 
     private long getEpayInvoiceNumber() {
@@ -130,5 +135,10 @@ public class RegistrantFacade {
         proformaInvoiceNumberGenerator.setCounter(counter + 1);
         registrantProformaInvoiceNumberGeneratorRepository.save(proformaInvoiceNumberGenerator);
         return counter;
+    }
+
+    public void setRegistrantPaid(Registrant registrant) {
+        registrant.getVisitors().forEach(visitor -> visitor.setStatus(VisitorStatus.PAYED));
+        registrantRepository.save(registrant);
     }
 }

@@ -4,6 +4,8 @@ import site.model.Registrant;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * DTO for the PDF
@@ -13,6 +15,10 @@ public class InvoiceData {
 
     private static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(100D);
     private static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);
+    private static final String DEFAULT_DESCRIPTION_BG = "jPrime 2015 билет за конференция";
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    public static final String ORIGINAL_BG = "Оригинал";
+    public static final String PROFORMA_BG = "Проформа";
 
     private String invoiceNumber;
     private String invoiceDate;
@@ -25,7 +31,9 @@ public class InvoiceData {
     private BigDecimal singlePriceWithVAT = DEFAULT_TICKET_PRICE;
     private Integer passQty;
     private String paymentType;
-    private String description = "";
+    private String description = DEFAULT_DESCRIPTION_BG;
+
+    private Long registrantId;
 
     public double getSinglePriceWithVAT() {
         return singlePriceWithVAT.doubleValue();
@@ -139,6 +147,14 @@ public class InvoiceData {
         this.description = description;
     }
 
+    public Long getRegistrantId() {
+        return registrantId;
+    }
+
+    public void setRegistrantId(Long registrantId) {
+        this.registrantId = registrantId;
+    }
+
     public static InvoiceData fromRegistrant(Registrant registrant) {
         InvoiceData result = new InvoiceData();
         result.setClient(registrant.getName());
@@ -148,6 +164,10 @@ public class InvoiceData {
         result.setMol(registrant.getMol());
         result.setPaymentType(registrant.getPaymentType().toString());
         result.setPassQty(registrant.getVisitors().size());
+        result.setRegistrantId(registrant.getId());
+        result.setPaymentType(registrant.getPaymentType().getBulgarianValue());
+        result.setInvoiceNumber(registrant.getRealInvoiceNumber() + "");
+        result.setInvoiceDate(LocalDate.now().format(FORMATTER));
         return result;
     }
 }

@@ -17,6 +17,7 @@
 	<field name="mol" class="java.lang.String"/>
 	<field name="invoiceType" class="java.lang.String"/>
 	<field name="paymentType" class="java.lang.String"/>
+    <field name="description" class="java.lang.String"/>
 	<title>
 		<band height="79">
 			<image>
@@ -32,7 +33,7 @@
 				<textElement textAlignment="Center" lineSpacing="Single">
 					<font fontName="DejaVu Sans" size="18" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["JPrime 2015\nInvoice\n"+$F{invoiceType}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["jPrime 2015\nInvoice\n"+$F{invoiceType}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -148,7 +149,7 @@ IBAN: BG60UNCR70001522105142]]></text>
 				</textElement>
 				<text><![CDATA[1.]]></text>
 			</staticText>
-			<staticText>
+			<textField>
 				<reportElement x="23" y="182" width="221" height="20"/>
 				<box>
 					<pen lineWidth="0.25"/>
@@ -160,8 +161,8 @@ IBAN: BG60UNCR70001522105142]]></text>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="DejaVu Sans" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[JPrime 2015 conference pass]]></text>
-			</staticText>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
 			<textField>
 				<reportElement x="244" y="182" width="72" height="20"/>
 				<box>
@@ -300,7 +301,7 @@ IBAN: BG60UNCR70001522105142]]></text>
 				<textElement lineSpacing="Single">
 					<font fontName="DejaVu Sans" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Payment type:"+$F{paymentType}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Payment type: "+$F{paymentType}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="11" y="222" width="279" height="20"/>

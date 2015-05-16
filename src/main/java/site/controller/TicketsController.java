@@ -49,6 +49,7 @@ public class TicketsController {
     public static final String TICKETS_EPAY_REGISTER_JSP = "/tickets-epay-register.jsp";
     public static final String TICKETS_EPAY_BUY_JSP = "/tickets-epay-buy.jsp";
     public static final String TICKETS_EPAY_RESULT_JSP = "/tickets-epay-result.jsp";
+
     @Autowired
     @Qualifier(MailFacade.NAME)
     private MailFacade mailFacade;
@@ -207,21 +208,17 @@ public class TicketsController {
         data.setClientAddress(regAddress);
         data.setClientEIK(regVat);
         data.setMol(regMol);
+        data.setPaymentType(registrant.getPaymentType().getBulgarianValue());
         if(registrant.getPaymentType().equals(Registrant.PaymentType.BANK_TRANSFER)) {
-            data.setInvoiceType("Проформа");//currently hardcoded
+            data.setInvoiceType(InvoiceData.PROFORMA_BG);//currently hardcoded
             data.setInvoiceNumber(String.valueOf(registrant.getProformaInvoiceNumber()));
-            data.setPaymentType("Банков превод");//currently hardcoded
         } else {
-            data.setInvoiceType("Оригинал");//currently hardcoded
+            data.setInvoiceType(InvoiceData.ORIGINAL_BG);//currently hardcoded
             data.setInvoiceNumber(String.valueOf(registrant.getRealInvoiceNumber()));
-            data.setPaymentType("ePay.bg");
         }
 
         String vatNumber = registrant.getVatNumber();
         if (vatNumber != null) {
-            if (!vatNumber.startsWith("BG")) {
-                vatNumber = "BG" + vatNumber;
-            }
             data.setClientVAT(vatNumber);
         } else {
             data.setClientVAT("");
@@ -234,11 +231,11 @@ public class TicketsController {
     private void sendPDF(Registrant registrant, byte[] pdf) throws MessagingException {
         try {
             String email = registrant.getEmail();
-            mailFacade.sendInvoice(email, "JPrime.io invoice",
-                    "Thank you for registering to JPrime. Your invoice is attached as part of this mail.",
+            mailFacade.sendInvoice(email, "jPrime.io invoice",
+                    "Thank you for registering to JPrime. Your proforma is attached as part of this mail.",
                     pdf);
             String registrations = registrant.getVisitors().toString();
-            mailFacade.sendInvoice("conference@jprime.io", "JPrime.io invoice",
+            mailFacade.sendInvoice("conference@jprime.io", "jPrime.io invoice",
                     "We got some registrations: " + registrations, pdf);
         } catch (Exception e) {
             logger.error("Could not send confirmation email", e);
