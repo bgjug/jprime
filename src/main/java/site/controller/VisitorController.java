@@ -58,14 +58,14 @@ public class VisitorController {
             // This means that we came here from the visitors admin panel
             registrant.setName(visitor.getName());
             registrant.setEmail(visitor.getEmail());
+            registrant = adminFacade.saveRegistrant(registrant);
         } else {
             // This means that we came here from the registrant admin panel
             registrant = adminFacade.findOneRegistrant(visitor.getRegistrant().getId());
             redirectUrl = "redirect:/admin/registrant/edit/" + visitor.getRegistrant().getId();
         }
         visitor.setRegistrant(registrant);
-        registrant.getVisitors().add(visitor);
-        this.adminFacade.saveRegistrant(visitor.getRegistrant());
+        adminFacade.saveVisitor(visitor);
         return redirectUrl;
     }
 

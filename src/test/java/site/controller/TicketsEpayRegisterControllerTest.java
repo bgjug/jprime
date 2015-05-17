@@ -1,6 +1,5 @@
 package site.controller;
 
-import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +28,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static site.controller.TicketsController.*;
+import static site.controller.TicketsController.TICKETS_EPAY_BUY_JSP;
+import static site.controller.TicketsController.TICKETS_EPAY_REGISTER_JSP;
+import static site.controller.TicketsController.TICKETS_EPAY_RESULT_JSP;
 
 /**
  * @author Ivan St. Ivanov
@@ -93,7 +94,7 @@ public class TicketsEpayRegisterControllerTest {
                 .param("company", "true")
                 .param("name", "Adams Family")
                 .param("address", "0001 Cemetery Lane")
-                .param("eik", "123456")
+                .param("eik", "666")
                 .param("vatNumber", "666")
                 .param("mol", "Gomez Adams")
                 .param("email", "gomez@adams.com")
@@ -107,8 +108,8 @@ public class TicketsEpayRegisterControllerTest {
         assertThat("gomez@adams.com", is(registrant.getEmail()));
         assertThat("Adams Family", is(registrant.getName()));
         assertThat("0001 Cemetery Lane", is(registrant.getAddress()));
-        assertThat("666", is(registrant.getVatNumber()));
-        assertThat("123456", is(registrant.getEik()));
+        assertThat("BG666", is(registrant.getVatNumber()));
+        assertThat("666", is(registrant.getEik()));
         assertThat("Gomez Adams", is(registrant.getMol()));
         assertThat(true, is(registrant.isCompany()));
         assertThat(1, is(registrant.getVisitors().size()));
