@@ -246,17 +246,10 @@ public class TicketsController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
         String date = dateFormat.format(Calendar.getInstance().getTime());
 
-        String invoiceNumber;
-        if(registrant.getPaymentType().equals(Registrant.PaymentType.BANK_TRANSFER)) {
-//            data.setInvoiceType(InvoiceData.PROFORMA_BG);//currently hardcoded
-//            data.setInvoiceNumber(String.valueOf(registrant.getProformaInvoiceNumber()));
-            invoiceNumber=registrant.getProformaInvoiceNumber()+"";
-            return "P "+date+", "+invoiceNumber+", "+registrant.getName()+", "+registrant.getVisitors().size()+"tickets, "+(registrant.getVisitors().size()*singlePriceWithVAT)+".pdf";
+        if(registrant.getRealInvoiceNumber() != 0) {
+            return date+", "+registrant.getRealInvoiceNumber()+", "+registrant.getName()+", "+registrant.getVisitors().size()+"tickets, "+(registrant.getVisitors().size()*singlePriceWithVAT)+".pdf";
         } else {
-//            data.setInvoiceType(InvoiceData.ORIGINAL_BG);//currently hardcoded
-//            data.setInvoiceNumber(String.valueOf(registrant.getRealInvoiceNumber()));
-            invoiceNumber=registrant.getRealInvoiceNumber()+"";
-            return "P "+date+", "+invoiceNumber+", "+registrant.getName()+", "+registrant.getVisitors().size()+"tickets, "+(registrant.getVisitors().size()*singlePriceWithVAT)+".pdf";
+            return "P "+date+", "+registrant.getProformaInvoiceNumber()+", "+registrant.getName()+", "+registrant.getVisitors().size()+"tickets, "+(registrant.getVisitors().size()*singlePriceWithVAT)+".pdf";
         }
     }
 }
