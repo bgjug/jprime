@@ -65,9 +65,9 @@ public class InvoiceController {
             byte[] invoice = invoiceExporter.exportInvoice(invoiceData, registrant.isCompany());
             mailFacade.sendInvoice(registrant.getEmail(), "jPrime.io original invoice",
                     "Please find attached the invoice for the conference passes that you purchased.",
-                    invoice);
+                    invoice, TicketsController.generatePdfFilename(registrant, invoiceData.getSinglePriceWithVAT()));
             mailFacade.sendInvoice("conference@jprime.io", "jPrime.io invoice",
-                    "The attached invoice was sent to " + registrant.getEmail(), invoice);
+                    "The attached invoice was sent to " + registrant.getEmail(), invoice, TicketsController.generatePdfFilename(registrant, invoiceData.getSinglePriceWithVAT()));
 
         } catch (Exception e) {
             e.printStackTrace();

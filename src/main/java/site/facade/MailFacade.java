@@ -36,7 +36,7 @@ public class MailFacade {
         mailSender.send(mimeMessage);
     }
 
-    public void sendInvoice(String to, String subject, String messageText, byte[] pdf) throws MessagingException {
+    public void sendInvoice(String to, String subject, String messageText, byte[] pdf, String pdfFilename) throws MessagingException {
         ByteArrayResource bais = null;
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
@@ -47,7 +47,7 @@ public class MailFacade {
         helper.setText(messageText, true);
 
         bais = new ByteArrayResource(pdf);
-        helper.addAttachment("invoice.pdf", bais);
+        helper.addAttachment(pdfFilename, bais);
 
         mailSender.send(mimeMessage);
     }

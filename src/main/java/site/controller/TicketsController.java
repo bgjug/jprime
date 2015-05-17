@@ -148,7 +148,7 @@ public class TicketsController {
 
         model.addAttribute("credit_wt_kin", EpayUtil.EPAY_KIN);
         model.addAttribute("credit_wt_amount", numberOfTickets*100);
-        model.addAttribute("credit_wt_description", (numberOfTickets == 1 ? "One jPrime.io ticket" : numberOfTickets+" jPrime.io tickets")+", invoice number: "+registrant.getEpayInvoiceNumber());
+        model.addAttribute("credit_wt_description", (numberOfTickets == 1 ? "One jPrime.io ticket" : numberOfTickets + " jPrime.io tickets") + ", invoice number: " + registrant.getEpayInvoiceNumber());
         model.addAttribute("tags", userFacade.findAllTags());
     }
 
@@ -233,12 +233,30 @@ public class TicketsController {
             String email = registrant.getEmail();
             mailFacade.sendInvoice(email, "jPrime.io invoice",
                     "Thank you for registering to JPrime. Your proforma is attached as part of this mail.",
-                    pdf);
+                    pdf, generatePdfFilename(registrant, 100));
             String registrations = registrant.getVisitors().toString();
             mailFacade.sendInvoice("conference@jprime.io", "jPrime.io invoice",
-                    "We got some registrations: " + registrations, pdf);
+                    "We got some registrations: " + registrations, pdf, generatePdfFilename(registrant, 100));
         } catch (Exception e) {
             logger.error("Could not send confirmation email", e);
+        }
+    }
+
+    public static String generatePdfFilename(Registrant registrant, double singlePriceWithVAT) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        String date = dateFormat.format(Calendar.getInstance().getTime());
+
+        String invoiceNumber;
+        if(registrant.getPaymentType().equals(Registrant.PaymentType.BANK_TRANSFER)) {
+//            data.setInvoiceType(InvoiceData.PROFORMA_BG);//currently hardcoded
+//            data.setInvoiceNumber(String.valueOf(registrant.getProformaInvoiceNumber()));
+            invoiceNumber=registrant.getProformaInvoiceNumber()+"";
+            return "P "+date+", "+invoiceNumber+", "+registrant.getName()+", "+registrant.getVisitors().size()+"tickets, "+(registrant.getVisitors().size()*singlePriceWithVAT)+".pdf";
+        } else {
+//            data.setInvoiceType(InvoiceData.ORIGINAL_BG);//currently hardcoded
+//            data.setInvoiceNumber(String.valueOf(registrant.getRealInvoiceNumber()));
+            invoiceNumber=registrant.getRealInvoiceNumber()+"";
+            return "P "+date+", "+invoiceNumber+", "+registrant.getName()+", "+registrant.getVisitors().size()+"tickets, "+(registrant.getVisitors().size()*singlePriceWithVAT)+".pdf";
         }
     }
 }
