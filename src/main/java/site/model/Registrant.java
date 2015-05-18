@@ -192,7 +192,7 @@ public class Registrant extends AbstractEntity {
     }
 
     public String getVatNumber() {
-        if (vatNumber != null && !vatNumber.startsWith("BG")) {
+        if (vatNumber != null && !vatNumber.isEmpty() && !vatNumber.startsWith("BG")) {
             return "BG" + vatNumber;
         }
         return vatNumber;

@@ -162,10 +162,10 @@ public class InvoiceData {
         result.setClientEIK(registrant.getEik());
         result.setClientVAT(registrant.getVatNumber());
         result.setMol(registrant.getMol());
-        result.setPaymentType(registrant.getPaymentType().toString());
+        result.setPaymentType(registrant.getPaymentType() != null ? registrant.getPaymentType().toString() : "");
         result.setPassQty(registrant.getVisitors().size());
         result.setRegistrantId(registrant.getId());
-        result.setPaymentType(registrant.getPaymentType().getBulgarianValue());
+        result.setPaymentType(registrant.getPaymentType()!=null?registrant.getPaymentType().getBulgarianValue():"");
         result.setInvoiceNumber(registrant.getRealInvoiceNumber() + "");
         result.setInvoiceDate(LocalDate.now().format(FORMATTER));
         return result;
