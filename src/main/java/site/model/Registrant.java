@@ -18,7 +18,7 @@ public class Registrant extends AbstractEntity {
 
     @OneToMany(mappedBy = "registrant", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Visitor> visitors = new ArrayList<>();
-    private boolean isCompany;
+    private boolean isCompany=true;
     private String name = "";
     private String address;
     private String vatNumber;
