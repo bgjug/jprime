@@ -48,7 +48,7 @@
             <label for="company">Company</label>
         </dt>
         <dd>
-            <form:checkbox path="company" id="isCompany" checked="true"/>
+            <form:checkbox path="company" id="isCompany" />
         </dd>
     </dl>
     <dl>
