@@ -312,8 +312,11 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <a href="mailto:conference@jprime.io?subject=platinum sponsorship"
+                            <!-- <a href="mailto:conference@jprime.io?subject=platinum sponsorship"
                                class="btn-system btn-small">Sign Up Now</a>
+                              -->
+                              <a href="javascript: return false;"
+                               class="btn-system btn-small" style="background-color: lightgray">sold out</a>
                         </div>
                     </div>
                 </div>
@@ -335,9 +338,12 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <a href="mailto:conference@jprime.io?subject=gold sponsorship"
+                            <!--  <a href="mailto:conference@jprime.io?subject=gold sponsorship"
                                class="btn-system btn-small">Sign
                                 Up Now</a>
+                                -->
+                                <a href="javascript: return false;"
+                               class="btn-system btn-small" style="background-color: lightgray">Sold out</a>
                         </div>
                     </div>
                 </div>
