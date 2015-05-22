@@ -27,9 +27,9 @@ public class Registrant extends AbstractEntity {
     private String eik;
 //    @Generated(GenerationTime.INSERT)
     @Column(unique = false)
-    private long epayInvoiceNumber;//the one for epay
+    private Long epayInvoiceNumber;//the one for epay
     @Column(unique = false)//because initially it is zero
-    private long realInvoiceNumber;//the real one, only after they pay
+    private Long realInvoiceNumber;//the real one, only after they pay
     @Column(unique = false)//because might not always be initialized
     private Long proformaInvoiceNumber;
     private PaymentType paymentType;
@@ -226,7 +226,7 @@ public class Registrant extends AbstractEntity {
         this.email = email;
     }
 
-    public long getEpayInvoiceNumber() {
+    public Long getEpayInvoiceNumber() {
         return epayInvoiceNumber;
     }
 
@@ -234,7 +234,7 @@ public class Registrant extends AbstractEntity {
         this.epayInvoiceNumber = epayInvoiceNumber;
     }
 
-    public long getRealInvoiceNumber() {
+    public Long getRealInvoiceNumber() {
         return realInvoiceNumber;
     }
 
