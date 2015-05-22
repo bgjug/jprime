@@ -24,7 +24,7 @@
 <body  style="background: #cccccc!important;">
 <admin:menu/>
 
-<div style="display: inline-block;width:45%">
+<div style="display: inline-block;width:auto">
 <form:form commandName="article" method="post"
            action="/admin/article/add">
     <fieldset>
@@ -45,7 +45,7 @@
                 <label for="description">Description</label>
             </dt>
             <dd>
-                <form:textarea path="description" cols="70" rows="5"/>
+                <form:textarea path="description" cols="70" rows="5" cssStyle="width:100%"/>
             </dd>
         </dl>
         <dl>
@@ -53,7 +53,7 @@
                 <label for="text">Text</label>
             </dt>
             <dd>
-                <form:textarea path="text"  cols="70" rows="20" id="text"/>
+                <form:textarea path="text"  cols="70" rows="20" id="text" cssStyle="width:100%"/>
             </dd>
         </dl>
         <dl>
@@ -81,7 +81,7 @@
 
 </form:form>
 </div>
-<div id="preview" style="display: inline-block; height:100%; vertical-align: top;border: 1px;background: white;padding:20px;width:45%">
+<div id="preview" style="display: inline-block; height:100%; vertical-align: top;border: 1px;background: white;padding:20px;max-width: 45%">
 
     <div class="blog-post gallery-post">
         <div class="post-content">
