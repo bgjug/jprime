@@ -68,8 +68,6 @@ public class Visitor extends AbstractEntity {
     }
 
     public VisitorStatus getStatus() {
-        //some fuzzy logic here: if registrant has payed EPAY invоice it means the the visitor has payed
-        if(registrant!=null && registrant.getRealInvoiceNumber()!=0) return VisitorStatus.PAYED;
         return status;
     }
 

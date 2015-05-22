@@ -227,7 +227,8 @@ public class Registrant extends AbstractEntity {
     }
 
     public Long getEpayInvoiceNumber() {
-        return epayInvoiceNumber;
+
+        return epayInvoiceNumber==null?Long.valueOf(0):epayInvoiceNumber;
     }
 
     public void setEpayInvoiceNumber(long epayInvoiceNumber) {
@@ -235,7 +236,7 @@ public class Registrant extends AbstractEntity {
     }
 
     public Long getRealInvoiceNumber() {
-        return realInvoiceNumber;
+        return realInvoiceNumber==null?Long.valueOf(0):realInvoiceNumber;
     }
 
     public void setRealInvoiceNumber(long realInvoiceNumber) {
@@ -243,7 +244,7 @@ public class Registrant extends AbstractEntity {
     }
 
     public Long getProformaInvoiceNumber() {
-        return proformaInvoiceNumber;
+        return proformaInvoiceNumber==null?Long.valueOf(0):proformaInvoiceNumber;
     }
 
     public void setProformaInvoiceNumber(Long proformaInvoiceNumber) {
