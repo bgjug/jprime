@@ -22,5 +22,5 @@ public interface VisitorRepository extends PagingAndSortingRepository<Visitor, L
 
     @Query(NEWEST_VISITORS)
     List<Visitor> findAllNewestUsers();
-
+    
 }

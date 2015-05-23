@@ -1,20 +1,36 @@
 package site.controller;
 
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.supercsv.cellprocessor.Optional;
+import org.supercsv.cellprocessor.constraint.NotNull;
+import org.supercsv.cellprocessor.ift.CellProcessor;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
+
 import site.facade.AdminFacade;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.model.VisitorStatus;
-
-import javax.validation.Valid;
-import java.util.List;
 
 /**
  * @author Mitia
@@ -89,4 +105,49 @@ public class VisitorController {
         adminFacade.deleteVisitor(itemId);
         return "redirect:/admin/visitor/view";
     }
+    
+    private CellProcessor[] getProcessors() {
+        
+        final CellProcessor[] processors = new CellProcessor[] { 
+               // new UniqueHashCode(), // customerNo (must be unique)
+        		new Optional(), // name
+                new Optional(), // email
+                new Optional(), // company
+                new Optional(), // status
+//                new NotNull(), // mailingAddress
+//                new Optional(new FmtBool("Y", "N")), // married
+//                new Optional(), // numberOfKids
+//                new NotNull(), // favouriteQuote
+//                new NotNull(), // email
+//                new LMinMax(0L, LMinMax.MAX_LONG) // loyaltyPoints
+        };
+        
+        return processors;
+}
+    
+    @RequestMapping(value = "/export", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<byte[]>  exportVisitors() throws IOException{
+    	 Iterable<Visitor> visitors = adminFacade.findAllVisitors();
+    	 final String[] header = new String[] { "name", "email", "company", "status"};
+    	 
+    	 ICsvBeanWriter beanWriter = null;
+    	 ByteArrayOutputStream out = new ByteArrayOutputStream();
+         try {
+			beanWriter = new CsvBeanWriter(new BufferedWriter(new OutputStreamWriter(out)),
+                     CsvPreference.STANDARD_PREFERENCE);
+        	 beanWriter.writeHeader(header);
+         for(Visitor visitor : visitors ){
+        	  beanWriter.write(visitor, header, getProcessors());
+			}
+		} finally {
+			if (beanWriter != null) {
+				beanWriter.close();
+			}
+		}
+         HttpHeaders headers = new HttpHeaders();
+         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        return ResponseEntity.ok().headers(headers).body(out.toByteArray());
+	}
+    
 }

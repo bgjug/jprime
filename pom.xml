@@ -155,7 +155,11 @@
 		    <artifactId>thumbnailator</artifactId>
 		    <version>0.4.8</version>
 		</dependency>
-		
+		<dependency>
+		    <groupId>net.sf.supercsv</groupId>
+		    <artifactId>super-csv</artifactId>
+		    <version>2.3.1</version>
+		</dependency>
     </dependencies>
 
     <!--mihail: a profile that has the spring-boot:run plugin and a couple of dependencies, so that-->

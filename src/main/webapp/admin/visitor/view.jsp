@@ -26,6 +26,7 @@
 
 		<div>
 			<a href="/admin/visitor/add">Add</a>
+			<a href="/admin/visitor/export">Export</a>
 		</div>
 		&nbsp;
 		<br/>

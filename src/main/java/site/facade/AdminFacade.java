@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import site.model.*;
 import site.repository.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service(AdminFacade.NAME)
@@ -181,6 +182,11 @@ public class AdminFacade {
 		return visitorRepository.findAll(pageable);
 	}
 
+	public Iterable<Visitor> findAllVisitors(){
+		return visitorRepository.findAll();
+	}
+
+	
 	public List<Visitor> findAllNewestVisitors(){
 		return visitorRepository.findAllNewestUsers();
 	}
