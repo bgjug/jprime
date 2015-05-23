@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
@@ -15,10 +17,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.constraint.NotNull;
@@ -28,6 +32,7 @@ import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import site.facade.AdminFacade;
+import site.facade.MailFacade;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.model.VisitorStatus;
@@ -41,10 +46,17 @@ public class VisitorController {
 
     public static final String VISITORS_JSP = "/admin/visitor/view.jsp";
     public static final String VISITOR_EDIT_JSP = "/admin/visitor/edit.jsp";
+    public static final String VISITOR_EDIT_SEND = "/admin/visitor/send.jsp";
 
+    private Logger log = Logger.getLogger(this.getClass());
+    
     @Autowired
     @Qualifier(AdminFacade.NAME)
     private AdminFacade adminFacade;
+    
+    @Autowired
+    @Qualifier(MailFacade.NAME)
+    private MailFacade mailFacade;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String viewVisitors(Model model) {
@@ -148,6 +160,27 @@ public class VisitorController {
          HttpHeaders headers = new HttpHeaders();
          headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         return ResponseEntity.ok().headers(headers).body(out.toByteArray());
+	}
+    
+	@RequestMapping(value = "/send", method = RequestMethod.GET)
+	public String send() {
+		return VISITOR_EDIT_SEND;
+	}
+    
+    @RequestMapping(value = "/send", method = RequestMethod.POST)
+    @ResponseBody
+    public String  send(@RequestParam String subject, @RequestParam String content) throws IOException{
+    	 Iterable<Visitor> visitors = adminFacade.findAllVisitors();
+    	 
+         for(Visitor visitor : visitors ){
+        	 if(!StringUtils.isEmpty(visitor))
+				try {
+					mailFacade.sendEmail(visitor.getEmail(), subject, content);
+				} catch (MessagingException e) {
+					log.error("issue when sending email to" + visitor.getEmail(), e);
+				}
+		}
+        return "Done ... all emails should be send but check the log for exceptions";
 	}
     
 }
