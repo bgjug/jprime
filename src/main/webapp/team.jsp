@@ -122,7 +122,7 @@
                             <a class="twitter" href="https://twitter.com/gochev"><i
                                     class="fa fa-twitter"></i></a>
                         </div>
-                        Nayden Gochev is senior software developer and trailer with more then 10 years of experience in the field. Worked in many Bulgarian and international companies, some of them include ISY Intellect, ProxiAD, Insight Technologies, Unic AG, Phamola и Telerik. Participated in many Java User Group seminars, made multiple internal company trainings and trainings for java developers at Pragmatic academy, Plovdiv University, NASD and SoftUni. His personal blog can be found at http://gochev.org
+                        Nayden Gochev is senior software developer and trailer with more then 10 years of experience in the field. Worked in many Bulgarian and international companies, some of them include ISY Intellect, ProxiAD, Insight Technologies, Unic AG, Phamola and Telerik. Participated in many Java User Group seminars, made multiple internal company trainings and trainings for java developers at Pragmatic academy, Plovdiv University, NASD and SoftUni. His personal blog can be found at http://gochev.org
                     </div>
                 </div>
             </div>
