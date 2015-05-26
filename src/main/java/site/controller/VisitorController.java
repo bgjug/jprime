@@ -176,8 +176,8 @@ public class VisitorController {
         	 if(!StringUtils.isEmpty(visitor))
 				try {
 					mailFacade.sendEmail(visitor.getEmail(), subject, content);
-				} catch (MessagingException e) {
-					log.error("issue when sending email to" + visitor.getEmail(), e);
+				} catch (Throwable t) {
+					log.error("issue when sending email to" + visitor.getEmail(), t);
 				}
 		}
         return "Done ... all emails should be send but check the log for exceptions";
