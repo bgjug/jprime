@@ -77,7 +77,8 @@ public class TicketsController {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("registrant", new Registrant());
         model.addAttribute("paymentTypes", getPaymentTypes());
-		return TICKETS_EPAY_REGISTER_JSP;
+//		return TICKETS_EPAY_REGISTER_JSP;
+        return TICKETS_JSP;
     }
 
     private List<String> getPaymentTypes() {

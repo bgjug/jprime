@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags"%>
-+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
 
 <!doctype html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->

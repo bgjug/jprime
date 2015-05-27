@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags"%>
-+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
 
 <!doctype html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -24,6 +24,8 @@
     <!-- Page Description and Author -->
     <meta name="description" content="Margo - Responsive HTML5 Template">
     <meta name="author" content="ZoOm Arts">
+    <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
+    
     <user:pageJavaScriptAndCss/>
 
 </head>
@@ -45,10 +47,15 @@
 
                         <!-- Start Single Post Content -->
                         <div class="post-content">
-                            <h2>Buy conference tickets</h2>
+                            <%--<h2>Buy conference tickets</h2>
                             <p>
                             <p>The conference fee is <strong>50</strong>.00 EUR (VAT included).</p>
                             <p>For registration contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
+                             --%>
+                             <h2>Registration is now closed</h2>
+                             <p>
+                             	<p>The registration is now closed, see you in 2016 :)</p>
+                             </p>
                         </div>
                         <!-- End Single Post Content -->
 
