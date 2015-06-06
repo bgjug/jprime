@@ -49,25 +49,25 @@
             <!-- Carousel inner -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img class="img-responsive" src="images/slider/bg1.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/index1.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
                             <h2 class="animated2 white" style="text-shadow: 3px 3px black;">
-                                <span><strong>jPrime</strong></span>
+                                <span><strong>jPrime</strong>2015</span>
                             </h2>
 
                             <h3 class="animated3 white" style="text-shadow: 2px 2px black;">
-                                <span>Java prime time in Sofia</span>
+                                <span>was HUGE!</span>
                             </h3>
 
-                            <p class="animated4"><a href="/nav/Agenda" class="slider btn btn-primary">Our Agenda</a> 
+                            <p class="animated4"><a href="/nav/2015" class="slider btn btn-primary">read more</a>
                         </div>
                     </div>
                 </div>
                 <!--/ Carousel item end -->
                 <div class="item">
-                    <img class="img-responsive" src="images/slider/bg2.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/index2.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
@@ -76,17 +76,16 @@
                             </h2>
 
                             <h3 class="animated5 white" style="text-shadow: 2px 2px black;">
-                                <span>Register now</span>
+                                <span>See you in 2016!</span>
                             </h3>
 
-                            <p class="animated6"><a href="/tickets/epay" class="slider btn btn-primary">Register</a>
                             </p>
                         </div>
                     </div>
                 </div>
                 <!--/ Carousel item end -->
                 <div class="item">
-                    <img class="img-responsive" src="images/slider/bg3.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/index3.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
@@ -239,7 +238,7 @@
 
             <!-- Start Big Heading -->
             <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                <h1>Our <strong>Speakers</strong></h1>
+                <h1>Our <strong>Speakers</strong> in 2015</h1>
             </div>
             <!-- End Big Heading -->
 
@@ -312,11 +311,9 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <!-- <a href="mailto:conference@jprime.io?subject=platinum sponsorship"
+                            <a href="mailto:conference@jprime.io?subject=platinum sponsorship"
                                class="btn-system btn-small">Sign Up Now</a>
-                              -->
-                              <a href="javascript: return false;"
-                               class="btn-system btn-small" style="background-color: lightgray">sold out</a>
+
                         </div>
                     </div>
                 </div>
@@ -338,12 +335,10 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <!--  <a href="mailto:conference@jprime.io?subject=gold sponsorship"
+                            <a href="mailto:conference@jprime.io?subject=gold sponsorship"
                                class="btn-system btn-small">Sign
                                 Up Now</a>
-                                -->
-                                <a href="javascript: return false;"
-                               class="btn-system btn-small" style="background-color: lightgray">Sold out</a>
+
                         </div>
                     </div>
                 </div>
