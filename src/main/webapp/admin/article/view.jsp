@@ -18,13 +18,18 @@
 	<admin:menu/>
 	<fieldset>
 	<legend>Articles</legend>
+
+		<div>
+			<a href="/admin/article/add">Add</a>
+		</div>
+		&nbsp;
 		<table class="admin-table">
 			<tr>
 				<td><i>Title</i></td>
 				<td><i>Description</i></td>
 				<td><i>Operations</i></td>
 			</tr>
-			<c:forEach var="article" items="${articles.content}">
+			<c:forEach var="article" items="${articles}">
 				<tr>
 					<td>${article.title}</td>
 					<td>${article.description }</td>
@@ -36,10 +41,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		&nbsp;
-		<div>
-			<a href="/admin/article/add">Add</a>
-		</div>
+
 	</fieldset>
 </body>
 </html>

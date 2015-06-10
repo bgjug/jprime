@@ -15,6 +15,7 @@ import site.model.Article;
 import site.model.User;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller()
@@ -26,8 +27,8 @@ public class ArticleController {
     private AdminFacade adminFacade;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public String view(Model model, Pageable pageable) {
-        Page<Article> articles = adminFacade.findAllArticles(pageable);
+    public String view(Model model) {
+        List<Article> articles = adminFacade.findAllArticles();
         model.addAttribute("articles", articles);
         return "/admin/article/view.jsp";
     }

@@ -56,14 +56,6 @@
                              <p>
                              	<p>The registration is now closed, see you in 2016 :)</p>
 
-                                <p>Free live streaming is available: <br/>
-                                    Beta: <a href="https://www.youtube.com/watch?v=kIlt_kgwX_4">here</a> <br/><br/>
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/kIlt_kgwX_4" frameborder="0" allowfullscreen></iframe><br/>
-                                    Alpha: <a href="https://www.youtube.com/watch?v=9hOVQiBhDuM">here</a> <br/>
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/9hOVQiBhDuM" frameborder="0" allowfullscreen></iframe>
-                                    <br/>
-                                    <br/>
-                                    P.S. We don't guarantee the quality and availability!
                              </p>
                         </div>
                         <!-- End Single Post Content -->

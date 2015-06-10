@@ -15,6 +15,8 @@ public interface ArticleRepository extends PagingAndSortingRepository<Article, L
 
 	String NAME = "articleRepository";
     String SELECT_ARTICLES_BY_TAG_STMT = "SELECT a FROM Article a JOIN a.tags t WHERE t.name = :tagName and a.published=true ORDER BY a.createdDate DESC ";
+    String SELECT_PUBLISHED_ARTICLES = "SELECT a FROM Article a WHERE a.published=true";
+    String SELECT_NEWEST_ARTICLES = "SELECT a FROM Article a ORDER BY a.createdDate DESC";
 
     @Query(SELECT_ARTICLES_BY_TAG_STMT)
     List<Article> findByTag(@Param("tagName") String tagName);
@@ -22,10 +24,14 @@ public interface ArticleRepository extends PagingAndSortingRepository<Article, L
     @Query(SELECT_ARTICLES_BY_TAG_STMT)
     Page<Article> findByTag(@Param("tagName") String tagName, Pageable pageable);
 
-    String SELECT_PUBLISHED_ARTICLES = "SELECT a FROM Article a WHERE a.published=true";
-
     @Query(SELECT_PUBLISHED_ARTICLES)
     List<Article> findAllPublished();
+
+    @Query(SELECT_NEWEST_ARTICLES)
+    List<Article> findAllLatestArticles();
+
+    @Query(SELECT_NEWEST_ARTICLES)
+    Page<Article> findAllLatestArticles(Pageable pageable);
 
     Page<Article> findByPublishedTrueOrderByCreatedDateDesc(Pageable pageable);
     

@@ -14,7 +14,7 @@ import java.util.List;
 @Repository(value = VisitorRepository.NAME)
 public interface VisitorRepository extends PagingAndSortingRepository<Visitor, Long> {
 
-    public static final String NEWEST_VISITORS = "SELECT v FROM Visitor v ORDER BY v.createdDate DESC";
+    String NEWEST_VISITORS = "SELECT v FROM Visitor v ORDER BY v.createdDate DESC";
 
     String NAME = "visitorRepository";
 

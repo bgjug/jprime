@@ -54,10 +54,12 @@ public class AdminFacade {
 
 	/* article repo */
 	public Page<Article> findAllArticles(Pageable pageable){
-		return articleRepository.findAll(pageable);
+		return articleRepository.findAllLatestArticles(pageable);
 	}
 
-
+	public List<Article> findAllArticles(){
+		return articleRepository.findAllLatestArticles();
+	}
 	
 	public Article findOneArticle(Long id){
 		return articleRepository.findOne(id);
@@ -70,7 +72,9 @@ public class AdminFacade {
 	public Article saveArticle(Article article){
 		return articleRepository.save(article);
 	}
-	
+
+
+
 	/* sponsor repo */
 	
 	public Page<Sponsor> findAllSponsors(Pageable pageable){
@@ -88,7 +92,9 @@ public class AdminFacade {
 	public Sponsor saveSponsor(Sponsor sponsor){
 		return sponsorRepository.save(sponsor);
 	}
-	
+
+
+
 	/* speaker repo */
 	
 	public Page<Speaker> findAllSpeakers(Pageable pageable){
@@ -107,7 +113,9 @@ public class AdminFacade {
 		return speakerRepository.save(speaker);
 	}
 	
-	
+
+
+
 	/* user repo */
 	
 	public Page<User> findAllUsers(Pageable pageable){
@@ -133,7 +141,9 @@ public class AdminFacade {
 	public User saveUser(User user){
 		return userRepository.save(user);
 	}
-	
+
+
+
 	/* tag repo */
 	
 	public Page<Tag> findAllTags(Pageable pageable){
@@ -177,6 +187,8 @@ public class AdminFacade {
         submissionRepository.save(submission);
     }
 
+
+
 	/* visitors repo */
 	public Page<Visitor> findAllVisitors(Pageable pageable){
 		return visitorRepository.findAll(pageable);
@@ -186,7 +198,6 @@ public class AdminFacade {
 		return visitorRepository.findAll();
 	}
 
-	
 	public List<Visitor> findAllNewestVisitors(){
 		return visitorRepository.findAllNewestUsers();
 	}
@@ -196,7 +207,6 @@ public class AdminFacade {
 	}
 
 	public void deleteVisitor(Long id){
-
 		Visitor visitor = visitorRepository.findOne(id);
 		Registrant registrant = visitor.getRegistrant();
 		registrant.getVisitors().remove(visitor);
@@ -212,6 +222,8 @@ public class AdminFacade {
 	public Visitor saveVisitor(Visitor visitor){
 		return visitorRepository.save(visitor);
 	}
+
+
 
 	/* registrants repo*/
 	public Page<Registrant> findAllRegistrants(Pageable pageable){
