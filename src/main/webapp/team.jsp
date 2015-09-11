@@ -57,7 +57,7 @@
                             </div>
                             Ivan St. Ivanov is development architect at SAP Labs Bulgaria, working in the HANA Cloud Platform performance team. He is active JUG member, driving the adoption of OpenJDK in Bulgaria. In his free time he likes contributing to open source software, mostly to JBoss Forge.
 
-                            Ivan is doing his PhD in the area of cloud multi-tenancy in the University of National and World Economy in Sofia. He is teaching Java, Java EE and SOA in three Universities in Sofia.
+                            Ivan is doing his PhD in the area of cloud multi-tenancy in the University of National and World Economy in Sofia. He is teaching Java, Java EE and SOA in three Universities in Sofia.<a href="http://nosoftskills.com/">nosoftskills.com</a>
                         </div>
                     </div>
                 <div class="col-md-3 col-sm-6 col-xs-12" style="width: 230px">
@@ -74,7 +74,7 @@
                                     class="fa fa-twitter"></i></a>
                         </div>
                         Dmitry is a passionate Java developer. Through his 8+ years career he has gained a huge experience with different web technologies. His areas of interest include the wide range of Java-related technologies, enterprise solutions, cloud computing technologies, Eclipse plug-ins, as well as non-Java like NodeJs and NoSql.
-                        He’s big enthusiast of distributed multinational, multi location software development. At his free time he’s trying to contribute to OpenJDK and supports his own opensource project. His latest passion is Oracles Javascript runtime on JVM – Nashorn.
+                        He’s big enthusiast of distributed multinational, multi location software development. At his free time he’s trying to contribute to OpenJDK and supports his own opensource project. His latest passion is Oracles Javascript runtime on JVM – Nashorn.<a href="http://dmitryalexandrov.net">dmitryalexandrov.net</a>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12" style="width: 230px">
@@ -90,7 +90,7 @@
                             <a class="twitter" href="https://twitter.com/mihailstoynov"><i
                                     class="fa fa-twitter"></i></a>
                         </div>
-                        Mihail is a security and software consultant, trainer and author. His resume includes projects in companies like Saudi Aramco, Boeing, HP, Siemens, USAF, several foreign banks and government entities. Mihail is the co-author of 6 books on software, and has 10 years of training experience in local and foreign companies and most of the local universities.
+                        Mihail is a security and software consultant, trainer and author. His resume includes projects in companies like Saudi Aramco, Boeing, HP, Siemens, USAF, several foreign banks and government entities. Mihail is the co-author of 6 books on software, and has 10 years of training experience in local and foreign companies and most of the local universities.<a href="https://mihail.stoynov.com">mihail.stoynov.com</a>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12" style="width: 230px">
@@ -106,7 +106,7 @@
                             <a class="twitter" href="https://twitter.com/mihailstoynov"><i
                                     class="fa fa-twitter"></i></a>
                         </div>
-                        Martin is a Java enthusiast. He is a graduate of Computer Science from the University of Sofia. He is also a certified Java professional (SCJP6) and a certified IBM cloud computing solution advisor. His areas of interest include the wide range of Java-related technologies (such as Servlets, JSP, JAXB, JAXP, JMS, JMX, JAX-RS, JAX-WS, Hibernate, Spring Framework, Liferay Portal and Eclipse RCP), cloud computing technologies, cloud-based software architectures, enterprise application integration, relational and NoSQL databases. You can reach him for any Java and FOSS-related topics (especially Eclipse and the OpenJDK).
+                        Martin is a Java enthusiast. He is a graduate of Computer Science from the University of Sofia. He is also a certified Java professional (SCJP6) and a certified IBM cloud computing solution advisor. His areas of interest include the wide range of Java-related technologies (such as Servlets, JSP, JAXB, JAXP, JMS, JMX, JAX-RS, JAX-WS, Hibernate, Spring Framework, Liferay Portal and Eclipse RCP), cloud computing technologies, cloud-based software architectures, enterprise application integration, relational and NoSQL databases. You can reach him for any Java and FOSS-related topics (especially Eclipse and the OpenJDK).<a href="http://martin-toshev.com/">http://martin-toshev.com/</a>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12" style="width: 230px">
