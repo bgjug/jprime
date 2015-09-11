@@ -16,7 +16,7 @@ case "$1" in
 		systemctl status jprime
 		;;
 	update)
-	    sudo -u jprime ~jprime/jprime.service.sh rebuild
+        sudo -u jprime ~jprime/jprime.service.sh rebuild
 		if [ $? -eq 0 ]; then
 			echo Stoppping service;
 			$0 stop
@@ -26,6 +26,18 @@ case "$1" in
 		else
 			echo "BUILD FAILED; REDEPLOY WAS NOT PERFORMED"
 		fi
+               	;;
+       	force-update)
+               	sudo -u jprime ~jprime/jprime.service.sh force-rebuild
+               	if [ $? -eq 0 ]; then
+                       	echo Stoppping service;
+                       	$0 stop
+                       	sudo -u jprime ~jprime/jprime.service.sh redeploy
+                       	echo Starting service
+                       	$0 start
+               	else
+                       	echo "BUILD FAILED; REDEPLOY WAS NOT PERFORMED"
+               	fi
                	;;
 	old_update)
 		#mihail: stays here just in case
@@ -54,7 +66,8 @@ case "$1" in
 		echo -e "\tUSAGE: $0 start/stop/status/restart"
 		echo -e "\tUSAGE: $0 update/edit_service/edit_opts/log/service_log"
 		echo -e "\tNOTES:"
-		echo -e "\t\t'update' will stop the app, git pull, and then start the app"
+		echo -e "\t\t'update' will git pull; if changes found, will rebuild  and then redeploy the app; if no changes, does nothing"
+		echo -e "\t\t'force-update' will git pull, and then redeploy the app; doesn't matter if changes found"
 		echo -e "\t\t'edit_opts' will open the config file"
 		echo -e "\t\t'service_log' will open the log for the service for debugging"
 		echo -e "\t\t'log' tail -f catalina.out"
