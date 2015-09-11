@@ -106,7 +106,7 @@
                             <a class="twitter" href="https://twitter.com/mihailstoynov"><i
                                     class="fa fa-twitter"></i></a>
                         </div>
-                        Martin is a Java enthusiast. He is a graduate of Computer Science from the University of Sofia. He is also a certified Java professional (SCJP6) and a certified IBM cloud computing solution advisor. His areas of interest include the wide range of Java-related technologies (such as Servlets, JSP, JAXB, JAXP, JMS, JMX, JAX-RS, JAX-WS, Hibernate, Spring Framework, Liferay Portal and Eclipse RCP), cloud computing technologies, cloud-based software architectures, enterprise application integration, relational and NoSQL databases. You can reach him for any Java and FOSS-related topics (especially Eclipse and the OpenJDK).<br /><a href="http://martin-toshev.com/">http://martin-toshev.com/</a>
+                        Martin is a Java enthusiast. He is a graduate of Computer Science from the University of Sofia. He is also a certified Java professional (SCJP6) and a certified IBM cloud computing solution advisor. His areas of interest include the wide range of Java-related technologies (such as Servlets, JSP, JAXB, JAXP, JMS, JMX, JAX-RS, JAX-WS, Hibernate, Spring Framework, Liferay Portal and Eclipse RCP), cloud computing technologies, cloud-based software architectures, enterprise application integration, relational and NoSQL databases. You can reach him for any Java and FOSS-related topics (especially Eclipse and the OpenJDK).<br /><a href="http://martin-toshev.com/">martin-toshev.com/</a>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12" style="width: 230px">
@@ -122,7 +122,7 @@
                             <a class="twitter" href="https://twitter.com/gochev"><i
                                     class="fa fa-twitter"></i></a>
                         </div>
-                        Nayden Gochev is senior software developer and trailer with more then 10 years of experience in the field. Worked in many Bulgarian and international companies, some of them include ISY Intellect, ProxiAD, Insight Technologies, Unic AG, Phamola and Telerik. Participated in many Java User Group seminars, made multiple internal company trainings and trainings for java developers at Pragmatic academy, Plovdiv University, NASD and SoftUni. His personal blog can be found at <a href="http://gochev.org">http://gochev.org</a>
+                        Nayden Gochev is senior software developer and trailer with more then 10 years of experience in the field. Worked in many Bulgarian and international companies, some of them include ISY Intellect, ProxiAD, Insight Technologies, Unic AG, Phamola and Telerik. Participated in many Java User Group seminars, made multiple internal company trainings and trainings for java developers at Pragmatic academy, Plovdiv University, NASD and SoftUni. His personal blog can be found at <a href="http://gochev.org">gochev.org</a>
                     </div>
                 </div>
             </div>
