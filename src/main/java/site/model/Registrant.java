@@ -1,6 +1,7 @@
 package site.model;
 
 
+import site.config.Globals;
 import site.controller.epay.EpayResponse;
 
 import javax.persistence.*;
@@ -35,7 +36,7 @@ public class Registrant extends AbstractEntity {
     private Long proformaInvoiceNumber;
     private PaymentType paymentType;
     @Enumerated(EnumType.STRING)
-    private Branch branch = Branch.YEAR_2016;
+    private Branch branch = Globals.CURRENT_BRANCH;
 
     @Embedded
     private EpayResponse epayResponse;

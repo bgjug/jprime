@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import site.config.Globals;
 import site.facade.ThumbnailService;
 import site.facade.UserService;
 import site.model.Branch;
@@ -44,7 +45,7 @@ public class AbstractCfpController {
             }
         }
         
-        submission.getSpeaker().setBranch(Branch.YEAR_2016);
+        submission.getSpeaker().setBranch(Globals.CURRENT_BRANCH);
         userFacade.submitTalk(submission);
     }
 

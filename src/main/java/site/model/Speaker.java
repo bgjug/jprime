@@ -11,6 +11,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
+import site.config.Globals;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,7 +41,7 @@ public class Speaker extends User {
     private Set<Submission> submissions = new HashSet<>();
     
     @Enumerated(EnumType.STRING)
-    private Branch branch = Branch.YEAR_2016;
+    private Branch branch = Globals.CURRENT_BRANCH;
 
     public Speaker() {
     }
