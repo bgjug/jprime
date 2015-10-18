@@ -76,7 +76,7 @@
                             </h2>
 
                             <h3 class="animated5 white" style="text-shadow: 2px 2px black;">
-                                <span>26.05.2016 in Sofia<</span>
+                                <span>26.05.2016 in Sofia</span>
                             </h3>
                             
                             <p class="animated4"><a href="/cfp" class="slider btn btn-primary">Submit a talk</a>
@@ -287,11 +287,11 @@
                     <!-- End Big Heading -->
 
                     <!-- Text -->
-                    <p class="text-center">We have 3 different packages for sponsors.</p>
+                    <p class="text-center">Sponsor packages for 2016 not yet available.</p>
                 </div>
             </div>
 
-            <div class="row pricing-tables">
+            <!-- <div class="row pricing-tables">
 
                 <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
                     <div class="pricing-table">
@@ -367,7 +367,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- End Pricing Table Section -->
