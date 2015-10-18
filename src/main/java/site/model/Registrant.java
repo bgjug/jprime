@@ -4,6 +4,7 @@ package site.model;
 import site.controller.epay.EpayResponse;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class Registrant extends AbstractEntity {
     @Column(unique = false)//because might not always be initialized
     private Long proformaInvoiceNumber;
     private PaymentType paymentType;
+    @Enumerated(EnumType.STRING)
+    private Branch branch = Branch.YEAR_2016;
 
     @Embedded
     private EpayResponse epayResponse;
@@ -267,7 +270,15 @@ public class Registrant extends AbstractEntity {
         this.epayResponse = epayResponse;
     }
 
-    @Override
+    public Branch getBranch() {
+		return branch;
+	}
+
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o)
             return true;

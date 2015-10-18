@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import site.facade.AdminFacade;
-import site.facade.MailFacade;
-import site.facade.UserFacade;
+import site.facade.AdminService;
+import site.facade.MailService;
+import site.facade.UserService;
 import site.model.Submission;
 
 import javax.validation.Valid;
@@ -29,25 +29,25 @@ import java.nio.file.Paths;
  */
 @Controller
 @RequestMapping("/admin/submission")
-public class AdminCfpController extends AbstractCfpController {
+public class SubmissionController extends AbstractCfpController {
 
-    private static final Logger logger = Logger.getLogger(AdminCfpController.class);
+    private static final Logger logger = Logger.getLogger(SubmissionController.class);
 
     static final String ADMIN_SUBMISSION_VIEW_JSP = "/admin/submission/view.jsp";
     static final String ADMIN_SUBMISSION_EDIT_JSP = "/admin/submission/edit.jsp";
     public static final String REDIRECT = "redirect:";
 
     @Autowired
-    @Qualifier(AdminFacade.NAME)
-    private AdminFacade adminFacade;
+    @Qualifier(AdminService.NAME)
+    private AdminService adminFacade;
 
     @Autowired
-    @Qualifier(MailFacade.NAME)
-    private MailFacade mailFacade;
+    @Qualifier(MailService.NAME)
+    private MailService mailFacade;
 
     @Autowired
-    @Qualifier(UserFacade.NAME)
-    private UserFacade userFacade;
+    @Qualifier(UserService.NAME)
+    private UserService userFacade;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String listSubmissions(Model model, Pageable pageable) {
@@ -108,13 +108,14 @@ public class AdminCfpController extends AbstractCfpController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String ediSubmission(@Valid final Submission submission, BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
+    public String editSubmission(@Valid final Submission submission, BindingResult bindingResult, @RequestParam("file") MultipartFile file, Model model) {
         if (bindingResult.hasErrors()) {
-            return "/edit/" + submission.getId();
+        	buildCfpFormModel(model, submission);
+        	return ADMIN_SUBMISSION_EDIT_JSP;
         }
         saveSubmission(submission, file, userFacade);
 
-        return REDIRECT + ADMIN_SUBMISSION_VIEW_JSP;
+        return REDIRECT + "/admin/submission/view";
     }
 
 }

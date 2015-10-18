@@ -16,7 +16,7 @@ import site.app.Application;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static site.controller.CfpController.CFP_CLOSED_JSP;
+import static site.controller.CfpController.*;
 
 /**
  * @author Ivan St. Ivanov
@@ -41,6 +41,6 @@ public class CfpControllerTest {
     public void getShouldReturnEmptySubscription() throws Exception {
         mockMvc.perform(get("/cfp"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(CFP_CLOSED_JSP));
+                .andExpect(view().name(CFP_OPEN_JSP));
     }
 }

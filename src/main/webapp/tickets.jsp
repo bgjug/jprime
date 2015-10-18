@@ -52,10 +52,9 @@
                             <p>The conference fee is <strong>50</strong>.00 EUR (VAT included).</p>
                             <p>For registration contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
                              --%>
-                             <h2>Registration is now closed</h2>
+                             <h2>Registration is not yet open</h2>
                              <p>
-                             	<p>The registration is now closed, see you in 2016 :)</p>
-
+                             	<p>The registration will open in 2016!</p>
                              </p>
                         </div>
                         <!-- End Single Post Content -->

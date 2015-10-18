@@ -6,7 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.ThumbnailService;
-import site.facade.UserFacade;
+import site.facade.UserService;
+import site.model.Branch;
 import site.model.SessionLevel;
 import site.model.Speaker;
 import site.model.Submission;
@@ -23,10 +24,11 @@ public class AbstractCfpController {
     protected Model buildCfpFormModel(Model model, Submission submission) {
         model.addAttribute("submission", submission);
         model.addAttribute("levels", SessionLevel.values());
+        model.addAttribute("branches", Branch.values());
         return model;
     }
 
-    protected void saveSubmission(Submission submission, MultipartFile file, UserFacade userFacade) {
+    protected void saveSubmission(Submission submission, MultipartFile file, UserService userFacade) {
         fixTwitterHandle(submission.getSpeaker());
 
         Speaker existingSpeaker = userFacade.findSpeaker(submission.getSpeaker().getEmail());
@@ -41,7 +43,8 @@ public class AbstractCfpController {
                 e.printStackTrace();
             }
         }
-
+        
+        submission.getSpeaker().setBranch(Branch.YEAR_2016);
         userFacade.submitTalk(submission);
     }
 

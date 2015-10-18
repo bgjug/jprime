@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import site.facade.AdminFacade;
+import site.facade.AdminService;
 
 /**
  * @author Ivan St. Ivanov
@@ -18,8 +18,8 @@ import site.facade.AdminFacade;
 public class ImageController {
 
 	@Autowired
-	@Qualifier(AdminFacade.NAME)
-	private AdminFacade adminFacade;
+	@Qualifier(AdminService.NAME)
+	private AdminService adminFacade;
 
 	@RequestMapping(value = "/sponsor/{itemId}", produces = {
 			MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE })

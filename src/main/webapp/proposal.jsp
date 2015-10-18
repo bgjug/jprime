@@ -47,7 +47,8 @@ pageEncoding="UTF-8"%>
     <!-- Start Single Post Content -->
     <div class="post-content">
         <h2>Submit your proposal</h2>
-        <br>Call for paper closes on <strong>3rd of May</strong>
+        <%-- Uncomment when we know when it ends I guess earlier
+        <br>Call for paper closes on <strong>3rd of May</strong> --%>
         <p>
         <user:cfp action="/cfp"/>
     </div>

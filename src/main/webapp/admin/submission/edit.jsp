@@ -20,6 +20,6 @@
 </head>
 <body>
 <admin:menu />
-<user:cfp action="/admin/submission/edit" />
+<user:cfp action="/admin/submission/edit"  admin="true"/>
 </body>
 </html>

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import site.facade.UserFacade;
+import site.facade.UserService;
 import site.model.Article;
 
 import java.awt.*;
@@ -24,8 +24,8 @@ public class NavController {
 	private static final Logger logger = Logger.getLogger(NavController.class);
 
 	@Autowired
-	@Qualifier(UserFacade.NAME)
-	private UserFacade userFacade;
+	@Qualifier(UserService.NAME)
+	private UserService userFacade;
 	
 	@RequestMapping("/nav/{tag}")
 	public String getByTag(@PathVariable("tag") final String tagName,

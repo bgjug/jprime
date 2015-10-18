@@ -24,9 +24,9 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.groupingBy;
 
-@Service(UserFacade.NAME)
+@Service(UserService.NAME)
 @Transactional
-public class UserFacade {
+public class UserService {
 
 	public static final String NAME = "userFacade";
 	

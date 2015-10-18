@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import site.facade.AdminFacade;
+import site.facade.AdminService;
 import site.model.Tag;
 
 
@@ -22,8 +22,8 @@ import site.model.Tag;
 public class TagController {
 
 	@Autowired
-	@Qualifier(AdminFacade.NAME)
-	private AdminFacade adminFacade;
+	@Qualifier(AdminService.NAME)
+	private AdminService adminFacade;
 	
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String view(Model model, Pageable pageable){

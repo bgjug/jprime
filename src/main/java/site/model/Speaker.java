@@ -3,11 +3,14 @@ package site.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,6 +37,9 @@ public class Speaker extends User {
 
     @OneToMany(mappedBy = "speaker", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, targetEntity = Submission.class)
     private Set<Submission> submissions = new HashSet<>();
+    
+    @Enumerated(EnumType.STRING)
+    private Branch branch = Branch.YEAR_2016;
 
     public Speaker() {
     }
@@ -95,7 +101,15 @@ public class Speaker extends User {
         this.featured = featured;
     }
 
-    @Override
+    public Branch getBranch() {
+		return branch;
+	}
+
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o)
             return true;

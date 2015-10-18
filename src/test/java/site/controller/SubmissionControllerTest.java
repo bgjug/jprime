@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static site.controller.AdminCfpController.*;
+import static site.controller.SubmissionController.*;
 
 /**
  * @author Ivan St. Ivanov
@@ -35,7 +35,7 @@ import static site.controller.AdminCfpController.*;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @Transactional
-public class AdminCfpControllerTest {
+public class SubmissionControllerTest {
 
     @Autowired
     private WebApplicationContext wac;

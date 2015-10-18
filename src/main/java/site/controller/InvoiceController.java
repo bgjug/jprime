@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import site.controller.invoice.InvoiceData;
 import site.controller.invoice.InvoiceExporter;
-import site.facade.MailFacade;
-import site.facade.RegistrantFacade;
+import site.facade.MailService;
+import site.facade.RegistrantService;
 import site.model.Registrant;
 
 import javax.transaction.Transactional;
@@ -27,14 +27,14 @@ public class InvoiceController {
     public static final String INVOICE_DATA_JSP = "/admin/invoice/invoiceData.jsp";
 
     @Autowired
-    @Qualifier(RegistrantFacade.NAME)
-    private RegistrantFacade registrantFacade;
+    @Qualifier(RegistrantService.NAME)
+    private RegistrantService registrantFacade;
 
     @Autowired
     private InvoiceExporter invoiceExporter;
 
     @Autowired
-    private MailFacade mailFacade;
+    private MailService mailFacade;
 
     @RequestMapping(value = "/{itemId}", method = RequestMethod.GET)
     public String invoiceDataForm(@PathVariable("itemId") Long itemId, Model model) {

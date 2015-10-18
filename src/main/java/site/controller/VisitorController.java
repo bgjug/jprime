@@ -31,8 +31,8 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
-import site.facade.AdminFacade;
-import site.facade.MailFacade;
+import site.facade.AdminService;
+import site.facade.MailService;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.model.VisitorStatus;
@@ -51,12 +51,12 @@ public class VisitorController {
     private Logger log = Logger.getLogger(this.getClass());
     
     @Autowired
-    @Qualifier(AdminFacade.NAME)
-    private AdminFacade adminFacade;
+    @Qualifier(AdminService.NAME)
+    private AdminService adminFacade;
     
     @Autowired
-    @Qualifier(MailFacade.NAME)
-    private MailFacade mailFacade;
+    @Qualifier(MailService.NAME)
+    private MailService mailFacade;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String viewVisitors(Model model) {

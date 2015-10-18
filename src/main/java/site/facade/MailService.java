@@ -14,8 +14,8 @@ import javax.mail.internet.MimeMessage;
 /**
  * @author Ivan St. Ivanov
  */
-@Service(MailFacade.NAME)
-public class MailFacade {
+@Service(MailService.NAME)
+public class MailService {
     public static final String NAME = "mailFacade";
 
     @Value("${spring.mail.username}")

@@ -17,9 +17,9 @@ import site.controller.epay.EpayResponse;
 import site.controller.epay.EpayUtil;
 import site.controller.invoice.InvoiceData;
 import site.controller.invoice.InvoiceExporter;
-import site.facade.MailFacade;
-import site.facade.RegistrantFacade;
-import site.facade.UserFacade;
+import site.facade.MailService;
+import site.facade.RegistrantService;
+import site.facade.UserService;
 import site.model.JprimeException;
 import site.model.PaymentTypeEditor;
 import site.model.Registrant;
@@ -45,31 +45,31 @@ public class TicketsController {
 
     private static final Logger logger = Logger.getLogger(TicketsController.class);
 
-    static final String TICKETS_JSP = "/tickets.jsp";
-    public static final String TICKETS_EPAY_REGISTER_JSP = "/tickets-epay-register.jsp";
+    static final String TICKETS_END_JSP = "/tickets.jsp";
+    public static final String TICKETS_EPAY_REGISTER_JSP = "/tickets.jsp";
     public static final String TICKETS_EPAY_BUY_JSP = "/tickets-epay-buy.jsp";
     public static final String TICKETS_EPAY_RESULT_JSP = "/tickets-epay-result.jsp";
 
     @Autowired
-    @Qualifier(MailFacade.NAME)
-    private MailFacade mailFacade;
+    @Qualifier(MailService.NAME)
+    private MailService mailFacade;
 
     @Autowired
-    @Qualifier(UserFacade.NAME)
-    private UserFacade userFacade;
+    @Qualifier(UserService.NAME)
+    private UserService userFacade;
 
     @Autowired
     private InvoiceExporter invoiceExporter;
 
     @Autowired
-    @Qualifier(RegistrantFacade.NAME)
-    private RegistrantFacade registrantFacade;
+    @Qualifier(RegistrantService.NAME)
+    private RegistrantService registrantFacade;
 
     //Mihail: old tickets page
     @RequestMapping(value = "/tickets", method = RequestMethod.GET)
     public String submissionForm(Model model) {
     	model.addAttribute("tags", userFacade.findAllTags());
-        return TICKETS_JSP;
+        return TICKETS_END_JSP;
     }
 
     @RequestMapping(value = "/tickets/epay", method = RequestMethod.GET)
@@ -78,7 +78,7 @@ public class TicketsController {
         model.addAttribute("registrant", new Registrant());
         model.addAttribute("paymentTypes", getPaymentTypes());
 //		return TICKETS_EPAY_REGISTER_JSP;
-        return TICKETS_JSP;
+        return TICKETS_END_JSP;
     }
 
     private List<String> getPaymentTypes() {

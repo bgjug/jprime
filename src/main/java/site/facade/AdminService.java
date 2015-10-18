@@ -14,9 +14,9 @@ import site.repository.*;
 import java.util.Collection;
 import java.util.List;
 
-@Service(AdminFacade.NAME)
+@Service(AdminService.NAME)
 @Transactional
-public class AdminFacade {
+public class AdminService {
 	
 	public static final String NAME = "adminFacade";
 	

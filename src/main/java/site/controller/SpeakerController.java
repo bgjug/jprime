@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import site.facade.AdminFacade;
+import site.facade.AdminService;
 import site.facade.ThumbnailService;
+import site.model.Branch;
 import site.model.Speaker;
+import site.model.VisitorStatus;
 import site.repository.SpeakerRepository;
 
 
@@ -30,8 +32,8 @@ import site.repository.SpeakerRepository;
 public class SpeakerController {
 
 	@Autowired
-	@Qualifier(AdminFacade.NAME)
-	private AdminFacade adminFacade;
+	@Qualifier(AdminService.NAME)
+	private AdminService adminFacade;
 	
 	@Autowired
 	@Qualifier(ThumbnailService.NAME)
@@ -49,8 +51,9 @@ public class SpeakerController {
 	
 	@Transactional
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(@Valid final Speaker speaker, BindingResult bindingResult, @RequestParam("file") MultipartFile file){
+	public String add(@Valid final Speaker speaker, BindingResult bindingResult, @RequestParam("file") MultipartFile file, Model model){
 		if(bindingResult.hasErrors()){
+			model.addAttribute("branches", Branch.values());
 			return "/admin/speaker/edit.jsp";
 		}
 		if(!file.isEmpty()){
@@ -75,6 +78,7 @@ public class SpeakerController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String edit(Model model){
 		model.addAttribute("speaker", new Speaker());
+		model.addAttribute("branches", Branch.values());
 		return "/admin/speaker/edit.jsp";
 	}
 	
@@ -83,6 +87,7 @@ public class SpeakerController {
 	public String edit(@PathVariable("itemId") Long itemId, Model model){
 		Speaker speaker = adminFacade.findOneSpeaker(itemId);
 		model.addAttribute("speaker", speaker);
+		model.addAttribute("branches", Branch.values());
 		return "/admin/speaker/edit.jsp";
 	}
 	

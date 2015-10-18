@@ -116,8 +116,16 @@
 
         </dd>
     </dl>
-    <sec:csrfInput/>
-    <form:hidden path="id"/>
+	<dl>
+		<dt>
+			<label for="branch">branch</label>
+		</dt>
+		<dd>
+			<form:select path="branch" items="${branches}" />
+		</dd>
+	</dl>
+	<sec:csrfInput />
+	<form:hidden path="id"/>
     <form:hidden path="epayInvoiceNumber"/>
     <form:hidden path="realInvoiceNumber"/>
     <form:hidden path="proformaInvoiceNumber"/>

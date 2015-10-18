@@ -26,6 +26,7 @@
 				<td><i>Phone</i></td>
 				<td><i>Twitter</i></td>
                 <td><i>Featured?</i></td>
+                <td><i>Branch?</i></td>
 				<td><i>Picture</i></td>
 				<td><i>Operations</i></td>
 			</tr>
@@ -37,6 +38,7 @@
 					<td>${speaker.phone}</td>
 					<td>${speaker.twitter}</td>
                     <td>${speaker.featured}</td>
+                    <td>${speaker.branch}</td>
 					<td><img src="/image/speaker/${speaker.id}"/></td>
 					<td>
 						<span style="float:left;"><a href="/admin/speaker/edit/${speaker.id}">Edit</a></span> &nbsp; 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import site.facade.UserFacade;
+import site.facade.UserService;
 import site.model.Speaker;
 import site.model.Sponsor;
 import site.model.SponsorPackage;
@@ -21,8 +21,8 @@ public class IndexController {
 	static final String PAGE_INDEX = "index.jsp";
 
     @Autowired
-    @Qualifier(UserFacade.NAME)
-    private UserFacade userFacade;
+    @Qualifier(UserService.NAME)
+    private UserService userFacade;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {

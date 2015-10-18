@@ -90,6 +90,14 @@
                     <form:checkbox path="featured"/>
                 </dd>
             </dl>
+            <dl>
+                <dt>
+                    <label for="branch">branch</label>
+                </dt>
+                <dd>
+                    <form:select path="branch" items="${branches}"/>
+                </dd>
+            </dl>
 			<dl>
 				<dt>
 					<label for="file">Picture ( MUST be 280x326)</label>

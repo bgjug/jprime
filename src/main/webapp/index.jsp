@@ -76,9 +76,10 @@
                             </h2>
 
                             <h3 class="animated5 white" style="text-shadow: 2px 2px black;">
-                                <span>See you in 2016!</span>
+                                <span>26.05.2016 in Sofia<</span>
                             </h3>
-
+                            
+                            <p class="animated4"><a href="/cfp" class="slider btn btn-primary">Submit a talk</a>
                             </p>
                         </div>
                     </div>
@@ -238,7 +239,7 @@
 
             <!-- Start Big Heading -->
             <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                <h1>Our <strong>Speakers</strong> in 2015</h1>
+                <h1>Our <strong>Speakers</strong> in 2015 were</h1>
             </div>
             <!-- End Big Heading -->
 

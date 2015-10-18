@@ -14,9 +14,9 @@ import site.repository.RegistrantRepository;
 
 import javax.transaction.Transactional;
 
-@Service(RegistrantFacade.NAME)
+@Service(RegistrantService.NAME)
 @Transactional
-public class RegistrantFacade {
+public class RegistrantService {
 
 	public static final String NAME = "registrantFacade";
 

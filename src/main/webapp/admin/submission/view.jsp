@@ -24,6 +24,7 @@
 				<td><i>Abstract</i></td>
                 <td><i>Level</i></td>
 				<td><i>Speaker</i></td>
+				<td><i>Branch<i></td>
                 <td><i>Status</i></td>
 				<td><i>Operations</i></td>
 			</tr>
@@ -33,6 +34,7 @@
 					<td>${submission.description}</td>
                     <td>${submission.level}</td>
 					<td>${submission.speaker.firstName} ${submission.speaker.lastName}</td>
+					<td>${submission.branch}</td>
                     <td>${submission.status}</td>
 					<td>
 						<span style="float:left;"><a href="/admin/submission/accept/${submission.id}">Accept</a></span> <br>

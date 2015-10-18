@@ -1,8 +1,14 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
+
+<%@ attribute name="action" %>
+<%@ attribute name="admin" required="false" type="java.lang.Boolean"%>
+
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags"%>
-<%@ attribute name="action" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <form:form commandName="submission" method="post"
            action="${action}" enctype="multipart/form-data">
@@ -82,6 +88,16 @@
                 <input name="file" type="file" />
             </dd>
         </dl>
+        <c:if test="${admin}">
+        	<dl>
+                <dt>
+                    <label for="branch">branch</label>
+                </dt>
+                <dd>
+                    <form:select path="branch" items="${branches}"/>
+                </dd>
+            </dl>
+        </c:if>
         <sec:csrfInput />
         <form:hidden path="id" />
         <form:hidden path="createdDate"/>

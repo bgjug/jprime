@@ -10,7 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import site.facade.AdminFacade;
+import site.facade.AdminService;
 import site.model.Article;
 import site.model.User;
 
@@ -23,8 +23,8 @@ import java.util.List;
 public class ArticleController {
 
     @Autowired
-    @Qualifier(AdminFacade.NAME)
-    private AdminFacade adminFacade;
+    @Qualifier(AdminService.NAME)
+    private AdminService adminFacade;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String view(Model model) {

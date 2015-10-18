@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static site.controller.TicketsController.TICKETS_EPAY_REGISTER_JSP;
-import static site.controller.TicketsController.TICKETS_JSP;
+import static site.controller.TicketsController.TICKETS_END_JSP;
 
 /**
  * @author Ivan St. Ivanov
@@ -42,7 +42,7 @@ public class TicketsControllerTest {
     public void getShouldReturnTicketsJsp() throws Exception {
         mockMvc.perform(get("/tickets"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(TICKETS_JSP));
+                .andExpect(view().name(TICKETS_END_JSP));
     }
 
 }

@@ -8,7 +8,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import site.facade.AdminFacade;
+
+import site.facade.AdminService;
+import site.model.Branch;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.model.VisitorStatus;
@@ -26,8 +28,8 @@ public class RegistrantController {
     public static final String REGISTRANT_EDIT_JSP = "/admin/registrant/edit.jsp";
 
     @Autowired
-    @Qualifier(AdminFacade.NAME)
-    private AdminFacade adminFacade;
+    @Qualifier(AdminService.NAME)
+    private AdminService adminFacade;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String viewRegistrants(Model model) {
@@ -39,6 +41,7 @@ public class RegistrantController {
     public String getNewRegistrantForm(Model model) {
         model.addAttribute("registrant", new Registrant());
         model.addAttribute("paymentTypes", Registrant.PaymentType.values());
+        model.addAttribute("branches", Branch.values());
         return REGISTRANT_EDIT_JSP;
     }
 
@@ -46,6 +49,7 @@ public class RegistrantController {
     public String getEditRegistrantForm(@PathVariable("itemId") Long itemId, Model model) {
         model.addAttribute("registrant", adminFacade.findOneRegistrant(itemId));
         model.addAttribute("paymentTypes", Registrant.PaymentType.values());
+        model.addAttribute("branches", Branch.values());
         return REGISTRANT_EDIT_JSP;
     }
 
@@ -59,8 +63,9 @@ public class RegistrantController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addRegistrant(@Valid final Registrant registrant, BindingResult bindingResult) {
+    public String addRegistrant(@Valid final Registrant registrant, BindingResult bindingResult,Model model) {
         if (bindingResult.hasErrors()) {
+        	model.addAttribute("branches", Branch.values());
             return REGISTRANT_EDIT_JSP;
         }
         adminFacade.saveRegistrant(registrant);

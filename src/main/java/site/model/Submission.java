@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import site.config.Globals;
+
 /**
  * @author Ivan St. Ivanov
  */
@@ -35,6 +37,9 @@ public class Submission extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Speaker.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "speaker", nullable = false, referencedColumnName = "id")
     private Speaker speaker = new Speaker();
+    
+    @Enumerated(EnumType.STRING)
+    private Branch branch = Globals.CURRENT_BRANCH;
 
     public Submission() {
     }
@@ -86,7 +91,15 @@ public class Submission extends AbstractEntity {
         this.speaker = speaker;
     }
 
-    @Override
+    public Branch getBranch() {
+		return branch;
+	}
+
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
