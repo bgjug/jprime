@@ -1,10 +1,19 @@
 package site.controller;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import javax.validation.Valid;
+
 import org.apache.log4j.Logger;
+import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,13 +24,6 @@ import site.config.Globals;
 import site.facade.MailService;
 import site.facade.UserService;
 import site.model.Submission;
-
-import javax.validation.Valid;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * @author Ivan St. Ivanov
@@ -52,9 +54,11 @@ public class CfpController extends AbstractCfpController {
     }
 
     @RequestMapping(value = "/cfp", method = RequestMethod.POST)
-    public String submitSession(@Valid final Submission submission, BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
-        if (bindingResult.hasErrors()) {
-            return "/cfp";
+    public String submitSession(@Valid final Submission submission, BindingResult bindingResult, @RequestParam("file") MultipartFile file, Model model) {
+        if (bindingResult.hasErrors() || StringUtils.isEmpty(submission.getSpeaker().getEmail()) || !new EmailValidator().isValid(submission.getSpeaker().getEmail(), null)) {
+        	model.addAttribute("tags", userFacade.findAllTags());
+            buildCfpFormModel(model, new Submission());
+        	return Globals.CFP;
         }
         saveSubmission(submission, file, userFacade);
         try {

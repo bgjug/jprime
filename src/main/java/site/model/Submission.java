@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import site.config.Globals;
 
 /**
@@ -21,10 +23,10 @@ import site.config.Globals;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Submission extends AbstractEntity {
 
-    @NotNull
+    @NotBlank
     private String title;
 
-    @NotNull
+    @NotBlank
     @Column(length = 3000)
     private String description;
 

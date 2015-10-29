@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -25,7 +26,7 @@ public class User extends AbstractEntity {
 	private String lastName;
 	
 	@Column(unique = true)
-    @NotNull
+    @NotBlank
     @Email
 	private String email;
 	
