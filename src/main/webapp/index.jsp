@@ -374,6 +374,7 @@
 
 
     <!-- Start Client/Partner Section -->
+    <%--
     <div class="partner">
         <div class="container">
             <div class="row">
@@ -436,6 +437,7 @@
         </div><!-- .container -->
     </div>
     <!-- End Client/Partner Section -->
+    --%>
 
 
     <user:footer/>
