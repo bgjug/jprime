@@ -291,7 +291,7 @@
                 </div>
             </div>
 
-            <!-- <div class="row pricing-tables">
+            <%-- <div class="row pricing-tables">
 
                 <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
                     <div class="pricing-table">
@@ -367,7 +367,7 @@
                     </div>
                 </div>
 
-            </div> -->
+            </div> --%>
         </div>
     </div>
     <!-- End Pricing Table Section -->
