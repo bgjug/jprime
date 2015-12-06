@@ -76,7 +76,7 @@
                             </h2>
 
                             <h3 class="animated5 white" style="text-shadow: 2px 2px black;">
-                                <span>26.05.2016 in Sofia</span>
+                                <span>26 and 27 May 2016 in Sofia</span>
                             </h3>
                             
                             <p class="animated4"><a href="/cfp" class="slider btn btn-primary">Submit a talk</a>
@@ -222,8 +222,7 @@
         </div>
         <!-- End Big Heading -->
 
-        <p class="text-center">jPrime is a one day conference with talks on Java, various languages on the JVM, mobile,
-            web and best practices. <br/> It is held on <strong>27th May 2015</strong> in Sofia Event Center. It's run
+        <p class="text-center">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices. <br/> Its second edition will be held on <strong>26th and 27th May 2016</strong> in Sofia Event Center. It's run
             by the Bulgarian Java User Group and backed by the biggest companies in the city.
             <br/><br/>jPrime features a combination of great international speakers along with the best presenters from
             Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning,
