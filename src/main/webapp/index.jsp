@@ -284,13 +284,10 @@
                         <h1>Become a <strong>Sponsor!</strong></h1>
                     </div>
                     <!-- End Big Heading -->
-
-                    <!-- Text -->
-                    <p class="text-center">Sponsor packages for 2016 not yet available.</p>
                 </div>
             </div>
 
-            <%-- <div class="row pricing-tables">
+            <div class="row pricing-tables">
 
                 <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
                     <div class="pricing-table">
@@ -298,16 +295,16 @@
                             <h3>Platinum</h3>
                         </div>
                         <div class="plan-price">
-                            <div class="price-value">1500<span>.00</span> EUR</div>
+                            <div class="price-value">5000<span>.00</span> BGN</div>
                         </div>
                         <div class="plan-list">
                             <ul>
                                 <li><strong>9</strong> free passes</li>
-                                <li><strong>20%</strong> discount of passes</li>
-                                <li><strong>Booth</strong> at the conference hall</li>
-                                <li><strong>Free</strong> raffle sponsorship</li>
+                                <li><strong>15%</strong> discount of passes</li>
+                                <li><strong>Booth</strong> in the conference hall</li>
+                                <li><strong>Presence</strong> on the stage for the raffle</li>
                                 <li><strong>2</strong> banners in the conference rooms</li>
-                                <li><strong>1</strong> invite for the speaker dinner</li>
+                                <li><strong>1</strong> invite for the "thank you" dinner</li>
                             </ul>
                         </div>
                         <div class="plan-signup">
@@ -324,14 +321,14 @@
                             <h3>Gold</h3>
                         </div>
                         <div class="plan-price">
-                            <div class="price-value">1000<span>.00</span> EUR</div>
+                            <div class="price-value">4000<span>.00</span> BGN</div>
                         </div>
                         <div class="plan-list">
                             <ul>
                                 <li><strong>6</strong> free passes</li>
                                 <li><strong>10%</strong> discount of passes</li>
-                                <li><strong>Booth</strong> at the conference hall</li>
-                                <li><strong>1</strong> banner in the conference rooms</li>
+                                <li><strong>Booth</strong> in the conference hall</li>
+                                <li><strong>2</strong> banners in the conference rooms</li>
                             </ul>
                         </div>
                         <div class="plan-signup">
@@ -350,13 +347,13 @@
                             <h3>Silver</h3>
                         </div>
                         <div class="plan-price">
-                            <div class="price-value">500<span>.00</span> EUR</div>
+                            <div class="price-value">1500<span>.00</span> BGN</div>
                         </div>
                         <div class="plan-list">
                             <ul>
                                 <li><strong>3</strong> free passes</li>
                                 <li><strong>10%</strong> discount of passes</li>
-                                <li><strong>1</strong> banner in the conference rooms</li>
+                                <li><strong>2</strong> banners in the conference rooms</li>
                             </ul>
                         </div>
                         <div class="plan-signup">
@@ -366,7 +363,7 @@
                     </div>
                 </div>
 
-            </div> --%>
+            </div>
         </div>
     </div>
     <!-- End Pricing Table Section -->
