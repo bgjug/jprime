@@ -8,6 +8,7 @@
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
 
 
 <form:form commandName="submission" method="post"
@@ -16,6 +17,9 @@
         <p>
             <form:errors />
         </p>
+        <dl>
+            <dt>Session info</dt>
+        </dl>
         <dl>
             <dt>
                 <label for="title">Title</label>
@@ -41,53 +45,17 @@
             </dd>
         </dl>
         <dl>
-            <dt>
-                <label for="speaker.firstName">First Name</label>
-            </dt>
-            <dd>
-                <form:input path="speaker.firstName" />
-            </dd>
+            <dt>Speaker</dt>
         </dl>
-        <dl>
-            <dt>
-                <label for="speaker.lastName">Last Name</label>
-            </dt>
-            <dd>
-                <form:input path="speaker.lastName" />
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                <label for="speaker.email">Email</label>
-            </dt>
-            <dd>
-                <form:input path="speaker.email" />
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                <label for="speaker.twitter">Twitter</label>
-            </dt>
-            <dd>
-                <form:input path="speaker.twitter" />
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                <label for="speaker.bio">Bio</label>
-            </dt>
-            <dd>
-                <form:textarea path="speaker.bio" style="width:80%" rows="5" />
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                <label for="file">Picture ( MUST be 280x326)</label>
-            </dt>
-            <dd>
-                <input name="file" type="file" />
-            </dd>
-        </dl>
+        <user:speaker role="speaker"/>
+        <button id="toggleCoSpeaker" type="button">Add co speaker</button>
+        <dl></dl>
+        <div id="coSpeaker">
+            <dl>
+                <dt>Co-Speaker</dt>
+            </dl>
+            <user:speaker role="coSpeaker"/>
+        </div>
         <c:if test="${admin}">
         	<dl>
                 <dt>

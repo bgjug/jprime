@@ -39,7 +39,11 @@ public class Submission extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Speaker.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "speaker", nullable = false, referencedColumnName = "id")
     private Speaker speaker = new Speaker();
-    
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Speaker.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "coSpeaker", nullable = true, referencedColumnName = "id")
+    private Speaker coSpeaker = null;
+
     @Enumerated(EnumType.STRING)
     private Branch branch = Globals.CURRENT_BRANCH;
 
@@ -51,6 +55,15 @@ public class Submission extends AbstractEntity {
         this.description = description;
         this.level = level;
         this.speaker = speaker;
+    }
+
+    public Submission(String title, String description, SessionLevel level, Speaker speaker,
+            Speaker coSpeaker) {
+        this.title = title;
+        this.description = description;
+        this.level = level;
+        this.speaker = speaker;
+        this.coSpeaker = coSpeaker;
     }
 
     public String getTitle() {
@@ -101,7 +114,15 @@ public class Submission extends AbstractEntity {
 		this.branch = branch;
 	}
 
-	@Override
+    public Speaker getCoSpeaker() {
+        return coSpeaker;
+    }
+
+    public void setCoSpeaker(Speaker coSpeaker) {
+        this.coSpeaker = coSpeaker;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o)
             return true;

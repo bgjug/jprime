@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags"%>
-+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
 
 <!doctype html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -26,7 +26,17 @@ pageEncoding="UTF-8"%>
   <meta name="author" content="ZoOm Arts">
 
     <user:pageJavaScriptAndCss/>
-
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#coSpeaker").hide();
+            $("#toggleCoSpeaker").click(function () {
+                $("#coSpeaker").toggle();
+                var coSpeakerButton = $("#toggleCoSpeaker");
+                var buttonCaption = coSpeakerButton.text();
+                coSpeakerButton.text(buttonCaption == "Add co speaker" ? "Remove co speaker" : "Add co speaker");
+            });
+        });
+    </script>
 </head>
 <body>
 

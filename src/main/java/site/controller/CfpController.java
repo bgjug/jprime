@@ -1,16 +1,7 @@
 package site.controller;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import javax.validation.Valid;
-
 import org.apache.log4j.Logger;
 import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -19,11 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import site.config.Globals;
-import site.facade.MailService;
-import site.facade.UserService;
 import site.model.Submission;
+
+import javax.validation.Valid;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * @author Ivan St. Ivanov
@@ -34,17 +28,8 @@ public class CfpController extends AbstractCfpController {
     private static final Logger logger = Logger.getLogger(CfpController.class);
 
     public static final String CFP_OPEN_JSP = "/proposal.jsp";
-    public static final String CFP_CLOSED_JSP = "/cfp-closed.jsp";
 
     public static final String JPRIME_CONF_MAIL_ADDRESS = "conference@jprime.io";
-
-    @Autowired
-    @Qualifier(UserService.NAME)
-    private UserService userFacade;
-
-    @Autowired
-    @Qualifier(MailService.NAME)
-    private MailService mailFacade;
 
     @RequestMapping(value = "/cfp", method = RequestMethod.GET)
     public String submissionForm(Model model) {
@@ -54,16 +39,24 @@ public class CfpController extends AbstractCfpController {
     }
 
     @RequestMapping(value = "/cfp", method = RequestMethod.POST)
-    public String submitSession(@Valid final Submission submission, BindingResult bindingResult, @RequestParam("file") MultipartFile file, Model model) {
+    public String submitSession(@Valid final Submission submission,
+            BindingResult bindingResult,
+            @RequestParam("speakerImage") MultipartFile speakerImage,
+            @RequestParam("coSpeakerImage") MultipartFile coSpeakerImage,
+            Model model) {
         if (bindingResult.hasErrors() || StringUtils.isEmpty(submission.getSpeaker().getEmail()) || !new EmailValidator().isValid(submission.getSpeaker().getEmail(), null)) {
         	model.addAttribute("tags", userFacade.findAllTags());
             buildCfpFormModel(model, new Submission());
         	return Globals.CFP;
         }
-        saveSubmission(submission, file, userFacade);
+        saveSubmission(submission, speakerImage, coSpeakerImage);
         try {
             mailFacade.sendEmail(submission.getSpeaker().getEmail(), "jPrime talk proposal",
                     loadMailContentTemplate("submissionContent.html"));
+            if (submission.getCoSpeaker() != null) {
+                mailFacade.sendEmail(submission.getCoSpeaker().getEmail(), "jPrime talk proposal",
+                        loadMailContentTemplate("submissionContent.html"));
+            }
             mailFacade.sendEmail(JPRIME_CONF_MAIL_ADDRESS, "New talk proposal",
                     prepareNewSubmissionContent(submission, loadMailContentTemplate("newSubmission.html")
             ));
@@ -85,5 +78,4 @@ public class CfpController extends AbstractCfpController {
                         .replace("{speaker.name}", submission.getSpeaker().getFirstName() + " " + submission.getSpeaker().getLastName())
                         .replace("{speaker.bio}", submission.getSpeaker().getBio());
     }
-
 }

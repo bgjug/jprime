@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import site.facade.AdminService;
-import site.facade.MailService;
-import site.facade.UserService;
 import site.model.Submission;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -40,15 +39,6 @@ public class SubmissionController extends AbstractCfpController {
     @Autowired
     @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
-
-    @Autowired
-    @Qualifier(MailService.NAME)
-    private MailService mailFacade;
-
-    @Autowired
-    @Qualifier(UserService.NAME)
-    private UserService userFacade;
-
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String listSubmissions(Model model, Pageable pageable) {
         Page<Submission> submissions = adminFacade.findAllSubmissions(pageable);
@@ -67,10 +57,7 @@ public class SubmissionController extends AbstractCfpController {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         adminFacade.acceptSubmission(submission);
         try {
-            String messageText = buildMessage(submission, "/acceptSubmission.html");
-            mailFacade.sendEmail(submission.getSpeaker().getEmail(),
-                    "Your jPrime talk proposal status",
-                    messageText);
+            sendEmails(submission, "/acceptSubmission.html");
         } catch (Exception e) {
             logger.error("Could not send accept email", e);
         }
@@ -82,14 +69,24 @@ public class SubmissionController extends AbstractCfpController {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         adminFacade.rejectSubmission(submission);
         try {
-            String messageText = buildMessage(submission, "/rejectSubmission.html");
-            mailFacade.sendEmail(submission.getSpeaker().getEmail(),
-                    "Your jPrime talk proposal status",
-                    messageText);
+            sendEmails(submission, "/rejectSubmission.html");
         } catch (Exception e) {
             logger.error("Could not send rejection email", e);
         }
         return REDIRECT + "/admin/submission/view";
+    }
+
+    private void sendEmails(Submission submission, String fileName)
+            throws IOException, URISyntaxException, MessagingException {
+        final String mailSubject = "Your jPrime talk proposal status";
+        String messageText = buildMessage(submission, fileName);
+        mailFacade.sendEmail(submission.getSpeaker().getEmail(), mailSubject, messageText);
+        if (submission.getCoSpeaker() != null) {
+            final String messageForCoSpeaker = messageText.replace(
+                    submission.getSpeaker().getFirstName(),
+                    submission.getCoSpeaker().getFirstName());
+            mailFacade.sendEmail(submission.getCoSpeaker().getEmail(), mailSubject, messageForCoSpeaker);
+        }
     }
 
     private String buildMessage(Submission submission, String fileName)
@@ -108,14 +105,17 @@ public class SubmissionController extends AbstractCfpController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editSubmission(@Valid final Submission submission, BindingResult bindingResult, @RequestParam("file") MultipartFile file, Model model) {
+    public String editSubmission(@Valid final Submission submission,
+            BindingResult bindingResult,
+            @RequestParam("speakerImage") MultipartFile speakerImage,
+            @RequestParam("coSpeakerImage") MultipartFile coSpeakerImage,
+            Model model) {
         if (bindingResult.hasErrors()) {
         	buildCfpFormModel(model, submission);
         	return ADMIN_SUBMISSION_EDIT_JSP;
         }
-        saveSubmission(submission, file, userFacade);
+        saveSubmission(submission, speakerImage, coSpeakerImage);
 
         return REDIRECT + "/admin/submission/view";
     }
-
 }
