@@ -188,7 +188,10 @@
             g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
         })();
     </script>
+    <%--
+    Removing this script for now since it creates loading issue.
     <noscript><p><img src="//analytics.sty.bz/piwik.php?idsite=19" style="border:0;" alt="" /></p></noscript>
+     --%>
     <!-- End Piwik Code -->
 
 </footer>
