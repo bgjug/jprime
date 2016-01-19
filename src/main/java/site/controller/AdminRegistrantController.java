@@ -22,7 +22,7 @@ import javax.validation.Valid;
  */
 @Controller()
 @RequestMapping(value = "/admin/registrant")
-public class RegistrantController {
+public class AdminRegistrantController {
 
     public static final String REGISTRANT_VIEW_JSP = "/admin/registrant/view.jsp";
     public static final String REGISTRANT_EDIT_JSP = "/admin/registrant/edit.jsp";
@@ -59,7 +59,7 @@ public class RegistrantController {
         visitor.setRegistrant(adminFacade.findOneRegistrant(itemId));
         model.addAttribute("visitor", visitor);
         model.addAttribute("statuses", VisitorStatus.values());
-        return VisitorController.VISITOR_EDIT_JSP;
+        return AdminVisitorController.VISITOR_EDIT_JSP;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)

@@ -30,8 +30,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static site.controller.RegistrantController.REGISTRANT_EDIT_JSP;
-import static site.controller.RegistrantController.REGISTRANT_VIEW_JSP;
+import static site.controller.AdminRegistrantController.REGISTRANT_EDIT_JSP;
+import static site.controller.AdminRegistrantController.REGISTRANT_VIEW_JSP;
 
 /**
  * @author Ivan St. Ivanov
@@ -137,7 +137,7 @@ public class RegistrantControllerTest {
         mockMvc.perform(get("/admin/registrant/" + ivan.getId() + "/addVisitor"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("visitor", hasProperty("registrant", is(ivan))))
-                .andExpect(view().name(VisitorController.VISITOR_EDIT_JSP));
+                .andExpect(view().name(AdminVisitorController.VISITOR_EDIT_JSP));
     }
 
     @Test

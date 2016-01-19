@@ -19,7 +19,7 @@ import site.model.Tag;
 
 @Controller()
 @RequestMapping(value = "/admin/tag")
-public class TagController {
+public class AdminTagController {
 
 	@Autowired
 	@Qualifier(AdminService.NAME)

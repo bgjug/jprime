@@ -22,7 +22,7 @@ import javax.validation.Valid;
  */
 @Controller()
 @RequestMapping(value = "/admin/invoice")
-public class InvoiceController {
+public class AdminInvoiceController {
 
     public static final String INVOICE_DATA_JSP = "/admin/invoice/invoiceData.jsp";
 

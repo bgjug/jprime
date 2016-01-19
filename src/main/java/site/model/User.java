@@ -5,14 +5,14 @@ import java.util.HashSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class User extends AbstractEntity {
@@ -21,14 +21,23 @@ public class User extends AbstractEntity {
      */
     private static final long serialVersionUID = 1L;
 	
+    @NotBlank
 	private String firstName;
 	
+    @NotBlank
 	private String lastName;
 	
 	@Column(unique = true)
     @NotBlank
     @Email
 	private String email;
+	
+	@NotBlank
+	@Length(max=250)
+	private String password;
+	
+	@Transient
+	private String cpassword;
 	
 	private String phone;
 
@@ -101,4 +110,20 @@ public class User extends AbstractEntity {
         result = 31 * result + email.hashCode();
         return result;
     }
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getCpassword() {
+		return cpassword;
+	}
+
+	public void setCpassword(String cpassword) {
+		this.cpassword = cpassword;
+	}
 }

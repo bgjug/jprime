@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller()
 @RequestMapping(value = "/admin/article")
-public class ArticleController {
+public class AdminArticleController {
 
     @Autowired
     @Qualifier(AdminService.NAME)

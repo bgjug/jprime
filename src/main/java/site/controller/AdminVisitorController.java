@@ -42,7 +42,7 @@ import site.model.VisitorStatus;
  */
 @Controller()
 @RequestMapping(value = "/admin/visitor")
-public class VisitorController {
+public class AdminVisitorController {
 
     public static final String VISITORS_JSP = "/admin/visitor/view.jsp";
     public static final String VISITOR_EDIT_JSP = "/admin/visitor/edit.jsp";

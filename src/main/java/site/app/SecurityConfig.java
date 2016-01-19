@@ -1,5 +1,7 @@
 package site.app;
 
+import java.util.Collections;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,13 +9,24 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import site.model.User;
+import site.repository.UserRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -24,6 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private UserRepository userRepository;
+    
     @Override
     public void configure(final WebSecurity web) throws Exception {
         web
@@ -37,29 +53,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER")
-                .and()
-                .withUser("admin").password(environment.getProperty("admin.password")).roles("ADMIN", "USER");
-//	        auth.authenticationProvider(new AuthenticationProvider() {
-//	            @Override
-//	            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-//	                String email = (String) authentication.getPrincipal();
-//	                String providedPassword = (String) authentication.getCredentials();
-//	                User user = userService.findAndAuthenticateUser(email, providedPassword);
-//	                if (user == null) {
-//	                    throw new BadCredentialsException("Username/Password does not match for " + authentication.getPrincipal());
-//	                }
-//
-//	                return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-//	            }
-//
-//	            @Override
-//	            public boolean supports(Class<?> authentication) {
-//	                return true;
-//	            }
-//	        });
+//        auth
+//                .inMemoryAuthentication()
+//                .withUser("user").password("password").roles("USER")
+//                .and()
+//                .withUser("admin").password(environment.getProperty("admin.password")).roles("ADMIN", "USER");
+	        auth.authenticationProvider(new AuthenticationProvider() {
+	            @Override
+	            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+	                String email = (String) authentication.getPrincipal();
+	                String providedPassword = (String) authentication.getCredentials();
+	                
+	                //admin hack
+	                if(email.equals("admin") && providedPassword.equals(environment.getProperty("admin.password"))){
+	                	return new UsernamePasswordAuthenticationToken(email, providedPassword, Collections.singleton(new SimpleGrantedAuthority("ADMIN")));
+	                }
+	                
+	                User user = userRepository.findUserByEmail(email);
+	                
+	                if (user == null || !passwordEncoder().matches(providedPassword, user.getPassword())) {
+	                    throw new BadCredentialsException("Username/Password does not match for " + authentication.getPrincipal());
+	                }
+	                
+	                return new UsernamePasswordAuthenticationToken(email, providedPassword, Collections.singleton(new SimpleGrantedAuthority("USER")));
+	            }
+
+	            @Override
+	            public boolean supports(Class<?> authentication) {
+	                return true;
+	            }
+	        });
     }
 
     @Override
@@ -69,8 +92,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                         //TODO Mihail: "/" only works if tomcat/conf/web.xml has index.jsp commented as a welcome page
                         //TODO if not, the controller will not be called and the jsp is not going to have any model object filled up.
-                .antMatchers("/", "/login", "/about", "/nav/**", "/cfp", "/tickets/**", "/image/**", "/team","/venue", "/404").permitAll() // #4
-                .antMatchers("/admin/**").hasRole("ADMIN") // #6
+                .antMatchers("/", "/login", "/about", "/nav/**", "/cfp", "/signup" , "/image/**", "/team","/venue", "/404").permitAll() // #4
+                .antMatchers("/admin/**").hasAuthority("ADMIN") // #6
+                .antMatchers("/tickets/**").hasAuthority("USER")
                 .anyRequest().authenticated() // 7
                 .and()
                 .formLogin()  // #8

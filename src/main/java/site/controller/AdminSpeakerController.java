@@ -29,7 +29,7 @@ import site.repository.SpeakerRepository;
 
 @Controller()
 @RequestMapping(value = "/admin/speaker")
-public class SpeakerController {
+public class AdminSpeakerController {
 
 	@Autowired
 	@Qualifier(AdminService.NAME)
