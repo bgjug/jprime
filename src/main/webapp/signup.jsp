@@ -81,6 +81,7 @@
                                     <input type="password" name="cpassword" id="cpassword"><br/>
 		                        	<form:errors path="cpassword"/>
                                 </div>
+                                <br/>
                                 <input type="submit" value="Join" class="btn">
                             </form:form>
                              </p>
