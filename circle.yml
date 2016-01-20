@@ -1,8 +1,7 @@
 ## Customize the test machine
 machine:
 
-  timezone:
-    Bulgaria/Sofia # Set the timezone
+  
 
   # Version of ruby to use
   java:
