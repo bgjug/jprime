@@ -67,17 +67,17 @@
 		                        	 <form:errors path="lastName"/>
                                 </div>
                                 <div class="form-wrapper">
-                                    <label for="email">Email</label><br/>
+                                    <label for="email">Email *</label><br/>
                                     <input type="email" name="email" id="email"><br/>
 		                        	<form:errors path="email"/>
                                 </div>
                                 <div class="form-wrapper">
-                                    <label for="password">Password</label><br/>
+                                    <label for="password">Password *</label><br/>
                                     <input type="password" name="password" id="password"><br/>
 		                        	<form:errors path="password"/>
                                 </div>
                                 <div class="form-wrapper">
-                                    <label for="password">Confirm password</label><br/>
+                                    <label for="password">Confirm password *</label><br/>
                                     <input type="password" name="cpassword" id="cpassword"><br/>
 		                        	<form:errors path="cpassword"/>
                                 </div>

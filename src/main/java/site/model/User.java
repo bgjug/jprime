@@ -21,10 +21,8 @@ public class User extends AbstractEntity {
      */
     private static final long serialVersionUID = 1L;
 	
-    @NotBlank
 	private String firstName;
 	
-    @NotBlank
 	private String lastName;
 	
 	@Column(unique = true)
