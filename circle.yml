@@ -25,7 +25,6 @@ dependencies:
   pre:
   override:
     - mvn clean install
-        timeout: 180 # fail if command has no output for 3 minutes
 
   # we automatically cache and restore many dependencies between
   # builds. If you need to, you can add custom paths to cache:
