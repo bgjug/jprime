@@ -32,7 +32,6 @@ public class User extends AbstractEntity {
     @Email
 	private String email;
 	
-	@NotBlank
 	@Length(max=250)
 	private String password;
 	

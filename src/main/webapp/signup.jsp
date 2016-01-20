@@ -57,28 +57,28 @@
                              	<form:form modelAttribute="user" action="/signup" method="post" enctype="multipart/form-data">
 	                    
                                 <div class="form-wrapper">
-                                    <label for="firstName">First Name</label>
-                                    <input type="text" name="firstName" id="name">
+                                    <label for="firstName">First Name</label> <br/>
+                                    <input type="text" name="firstName" id="name"><br/>
 		                        	<form:errors path="firstName"/>
                                 </div>
                                 <div class="form-wrapper">
-                                    <label for="lastName">Last Name</label>
-                                    <input type="text" name="lastName" id="username">
+                                    <label for="lastName">Last Name</label><br/>
+                                    <input type="text" name="lastName" id="username"><br/>
 		                        	 <form:errors path="lastName"/>
                                 </div>
                                 <div class="form-wrapper">
-                                    <label for="email">Email</label>
-                                    <input type="email" name="email" id="email">
+                                    <label for="email">Email</label><br/>
+                                    <input type="email" name="email" id="email"><br/>
 		                        	<form:errors path="email"/>
                                 </div>
                                 <div class="form-wrapper">
-                                    <label for="password">Password</label>
-                                    <input type="password" name="password" id="password">
+                                    <label for="password">Password</label><br/>
+                                    <input type="password" name="password" id="password"><br/>
 		                        	<form:errors path="password"/>
                                 </div>
                                 <div class="form-wrapper">
-                                    <label for="password">Confirm password</label>
-                                    <input type="password" name="cpassword" id="cpassword">
+                                    <label for="password">Confirm password</label><br/>
+                                    <input type="password" name="cpassword" id="cpassword"><br/>
 		                        	<form:errors path="cpassword"/>
                                 </div>
                                 <input type="submit" value="Join" class="btn">
