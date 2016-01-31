@@ -13,9 +13,12 @@ class MailServiceMock extends MailService {
 
     List<String> recipientAddresses = new ArrayList<>();
 
+    String lastMessageText;
+    
     @Override
     public void sendEmail(String to, String subject, String messageText)
             throws MessagingException {
         recipientAddresses.add(to);
+        lastMessageText = messageText;
     }
 }
