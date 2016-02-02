@@ -46,7 +46,7 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 			return "/signup.jsp";
 		}
-		if (!user.getPassword().equals(user.getCpassword()) || StringUtils.isEmpty(user.getPassword())) {
+		if (StringUtils.isEmpty(user.getPassword()) || !user.getPassword().equals(user.getCpassword())) {
 			bindingResult.rejectValue("cpassword", "notmatch.password", "Passwords dont match!");
 			return "/signup.jsp";
 		}
