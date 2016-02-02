@@ -30,7 +30,6 @@ public class User extends AbstractEntity {
     @Email
 	private String email;
 	
-	@Length(max=250)
 	private String password;
 	
 	@Transient
