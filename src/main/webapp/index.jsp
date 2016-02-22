@@ -369,7 +369,7 @@
     <!-- End Pricing Table Section -->
 
 
-    <!-- Start Client/Partner Section -->
+    <!-- Start Sponsor Section -->
     <%--
     <div class="partner">
         <div class="container">
@@ -432,8 +432,39 @@
             </div><!-- .row -->
         </div><!-- .container -->
     </div>
-    <!-- End Client/Partner Section -->
+    <!-- End Sponsor Section -->
     --%>
+    
+    
+    <!-- Start Sponsor Section -->
+    <c:if test="${fn:length(partners) gt 0}">
+	    <div class="partner">
+	        <div class="container">
+	            <div class="row">
+	
+	                <div class="big-title text-center">
+	                    <h1><strong>Media</strong> Partners</h1>
+	                </div>
+	
+	                <div class="our-clients">
+	                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partner)}" data-appeared-items="${fn:length(partner)}"
+	                         data-navigation="true">
+	
+	                        <c:forEach var="partner" items="${partners}">
+	                            <div class="client-item item">
+	                                <a href="${partner.companyWebsite}"><img src="/image/partner/${partner.id}"
+	                                                                         alt="${partner.companyName}"/></a>
+	                            </div>
+	                        </c:forEach>
+	
+	                    </div>
+	                </div>
+	                <!-- End Clients Carousel -->
+	            </div><!-- .row -->
+	        </div><!-- .container -->
+	    </div>
+    </c:if>
+    <!-- End Sponsor Section -->
 
 
     <user:footer/>

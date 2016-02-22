@@ -27,6 +27,13 @@ public class ImageController {
 	public byte[] getSponsorLogo(@PathVariable("itemId") Long itemId) {
 		return adminFacade.findOneSponsor(itemId).getLogo();
 	}
+	
+	@RequestMapping(value = "/partner/{itemId}", produces = {
+			MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE })
+	@ResponseBody
+	public byte[] getPartnerLogo(@PathVariable("itemId") Long itemId) {
+		return adminFacade.findOnePartner(itemId).getLogo();
+	}
 
 	@RequestMapping(value = "/speaker/{itemId}", produces = {
 			MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE })

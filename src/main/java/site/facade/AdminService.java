@@ -33,6 +33,10 @@ public class AdminService {
 	private SponsorRepository sponsorRepository;
 	
 	@Autowired
+	@Qualifier(PartnerRepository.NAME)
+	private PartnerRepository partnerRepository;
+	
+	@Autowired
 	@Qualifier(UserRepository.NAME)
 	private UserRepository userRepository;
 
@@ -92,6 +96,25 @@ public class AdminService {
 	public Sponsor saveSponsor(Sponsor sponsor){
 		return sponsorRepository.save(sponsor);
 	}
+	
+	/* partner repo */
+	
+	public Page<Partner> findAllPartners(Pageable pageable){
+		return partnerRepository.findAll(pageable);
+	}
+	
+	public Partner findOnePartner(Long id){
+		return partnerRepository.findOne(id);
+	}
+	
+	public void deletePartner(Long id){
+		partnerRepository.delete(id);
+	}
+	
+	public Partner savePartner(Partner partner){
+		return partnerRepository.save(partner);
+	}
+
 
 
 

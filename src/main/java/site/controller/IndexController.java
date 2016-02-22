@@ -36,6 +36,7 @@ public class IndexController {
                 new ArrayList<>()));
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("featuredSpeakers", userFacade.findFeaturedSpeakers());
+        model.addAttribute("partners", userFacade.findAllPartners());
 		return PAGE_INDEX;
 	}
 

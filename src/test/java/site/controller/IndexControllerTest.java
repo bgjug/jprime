@@ -12,12 +12,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
+
 import site.app.Application;
+import site.model.Partner;
 import site.model.Speaker;
 import site.model.Sponsor;
 import site.model.SponsorPackage;
 import site.model.Tag;
 import site.repository.ArticleRepository;
+import site.repository.PartnerRepository;
 import site.repository.SpeakerRepository;
 import site.repository.SponsorRepository;
 import site.repository.SubmissionRepository;
@@ -65,7 +68,12 @@ public class IndexControllerTest {
     @Autowired
     @Qualifier(SpeakerRepository.NAME)
     private SpeakerRepository speakerRepository;
-
+    
+    @Autowired
+    @Qualifier(PartnerRepository.NAME)
+    private PartnerRepository partnerRepository;
+    
+    
     @Autowired
     @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
@@ -78,6 +86,8 @@ public class IndexControllerTest {
 
     private Speaker brianGoetz;
 
+    private Partner softUni;
+    
     @Before
     public void setup() throws IOException {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
@@ -95,6 +105,10 @@ public class IndexControllerTest {
 
         Speaker ivanIvanov = new Speaker("Ivan St.", "Ivanov", "ivan@jprime.io", "JBoss Forge", "@ivan_stefanov", false);
         speakerRepository.save(ivanIvanov);
+        
+        softUni = new Partner();
+        softUni.setCompanyName("SoftUni");
+        partnerRepository.save(softUni);
     }
 
     @Test
@@ -106,6 +120,7 @@ public class IndexControllerTest {
                 .andExpect(model().attribute("goldSponsors", contains(google, apple)))
                 .andExpect(model().attribute("silverSponsors", hasSize(0)))
                 .andExpect(model().attribute("tags", containsInAnyOrder(tag1, tag2)))
-                .andExpect(model().attribute("featuredSpeakers", contains(brianGoetz)));
+                .andExpect(model().attribute("featuredSpeakers", contains(brianGoetz)))
+                .andExpect(model().attribute("partners", contains(softUni)));
     }
 }
