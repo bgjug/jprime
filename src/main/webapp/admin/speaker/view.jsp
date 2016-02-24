@@ -39,7 +39,7 @@
 					<td>${speaker.twitter}</td>
                     <td>${speaker.featured}</td>
                     <td>${speaker.branch}</td>
-					<td><img src="/image/speaker/${speaker.id}"/></td>
+					<td><img src="/image/speaker/${speaker.id}" style="max-width: 280px"/></td>
 					<td>
 						<span style="float:left;"><a href="/admin/speaker/edit/${speaker.id}">Edit</a></span> &nbsp; 
 						<span style="float:right;"><a href="/admin/speaker/remove/${speaker.id}"> Remove </a></span> 
