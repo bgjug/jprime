@@ -33,7 +33,7 @@
 				<textElement textAlignment="Center" lineSpacing="Single">
 					<font fontName="DejaVu Sans" size="18" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["jPrime 2015\nInvoice\n"+$F{invoiceType}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["jPrime 2016\nInvoice\n"+$F{invoiceType}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -51,12 +51,12 @@
 				<textElement lineSpacing="Single">
 					<font fontName="DejaVu Sans" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[STY Consulting Ltd.
-Address: Bulgaria, 1172 Sofia, Dianabad 5A
-EIK: 200800814
-VAT: BG200800814
-MOL: Mihail Stoynov
-IBAN: BG60UNCR70001522105142]]></text>
+				<text><![CDATA[jPrime Events Ltd.
+Address: Bulgaria, Sofia, Postal Code 1574, r.d. Hristo Smirnenski, bl. 20, entr. B, fl. 6, apt. 20
+UIC: 203915037
+VAT: BG203915037
+MOL: Ivan Stefanov Ivanov
+IBAN: BG50PIRB742416055967]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="316" y="48" width="239" height="74"/>

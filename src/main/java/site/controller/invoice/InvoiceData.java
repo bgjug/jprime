@@ -13,9 +13,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class InvoiceData {
 
-    private static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(100D);
+    private static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(140D);
     private static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);
-    private static final String DEFAULT_DESCRIPTION_BG = "jPrime 2015 билет за конференция";
+    private static final String DEFAULT_DESCRIPTION_BG = "jPrime 2016 билет за конференция";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     public static final String ORIGINAL_BG = "Оригинал";
     public static final String PROFORMA_BG = "Проформа";

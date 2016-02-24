@@ -33,7 +33,7 @@
 				<textElement textAlignment="Center" lineSpacing="Single">
 					<font fontName="DejaVu Sans" size="18" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["jPrime 2015\nФактура\n"+$F{invoiceType}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["jPrime 2016\nФактура\n"+$F{invoiceType}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -51,12 +51,12 @@
 				<textElement lineSpacing="Single">
 					<font fontName="DejaVu Sans" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[ЕсТиУай Консултинг ЕООД.
-Адрес: България, 1172 София, Дианабад 5A
-ЕИК: 200800814
-ДДС: BG200800814
-МОЛ: Михаил Стойнов
-IBAN: BG60UNCR70001522105142]]></text>
+				<text><![CDATA[ДжейПрайм Ивентс ООД.
+Адрес: България, 1574 София, ж.к. Христо Смирненски бл. 20, вх. Б. ет. 6, ап. 20
+ЕИК: 203915037
+ДДС: BG203915037
+МОЛ: Иван Стефанов Иванов
+IBAN: BG50PIRB742416055967]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="316" y="48" width="239" height="74"/>
@@ -331,10 +331,6 @@ IBAN: BG60UNCR70001522105142]]></text>
 				</textElement>
 				<text><![CDATA[Bulgarian Java User Group]]></text>
 			</staticText>
-			<image>
-				<reportElement x="0" y="0" width="111" height="54"/>
-				<imageExpression class="java.lang.String"><![CDATA["invoice/sty.png"]]></imageExpression>
-			</image>
 		</band>
 	</pageFooter>
 </jasperReport>

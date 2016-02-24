@@ -61,7 +61,7 @@ public class InvoiceExporter {
     //demonstration purposes only!
     public static void main(String[] args) throws Exception {
         InvoiceData data = new InvoiceData();
-        data.setInvoiceDate("27.05.2015");
+        data.setInvoiceDate("27.05.2016");
         data.setInvoiceNumber("11234");
         data.setClient("някъв клиент");
         data.setClientAddress("1111, Sofia, some улица 1, some entrance, some floor, some appt");
