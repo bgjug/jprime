@@ -54,11 +54,11 @@
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
                             <h2 class="animated2 white" style="text-shadow: 3px 3px black;">
-                                <span><strong>jPrime</strong>2015</span>
+                                <span><strong>Java Prime Time in Sofia</strong></span>
                             </h2>
 
                             <h3 class="animated3 white" style="text-shadow: 2px 2px black;">
-                                <span>was HUGE!</span>
+                                <span>26 and 27 May 2016</span>
                             </h3>
 
                             <p class="animated4"><a href="/nav/2015" class="slider btn btn-primary">read more</a>
@@ -76,7 +76,7 @@
                             </h2>
 
                             <h3 class="animated5 white" style="text-shadow: 2px 2px black;">
-                                <span>26 and 27 May 2016 in Sofia</span>
+                                <span>26 and 27 May 2016 in Sofia</span> <!--  will be changed with tickets available -->
                             </h3>
                             
                             <p class="animated4"><a href="/cfp" class="slider btn btn-primary">Submit a talk</a>
