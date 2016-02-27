@@ -54,7 +54,7 @@
                              --%>
                              <h2>Registration is not yet open</h2>
                              <p>
-                             	<p>The registration will open in 2016!</p>
+                             	<p>The registration will be open in few days!</p>
                              </p>
                         </div>
                         <!-- End Single Post Content -->
