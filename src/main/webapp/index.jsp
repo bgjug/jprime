@@ -238,7 +238,7 @@
 
             <!-- Start Big Heading -->
             <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                <h1>Our <strong>Speakers</strong> in 2015 were</h1>
+                <h1>Our <strong>Speakers</strong> in 2016</h1>
             </div>
             <!-- End Big Heading -->
 

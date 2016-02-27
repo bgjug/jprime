@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import site.config.Globals;
 import site.model.Article;
 import site.model.Partner;
 import site.model.Speaker;
@@ -108,7 +109,7 @@ public class UserService {
 	}
 
     public List<Speaker> findFeaturedSpeakers() {
-        return speakerRepository.findFeaturedSpeakers();
+        return speakerRepository.findFeaturedSpeakers(Globals.CURRENT_BRANCH);
     }
     
     public Speaker findSpeaker(String email) {
