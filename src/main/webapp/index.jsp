@@ -370,7 +370,6 @@
 
 
     <!-- Start Sponsor Section -->
-    <%--
     <div class="partner">
         <div class="container">
             <div class="row">
@@ -433,7 +432,7 @@
         </div><!-- .container -->
     </div>
     <!-- End Sponsor Section -->
-    --%>
+    
     
     
     <!-- Start Sponsor Section -->
@@ -442,12 +441,12 @@
 	        <div class="container">
 	            <div class="row">
 	
-	                <div class="big-title text-center">
+	                <div class="big-title text-center" >
 	                    <h1><strong>Media</strong> Partners</h1>
 	                </div>
 	
 	                <div class="our-clients">
-	                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partner)}" data-appeared-items="${fn:length(partner)}"
+	                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partners)}" data-appeared-items="${fn:length(partners)}"
 	                         data-navigation="true">
 	
 	                        <c:forEach var="partner" items="${partners}">
