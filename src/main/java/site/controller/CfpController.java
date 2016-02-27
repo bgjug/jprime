@@ -28,6 +28,7 @@ public class CfpController extends AbstractCfpController {
     private static final Logger logger = Logger.getLogger(CfpController.class);
 
     public static final String CFP_OPEN_JSP = "/proposal.jsp";
+    public static final String CFP_CLOSED_JSP = "/cfp-closed.jsp";
 
     public static final String JPRIME_CONF_MAIL_ADDRESS = "conference@jprime.io";
 
