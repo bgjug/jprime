@@ -47,18 +47,18 @@
 
                         <!-- Start Single Post Content -->
                         <div class="post-content">
+                       
                             <h2>Buy conference tickets</h2>
+                             <%-- 
                             <p>
                             <p>The conference fee is <strong>70</strong>.00 EUR (VAT included).</p>
                             <p>For registration contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
                             <p>* There is a ~25% discount for students. Student ticket price <strong>50</strong>.00 EUR (VAT included).</p>
-                             
-                             <%-- registration closed 
+                             --%>
                              <h2>Registration is not yet open</h2>
                              <p>
                              	<p>The registration will be open in few days!</p>
                              </p>
-                              --%>
                         </div>
                         <!-- End Single Post Content -->
 
