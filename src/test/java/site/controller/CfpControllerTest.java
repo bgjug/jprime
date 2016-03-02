@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
+import site.config.Globals;
 import site.model.SessionLevel;
 import site.model.Submission;
 import site.model.SubmissionStatus;
@@ -64,7 +65,7 @@ public class CfpControllerTest {
     public void getShouldReturnEmptySubscription() throws Exception {
         mockMvc.perform(get("/cfp"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(CFP_OPEN_JSP));
+                .andExpect(view().name(Globals.CFP));
     }
 
     @Test
