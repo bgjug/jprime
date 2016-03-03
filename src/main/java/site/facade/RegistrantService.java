@@ -82,7 +82,7 @@ public class RegistrantService {
         Registrant.EpayInvoiceNumberGenerator epayInvoiceNumberGenerator;
         if(count == 0) {
             epayInvoiceNumberGenerator = new Registrant.EpayInvoiceNumberGenerator();
-            epayInvoiceNumberGenerator.setCounter(1000001);
+            epayInvoiceNumberGenerator.setCounter(8100000001L);
             epayInvoiceNumberGenerator = registrantEpayInvoiceNumberGeneratorRepository.save(epayInvoiceNumberGenerator);
         } else {
             epayInvoiceNumberGenerator = registrantEpayInvoiceNumberGeneratorRepository.findFirstByOrderByIdAsc();
@@ -104,7 +104,7 @@ public class RegistrantService {
         Registrant.RealInvoiceNumberGenerator realInvoiceNumberGenerator;
         if(count == 0) {
             realInvoiceNumberGenerator = new Registrant.RealInvoiceNumberGenerator();
-            realInvoiceNumberGenerator.setCounter(81000001);
+            realInvoiceNumberGenerator.setCounter(8000000001L);
             realInvoiceNumberGenerator = registrantRealInvoiceNumberGeneratorRepository.save(realInvoiceNumberGenerator);
         } else {
             realInvoiceNumberGenerator = registrantRealInvoiceNumberGeneratorRepository.findFirstByOrderByIdAsc();
@@ -125,7 +125,7 @@ public class RegistrantService {
         Registrant.ProformaInvoiceNumberGenerator proformaInvoiceNumberGenerator;
         if(count == 0) {
             proformaInvoiceNumberGenerator = new Registrant.ProformaInvoiceNumberGenerator();
-            proformaInvoiceNumberGenerator.setCounter(71000001);
+            proformaInvoiceNumberGenerator.setCounter(7000000001L);
             proformaInvoiceNumberGenerator = registrantProformaInvoiceNumberGeneratorRepository.save(proformaInvoiceNumberGenerator);
         } else {
             proformaInvoiceNumberGenerator = registrantProformaInvoiceNumberGeneratorRepository.findFirstByOrderByIdAsc();

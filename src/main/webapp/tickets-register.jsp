@@ -166,7 +166,8 @@
     <div class="post-content">
         <h2>Buy conference tickets</h2>
         <p>
-        <p>The conference fee is <strong>100</strong>.00 BGN (VAT included).</p>
+        <p>The conference fee is <strong>140</strong>.00 BGN (VAT included).</p>
+        <p>* There is a ~25% discount for students. Student ticket price is <strong>100</strong>.00 BGN (VAT included).</p>
 
         Buy a ticket:
         <form:form commandName="registrant" method="post"
@@ -186,10 +187,12 @@
                     <dd><form:input path="visitors[0].company"/></dd>
                 </dl>
             </fieldset>
-            <a id="newVisitor">Add new</a>&nbsp;&nbsp;
-            <a id="removeVisitor">Remove last</a>
+            <input type="button" id="newVisitor" value="Add new">&nbsp;&nbsp;
+            <input type="button" id="removeVisitor" value="Remove last">
             <br><br>
-            <form:checkbox path="company" label=" Issue invoice" id="isCompany" checked="true"/>
+            <form:checkbox path="student" label="I am student" id="isStudent"/>
+            <br>
+            <form:checkbox path="company" label="Issue VAT invoice" id="isCompany"/>
             <br><br>
             <fieldset id="invoiceFieldset">
                 <legend>Invoice information</legend>
@@ -218,10 +221,10 @@
                     <dd><form:input path="email" /></dd>
                 </dl>
             </fieldset>
-            <dl>
+            <%--<dl>
                 <dt><label for="paymentType">Pay with</label></dt>
                 <dd><form:select path="paymentType" items="${paymentTypes}"/></dd>
-            </dl>
+            </dl>--%>
             <sec:csrfInput/>
             <form:hidden path="id"/>
             <button type="submit">Proceed</button>

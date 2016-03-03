@@ -22,15 +22,13 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static site.controller.TicketsController.TICKETS_EPAY_BUY_JSP;
-import static site.controller.TicketsController.TICKETS_EPAY_REGISTER_JSP;
-import static site.controller.TicketsController.TICKETS_EPAY_RESULT_JSP;
+import static site.controller.TicketsController.TICKETS_REGISTER_JSP;
+import static site.controller.TicketsController.TICKETS_RESULT_JSP;
 
 /**
  * @author Ivan St. Ivanov
@@ -60,7 +58,7 @@ public class TicketsEpayRegisterControllerTest {
         mockMvc.perform(get("/tickets/epay"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("registrant", is(new Registrant())))
-                .andExpect(view().name(TICKETS_EPAY_REGISTER_JSP));
+                .andExpect(view().name(TICKETS_REGISTER_JSP));
     }
 
     @Test
@@ -69,10 +67,9 @@ public class TicketsEpayRegisterControllerTest {
                 .param("visitors[0].name", "John Doe")
                 .param("visitors[0].email", "john@example.com")
                 .param("visitors[0].company", "Example")
-                .param("paymentType", Registrant.PaymentType.BANK_TRANSFER.toString())
                 .param("company", "false"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(TICKETS_EPAY_RESULT_JSP));
+                .andExpect(view().name(TICKETS_RESULT_JSP));
         List<Registrant> allRegistrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(allRegistrants.size(), is(1));
         Registrant registrant = allRegistrants.get(0);
@@ -97,10 +94,9 @@ public class TicketsEpayRegisterControllerTest {
                 .param("eik", "666")
                 .param("vatNumber", "666")
                 .param("mol", "Gomez Adams")
-                .param("email", "gomez@adams.com")
-                .param("paymentType", Registrant.PaymentType.EPAY_CREDIT_CARD.toString()))
+                .param("email", "gomez@adams.com"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(TICKETS_EPAY_BUY_JSP));
+                .andExpect(view().name(TICKETS_RESULT_JSP));
         List<Registrant> allRegistrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(allRegistrants.size(), is(1));
         Registrant registrant = allRegistrants.get(0);
@@ -131,10 +127,9 @@ public class TicketsEpayRegisterControllerTest {
                 .param("address", "0001 Cemetery Lane")
                 .param("vatNumber", "666")
                 .param("mol", "Gomez Adams")
-                .param("email", "gomez@adams.com")
-                .param("paymentType", Registrant.PaymentType.BANK_TRANSFER.toString()))
+                .param("email", "gomez@adams.com"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(TICKETS_EPAY_RESULT_JSP));
+                .andExpect(view().name(TICKETS_RESULT_JSP));
         List<Registrant> allRegistrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(allRegistrants.size(), is(1));
         Registrant registrant = allRegistrants.get(0);
@@ -145,14 +140,10 @@ public class TicketsEpayRegisterControllerTest {
     }
 
     @Test
-    public void getTicketsEpayShouldReturnEmptyRegistrantAndAllPaymentTypes() throws Exception {
+    public void getTicketsEpayShouldReturnEmptyRegistrant() throws Exception {
         mockMvc.perform(get("/tickets/epay"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(TICKETS_EPAY_REGISTER_JSP))
-                .andExpect(model().attribute("registrant", new Registrant()))
-                .andExpect(model().attribute("paymentTypes", containsInAnyOrder(
-                        Registrant.PaymentType.BANK_TRANSFER.toString(),
-                        Registrant.PaymentType.EPAY_ACCOUNT.toString(),
-                        Registrant.PaymentType.EPAY_CREDIT_CARD.toString())));
+                .andExpect(view().name(TICKETS_REGISTER_JSP))
+                .andExpect(model().attribute("registrant", new Registrant()));
     }
 }

@@ -20,7 +20,8 @@ public class Registrant extends AbstractEntity {
 
     @OneToMany(mappedBy = "registrant", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Visitor> visitors = new ArrayList<>();
-    private boolean isCompany=true;
+    private boolean isCompany = true;
+    private boolean isStudent = false;
     private String name = "";
     private String address;
     private String vatNumber;
@@ -177,6 +178,14 @@ public class Registrant extends AbstractEntity {
 
     public void setCompany(boolean isCompany) {
         this.isCompany = isCompany;
+    }
+
+    public boolean isStudent() {
+        return isStudent;
+    }
+
+    public void setStudent(boolean student) {
+        isStudent = student;
     }
 
     public String getName() {

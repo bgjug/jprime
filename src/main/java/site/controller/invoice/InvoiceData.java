@@ -13,7 +13,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class InvoiceData {
 
-    private static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(140D);
+    public static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(140D);
+    public static final BigDecimal STUDENT_TICKET_PRICE = BigDecimal.valueOf(100D);
     private static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);
     private static final String DEFAULT_DESCRIPTION_BG = "jPrime 2016 билет за конференция";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -160,14 +161,22 @@ public class InvoiceData {
         result.setClient(registrant.getName());
         result.setClientAddress(registrant.getAddress());
         result.setClientEIK(registrant.getEik());
-        result.setClientVAT(registrant.getVatNumber());
+        if (registrant.getVatNumber() != null) {
+            result.setClientVAT(registrant.getVatNumber());
+        } else {
+            result.setClientVAT("");
+        }
         result.setMol(registrant.getMol());
-        result.setPaymentType(registrant.getPaymentType() != null ? registrant.getPaymentType().toString() : "");
         result.setPassQty(registrant.getVisitors().size());
         result.setRegistrantId(registrant.getId());
-        result.setPaymentType(registrant.getPaymentType()!=null?registrant.getPaymentType().getBulgarianValue():"");
+        result.setPaymentType(registrant.getPaymentType() != null ?
+                registrant.getPaymentType().getBulgarianValue() :
+                "");
         result.setInvoiceNumber(registrant.getRealInvoiceNumber() + "");
         result.setInvoiceDate(LocalDate.now().format(FORMATTER));
+        if (registrant.isStudent()) {
+            result.setSinglePriceWithVAT(STUDENT_TICKET_PRICE.intValue());
+        }
         return result;
     }
 }
