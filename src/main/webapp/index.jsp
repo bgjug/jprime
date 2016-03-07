@@ -79,7 +79,7 @@
                                 <span>26 and 27 May 2016 in Sofia</span> <!--  will be changed with tickets available -->
                             </h3>
                             
-                            <p class="animated4"><a href="/cfp" class="slider btn btn-primary">Submit a talk</a>
+                            <p class="animated4"><a href="tickets/epay" class="slider btn btn-primary">Buy ticket</a>
                             </p>
                         </div>
                     </div>
