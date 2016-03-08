@@ -13,7 +13,7 @@
 <head>
 
     <!-- Basic -->
-    <title>Signup</title>
+    <title>Reset Password</title>
 
     <!-- Define Charset -->
     <meta charset="utf-8">
@@ -47,54 +47,31 @@
 
                         <!-- Start Single Post Content -->
                         <div class="post-content">
-                            
-                            <h3>Login</h3>
-
-							<c:if test="${not empty error}">
-								<div class="error">${error}</div>
-							</c:if>
-							<c:if test="${not empty msg}">
-								<div class="msg">${msg}</div>
-							</c:if>
-							<sec:authorize access="hasRole('USER')">
-								welcome USER
-							</sec:authorize>
-							<sec:authorize access="hasRole('ADMIN')">
-								welcome ADMIN
-							</sec:authorize>
-							<form name='loginForm'
-								action="<c:url value='/login' />" method='POST'>
-					
-					
-								<table>
-									<tr>
-										<td>User:</td>
-										<td><input type='text' name='username' value=''></td>
-									</tr>
-									<tr>
-										<td>Password:</td>
-										<td><input type='password' name='password' /></td>
-									</tr>
-									<tr>
-										<td colspan="2"><a href="<c:out value='/resetPassword'/>" style="margin-left: 100px; position: absolute;">Forgot your password?</a></td>
-									</tr>
-									<tr>
-										<td>
-										<br/>
-										<input name="submit" type="submit"
-											value="submit" />
-										</td>
-										<td>
-											<a href="<c:out value='/signup'/>" style="margin-left: 80px; position: absolute;"> Register </a>
-										</td>
-									</tr>
-								</table>
-								
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" />
-					
-							</form>
-                            
+                            <%--<h2>Buy conference tickets</h2>
+                            <p>
+                            <p>The conference fee is <strong>50</strong>.00 EUR (VAT included).</p>
+                            <p>For registration contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
+                             --%>
+                             <h2>Pick a new password</h2>
+                             <p>
+                             	<form:form modelAttribute="changePassword" action="/createNewPassword" method="post" enctype="multipart/form-data">
+	                                <div class="form-wrapper">
+	                                    <label for="password">Password *</label><br/>
+	                                    <input type="password" name="password" id="password"><br/>
+			                        	<form:errors path="password"/>
+	                                </div>
+	                                <div class="form-wrapper">
+	                                    <label for="cpassword">Confirm password *</label><br/>
+	                                    <input type="password" name="cpassword" id="cpassword"><br/>
+			                        	<form:errors path="cpassword"/>
+	                                </div>
+	                                <input type="hidden" name="tokenId"
+										value="${tokenId}" />
+		                            <p><strong>${error_msg}</strong></p>
+	                                <br/>
+	                                <input type="submit" value="Submit" class="btn">
+                            	</form:form>
+                            </p>
                         </div>
                         <!-- End Single Post Content -->
 

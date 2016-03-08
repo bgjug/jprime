@@ -119,6 +119,11 @@ public class User extends AbstractEntity {
 		return cpassword;
 	}
 
+	@Override
+	public String toString() {
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+	}
+
 	public void setCpassword(String cpassword) {
 		this.cpassword = cpassword;
 	}

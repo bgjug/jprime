@@ -13,7 +13,7 @@
 <head>
 
     <!-- Basic -->
-    <title>Signup</title>
+    <title>Reset Password</title>
 
     <!-- Define Charset -->
     <meta charset="utf-8">
@@ -48,52 +48,34 @@
                         <!-- Start Single Post Content -->
                         <div class="post-content">
                             
-                            <h3>Login</h3>
-
-							<c:if test="${not empty error}">
-								<div class="error">${error}</div>
-							</c:if>
-							<c:if test="${not empty msg}">
-								<div class="msg">${msg}</div>
-							</c:if>
-							<sec:authorize access="hasRole('USER')">
-								welcome USER
-							</sec:authorize>
-							<sec:authorize access="hasRole('ADMIN')">
-								welcome ADMIN
-							</sec:authorize>
-							<form name='loginForm'
-								action="<c:url value='/login' />" method='POST'>
-					
-					
-								<table>
-									<tr>
-										<td>User:</td>
-										<td><input type='text' name='username' value=''></td>
-									</tr>
-									<tr>
-										<td>Password:</td>
-										<td><input type='password' name='password' /></td>
-									</tr>
-									<tr>
-										<td colspan="2"><a href="<c:out value='/resetPassword'/>" style="margin-left: 100px; position: absolute;">Forgot your password?</a></td>
-									</tr>
-									<tr>
-										<td>
-										<br/>
-										<input name="submit" type="submit"
-											value="submit" />
-										</td>
-										<td>
-											<a href="<c:out value='/signup'/>" style="margin-left: 80px; position: absolute;"> Register </a>
-										</td>
-									</tr>
-								</table>
-								
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" />
-					
-							</form>
+                             <c:choose>
+							    <c:when test="${not empty sent_to_email}">
+							    	<h2>Check your email</h2>	
+							    	<br/>
+							      	<p> We have sent an email to <strong>${sent_to_email}</strong>. Click the link in the email to reset your password.</p>
+							      	 <br />
+							      	<p>If you don't see the email, check other places it might be, like your junk, spam, social, or other folders. </p>
+							        <br />
+							    </c:when>    
+							    <c:otherwise>
+							    	 <h2>Reset your password</h2>	
+							       	 <p>
+			                             <form:form action="/resetPassword" method="post" enctype="multipart/form-data">
+			                                <div class="form-wrapper">
+			                                    <label for="email">Email</label>
+			                                    <br/>
+			                                    <input type="text" name="email" id="email"/>
+			                                    <br/>
+					                        	<form:errors path="email"/>
+			                                </div>
+			                                <p><strong>${error_msg}<strong><p>
+			                                <br/>
+			                                <input type="submit" value="reset" class="btn">
+			                             </form:form>
+		                             </p>
+							        <br />
+							    </c:otherwise>
+							</c:choose>
                             
                         </div>
                         <!-- End Single Post Content -->
@@ -103,8 +85,6 @@
 
                 </div>
 
-
-
                 <user:sidebar/>
 
             </div>
@@ -112,7 +92,6 @@
         </div>
     </div>
     <!-- End content -->
-
 
     <user:footer/>
 </div>
@@ -127,8 +106,6 @@
         <div class="dot2"></div>
     </div>
 </div>
-
-
 
 </body>
 </html>

@@ -1,8 +1,9 @@
 package site.app;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -20,8 +21,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
-import java.util.Properties;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+import site.model.User;
+import site.repository.UserRepository;
 
 /**
  * to make this deployable as war, this is necessary:
@@ -58,16 +62,18 @@ public class Application  extends SpringBootServletInitializer {
 //		 UserRepository repository = context.getBean(UserRepository.class);
 //		 //example data
 //		 User user = new User();
-//		 user.setEmail("nov34@test.com");
-//		 user.setFirstName("test");
-//		 user.setLastName("test");
+//       user.setEmail("nov34@test.com");
+//       user.setFirstName("test");
+//       user.setLastName("test");
 //
 //		 repository.save(user);
+		 
+		 
 //		 Iterable<User> allUsers = repository.findAll();
 //		 for(User theUser : allUsers){
 //			 System.out.println(theUser.getEmail());
 //		 }
-//		 
+		 
 //		 SponsorRepository sponsorRepository = context.getBean(SponsorRepository.class);
 //		 
 //		 Sponsor sponsor = new Sponsor();
@@ -75,12 +81,12 @@ public class Application  extends SpringBootServletInitializer {
 //		 sponsor.setSponsorPackage(SponsorPackage.DIAMOND);
 //		 
 //		 sponsorRepository.save(sponsor);
-		
+//		
 //		Page page = new Page();
 //		page.setName("home");
 //		PageRepository pageRepository = context.getBean(PageRepository.class);
 //		pageRepository.save(page);
-		 
+//		 
 //		Link link = new Link();
 //		link.setName("Registration");
 //		link.setUrl("/");
