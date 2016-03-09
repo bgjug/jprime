@@ -24,14 +24,21 @@ public class Sponsor extends User {
 	
 	private String description;
 
+	private boolean active;
+
     public Sponsor() {
     }
 
     public Sponsor(SponsorPackage sponsorPackage, String companyName, String companyWebsite, String email) {
+        this(sponsorPackage, companyName, companyWebsite, email, true);
+    }
+
+    public Sponsor(SponsorPackage sponsorPackage, String companyName, String companyWebsite, String email, boolean active) {
         this.sponsorPackage = sponsorPackage;
         this.companyName = companyName;
         this.companyWebsite = companyWebsite;
         setEmail(email);
+        this.active = active;
     }
 
     public SponsorPackage getSponsorPackage() {
@@ -74,7 +81,15 @@ public class Sponsor extends User {
 		this.logo = logo;
 	}
 
-    @Override
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o)
             return true;

@@ -81,6 +81,7 @@ public class IndexControllerTest {
     private Sponsor google;
     private Sponsor apple;
     private Sponsor sap;
+    private Sponsor hater;
     private Tag tag1;
     private Tag tag2;
 
@@ -96,7 +97,8 @@ public class IndexControllerTest {
         apple = new Sponsor(SponsorPackage.GOLD, "Apple", "http://www.apple.com", "sponsor@apple.com");
         sap = new Sponsor(SponsorPackage.PLATINUM, "SAP", "http://www.sap.com", "sponsor@sap.com");
         sap.setLogo(Files.readAllBytes(Paths.get("src/main/webapp/images/sap.png")));
-        sponsorRepository.save(google); sponsorRepository.save(apple); sponsorRepository.save(sap);
+        hater = new Sponsor(SponsorPackage.SILVER, "Now I hate Java", "http://hatejava.com", "hater@hatejava.com", false);
+        sponsorRepository.save(google); sponsorRepository.save(apple); sponsorRepository.save(sap); sponsorRepository.save(hater);
 
         tag1 = tagRepository.save(new Tag("tag1")); tag2 = tagRepository.save(new Tag("tag2"));
 

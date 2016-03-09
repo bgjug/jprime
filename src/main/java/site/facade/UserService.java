@@ -116,8 +116,8 @@ public class UserService {
         return speakerRepository.findByEmail(email);
     }
 
-	public Map<SponsorPackage, List<Sponsor>> findAllSponsors(){
-        return sponsorRepository.findAll().stream().collect(groupingBy(Sponsor::getSponsorPackage));
+	public Map<SponsorPackage, List<Sponsor>> findAllActiveSponsors(){
+        return sponsorRepository.findByActive(true).stream().collect(groupingBy(Sponsor::getSponsorPackage));
     }
 	
 	public List<Partner> findAllPartners(){

@@ -12,4 +12,6 @@ public interface SponsorRepository extends PagingAndSortingRepository<Sponsor, L
 	String NAME = "sponsorRepository";
 
     List<Sponsor> findAll();
+
+    List<Sponsor> findByActive(Boolean active);
 }

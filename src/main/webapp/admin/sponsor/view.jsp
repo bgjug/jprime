@@ -23,13 +23,15 @@
 				<td><i>Name</i></td>
 				<td><i>Package</i></td>
 				<td><i>LOGO</i></td>
+                <td><i>Active</i></td>
 				<td><i>Operations</i></td>
 			</tr>
 			<c:forEach var="sponsor" items="${sponsors.content}">
 				<tr>
 					<td>${sponsor.companyName}</td>
-					<td>${sponsor.sponsorPackage }</td>
+					<td>${sponsor.sponsorPackage}</td>
 					<td><img src="/image/sponsor/${sponsor.id}"/></td>
+                    <td>${sponsor.active}</td>
 					<td>
 						<span style="float:left;"><a href="/admin/sponsor/edit/${sponsor.id}">Edit</a></span> &nbsp; 
 						<span style="float:right;"><a href="/admin/sponsor/remove/${sponsor.id}"> Remove </a></span> 

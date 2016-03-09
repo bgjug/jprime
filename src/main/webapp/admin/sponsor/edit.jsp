@@ -73,6 +73,14 @@
 					<input name="file" type="file" />
 				</dd>
 			</dl>
+			<dl>
+				<dt>
+					<label for="active">active</label>
+				</dt>
+				<dd>
+					<form:checkbox path="active"/>
+				</dd>
+			</dl>
 			<sec:csrfInput />
 			<form:hidden path="id" />
 			<form:hidden path="createdDate" />

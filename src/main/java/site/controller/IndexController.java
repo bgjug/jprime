@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import site.facade.UserService;
-import site.model.Speaker;
 import site.model.Sponsor;
 import site.model.SponsorPackage;
 
@@ -27,7 +26,7 @@ public class IndexController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 
-        Map<SponsorPackage, List<Sponsor>> allSponsors = userFacade.findAllSponsors();
+        Map<SponsorPackage, List<Sponsor>> allSponsors = userFacade.findAllActiveSponsors();
         model.addAttribute("platinumSponsors", allSponsors.getOrDefault(SponsorPackage.PLATINUM,
                 new ArrayList<>()));
         model.addAttribute("goldSponsors", allSponsors.getOrDefault(SponsorPackage.GOLD,
