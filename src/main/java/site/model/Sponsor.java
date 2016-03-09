@@ -82,6 +82,8 @@ public class Sponsor extends User {
 	}
 
 	public Boolean isActive() {
+        if (active == null)
+            return false;
 		return active;
 	}
 
