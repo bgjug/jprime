@@ -24,7 +24,7 @@ public class Sponsor extends User {
 	
 	private String description;
 
-	private boolean active;
+	private Boolean active;
 
     public Sponsor() {
     }
@@ -33,7 +33,7 @@ public class Sponsor extends User {
         this(sponsorPackage, companyName, companyWebsite, email, true);
     }
 
-    public Sponsor(SponsorPackage sponsorPackage, String companyName, String companyWebsite, String email, boolean active) {
+    public Sponsor(SponsorPackage sponsorPackage, String companyName, String companyWebsite, String email, Boolean active) {
         this.sponsorPackage = sponsorPackage;
         this.companyName = companyName;
         this.companyWebsite = companyWebsite;
@@ -81,11 +81,11 @@ public class Sponsor extends User {
 		this.logo = logo;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
