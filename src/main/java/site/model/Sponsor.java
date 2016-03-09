@@ -81,7 +81,7 @@ public class Sponsor extends User {
 		this.logo = logo;
 	}
 
-	public Boolean isActive() {
+	public Boolean getActive() {
         if (active == null)
             return false;
 		return active;
