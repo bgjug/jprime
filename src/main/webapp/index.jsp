@@ -195,7 +195,7 @@
                     <span>Cool</span>
                     <span>Great</span>
                   </span>
-                    Margo Template is Ready for <br/>Business, Agency <strong>or</strong> Creative Portfolios
+
                 </h1>
                 <!-- End Animations Text -->
 

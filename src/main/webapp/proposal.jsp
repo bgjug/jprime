@@ -22,8 +22,8 @@ pageEncoding="UTF-8"%>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <!-- Page Description and Author -->
-  <meta name="description" content="Margo - Responsive HTML5 Template">
-  <meta name="author" content="ZoOm Arts">
+    <meta name="description" content="jPrime 2016">
+    <meta name="author" content="jPrime">
 
     <user:pageJavaScriptAndCss/>
     <script type="text/javascript">
