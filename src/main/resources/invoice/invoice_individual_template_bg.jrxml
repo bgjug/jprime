@@ -16,7 +16,7 @@
 	<field name="totalPriceWithVAT" class="java.lang.Double"/>
 	<field name="paymentType" class="java.lang.String"/>
 	<field name="invoiceType" class="java.lang.String"/>
-    <field name="description" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
 	<title>
 		<band height="79">
 			<image>
@@ -57,7 +57,7 @@
 МОЛ: Иван Стефанов Иванов
 IBAN: BG50PIRB74241605596745]]></text>
 			</staticText>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="316" y="48" width="239" height="86"/>
 				<textElement lineSpacing="Single">
 					<font fontName="DejaVu Sans" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
