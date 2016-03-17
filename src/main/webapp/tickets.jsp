@@ -52,6 +52,8 @@
                             <p>The conference fee is <strong>140</strong>.00 BGN (VAT included).</p>
                             <p>For registration contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
                             <p>* There is a ~25% discount for students. Student ticket price <strong>100</strong>.00 BGN (VAT included).</p>
+                            <p>* There is a free pass for a JUG lead (one per Java User Group).</p>
+
                             <!--
                              <h2>Registration is not yet open</h2>
                              <p>

@@ -168,6 +168,7 @@
         <p>
         <p>The conference fee is <strong>140</strong>.00 BGN (VAT included).</p>
         <p>* There is a ~25% discount for students. Student ticket price is <strong>100</strong>.00 BGN (VAT included).</p>
+        <p>* There is a free pass for a JUG lead (one per Java User Group).</p>
 
         Buy a ticket:
         <form:form commandName="registrant" method="post"
