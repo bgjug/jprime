@@ -35,7 +35,15 @@
 		</table>
 		&nbsp;
 		<div>
-			<a href="/admin/tag/add">Add</a>
+			<c:if test="${tags.number > 0}">
+				<span><a href="/admin/tag/view?page=${tags.number - 1}">previous</a></span>
+			</c:if>
+			<c:if test="${tags.number < (tags.totalPages - 1)}">
+				<span><a href="/admin/tag/view?page=${tags.number + 1}">next</a></span>
+			</c:if>
+		</div>
+		<div>
+			<a style="float:right;" href="/admin/tag/add">Add</a>
 		</div>
 	</fieldset>
 </body>

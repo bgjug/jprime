@@ -48,7 +48,15 @@
 		</table>
 		&nbsp;
 		<div>
-			<a href="/admin/submission/add">Add</a>
+			<c:if test="${submissions.number > 0}">
+				<span><a href="/admin/submission/view?page=${submissions.number - 1}">previous</a></span>
+			</c:if>
+			<c:if test="${submissions.number < (submissions.totalPages - 1)}">
+				<span><a href="/admin/submission/view?page=${submissions.number + 1}">next</a></span>
+			</c:if>
+		</div>
+		<div>
+			<a style="float:right;" href="/admin/submission/add">Add</a>
 		</div>
 	</fieldset>
 </body>

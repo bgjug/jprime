@@ -37,7 +37,15 @@
 		</table>
 		&nbsp;
 		<div>
-			<a href="/admin/partner/add">Add</a>
+			<c:if test="${partners.number > 0}">
+				<span><a href="/admin/partner/view?page=${partners.number - 1}">previous</a></span>
+			</c:if>
+			<c:if test="${partners.number < (partners.totalPages - 1)}">
+				<span><a href="/admin/partner/view?page=${partners.number + 1}">next</a></span>
+			</c:if>
+		</div>
+		<div>
+			<a style="float:right;" href="/admin/partner/add">Add</a>
 		</div>
 	</fieldset>
 </body>

@@ -49,7 +49,15 @@
 		</table>
 		&nbsp;
 		<div>
-			<a href="/admin/speaker/add">Add</a>
+			<c:if test="${speakers.number > 0}">
+				<span><a href="/admin/speaker/view?page=${speakers.number - 1}">previous</a></span>
+			</c:if>
+			<c:if test="${speakers.number < (speakers.totalPages - 1)}">
+				<span><a href="/admin/speaker/view?page=${speakers.number + 1}">next</a></span>
+			</c:if>
+		</div>
+		<div>
+			<a style="float:right;" href="/admin/speaker/add">Add</a>
 		</div>
 	</fieldset>
 </body>
