@@ -61,18 +61,18 @@ public class Application  extends SpringBootServletInitializer {
     public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
 		
-		VenueHall hall = new VenueHall();
-		hall.setName("VITOSHA може и кирилица");
-		hall.setDescription("ala bala na dqsno тука ще има и криилица ! ");
-		hall = context.getBean(VenueHallRepository.class).save(hall);
-		
-		Session session = new Session();
-		session.setStartTime(DateTime.now());
-		session.setEndTime(DateTime.now().minus(Duration.standardHours(1)));
-		session.setSubmission(context.getBean(SubmissionRepository.class).findAll().iterator().next());
-		session.setHall(hall);
-		
-		context.getBean(SessionRepository.class).save(session);
+//		VenueHall hall = new VenueHall();
+//		hall.setName("VITOSHA");
+//		hall.setDescription("ala bala na dqsno");
+//		hall = context.getBean(VenueHallRepository.class).save(hall);
+//		
+//		Session session = new Session();
+//		session.setStartTime(DateTime.now());
+//		session.setEndTime(DateTime.now().minus(Duration.standardHours(1)));
+//		session.setSubmission(context.getBean(SubmissionRepository.class).findAll().iterator().next());
+//		session.setHall(hall);
+//		
+//		context.getBean(SessionRepository.class).save(session);
 		
 //		System.out.println("Let's inspect the beans provided by Spring Boot:");
 //
