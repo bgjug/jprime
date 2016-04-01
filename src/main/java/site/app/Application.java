@@ -4,6 +4,8 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -16,16 +18,23 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import site.model.Session;
 import site.model.User;
+import site.model.VenueHall;
+import site.repository.SessionRepository;
+import site.repository.SubmissionRepository;
 import site.repository.UserRepository;
+import site.repository.VenueHallRepository;
 
 /**
  * to make this deployable as war, this is necessary:
@@ -51,6 +60,20 @@ public class Application  extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+		
+//		VenueHall hall = new VenueHall();
+//		hall.setName("VITOSHA");
+//		hall.setDescription("ala bala na dqsno");
+//		hall = context.getBean(VenueHallRepository.class).save(hall);
+//		
+//		Session session = new Session();
+//		session.setStartTime(DateTime.now());
+//		session.setEndTime(DateTime.now().minus(Duration.standardHours(1)));
+//		session.setSubmission(context.getBean(SubmissionRepository.class).findAll().iterator().next());
+//		session.setHall(hall);
+//		
+//		context.getBean(SessionRepository.class).save(session);
+		
 //		System.out.println("Let's inspect the beans provided by Spring Boot:");
 //
 //		String[] beanNames = ctx.getBeanDefinitionNames();

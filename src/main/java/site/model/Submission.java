@@ -36,11 +36,11 @@ public class Submission extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private SessionLevel level;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Speaker.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "speaker", nullable = false, referencedColumnName = "id")
     private Speaker speaker = new Speaker();
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Speaker.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "coSpeaker", nullable = true, referencedColumnName = "id")
     private Speaker coSpeaker = null;
 

@@ -33,7 +33,7 @@ public class Speaker extends User {
     private String twitter;
 
     private Boolean featured = false;
-
+    
     @Lob
     private byte[] picture;
 

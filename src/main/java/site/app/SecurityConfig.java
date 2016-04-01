@@ -2,13 +2,12 @@ package site.app;
 
 import java.util.Collections;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,8 +18,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -93,6 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         //TODO Mihail: "/" only works if tomcat/conf/web.xml has index.jsp commented as a welcome page
                         //TODO if not, the controller will not be called and the jsp is not going to have any model object filled up.
                 .antMatchers("/", "/login", "/about", "/nav/**", "/cfp", "/signup", "/resetPassword","/createNewPassword", "/successfulPasswordChange", "/image/**", "/tickets/**", "/team","/venue", "/404").permitAll() // #4
+                .antMatchers(HttpMethod.GET, "/halls", "/halls/**", "/sessions", "/sessions/**", "/submissions", "/submissions/**").permitAll()
                 .antMatchers("/admin/**").hasAuthority("ADMIN") // #6
                 .antMatchers("/user/**").hasAuthority("USER") //will contain schedule and etc
                 .anyRequest().authenticated() // 7
