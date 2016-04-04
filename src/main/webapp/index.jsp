@@ -227,6 +227,10 @@
             <br/><br/>jPrime features a combination of great international speakers along with the best presenters from
             Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning,
             hacking, networking and fun.</p>
+            
+        <div class="container">
+        	<iframe width="560" height="315" src="https://www.youtube.com/embed/2vseYx1bDik" frameborder="0" allowfullscreen></iframe>
+        </div>
 
     </div>
     <!-- End Portfolio Section -->
