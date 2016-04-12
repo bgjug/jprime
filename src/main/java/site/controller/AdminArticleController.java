@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import site.facade.AdminService;
 import site.model.Article;
+import site.model.Role;
 import site.model.User;
 
 import javax.validation.Valid;
@@ -45,17 +46,18 @@ public class AdminArticleController {
         if (bindingResult.hasErrors()) {
             return "/admin/article/edit.jsp";
         }
-        User admin = this.adminFacade.findUserByEmail("admin@jsprime.io");
-        if (admin == null) {
-            admin = new User();
-            admin.setEmail("admin@jsprime.io");
-            admin.setFirstName("Admin");
-            admin.setLastName("");
-            this.adminFacade.saveUser(admin);
+        User adminUser = this.adminFacade.findUserByEmail(User.ADMIN_EMAIL);
+        Role adminRole = this.adminFacade.findRoleByNameOrCreate(Role.ADMIN_NAME); //@Trifon
+        if (adminUser == null) {
+            adminUser = this.adminFacade.createRegularUser(User.ADMIN_EMAIL);
+            adminUser.setFirstName("Admin");
+            adminUser.setLastName("");
+            adminUser.addRole( adminRole ); //@Trifon
+            adminUser = this.adminFacade.saveUser(adminUser);
             //refresh
-            admin = this.adminFacade.findUserByEmail("admin@jsprime.io");
+            adminUser = this.adminFacade.findUserByEmail(User.ADMIN_EMAIL); // TODO - Maybe this refresh is not needed as admin is already updated by saveUser()?
         }
-        article.setAuthor(admin);
+        article.setAuthor(adminUser);
         this.adminFacade.saveArticle(article);
 
         return "redirect:/admin/article/view";
@@ -83,5 +85,4 @@ public class AdminArticleController {
         adminFacade.deleteArticle(itemId);
         return "redirect:/admin/article/view";
     }
-
 }

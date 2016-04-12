@@ -22,6 +22,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import site.model.Role;
 import site.model.User;
 import site.repository.UserRepository;
 
@@ -62,8 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                String providedPassword = (String) authentication.getCredentials();
 	                
 	                //admin hack
-	                if(email.equals("admin") && providedPassword.equals(environment.getProperty("admin.password"))){
-	                	return new UsernamePasswordAuthenticationToken(email, providedPassword, Collections.singleton(new SimpleGrantedAuthority("ADMIN")));
+	                if(email.equals("admin") && providedPassword.equals(environment.getProperty("admin.password"))) {
+	                	return new UsernamePasswordAuthenticationToken(email, providedPassword, Collections.singleton(new SimpleGrantedAuthority(Role.ADMIN_NAME)));
 	                }
 	                
 	                User user = userRepository.findUserByEmail(email);
@@ -71,8 +72,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                if (user == null || !passwordEncoder().matches(providedPassword, user.getPassword())) {
 	                    throw new BadCredentialsException("Username/Password does not match for " + authentication.getPrincipal());
 	                }
-	                
-	                return new UsernamePasswordAuthenticationToken(email, providedPassword, Collections.singleton(new SimpleGrantedAuthority("USER")));
+	                // @Trifon - Read User roles from DB
+	                // return new UsernamePasswordAuthenticationToken(email, providedPassword, Collections.singleton(new SimpleGrantedAuthority("USER")));
+	                return new UsernamePasswordAuthenticationToken(email, providedPassword, user.getRoles());
 	            }
 
 	            @Override

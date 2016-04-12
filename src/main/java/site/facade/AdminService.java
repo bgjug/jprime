@@ -41,6 +41,10 @@ public class AdminService {
 	private UserRepository userRepository;
 
 	@Autowired
+	@Qualifier(RoleRepository.NAME)
+	private RoleRepository roleRepository;
+
+	@Autowired
 	@Qualifier(TagRepository.NAME)
 	private TagRepository tagRepository;
 
@@ -149,9 +153,36 @@ public class AdminService {
 		return userRepository.findOne(id);
 	}
 
+	//@Trifon
+	public Role findRoleByName(String roleName) {
+		return roleRepository.findByName( roleName );
+	}
+	//@Trifon
+	public Role findRoleByNameOrCreate(String roleName) {
+        Role role = this.findRoleByName( roleName );
+		if (role == null) {
+        	role = new Role( roleName );
+        	role = this.saveRole( role );
+        }
+		return role;
+	}
+	//@Trifon
+	public Role saveRole(Role role) {
+		return roleRepository.save( role );
+	}
+	//@Trifon
+	public User createRegularUser(String email) {
+		 Role userRole = this.findRoleByNameOrCreate(Role.USER_NAME);
+
+		 User user = new User();
+		 user.setEmail( email );
+		 user.addRole( userRole );
+		 return user;
+	}
+
     //currently used for admin TODO:to be fixed with normal authentication with spring
     public User findUserByEmail(String email){
-        if(userRepository.findByEmail(email).size()>0) {
+        if (userRepository.findByEmail(email).size()>0) {
             return userRepository.findByEmail(email).get(0);
         }
         return null;
