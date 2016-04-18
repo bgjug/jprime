@@ -8,4 +8,6 @@
     <li><a href="/admin/registrant/view" style="color: blueviolet!important;">Registrants</a></li>
 	<li><a href="/admin/visitor/view" style="color: blueviolet!important;">Visitors</a></li>
     <li><a href="/admin/submission/view" style="color: blueviolet!important;">Submissions</a></li>
+	<li><a href="/admin/hall/view" style="color: blueviolet!important;">Halls</a></li>
+	<li><a href="/admin/session/view" style="color: blueviolet!important;">Sessions</a></li>
 </ul>

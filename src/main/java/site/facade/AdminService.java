@@ -56,6 +56,14 @@ public class AdminService {
 	@Qualifier(RegistrantRepository.NAME)
 	private RegistrantRepository registrantRepository;
 
+	@Autowired
+	@Qualifier(SessionRepository.NAME)
+	private SessionRepository sessionRepository;
+
+	@Autowired
+	@Qualifier(VenueHallRepository.NAME)
+	private VenueHallRepository venueHallRepository;
+
 	/* article repo */
 	public Page<Article> findAllArticles(Pageable pageable){
 		return articleRepository.findAllLatestArticles(pageable);
@@ -189,6 +197,7 @@ public class AdminService {
 		return tagRepository.save(tag);
 	}
 
+	/* submissions repo */
     public Page<Submission> findAllSubmissions(Pageable pageable) {
         return submissionRepository.findAll(pageable);
     }
@@ -209,6 +218,10 @@ public class AdminService {
         submission.setStatus(status);
         submissionRepository.save(submission);
     }
+
+	public Iterable<Submission> findAllAcceptedSubmissionsForBranch(Branch branch) {
+		return submissionRepository.findByBranchAndStatus(branch, SubmissionStatus.ACCEPTED);
+	}
 
 
 
@@ -268,4 +281,39 @@ public class AdminService {
     public void deleteRegistrant(Long itemId) {
         registrantRepository.delete(itemId);
     }
+
+	/* sessions repo */
+	public Iterable<Session> findAllSessions() {
+		return sessionRepository.findAll();
+	}
+
+	public Session saveSession(Session session) {
+		return sessionRepository.save(session);
+	}
+
+	public Session findOneSession(Long itemId) {
+		return sessionRepository.findOne(itemId);
+	}
+
+	public void deleteSession(Long itemId) {
+		sessionRepository.delete(itemId);
+	}
+
+	/* venue halls repo */
+	public Iterable<VenueHall> findAllVenueHalls() {
+		return venueHallRepository.findAll();
+	}
+
+	public VenueHall saveVenueHall(VenueHall venueHall) {
+		return venueHallRepository.save(venueHall);
+	}
+
+	public VenueHall findOneVenueHall(Long itemId) {
+		return venueHallRepository.findOne(itemId);
+	}
+
+	public void deleteVenueHall(Long itemId) {
+		venueHallRepository.delete(itemId);
+	}
+
 }

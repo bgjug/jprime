@@ -19,6 +19,14 @@ public class VenueHall extends AbstractEntity {
     @Lob
     private byte[] map;
 
+	public VenueHall() {
+	}
+
+	public VenueHall(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -41,6 +49,11 @@ public class VenueHall extends AbstractEntity {
 
 	public void setMap(byte[] map) {
 		this.map = map;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 
 	@Override

@@ -1,19 +1,10 @@
 package site.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
-import java.util.Collection;
-import java.util.HashSet;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Session extends AbstractEntity {
@@ -37,6 +28,16 @@ public class Session extends AbstractEntity {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = VenueHall.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "hall", nullable = false, referencedColumnName = "id")
 	private VenueHall hall;
+
+	public Session() {
+	}
+
+	public Session(Submission submission, DateTime startTime, DateTime endTime, VenueHall hall) {
+		this.submission = submission;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.hall = hall;
+	}
 
 	public Submission getSubmission() {
 		return submission;
@@ -69,4 +70,19 @@ public class Session extends AbstractEntity {
 	public void setHall(VenueHall hall) {
 		this.hall = hall;
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Session session = (Session) o;
+        return Objects.equals(submission, session.submission) &&
+                Objects.equals(startTime, session.startTime) &&
+                Objects.equals(endTime, session.endTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(submission, startTime, endTime);
+    }
 }
