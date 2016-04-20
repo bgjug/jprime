@@ -19,7 +19,6 @@
     <link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/datetime/jquery.datetimepicker.css"/>
-
 </head>
 <body>
 <admin:menu/>
@@ -36,14 +35,23 @@
         </dt>
         <dd>
             <form:select path="submission">
+                <form:option value="-1" label="Break"/>
                 <form:options items="${submissions}" itemValue="id" itemLabel="title"/>
             </form:select>
 
         </dd>
     </dl>
+    <dl id="titleRow">
+        <dt>
+            <label for="title">Break title</label>
+        </dt>
+        <dd>
+            <form:input path="title"/>
+        </dd>
+    </dl>
     <dl>
         <dt>
-            <label for="startTime">Start time (dd.MM.yyyy HH:mm)</label>
+            <label for="startTime">Start time</label>
         </dt>
         <dd>
             <form:input path="startTime"/>
@@ -51,13 +59,13 @@
     </dl>
     <dl>
         <dt>
-            <label for="endTime">End time (dd.MM.yyyy HH:mm)</label>
+            <label for="endTime">End time</label>
         </dt>
         <dd>
             <form:input path="endTime"/>
         </dd>
     </dl>
-    <dl>
+    <dl id="hallRow">
         <dt>
             <label for="hall">Hall</label>
         </dt>
@@ -88,8 +96,26 @@ $(function() {
             ]
 	 };
 	 
-	 $('#startTime').datetimepicker(calendarConfig);
-	 $('#endTime').datetimepicker(calendarConfig);
+    $('#startTime').datetimepicker(calendarConfig);
+	$('#endTime').datetimepicker(calendarConfig);
+
+
+    var handleBreaks = function() {
+        var selectedValue = $("#submission").val();
+        var titleField = $('#titleRow');
+        var hallField = $('#hallRow');
+        if (selectedValue != "-1") {
+            titleField.hide();
+            $('#title').val("");
+            hallField.show();
+        } else {
+            titleField.show();
+            hallField.hide();
+        }
+    };
+
+    handleBreaks();
+    $('#submission').change(handleBreaks);
 });
 </script>
 

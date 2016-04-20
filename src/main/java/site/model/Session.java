@@ -12,21 +12,27 @@ public class Session extends AbstractEntity {
      * Default serial version uid.
      */
     private static final long serialVersionUID = 1L;
-	
-    @OneToOne(fetch = FetchType.EAGER, targetEntity = Submission.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "submission", nullable = false, referencedColumnName = "id")
-	private Submission submission;
-    
-    @Column(name = "start_time")
+
+	private String title;
+
+	@Column(name = "start_time")
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime startTime;
-    
-    @Column(name = "end_time")
-   	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime endTime;
-    
+	private DateTime startTime;
+
+	@Column(name = "end_time")
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	private DateTime endTime;
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, targetEntity = Submission.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "submission", referencedColumnName = "id")
+	private Submission submission;
+
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = VenueHall.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "hall", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "hall", referencedColumnName = "id")
 	private VenueHall hall;
 
 	public Session() {
@@ -34,8 +40,8 @@ public class Session extends AbstractEntity {
 
 	public Session(Submission submission, DateTime startTime, DateTime endTime, VenueHall hall) {
 		this.submission = submission;
-		this.startTime = startTime;
-		this.endTime = endTime;
+		setStartTime(startTime);
+		setEndTime(endTime);
 		this.hall = hall;
 	}
 
@@ -47,22 +53,6 @@ public class Session extends AbstractEntity {
 		this.submission = submission;
 	}
 
-	public DateTime getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(DateTime startTime) {
-		this.startTime = startTime;
-	}
-
-	public DateTime getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(DateTime endTime) {
-		this.endTime = endTime;
-	}
-
 	public VenueHall getHall() {
 		return hall;
 	}
@@ -71,18 +61,45 @@ public class Session extends AbstractEntity {
 		this.hall = hall;
 	}
 
+    public String getTitle() {
+        if (submission != null) {
+            return submission.getTitle() +
+                    "<p>" +
+                    submission.getSpeaker().getFirstName() + " " +
+                    submission.getSpeaker().getLastName();
+        }
+
+        return title;
+    }
+
+    public DateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(DateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public DateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(DateTime endTime) {
+        this.endTime = endTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Session session = (Session) o;
-        return Objects.equals(submission, session.submission) &&
-                Objects.equals(startTime, session.startTime) &&
-                Objects.equals(endTime, session.endTime);
+        return Objects.equals(getTitle(), session.getTitle()) &&
+                Objects.equals(getStartTime(), session.getStartTime()) &&
+                Objects.equals(getEndTime(), session.getEndTime());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(submission, startTime, endTime);
+        return Objects.hash(getTitle(), getStartTime(), getEndTime());
     }
 }

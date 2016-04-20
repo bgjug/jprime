@@ -23,7 +23,9 @@ import java.util.List;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -104,6 +106,7 @@ public class SessionControllerTest {
                 .param("submission", forgeSubmission.getId() + "")
                 .param("startTime", "26.05.2016 10:15")
                 .param("endTime", "26.05.2016 11:15")
+                .param("title", "")
                 .param("hall", betaHall.getId() + "")
                 .param("id", ""))
                 .andExpect(status().isFound())
@@ -116,6 +119,30 @@ public class SessionControllerTest {
         assertThat(session.getStartTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
         assertThat(session.getEndTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
         assertThat(session.getHall().getName(), is(betaHall.getName()));
+        assertTrue(session.getTitle().startsWith(session.getSubmission().getTitle()) &&
+                session.getTitle().endsWith(session.getSubmission().getSpeaker().getLastName()));
+    }
+
+    @Test
+    public void shouldAddCoffeeBreak() throws Exception {
+        mockMvc.perform(post("/admin/session/add")
+                .param("submission", "")
+                .param("startTime", "26.05.2016 10:15")
+                .param("endTime", "26.05.2016 11:15")
+                .param("title", "Coffee break")
+                .param("hall", "")
+                .param("id", ""))
+                .andExpect(status().isFound())
+                .andExpect(view().name("redirect:/admin/session/view"));
+        List<Session> sessions = sessionRepository.findAll();
+        assertThat(sessions.size(), is(2));
+
+        Session session = sessions.get(1);
+        assertNull(session.getSubmission());
+        assertThat(session.getTitle(), is("Coffee break"));
+        assertThat(session.getStartTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getEndTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertNull(session.getHall());
     }
 
     @Test
@@ -125,6 +152,7 @@ public class SessionControllerTest {
                 .param("submission", bootSubmission.getId() + "")
                 .param("startTime", "27.05.2016 10:15")
                 .param("endTime", "27.05.2016 11:15")
+                .param("title", "")
                 .param("hall", betaHall.getId() + "")
                 .param("id", bootSession.getId() + ""))
                 .andExpect(status().isFound())
@@ -137,6 +165,28 @@ public class SessionControllerTest {
         assertThat(session.getStartTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
         assertThat(session.getEndTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
         assertThat(session.getHall().getName(), is(betaHall.getName()));
+    }
+
+    @Test
+    public void shouldChangeSessionType() throws Exception {
+        mockMvc.perform(post("/admin/session/add")
+                .param("submission", "")
+                .param("startTime", "27.05.2016 10:15")
+                .param("endTime", "27.05.2016 11:15")
+                .param("title", "Opening")
+                .param("hall", "")
+                .param("id", bootSession.getId() + ""))
+                .andExpect(status().isFound())
+                .andExpect(view().name("redirect:/admin/session/view"));
+        List<Session> sessions = sessionRepository.findAll();
+        assertThat(sessions.size(), is(1));
+
+        Session session = sessions.get(0);
+        assertNull(session.getSubmission());
+        assertThat(session.getStartTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getEndTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertNull(session.getHall());
+        assertThat(session.getTitle(), is("Opening"));
     }
 
     @Test
