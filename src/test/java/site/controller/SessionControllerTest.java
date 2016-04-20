@@ -102,8 +102,8 @@ public class SessionControllerTest {
     public void shouldAddNewSession() throws Exception {
         mockMvc.perform(post("/admin/session/add")
                 .param("submission", forgeSubmission.getId() + "")
-                .param("startTime", "26.05.16 10:15")
-                .param("endTime", "26.05.16 11:15")
+                .param("startTime", "26.05.2016 10:15")
+                .param("endTime", "26.05.2016 11:15")
                 .param("hall", betaHall.getId() + "")
                 .param("id", ""))
                 .andExpect(status().isFound())
@@ -123,8 +123,8 @@ public class SessionControllerTest {
         Submission bootSubmission = bootSession.getSubmission();
         mockMvc.perform(post("/admin/session/add")
                 .param("submission", bootSubmission.getId() + "")
-                .param("startTime", "27.05.16 10:15")
-                .param("endTime", "27.05.16 11:15")
+                .param("startTime", "27.05.2016 10:15")
+                .param("endTime", "27.05.2016 11:15")
                 .param("hall", betaHall.getId() + "")
                 .param("id", bootSession.getId() + ""))
                 .andExpect(status().isFound())
