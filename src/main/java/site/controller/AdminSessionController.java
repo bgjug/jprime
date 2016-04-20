@@ -50,16 +50,24 @@ public class AdminSessionController {
     public String addSession(@RequestParam String submission,
                              @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") DateTime startTime,
                              @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") DateTime endTime,
+                             @RequestParam String title,
                              @RequestParam String hall,
                              @RequestParam String id) {
         Session session = new Session();
         if (!"".equals(id)) {
             session = adminFacade.findOneSession(Long.parseLong(id));
         }
-        session.setSubmission(adminFacade.findOneSubmission(Long.parseLong(submission)));
+        if (title != null && !title.equals("")) {
+            session.setTitle(title);
+            session.setSubmission(null);
+            session.setHall(null);
+        } else {
+            session.setSubmission(adminFacade.findOneSubmission(Long.parseLong(submission)));
+            session.setHall(adminFacade.findOneVenueHall(Long.parseLong(hall)));
+            session.setTitle(null);
+        }
         session.setStartTime(startTime);
         session.setEndTime(endTime);
-        session.setHall(adminFacade.findOneVenueHall(Long.parseLong(hall)));
         adminFacade.saveSession(session);
         return "redirect:/admin/session/view";
     }

@@ -35,7 +35,7 @@
         </tr>
         <c:forEach var="session" items="${sessions}">
             <tr>
-                <td>${session.submission.title}</td>
+                <td>${session.title}</td>
                 <td>${session.submission.description}</td>
                 <td>${session.submission.speaker.firstName} ${session.submission.speaker.lastName}</td>
                 <td>${session.submission.coSpeaker.firstName} ${session.submission.coSpeaker.lastName}</td>
