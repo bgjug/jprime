@@ -48,8 +48,8 @@ public class AdminSessionController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addSession(@RequestParam String submission,
-                             @RequestParam @DateTimeFormat(pattern = "dd.MM.yy HH:mm") DateTime startTime,
-                             @RequestParam @DateTimeFormat(pattern = "dd.MM.yy HH:mm") DateTime endTime,
+                             @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") DateTime startTime,
+                             @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") DateTime endTime,
                              @RequestParam String hall,
                              @RequestParam String id) {
         Session session = new Session();
