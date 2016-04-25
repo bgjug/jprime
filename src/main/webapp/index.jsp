@@ -385,7 +385,7 @@
                 </div>
 
                 <div class="our-clients">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(platinumSponsors)}" data-appeared-items="${fn:length(platinumSponsors)}"
+                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(platinumSponsors) gt 3 ? '3':fn:length(platinumSponsors)}" data-appeared-items="${fn:length(platinumSponsors)}"
                          data-navigation="true">
 
                         <c:forEach var="sponsor" items="${platinumSponsors}">
@@ -403,7 +403,7 @@
                 </div>
 
                 <div class="our-clients text-center" style="text-align: center">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(goldSponsors)}" data-appeared-items="${fn:length(goldSponsors)}"
+                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(goldSponsors) gt 3 ? '3':fn:length(goldSponsors)}" data-appeared-items="${fn:length(goldSponsors)}"
                          data-navigation="true">
 
                         <c:forEach var="sponsor" items="${goldSponsors}">
@@ -420,7 +420,7 @@
                 </div>
 
                 <div class="our-clients">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(silverSponsors)}" data-appeared-items="${fn:length(silverSponsors)}"
+                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(silverSponsors) gt 3 ? '3':fn:length(silverSponsors)}" data-appeared-items="${fn:length(silverSponsors)}"
                          data-navigation="true">
 
                         <c:forEach var="sponsor" items="${silverSponsors}">
@@ -451,7 +451,7 @@
 	                </div>
 	
 	                <div class="our-clients">
-	                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partners)}" data-appeared-items="${fn:length(partners)}"
+	                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partners) gt 3? '3' : fn:length(partners)}" data-appeared-items="${fn:length(partners)}"
 	                         data-navigation="true">
 	
 	                        <c:forEach var="partner" items="${partners}">
