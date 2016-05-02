@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import site.config.Globals;
 import site.model.Article;
 import site.model.Partner;
+import site.model.Session;
 import site.model.Speaker;
 import site.model.Sponsor;
 import site.model.SponsorPackage;
@@ -16,6 +17,7 @@ import site.model.Submission;
 import site.model.Tag;
 import site.repository.ArticleRepository;
 import site.repository.PartnerRepository;
+import site.repository.SessionRepository;
 import site.repository.SpeakerRepository;
 import site.repository.SponsorRepository;
 import site.repository.SubmissionRepository;
@@ -58,6 +60,11 @@ public class UserService {
     @Autowired
     @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
+    
+    @Autowired
+    @Qualifier(SessionRepository.NAME)
+	private SessionRepository sessionRepository;
+	
 
     /**
      * Speaker
@@ -126,5 +133,13 @@ public class UserService {
 
     public void	submitTalk(Submission submission) {
         submissionRepository.save(submission);
+    }
+    
+    public Session findSessionTalk(long id){
+    	return sessionRepository.findOne(id);
+    }
+    
+    public List<Session> findSessionTalksAndBreaksByHallName(String hallName){
+    	return sessionRepository.findByHallNameOrHallIsNullOrderByStartTimeAsc(hallName);
     }
 }
