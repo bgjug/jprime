@@ -39,7 +39,8 @@ public class AgendaController {
     	//we have 2 options here
     	//option one iterate on all alpha on the view and with status=i and use i.count in beta to get the beta talk with the same position as in alpha.
     	//pros - easy, cons - not good when we have a missing slots on beta or when slots dont match !
-    	//option two is to create a structure with slots (indexes or timings 09:00-09:40 and so on .. and to put on each slot the one(when break) or two (when talks for alpha and beta)
+
+    		//option two is to create a structure with slots (indexes or timings 09:00-09:40 and so on .. and to put on each slot the one(when break) or two (when talks for alpha and beta)
     	//then to just iterate over this indexes or timings on the frontend taking the content
     	//pros have to make the mapping here, cons - well this implementation costs more time
     	
