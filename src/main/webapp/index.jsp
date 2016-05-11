@@ -129,7 +129,7 @@
 
                 <!-- Start Big Heading -->
                 <div class="big-title text-center">
-                    <h1><strong>This conference is brought to you by</strong></h1>
+                    <h1><strong>The conference is organized by</strong></h1>
                 </div>
                 <!-- End Big Heading -->
 
