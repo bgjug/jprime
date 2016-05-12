@@ -437,11 +437,11 @@
         </div><!-- .container -->
     </div>
     <!-- End Sponsor Section -->
-    
-    
-    
+
+
+${fn:length(partnerChunks)}
     <!-- Start Sponsor Section -->
-    <c:if test="${fn:length(partners) gt 0}">
+    <c:if test="${fn:length(partnerChunks) gt 0}">
 	    <div class="partner">
 	        <div class="container">
 	            <div class="row">
@@ -451,17 +451,20 @@
 	                </div>
 	
 	                <div class="our-clients">
-	                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partners) gt 3? '3' : fn:length(partners)}" data-appeared-items="${fn:length(partners)}"
-	                         data-navigation="true">
-	
-	                        <c:forEach var="partner" items="${partners}">
-	                            <div class="client-item item">
-	                                <a href="${partner.companyWebsite}"><img src="/image/partner/${partner.id}"
-	                                                                         alt="${partner.companyName}"/></a>
-	                            </div>
-	                        </c:forEach>
-	
-	                    </div>
+	                     <c:forEach var="partners" items="${partnerChunks}">
+                 
+                                <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partners) gt 3? '3' : fn:length(partners)}" data-appeared-items="${fn:length(partners)}"
+                                             data-navigation="true">
+
+                                            <c:forEach var="partner" items="${partners}">
+                                                <div class="client-item item">
+                                                    <a href="${partner.companyWebsite}"><img src="/image/partner/${partner.id}"
+                                                                                             alt="${partner.companyName}"/></a>
+                                                </div>
+                                            </c:forEach>
+                                </div>
+    			       </c:forEach>
+
 	                </div>
 	                <!-- End Clients Carousel -->
 	            </div><!-- .row -->

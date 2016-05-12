@@ -1,5 +1,6 @@
 package site.controller;
 
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
@@ -123,6 +125,6 @@ public class IndexControllerTest {
                 .andExpect(model().attribute("silverSponsors", hasSize(0)))
                 .andExpect(model().attribute("tags", containsInAnyOrder(tag1, tag2)))
                 .andExpect(model().attribute("featuredSpeakers", contains(brianGoetz)))
-                .andExpect(model().attribute("partners", contains(softUni)));
+                .andExpect(model().attribute("partnerChunks", IsInstanceOf.instanceOf(List.class)));
     }
 }
