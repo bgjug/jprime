@@ -91,16 +91,17 @@
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
                             <h2 class="animated7 white" style="text-shadow: 3px 3px black;">
-                                <span>Become a <strong>Sponsor</strong></span>
+<!--                                 <span>Become a <strong>Sponsor</strong></span> -->
+									<span>Student <strong>tickets !</strong></span>
                             </h2>
 
                             <h3 class="animated8 white" style="text-shadow: 2px 2px black;">
-                                <span>WHAT ARE YOU WAITING FOR</span>
+                                <span>Now available</span>
                             </h3>
 
                             <div class="">
-                                <a class="animated4 slider btn btn-primary btn-min-block" href="#sponsors">Become
-                                    Sponsor</a><a class="animated4 slider btn btn-default btn-min-block"
+                                <a class="animated4 slider btn btn-primary btn-min-block" href="#sponsors">Get Ticket</a>
+                                <a class="animated4 slider btn btn-default btn-min-block"
                                                   href="#sponsors">Learn More</a>
                             </div>
                         </div>
@@ -278,7 +279,8 @@
     </div>
     <!-- End Team Member Section -->
 
-    <!-- Start Pricing Table Section -->
+    <!-- Start Pricing Table for Sponsors Section -->
+    <%--
     <div class=" section pricing-section" id="sponsors">
         <div class="container">
             <div class="row">
@@ -369,8 +371,84 @@
 
             </div>
         </div>
+    </div> --%>
+    <!-- End Pricing Table for Sponsors Section -->
+    
+    <!-- Start Pricing Table for Sponsors Section -->
+    <div class=" section pricing-section" id="sponsors">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Start Big Heading -->
+                    <div class="big-title text-center">
+                        <h1>Buy <strong>Ticket!</strong></h1>
+                    </div>
+                    <!-- End Big Heading -->
+                </div>
+            </div>
+
+            <div class="row pricing-tables">
+
+                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
+                    <div class="pricing-table">
+                        <div class="plan-name">
+                            <h3>Normal ticket</h3>
+                        </div>
+                        <div class="plan-price">
+                            <div class="price-value">140<span>.00</span> BGN</div>
+                        </div>
+                        <div class="plan-list">
+                            <ul>
+                                <li><strong>1.5</strong> days conference</li>
+                                <li><strong>19</strong> awesome talks!</li>
+                                <li><strong>Lunch</strong> box</li>
+                                <li><strong>A bag</strong> full of goodies</li>
+                                <li><strong>Free T-shirt!</strong></li>
+                                <li><strong>Raffle !</strong></li>
+                                <li><strong>Beers !</strong></li>
+                                <li><strong>Coffee</strong> and soft drinks</li>
+                            </ul>
+                        </div>
+                        <div class="plan-signup">
+                            <a href="tickets/epay"
+                               class="btn-system btn-small">Get It Now</a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
+                    <div class="pricing-table">
+                        <div class="plan-name">
+                            <h3>Student ticket</h3>
+                        </div>
+                        <div class="plan-price">
+                            <div class="price-value">100<span>.00</span> BGN</div>
+                        </div>
+                        <div class="plan-list">
+                            <ul>
+                                <li><strong>1.5</strong> days conference</li>
+                                <li><strong>19</strong> awesome talks!</li>
+                                <li><strong>Lunch</strong> box</li>
+                                <li><strong>A bag</strong> full of goodies</li>
+                                <li><strong>Free T-shirt!</strong></li>
+                                <li><strong>Raffle !</strong></li>
+                                <li><strong>Beers !</strong></li>
+                                <li><strong>Coffee</strong> and soft drinks</li>
+                            </ul>
+                        </div>
+                        <div class="plan-signup">
+                            <a href="tickets/epay"
+                               class="btn-system btn-small">Get It Now</a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
-    <!-- End Pricing Table Section -->
+    <!-- End Pricing Table for Sponsors Section -->
 
 
     <!-- Start Sponsor Section -->
@@ -439,7 +517,6 @@
     <!-- End Sponsor Section -->
 
 
-${fn:length(partnerChunks)}
     <!-- Start Sponsor Section -->
     <c:if test="${fn:length(partnerChunks) gt 0}">
 	    <div class="partner">
@@ -473,8 +550,7 @@ ${fn:length(partnerChunks)}
     </c:if>
     <!-- End Sponsor Section -->
 
-
-    <user:footer/>
+	<jsp:directive.include file="footer.jsp" />
 
 </div>
 <!-- End Full Body Container -->

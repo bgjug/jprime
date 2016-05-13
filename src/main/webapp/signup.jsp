@@ -104,7 +104,7 @@
     <!-- End content -->
 
 
-    <user:footer/>
+    <jsp:directive.include file="footer.jsp" />
 </div>
 <!-- End Container -->
 

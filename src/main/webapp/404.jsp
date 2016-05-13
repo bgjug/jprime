@@ -48,7 +48,7 @@
         <!-- .container -->
     </div>
 
-    <user:footer/>
+    <jsp:directive.include file="footer.jsp" />
 
 </div>
 <!-- End Full Body Container -->

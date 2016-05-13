@@ -430,7 +430,7 @@
 
 
     <!-- Start Footer -->
-    <user:footer/>
+    <<jsp:directive.include file="footer.jsp" />
     <!-- End Footer -->
 
 </div>
