@@ -49,7 +49,7 @@
             <!-- Carousel inner -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img class="img-responsive" src="images/slider/index1.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/duke1.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
