@@ -41,6 +41,7 @@ public class IndexController {
         
         // split partners in groups for better display in rows
         List<Partner> partners = userFacade.findAllPartners();
+        Collections.shuffle(partners);
         List<List<Partner>> partnerChunks = new LinkedList<>();
         int partnersCount = 0;
         List<Partner> currentChunk = new LinkedList<>();
