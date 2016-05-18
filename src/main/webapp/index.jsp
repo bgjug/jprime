@@ -524,7 +524,7 @@
 	            <div class="row">
 	
 	                <div class="big-title text-center" >
-	                    <h1><strong>Media</strong> Partners</h1>
+	                    <h1><strong>Community and Media</strong> Partners</h1>
 	                </div>
 	
 	                <div class="our-clients">
