@@ -1,6 +1,8 @@
 package site.controller;
 
+import org.apache.catalina.Globals;
 import org.apache.log4j.Logger;
+import org.apache.tomcat.jni.Global;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -52,18 +54,11 @@ public class TicketsController {
     @Qualifier(RegistrantService.NAME)
     private RegistrantService registrantFacade;
 
-    //Mihail: old tickets page
-    @RequestMapping(value = "/tickets", method = RequestMethod.GET)
-    public String submissionForm(Model model) {
-    	model.addAttribute("tags", userFacade.findAllTags());
-        return TICKETS_END_JSP;
-    }
-
     @RequestMapping(value = "/tickets/epay", method = RequestMethod.GET)
     public String goToRegisterPage(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("registrant", new Registrant());
-		return TICKETS_REGISTER_JSP;
+		return site.config.Globals.PAGE_TICKETS;
     }
 
     /**

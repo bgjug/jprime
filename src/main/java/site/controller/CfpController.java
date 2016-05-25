@@ -36,7 +36,7 @@ public class CfpController extends AbstractCfpController {
     public String submissionForm(Model model) {
     	model.addAttribute("tags", userFacade.findAllTags());
         buildCfpFormModel(model, new Submission());
-        return Globals.CFP;
+        return Globals.PAGE_CFP;
     }
 
     @RequestMapping(value = "/cfp", method = RequestMethod.POST)
@@ -48,7 +48,7 @@ public class CfpController extends AbstractCfpController {
         if (bindingResult.hasErrors() || StringUtils.isEmpty(submission.getSpeaker().getEmail()) || !new EmailValidator().isValid(submission.getSpeaker().getEmail(), null)) {
         	model.addAttribute("tags", userFacade.findAllTags());
             buildCfpFormModel(model, new Submission());
-        	return Globals.CFP;
+        	return Globals.PAGE_CFP;
         }
         saveSubmission(submission, speakerImage, coSpeakerImage);
         try {

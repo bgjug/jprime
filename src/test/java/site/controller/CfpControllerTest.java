@@ -65,7 +65,7 @@ public class CfpControllerTest {
     public void getShouldReturnEmptySubscription() throws Exception {
         mockMvc.perform(get("/cfp"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(Globals.CFP));
+                .andExpect(view().name(Globals.PAGE_CFP));
     }
 
     @Test

@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
+import site.config.Globals;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -36,9 +37,9 @@ public class TicketsControllerTest {
 
     @Test
     public void getShouldReturnTicketsJsp() throws Exception {
-        mockMvc.perform(get("/tickets"))
+        mockMvc.perform(get("/tickets/epay"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(TICKETS_END_JSP));
+                .andExpect(view().name(Globals.PAGE_TICKETS));
     }
 
 }

@@ -141,7 +141,7 @@
 
                         <!-- Client 1 -->
                         <div class="client-item item">
-                            <a href="http://java-bg.org/"><img src="images/bg-jug.png" alt="Bulgarian JUG"/></a>
+                            <a href="http://java-bg.org/"><img src="images/bg-jug.png" alt="Bulgarian JUG" style="width:85px;"/></a>
                         </div>
 
                         <!-- Client 2 -->
@@ -213,6 +213,30 @@
     <!-- End Purchase Section -->
      --%>
 
+
+	<!-- Start Live Stream Section -->
+    <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff;">
+
+        <!-- Start Big Heading -->
+        <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
+            <h1>jPrime<strong> livestream</strong></h1>
+        </div>
+        <!-- End Big Heading -->
+
+        <p class="text-center">Track 1 (Beta)</p>
+            
+        <div class="container" style="text-align: center">
+        	 <iframe title="" width="720" height="405" src="http://i.cdn.bg/live/0zI7XuE2Dr" frameborder="0" mozallowfullscreen webkitallowfullscreen allowfullscreen></iframe>
+        </div>
+        
+        <p class="text-center">Track 2 (Alpha)</p>
+            
+        <div class="container" style="text-align: center">
+        	 <iframe title="" width="720" height="405" src="http://i.cdn.bg/live/wC7nBgrPX1" frameborder="0" mozallowfullscreen webkitallowfullscreen allowfullscreen></iframe>
+        </div>
+
+    </div>
+    <!-- End Live Stream Section -->
 
     <!-- Start Portfolio Section -->
     <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff;">
