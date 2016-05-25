@@ -141,7 +141,8 @@
 
                         <!-- Client 1 -->
                         <div class="client-item item">
-                            <a href="http://java-bg.org/"><img src="images/bg-jug.png" alt="Bulgarian JUG"/></a>
+                            <a href="http://java-bg.org/"><img style="width:85px;" src="images/bg-jug.png" alt="Bulgarian JUG" onmouseenter="jugLogo(this, true)" onmouseleave="jugLogo(this, false)"/></a>
+                            <img src="images/jug-banner-text.png" id="jug-banner-text" style="display:none"/>
                         </div>
 
                         <!-- Client 2 -->
@@ -564,6 +565,18 @@
         <div class="dot2"></div>
     </div>
 </div>
+
+<script type="text/javascript">
+function jugLogo(element, show){
+	if(show){
+		$('#jug-banner-text').show();
+	}
+	else {
+		$('#jug-banner-text').hide();
+	}
+}
+
+</script>
 
 
 </body>
