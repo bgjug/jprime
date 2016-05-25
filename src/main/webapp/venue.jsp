@@ -38,7 +38,7 @@
     <div id="content">
         <div class="container">
 
-            <p class="text-center"><br/> jPrime is held on <strong>27th May 2015</strong> in Sofia Event Center. </p>
+            <p class="text-center"><br/> jPrime is held on <strong>26-27th May 2016</strong> in Sofia Event Center. </p>
 
             <center>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m0!3m2!1sru!2sbg!4v1429266821187!6m8!1m7!1sipo8Sl0qHi8AAAQfDR2bcQ!2m2!1d42.657808!2d23.315222!3f307.9207157147706!4f-10.178049410940872!5f0.7820865974627469"
