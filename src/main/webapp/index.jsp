@@ -214,6 +214,7 @@
      --%>
 
 
+	<%--
 	<!-- Start Live Stream Section -->
     <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff;">
 
@@ -239,6 +240,7 @@
 
     </div>
     <!-- End Live Stream Section -->
+     --%>
 
     <!-- Start Portfolio Section -->
     <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff;">
