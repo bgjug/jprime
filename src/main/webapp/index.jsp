@@ -58,7 +58,7 @@
                             </h2>
 
                             <h3 class="animated3 white" style="text-shadow: 2px 2px black;">
-                                <span>26 and 27 May 2016</span>
+                                <span>30 and 31 May 2017</span>
                             </h3>
 
                             <p class="animated4"><a href="/nav/2015" class="slider btn btn-primary">read more</a>
@@ -76,9 +76,9 @@
                             </h2>
 
                             <h3 class="animated5 white" style="text-shadow: 2px 2px black;">
-                                <span>26 and 27 May 2016 in Sofia</span> <!--  will be changed with tickets available -->
+                                <span>30 and 31 May 2017 in Sofia</span> <!--  will be changed with tickets available -->
                             </h3>
-                            
+
                             <p class="animated4"><a href="tickets/epay" class="slider btn btn-primary">Buy ticket</a>
                             </p>
                         </div>
@@ -226,14 +226,14 @@
 
         <p class="text-center">Track 1 (Beta)</p>
         <p class="text-center">FIX: since the stream is plain http, it won't work in chrome, <a target="_blank" href="http://i.cdn.bg/live/0zI7XuE2Dr">open in new tab</a></p>
-        
+
         <div class="container" style="text-align: center">
         	 <iframe title="" width="720" height="405" src="http://i.cdn.bg/live/0zI7XuE2Dr" frameborder="0" mozallowfullscreen webkitallowfullscreen allowfullscreen></iframe>
         </div>
-        
+
         <p class="text-center">Track 2 (Alpha)</p>
         <p class="text-center">FIX: since the stream is plain http, it won't work in chrome, <a target="_blank" href="http://i.cdn.bg/live/wC7nBgrPX1">open in new tab</a></p>
-            
+
         <div class="container" style="text-align: center">
         	 <iframe title="" width="720" height="405" src="http://i.cdn.bg/live/wC7nBgrPX1" frameborder="0" mozallowfullscreen webkitallowfullscreen allowfullscreen></iframe>
         </div>
@@ -251,19 +251,19 @@
         </div>
         <!-- End Big Heading -->
 
-        <p class="text-center">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices. <br/> Its second edition will be held on <strong>26th and 27th May 2016</strong> in Sofia Event Center. It's run
+        <p class="text-center">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices. <br/> Its second edition will be held on <strong>30th and 31th May 2017</strong> in TBD. It's run
             by the Bulgarian Java User Group and backed by the biggest companies in the city.
             <br/><br/>jPrime features a combination of great international speakers along with the best presenters from
             Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning,
             hacking, networking and fun.</p>
-            
+
         <div class="container">
-        	<iframe width="560" height="315" src="https://www.youtube.com/embed/2vseYx1bDik" frameborder="0" allowfullscreen></iframe>
+        	<iframe width="560" height="315" src="https://www.youtube.com/embed/BSyuYujElno" frameborder="0" allowfullscreen></iframe>
         </div>
 
     </div>
     <!-- End Portfolio Section -->
-    
+
     <!-- Start Team Member Section -->
     <a name="speakers"></a>
     <div class="section" style="background:#fff;">
@@ -271,7 +271,7 @@
 
             <!-- Start Big Heading -->
             <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                <h1>Our <strong>Speakers</strong> in 2016</h1>
+                <h1>Our <strong>Speakers</strong> in 2017</h1>
             </div>
             <!-- End Big Heading -->
 
@@ -401,7 +401,7 @@
         </div>
     </div> --%>
     <!-- End Pricing Table for Sponsors Section -->
-    
+
     <!-- Start Pricing Table for Sponsors Section -->
     <div class=" section pricing-section" id="sponsors">
         <div class="container">
@@ -550,14 +550,14 @@
 	    <div class="partner">
 	        <div class="container">
 	            <div class="row">
-	
+
 	                <div class="big-title text-center" >
 	                    <h1><strong>Community and Media</strong> Partners</h1>
 	                </div>
-	
+
 	                <div class="our-clients">
 	                     <c:forEach var="partners" items="${partnerChunks}">
-                 
+
                                 <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partners) gt 3? '3' : fn:length(partners)}" data-appeared-items="${fn:length(partners)}"
                                              data-navigation="true">
 
