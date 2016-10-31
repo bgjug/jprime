@@ -102,9 +102,11 @@
                             <li>
                                 <a <c:if test='${"/team.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/team">The Team</a>
                             </li>
+                            <%--
                             <li>
                                 <a <c:if test='${"/venue.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/venue">Venue/Useful info</a>
                             </li>
+                            --%>
                             <c:forEach var="tag" items="${tags}">
                                 <li>
                                     <a href="/nav/${tag.name}"><c:out value="${tag.name}"/></a>
