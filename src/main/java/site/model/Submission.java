@@ -10,9 +10,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import site.config.Globals;
 
@@ -46,6 +48,9 @@ public class Submission extends AbstractEntity {
 
     @Enumerated(EnumType.STRING)
     private Branch branch = Globals.CURRENT_BRANCH;
+    
+    @Transient
+    private String captcha;
 
     public Submission() {
     }
@@ -145,4 +150,12 @@ public class Submission extends AbstractEntity {
         result = 31 * result + speaker.hashCode();
         return result;
     }
+
+	public String getCaptcha() {
+		return captcha;
+	}
+
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
+	}
 }

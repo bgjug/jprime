@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import site.config.Globals;
 import site.model.Submission;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -44,12 +46,19 @@ public class CfpController extends AbstractCfpController {
             BindingResult bindingResult,
             @RequestParam("speakerImage") MultipartFile speakerImage,
             @RequestParam("coSpeakerImage") MultipartFile coSpeakerImage,
-            Model model) {
-        if (bindingResult.hasErrors() || StringUtils.isEmpty(submission.getSpeaker().getEmail()) || !new EmailValidator().isValid(submission.getSpeaker().getEmail(), null)) {
-        	model.addAttribute("tags", userFacade.findAllTags());
-            buildCfpFormModel(model, new Submission());
-        	return Globals.PAGE_CFP;
-        }
+            Model model, HttpServletRequest request) {
+    	boolean invalidCaptcha = false;
+		if (submission.getCaptcha() == null || !submission.getCaptcha()
+				.equals(request.getSession().getAttribute(CaptchaController.SESSION_PARAM_CAPTCHA_IMAGE))) {
+			invalidCaptcha = true;
+			bindingResult.rejectValue("captcha", "invalid");
+		}
+		if (bindingResult.hasErrors() || StringUtils.isEmpty(submission.getSpeaker().getEmail())
+				|| !new EmailValidator().isValid(submission.getSpeaker().getEmail(), null) || invalidCaptcha) {
+			model.addAttribute("tags", userFacade.findAllTags());
+			buildCfpFormModel(model, submission);
+			return Globals.PAGE_CFP;
+		}
         saveSubmission(submission, speakerImage, coSpeakerImage);
         try {
             mailFacade.sendEmail(submission.getSpeaker().getEmail(), "jPrime talk proposal",

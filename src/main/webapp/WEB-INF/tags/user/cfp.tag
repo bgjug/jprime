@@ -15,7 +15,6 @@
            action="${action}" enctype="multipart/form-data">
     <fieldset>
         <p>
-            <form:errors />
         </p>
         <dl>
             <dt>Session info</dt>
@@ -26,6 +25,7 @@
             </dt>
             <dd>
                 <form:input path="title" />
+                <form:errors path="title"/>
             </dd>
         </dl>
         <dl>
@@ -34,6 +34,7 @@
             </dt>
             <dd>
                 <form:textarea path="description"  style="width:80%" rows="5"/>
+                <form:errors path="description"/>
             </dd>
         </dl>
         <dl>
@@ -42,6 +43,7 @@
             </dt>
             <dd>
                 <form:select path="level" items="${levels}"/>
+                <form:errors path="level"/>
             </dd>
         </dl>
         <dl>
@@ -72,7 +74,15 @@
         <form:hidden path="createdBy"/>
         <form:hidden path="status" />
         <form:hidden path="speaker.id" />
-        <button type="submit">Submit</button>
+        <p>
+	        <c:url var="captchaUrl" value="/captcha-image"/>
+	        <img src="${captchaUrl}"/>
+	        <form:input path="captcha"/>
+	        <form:errors path="captcha"/>
+        </p>
+        <p>
+        	<button type="submit">Submit</button>
+        </p>
     </fieldset>
 
 </form:form>

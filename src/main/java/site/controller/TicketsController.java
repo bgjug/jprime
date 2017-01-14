@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -66,10 +67,16 @@ public class TicketsController {
      */
     @Transactional
     @RequestMapping(value = "/tickets/epay", method = RequestMethod.POST)
-    public String register(Model model, @Valid final Registrant registrant, BindingResult bindingResult) throws Exception {
-        if (bindingResult.hasErrors()) {
-            return TICKETS_REGISTER_JSP;
-        }
+    public String register(Model model, @Valid final Registrant registrant, BindingResult bindingResult, HttpServletRequest request) throws Exception {
+		boolean invalidCaptcha = false;
+    	if (registrant.getCaptcha() == null || !registrant.getCaptcha()
+				.equals(request.getSession().getAttribute(CaptchaController.SESSION_PARAM_CAPTCHA_IMAGE))) {
+    		bindingResult.rejectValue("captcha", "invalid");
+			invalidCaptcha = true;
+		}
+		if (bindingResult.hasErrors() || invalidCaptcha) {
+			return TICKETS_REGISTER_JSP;
+		}
 
         //check empty users, server side validation
         List<Visitor> toBeRemoved = registrant.getVisitors().stream().filter(v -> v.getEmail() == null || v.getEmail().isEmpty() || v.getName() == null || v.getName().isEmpty()).collect(Collectors.toList());

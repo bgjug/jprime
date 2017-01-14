@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
            uri="http://www.springframework.org/security/tags"%>
-+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!doctype html>
@@ -228,7 +228,15 @@
             </dl>--%>
             <sec:csrfInput/>
             <form:hidden path="id"/>
-            <button type="submit">Proceed</button>
+            <p>
+		        <c:url var="captchaUrl" value="/captcha-image"/>
+		        <img src="${captchaUrl}"/>
+		        <form:input path="captcha"/>
+		        <form:errors path="captcha"/>
+        	</p>
+            <p>
+            	<button type="submit">Proceed</button>
+            </p>
 
         </form:form>
 

@@ -6,6 +6,8 @@ import site.controller.epay.EpayResponse;
 
 import javax.persistence.*;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,9 @@ public class Registrant extends AbstractEntity {
 
     @Embedded
     private EpayResponse epayResponse;
+    
+    @Transient
+    private String captcha;
 
     public enum PaymentType {
         EPAY_ACCOUNT("ePay account", "epay.bg"), EPAY_CREDIT_CARD("Bank card", "Банкова карта"),
@@ -323,4 +328,12 @@ public class Registrant extends AbstractEntity {
         result = 31 * result + email.hashCode();
         return result;
     }
+
+	public String getCaptcha() {
+		return captcha;
+	}
+
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
+	}
 }
