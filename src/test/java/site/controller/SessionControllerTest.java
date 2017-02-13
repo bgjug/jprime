@@ -2,6 +2,7 @@ package site.controller;
 
 import org.joda.time.DateTime;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,8 +105,8 @@ public class SessionControllerTest {
     public void shouldAddNewSession() throws Exception {
         mockMvc.perform(post("/admin/session/add")
                 .param("submission", forgeSubmission.getId() + "")
-                .param("startTime", "26.05.2016 10:15")
-                .param("endTime", "26.05.2016 11:15")
+                .param("startTime", "26.05.2017 10:15")
+                .param("endTime", "26.05.2017 11:15")
                 .param("title", "")
                 .param("hall", betaHall.getId() + "")
                 .param("id", ""))
@@ -127,8 +128,8 @@ public class SessionControllerTest {
     public void shouldAddCoffeeBreak() throws Exception {
         mockMvc.perform(post("/admin/session/add")
                 .param("submission", "")
-                .param("startTime", "26.05.2016 10:15")
-                .param("endTime", "26.05.2016 11:15")
+                .param("startTime", "26.05.2017 10:15")
+                .param("endTime", "26.05.2017 11:15")
                 .param("title", "Coffee break")
                 .param("hall", "")
                 .param("id", ""))
@@ -150,8 +151,8 @@ public class SessionControllerTest {
         Submission bootSubmission = bootSession.getSubmission();
         mockMvc.perform(post("/admin/session/add")
                 .param("submission", bootSubmission.getId() + "")
-                .param("startTime", "27.05.2016 10:15")
-                .param("endTime", "27.05.2016 11:15")
+                .param("startTime", "27.05.2017 10:15")
+                .param("endTime", "27.05.2017 11:15")
                 .param("title", "")
                 .param("hall", betaHall.getId() + "")
                 .param("id", bootSession.getId() + ""))
@@ -171,8 +172,8 @@ public class SessionControllerTest {
     public void shouldChangeSessionType() throws Exception {
         mockMvc.perform(post("/admin/session/add")
                 .param("submission", "")
-                .param("startTime", "27.05.2016 10:15")
-                .param("endTime", "27.05.2016 11:15")
+                .param("startTime", "27.05.2017 10:15")
+                .param("endTime", "27.05.2017 11:15")
                 .param("title", "Opening")
                 .param("hall", "")
                 .param("id", bootSession.getId() + ""))
