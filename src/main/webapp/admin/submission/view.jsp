@@ -18,6 +18,9 @@
 	<admin:menu/>
 	<fieldset>
 	<legend>Submissions</legend>
+	    <div>
+            <a href="/admin/submission/view/all">See all submissions</a>
+        </div>
 		<table class="admin-table">
 			<tr>
 				<td><i>Title</i></td>

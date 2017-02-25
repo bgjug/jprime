@@ -79,19 +79,28 @@ public class SubmissionControllerTest {
     }
 
     @Test
-    public void viewSubmissionsShouldReturnAllSubmissions() throws Exception {
-        mockMvc.perform(get("/admin/submission/view"))
+    public void viewAllSubmissionsShouldReturnAllSubmissions() throws Exception {
+        mockMvc.perform(get("/admin/submission/view/all"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP))
                 .andExpect(model().attribute("submissions", contains(valhalla, forge, bootAddon)));
     }
 
     @Test
-    public void viewSubmissionsShouldReturnAllSubmissionsForBranch() throws Exception {
-        mockMvc.perform(get("/admin/submission/view/2017"))
+    public void viewSubmissionsShouldReturnSubmissionsForCurrentYear() throws Exception {
+        mockMvc.perform(get("/admin/submission/view"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP))
                 .andExpect(model().attribute("submissions", contains(valhalla, forge)));
+    }
+
+
+    @Test
+    public void viewSubmissionsShouldReturnAllSubmissionsForPrevYear() throws Exception {
+        mockMvc.perform(get("/admin/submission/view/2016"))
+                .andExpect(status().isOk())
+                .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP))
+                .andExpect(model().attribute("submissions", contains(bootAddon)));
     }
 
     @Test
