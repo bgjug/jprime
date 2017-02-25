@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import site.facade.AdminService;
+import site.model.Branch;
 import site.model.Submission;
 
 import javax.mail.MessagingException;
@@ -42,6 +43,14 @@ public class SubmissionController extends AbstractCfpController {
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String listSubmissions(Model model, Pageable pageable) {
         Page<Submission> submissions = adminFacade.findAllSubmissions(pageable);
+        model.addAttribute("submissions", submissions);
+        return ADMIN_SUBMISSION_VIEW_JSP;
+    }
+
+    @RequestMapping(value = "/view/{year}", method = RequestMethod.GET)
+    public String listSubmissions(Model model, Pageable pageable, @PathVariable String year) {
+    	Branch branch = Branch.valueOfYear(year);
+        Page<Submission> submissions = adminFacade.findAllSubmissionsForBranch(branch, pageable);
         model.addAttribute("submissions", submissions);
         return ADMIN_SUBMISSION_VIEW_JSP;
     }

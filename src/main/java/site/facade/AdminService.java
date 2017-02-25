@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import site.model.*;
 import site.repository.*;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service(AdminService.NAME)
@@ -201,6 +200,11 @@ public class AdminService {
     public Page<Submission> findAllSubmissions(Pageable pageable) {
         return submissionRepository.findAll(pageable);
     }
+    
+    public Page<Submission> findAllSubmissionsForBranch(Branch branch, Pageable pageable) {
+        return submissionRepository.findAllByBranch(branch, pageable);
+    }
+    
 
     public Submission findOneSubmission(Long submissionId) {
         return submissionRepository.findOne(submissionId);
