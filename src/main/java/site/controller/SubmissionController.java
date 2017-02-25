@@ -47,6 +47,7 @@ public class SubmissionController extends AbstractCfpController {
     public String listAllSubmissions(Model model, Pageable pageable) {
         Page<Submission> submissions = adminFacade.findAllSubmissions(pageable);
         model.addAttribute("submissions", submissions);
+        model.addAttribute("path", "all");
         return ADMIN_SUBMISSION_VIEW_JSP;
     }
     
@@ -64,6 +65,8 @@ public class SubmissionController extends AbstractCfpController {
     private String listSubmissionsForBranch(Model model, Pageable pageable, Branch branch) {
         Page<Submission> submissions = adminFacade.findAllSubmissionsForBranch(branch, pageable);
         model.addAttribute("submissions", submissions);
+        model.addAttribute("path", "");
+        model.addAttribute("isCurrentYearOnly", Boolean.TRUE);
         return ADMIN_SUBMISSION_VIEW_JSP;
     }
 

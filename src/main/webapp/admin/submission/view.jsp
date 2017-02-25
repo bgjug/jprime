@@ -18,9 +18,11 @@
 	<admin:menu/>
 	<fieldset>
 	<legend>Submissions</legend>
-	    <div>
-            <a href="/admin/submission/view/all">See all submissions</a>
-        </div>
+	    <c:if test="${isCurrentYearOnly}">
+		    <div>
+	            <a href="/admin/submission/view/all">See all submissions</a>
+	        </div>
+        </c:if>
 		<table class="admin-table">
 			<tr>
 				<td><i>Title</i></td>
@@ -52,10 +54,10 @@
 		&nbsp;
 		<div>
 			<c:if test="${submissions.number > 0}">
-				<span><a href="/admin/submission/view?page=${submissions.number - 1}">previous</a></span>
+				<span><a href="/admin/submission/view/${path}?page=${submissions.number - 1}">previous</a></span>
 			</c:if>
 			<c:if test="${submissions.number < (submissions.totalPages - 1)}">
-				<span><a href="/admin/submission/view?page=${submissions.number + 1}">next</a></span>
+				<span><a href="/admin/submission/view/${path}?page=${submissions.number + 1}">next</a></span>
 			</c:if>
 		</div>
 		<div>
