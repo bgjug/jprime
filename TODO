@@ -1,4 +1,7 @@
-TODO
+TODO (out dated)
+!!! Please check the ISSUES https://github.com/bgjug/jprime/issues for the up2date list. !!!
+
+Old TODO
 1)currently in the SecurityConfig this two lines are commented.. but should not BE 
 
   //.antMatchers("/admin/**").hasRole("ADMIN") // #6 <br/>
