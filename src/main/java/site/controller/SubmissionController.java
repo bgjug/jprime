@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import site.config.Globals;
 import site.facade.AdminService;
+import site.model.Branch;
 import site.model.Submission;
 
 import javax.mail.MessagingException;
@@ -39,10 +42,31 @@ public class SubmissionController extends AbstractCfpController {
     @Autowired
     @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public String listSubmissions(Model model, Pageable pageable) {
+    
+    @RequestMapping(value = "/view/all", method = RequestMethod.GET)
+    public String listAllSubmissions(Model model, Pageable pageable) {
         Page<Submission> submissions = adminFacade.findAllSubmissions(pageable);
         model.addAttribute("submissions", submissions);
+        model.addAttribute("path", "all");
+        return ADMIN_SUBMISSION_VIEW_JSP;
+    }
+    
+    @RequestMapping(value = "/view/{year}", method = RequestMethod.GET)
+    public String listSubmissions(Model model, Pageable pageable, @PathVariable String year) {
+    	Branch branch = Branch.valueOfYear(year);
+        return listSubmissionsForBranch(model, pageable, branch);
+    }
+    
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String listSubmissions(Model model, Pageable pageable) {
+        return listSubmissionsForBranch(model, pageable, Globals.CURRENT_BRANCH);
+    }
+
+    private String listSubmissionsForBranch(Model model, Pageable pageable, Branch branch) {
+        Page<Submission> submissions = adminFacade.findAllSubmissionsForBranch(branch, pageable);
+        model.addAttribute("submissions", submissions);
+        model.addAttribute("path", "");
+        model.addAttribute("isCurrentYearOnly", Boolean.TRUE);
         return ADMIN_SUBMISSION_VIEW_JSP;
     }
 

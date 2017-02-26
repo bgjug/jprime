@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
+import site.model.Branch;
 import site.model.SessionLevel;
 import site.model.Speaker;
 import site.model.Submission;
@@ -68,18 +69,38 @@ public class SubmissionControllerTest {
 
         valhalla = submissionRepository.save(new Submission("Project Valhalla", "Primitives in Generics",
                 SessionLevel.ADVANCED, brianGoetz));
+        valhalla.setBranch(Branch.YEAR_2017);
         forge = submissionRepository.save(new Submission("JBoss Forge", "Productivity for Java EE",
                 SessionLevel.INTERMEDIATE, ivanIvanov));
+        forge.setBranch(Branch.YEAR_2017);
         bootAddon = submissionRepository.save(new Submission("Spring Boot Forge Addon", "We are not hipsters",
                 SessionLevel.BEGINNER, naydenGochev, ivanIvanov2));
+        bootAddon.setBranch(Branch.YEAR_2016);
     }
 
     @Test
-    public void viewSubmissionsShouldReturnAllSubmissions() throws Exception {
-        mockMvc.perform(get("/admin/submission/view"))
+    public void viewAllSubmissionsShouldReturnAllSubmissions() throws Exception {
+        mockMvc.perform(get("/admin/submission/view/all"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP))
                 .andExpect(model().attribute("submissions", contains(valhalla, forge, bootAddon)));
+    }
+
+    @Test
+    public void viewSubmissionsShouldReturnSubmissionsForCurrentYear() throws Exception {
+        mockMvc.perform(get("/admin/submission/view"))
+                .andExpect(status().isOk())
+                .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP))
+                .andExpect(model().attribute("submissions", contains(valhalla, forge)));
+    }
+
+
+    @Test
+    public void viewSubmissionsShouldReturnAllSubmissionsForPrevYear() throws Exception {
+        mockMvc.perform(get("/admin/submission/view/2016"))
+                .andExpect(status().isOk())
+                .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP))
+                .andExpect(model().attribute("submissions", contains(bootAddon)));
     }
 
     @Test
