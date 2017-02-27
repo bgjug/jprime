@@ -14,4 +14,6 @@ public interface PartnerRepository extends PagingAndSortingRepository<Partner, L
 	String NAME = "partnerRepository";
 
     List<Partner> findAll();
+
+    List<Partner> findByActive(Boolean active);
 }

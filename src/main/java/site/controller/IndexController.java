@@ -40,7 +40,7 @@ public class IndexController {
         model.addAttribute("featuredSpeakers", userFacade.findFeaturedSpeakers());
         
         // split partners in groups for better display in rows
-        List<Partner> partners = userFacade.findAllPartners();
+        List<Partner> partners = userFacade.findAllActivePartners();
         Collections.shuffle(partners);
         List<List<Partner>> partnerChunks = new LinkedList<>();
         int partnersCount = 0;

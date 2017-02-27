@@ -31,6 +31,8 @@ public class Partner extends AbstractEntity {
 	
 	private String description;
 
+	private Boolean active;
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -50,7 +52,7 @@ public class Partner extends AbstractEntity {
         return true;
     }
 
-    @Override
+	@Override
     public int hashCode() {
         int result = companyName.hashCode();
         result = 31 * result + companyWebsite.hashCode();
@@ -90,4 +92,13 @@ public class Partner extends AbstractEntity {
 		this.description = description;
 	}
 
+	public Boolean getActive() {
+		if (active == null)
+			return false;
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 }

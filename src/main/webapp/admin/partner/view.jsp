@@ -22,12 +22,14 @@
 			<tr>
 				<td><i>Name</i></td>
 				<td><i>LOGO</i></td>
+				<td><i>Active</i></td>
 				<td><i>Operations</i></td>
 			</tr>
 			<c:forEach var="partner" items="${partners.content}">
 				<tr>
 					<td>${partner.companyName}</td>
 					<td><img src="/image/partner/${partner.id}"/></td>
+					<td>${partner.active}</td>
 					<td>
 						<span style="float:left;"><a href="/admin/partner/edit/${partner.id}">Edit</a></span> &nbsp; 
 						<span style="float:right;"><a href="/admin/partner/remove/${partner.id}"> Remove </a></span> 

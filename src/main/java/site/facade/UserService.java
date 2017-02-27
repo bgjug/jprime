@@ -127,8 +127,8 @@ public class UserService {
         return sponsorRepository.findByActive(true).stream().collect(groupingBy(Sponsor::getSponsorPackage));
     }
 	
-	public List<Partner> findAllPartners(){
-        return partnerRepository.findAll();
+	public List<Partner> findAllActivePartners(){
+        return partnerRepository.findByActive(true);
     }
 
     public void	submitTalk(Submission submission) {
