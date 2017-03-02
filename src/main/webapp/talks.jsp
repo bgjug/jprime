@@ -61,8 +61,10 @@
                             </ul>
                             <p>
                             
+                            The agenda is not yet available !
+                            <%--
                             The agenda is not yet complete &amp; final, some changes may occur !
-
+							
 							<div class="entry-content">
 							<style>
 								table{
@@ -291,7 +293,7 @@
 							</tr>
 							</tbody>
 							</table>
-							</div>
+							</div> --%>
 
                         </div>
                         <!-- End Single Post Content -->
