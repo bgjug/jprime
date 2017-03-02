@@ -61,7 +61,7 @@
                                 <span>30 and 31 May 2017</span>
                             </h3>
 
-                            <p class="animated4"><a href="/nav/2015" class="slider btn btn-primary">read more</a>
+                            <p class="animated4"><a href="#about" class="slider btn btn-primary">read more</a>
                         </div>
                     </div>
                 </div>
@@ -243,7 +243,7 @@
      --%>
 
     <!-- Start Portfolio Section -->
-    <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff;">
+    <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff;"  id="about">
 
         <!-- Start Big Heading -->
         <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
