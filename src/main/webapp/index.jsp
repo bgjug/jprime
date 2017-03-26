@@ -251,8 +251,9 @@
         </div>
         <!-- End Big Heading -->
 
-        <p class="text-center">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices. <br/> Its second edition will be held on <strong>30th and 31th May 2017</strong> in TBD. It's run
-            by the Bulgarian Java User Group and backed by the biggest companies in the city.
+        <p class="text-center">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices.
+            <br/> Its third edition will be held on <strong>30th and 31th May 2017</strong> in Sofia Tech Park.
+            It's run by the Bulgarian Java User Group and backed by the biggest companies in the city.
             <br/><br/>jPrime features a combination of great international speakers along with the best presenters from
             Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning,
             hacking, networking and fun.</p>
@@ -427,8 +428,8 @@
                         </div>
                         <div class="plan-list">
                             <ul>
-                                <li><strong>1.5</strong> days conference</li>
-                                <li><strong>19</strong> awesome talks!</li>
+                                <li><strong>2</strong> days conference</li>
+                                <li><strong>28</strong> awesome talks!</li>
                                 <li><strong>Lunch</strong> box</li>
                                 <li><strong>A bag</strong> full of goodies</li>
                                 <li><strong>Free T-shirt!</strong></li>
@@ -455,8 +456,8 @@
                         </div>
                         <div class="plan-list">
                             <ul>
-                                <li><strong>1.5</strong> days conference</li>
-                                <li><strong>19</strong> awesome talks!</li>
+                                <li><strong>2</strong> days conference</li>
+                                <li><strong>28</strong> awesome talks!</li>
                                 <li><strong>Lunch</strong> box</li>
                                 <li><strong>A bag</strong> full of goodies</li>
                                 <li><strong>Free T-shirt!</strong></li>
