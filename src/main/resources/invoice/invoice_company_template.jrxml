@@ -33,7 +33,7 @@
 				<textElement textAlignment="Center" lineSpacing="Single">
 					<font fontName="DejaVu Sans" size="18" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["jPrime 2016\nInvoice\n"+$F{invoiceType}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["jPrime 2017\nInvoice\n"+$F{invoiceType}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
