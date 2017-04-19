@@ -122,7 +122,7 @@
                             <a class="twitter" href="https://twitter.com/gochev"><i
                                     class="fa fa-twitter"></i></a>
                         </div>
-                        Nayden Gochev is Solution Architect at Nemesis Software with with more than 12 years of experience. Developer, Trainer and consultant in many international companies and Bulgarian companies. He took part in many conferences, seminars, techincal trainings in multiple academic and non academic structures and companies. One of the organizer of jPrime and jProfessionals conferences and the monthly Bulgarian Java User Group seminars. Huge Java fan with love for all *.java and big community supporter. His personal blog can be found at <a href="http://gochev.org">gochev.org</a>
+                        Nayden Gochev is Solution Architect at Nemesis Software with with more than 12 years of experience. Developer, Trainer and consultant in many international companies and Bulgarian companies. He took part in many conferences, seminars, technical trainings in multiple academic and non academic structures and companies. One of the organizers of jPrime and jProfessionals conferences and the monthly Bulgarian Java User Group seminars. Huge Java fan with love for all *.java and big community supporter. His personal blog can be found at <a href="http://gochev.org">gochev.org</a>
                     </div>
                 </div>
             </div>
