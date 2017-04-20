@@ -11,7 +11,7 @@
                         <div class="col-md-7">
                             <!-- Start Contact Info -->
                             <ul class="contact-details">
-                                <li><a href="https://goo.gl/maps/fTo45" target="_blank"><i class="fa fa-map-marker"></i> Cherni Vrah 100, Sofia, Bulgaria</a>
+                                <li><a href="https://goo.gl/maps/67NtDSTADcG2" target="_blank"><i class="fa fa-map-marker"></i> Tsarigradsko Shosse 115B, Sofia, Bulgaria</a>
                                 </li>
                                 <li><a href="mailto:conference@jprime.io"><i class="fa fa-envelope-o"></i> conference@jprime.io</a>
                                 </li>
