@@ -287,7 +287,7 @@
                         <a href="${speakerUrl}"><div class="team-member modern">
                             <!-- Memebr Photo, Name & Position -->
                             <div class="member-photo">
-                                <img alt="" src="/image/speaker/${speaker.id}"/>
+                                <img alt="" src="/image/speaker/${speaker.id}" height="365" width="280"/>
 
                                 <div class="member-name"><c:out value="${speaker.firstName}"/>&nbsp;<c:out
                                         value="${speaker.lastName}"/><span><c:out
