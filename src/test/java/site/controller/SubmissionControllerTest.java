@@ -62,10 +62,10 @@ public class SubmissionControllerTest {
 
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 
-        Speaker brianGoetz = new Speaker("Brian", "Goetz", "brian@oracle.com", "The Java Language Architect", "@briangoetz", true);
-        Speaker ivanIvanov = new Speaker("Ivan St.", "Ivanov", "ivan@jprime.io", "JBoss Forge", "@ivan_stefanov", false);
-        Speaker naydenGochev = new Speaker("Nayden", "Gochev", "nayden@jprio.io", "The Spring Guy", "@gochev", false);
-        Speaker ivanIvanov2 = new Speaker("Ivan St.", "Ivanov", "ivan@forge.com", "JBoss Forge", "@ivan_stefanov", false);
+        Speaker brianGoetz = new Speaker("Brian", "Goetz", "brian@oracle.com", "The Java Language Architect", "@briangoetz", true, true);
+        Speaker ivanIvanov = new Speaker("Ivan St.", "Ivanov", "ivan@jprime.io", "JBoss Forge", "@ivan_stefanov", false, true);
+        Speaker naydenGochev = new Speaker("Nayden", "Gochev", "nayden@jprio.io", "The Spring Guy", "@gochev", false, true);
+        Speaker ivanIvanov2 = new Speaker("Ivan St.", "Ivanov", "ivan@forge.com", "JBoss Forge", "@ivan_stefanov", false, true);
 
         valhalla = submissionRepository.save(new Submission("Project Valhalla", "Primitives in Generics",
                 SessionLevel.ADVANCED, brianGoetz));

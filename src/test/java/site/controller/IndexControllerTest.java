@@ -104,10 +104,10 @@ public class IndexControllerTest {
 
         tag1 = tagRepository.save(new Tag("tag1")); tag2 = tagRepository.save(new Tag("tag2"));
 
-        brianGoetz = new Speaker("Brian", "Goetz", "brian@oracle.com", "The Java Language Architect", "@briangoetz", true);
+        brianGoetz = new Speaker("Brian", "Goetz", "brian@oracle.com", "The Java Language Architect", "@briangoetz", true, true);
         brianGoetz = speakerRepository.save(brianGoetz);
 
-        Speaker ivanIvanov = new Speaker("Ivan St.", "Ivanov", "ivan@jprime.io", "JBoss Forge", "@ivan_stefanov", false);
+        Speaker ivanIvanov = new Speaker("Ivan St.", "Ivanov", "ivan@jprime.io", "JBoss Forge", "@ivan_stefanov", false, false);
         speakerRepository.save(ivanIvanov);
         
         softUni = new Partner();
@@ -124,7 +124,7 @@ public class IndexControllerTest {
                 .andExpect(model().attribute("goldSponsors", containsInAnyOrder(google, apple)))
                 .andExpect(model().attribute("silverSponsors", hasSize(0)))
                 .andExpect(model().attribute("tags", containsInAnyOrder(tag1, tag2)))
-                .andExpect(model().attribute("featuredSpeakers", contains(brianGoetz)))
+                .andExpect(model().attribute("acceptedSpeakers", contains(brianGoetz)))
                 .andExpect(model().attribute("partnerChunks", IsInstanceOf.instanceOf(List.class)));
     }
 }

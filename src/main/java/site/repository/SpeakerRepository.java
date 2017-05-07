@@ -25,6 +25,9 @@ public interface SpeakerRepository extends PagingAndSortingRepository<Speaker, L
 
     @Query("SELECT s FROM Speaker s WHERE s.featured = true and s.branch = :branch")
     public List<Speaker> findFeaturedSpeakers(@Param("branch")Branch branch);
-    
+
+    @Query("SELECT s FROM Speaker s WHERE (s.accepted = true or s.featured = true) and s.branch = :branch")
+    public List<Speaker> findAcceptedSpeakers(@Param("branch")Branch branch);
+
     public Speaker findByEmail(String email);
 }

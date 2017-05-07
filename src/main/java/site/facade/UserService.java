@@ -118,7 +118,11 @@ public class UserService {
     public List<Speaker> findFeaturedSpeakers() {
         return speakerRepository.findFeaturedSpeakers(Globals.CURRENT_BRANCH);
     }
-    
+
+    public List<Speaker> findAcceptedSpeakers() {
+        return speakerRepository.findAcceptedSpeakers(Globals.CURRENT_BRANCH);
+    }
+
     public Speaker findSpeaker(String email) {
         return speakerRepository.findByEmail(email);
     }

@@ -37,8 +37,8 @@ public class IndexController {
 		model.addAttribute("silverSponsors", silverSponsors);
 		
         model.addAttribute("tags", userFacade.findAllTags());
-        model.addAttribute("featuredSpeakers", userFacade.findFeaturedSpeakers());
-        
+        model.addAttribute("acceptedSpeakers", userFacade.findAcceptedSpeakers());
+
         // split partners in groups for better display in rows
         List<Partner> partners = userFacade.findAllActivePartners();
         Collections.shuffle(partners);

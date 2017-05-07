@@ -90,7 +90,15 @@
                     <form:checkbox path="featured"/>
                 </dd>
             </dl>
-            <dl>
+			<dl>
+				<dt>
+					<label for="accepted">accepted</label>
+				</dt>
+				<dd>
+					<form:checkbox path="accepted"/>
+				</dd>
+			</dl>
+			<dl>
                 <dt>
                     <label for="branch">branch</label>
                 </dt>

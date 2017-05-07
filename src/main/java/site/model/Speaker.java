@@ -33,7 +33,9 @@ public class Speaker extends User {
     private String twitter;
 
     private Boolean featured = false;
-    
+
+    private Boolean accepted = false;
+
     @Lob
     private byte[] picture;
 
@@ -46,13 +48,14 @@ public class Speaker extends User {
     public Speaker() {
     }
 
-    public Speaker(String firstName, String lastName, String email, String headline, String twitter, boolean featured) {
+    public Speaker(String firstName, String lastName, String email, String headline, String twitter, boolean featured, boolean accepted) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
         this.headline = headline;
         this.twitter = twitter;
         this.featured = featured;
+        this.accepted = accepted;
     }
 
     public byte[] getPicture() {
@@ -111,7 +114,15 @@ public class Speaker extends User {
 		this.branch = branch;
 	}
 
-	@Override
+    public Boolean getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
