@@ -92,11 +92,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/login", "/about", "/nav/**", "/cfp", "/signup", "/resetPassword","/createNewPassword", "/successfulPasswordChange", "/image/**", "/tickets/**", "/team","/venue", "/404", "/captcha-image").permitAll() // #4
                 .antMatchers(HttpMethod.GET, "/halls", "/halls/**", "/sessions", "/sessions/**", "/submissions", "/submissions/**").permitAll()
                 .antMatchers("/admin/**").hasAuthority("ADMIN") // #6
+                .antMatchers("/raffle/**").hasAuthority("ADMIN") // #7
                 .antMatchers("/user/**").hasAuthority("USER") //will contain schedule and etc
-                .anyRequest().authenticated() // 7
+                .anyRequest().authenticated() // 8
                 .and()
-                .formLogin()  // #8
-                .loginPage("/login") // #9
+                .formLogin()  // #9
+                .loginPage("/login") // #10
                 .permitAll(); // #5
     }
 

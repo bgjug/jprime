@@ -10,4 +10,5 @@
     <li><a href="/admin/submission/view" style="color: blueviolet!important;">Submissions</a></li>
 	<li><a href="/admin/hall/view" style="color: blueviolet!important;">Halls</a></li>
 	<li><a href="/admin/session/view" style="color: blueviolet!important;">Sessions</a></li>
+	<li><a href="/raffle/view" style="color: blueviolet!important;">Raffle</a></li>
 </ul>
