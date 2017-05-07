@@ -55,9 +55,9 @@
                                 <a class="twitter" href="http://twitter.com/ivan_stefanov"><i
                                         class="fa fa-twitter"></i></a>
                             </div>
-                            Ivan St. Ivanov is development architect at SAP Labs Bulgaria, working in the HANA Cloud Platform performance team. He is active JUG member, driving the adoption of OpenJDK in Bulgaria. In his free time he likes contributing to open source software, mostly to JBoss Forge.
+                            Ivan St. Ivanov is co-founder and senior programmer at VIDA Software, doing various consulting gigs and teaching a couple of Java and Microservices related courses. He is active JUG member, driving the Adopt-a-JSR programme in Bulgaria. In his free time he likes contributing to open source software. As such he is proud contributor to the MicroProfile.
 
-                            Ivan is doing his PhD in the area of cloud multi-tenancy in the University of National and World Economy in Sofia. He is teaching Java, Java EE and SOA in three Universities in Sofia.<br /><a href="http://nosoftskills.com/">nosoftskills.com</a>
+                            Ivan is doing his PhD in the area of cloud multi-tenancy in the University of National and World Economy. He is also teaching Java and Java EE in the Sofia University.<br /><a href="http://nosoftskills.com/">nosoftskills.com</a>
                         </div>
                     </div>
                 <div class="col-md-3 col-sm-6 col-xs-12" style="width: 230px">
@@ -73,7 +73,7 @@
                             <a class="twitter" href="http://twitter.com/bercut2000"><i
                                     class="fa fa-twitter"></i></a>
                         </div>
-                        Dmitry is a passionate Java developer. Through his 8+ years career he has gained a huge experience with different web technologies. His areas of interest include the wide range of Java-related technologies, enterprise solutions, cloud computing technologies, Eclipse plug-ins, as well as non-Java like NodeJs and NoSql.
+                        Dmitry is a passionate Java developer. Through his 10+ years career he has gained a huge experience with different web technologies. His areas of interest include the wide range of Java-related technologies, enterprise solutions, cloud computing technologies, Eclipse plug-ins, as well as non-Java like NodeJs and NoSql.
                         He’s big enthusiast of distributed multinational, multi location software development. At his free time he’s trying to contribute to OpenJDK and supports his own opensource project. His latest passion is Oracles Javascript runtime on JVM – Nashorn.<br /><a href="http://dmitryalexandrov.net">dmitryalexandrov.net</a>
                     </div>
                 </div>
