@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import site.facade.UserService;
 import site.model.Article;
 
-import java.util.List;
-
 @Controller
 public class NavController {
 	
@@ -28,15 +26,16 @@ public class NavController {
 	private UserService userFacade;
 	
 	@RequestMapping("/nav/{tag}")
-	public String getByTag(@PathVariable("tag") final String tagName, Model model) {
+	public String getByTag(@PathVariable("tag") final String tagName,
+			Pageable pageable, Model model) {
 		model.addAttribute("tags", userFacade.findAllTags());
 
-		List<Article> articles= userFacade.findArticlesByTag(tagName);
-		if(articles.size() > 1) {
+		Page<Article> articles= userFacade.findArticlesByTag(tagName, pageable);
+		if(articles.getTotalElements() > 1) {
 			model.addAttribute("articles", articles);
 			return "/blog.jsp";
 		} else { //just 1 for example Agenda will be such an article 1 article in a tag.. no need for paging and so on
-			model.addAttribute("article", articles.get(0));
+			model.addAttribute("article", articles.getContent().iterator().next());
 			return "/single-post.jsp";
 		}
 	}
