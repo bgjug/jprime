@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +27,7 @@ public class NavController {
 	private UserService userFacade;
 	
 	@RequestMapping("/nav/{tag}")
-	public String getByTag(@PathVariable("tag") final String tagName,
+	public String getByTag(@PathVariable("tag") final String tagName, @PageableDefault(size = 24)
 			Pageable pageable, Model model) {
 		model.addAttribute("tags", userFacade.findAllTags());
 
