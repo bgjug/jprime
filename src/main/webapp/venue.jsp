@@ -38,15 +38,13 @@
     <div id="content">
         <div class="container">
 
-            <p class="text-center"><br/> jPrime is held on <strong>26-27th May 2016</strong> in Sofia Event Center. </p>
+            <p class="text-center"><br/> jPrime is held on <strong>30-31th May 2017</strong> in Sofia Tech Park. </p>
 
             <center>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m0!3m2!1sru!2sbg!4v1429266821187!6m8!1m7!1sipo8Sl0qHi8AAAQfDR2bcQ!2m2!1d42.657808!2d23.315222!3f307.9207157147706!4f-10.178049410940872!5f0.7820865974627469"
-                        width="100%" height="450" frameborder="0" style="border:0"></iframe>
+                <img alt="techpark" src="/images/sftp.png" width="100%"/><br/><br/>
             </center>
             <center>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11736.674105662074!2d23.314898!3d42.657784!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x968e1b14857aa12d!2z0J_QkNCg0JDQlNCQ0JnQoSDQptCV0J3QotCq0KA!5e0!3m2!1sbg!2sbg!4v1429266435259&style=saturation:-75|gamma:1.07|hue:0xffe500"
-                        width="100%" height="500" frameborder="0" style="border:0"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11734.949903249553!2d23.3733712!3d42.6669183!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcbc66ddbb54d08b3!2z0KHQvtGE0LjRjyDRgtC10YUg0L_QsNGA0Lo!5e0!3m2!1sru!2sbg!4v1494940078038" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
             </center>
 
         </div>
@@ -93,7 +91,7 @@
 
                             <div class="member-name"><b>Accomodation</b><br/><br/>
 
-                                For the conference guests we recommend <a href="http://www.lozenetzhotel.com/en/">Lozenetz hotel</a> which is centrally located. <br/>
+                                For the conference guests we recommend <a href="http://www.hotel-europe-bg.com/en/">Best Western Hotel Europe</a> which is centrally located. <br/>
                                 <br/>
                                 <br/>
                                 For more information please contact <a href="mailto:ivan@jprime.io">Ivan</a>.
