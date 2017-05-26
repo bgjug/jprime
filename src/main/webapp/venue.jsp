@@ -75,9 +75,9 @@
                             <img alt="" src="/images/apt.png"/><br/><br/>
 
                             <div class="member-name"><b>Transport</b><br/><br/>
-                                <b>Conference hall address</b>: Cherni Vrah 100, Sofia, Bulgaria<br/>
-                                Sofia Event center is located 15 km away from the Sofia International Airport.<br/>
-                                It usually takes up to 25 min to reach the venue with a car.<br/>
+                                <b>Conference hall address</b>: Tsarigradsko Shosse 115B, Sofia, Bulgaria<br/>
+                                Sofia Tech Park is located 6 km away from the Sofia International Airport.<br/>
+                                It usually takes up to 10 min to reach the venue with a car.<br/>
                                 <br/>
                                 Average taxi price <b>0,40/0,45</b> Eurocent per km.
                             </div>
