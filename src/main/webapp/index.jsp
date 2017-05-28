@@ -79,7 +79,7 @@
                                 <span>30 and 31 May 2017 in Sofia</span> <!--  will be changed with tickets available -->
                             </h3>
 
-                            <p class="animated4"><a href="tickets/epay" class="slider btn btn-primary">Buy ticket</a>
+                            <p class="animated4"><a href="#" class="slider btn btn-primary">We are sold out, sorry..</a>
                             </p>
                         </div>
                     </div>
