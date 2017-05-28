@@ -173,6 +173,7 @@
         Buy a ticket:
         <form:form commandName="registrant" method="post"
                    action="/tickets/epay" id="visitorsForm">
+            <%--
             <p>
                 <form:errors/>
             </p>
@@ -236,8 +237,9 @@
         	</p>
             <p>
             	<button type="submit">Proceed</button>
-            </p>
+            </p>--%>
 
+            <b>Sorry, we are sold out!</b>
         </form:form>
 
 
