@@ -259,7 +259,7 @@
             hacking, networking and fun.</p>
 
         <div class="container">
-        	<iframe width="560" height="315" src="https://www.youtube.com/embed/BSyuYujElno" frameborder="0" allowfullscreen></iframe>
+            <iframe width="854" height="480" src="https://www.youtube.com/embed/IhuTM9RFUhQ" frameborder="0" allowfullscreen></iframe>
         </div>
 
     </div>
@@ -439,8 +439,8 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <a href="tickets/epay"
-                               class="btn-system btn-small">Get It Now</a>
+                            <a href="#"
+                               class="btn-system btn-small">Sold out</a>
 
                         </div>
                     </div>
@@ -467,8 +467,8 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <a href="tickets/epay"
-                               class="btn-system btn-small">Get It Now</a>
+                            <a href="#"
+                               class="btn-system btn-small">Sold out</a>
 
                         </div>
                     </div>
