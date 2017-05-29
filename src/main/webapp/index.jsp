@@ -49,7 +49,7 @@
             <!-- Carousel inner -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img class="img-responsive" src="images/slider/index1.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/artwork.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
@@ -67,7 +67,7 @@
                 </div>
                 <!--/ Carousel item end -->
                 <div class="item">
-                    <img class="img-responsive" src="images/slider/index2.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/index1.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
@@ -86,7 +86,7 @@
                 </div>
                 <!--/ Carousel item end -->
                 <div class="item">
-                    <img class="img-responsive" src="images/slider/index3.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/index2.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
@@ -259,6 +259,13 @@
             hacking, networking and fun.</p>
 
         <div class="container">
+
+            <!-- Start Big Heading -->
+            <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
+                <h1>Watch us <strong>live</strong></h1>
+            </div>
+            <!-- End Big Heading -->
+
             <iframe width="854" height="480" src="https://www.youtube.com/embed/IhuTM9RFUhQ" frameborder="0" allowfullscreen></iframe>
         </div>
 
