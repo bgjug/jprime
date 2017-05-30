@@ -86,7 +86,7 @@
                 </div>
                 <!--/ Carousel item end -->
                 <div class="item">
-                    <img class="img-responsive" src="images/slider/index2.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/index3.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
@@ -265,8 +265,11 @@
                 <h1>Watch us <strong>live</strong></h1>
             </div>
             <!-- End Big Heading -->
-
-            <iframe width="854" height="480" src="https://www.youtube.com/embed/IhuTM9RFUhQ" frameborder="0" allowfullscreen></iframe>
+            <center><b>Hall 1</b></center><br/>
+            <iframe width="854" height="480" src="https://www.youtube.com/embed/EMdGkC3QmHY" frameborder="0" allowfullscreen></iframe>
+        <br/>
+            <center><b>Hall 2</b></center><br/>
+            <iframe width="854" height="480" src="https://www.youtube.com/embed/GPv_J7wnRPw" frameborder="0" allowfullscreen></iframe>
         </div>
 
     </div>
