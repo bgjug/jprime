@@ -269,7 +269,7 @@
             <iframe width="854" height="480" src="https://www.youtube.com/embed/EMdGkC3QmHY" frameborder="0" allowfullscreen></iframe>
         <br/>
             <center><b>Hall 2</b></center><br/>
-            <iframe width="854" height="480" src="https://www.youtube.com/embed/GPv_J7wnRPw" frameborder="0" allowfullscreen></iframe>
+            <iframe width="854" height="480" src="https://www.youtube.com/embed/vN7z-_XY60I" frameborder="0" allowfullscreen></iframe>
         </div>
 
     </div>
