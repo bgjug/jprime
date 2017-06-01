@@ -262,14 +262,8 @@
 
             <!-- Start Big Heading -->
             <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                <h1>Watch us <strong>live</strong></h1>
+                <h1>We are done for this year! <strong>See you in 2018!</strong></h1>
             </div>
-            <!-- End Big Heading -->
-            <center><b>Hall 1</b></center><br/>
-            <iframe width="854" height="480" src="https://www.youtube.com/embed/EMdGkC3QmHY" frameborder="0" allowfullscreen></iframe>
-        <br/>
-            <center><b>Hall 2</b></center><br/>
-            <iframe width="854" height="480" src="https://www.youtube.com/embed/vN7z-_XY60I" frameborder="0" allowfullscreen></iframe>
         </div>
 
     </div>
