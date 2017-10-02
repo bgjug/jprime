@@ -38,7 +38,7 @@
     <div id="content">
         <div class="container">
 
-            <p class="text-center"><br/> jPrime is held on <strong>30-31th May 2017</strong> in Sofia Tech Park. </p>
+            <p class="text-center"><br/> jPrime is held on <strong>29-30th May 2018</strong> in Sofia Tech Park. </p>
 
             <center>
                 <img alt="techpark" src="/images/sftp.png" width="100%"/><br/><br/>

@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2016">
+    <meta name="description" content="jPrime 2018">
     <meta name="author" content="jPrime">
     <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
     
@@ -58,8 +58,8 @@
  							-->
                              <h2>Registration is now closed</h2>
                              <p>
-                             	<p>The registration is now closed, see you in 2017 :)</p>
-                             	<p>Note that live streaming of the event will be available from 26 May to 27 May.</p>
+                             	<p>The registration is currently closed, see you in 2018 :)</p>
+                             	<p>Note that live streaming of the event will be available from 29 May to 30 May.</p>
                              	<p>All recordings will be available at a later time.</p>
                              </p>
                         </div>

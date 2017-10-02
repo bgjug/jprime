@@ -58,7 +58,7 @@
                             </h2>
 
                             <h3 class="animated3 white" style="text-shadow: 2px 2px black;">
-                                <span>30 and 31 May 2017</span>
+                                <span>29 and 30 May 2018</span>
                             </h3>
 
                             <p class="animated4"><a href="#about" class="slider btn btn-primary">read more</a>
@@ -76,11 +76,9 @@
                             </h2>
 
                             <h3 class="animated5 white" style="text-shadow: 2px 2px black;">
-                                <span>30 and 31 May 2017 in Sofia</span> <!--  will be changed with tickets available -->
+                                <span>29 and 30 May 2018 in Sofia</span> <!--  will be changed with tickets available -->
                             </h3>
 
-                            <p class="animated4"><a href="#" class="slider btn btn-primary">We are sold out, sorry..</a>
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -252,7 +250,7 @@
         <!-- End Big Heading -->
 
         <p class="text-center">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices.
-            <br/> Its third edition will be held on <strong>30th and 31th May 2017</strong> in Sofia Tech Park.
+            <br/> Its forth edition will be held on <strong>29th and 30th May 2018</strong> in Sofia Tech Park.
             It's run by the Bulgarian Java User Group and backed by the biggest companies in the city.
             <br/><br/>jPrime features a combination of great international speakers along with the best presenters from
             Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning,
