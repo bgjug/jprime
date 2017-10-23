@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
+import site.config.Globals;
 import site.model.Branch;
 import site.model.SessionLevel;
 import site.model.Speaker;
@@ -69,10 +70,10 @@ public class SubmissionControllerTest {
 
         valhalla = submissionRepository.save(new Submission("Project Valhalla", "Primitives in Generics",
                 SessionLevel.ADVANCED, brianGoetz));
-        valhalla.setBranch(Branch.YEAR_2017);
+        valhalla.setBranch(Globals.CURRENT_BRANCH);
         forge = submissionRepository.save(new Submission("JBoss Forge", "Productivity for Java EE",
                 SessionLevel.INTERMEDIATE, ivanIvanov));
-        forge.setBranch(Branch.YEAR_2017);
+        forge.setBranch(Globals.CURRENT_BRANCH);
         bootAddon = submissionRepository.save(new Submission("Spring Boot Forge Addon", "We are not hipsters",
                 SessionLevel.BEGINNER, naydenGochev, ivanIvanov2));
         bootAddon.setBranch(Branch.YEAR_2016);
