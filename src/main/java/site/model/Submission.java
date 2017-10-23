@@ -38,6 +38,9 @@ public class Submission extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private SessionLevel level;
 
+    @Enumerated(EnumType.STRING)
+    private SessionType type = SessionType.ConferenceSession;
+
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "speaker", nullable = false, referencedColumnName = "id")
     private Speaker speaker = new Speaker();
@@ -48,25 +51,27 @@ public class Submission extends AbstractEntity {
 
     @Enumerated(EnumType.STRING)
     private Branch branch = Globals.CURRENT_BRANCH;
-    
+
     @Transient
     private String captcha;
 
     public Submission() {
     }
 
-    public Submission(String title, String description, SessionLevel level, Speaker speaker) {
+    public Submission(String title, String description, SessionLevel level, SessionType type, Speaker speaker) {
         this.title = title;
         this.description = description;
         this.level = level;
         this.speaker = speaker;
+        this.type = type;
     }
 
-    public Submission(String title, String description, SessionLevel level, Speaker speaker,
+    public Submission(String title, String description, SessionLevel level, SessionType type, Speaker speaker,
             Speaker coSpeaker) {
         this.title = title;
         this.description = description;
         this.level = level;
+        this.type = type;
         this.speaker = speaker;
         this.coSpeaker = coSpeaker;
     }
@@ -125,6 +130,14 @@ public class Submission extends AbstractEntity {
 
     public void setCoSpeaker(Speaker coSpeaker) {
         this.coSpeaker = coSpeaker;
+    }
+
+    public SessionType getType() {
+        return type;
+    }
+
+    public void setType(SessionType type) {
+        this.type = type;
     }
 
     @Override
