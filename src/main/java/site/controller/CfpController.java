@@ -5,7 +5,7 @@ import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,9 +36,7 @@ public class CfpController extends AbstractCfpController {
 
     @RequestMapping(value = "/cfp", method = RequestMethod.GET)
     public String submissionForm(Model model) {
-    	model.addAttribute("tags", userFacade.findAllTags());
-        buildCfpFormModel(model, new Submission());
-        return Globals.PAGE_CFP;
+        return goToCFP(new Submission(), model);
     }
 
     @RequestMapping(value = "/cfp", method = RequestMethod.POST)
@@ -53,11 +51,16 @@ public class CfpController extends AbstractCfpController {
 			invalidCaptcha = true;
 			bindingResult.rejectValue("captcha", "invalid");
 		}
-		if (bindingResult.hasErrors() || StringUtils.isEmpty(submission.getSpeaker().getEmail())
-				|| !new EmailValidator().isValid(submission.getSpeaker().getEmail(), null) || invalidCaptcha) {
-			model.addAttribute("tags", userFacade.findAllTags());
-			buildCfpFormModel(model, submission);
-			return Globals.PAGE_CFP;
+		if (bindingResult.hasErrors() || invalidCaptcha) {
+            return goToCFP(submission, model);
+		}
+
+		if(StringUtils.isEmpty(submission.getSpeaker().getEmail())
+            || !new EmailValidator().isValid(submission.getSpeaker().getEmail(), null)) {
+
+		    bindingResult.addError(new FieldError("submission", "speaker.email", "Invalid Email!"));
+
+            return goToCFP(submission, model);
 		}
         saveSubmission(submission, speakerImage, coSpeakerImage);
         try {
@@ -75,6 +78,12 @@ public class CfpController extends AbstractCfpController {
         }
 
         return "redirect:/";
+    }
+
+    private String goToCFP(@Valid Submission submission, Model model) {
+        model.addAttribute("tags", userFacade.findAllTags());
+        buildCfpFormModel(model, submission);
+        return Globals.PAGE_CFP;
     }
 
     private String loadMailContentTemplate(String templateFileName)
