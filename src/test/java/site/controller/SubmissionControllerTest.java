@@ -13,11 +13,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
-import site.model.Branch;
-import site.model.SessionLevel;
-import site.model.Speaker;
-import site.model.Submission;
-import site.model.SubmissionStatus;
+import site.config.Globals;
+import site.model.*;
 import site.repository.SubmissionRepository;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -68,13 +65,13 @@ public class SubmissionControllerTest {
         Speaker ivanIvanov2 = new Speaker("Ivan St.", "Ivanov", "ivan@forge.com", "JBoss Forge", "@ivan_stefanov", false, true);
 
         valhalla = submissionRepository.save(new Submission("Project Valhalla", "Primitives in Generics",
-                SessionLevel.ADVANCED, brianGoetz));
-        valhalla.setBranch(Branch.YEAR_2017);
+                SessionLevel.ADVANCED, SessionType.ConferenceSession, brianGoetz));
+        valhalla.setBranch(Globals.CURRENT_BRANCH);
         forge = submissionRepository.save(new Submission("JBoss Forge", "Productivity for Java EE",
-                SessionLevel.INTERMEDIATE, ivanIvanov));
-        forge.setBranch(Branch.YEAR_2017);
+                SessionLevel.INTERMEDIATE, SessionType.ConferenceSession, ivanIvanov));
+        forge.setBranch(Globals.CURRENT_BRANCH);
         bootAddon = submissionRepository.save(new Submission("Spring Boot Forge Addon", "We are not hipsters",
-                SessionLevel.BEGINNER, naydenGochev, ivanIvanov2));
+                SessionLevel.BEGINNER, SessionType.ConferenceSession, naydenGochev, ivanIvanov2));
         bootAddon.setBranch(Branch.YEAR_2016);
     }
 
