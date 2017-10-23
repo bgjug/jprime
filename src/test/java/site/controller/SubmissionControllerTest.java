@@ -13,11 +13,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
-import site.model.Branch;
-import site.model.SessionLevel;
-import site.model.Speaker;
-import site.model.Submission;
-import site.model.SubmissionStatus;
+import site.model.*;
 import site.repository.SubmissionRepository;
 
 import static org.hamcrest.MatcherAssert.assertThat;
