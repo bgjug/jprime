@@ -13,7 +13,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
-import site.model.*;
+import site.config.Globals;
+import site.model.Branch;
+import site.model.SessionLevel;
+import site.model.Speaker;
+import site.model.Submission;
+import site.model.SubmissionStatus;
+import site.model.SessionType;
 import site.repository.SubmissionRepository;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -65,10 +71,10 @@ public class SubmissionControllerTest {
 
         valhalla = submissionRepository.save(new Submission("Project Valhalla", "Primitives in Generics",
                 SessionLevel.ADVANCED, SessionType.ConferenceSession, brianGoetz));
-        valhalla.setBranch(Branch.YEAR_2017);
+        valhalla.setBranch(Globals.CURRENT_BRANCH);
         forge = submissionRepository.save(new Submission("JBoss Forge", "Productivity for Java EE",
                 SessionLevel.INTERMEDIATE, SessionType.ConferenceSession, ivanIvanov));
-        forge.setBranch(Branch.YEAR_2017);
+        forge.setBranch(Globals.CURRENT_BRANCH);
         bootAddon = submissionRepository.save(new Submission("Spring Boot Forge Addon", "We are not hipsters",
                 SessionLevel.BEGINNER, SessionType.ConferenceSession, naydenGochev, ivanIvanov2));
         bootAddon.setBranch(Branch.YEAR_2016);
