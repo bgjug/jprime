@@ -25,6 +25,7 @@
     </dt>
     <dd>
         <form:input path="${role}.email" />
+        <form:errors style="color:#ff0000" path="${role}.email"/>
     </dd>
 </dl>
 <dl>
