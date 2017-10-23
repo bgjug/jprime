@@ -40,7 +40,7 @@
 					<td>${submission.title}</td>
 					<td>${submission.description}</td>
                     <td>${submission.level}</td>
-					<td>${submission.type}</td>
+					<td>${submission.type != null ? submission.type.toString() : "Conference session"}</td>
 					<td>${submission.speaker.firstName} ${submission.speaker.lastName}</td>
 					<td>${submission.coSpeaker.firstName} ${submission.coSpeaker.lastName}</td>
 					<td>${submission.branch}</td>
