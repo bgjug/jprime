@@ -66,9 +66,9 @@ public class SessionControllerTest {
     @Before
     public void setup() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        this.forgeSubmission = submissionRepository.save(new Submission("Forge with me", "Forge is the best", SessionLevel.BEGINNER, new Speaker("Ivan St.", "Ivanov", "ivan.st.ivanov@example.com", "The Forge Guy", "@forge", false, true)));
+        this.forgeSubmission = submissionRepository.save(new Submission("Forge with me", "Forge is the best", SessionLevel.BEGINNER, SessionType.ConferenceSession, new Speaker("Ivan St.", "Ivanov", "ivan.st.ivanov@example.com", "The Forge Guy", "@forge", false, true)));
         forgeSubmission.setStatus(SubmissionStatus.ACCEPTED);
-        Submission bootSubmission = submissionRepository.save(new Submission("Spring Boot", "Bootiful or what?", SessionLevel.BEGINNER, new Speaker("Nayden", "Gochev", "nayden.gochev@example.com", "The Spring Guy", "@sprink", true, true)));
+        Submission bootSubmission = submissionRepository.save(new Submission("Spring Boot", "Bootiful or what?", SessionLevel.BEGINNER, SessionType.ConferenceSession, new Speaker("Nayden", "Gochev", "nayden.gochev@example.com", "The Spring Guy", "@sprink", true, true)));
         bootSubmission.setStatus(SubmissionStatus.ACCEPTED);
         this.betaHall = venueHallRepository.save(new VenueHall("Beta", "600 seats"));
         venueHallRepository.save(new VenueHall("Alpha", "400 seats"));
