@@ -47,6 +47,15 @@
             </dd>
         </dl>
         <dl>
+            <dt>
+                <label for="type">Session type</label>
+            </dt>
+            <dd>
+                <form:select path="type" items="${sessionTypes}"/>
+                <form:errors path="type"/>
+            </dd>
+        </dl>
+        <dl>
             <dt>Speaker</dt>
         </dl>
         <user:speaker role="speaker"/>
