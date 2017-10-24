@@ -28,12 +28,22 @@ pageEncoding="UTF-8"%>
     <user:pageJavaScriptAndCss/>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#coSpeaker").hide();
-            $("#toggleCoSpeaker").click(function () {
-                $("#coSpeaker").toggle();
+            var coSpeakerButton = $("#toggleCoSpeaker");
+            var buttonCaption = coSpeakerButton.text();
+            buttonCaption == "Add co speaker" ? $("#coSpeaker").hide() : $("#coSpeaker").show();
+
+            coSpeakerButton.click(function () {
+                var coSpeakerDiv = $("#coSpeaker");
+                coSpeakerDiv.toggle();
                 var coSpeakerButton = $("#toggleCoSpeaker");
                 var buttonCaption = coSpeakerButton.text();
-                coSpeakerButton.text(buttonCaption == "Add co speaker" ? "Remove co speaker" : "Add co speaker");
+
+                if (buttonCaption == "Remove co speaker") {
+                    coSpeakerButton.text("Add co speaker");
+                    $("input[id^='coSpeaker']").val("");
+                } else {
+                    coSpeakerButton.text("Remove co speaker");
+                }
             });
         });
     </script>
