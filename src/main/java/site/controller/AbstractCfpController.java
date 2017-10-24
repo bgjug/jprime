@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.config.Globals;
@@ -28,26 +29,27 @@ public class AbstractCfpController {
     @Qualifier(UserService.NAME)
     protected UserService userFacade;
 
-
     @Autowired
     @Qualifier(MailService.NAME)
     protected MailService mailFacade;
 
     @Autowired
-	@Qualifier(ThumbnailService.NAME)
-	private ThumbnailService thumbnailService;
+    @Qualifier(ThumbnailService.NAME)
+    private ThumbnailService thumbnailService;
 
     protected Model buildCfpFormModel(Model model, Submission submission) {
         model.addAttribute("submission", submission);
         model.addAttribute("levels", SessionLevel.values());
         model.addAttribute("sessionTypes", Arrays.stream(SessionType.values()).collect(Collectors.toMap(Function.identity(), SessionType::toString)));
         model.addAttribute("branches", Branch.values());
+        model.addAttribute("coSpeaker_caption", submission.getCoSpeaker() == null || StringUtils.isEmpty(
+            submission.getCoSpeaker().getFirstName()) ? "Add co speaker" : "Remove co speaker");
 
         return model;
     }
 
     protected void saveSubmission(Submission submission, MultipartFile speakerImage,
-            MultipartFile coSpeakerImage) {
+        MultipartFile coSpeakerImage) {
         submission.setSpeaker(handleSubmittedSpeaker(submission.getSpeaker(), speakerImage));
         if (hasCoSpeaker(submission)) {
             submission.setCoSpeaker(handleSubmittedSpeaker(submission.getCoSpeaker(), coSpeakerImage));
@@ -58,9 +60,8 @@ public class AbstractCfpController {
     }
 
     private boolean hasCoSpeaker(Submission submission) {
-        return submission.getCoSpeaker() != null &&
-                submission.getCoSpeaker().getLastName() != null &&
-                !submission.getCoSpeaker().getLastName().equals("");
+        return submission.getCoSpeaker() != null && !StringUtils.isEmpty(
+            submission.getCoSpeaker().getLastName());
     }
 
     private Speaker handleSubmittedSpeaker(Speaker speaker, MultipartFile image) {
@@ -94,7 +95,6 @@ public class AbstractCfpController {
         }
         return speaker;
     }
-
 
     void setMailFacade(MailService mailFacade) {
         this.mailFacade = mailFacade;

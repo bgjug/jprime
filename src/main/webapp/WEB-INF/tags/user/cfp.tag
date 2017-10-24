@@ -59,7 +59,7 @@
             <dt>Speaker</dt>
         </dl>
         <user:speaker role="speaker"/>
-        <button id="toggleCoSpeaker" type="button">Add co speaker</button>
+        <button id="toggleCoSpeaker" type="button">${coSpeaker_caption}</button>
         <dl></dl>
         <div id="coSpeaker">
             <dl>
