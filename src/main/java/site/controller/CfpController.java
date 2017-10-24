@@ -55,13 +55,23 @@ public class CfpController extends AbstractCfpController {
             return goToCFP(submission, model);
 		}
 
-		if(StringUtils.isEmpty(submission.getSpeaker().getEmail())
-            || !new EmailValidator().isValid(submission.getSpeaker().getEmail(), null)) {
+        if (submission.getCoSpeaker() != null && StringUtils.isEmpty(submission.getCoSpeaker().getLastName())) {
+		    // Clear coSpeaker object in case there is no last name specified
+            submission.setCoSpeaker(null);
+        }
 
-		    bindingResult.addError(new FieldError("submission", "speaker.email", "Invalid Email!"));
+        String result = validateEmail(bindingResult, submission, model, submission.getSpeaker().getEmail(), "speaker");
+		if (result != null) {
+		    return result;
+        }
 
-            return goToCFP(submission, model);
-		}
+        if(submission.getCoSpeaker() != null) {
+            result = validateEmail(bindingResult, submission, model, submission.getCoSpeaker().getEmail(), "coSpeaker");
+            if (result != null) {
+                return result;
+            }
+        }
+
         saveSubmission(submission, speakerImage, coSpeakerImage);
         try {
             mailFacade.sendEmail(submission.getSpeaker().getEmail(), "jPrime talk proposal",
@@ -78,6 +88,18 @@ public class CfpController extends AbstractCfpController {
         }
 
         return "redirect:/";
+    }
+
+    private String validateEmail(BindingResult bindingResult, Submission submission, Model model, String email, String role) {
+        EmailValidator emailValidator = new EmailValidator();
+
+        if(!StringUtils.isEmpty(email) && emailValidator.isValid(email, null)) {
+            // Email is valid
+            return null;
+        }
+
+        bindingResult.addError(new FieldError("submission", role + ".email", "Invalid Email!"));
+        return goToCFP(submission, model);
     }
 
     private String goToCFP(@Valid Submission submission, Model model) {
