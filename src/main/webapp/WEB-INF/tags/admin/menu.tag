@@ -1,5 +1,5 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
-<ul id="menu" >
+<ul id="menu" style="margin-bottom: 28px">
 	<li><a href="/admin/tag/view" style="color: blueviolet!important;">Tags</a></li>
 	<li><a href="/admin/article/view" style="color: blueviolet!important;">Articles</a></li>
 	<li><a href="/admin/sponsor/view" style="color: blueviolet!important;">Sponsors</a></li>
