@@ -429,7 +429,7 @@
                             <span>(Until 15th of Match)</span>
                         </div>
                         <div class="plan-price">
-                            <div class="price-value">200<span>.00</span> BGN</div>
+                            <div class="price-value">140<span>.00</span> BGN</div>
                         </div>
                         <div class="plan-list">
                             <ul>
