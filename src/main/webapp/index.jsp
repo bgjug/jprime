@@ -76,8 +76,11 @@
                             </h2>
 
                             <h3 class="animated5 white" style="text-shadow: 2px 2px black;">
-                                <span>29 and 30 May 2018 in Sofia</span> <!--  will be changed with tickets available -->
+                                <span>2 full days</span>
                             </h3>
+
+                            <p class="animated4"><a href="tickets/epay" class="slider btn btn-primary">Buy ticket</a>
+                            </p>
 
                         </div>
                     </div>
@@ -311,7 +314,6 @@
     <!-- End Team Member Section -->
 
     <!-- Start Pricing Table for Sponsors Section -->
-    <%--
     <div class=" section pricing-section" id="sponsors">
         <div class="container">
             <div class="row">
@@ -402,7 +404,7 @@
 
             </div>
         </div>
-    </div> --%>
+    </div>
     <!-- End Pricing Table for Sponsors Section -->
 
     <!-- Start Pricing Table for Sponsors Section -->
@@ -423,15 +425,17 @@
                 <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
                     <div class="pricing-table">
                         <div class="plan-name">
-                            <h3>Normal ticket</h3>
+                            <h3>Early bird ticket</h3>
+                            <span>(Until 15th of Match)</span>
                         </div>
                         <div class="plan-price">
-                            <div class="price-value">140<span>.00</span> BGN</div>
+                            <div class="price-value">200<span>.00</span> BGN</div>
                         </div>
                         <div class="plan-list">
                             <ul>
                                 <li><strong>2</strong> days conference</li>
-                                <li><strong>28</strong> awesome talks!</li>
+                                <li><strong>28+</strong> awesome talks!</li>
+                                <li><strong>Hands-on</strong> labs!</li>
                                 <li><strong>Lunch</strong> box</li>
                                 <li><strong>A bag</strong> full of goodies</li>
                                 <li><strong>Free T-shirt!</strong></li>
@@ -441,8 +445,38 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <a href="#"
-                               class="btn-system btn-small">Sold out</a>
+                            <a href="tickets/epay"
+                               class="btn-system btn-small">Get It Now</a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
+                    <div class="pricing-table">
+                        <div class="plan-name">
+                            <h3>Regular ticket</h3>
+                            <span>(After 15th of Match)</span>
+                        </div>
+                        <div class="plan-price">
+                            <div class="price-value">200<span>.00</span> BGN</div>
+                        </div>
+                        <div class="plan-list">
+                            <ul>
+                                <li><strong>2</strong> days conference</li>
+                                <li><strong>28+</strong> awesome talks!</li>
+                                <li><strong>Hands-on</strong> labs!</li>
+                                <li><strong>Lunch</strong> box</li>
+                                <li><strong>A bag</strong> full of goodies</li>
+                                <li><strong>Free T-shirt!</strong></li>
+                                <li><strong>Raffle !</strong></li>
+                                <li><strong>Beers !</strong></li>
+                                <li><strong>Coffee</strong> and soft drinks</li>
+                            </ul>
+                        </div>
+                        <div class="plan-signup">
+                            <a href="tickets/epay"
+                               class="btn-system btn-small">Get It Now</a>
 
                         </div>
                     </div>
@@ -452,6 +486,7 @@
                     <div class="pricing-table">
                         <div class="plan-name">
                             <h3>Student ticket</h3>
+                            <span>(Available at all times)</span>
                         </div>
                         <div class="plan-price">
                             <div class="price-value">100<span>.00</span> BGN</div>
@@ -459,7 +494,8 @@
                         <div class="plan-list">
                             <ul>
                                 <li><strong>2</strong> days conference</li>
-                                <li><strong>28</strong> awesome talks!</li>
+                                <li><strong>28+</strong> awesome talks!</li>
+                                <li><strong>Hands-on</strong> labs!</li>
                                 <li><strong>Lunch</strong> box</li>
                                 <li><strong>A bag</strong> full of goodies</li>
                                 <li><strong>Free T-shirt!</strong></li>
@@ -469,8 +505,8 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <a href="#"
-                               class="btn-system btn-small">Sold out</a>
+                            <a href="tickets/epay"
+                               class="btn-system btn-small">Get It Now</a>
 
                         </div>
                     </div>
