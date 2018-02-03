@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import site.config.Globals;
 import site.model.*;
 import site.repository.*;
 
@@ -226,8 +227,10 @@ public class AdminService {
 	public Iterable<Submission> findAllAcceptedSubmissionsForBranch(Branch branch) {
 		return submissionRepository.findByBranchAndStatus(branch, SubmissionStatus.ACCEPTED);
 	}
-
-
+	
+	public List<Submission> findAllSubmitedSubmissionsForCurrentBranch(){
+		return submissionRepository.findByBranchAndStatus(Globals.CURRENT_BRANCH, SubmissionStatus.SUBMITTED);
+	}
 
 	/* visitors repo */
 	public Page<Visitor> findAllVisitors(Pageable pageable){
