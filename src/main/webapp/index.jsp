@@ -258,15 +258,15 @@
             <br/><br/>jPrime features a combination of great international speakers along with the best presenters from
             Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning,
             hacking, networking and fun.</p>
-
+<!--
         <div class="container">
 
-            <!-- Start Big Heading -->
+            <!-- Start Big Heading --/>
             <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
                 <h1>We are done for this year! <strong>See you in 2018!</strong></h1>
             </div>
         </div>
-
+-->
     </div>
     <!-- End Portfolio Section -->
 
@@ -277,7 +277,7 @@
 
             <!-- Start Big Heading -->
             <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                <h1>Our <strong>Speakers</strong> in 2017</h1>
+                <h1>Our <strong>Speakers:</strong></h1>
             </div>
             <!-- End Big Heading -->
 
