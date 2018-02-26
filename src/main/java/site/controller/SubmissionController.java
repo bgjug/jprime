@@ -1,5 +1,18 @@
 package site.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -7,24 +20,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.config.Globals;
 import site.facade.AdminService;
+import site.facade.CSVService;
 import site.model.Branch;
 import site.model.Submission;
-
-import javax.mail.MessagingException;
-import javax.validation.Valid;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * @author Ivan St. Ivanov
@@ -38,10 +47,15 @@ public class SubmissionController extends AbstractCfpController {
     static final String ADMIN_SUBMISSION_VIEW_JSP = "/admin/submission/view.jsp";
     static final String ADMIN_SUBMISSION_EDIT_JSP = "/admin/submission/edit.jsp";
     public static final String REDIRECT = "redirect:";
+    public static final String PRODUCES_TYPE = "application/octet-stream";
 
     @Autowired
     @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
+    
+    @Autowired
+    @Qualifier(CSVService.NAME)
+    private CSVService csvFacade;
     
     @RequestMapping(value = "/view/all", method = RequestMethod.GET)
     public String listAllSubmissions(Model model, Pageable pageable) {
@@ -98,6 +112,30 @@ public class SubmissionController extends AbstractCfpController {
             logger.error("Could not send rejection email", e);
         }
         return REDIRECT + "/admin/submission/view";
+    }
+    
+    @RequestMapping(value = "/exportCSV", method = RequestMethod.GET, produces = PRODUCES_TYPE)
+    public@ResponseBody void exportSubmissionsToCSV(HttpServletResponse response) {
+    	List<Submission> findAllSubmitedSubmissionsForCurrentBranch = adminFacade.findAllSubmitedSubmissionsForCurrentBranch();
+    	File submissionsCSVFile;
+		try {
+			submissionsCSVFile = csvFacade.exportSubmissions(findAllSubmitedSubmissionsForCurrentBranch);
+		} catch (IOException e) {
+			logger.error("Could not create submissions file", e);
+			return;
+		}
+		
+		try(InputStream inputStream = new FileInputStream(submissionsCSVFile) ){
+	        response.setContentType(PRODUCES_TYPE);
+	        response.setHeader("Content-Disposition", "attachment; filename=" + submissionsCSVFile.getName());
+	        response.setHeader("Content-Length", String.valueOf(submissionsCSVFile.length()));
+	        FileCopyUtils.copy(inputStream, response.getOutputStream());
+	        if(!submissionsCSVFile.delete()) {
+	        	logger.warn("Submission file: " + submissionsCSVFile.getAbsolutePath() + " cannot be deleted");
+	        }
+		} catch (IOException e) {
+			logger.error("Could not download file: " + submissionsCSVFile.getAbsolutePath(), e);
+		}
     }
 
     private void sendEmails(Submission submission, String fileName)

@@ -23,6 +23,9 @@
 	            <a href="/admin/submission/view/all">See all submissions</a>
 	        </div>
         </c:if>
+        <div>
+        	<a href="/admin/submission/exportCSV">Export to CSV</a>
+        </div>
 		<table class="admin-table">
 			<tr>
 				<td><i>Title</i></td>

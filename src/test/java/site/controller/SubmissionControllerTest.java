@@ -1,5 +1,18 @@
 package site.controller;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.core.Is.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static site.controller.SubmissionController.ADMIN_SUBMISSION_EDIT_JSP;
+import static site.controller.SubmissionController.ADMIN_SUBMISSION_VIEW_JSP;
+
+import java.io.File;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,25 +25,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
+
 import site.app.Application;
 import site.config.Globals;
+import site.facade.CSVService;
 import site.model.Branch;
 import site.model.SessionLevel;
+import site.model.SessionType;
 import site.model.Speaker;
 import site.model.Submission;
 import site.model.SubmissionStatus;
-import site.model.SessionType;
 import site.repository.SubmissionRepository;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.core.Is.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static site.controller.SubmissionController.ADMIN_SUBMISSION_EDIT_JSP;
-import static site.controller.SubmissionController.ADMIN_SUBMISSION_VIEW_JSP;
 
 /**
  * @author Ivan St. Ivanov
@@ -51,6 +56,10 @@ public class SubmissionControllerTest {
     @Autowired
     @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
+    
+    @Autowired
+    @Qualifier(CSVService.NAME)
+    private CSVService csvFacade;
 
     private Submission valhalla;
     private Submission forge;
@@ -159,5 +168,18 @@ public class SubmissionControllerTest {
                 .andExpect(view().name(ADMIN_SUBMISSION_EDIT_JSP))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("submission", is(forge)));
+    }
+
+    @Test
+    public void exportSubmissionsAsCSVShouldReturnSubmissionsCSVFile() throws Exception{
+    	File exportSubmissions = csvFacade.exportSubmissions(submissionRepository.
+    			findByBranchAndStatus(Globals.CURRENT_BRANCH, SubmissionStatus.SUBMITTED));
+    	String length = Long.toString(exportSubmissions.length());
+    	
+    	mockMvc.perform(get("/admin/submission/exportCSV/"))
+    	.andExpect(status().isOk())
+    	.andExpect(header().string("Content-Length", length));
+    	
+    	exportSubmissions.delete();
     }
 }
