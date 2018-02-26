@@ -149,10 +149,6 @@ public class Application  extends SpringBootServletInitializer {
     @Bean
     public DataSource primaryDataSource() {
 
-        System.out.println("MIHAIL: "+user);
-        System.out.println("MIHAIL: "+password);
-        System.out.println("MIHAIL: "+dataSourceUrl);
-        System.out.println("MIHAIL: "+driverClassName);
         Properties dsProps = new Properties();
         dsProps.setProperty("url", dataSourceUrl);
         dsProps.setProperty("user", user);

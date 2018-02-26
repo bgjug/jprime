@@ -117,8 +117,8 @@ public class SessionControllerTest {
 
         Session session = sessions.get(1);
         assertThat(session.getSubmission().getTitle(), is(forgeSubmission.getTitle()));
-        assertThat(session.getStartTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
-        assertThat(session.getEndTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getStartTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getEndTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
         assertThat(session.getHall().getName(), is(betaHall.getName()));
         assertTrue(session.getTitle().startsWith(session.getSubmission().getTitle()) &&
                 session.getTitle().endsWith(session.getSubmission().getSpeaker().getLastName()));
@@ -141,8 +141,8 @@ public class SessionControllerTest {
         Session session = sessions.get(1);
         assertNull(session.getSubmission());
         assertThat(session.getTitle(), is("Coffee break"));
-        assertThat(session.getStartTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
-        assertThat(session.getEndTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getStartTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getEndTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
         assertNull(session.getHall());
     }
 
@@ -163,8 +163,8 @@ public class SessionControllerTest {
 
         Session session = sessions.get(0);
         assertThat(session.getSubmission().getTitle(), is(bootSubmission.getTitle()));
-        assertThat(session.getStartTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
-        assertThat(session.getEndTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getStartTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getEndTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
         assertThat(session.getHall().getName(), is(betaHall.getName()));
     }
 
@@ -184,8 +184,8 @@ public class SessionControllerTest {
 
         Session session = sessions.get(0);
         assertNull(session.getSubmission());
-        assertThat(session.getStartTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
-        assertThat(session.getEndTime(), is(new DateTime().withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getStartTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getEndTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
         assertNull(session.getHall());
         assertThat(session.getTitle(), is("Opening"));
     }
