@@ -206,7 +206,7 @@
     </profiles>
 
     <properties>
-        <start-class>site.app.Application</start-class><!-- becase we want to start the spring-boot as a war-->
+        <start-class>site.app.Application</start-class><!-- because we want to start the spring-boot as a war-->
         <spring.version>4.1.5.RELEASE</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-data-jpa.version>1.5.0.M1</spring-data-jpa.version>
