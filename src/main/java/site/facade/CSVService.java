@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.supercsv.cellprocessor.ift.CellProcessor;
 import org.supercsv.io.CsvMapWriter;
@@ -18,7 +19,7 @@ import site.model.Submission;
 
 @Service(CSVService.NAME)
 public class CSVService {
-	private static final Logger logger = Logger.getLogger(CSVService.class);
+	private static final Logger logger = LogManager.getLogger(CSVService.class);
 	public static final String NAME = "csvFacade";
 	final String[] submissionHeader = new String[] { "Title", "Abstract", "Session level", "Session type", "Speaker Name", "Speaker Bio",
 			"Co-Speaker Name", "Co-Speaker Bio" };

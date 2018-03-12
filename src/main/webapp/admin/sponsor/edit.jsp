@@ -17,7 +17,7 @@
 </head>
 <body>
 	<admin:menu/>
-	<form:form commandName="sponsor" method="post"
+	<form:form modelAttribute="sponsor" method="post"
 		action="/admin/sponsor/add" enctype="multipart/form-data">
 		<fieldset>
 			<legend>Add/Edit Sponsor</legend>
@@ -65,6 +65,9 @@
 					<form:input path="sponsorPackage" />
 				</dd>
 			</dl>
+			<c:if test="${not empty multipartException}">
+				<p style="color:darkred">${multipartException}</p>
+			</c:if>
 			<dl>
 				<dt>
 					<label for="file">logo ( MUST BE 180x64 !!!)</label>

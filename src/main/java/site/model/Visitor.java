@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class Visitor extends AbstractEntity {
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "registrant")
     private Registrant registrant;
     private String name;
     private String email;

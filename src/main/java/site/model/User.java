@@ -8,11 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
 
-import org.hibernate.validator.constraints.Email;
+import javax.validation.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class User extends AbstractEntity {
@@ -27,7 +27,7 @@ public class User extends AbstractEntity {
 	
 	@Column(unique = true)
     @NotBlank
-    @Email
+	@Email
 	private String email;
 	
 	private String password;

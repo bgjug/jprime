@@ -1,6 +1,7 @@
 package site.controller;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -20,7 +21,7 @@ import site.model.Article;
 @Controller
 public class NavController {
 	
-	private static final Logger logger = Logger.getLogger(NavController.class);
+	private static final Logger logger = LogManager.getLogger(NavController.class);
 
 	@Autowired
 	@Qualifier(UserService.NAME)

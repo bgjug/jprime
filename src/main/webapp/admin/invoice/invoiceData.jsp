@@ -17,7 +17,7 @@
 </head>
 <body>
 <admin:menu/>
-<form:form commandName="invoiceData" method="post"
+<form:form modelAttribute="invoiceData" method="post"
            action="/admin/invoice/send">
     <fieldset>
         <legend>Invoice</legend>

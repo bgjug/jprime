@@ -17,7 +17,7 @@
 </head>
 <body>
 	<admin:menu/>
-	<form:form commandName="tag" method="post"
+	<form:form modelAttribute="tag" method="post"
 		action="/admin/tag/add">
 		<fieldset>
 			<legend>Add/Edit Tags</legend>

@@ -20,7 +20,7 @@
 </head>
 <body>
 <admin:menu/>
-<form:form commandName="visitor" method="post"
+<form:form modelAttribute="visitor" method="post"
            action="/admin/visitor/add">
     <fieldset>
         <legend>Add/Edit visitor</legend>

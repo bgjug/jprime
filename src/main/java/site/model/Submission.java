@@ -1,5 +1,7 @@
 package site.model;
 
+import site.config.Globals;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,12 +13,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import site.config.Globals;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author Ivan St. Ivanov

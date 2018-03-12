@@ -20,7 +20,7 @@
 </head>
 <body>
 <admin:menu/>
-<form:form commandName="hall" method="post"
+<form:form modelAttribute="hall" method="post"
            action="/admin/hall/add">
 <fieldset>
     <legend>Add/Edit Venue Hall</legend>

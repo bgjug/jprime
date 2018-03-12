@@ -72,7 +72,7 @@ public class UserService {
      * @return
      */
     public Speaker findSpeaker(Long id){
-		return speakerRepository.findOne(id);
+		return speakerRepository.findById(id).get();
 	}
 
     /**
@@ -81,7 +81,7 @@ public class UserService {
      * @return
      */
 	public Article findArticle(Long id){
-		return articleRepository.findOne(id);
+		return articleRepository.findById(id).get();
 	}
 
     public Page<Article> allArticles(Pageable pageable){
@@ -92,7 +92,7 @@ public class UserService {
         return articleRepository.findByPublishedTrueOrderByCreatedDateDesc(pageable);
     }
     public Article getArticleById(long id){
-        return articleRepository.findOne(id);
+        return articleRepository.findById(id).get();
     }
     
     public Article getArticleByTitle(String title){
@@ -140,7 +140,7 @@ public class UserService {
     }
     
     public Session findSessionTalk(long id){
-    	return sessionRepository.findOne(id);
+    	return sessionRepository.findById(id).get();
     }
     
     public List<Session> findSessionTalksAndBreaksByHallName(String hallName){

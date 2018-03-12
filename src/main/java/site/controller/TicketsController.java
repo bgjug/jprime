@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ import site.model.VisitorStatus;
 @Controller
 public class TicketsController {
 
-    private static final Logger logger = Logger.getLogger(TicketsController.class);
+    private static final Logger logger = LogManager.getLogger(TicketsController.class);
 
     public static final String TICKETS_END_JSP = "/tickets.jsp";
     public static final String TICKETS_REGISTER_JSP = "/tickets-register.jsp";

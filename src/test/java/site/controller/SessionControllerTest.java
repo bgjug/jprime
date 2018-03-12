@@ -2,12 +2,11 @@ package site.controller;
 
 import org.joda.time.DateTime;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -15,7 +14,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
-import site.model.*;
+import site.model.Session;
+import site.model.SessionLevel;
+import site.model.SessionType;
+import site.model.Speaker;
+import site.model.Submission;
+import site.model.SubmissionStatus;
+import site.model.VenueHall;
 import site.repository.SessionRepository;
 import site.repository.SubmissionRepository;
 import site.repository.VenueHallRepository;
@@ -29,7 +34,9 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static site.controller.AdminSessionController.SESSIONS_EDIT_JSP;
 import static site.controller.AdminSessionController.SESSIONS_VIEW_JSP;
 
@@ -37,7 +44,7 @@ import static site.controller.AdminSessionController.SESSIONS_VIEW_JSP;
  * @author Ivan St. Ivanov
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringBootTest(classes = Application.class)
 @WebAppConfiguration
 @Transactional
 public class SessionControllerTest {
