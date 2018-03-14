@@ -35,18 +35,19 @@ public class CSVService {
 	
 	private void writeSubmissions(List<Submission> submissions, ICsvMapWriter mapWriter) throws IOException{
 		CellProcessor[] processors = new CellProcessor[] {null, null, null, null, null, null, null, null};
-   	 	Map<String, Object> submissionRow = new HashMap<String, Object>();
+   	 	Map<String, Object> submissionRow;
    	 	mapWriter.writeHeader(submissionHeader);
    	 	
 		for(Submission submission: submissions){
+			submissionRow = new HashMap<String, Object>();
 			submissionRow.put(submissionHeader[0], submission.getTitle());
 			submissionRow.put(submissionHeader[1], submission.getDescription());
 			submissionRow.put(submissionHeader[2], submission.getLevel());
 			submissionRow.put(submissionHeader[3], submission.getType());
-			submissionRow.put(submissionHeader[4], submission.getSpeaker().getFirstName() + ", " + submission.getSpeaker().getLastName());
+			submissionRow.put(submissionHeader[4], submission.getSpeaker().getFirstName());
 			submissionRow.put(submissionHeader[5], submission.getSpeaker().getBio());
 			if(submission.getCoSpeaker() != null){
-				submissionRow.put(submissionHeader[6], submission.getCoSpeaker().getFirstName() + ", " + submission.getCoSpeaker().getLastName());
+				submissionRow.put(submissionHeader[6], submission.getCoSpeaker().getFirstName());
 				submissionRow.put(submissionHeader[7], submission.getCoSpeaker().getBio());
 			}
 			mapWriter.write(submissionRow, submissionHeader, processors);
