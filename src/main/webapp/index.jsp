@@ -54,14 +54,15 @@
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
                             <h2 class="animated2 white" style="text-shadow: 3px 3px black;">
-                                <span><strong>Java Prime Time in Sofia</strong></span>
+                                <span><strong><!--Java Prime Time in Sofia--></strong></span>
                             </h2>
 
                             <h3 class="animated3 white" style="text-shadow: 2px 2px black;">
-                                <span>29 and 30 May 2018</span>
+                                <span><!--29 and 30 May 2018--></span>
                             </h3>
-
+                            <%--
                             <p class="animated4"><a href="#about" class="slider btn btn-primary">read more</a>
+                            --%>
                         </div>
                     </div>
                 </div>
@@ -422,7 +423,7 @@
 
             <div class="row pricing-tables">
 
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
+                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5; margin-bottom: -200px;">
                     <div class="pricing-table">
                         <div class="plan-name">
                             <h3>Early bird ticket</h3>
@@ -445,8 +446,8 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <a href="tickets/epay"
-                               class="btn-system btn-small">Get It Now</a>
+                            <a href="#"
+                               class="btn-system btn-small">Over</a>
 
                         </div>
                     </div>

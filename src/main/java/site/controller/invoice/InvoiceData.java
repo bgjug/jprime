@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class InvoiceData {
 
-    public static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(140D);
+    public static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(200D);
     public static final BigDecimal STUDENT_TICKET_PRICE = BigDecimal.valueOf(100D);
     private static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);
     private static final String DEFAULT_DESCRIPTION_BG = "jPrime 2018 билет за конференция";
