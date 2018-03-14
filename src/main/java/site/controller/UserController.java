@@ -1,16 +1,8 @@
 package site.controller;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import javax.mail.MessagingException;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
-import org.apache.log4j.Logger;
-import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,11 +16,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import site.facade.MailService;
 import site.facade.ResetPasswordService;
 import site.model.User;
 import site.repository.UserRepository;
+
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @Controller
 public class UserController {
@@ -43,8 +42,9 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@Autowired
-	private AuthenticationManager authenticationManager;
+	//@Autowired - Spring cannot find the Bean and it is not used anywhere, so we do not need it
+	//private AuthenticationManager authenticationManager;
+
 	
 	@Autowired
 	protected MailService mailService;
@@ -52,7 +52,7 @@ public class UserController {
 	@Autowired
 	private ResetPasswordService resetPassService;
 	
-	private static final Logger logger = Logger.getLogger(UserController.class);
+	private static final Logger logger = LogManager.getLogger(UserController.class);
 
 	@Value("${site.url.reset.password:https://jprime.io/createNewPassword?tokenId=}")
 	private  String createNewPasswordUrl;

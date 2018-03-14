@@ -25,7 +25,7 @@
 <admin:menu/>
 
 <div style="display: inline-block;width:auto">
-<form:form commandName="article" method="post"
+<form:form modelAttribute="article" method="post"
            action="/admin/article/add">
     <fieldset>
         <legend>Add/Edit Article</legend>

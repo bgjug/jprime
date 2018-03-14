@@ -11,7 +11,7 @@
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
 
 
-<form:form commandName="submission" method="post"
+<form:form modelAttribute="submission" method="post"
            action="${action}" enctype="multipart/form-data">
     <fieldset>
         <p>

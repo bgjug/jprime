@@ -38,7 +38,7 @@ public class RegistrantService {
     }
 
     public Registrant findById(long id) {
-        return registrantRepository.findOne(id);
+        return registrantRepository.findById(id).get();
     }
 
     /** Complicated */

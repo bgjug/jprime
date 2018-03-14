@@ -5,7 +5,8 @@ import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +26,7 @@ public class ResetPasswordService {
 	@Value("${site.reset.password.token.duration.hours:2}")
 	private int TOKEN_DURATION_IN_HOURS;
 
-	private static final Logger logger = Logger.getLogger(ResetPasswordService.class);
+	private static final Logger logger = LogManager.getLogger(ResetPasswordService.class);
 
 	@Autowired
 	private ResetPasswordTokenRepository resetPassRepository;
@@ -80,7 +81,7 @@ public class ResetPasswordService {
 		for (ResetPasswordToken token : tokens) {
 			token.setUsed(true);
 		}
-		resetPassRepository.save(tokens);
+		resetPassRepository.saveAll(tokens);
 	}
 
 	private String getNewTokenId() {

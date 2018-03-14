@@ -19,7 +19,7 @@
 </head>
 <body>
 	<admin:menu />
-	<form:form commandName="speaker" method="post"
+		<form:form modelAttribute="speaker" method="post"
 		action="/admin/speaker/add" enctype="multipart/form-data">
 		<fieldset>
 			<legend>Add/Edit Speaker</legend>
@@ -106,6 +106,9 @@
                     <form:select path="branch" items="${branches}"/>
                 </dd>
             </dl>
+			<c:if test="${not empty multipartException}">
+				<p style="color:darkred">${multipartException}</p>
+			</c:if>
 			<dl>
 				<dt>
 					<label for="file">Picture ( MUST be 280x326)</label>

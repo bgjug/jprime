@@ -22,7 +22,7 @@
 </head>
 <body>
 <admin:menu/>
-<form:form commandName="session" method="post"
+<form:form modelAttribute="session" method="post"
            action="/admin/session/add">
 <fieldset>
     <legend>Add/Edit Session</legend>

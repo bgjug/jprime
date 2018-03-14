@@ -74,11 +74,11 @@ public class AdminService {
 	}
 	
 	public Article findOneArticle(Long id){
-		return articleRepository.findOne(id);
+		return articleRepository.findById(id).get();
 	}
 	
 	public void deleteArticle(Long id){
-		articleRepository.delete(id);
+		articleRepository.deleteById(id);
 	}
 	
 	public Article saveArticle(Article article){
@@ -94,11 +94,11 @@ public class AdminService {
 	}
 	
 	public Sponsor findOneSponsor(Long id){
-		return sponsorRepository.findOne(id);
+		return sponsorRepository.findById(id).get();
 	}
 	
 	public void deleteSponsor(Long id){
-		sponsorRepository.delete(id);
+		sponsorRepository.deleteById(id);
 	}
 	
 	public Sponsor saveSponsor(Sponsor sponsor){
@@ -112,11 +112,11 @@ public class AdminService {
 	}
 	
 	public Partner findOnePartner(Long id){
-		return partnerRepository.findOne(id);
+		return partnerRepository.findById(id).get();
 	}
 	
 	public void deletePartner(Long id){
-		partnerRepository.delete(id);
+		partnerRepository.deleteById(id);
 	}
 	
 	public Partner savePartner(Partner partner){
@@ -133,11 +133,11 @@ public class AdminService {
 	}
 	
 	public Speaker findOneSpeaker(Long id){
-		return speakerRepository.findOne(id);
+		return speakerRepository.findById(id).get();
 	}
 	
 	public void deleteSpeaker(Long id){
-		speakerRepository.delete(id);
+		speakerRepository.deleteById(id);
 	}
 	
 	public Speaker saveSpeaker(Speaker speaker){
@@ -154,7 +154,7 @@ public class AdminService {
 	}
 	
 	public User findOneUser(Long id){
-		return userRepository.findOne(id);
+		return userRepository.findById(id).get();
 	}
 
     //currently used for admin TODO:to be fixed with normal authentication with spring
@@ -166,9 +166,9 @@ public class AdminService {
     }
 	
 	public void deleteUser(Long id){
-		userRepository.delete(id);
+		userRepository.deleteById(id);
 	}
-	
+
 	public User saveUser(User user){
 		return userRepository.save(user);
 	}
@@ -186,11 +186,11 @@ public class AdminService {
 	}
 	
 	public Tag findOneTag(Long id){
-		return tagRepository.findOne(id);
+		return tagRepository.findById(id).get();
 	}
 	
 	public void deleteTag(Long id){
-		tagRepository.delete(id);
+		tagRepository.deleteById(id);
 	}
 	
 	public Tag saveTag(Tag tag){
@@ -208,7 +208,7 @@ public class AdminService {
     
 
     public Submission findOneSubmission(Long submissionId) {
-        return submissionRepository.findOne(submissionId);
+        return submissionRepository.findById(submissionId).get();
     }
 
     public void acceptSubmission(Submission submission) {
@@ -246,11 +246,11 @@ public class AdminService {
 	}
 
 	public Visitor findOneVisitor(Long id){
-		return visitorRepository.findOne(id);
+		return visitorRepository.findById(id).get();
 	}
 
 	public void deleteVisitor(Long id){
-		Visitor visitor = visitorRepository.findOne(id);
+		Visitor visitor = visitorRepository.findById(id).get();
 		Registrant registrant = visitor.getRegistrant();
 		registrant.getVisitors().remove(visitor);
 		visitorRepository.delete(visitor);
@@ -282,11 +282,11 @@ public class AdminService {
 	}
 
     public Registrant findOneRegistrant(Long itemId) {
-        return registrantRepository.findOne(itemId);
+        return registrantRepository.findById(itemId).get();
     }
 
     public void deleteRegistrant(Long itemId) {
-        registrantRepository.delete(itemId);
+        registrantRepository.deleteById(itemId);
     }
 
 	/* sessions repo */
@@ -299,11 +299,11 @@ public class AdminService {
 	}
 
 	public Session findOneSession(Long itemId) {
-		return sessionRepository.findOne(itemId);
+		return sessionRepository.findById(itemId).get();
 	}
 
 	public void deleteSession(Long itemId) {
-		sessionRepository.delete(itemId);
+		sessionRepository.deleteById(itemId);
 	}
 
 	/* venue halls repo */
@@ -316,11 +316,11 @@ public class AdminService {
 	}
 
 	public VenueHall findOneVenueHall(Long itemId) {
-		return venueHallRepository.findOne(itemId);
+		return venueHallRepository.findById(itemId).get();
 	}
 
 	public void deleteVenueHall(Long itemId) {
-		venueHallRepository.delete(itemId);
+		venueHallRepository.deleteById(itemId);
 	}
 
 }

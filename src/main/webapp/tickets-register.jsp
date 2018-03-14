@@ -172,7 +172,7 @@
         <p>* There is a free pass for a JUG lead (one per Java User Group).</p>
 
         Buy a ticket:
-        <form:form commandName="registrant" method="post"
+        <form:form modelAttribute="registrant" method="post"
                    action="/tickets/epay" id="visitorsForm">
             <p>
                 <form:errors/>

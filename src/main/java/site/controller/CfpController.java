@@ -1,11 +1,13 @@
 package site.controller;
 
-import org.apache.log4j.Logger;
-import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import site.config.Globals;
 import site.model.Submission;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -27,7 +28,7 @@ import java.nio.file.Paths;
 @Controller
 public class CfpController extends AbstractCfpController {
 
-    private static final Logger logger = Logger.getLogger(CfpController.class);
+    private static final Logger logger = LogManager.getLogger(CfpController.class);
 
     public static final String CFP_OPEN_JSP = "/proposal.jsp";
     public static final String CFP_CLOSED_JSP = "/cfp-closed.jsp";

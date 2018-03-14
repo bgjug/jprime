@@ -17,7 +17,8 @@ import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +42,7 @@ public class CaptchaController {
 	private static final int MAX_CIRCLES_TO_DRAW = 10;
 	private static final int MIN_CIRCLES_TO_DRAW = 6;
 	
-	private static final Logger logger = Logger.getLogger(CaptchaController.class);
+	private static final Logger logger = LogManager.getLogger(CaptchaController.class);
 
 	@RequestMapping(produces = {
 			MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE })

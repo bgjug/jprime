@@ -17,7 +17,7 @@
 </head>
 <body>
 	<admin:menu/>
-	<form:form commandName="partner" method="post"
+	<form:form modelAttribute="partner" method="post"
 		action="/admin/partner/add" enctype="multipart/form-data">
 		<fieldset>
 			<legend>Add/Edit Partner</legend>
@@ -48,6 +48,9 @@
 					<form:input path="companyWebsite" />
 				</dd>
 			</dl>
+			<c:if test="${not empty multipartException}">
+				<p style="color:darkred">${multipartException}</p>
+			</c:if>
 			<dl>
 				<dt>
 					<label for="file">logo ( MUST BE 180x64 !!!)</label>

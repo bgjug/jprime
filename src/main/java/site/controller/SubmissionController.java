@@ -13,7 +13,8 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -42,7 +43,7 @@ import site.model.Submission;
 @RequestMapping("/admin/submission")
 public class SubmissionController extends AbstractCfpController {
 
-    private static final Logger logger = Logger.getLogger(SubmissionController.class);
+    private static final Logger logger = LogManager.getLogger(SubmissionController.class);
 
     static final String ADMIN_SUBMISSION_VIEW_JSP = "/admin/submission/view.jsp";
     static final String ADMIN_SUBMISSION_EDIT_JSP = "/admin/submission/edit.jsp";

@@ -20,7 +20,7 @@
 </head>
 <body>
 <admin:menu/>
-<form:form commandName="registrant" method="post"
+<form:form modelAttribute="registrant" method="post"
            action="/admin/registrant/add">
 <fieldset>
     <legend>Add/Edit Registrant</legend>

@@ -9,7 +9,8 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
@@ -48,7 +49,7 @@ public class AdminVisitorController {
     public static final String VISITOR_EDIT_JSP = "/admin/visitor/edit.jsp";
     public static final String VISITOR_EDIT_SEND = "/admin/visitor/send.jsp";
 
-    private Logger log = Logger.getLogger(this.getClass());
+    private Logger log = LogManager.getLogger(this.getClass());
     
     @Autowired
     @Qualifier(AdminService.NAME)
