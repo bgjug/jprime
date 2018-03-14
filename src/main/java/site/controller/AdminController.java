@@ -11,7 +11,7 @@ public class AdminController {
 	
 	private static final Logger logger = LogManager.getLogger(AdminController.class);
 
-	private static final String PAGE_ADMIN_INDEX = "index.jsp";
+	private static final String PAGE_ADMIN_INDEX = "/admin/index.jsp";
 
 	@RequestMapping("/admin")
 	public String index(Model model) {
