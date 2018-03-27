@@ -1,6 +1,8 @@
 package site.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 
 @Entity
@@ -20,6 +22,9 @@ public class Partner extends AbstractEntity {
 	private String description;
 
 	private Boolean active;
+
+	@Enumerated(EnumType.STRING)
+	private PartnerPackage partnerPackage;
 
     @Override
     public boolean equals(Object o) {
@@ -89,4 +94,13 @@ public class Partner extends AbstractEntity {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
+
+	public PartnerPackage getPartnerPackage() {
+		if(partnerPackage == null) {
+			return PartnerPackage.MEDIA;
+		}
+		return partnerPackage;
+	}
+
+	public void setPartnerPackage(PartnerPackage partnerPackage) { this.partnerPackage = partnerPackage; }
 }

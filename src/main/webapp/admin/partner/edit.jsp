@@ -67,6 +67,14 @@
 					<form:checkbox path="active"/>
 				</dd>
 			</dl>
+			<dl>
+				<dt>
+					<label for="package">package ( type MEDIA, OTHER)</label>
+				</dt>
+				<dd>
+					<form:input path="partnerPackage" />
+				</dd>
+			</dl>
 			<sec:csrfInput />
 			<form:hidden path="id" />
 			<form:hidden path="createdDate" />

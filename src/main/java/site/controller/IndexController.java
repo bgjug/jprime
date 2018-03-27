@@ -40,8 +40,21 @@ public class IndexController {
         model.addAttribute("acceptedSpeakers", userFacade.findAcceptedSpeakers());
 
         // split partners in groups for better display in rows
-        List<Partner> partners = userFacade.findAllActivePartners();
+        List<Partner> partners = userFacade.findAllActiveMediaPartners();
         Collections.shuffle(partners);
+        List<List<Partner>> partnerChunks = getPartnerChunks(partners);
+        model.addAttribute("partnerChunks", partnerChunks);
+
+        List<Partner> eventPartners = userFacade.findAllActiveEventPartners();
+        Collections.shuffle(eventPartners);
+        List<List<Partner>> eventPartnerChunks = getPartnerChunks(eventPartners);
+
+        model.addAttribute("eventPartnerChunks", eventPartnerChunks);
+
+		return PAGE_INDEX;
+	}
+
+    private List<List<Partner>> getPartnerChunks(List<Partner> partners) {
         List<List<Partner>> partnerChunks = new LinkedList<>();
         int partnersCount = 0;
         List<Partner> currentChunk = new LinkedList<>();
@@ -60,10 +73,8 @@ public class IndexController {
             partnerChunks.add(currentChunk);
         }
 
-        model.addAttribute("partnerChunks", partnerChunks);
-
-		return PAGE_INDEX;
-	}
+        return partnerChunks;
+    }
 
 	private List<Sponsor> shuffleAndGet(
 			Map<SponsorPackage, List<Sponsor>> allSponsors, SponsorPackage sponsorPackage) {

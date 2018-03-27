@@ -7,14 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import site.config.Globals;
-import site.model.Article;
-import site.model.Partner;
-import site.model.Session;
-import site.model.Speaker;
-import site.model.Sponsor;
-import site.model.SponsorPackage;
-import site.model.Submission;
-import site.model.Tag;
+import site.model.*;
 import site.repository.ArticleRepository;
 import site.repository.PartnerRepository;
 import site.repository.SessionRepository;
@@ -131,8 +124,14 @@ public class UserService {
         return sponsorRepository.findByActive(true).stream().collect(groupingBy(Sponsor::getSponsorPackage));
     }
 	
-	public List<Partner> findAllActivePartners(){
-        return partnerRepository.findByActive(true);
+	public List<Partner> findAllActiveMediaPartners(){
+        List<Partner> partners = partnerRepository.findByActiveAndPartnerPackage(true, PartnerPackage.MEDIA);
+        partners.addAll(partnerRepository.findByActiveAndPartnerPackage(true, null));
+        return partners;
+    }
+
+    public List<Partner> findAllActiveEventPartners(){
+        return partnerRepository.findByActiveAndPartnerPackage(true, PartnerPackage.OTHER);
     }
 
     public void	submitTalk(Submission submission) {

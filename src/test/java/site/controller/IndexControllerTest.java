@@ -14,11 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
-import site.model.Partner;
-import site.model.Speaker;
-import site.model.Sponsor;
-import site.model.SponsorPackage;
-import site.model.Tag;
+import site.model.*;
 import site.repository.ArticleRepository;
 import site.repository.PartnerRepository;
 import site.repository.SpeakerRepository;
@@ -88,7 +84,9 @@ public class IndexControllerTest {
     private Speaker brianGoetz;
 
     private Partner softUni;
-    
+
+    private Partner baristo;
+
     @Before
     public void setup() throws IOException {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
@@ -111,6 +109,11 @@ public class IndexControllerTest {
         softUni = new Partner();
         softUni.setCompanyName("SoftUni");
         partnerRepository.save(softUni);
+
+        baristo = new Partner();
+        baristo.setCompanyName("Baristo");
+        baristo.setPartnerPackage(PartnerPackage.OTHER);
+        partnerRepository.save(baristo);
     }
 
     @Test
@@ -123,6 +126,7 @@ public class IndexControllerTest {
                 .andExpect(model().attribute("silverSponsors", hasSize(0)))
                 .andExpect(model().attribute("tags", containsInAnyOrder(tag1, tag2)))
                 .andExpect(model().attribute("acceptedSpeakers", contains(brianGoetz)))
-                .andExpect(model().attribute("partnerChunks", IsInstanceOf.instanceOf(List.class)));
+                .andExpect(model().attribute("partnerChunks", IsInstanceOf.instanceOf(List.class)))
+                .andExpect(model().attribute("eventPartnerChunks", IsInstanceOf.instanceOf(List.class)));
     }
 }

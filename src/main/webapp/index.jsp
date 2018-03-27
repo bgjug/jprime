@@ -580,7 +580,7 @@
     <!-- End Sponsor Section -->
 
 
-    <!-- Start Sponsor Section -->
+    <!-- Start Media Partners Section -->
     <c:if test="${fn:length(partnerChunks) gt 0}">
 	    <div class="partner">
 	        <div class="container">
@@ -611,9 +611,43 @@
 	        </div><!-- .container -->
 	    </div>
     </c:if>
-    <!-- End Sponsor Section -->
+    <!-- End Media Partners Section -->
 
-	<jsp:directive.include file="footer.jsp" />
+    <!-- Start Event Partners Section -->
+    <c:if test="${fn:length(eventPartnerChunks) gt 0}">
+        <div class="event-partner">
+            <div class="container">
+                <div class="row">
+
+                    <div class="big-title text-center" >
+                        <h1><strong>Event</strong> Partners</h1>
+                    </div>
+
+                    <div class="our-clients">
+                        <c:forEach var="eventPartners" items="${eventPartnerChunks}">
+
+                            <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(eventPartners) gt 3? '3' : fn:length(eventPartners)}" data-appeared-items="${fn:length(eventPartners)}"
+                                 data-navigation="true">
+
+                                <c:forEach var="eventPartner" items="${eventPartners}">
+                                    <div class="client-item item">
+                                        <a href="${eventPartner.companyWebsite}"><img src="/image/partner/${eventPartner.id}"
+                                                                                 alt="${eventPartner.companyName}"/></a>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </c:forEach>
+
+                    </div>
+                    <!-- End Clients Carousel -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </div>
+    </c:if>
+    <!-- End Event Partners Section -->
+
+
+    <jsp:directive.include file="footer.jsp" />
 
 </div>
 <!-- End Full Body Container -->
