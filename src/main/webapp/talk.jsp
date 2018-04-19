@@ -44,7 +44,7 @@
 
                     <c:if test="${empty talk}">
                         <div class="post-content">
-                            <h2>No article available</h2>
+                            <h2>No talk information available</h2>
                         </div>
                     </c:if>
 
@@ -53,7 +53,7 @@
                     <div class="blog-post gallery-post">
                         <!-- Start Single Post Content -->
                         <div class="post-content">
-                            <h2>${talk.submission.title}</h2>
+                            <h2>${talk.submission.title} (<joda:format pattern="HH:mm" value="${talk.startTime}" /> - <joda:format pattern="HH:mm" value="${talk.endTime}" /> on <joda:format locale="en" pattern="EEEE" value="${talk.endTime}" />)</h2>
                             <ul class="post-meta">
                                 <%--<li>By <a href="#">${article.author.firstName} ${article.author.lastName}</a>  &nbsp;&nbsp;
                                 <joda:format value="${article.createdDate}" pattern="dd-MM-yyyy"/>

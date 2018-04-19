@@ -112,7 +112,7 @@
                             </li>
 
                             <li>
-                                <a <c:if test='${"/agenda.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/Agenda">Agenda</a>
+                                <a <c:if test='${"/agenda.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/agenda">Agenda</a>
                             </li>
 
                             <c:forEach var="tag" items="${tags}">
