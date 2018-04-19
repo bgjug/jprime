@@ -1,7 +1,5 @@
 package site.controller;
 
-import java.awt.Image;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -16,16 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.AdminService;
 import site.facade.ThumbnailService;
 import site.model.Branch;
 import site.model.Speaker;
-import site.model.VisitorStatus;
-import site.repository.SpeakerRepository;
-
 
 @Controller()
 @RequestMapping(value = "/admin/speaker")
@@ -33,7 +27,7 @@ public class AdminSpeakerController {
 
 	@Autowired
 	@Qualifier(AdminService.NAME)
-	private AdminService adminFacade;
+	private AdminService adminService;
 	
 	@Autowired
 	@Qualifier(ThumbnailService.NAME)
@@ -42,7 +36,7 @@ public class AdminSpeakerController {
 	@Transactional
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String view(Model model, Pageable pageable){
-		Page<Speaker> speakers = adminFacade.findAllSpeakers(pageable);
+		Page<Speaker> speakers = adminService.findAllSpeakers(pageable);
 		
 		model.addAttribute("speakers", speakers);
 		
@@ -65,12 +59,12 @@ public class AdminSpeakerController {
             }
 		} else { //empty file is it edit?
 			if(speaker.getId()!= null){
-				Speaker oldSpeaker = adminFacade.findOneSpeaker(speaker.getId());
+				Speaker oldSpeaker = adminService.findOneSpeaker(speaker.getId());
 				byte[] oldImage = oldSpeaker.getPicture();
 				speaker.setPicture(oldImage);
 			}
 		}
-		this.adminFacade.saveSpeaker(speaker);
+		this.adminService.saveSpeaker(speaker);
 		
 		return "redirect:/admin/speaker/view";
 	}
@@ -85,7 +79,7 @@ public class AdminSpeakerController {
 	@Transactional
 	@RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
 	public String edit(@PathVariable("itemId") Long itemId, Model model){
-		Speaker speaker = adminFacade.findOneSpeaker(itemId);
+		Speaker speaker = adminService.findOneSpeaker(itemId);
 		model.addAttribute("speaker", speaker);
 		model.addAttribute("branches", Branch.values());
 		return "/admin/speaker/edit.jsp";
@@ -94,7 +88,7 @@ public class AdminSpeakerController {
 	@Transactional
 	@RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
 	public String remove(@PathVariable("itemId") Long itemId, Model model) {
-        adminFacade.deleteSpeaker(itemId);
+        adminService.deleteSpeaker(itemId);
         return "redirect:/admin/speaker/view";
     }
 }

@@ -107,6 +107,14 @@
                                 <a <c:if test='${"/venue.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/venue">Venue/Useful info</a>
                             </li>
 
+                            <li>
+                                <a <c:if test='${"/speakers.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/speakers">Speakers</a>
+                            </li>
+
+                            <li>
+                                <a <c:if test='${"/agenda.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/Agenda">Agenda</a>
+                            </li>
+
                             <c:forEach var="tag" items="${tags}">
                                 <li>
                                     <a href="/nav/${tag.name}"><c:out value="${tag.name}"/></a>
