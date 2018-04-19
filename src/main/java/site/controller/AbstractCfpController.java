@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,6 +32,7 @@ public class AbstractCfpController {
 
     @Autowired
     @Qualifier(MailService.NAME)
+    @Lazy
     protected MailService mailFacade;
 
     @Autowired

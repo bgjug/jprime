@@ -2,6 +2,7 @@ package site.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,7 @@ public class AdminInvoiceController {
     private InvoiceExporter invoiceExporter;
 
     @Autowired
+    @Lazy
     private MailService mailFacade;
 
     @RequestMapping(value = "/{itemId}", method = RequestMethod.GET)
