@@ -282,10 +282,7 @@
             <div class="row">
                 <c:forEach var="speaker" items="${acceptedSpeakers}">
                     <div class="col-md-3 col-sm-6 col-xs-12">
-                    	<c:url var="speakerUrl" value="/nav/article">
-                    		<c:param name="title" value="${speaker.firstName} ${speaker.lastName}"/>
-                    	</c:url>
-                        <a href="${speakerUrl}"><div class="team-member modern">
+                        <a href="/speaker/${speaker.id}"><div class="team-member modern">
                             <!-- Memebr Photo, Name & Position -->
                             <div class="member-photo">
                                 <img alt="" src="/image/speaker/${speaker.id}" height="365" width="280"/>
