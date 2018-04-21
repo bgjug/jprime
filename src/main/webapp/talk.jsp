@@ -74,6 +74,20 @@
 	                                <a class="twitter" href="https://twitter.com/${talk.submission.speaker.twitter}/"><i class="fa fa-twitter"></i></a>
 	                            </div>
 	                        </div>
+                            <c:if test="${not empty talk.submission.coSpeaker}">
+                                <div class="team-member modern">
+                                    <!-- Memebr Photo, Name & Position -->
+                                    <div class="member-photo">
+                                        <img alt="" src="/image/speaker/${talk.submission.coSpeaker.id}">
+
+                                        <div class="member-name">${talk.submission.speaker.firstName}&nbsp;${talk.submission.coSpeaker.lastName}<span>${talk.submission.coSpeaker.headline}</span>
+                                        </div>
+                                    </div>
+                                    <div class="member-socail" style="text-align: left">
+                                        <a class="twitter" href="https://twitter.com/${talk.submission.coSpeaker.twitter}/"><i class="fa fa-twitter"></i></a>
+                                    </div>
+                                </div>
+                            </c:if>
 	                    </div>
 	
 						<p>
@@ -83,11 +97,25 @@
 						<p><b>Level:</b><br/>
 						${talk.submission.level}
 						</p>
-						
-						<p><b>Bio:</b><br/>
-						${talk.submission.speaker.bio}
-						</p>
 
+                        <c:choose>
+                            <c:when test="${not empty talk.submission.coSpeaker}">
+                                <p>
+                                    <b>Speakers:</b><br/>
+                                    <p>
+                                        ${talk.submission.speaker.bio}
+                                    </p>
+                                    <p>
+                                            ${talk.submission.coSpeaker.bio}
+                                    </p>
+                                </p>
+                            </c:when>
+                            <c:otherwise>
+                                <p>
+                                    <b>Bio:</b><br/>${talk.submission.speaker.bio}
+                                </p>
+                            </c:otherwise>
+                        </c:choose>
 
                         </div>
                         <!-- End Single Post Content -->
