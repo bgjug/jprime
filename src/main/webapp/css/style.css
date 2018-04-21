@@ -44,7 +44,7 @@ body {
     line-height: 21px;
 	font-weight: 300;
 	color: #888;
-	background: url(../images/patterns/1.png) fixed repeat;
+	/*background: url(../images/patterns/1.png) fixed repeat;*/
 }
 strong, b {
 	font-weight: 600;
@@ -5265,10 +5265,10 @@ ul.footer-nav li a:hover {
 	height: 20px;
 }
 .switcher-box .bg-list li a.bg1 {
-	background: url(../images/patterns/1.png) repeat;
+	/*background: url(../images/patterns/1.png) repeat;*/
 }
 .switcher-box .bg-list li a.bg2 {
-	background: url(../images/patterns/2.png) repeat;
+	/*background: url(../images/patterns/2.png) repeat;*/
 }
 .switcher-box .bg-list li a.bg3 {
 	background: url(../images/patterns/3.png) repeat;
