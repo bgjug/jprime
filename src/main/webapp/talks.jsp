@@ -326,7 +326,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:set var="workshopsCounter" value="0"/>
                                 <c:forEach var="talk" items="${alpha}" varStatus="i">
                                     <c:set var="talkDay">
                                         <joda:format pattern="D" value="${talk.startTime}" />
