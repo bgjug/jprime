@@ -545,49 +545,19 @@
                     <h1><strong>Gold</strong> Sponsors</h1>
                 </div>
 
-                <c:choose>
-                    <c:when test="${fn:length(goldSponsors) gt 6}">
-                        <div class="our-clients text-center" style="text-align: center">
-                            <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(goldSponsors) gt 3 ? '3':fn:length(goldSponsors)}" data-appeared-items="${fn:length(goldSponsors)}"
-                                 data-navigation="true">
+                <div class="our-clients text-center" style="text-align: center">
+                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(goldSponsors) gt 3 ? '3':fn:length(goldSponsors)}"
+                         data-appeared-items="${fn:length(goldSponsors)}"
+                         data-navigation="true">
 
-                                <c:forEach var="sponsor" items="${goldSponsors}" end="5">
-                                    <div class="client-item item" style="float: none; display: inline-block">
-                                        <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}" /></a>
-                                    </div>
-                                </c:forEach>
-
+                        <c:forEach var="sponsor" items="${goldSponsors}">
+                            <div class="client-item item" style="float: none; display: inline-block">
+                                <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}"/></a>
                             </div>
-                        </div>
-                        <div class="our-clients text-center" style="text-align: center">
-                            <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(goldSponsors)-5 gt 3 ? '3':fn:length(goldSponsors)}" data-appeared-items="${fn:length(goldSponsors)}"
-                                 data-navigation="true">
+                        </c:forEach>
 
-                                <c:forEach var="sponsor" items="${goldSponsors}" begin="6">
-                                    <div class="client-item item" style="float: none; display: inline-block">
-                                        <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}" /></a>
-                                    </div>
-                                </c:forEach>
-
-                            </div>
-                        </div>
-                    </c:when>
-                    <c:otherwise>
-                        <div class="our-clients text-center" style="text-align: center">
-                            <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(goldSponsors) gt 3 ? '3':fn:length(goldSponsors)}" data-appeared-items="${fn:length(goldSponsors)}"
-                                 data-navigation="true">
-
-                                <c:forEach var="sponsor" items="${goldSponsors}">
-                                    <div class="client-item item" style="float: none; display: inline-block">
-                                        <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}" /></a>
-                                    </div>
-                                </c:forEach>
-
-                            </div>
-                        </div>
-                    </c:otherwise>
-                </c:choose>
-
+                    </div>
+                </div>
 
                 <div class="big-title text-center">
                     <h1><strong>Silver</strong> Sponsors</h1>
