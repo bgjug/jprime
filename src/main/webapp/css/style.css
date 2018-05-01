@@ -5637,3 +5637,13 @@ ul.footer-nav li a:hover {
 .navbar-collapse {
 	max-height: 340px;
 }
+
+.partner .row .our-clients{
+	width: 100%;
+	text-align: center;
+}
+
+.partner .row .our-clients .client-item{
+	display: inline-block;
+	zoom: 1;
+}

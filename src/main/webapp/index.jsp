@@ -528,17 +528,14 @@
                 </div>
 
                 <div class="our-clients">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(platinumSponsors) gt 3 ? '3':fn:length(platinumSponsors)}" data-appeared-items="${fn:length(platinumSponsors)}"
-                         data-navigation="true">
 
-                        <c:forEach var="sponsor" items="${platinumSponsors}">
-                            <div class="client-item item">
-                                <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}"
-                                                                         alt="${sponsor.companyName}"/></a>
-                            </div>
-                        </c:forEach>
+                    <c:forEach var="sponsor" items="${platinumSponsors}">
+                        <div class="client-item item">
+                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}"
+                                                                     alt="${sponsor.companyName}"/></a>
+                        </div>
+                    </c:forEach>
 
-                    </div>
                 </div>
 
                 <div class="big-title text-center">
@@ -546,17 +543,13 @@
                 </div>
 
                 <div class="our-clients text-center" style="text-align: center">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(goldSponsors) gt 3 ? '3':fn:length(goldSponsors)}"
-                         data-appeared-items="${fn:length(goldSponsors)}"
-                         data-navigation="true">
 
-                        <c:forEach var="sponsor" items="${goldSponsors}">
-                            <div class="client-item item" style="float: none; display: inline-block">
-                                <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}"/></a>
-                            </div>
-                        </c:forEach>
+                    <c:forEach var="sponsor" items="${goldSponsors}">
+                        <div class="client-item item" style="float: none; display: inline-block">
+                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}"/></a>
+                        </div>
+                    </c:forEach>
 
-                    </div>
                 </div>
 
                 <div class="big-title text-center">
@@ -564,17 +557,14 @@
                 </div>
 
                 <div class="our-clients">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(silverSponsors) gt 3 ? '3':fn:length(silverSponsors)}" data-appeared-items="${fn:length(silverSponsors)}"
-                         data-navigation="true">
 
-                        <c:forEach var="sponsor" items="${silverSponsors}">
-                            <div class="client-item item">
-                                <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}"
-                                                                         alt="${sponsor.companyName}"/></a>
-                            </div>
-                        </c:forEach>
+                    <c:forEach var="sponsor" items="${silverSponsors}">
+                        <div class="client-item item">
+                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}"
+                                                                     alt="${sponsor.companyName}"/></a>
+                        </div>
+                    </c:forEach>
 
-                    </div>
                 </div>
                 <!-- End Clients Carousel -->
             </div><!-- .row -->
