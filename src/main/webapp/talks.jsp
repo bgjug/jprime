@@ -209,7 +209,7 @@
                                                 <c:if test="${workshops[workshopsCounter].startTime eq talk.startTime}">
                                                     <c:set var="talk" value="${workshops[workshopsCounter]}"/>
                                                     <c:set var="workshopsCounter" value="${workshopsCounter + 1}"/>
-                                                    <td rowspan="${talk.endTime eq alpha[i.count].startTime ? 1 : 2}">
+                                                    <td rowspan="${talk.endTime eq alpha[i.count].startTime ? 1 : 3}">
                                                         <a href="/agenda/${talk.id}">${talk.submission.title}</a>
                                                         <br/>
                                                         <c:if test="${not empty talk.submission and not empty talk.submission.speaker}">
@@ -373,7 +373,7 @@
                                             <c:if test="${workshops[workshopsCounter].startTime eq talk.startTime}">
                                                 <c:set var="talk" value="${workshops[workshopsCounter]}"/>
                                                 <c:set var="workshopsCounter" value="${workshopsCounter + 1}"/>
-                                                <td rowspan="${talk.endTime eq alpha[i.count].startTime ? 1 : 2}">
+                                                <td rowspan="${talk.endTime eq alpha[i.count].startTime ? 1 : 3}">
                                                     <a href="/agenda/${talk.id}">${talk.submission.title}</a>
                                                     <br/>
                                                     <c:if test="${not empty talk.submission and not empty talk.submission.speaker}">
