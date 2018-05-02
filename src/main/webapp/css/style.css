@@ -2838,7 +2838,7 @@ ul.icons-list li i {
 }
 
 .big-title h1 strong, .big-title h2 strong {
-	font-weight: 400;
+	font-weight: 900;
 }
 
 .big-title .title-desc {
@@ -5643,7 +5643,16 @@ ul.footer-nav li a:hover {
 	text-align: center;
 }
 
+.partner .row .big-title h1{
+	font-weight: bold;
+}
+
 .partner .row .our-clients .client-item{
 	display: inline-block;
 	zoom: 1;
+	padding: 15px;
+}
+
+.tcenter tbody tr td[rowspan] {
+	vertical-align: top;
 }
