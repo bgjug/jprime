@@ -8,7 +8,7 @@
             <div class="top-bar">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-10">
                             <!-- Start Contact Info -->
                             <ul class="contact-details">
                                 <li><a href="https://goo.gl/maps/67NtDSTADcG2" target="_blank"><i class="fa fa-map-marker"></i> Tsarigradsko Shosse 115B, Sofia, Bulgaria</a>
@@ -17,10 +17,22 @@
                                 </li>
                                 <li><a href="#"><i class="fa fa-phone"></i> +359 887 749 325</a>
                                 </li>
+                                <li>
+                                    <a><!-- for the vertical line--></a>
+                                </li>
+                                <li>
+                                    <form action="https://jprime.us13.list-manage.com/subscribe/post?u=968bc6e2a2348118b259c0df2&amp;id=c9a8e30e18" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+                                        <input value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required="" type="email">
+                                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input name="b_968bc6e2a2348118b259c0df2_c9a8e30e18" tabindex="-1" value="" type="text"></div>
+                                        <input class="btn-system btn-small" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" type="submit">
+                                    </form>
+
+                                </li>
                             </ul>
                             <!-- End Contact Info -->
                         </div><!-- .col-md-6 -->
-                        <div class="col-md-5">
+                        <div class="col-md-2">
                             <!-- Start Social Links -->
                             <ul class="social-list">
                                 <li>
