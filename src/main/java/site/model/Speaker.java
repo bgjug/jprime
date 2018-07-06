@@ -38,6 +38,8 @@ public class Speaker extends User {
 
     @Lob
     private byte[] picture;
+    
+    private String videos;
 
     @OneToMany(mappedBy = "speaker", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, targetEntity = Submission.class)
     private Set<Submission> submissions = new HashSet<>();
@@ -80,6 +82,13 @@ public class Speaker extends User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+    
+    public String getVideos() {
+    	return videos;
+    }
+    public void setVideos(String videos) {
+    	this.videos = videos;
     }
 
     public String getTwitter() {
