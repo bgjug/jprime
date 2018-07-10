@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,24 +14,28 @@ import site.config.Globals;
 import site.facade.MailService;
 import site.facade.ThumbnailService;
 import site.facade.UserService;
+import site.facade.VideoSanitizerService;
 import site.model.Branch;
 import site.model.SessionLevel;
+import site.model.SessionType;
 import site.model.Speaker;
 import site.model.Submission;
-import site.model.SessionType;
 
 /**
  * @author Ivan St. Ivanov
  */
 public class AbstractCfpController {
-
+	
+	@Autowired
+	private VideoSanitizerService videoSanitizerService;
+	
     @Autowired
     @Qualifier(UserService.NAME)
     protected UserService userFacade;
 
-    @Autowired
+    @Autowired(required = false)
     @Qualifier(MailService.NAME)
-    @Lazy
+//    @Lazy
     protected MailService mailFacade;
 
     @Autowired
@@ -75,6 +78,9 @@ public class AbstractCfpController {
             fixTwitterHandle(speaker);
             speaker.setBranch(Globals.CURRENT_BRANCH);
             formatPicture(speaker, image);
+            if(speaker.getVideos() != null) {
+            	speaker.setVideos(videoSanitizerService.formatString(speaker.getVideos()));
+        	}
             return speaker;
         }
     }

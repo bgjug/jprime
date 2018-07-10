@@ -22,7 +22,7 @@ public class CSVService {
 	private static final Logger logger = LogManager.getLogger(CSVService.class);
 	public static final String NAME = "csvFacade";
 	final String[] submissionHeader = new String[] { "Title", "Abstract", "Session level", "Session type", "Speaker Name", "Speaker Bio",
-			"Co-Speaker Name", "Co-Speaker Bio" };
+			"Co-Speaker Name", "Co-Speaker Bio" , "Speaker Videos", "Co-Speaker Videos"};
 	
 	public File exportSubmissions(List<Submission> submissions) throws IOException{
 		File submissionsCSVFile = File.createTempFile("submissions.", ".csv");
@@ -34,7 +34,7 @@ public class CSVService {
 	}
 	
 	private void writeSubmissions(List<Submission> submissions, ICsvMapWriter mapWriter) throws IOException{
-		CellProcessor[] processors = new CellProcessor[] {null, null, null, null, null, null, null, null};
+		CellProcessor[] processors = new CellProcessor[] {null, null, null, null, null, null, null, null, null, null};
    	 	Map<String, Object> submissionRow;
    	 	mapWriter.writeHeader(submissionHeader);
    	 	
@@ -50,6 +50,11 @@ public class CSVService {
 				submissionRow.put(submissionHeader[6], submission.getCoSpeaker().getFirstName());
 				submissionRow.put(submissionHeader[7], submission.getCoSpeaker().getBio());
 			}
+			submissionRow.put(submissionHeader[8] , submission.getSpeaker().getVideos());
+			if(submission.getCoSpeaker() != null) {
+				submissionRow.put(submissionHeader[9] , submission.getCoSpeaker().getVideos());
+			}
+
 			mapWriter.write(submissionRow, submissionHeader, processors);
 		}
 	}
