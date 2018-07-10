@@ -33,9 +33,9 @@ public class AbstractCfpController {
     @Qualifier(UserService.NAME)
     protected UserService userFacade;
 
-    @Autowired(required = false)
+    @Autowired
     @Qualifier(MailService.NAME)
-//    @Lazy
+    @Lazy
     protected MailService mailFacade;
 
     @Autowired
