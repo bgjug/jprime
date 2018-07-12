@@ -1,7 +1,6 @@
 package site.controller;
 
 import org.junit.Before;
-import org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
 import site.config.Globals;
 import site.facade.CSVService;
-import site.facade.VideoSanitizerService;
+import site.facade.StringSanitizer;
 import site.model.Branch;
 import site.model.SessionLevel;
 import site.model.SessionType;
@@ -48,8 +47,6 @@ import static site.controller.SubmissionController.ADMIN_SUBMISSION_VIEW_JSP;
 @WebAppConfiguration
 @Transactional
 public class SubmissionControllerTest {
-
-    private VideoSanitizerService videoSanitizerService = new VideoSanitizerService();
 
     @Autowired
     private WebApplicationContext wac;
@@ -192,7 +189,7 @@ public class SubmissionControllerTest {
     public void videosTest() {
         Speaker brianGoetz = new Speaker("Brian", "Goetz", "brian@oracle.com", "The Java Language Architect", "@briangoetz", true, true,
                 "youtube.com,, youtube.com;someurl.com\nsomeurl.com\t,anotherurl.com");
-        brianGoetz.setVideos(videoSanitizerService.formatString(brianGoetz.getVideos()));
+        brianGoetz.setVideos(StringSanitizer.formatString(brianGoetz.getVideos()));
         assertFalse(brianGoetz.getVideos().contains(","));
         assertFalse(brianGoetz.getVideos().contains(",,"));
         assertFalse(brianGoetz.getVideos().contains(";"));
@@ -200,7 +197,7 @@ public class SubmissionControllerTest {
         assertFalse(brianGoetz.getVideos().contains("\t"));
 
 
-        assertTrue(videoSanitizerService.formatString(brianGoetz.getVideos()).split(" ").length == 5);
+        assertTrue(StringSanitizer.formatString(brianGoetz.getVideos()).split(" ").length == 5);
 
     }
 }

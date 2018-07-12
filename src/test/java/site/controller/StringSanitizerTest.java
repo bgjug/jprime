@@ -4,19 +4,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import site.facade.VideoSanitizerService;
-import site.model.Speaker;
+import site.facade.StringSanitizer;
 
-public class VideoSanitizerServiceTest {
-
-	private VideoSanitizerService videoSanitizerService = new VideoSanitizerService();
-
+public class StringSanitizerTest {
 	@Test
 	public void formatStringTest() {
 		String testString = "Sometext.With,Alot of;punctuation\twhichshould\nbesplitted, one.com, hh ,,, em.co.uk";
-		String formatedString = videoSanitizerService.formatString(testString);
+		String formatedString = StringSanitizer.formatString(testString);
 
 		assertTrue(formatedString.split(" ").length == 9);
 

@@ -31,7 +31,7 @@ public class Speaker extends User {
 
     private String headline;
 
-    private String twitter;	
+    private String twitter;
 
     private Boolean featured = false;
 

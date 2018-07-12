@@ -43,9 +43,6 @@ public class AdminService {
 	public static final String NAME = "adminFacade";
 	
 	@Autowired
-	private VideoSanitizerService videoSanitizerService;
-	
-	@Autowired
 	@Qualifier(ArticleRepository.NAME)
 	private ArticleRepository articleRepository;
 	
@@ -166,10 +163,11 @@ public class AdminService {
 	}
 	
 	public Speaker saveSpeaker(Speaker speaker){
-		if(speaker.getVideos() != null)
-            speaker.setVideos(videoSanitizerService.
-            		formatString(speaker.getVideos()));
-       
+		if (speaker.getVideos() != null) {
+			speaker.setVideos(StringSanitizer.
+					formatString(speaker.getVideos()));
+		}
+
 		return speakerRepository.save(speaker);
 	}
 	
