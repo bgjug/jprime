@@ -80,7 +80,7 @@
                                 <span>2 full days</span>
                             </h3>
 
-                            <p class="animated4"><a href="tickets/epay" class="slider btn btn-primary">Buy ticket</a>
+                            <p class="animated4"><a href="tickets/epay" class="slider btn btn-primary">Buy a ticket</a>
                             </p>
 
                         </div>
@@ -412,7 +412,7 @@
                 <div class="col-md-12">
                     <!-- Start Big Heading -->
                     <div class="big-title text-center">
-                        <h1>Buy <strong>Ticket!</strong></h1>
+                        <h1>Buy a <strong>Ticket!</strong></h1>
                     </div>
                     <!-- End Big Heading -->
                 </div>
@@ -424,7 +424,7 @@
                     <div class="pricing-table">
                         <div class="plan-name">
                             <h3>Early bird ticket</h3>
-                            <span>(Until 15th of Match)</span>
+                            <span>(Until 15th of March)</span>
                         </div>
                         <div class="plan-price">
                             <div class="price-value">140<span>.00</span> BGN</div>
@@ -454,7 +454,7 @@
                     <div class="pricing-table">
                         <div class="plan-name">
                             <h3>Regular ticket</h3>
-                            <span>(After 15th of Match)</span>
+                            <span>(After 15th of March)</span>
                         </div>
                         <div class="plan-price">
                             <div class="price-value">200<span>.00</span> BGN</div>
