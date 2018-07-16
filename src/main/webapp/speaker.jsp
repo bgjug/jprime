@@ -50,7 +50,7 @@
 
                     <a href="/speakers">Back</a><br/><br/>
                     <!-- Start Single Post Area -->
-                    <div class="blog-post gallery-post">
+                    <div class="blog-post gallery-post" style="margin-bottom: 10em;">
                         <div class="col-md-3 col-sm-6 col-xs-12 animated">
                             <div class="team-member modern">
                                 <!-- Memebr Photo, Name & Position -->
@@ -64,10 +64,20 @@
                                 </div>
                             </div>
                         </div>
-
-                        <p>
-                            <c:out value="${speaker.bio}"/>
-                        </p>
+                        <div>
+                            <p>
+                                <c:out value="${speaker.bio}"/>
+                            </p>
+                        </div>
+                    </div>
+                     <div>
+                    	<c:forEach items="${speaker.videos.split(' ')}" var="video">
+                    		<div style= "width: 50%; height:50%; margin-left: 30%; margin-top: 2%">
+                            	<iframe  align = "centered"src="${video}"
+                          		          frameborder="1" allow="autoplay; encrypted-media" allowfullscreen>
+                        	  	</iframe>
+                    	    </div>
+                  	  </c:forEach>
                     </div>
                     <!-- End Single Post Area -->
                     <!-- currently not needed!!

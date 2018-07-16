@@ -29,6 +29,7 @@
 				<td><i>Accepted?</i></td>
 				<td><i>Branch?</i></td>
 				<td><i>Picture</i></td>
+				<td><i>Video</i></td>
 				<td><i>Operations</i></td>
 			</tr>
 			<c:forEach var="speaker" items="${speakers.content}">
@@ -42,6 +43,7 @@
 					<td>${speaker.accepted}</td>
 					<td>${speaker.branch}</td>
 					<td><img src="/image/speaker/${speaker.id}" style="max-width: 280px"/></td>
+					<td>${speaker.videos}</td>
 					<td>
 						<span style="float:left;"><a href="/admin/speaker/edit/${speaker.id}">Edit</a></span> &nbsp; 
 						<span style="float:right;"><a href="/admin/speaker/remove/${speaker.id}"> Remove </a></span> 

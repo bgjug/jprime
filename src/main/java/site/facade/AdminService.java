@@ -1,5 +1,7 @@
 package site.facade;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +11,30 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import site.config.Globals;
-import site.model.*;
-import site.repository.*;
-
-import java.util.List;
+import site.model.Article;
+import site.model.Branch;
+import site.model.Partner;
+import site.model.Registrant;
+import site.model.Session;
+import site.model.Speaker;
+import site.model.Sponsor;
+import site.model.Submission;
+import site.model.SubmissionStatus;
+import site.model.Tag;
+import site.model.User;
+import site.model.VenueHall;
+import site.model.Visitor;
+import site.repository.ArticleRepository;
+import site.repository.PartnerRepository;
+import site.repository.RegistrantRepository;
+import site.repository.SessionRepository;
+import site.repository.SpeakerRepository;
+import site.repository.SponsorRepository;
+import site.repository.SubmissionRepository;
+import site.repository.TagRepository;
+import site.repository.UserRepository;
+import site.repository.VenueHallRepository;
+import site.repository.VisitorRepository;
 
 @Service(AdminService.NAME)
 @Transactional
@@ -141,6 +163,11 @@ public class AdminService {
 	}
 	
 	public Speaker saveSpeaker(Speaker speaker){
+		if (speaker.getVideos() != null) {
+			speaker.setVideos(StringSanitizer.
+					formatString(speaker.getVideos()));
+		}
+
 		return speakerRepository.save(speaker);
 	}
 	

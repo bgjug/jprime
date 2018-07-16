@@ -117,6 +117,14 @@
 					<input name="file" type="file" />
 				</dd>
 			</dl>
+			<dl>
+				<dt>
+					<label for="videos">Videos</label>
+				</dt>
+				<dd>
+					<form:input path="videos" />
+				</dd>
+			</dl>
 			<sec:csrfInput />
 			<form:hidden path="id" />
 			<form:hidden path="createdDate" />

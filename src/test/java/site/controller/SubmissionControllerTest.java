@@ -15,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
 import site.config.Globals;
 import site.facade.CSVService;
+import site.facade.StringSanitizer;
 import site.model.Branch;
 import site.model.SessionLevel;
 import site.model.SessionType;
@@ -28,6 +29,8 @@ import java.io.File;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -55,7 +58,7 @@ public class SubmissionControllerTest {
     @Autowired
     @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
-    
+
     @Autowired
     @Qualifier(CSVService.NAME)
     private CSVService csvFacade;
@@ -72,7 +75,7 @@ public class SubmissionControllerTest {
 
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 
-        Speaker brianGoetz = new Speaker("Brian", "Goetz", "brian@oracle.com", "The Java Language Architect", "@briangoetz", true, true);
+        Speaker brianGoetz = new Speaker("Brian", "Goetz", "brian@oracle.com", "The Java Language Architect", "@briangoetz", true, true, "youtube.com,youtube.com;someurl.com");
         Speaker ivanIvanov = new Speaker("Ivan St.", "Ivanov", "ivan@jprime.io", "JBoss Forge", "@ivan_stefanov", false, true);
         Speaker naydenGochev = new Speaker("Nayden", "Gochev", "nayden@jprio.io", "The Spring Guy", "@gochev", false, true);
         Speaker ivanIvanov2 = new Speaker("Ivan St.", "Ivanov", "ivan@forge.com", "JBoss Forge", "@ivan_stefanov", false, true);
@@ -171,14 +174,30 @@ public class SubmissionControllerTest {
 
     @Test
     public void exportSubmissionsAsCSVShouldReturnSubmissionsCSVFile() throws Exception{
-    	File exportSubmissions = csvFacade.exportSubmissions(submissionRepository.
-    			findByBranchAndStatus(Globals.CURRENT_BRANCH, SubmissionStatus.SUBMITTED));
-    	String length = Long.toString(exportSubmissions.length());
-    	
-    	mockMvc.perform(get("/admin/submission/exportCSV/"))
-    	.andExpect(status().isOk())
-    	.andExpect(header().string("Content-Length", length));
-    	
-    	exportSubmissions.delete();
+        File exportSubmissions = csvFacade.exportSubmissions(submissionRepository.
+                findByBranchAndStatus(Globals.CURRENT_BRANCH, SubmissionStatus.SUBMITTED));
+        String length = Long.toString(exportSubmissions.length());
+
+        mockMvc.perform(get("/admin/submission/exportCSV/"))
+                .andExpect(status().isOk())
+                .andExpect(header().string("Content-Length", length));
+
+        exportSubmissions.delete();
+    }
+
+    @Test
+    public void videosTest() {
+        Speaker brianGoetz = new Speaker("Brian", "Goetz", "brian@oracle.com", "The Java Language Architect", "@briangoetz", true, true,
+                "youtube.com,, youtube.com;someurl.com\nsomeurl.com\t,anotherurl.com");
+        brianGoetz.setVideos(StringSanitizer.formatString(brianGoetz.getVideos()));
+        assertFalse(brianGoetz.getVideos().contains(","));
+        assertFalse(brianGoetz.getVideos().contains(",,"));
+        assertFalse(brianGoetz.getVideos().contains(";"));
+        assertFalse(brianGoetz.getVideos().contains("\n"));
+        assertFalse(brianGoetz.getVideos().contains("\t"));
+
+
+        assertTrue(StringSanitizer.formatString(brianGoetz.getVideos()).split(" ").length == 5);
+
     }
 }

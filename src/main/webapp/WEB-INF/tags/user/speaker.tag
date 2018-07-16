@@ -45,6 +45,14 @@
     </dd>
 </dl>
 <dl>
+	<dt>
+		<label for="${role}.videos">Video</label>
+	</dt>
+	<dd>
+		<form:textarea path="${role}.videos" style="width:80%" rows="3" />
+	</dd>
+</dl>
+<dl>
     <dt>
         <label for="${role}Image">Image</label>
     </dt>

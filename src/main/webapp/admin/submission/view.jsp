@@ -33,7 +33,9 @@
                 <td><i>Level</i></td>
 				<td><i>Type</i></td>
 				<td><i>Speaker</i></td>
+				<td><i>Speaker video</i></td>
 				<td><i>Co-Speaker</i></td>
+				<td><i>Co-Speaker video</i></td>
 				<td><i>Branch</i></td>
                 <td><i>Status</i></td>
 				<td><i>Operations</i></td>
@@ -45,7 +47,9 @@
                     <td>${submission.level}</td>
 					<td>${submission.type != null ? submission.type.toString() : "Conference session"}</td>
 					<td>${submission.speaker.firstName} ${submission.speaker.lastName}</td>
+					<td>${submission.speaker.videos}</td>
 					<td>${submission.coSpeaker.firstName} ${submission.coSpeaker.lastName}</td>
+					<td>${submission.coSpeaker.videos}</td>
 					<td>${submission.branch}</td>
                     <td>${submission.status}</td>
 					<td>

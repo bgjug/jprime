@@ -1,5 +1,8 @@
 package site.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,9 +16,6 @@ import javax.persistence.OneToMany;
 
 import site.config.Globals;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Speaker extends User {
@@ -23,6 +23,7 @@ public class Speaker extends User {
     /**
      *
      */
+	
     private static final long serialVersionUID = 1L;
 
     @Column(length = 1024)
@@ -38,6 +39,8 @@ public class Speaker extends User {
 
     @Lob
     private byte[] picture;
+    
+    private String videos;
 
     @OneToMany(mappedBy = "speaker", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, targetEntity = Submission.class)
     private Set<Submission> submissions = new HashSet<>();
@@ -56,6 +59,17 @@ public class Speaker extends User {
         this.twitter = twitter;
         this.featured = featured;
         this.accepted = accepted;
+    }
+    
+    public Speaker(String firstName, String lastName, String email, String headline, String twitter, boolean featured, boolean accepted, String videos) {
+        setFirstName(firstName);
+        setLastName(lastName);
+        setEmail(email);
+        this.headline = headline;
+        this.twitter = twitter;
+        this.featured = featured;
+        this.accepted = accepted;
+        setVideos(videos);
     }
 
     public byte[] getPicture() {
@@ -80,6 +94,13 @@ public class Speaker extends User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+    
+    public String getVideos() {
+    	return videos;
+    }
+    public void setVideos(String videos) {
+    	this.videos = videos;
     }
 
     public String getTwitter() {
