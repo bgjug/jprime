@@ -49,16 +49,16 @@
             <!-- Carousel inner -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img class="img-responsive" src="images/slider/artwork.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/index2.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
                             <h2 class="animated2 white" style="text-shadow: 3px 3px black;">
-                                <span><strong><!--Java Prime Time in Sofia--></strong></span>
+                                <span><strong>Java Prime Time in Sofia</strong></span>
                             </h2>
 
                             <h3 class="animated3 white" style="text-shadow: 2px 2px black;">
-                                <span><!--29 and 30 May 2019--></span>
+                                <span>28 and 29 May 2019</span>
                             </h3>
                             <%--
                             <p class="animated4"><a href="#about" class="slider btn btn-primary">read more</a>
@@ -68,7 +68,7 @@
                 </div>
                 <!--/ Carousel item end -->
                 <div class="item">
-                    <img class="img-responsive" src="images/slider/index1.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/index3.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
@@ -80,7 +80,9 @@
                                 <span>2 full days</span>
                             </h3>
 
-                            <p class="animated4"><a href="tickets/epay" class="slider btn btn-primary">Buy a ticket</a>
+                            <!--
+                                <p class="animated4"><a href="tickets/epay" class="slider btn btn-primary">Buy a ticket</a>
+                            -->
                             </p>
 
                         </div>
@@ -88,13 +90,13 @@
                 </div>
                 <!--/ Carousel item end -->
                 <div class="item">
-                    <img class="img-responsive" src="images/slider/index3.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/index1.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
                             <h2 class="animated7 white" style="text-shadow: 3px 3px black;">
-<!--                                 <span>Become a <strong>Sponsor</strong></span> -->
-									<span>Student <strong>tickets !</strong></span>
+                                    <span>Become a <strong>Sponsor</strong></span>
+									<!-- <span>Student <strong>tickets !</strong></span> -->
                             </h2>
 
                             <h3 class="animated8 white" style="text-shadow: 2px 2px black;">
@@ -102,9 +104,9 @@
                             </h3>
 
                             <div class="">
-                                <a class="animated4 slider btn btn-primary btn-min-block" href="#sponsors">Get Ticket</a>
                                 <a class="animated4 slider btn btn-default btn-min-block"
                                                   href="#sponsors">Learn More</a>
+                                <!--<a class="animated4 slider btn btn-primary btn-min-block" href="#sponsors">Get Ticket</a> -->
                             </div>
                         </div>
                     </div>
