@@ -159,7 +159,7 @@
             <div class="copyright-section">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>&copy; 2018 jPrime - All Rights Reserved <a href="http://jprime.io">jPrime</a></p>
+                        <p>&copy; 2019 jPrime - All Rights Reserved <a href="http://jprime.io">jPrime</a></p>
                     </div>
                     <!-- .col-md-6 -->
                     <div class="col-md-6">

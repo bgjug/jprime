@@ -58,7 +58,7 @@
                             </h2>
 
                             <h3 class="animated3 white" style="text-shadow: 2px 2px black;">
-                                <span><!--29 and 30 May 2018--></span>
+                                <span><!--29 and 30 May 2019--></span>
                             </h3>
                             <%--
                             <p class="animated4"><a href="#about" class="slider btn btn-primary">read more</a>
@@ -254,7 +254,7 @@
         <!-- End Big Heading -->
 
         <p class="text-center">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices.
-            <br/> Its forth edition will be held on <strong>29th and 30th May 2018</strong> in Sofia Tech Park.
+            <br/> Its forth edition will be held on <strong>28th and 29th May 2019</strong> in Sofia Tech Park.
             It's run by the Bulgarian Java User Group and backed by the biggest companies in the city.
             <br/><br/>jPrime features a combination of great international speakers along with the best presenters from
             Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning,
@@ -264,7 +264,7 @@
 
             <!-- Start Big Heading --/>
             <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                <h1>We are done for this year! <strong>See you in 2018!</strong></h1>
+                <h1>We are done for this year! <strong>See you in 2019!</strong></h1>
             </div>
         </div>
 -->

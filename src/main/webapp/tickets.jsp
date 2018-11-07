@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2018">
+    <meta name="description" content="jPrime 2019">
     <meta name="author" content="jPrime">
     <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
     
@@ -56,11 +56,11 @@
                             <p>* There is a free pass for a JUG lead (one per Java User Group).</p>
 
  							-->
-                             <h2>Registration is now closed</h2>
+                             <h2>Registration is closed</h2>
                              <p>
-                             	<p>The registration is currently closed, see you in 2018 :)</p>
-                             	<p>Note that live streaming of the event will be available from 29 May to 30 May.</p>
-                             	<p>All recordings will be available at a later time.</p>
+                             	<p>The registration is currently closed, see you in 2019 :)</p>
+                             	<p>Note that the recordings of the previous conference are available at <a href="https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3">https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3</a> .</p>
+                             	<p>The tickets registration for 2019 will be opened at the beginning of 2019.</p>
                              </p>
                         </div>
                         <!-- End Single Post Content -->
