@@ -43,7 +43,7 @@
             </p>
 
             <center>
-                <img alt="techpark" src="/images/sftp.png" width="100%"/><br/><br/>
+                <img alt="techpark" src="/images/venue.jpg" width="100%"/><br/><br/>
             </center>
             <center>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11734.949903249553!2d23.3733712!3d42.6669183!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcbc66ddbb54d08b3!2z0KHQvtGE0LjRjyDRgtC10YUg0L_QsNGA0Lo!5e0!3m2!1sru!2sbg!4v1494940078038" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
