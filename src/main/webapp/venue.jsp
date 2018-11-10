@@ -22,7 +22,6 @@
     <!-- Page Description and Author -->
     <meta name="description" content="JPrime Conference">
     <meta name="author" content="JPrime">
-    <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
 
     <user:pageJavaScriptAndCss/>
 

@@ -27,7 +27,6 @@
     <meta name="author" content="jPrime">
 
 
-    <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
 
     <user:pageJavaScriptAndCss/>
 
