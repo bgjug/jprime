@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
+import site.config.Globals;
 import site.model.Registrant;
 import site.model.VisitorStatus;
 import site.repository.RegistrantRepository;
@@ -59,7 +60,7 @@ public class TicketsEpayRegisterControllerTest {
         mockMvc.perform(get("/tickets/epay"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("registrant", is(new Registrant())))
-                .andExpect(view().name(TICKETS_REGISTER_JSP));
+                .andExpect(view().name(Globals.PAGE_TICKETS));
     }
 
     @Test
@@ -147,7 +148,7 @@ public class TicketsEpayRegisterControllerTest {
     public void getTicketsEpayShouldReturnEmptyRegistrant() throws Exception {
         mockMvc.perform(get("/tickets/epay"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(TICKETS_REGISTER_JSP))
+                .andExpect(view().name(Globals.PAGE_TICKETS))
                 .andExpect(model().attribute("registrant", new Registrant()));
     }
 }
