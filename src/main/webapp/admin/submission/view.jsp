@@ -52,6 +52,7 @@
 						<span style="float:left;"><a href="/admin/submission/accept/${submission.id}">Accept</a></span> <br>
 						<span style="float:left;"><a href="/admin/submission/reject/${submission.id}">Reject</a></span> <br>
                         <span style="float:left;"><a href="/admin/submission/edit/${submission.id}">Edit</a></span>
+						<span style="float:left;"><a href="/admin/submission/notify/${submission.id}">Notify</a></span>
 					</td>
 				</tr>
 			</c:forEach>

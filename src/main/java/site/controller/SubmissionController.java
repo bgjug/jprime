@@ -57,7 +57,7 @@ public class SubmissionController extends AbstractCfpController {
     @Autowired
     @Qualifier(CSVService.NAME)
     private CSVService csvFacade;
-    
+
     @RequestMapping(value = "/view/all", method = RequestMethod.GET)
     public String listAllSubmissions(Model model, Pageable pageable) {
         Page<Submission> submissions = adminFacade.findAllSubmissions(pageable);
@@ -99,6 +99,17 @@ public class SubmissionController extends AbstractCfpController {
             sendEmails(submission, "/acceptSubmission.html");
         } catch (Exception e) {
             logger.error("Could not send accept email", e);
+        }
+        return REDIRECT + "/admin/submission/view";
+    }
+
+    @RequestMapping(value = "/notify/{submissionId}", method = RequestMethod.GET)
+    public String notify(@PathVariable("submissionId") Long submissionId) {
+        Submission submission = adminFacade.findOneSubmission(submissionId);
+        try {
+            sendNotificationEmails(submission);
+        } catch (Exception e) {
+            logger.error("Could not send notification emails", e);
         }
         return REDIRECT + "/admin/submission/view";
     }
