@@ -29,6 +29,8 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static site.controller.ResourceAsString.resourceAsString;
+
 @Controller
 public class UserController {
 
@@ -83,7 +85,7 @@ public class UserController {
 			String mailContent = buildWelcomeMailContent(user, "/welcomingMail.html");
 			String mailTitle = "Welcome to JPrime!";
 			mailService.sendEmail(user.getEmail(), mailTitle, mailContent);
-		} catch (MessagingException | IOException | URISyntaxException e) {
+		} catch (MessagingException | IOException e) {
 			logger.error("Error while sending Welcoming Mail to  " + user, e);
 		}
 
@@ -152,7 +154,7 @@ public class UserController {
 				String mailContent = buildResetMailContent(user, tokenId, "/resetPasswordMail.html");
 				String mailTitle = "Reset your JPrime password";
 				mailService.sendEmail(email, mailTitle, mailContent);
-			} catch (MessagingException | IOException | URISyntaxException e) {
+			} catch (MessagingException | IOException e) {
 			    logger.error("Error while sending ResetPassword Mail to  " + user, e);
 			}
 		}
@@ -216,9 +218,8 @@ public class UserController {
 	}
 	
     private String buildResetMailContent(User user, String tokenId, String fileName)
-            throws IOException, URISyntaxException {
-        String messageText = new String(Files.readAllBytes(Paths.get(getClass().getResource(
-                fileName).toURI())));
+            throws IOException {
+        String messageText = resourceAsString(fileName);
         messageText = messageText.replace("{user.firstName}", user.getFirstName());
         String url = createNewPasswordUrl+tokenId;
         messageText = messageText.replace("{url}", url);
@@ -226,9 +227,8 @@ public class UserController {
     }
     
     private String buildWelcomeMailContent(User user, String fileName)
-            throws IOException, URISyntaxException {
-        String messageText = new String(Files.readAllBytes(Paths.get(getClass().getResource(
-                fileName).toURI())));
+            throws IOException {
+        String messageText = resourceAsString(fileName);
         messageText = messageText.replace("{user.firstName}", user.getFirstName());
         return messageText;
     }

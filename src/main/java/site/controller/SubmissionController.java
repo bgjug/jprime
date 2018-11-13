@@ -36,6 +36,8 @@ import site.facade.CSVService;
 import site.model.Branch;
 import site.model.Submission;
 
+import static site.controller.ResourceAsString.resourceAsString;
+
 /**
  * @author Ivan St. Ivanov
  */
@@ -164,9 +166,8 @@ public class SubmissionController extends AbstractCfpController {
     }
 
     private String buildMessage(Submission submission, String fileName)
-            throws IOException, URISyntaxException {
-        String messageText = new String(Files.readAllBytes(Paths.get(getClass().getResource(
-                fileName).toURI())));
+            throws IOException {
+        String messageText = resourceAsString(fileName);
         messageText = messageText.replace("{speaker.firstName}", submission.getSpeaker().getFirstName());
         messageText = messageText.replace("{submission.title}", submission.getTitle());
         return messageText;

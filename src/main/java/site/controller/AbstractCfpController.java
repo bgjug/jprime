@@ -2,9 +2,6 @@ package site.controller;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -25,6 +22,8 @@ import site.model.SessionLevel;
 import site.model.Speaker;
 import site.model.Submission;
 import site.model.SessionType;
+
+import static site.controller.ResourceAsString.resourceAsString;
 
 /**
  * @author Ivan St. Ivanov
@@ -109,13 +108,12 @@ public class AbstractCfpController {
         this.mailFacade = mailFacade;
     }
 
-    private String loadMailContentTemplate(String templateFileName)
-        throws IOException, URISyntaxException {
-        return new String(Files.readAllBytes(Paths.get(getClass().getResource("/" + templateFileName).toURI())));
+    private String loadMailContentTemplate(String templateFileName) throws IOException {
+        return resourceAsString("/" + templateFileName);
     }
 
     public void sendNotificationEmails(Submission submission)
-        throws IOException, URISyntaxException, MessagingException {
+        throws IOException, MessagingException {
 
             mailFacade.sendEmail(submission.getSpeaker().getEmail(), "jPrime talk proposal",
                 loadMailContentTemplate("submissionContent.html"));
