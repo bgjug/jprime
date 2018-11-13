@@ -41,7 +41,7 @@ public class AgendaController {
 		model.addAttribute("firstDayDate", startDate);
 		model.addAttribute("secondDayDate", startDate.plusDays(1));
 
-		model.addAttribute("agenda", false);
+		model.addAttribute("agenda", Globals.AGENDA);
 
     	//we have 2 options here
     	//option one iterate on all alpha on the view and with status=i and use i.count in beta to get the beta talk with the same position as in alpha.
