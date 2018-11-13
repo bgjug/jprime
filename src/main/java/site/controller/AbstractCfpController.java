@@ -1,5 +1,10 @@
 package site.controller;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -25,6 +30,8 @@ import site.model.SessionType;
  * @author Ivan St. Ivanov
  */
 public class AbstractCfpController {
+
+    public static final String JPRIME_CONF_MAIL_ADDRESS = "conference@jprime.io";
 
     @Autowired
     @Qualifier(UserService.NAME)
@@ -101,5 +108,33 @@ public class AbstractCfpController {
     void setMailFacade(MailService mailFacade) {
         this.mailFacade = mailFacade;
     }
+
+    private String loadMailContentTemplate(String templateFileName)
+        throws IOException, URISyntaxException {
+        return new String(Files.readAllBytes(Paths.get(getClass().getResource("/" + templateFileName).toURI())));
+    }
+
+    public void sendNotificationEmails(Submission submission)
+        throws IOException, URISyntaxException, MessagingException {
+
+            mailFacade.sendEmail(submission.getSpeaker().getEmail(), "jPrime talk proposal",
+                loadMailContentTemplate("submissionContent.html"));
+            if (submission.getCoSpeaker() != null) {
+                mailFacade.sendEmail(submission.getCoSpeaker().getEmail(), "jPrime talk proposal",
+                    loadMailContentTemplate("submissionContent.html"));
+            }
+            mailFacade.sendEmail(JPRIME_CONF_MAIL_ADDRESS, "New talk proposal",
+                prepareNewSubmissionContent(submission, loadMailContentTemplate("newSubmission.html")
+                ));
+
+    }
+
+    private String prepareNewSubmissionContent(Submission submission, String template) {
+        return template.replace("{session.title}", submission.getTitle())
+                       .replace("{session.abstract}", submission.getDescription())
+                       .replace("{speaker.name}", submission.getSpeaker().getFirstName() + " " + submission.getSpeaker().getLastName())
+                       .replace("{speaker.bio}", submission.getSpeaker().getBio());
+    }
+
 
 }
