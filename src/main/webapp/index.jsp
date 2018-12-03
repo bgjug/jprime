@@ -407,115 +407,115 @@
     </div>
     <!-- End Pricing Table for Sponsors Section -->
 
-    <!-- Start Pricing Table for Sponsors Section -->
-    <div class=" section pricing-section" id="sponsors">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Start Big Heading -->
-                    <div class="big-title text-center">
-                        <h1>Buy a <strong>Ticket!</strong></h1>
-                    </div>
-                    <!-- End Big Heading -->
-                </div>
-            </div>
+    <!-- Start Pricing Table for tickets Section -->
+    <%--<div class=" section pricing-section" id="tickets">--%>
+        <%--<div class="container">--%>
+            <%--<div class="row">--%>
+                <%--<div class="col-md-12">--%>
+                    <%--<!-- Start Big Heading -->--%>
+                    <%--<div class="big-title text-center">--%>
+                        <%--<h1>Buy a <strong>Ticket!</strong></h1>--%>
+                    <%--</div>--%>
+                    <%--<!-- End Big Heading -->--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
-            <div class="row pricing-tables">
+            <%--<div class="row pricing-tables">--%>
 
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5; margin-bottom: -200px;">
-                    <div class="pricing-table">
-                        <div class="plan-name">
-                            <h3>Early bird ticket</h3>
-                            <span>(Until 15th of March)</span>
-                        </div>
-                        <div class="plan-price">
-                            <div class="price-value">140<span>.00</span> BGN</div>
-                        </div>
-                        <div class="plan-list">
-                            <ul>
-                                <li><strong>2</strong> days conference</li>
-                                <li><strong>28+</strong> awesome talks!</li>
-                                <li><strong>Hands-on</strong> labs!</li>
-                                <li><strong>Lunch</strong> box</li>
-                                <li><strong>A bag</strong> full of goodies</li>
-                                <li><strong>Free T-shirt!</strong></li>
-                                <li><strong>Raffle !</strong></li>
-                                <li><strong>Beers !</strong></li>
-                                <li><strong>Coffee</strong> and soft drinks</li>
-                            </ul>
-                        </div>
-                        <div class="plan-signup">
-                            <a href="#"
-                               class="btn-system btn-small">Over</a>
+                <%--<div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5; margin-bottom: -200px;">--%>
+                    <%--<div class="pricing-table">--%>
+                        <%--<div class="plan-name">--%>
+                            <%--<h3>Early bird ticket</h3>--%>
+                            <%--<span>(Until 15th of March)</span>--%>
+                        <%--</div>--%>
+                        <%--<div class="plan-price">--%>
+                            <%--<div class="price-value">140<span>.00</span> BGN</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="plan-list">--%>
+                            <%--<ul>--%>
+                                <%--<li><strong>2</strong> days conference</li>--%>
+                                <%--<li><strong>28+</strong> awesome talks!</li>--%>
+                                <%--<li><strong>Hands-on</strong> labs!</li>--%>
+                                <%--<li><strong>Lunch</strong> box</li>--%>
+                                <%--<li><strong>A bag</strong> full of goodies</li>--%>
+                                <%--<li><strong>Free T-shirt!</strong></li>--%>
+                                <%--<li><strong>Raffle !</strong></li>--%>
+                                <%--<li><strong>Beers !</strong></li>--%>
+                                <%--<li><strong>Coffee</strong> and soft drinks</li>--%>
+                            <%--</ul>--%>
+                        <%--</div>--%>
+                        <%--<div class="plan-signup">--%>
+                            <%--<a href="#"--%>
+                               <%--class="btn-system btn-small">Over</a>--%>
 
-                        </div>
-                    </div>
-                </div>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
-                    <div class="pricing-table">
-                        <div class="plan-name">
-                            <h3>Regular ticket</h3>
-                            <span>(After 15th of March)</span>
-                        </div>
-                        <div class="plan-price">
-                            <div class="price-value">200<span>.00</span> BGN</div>
-                        </div>
-                        <div class="plan-list">
-                            <ul>
-                                <li><strong>2</strong> days conference</li>
-                                <li><strong>28+</strong> awesome talks!</li>
-                                <li><strong>Hands-on</strong> labs!</li>
-                                <li><strong>Lunch</strong> box</li>
-                                <li><strong>A bag</strong> full of goodies</li>
-                                <li><strong>Free T-shirt!</strong></li>
-                                <li><strong>Raffle !</strong></li>
-                                <li><strong>Beers !</strong></li>
-                                <li><strong>Coffee</strong> and soft drinks</li>
-                            </ul>
-                        </div>
-                        <div class="plan-signup">
-                            <a href="tickets/epay"
-                               class="btn-system btn-small">Get It Now</a>
+                <%--<div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">--%>
+                    <%--<div class="pricing-table">--%>
+                        <%--<div class="plan-name">--%>
+                            <%--<h3>Regular ticket</h3>--%>
+                            <%--<span>(After 15th of March)</span>--%>
+                        <%--</div>--%>
+                        <%--<div class="plan-price">--%>
+                            <%--<div class="price-value">200<span>.00</span> BGN</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="plan-list">--%>
+                            <%--<ul>--%>
+                                <%--<li><strong>2</strong> days conference</li>--%>
+                                <%--<li><strong>28+</strong> awesome talks!</li>--%>
+                                <%--<li><strong>Hands-on</strong> labs!</li>--%>
+                                <%--<li><strong>Lunch</strong> box</li>--%>
+                                <%--<li><strong>A bag</strong> full of goodies</li>--%>
+                                <%--<li><strong>Free T-shirt!</strong></li>--%>
+                                <%--<li><strong>Raffle !</strong></li>--%>
+                                <%--<li><strong>Beers !</strong></li>--%>
+                                <%--<li><strong>Coffee</strong> and soft drinks</li>--%>
+                            <%--</ul>--%>
+                        <%--</div>--%>
+                        <%--<div class="plan-signup">--%>
+                            <%--<a href="tickets/epay"--%>
+                               <%--class="btn-system btn-small">Get It Now</a>--%>
 
-                        </div>
-                    </div>
-                </div>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
-                    <div class="pricing-table">
-                        <div class="plan-name">
-                            <h3>Student ticket</h3>
-                            <span>(Available at all times)</span>
-                        </div>
-                        <div class="plan-price">
-                            <div class="price-value">100<span>.00</span> BGN</div>
-                        </div>
-                        <div class="plan-list">
-                            <ul>
-                                <li><strong>2</strong> days conference</li>
-                                <li><strong>28+</strong> awesome talks!</li>
-                                <li><strong>Hands-on</strong> labs!</li>
-                                <li><strong>Lunch</strong> box</li>
-                                <li><strong>A bag</strong> full of goodies</li>
-                                <li><strong>Free T-shirt!</strong></li>
-                                <li><strong>Raffle !</strong></li>
-                                <li><strong>Beers !</strong></li>
-                                <li><strong>Coffee</strong> and soft drinks</li>
-                            </ul>
-                        </div>
-                        <div class="plan-signup">
-                            <a href="tickets/epay"
-                               class="btn-system btn-small">Get It Now</a>
+                <%--<div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">--%>
+                    <%--<div class="pricing-table">--%>
+                        <%--<div class="plan-name">--%>
+                            <%--<h3>Student ticket</h3>--%>
+                            <%--<span>(Available at all times)</span>--%>
+                        <%--</div>--%>
+                        <%--<div class="plan-price">--%>
+                            <%--<div class="price-value">100<span>.00</span> BGN</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="plan-list">--%>
+                            <%--<ul>--%>
+                                <%--<li><strong>2</strong> days conference</li>--%>
+                                <%--<li><strong>28+</strong> awesome talks!</li>--%>
+                                <%--<li><strong>Hands-on</strong> labs!</li>--%>
+                                <%--<li><strong>Lunch</strong> box</li>--%>
+                                <%--<li><strong>A bag</strong> full of goodies</li>--%>
+                                <%--<li><strong>Free T-shirt!</strong></li>--%>
+                                <%--<li><strong>Raffle !</strong></li>--%>
+                                <%--<li><strong>Beers !</strong></li>--%>
+                                <%--<li><strong>Coffee</strong> and soft drinks</li>--%>
+                            <%--</ul>--%>
+                        <%--</div>--%>
+                        <%--<div class="plan-signup">--%>
+                            <%--<a href="tickets/epay"--%>
+                               <%--class="btn-system btn-small">Get It Now</a>--%>
 
-                        </div>
-                    </div>
-                </div>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
-            </div>
-        </div>
-    </div>
-    <!-- End Pricing Table for Sponsors Section -->
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <!-- End Pricing Table for tickets Section -->
 
 
     <!-- Start Sponsor Section -->
