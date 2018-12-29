@@ -71,7 +71,7 @@
                     <img class="img-responsive" src="images/slider/index3.jpg" alt="slider">
 
                     <div class="slider-content">
-                        <div class="col-md-12 text-center">
+                        <div class="col-md-12 text-centerpartnerChunks">
                             <h2 class="animated4 white" style="text-shadow: 3px 3px black;">
                                 <span><strong>jPrime</strong> wants YOU </span>
                             </h2>
@@ -574,9 +574,41 @@
     </div>
     <!-- End Sponsor Section -->
 
+    <!-- Start Official Supporters Partners Section -->
+    <c:if test="${fn:length(officialSupporterPartnersChunks) gt 0}">
+        <div class="partner">
+            <div class="container">
+                <div class="row">
+
+                    <div class="big-title text-center" >
+                        <h1><strong>Official </strong> Supporters</h1>
+                    </div>
+
+                    <div class="our-clients">
+                        <c:forEach var="partners" items="${officialSupporterPartnersChunks}">
+
+                            <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partners) gt 3? '3' : fn:length(partners)}" data-appeared-items="${fn:length(partners)}"
+                                 data-navigation="true">
+
+                                <c:forEach var="partner" items="${partners}">
+                                    <div class="client-item item">
+                                        <a href="${partner.companyWebsite}"><img src="/image/partner/${partner.id}"
+                                                                                 alt="${partner.companyName}"/></a>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </c:forEach>
+
+                    </div>
+                    <!-- End Clients Carousel -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </div>
+    </c:if>
+    <!-- End Official Supporters Partners Section -->
 
     <!-- Start Media Partners Section -->
-    <c:if test="${fn:length(partnerChunks) gt 0}">
+    <c:if test="${fn:length(mediaPartnersChunks) gt 0}">
 	    <div class="partner">
 	        <div class="container">
 	            <div class="row">
@@ -586,7 +618,7 @@
 	                </div>
 
 	                <div class="our-clients">
-	                     <c:forEach var="partners" items="${partnerChunks}">
+	                     <c:forEach var="partners" items="${mediaPartnersChunks}">
 
                                 <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partners) gt 3? '3' : fn:length(partners)}" data-appeared-items="${fn:length(partners)}"
                                              data-navigation="true">

@@ -69,7 +69,7 @@
 			</dl>
 			<dl>
 				<dt>
-					<label for="package">package ( type MEDIA, OTHER)</label>
+					<label for="package">package ( type MEDIA, OTHER or SUPPORTER)</label>
 				</dt>
 				<dd>
 					<form:input path="partnerPackage" />
