@@ -28,6 +28,7 @@ public class CfpController extends AbstractCfpController {
 
     public static final String CFP_OPEN_JSP = "/proposal.jsp";
     public static final String CFP_CLOSED_JSP = "/cfp-closed.jsp";
+    public static final String CFP_THANK_YOU = "/cfp-thank-you.jsp";
 
     @RequestMapping(value = "/cfp", method = RequestMethod.GET)
     public String submissionForm(Model model) {
@@ -69,7 +70,13 @@ public class CfpController extends AbstractCfpController {
             logger.error("Could not send confirmation email", e);
         }
 
-        return "redirect:/";
+        return "redirect:/cfp-thank-you";
+    }
+
+        @RequestMapping(value = "/cfp-thank-you", method = RequestMethod.GET)
+    public String thankYou(Model model) {
+        model.addAttribute("tags", userFacade.findAllTags());
+        return CfpController.CFP_THANK_YOU;
     }
 
     private String validateEmail(BindingResult bindingResult, Submission submission, Model model, String email, String role) {

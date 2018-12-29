@@ -11,7 +11,11 @@ import site.model.Partner;
 import site.model.Sponsor;
 import site.model.SponsorPackage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class IndexController {
@@ -40,15 +44,20 @@ public class IndexController {
         model.addAttribute("acceptedSpeakers", userFacade.findAcceptedSpeakers());
 
         // split partners in groups for better display in rows
-        List<Partner> partners = userFacade.findAllActiveMediaPartners();
-        Collections.shuffle(partners);
-        List<List<Partner>> partnerChunks = getPartnerChunks(partners);
-        model.addAttribute("partnerChunks", partnerChunks);
+        List<Partner> officialSupporterPartners = userFacade.findAllActiveOfficalSupportingPartners();
+        Collections.shuffle(officialSupporterPartners);
+        List<List<Partner>> officialSupporterPartnersChunks = getPartnerChunks(officialSupporterPartners);
+        model.addAttribute("officialSupporterPartnersChunks", officialSupporterPartnersChunks);
+
+
+        List<Partner> mediaPartners = userFacade.findAllActiveMediaPartners();
+        Collections.shuffle(mediaPartners);
+        List<List<Partner>> mediaPartnersChunks = getPartnerChunks(mediaPartners);
+        model.addAttribute("mediaPartnersChunks", mediaPartnersChunks);
 
         List<Partner> eventPartners = userFacade.findAllActiveEventPartners();
         Collections.shuffle(eventPartners);
         List<List<Partner>> eventPartnerChunks = getPartnerChunks(eventPartners);
-
         model.addAttribute("eventPartnerChunks", eventPartnerChunks);
 
 		return PAGE_INDEX;
