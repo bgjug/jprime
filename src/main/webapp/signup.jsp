@@ -57,31 +57,32 @@
 	                    
                                 <div class="form-wrapper">
                                     <label for="firstName">First Name</label> <br/>
-                                    <input type="text" name="firstName" id="name"><br/>
+                                    <input type="text" name="firstName" id="name">
 		                        	<form:errors path="firstName"/>
                                 </div>
                                 <div class="form-wrapper">
                                     <label for="lastName">Last Name</label><br/>
-                                    <input type="text" name="lastName" id="username"><br/>
+                                    <input type="text" name="lastName" id="username">
 		                        	 <form:errors path="lastName"/>
                                 </div>
                                 <div class="form-wrapper">
                                     <label for="email">Email *</label><br/>
-                                    <input type="email" name="email" id="email"><br/>
+                                    <input type="email" name="email" id="email">
 		                        	<form:errors path="email"/>
                                 </div>
                                 <div class="form-wrapper">
                                     <label for="password">Password *</label><br/>
-                                    <input type="password" name="password" id="password"><br/>
+                                    <input type="password" name="password" id="password">
 		                        	<form:errors path="password"/>
                                 </div>
                                 <div class="form-wrapper">
                                     <label for="password">Confirm password *</label><br/>
-                                    <input type="password" name="cpassword" id="cpassword"><br/>
+                                    <input type="password" name="cpassword" id="cpassword">
 		                        	<form:errors path="cpassword"/>
                                 </div>
                                 <br/>
-                                <input type="submit" value="Join" class="btn">
+                                <input type="submit" value="Register" class="btn">
+                                <a href="<c:out value='/login'/>" style="margin-left: 30px; position: absolute;">Back to Login?</a>
                             </form:form>
                              </p>
                         </div>

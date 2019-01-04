@@ -22,10 +22,10 @@
                                 </li>
                                 <li>
                                     <form action="https://jprime.us13.list-manage.com/subscribe/post?u=968bc6e2a2348118b259c0df2&amp;id=c9a8e30e18" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
-                                        <input value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required="" type="email">
+                                        <input value="" name="EMAIL" class="email inputsm" id="mce-EMAIL" placeholder="email address" required="" type="email">
                                         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                                         <div style="position: absolute; left: -5000px;" aria-hidden="true"><input name="b_968bc6e2a2348118b259c0df2_c9a8e30e18" tabindex="-1" value="" type="text"></div>
-                                        <input class="btn-system btn-small" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" type="submit">
+                                        <input class="btn btn-link" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" type="submit">
                                     </form>
 
                                 </li>
@@ -41,12 +41,15 @@
                                 <li>
                                     <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" href="https://www.facebook.com/jprimeConf"><i class="fa fa-facebook"></i></a>
                                 </li>
+                                <%-- This ones no one uses anymore --%>
+                                <%--
                                 <li>
                                     <a class="google itl-tooltip" data-placement="bottom" title="Google" href="https://plus.google.com/u/2/108212814919981345652/posts"><i class="fa fa-google"></i></a>
                                 </li>
                                 <li>
                                     <a class="linkedin itl-tooltip" data-placement="bottom" title="Linkedin" href="https://www.linkedin.com/groups/jPrime-8290432"><i class="fa fa-linkedin"></i></a>
                                 </li>
+                                --%>
                             </ul>
                             <!-- End Social Links -->
                         </div><!-- .col-md-6 -->
@@ -132,6 +135,10 @@
                                     <a href="/nav/${tag.name}"><c:out value="${tag.name}"/></a>
                                 </li>
                             </c:forEach>
+
+                            <li>
+                                <a <c:if test='${"/login.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/login">Login/Register</a>
+                            </li>
                             <%--
                             <li>
                                 <a href="#">Shortcodes</a>

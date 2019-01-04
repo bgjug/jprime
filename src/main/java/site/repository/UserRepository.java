@@ -1,11 +1,10 @@
 package site.repository;
 
-import java.util.List;
-
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
-
 import site.model.User;
+
+import java.util.List;
 
 @Repository(value = UserRepository.NAME)
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
@@ -14,6 +13,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 	List<User> findByEmail(String email);
 	
-	public User findUserByEmail(String email);
+	User findUserByEmail(String email);
 
 }

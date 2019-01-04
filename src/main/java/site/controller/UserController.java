@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,9 +24,6 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import static site.controller.ResourceAsString.resourceAsString;
 
@@ -43,11 +39,7 @@ public class UserController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	//@Autowired - Spring cannot find the Bean and it is not used anywhere, so we do not need it
-	//private AuthenticationManager authenticationManager;
 
-	
 	@Autowired
 	protected MailService mailService;
 	
@@ -73,6 +65,13 @@ public class UserController {
 
 		if (StringUtils.isEmpty(user.getPassword()) || !user.getPassword().equals(user.getCpassword())) {
 			bindingResult.rejectValue("cpassword", "notmatch.password", "Passwords dont match!");
+
+			return "/signup.jsp";
+		}
+
+		User existingUser = userRepository.findUserByEmail(user.getEmail());
+		if (existingUser != null) {
+			bindingResult.rejectValue("email", "email.exists", "This email already exists, please use forgot password");
 
 			return "/signup.jsp";
 		}
