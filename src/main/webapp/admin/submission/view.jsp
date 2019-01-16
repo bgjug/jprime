@@ -10,6 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/js/niceforms.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css" />
 <title>Insert title here</title>
@@ -53,6 +54,7 @@
 						<span style="float:left;"><a href="/admin/submission/reject/${submission.id}">Reject</a></span> <br>
                         <span style="float:left;"><a href="/admin/submission/edit/${submission.id}">Edit</a></span> <br>
 						<span style="float:left;"><a href="/admin/submission/notify/${submission.id}">Notify</a></span>
+						<span style="float:left;"><a href="/admin/submission/delete/${submission.id}" class="confirmation">Delete</a></span>
 					</td>
 				</tr>
 			</c:forEach>
@@ -69,6 +71,18 @@
 		<div>
 			<a style="float:right;" href="/admin/submission/add">Add</a>
 		</div>
+
+		<c:if test="${msg != null}">
+			<script type="text/javascript">
+				alert("${msg}")
+			</script>
+		</c:if>
 	</fieldset>
+
+	<script type="text/javascript">
+		$('.confirmation').on('click', function () {
+			return confirm('Please confirm that you want to delete this submission?');
+		});
+	</script>
 </body>
 </html>
