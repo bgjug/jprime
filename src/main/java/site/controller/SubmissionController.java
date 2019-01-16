@@ -130,10 +130,10 @@ public class SubmissionController extends AbstractCfpController {
     
     @RequestMapping(value = "/exportCSV", method = RequestMethod.GET, produces = PRODUCES_TYPE)
     public@ResponseBody void exportSubmissionsToCSV(HttpServletResponse response) {
-    	List<Submission> findAllSubmitedSubmissionsForCurrentBranch = adminFacade.findAllSubmitedSubmissionsForCurrentBranch();
+    	List<Submission> findAllSubmittedSubmissionsForCurrentBranch = adminFacade.findAllSubmitedSubmissionsForCurrentBranch();
     	File submissionsCSVFile;
 		try {
-			submissionsCSVFile = csvFacade.exportSubmissions(findAllSubmitedSubmissionsForCurrentBranch);
+			submissionsCSVFile = csvFacade.exportSubmissions(findAllSubmittedSubmissionsForCurrentBranch);
 		} catch (IOException e) {
 			logger.error("Could not create submissions file", e);
 			return;
