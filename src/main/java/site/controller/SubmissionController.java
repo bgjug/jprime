@@ -35,6 +35,7 @@ import site.facade.AdminService;
 import site.facade.CSVService;
 import site.model.Branch;
 import site.model.Submission;
+import site.model.SubmissionStatus;
 
 import static site.controller.ResourceAsString.resourceAsString;
 
@@ -126,6 +127,18 @@ public class SubmissionController extends AbstractCfpController {
             logger.error("Could not send rejection email", e);
         }
         return REDIRECT + "/admin/submission/view";
+    }
+
+    @RequestMapping(value = "/delete/{submissionId}", method = RequestMethod.GET)
+    public String delete(Model model, Pageable pageable, @PathVariable("submissionId") Long submissionId) {
+        Submission submission = adminFacade.findOneSubmission(submissionId);
+        if (submission.getStatus() != SubmissionStatus.SUBMITTED) {
+            model.addAttribute("msg", "Only SUBMITTED submissions can be deleted!");
+        } else {
+            adminFacade.deleteSubmission(submission);
+        }
+
+        return listSubmissions(model, pageable);
     }
 
     @RequestMapping(value = "/exportCSV", method = RequestMethod.GET, produces = PRODUCES_TYPE)
