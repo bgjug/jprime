@@ -219,6 +219,10 @@ public class AdminService {
         changeStatusTo(submission, SubmissionStatus.REJECTED);
     }
 
+	public void deleteSubmission(Submission submission) {
+		submissionRepository.delete(submission);
+	}
+
     private void changeStatusTo(Submission submission, SubmissionStatus status) {
         submission.setStatus(status);
         submissionRepository.save(submission);
