@@ -53,7 +53,7 @@
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
-                            <h2 class="animated2 white" style="text-shadow: 3px 3px black;">
+                            <%--h2 class="animated2 white" style="text-shadow: 3px 3px black;">
                                 <span><strong>Java Prime Time in Sofia</strong></span>
                             </h2>
 
@@ -68,7 +68,7 @@
                 </div>
                 <!--/ Carousel item end -->
                 <div class="item">
-                    <img class="img-responsive" src="images/slider/index3.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/index1.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-centerpartnerChunks">
@@ -90,7 +90,7 @@
                 </div>
                 <!--/ Carousel item end -->
                 <div class="item">
-                    <img class="img-responsive" src="images/slider/index1.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/index3.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
