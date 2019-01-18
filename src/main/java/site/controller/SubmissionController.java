@@ -55,7 +55,7 @@ public class SubmissionController extends AbstractCfpController {
     @Autowired
     @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
-    
+
     @Autowired
     @Qualifier(CSVService.NAME)
     private CSVService csvFacade;
@@ -67,13 +67,13 @@ public class SubmissionController extends AbstractCfpController {
         model.addAttribute("path", "all");
         return ADMIN_SUBMISSION_VIEW_JSP;
     }
-    
+
     @RequestMapping(value = "/view/{year}", method = RequestMethod.GET)
     public String listSubmissions(Model model, Pageable pageable, @PathVariable String year) {
     	Branch branch = Branch.valueOfYear(year);
         return listSubmissionsForBranch(model, pageable, branch);
     }
-    
+
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String listSubmissions(Model model, Pageable pageable) {
         return listSubmissionsForBranch(model, pageable, Globals.CURRENT_BRANCH);
@@ -127,7 +127,7 @@ public class SubmissionController extends AbstractCfpController {
         }
         return REDIRECT + "/admin/submission/view";
     }
-    
+
     @RequestMapping(value = "/exportCSV", method = RequestMethod.GET, produces = PRODUCES_TYPE)
     public@ResponseBody void exportSubmissionsToCSV(HttpServletResponse response) {
     	List<Submission> findAllSubmittedSubmissionsForCurrentBranch = adminFacade.findAllSubmitedSubmissionsForCurrentBranch();
@@ -138,7 +138,7 @@ public class SubmissionController extends AbstractCfpController {
 			logger.error("Could not create submissions file", e);
 			return;
 		}
-		
+
 		try(InputStream inputStream = new FileInputStream(submissionsCSVFile) ){
 	        response.setContentType(PRODUCES_TYPE);
 	        response.setHeader("Content-Disposition", "attachment; filename=" + submissionsCSVFile.getName());
@@ -153,7 +153,7 @@ public class SubmissionController extends AbstractCfpController {
     }
 
     private void sendEmails(Submission submission, String fileName)
-            throws IOException, URISyntaxException, MessagingException {
+            throws IOException, MessagingException {
         final String mailSubject = "Your jPrime talk proposal status";
         String messageText = buildMessage(submission, fileName);
         mailFacade.sendEmail(submission.getSpeaker().getEmail(), mailSubject, messageText);
@@ -170,6 +170,7 @@ public class SubmissionController extends AbstractCfpController {
         String messageText = resourceAsString(fileName);
         messageText = messageText.replace("{speaker.firstName}", submission.getSpeaker().getFirstName());
         messageText = messageText.replace("{submission.title}", submission.getTitle());
+        messageText = messageText.replace("{submission.year}", Globals.CURRENT_BRANCH.toString());
         return messageText;
     }
 

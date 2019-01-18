@@ -3,6 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="jprime.year" class="java.lang.String" isForPrompting="false"/>
 	<field name="invoiceDate" class="java.lang.String"/>
 	<field name="invoiceNumber" class="java.lang.String"/>
 	<field name="client" class="java.lang.String"/>
@@ -33,7 +34,7 @@
 				<textElement textAlignment="Center" lineSpacing="Single">
 					<font fontName="DejaVu Sans" size="18" pdfEncoding="Cp1251" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["jPrime 2018\nInvoice\n"+$F{invoiceType}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["jPrime " + $P{jprime.year} + "\nInvoice\n"+$F{invoiceType}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
