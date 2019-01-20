@@ -89,24 +89,6 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a <c:if test='${"/index.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/">Home </a>
-                                <%--<ul class="dropdown">
-                                    <li><a class="active" href="/">Home Main Version</a>
-                                    </li>
-                                    <li><a href="index-01.html">Home Version 1</a>
-                                    </li>
-                                    <li><a href="index-02.html">Home Version 2</a>
-                                    </li>
-                                    <li><a href="index-03.html">Home Version 3</a>
-                                    </li>
-                                    <li><a href="index-04.html">Home Version 4</a>
-                                    </li>
-                                    <li><a href="index-05.html">Home Version 5</a>
-                                    </li>
-                                    <li><a href="index-06.html">Home Version 6</a>
-                                    </li>
-                                    <li><a href="index-07.html">Home Version 7</a>
-                                    </li>
-                                </ul> --%>
                             </li>
                             <li>
                                 <a <c:if test='${"/proposal.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/cfp">Call for papers</a>
@@ -130,11 +112,18 @@
                                 <a <c:if test='${"/agenda.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/agenda">Agenda</a>
                             </li>
 
-                            <c:forEach var="tag" items="${tags}">
+                            <c:if test="${tags.size() > 0}">
                                 <li>
-                                    <a href="/nav/${tag.name}"><c:out value="${tag.name}"/></a>
+                                    <a href="#">Previous years</a>
+                                    <ul class="dropdown">
+                                        <c:forEach var="tag" items="${tags}">
+                                            <li>
+                                                <a href="/nav/${tag.name}"><c:out value="${tag.name}"/></a>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
                                 </li>
-                            </c:forEach>
+                            </c:if>
 
                             <li>
                                 <a <c:if test='${"/login.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/login">Login/Register</a>
