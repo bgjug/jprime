@@ -119,7 +119,7 @@
                             </li>
 
                             <li>
-                                <a <c:if test='${"/venue.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/venue">Venue/Useful info</a>
+                                <a <c:if test='${"/venue.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/venue">Useful info</a>
                             </li>
 
                             <li>
@@ -136,9 +136,12 @@
                                 </li>
                             </c:forEach>
 
+                            <%-- not yet required --%>
+                            <%--
                             <li>
                                 <a <c:if test='${"/login.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/login">Login/Register</a>
                             </li>
+                            --%>
                             <%--
                             <li>
                                 <a href="#">Shortcodes</a>
