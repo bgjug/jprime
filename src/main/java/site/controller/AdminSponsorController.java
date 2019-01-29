@@ -14,16 +14,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.AdminService;
 import site.facade.ThumbnailService;
-import site.model.Partner;
+import site.model.Speaker;
+import site.model.Sponsor;
 
 
 @Controller()
-@RequestMapping(value = "/admin/partner")
-public class PartnerController {
+@RequestMapping(value = "/admin/sponsor")
+public class AdminSponsorController {
 
 	@Autowired
 	@Qualifier(AdminService.NAME)
@@ -36,58 +38,58 @@ public class PartnerController {
 	@Transactional
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String view(Model model, Pageable pageable){
-		Page<Partner> partners = adminFacade.findAllPartners(pageable);
+		Page<Sponsor> sponsors = adminFacade.findAllSponsors(pageable);
 		
-		model.addAttribute("partners", partners);
+		model.addAttribute("sponsors", sponsors);
 		
-		return "/admin/partner/view.jsp";
+		return "/admin/sponsor/view.jsp";
 	}
 	
 	@Transactional
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(@Valid final Partner partner, BindingResult bindingResult, @RequestParam("file") MultipartFile file){
+	public String add(@Valid final Sponsor sponsor, BindingResult bindingResult, @RequestParam("file") MultipartFile file){
 		if(bindingResult.hasErrors()){
 			System.out.println(bindingResult.getAllErrors());
-			return "/admin/partner/edit.jsp";
+			return "/admin/sponsor/edit.jsp";
 		}
 		if(!file.isEmpty()){
 			try {
                 byte[] bytes = file.getBytes();
-                partner.setLogo(thumbnailService.thumbImage(bytes, 180, 64));
+                sponsor.setLogo(thumbnailService.thumbImage(bytes, 180, 64, ThumbnailService.ResizeType.FIT_TO_HEIGHT));
             } catch (Exception e) {
                 e.printStackTrace();
             }
 		} else { //empty file is it edit?
-			if(partner.getId()!= null){
-				Partner oldPartner = adminFacade.findOnePartner(partner.getId());
-				byte[] oldImage = oldPartner.getLogo();
-				partner.setLogo(oldImage);
+			if(sponsor.getId()!= null){
+				Sponsor oldSponsor = adminFacade.findOneSponsor(sponsor.getId());
+				byte[] oldImage = oldSponsor.getLogo();
+				sponsor.setLogo(oldImage);
 			}
 		}
-		this.adminFacade.savePartner(partner);
+		this.adminFacade.saveSponsor(sponsor);
 		
-		return "redirect:/admin/partner/view";
+		return "redirect:/admin/sponsor/view";
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String edit(Model model){
-		model.addAttribute("partner", new Partner());
-		return "/admin/partner/edit.jsp";
+		model.addAttribute("sponsor", new Sponsor());
+		return "/admin/sponsor/edit.jsp";
 	}
 	
 	@Transactional
 	@RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
 	public String edit(@PathVariable("itemId") Long itemId, Model model){
-		Partner partner = adminFacade.findOnePartner(itemId);
-		model.addAttribute("partner", partner);
-		return "/admin/partner/edit.jsp";
+		Sponsor sponsor = adminFacade.findOneSponsor(itemId);
+		model.addAttribute("sponsor", sponsor);
+		return "/admin/sponsor/edit.jsp";
 	}
 	
 	@Transactional
 	@RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
 	public String remove(@PathVariable("itemId") Long itemId, Model model){
-		adminFacade.deletePartner(itemId);
-		return "redirect:/admin/partner/view";
+		adminFacade.deleteSponsor(itemId);
+		return "redirect:/admin/sponsor/view";
 	}
 
 }

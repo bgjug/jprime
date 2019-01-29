@@ -53,7 +53,7 @@ public class AdminSpeakerController {
 		if(!file.isEmpty()){
 			try {
                 byte[] bytes = file.getBytes();
-                speaker.setPicture(thumbnailService.thumbImage(bytes, 280, 326));
+                speaker.setPicture(thumbnailService.thumbImage(bytes, 280, 326, ThumbnailService.ResizeType.FIT_TO_RATIO));
             } catch (Exception e) {
                 e.printStackTrace();
             }
