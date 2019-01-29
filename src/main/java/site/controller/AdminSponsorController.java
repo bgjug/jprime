@@ -22,74 +22,80 @@ import site.facade.ThumbnailService;
 import site.model.Speaker;
 import site.model.Sponsor;
 
-
 @Controller()
 @RequestMapping(value = "/admin/sponsor")
 public class AdminSponsorController {
 
-	@Autowired
-	@Qualifier(AdminService.NAME)
-	private AdminService adminFacade;
-	
-	@Autowired
-	@Qualifier(ThumbnailService.NAME)
-	private ThumbnailService thumbnailService;
-	
-	@Transactional
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String view(Model model, Pageable pageable){
-		Page<Sponsor> sponsors = adminFacade.findAllSponsors(pageable);
-		
-		model.addAttribute("sponsors", sponsors);
-		
-		return "/admin/sponsor/view.jsp";
-	}
-	
-	@Transactional
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(@Valid final Sponsor sponsor, BindingResult bindingResult, @RequestParam("file") MultipartFile file){
-		if(bindingResult.hasErrors()){
-			System.out.println(bindingResult.getAllErrors());
-			return "/admin/sponsor/edit.jsp";
-		}
-		if(!file.isEmpty()){
-			try {
+    @Autowired
+    @Qualifier(AdminService.NAME)
+    private AdminService adminFacade;
+
+    @Autowired
+    @Qualifier(ThumbnailService.NAME)
+    private ThumbnailService thumbnailService;
+
+    @Transactional
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String view(Model model, Pageable pageable) {
+        Page<Sponsor> sponsors = adminFacade.findAllSponsors(pageable);
+
+        model.addAttribute("sponsors", sponsors);
+
+        return "/admin/sponsor/view.jsp";
+    }
+
+    @Transactional
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String add(@Valid final Sponsor sponsor, BindingResult bindingResult,
+                      @RequestParam("file") MultipartFile file,
+                      @RequestParam(name = "resizeImage", required = false) boolean resize) {
+        if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors());
+            return "/admin/sponsor/edit.jsp";
+        }
+        if (!file.isEmpty()) {
+            try {
                 byte[] bytes = file.getBytes();
-                sponsor.setLogo(thumbnailService.thumbImage(bytes, 180, 64, ThumbnailService.ResizeType.FIT_TO_HEIGHT));
+                if (resize == true) {
+                    sponsor.setLogo(thumbnailService.thumbImage(bytes, 180, 64,
+                                                                ThumbnailService.ResizeType.FIT_TO_HEIGHT));
+                } else {
+                    sponsor.setLogo(bytes);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-		} else { //empty file is it edit?
-			if(sponsor.getId()!= null){
-				Sponsor oldSponsor = adminFacade.findOneSponsor(sponsor.getId());
-				byte[] oldImage = oldSponsor.getLogo();
-				sponsor.setLogo(oldImage);
-			}
-		}
-		this.adminFacade.saveSponsor(sponsor);
-		
-		return "redirect:/admin/sponsor/view";
-	}
-	
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String edit(Model model){
-		model.addAttribute("sponsor", new Sponsor());
-		return "/admin/sponsor/edit.jsp";
-	}
-	
-	@Transactional
-	@RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
-	public String edit(@PathVariable("itemId") Long itemId, Model model){
-		Sponsor sponsor = adminFacade.findOneSponsor(itemId);
-		model.addAttribute("sponsor", sponsor);
-		return "/admin/sponsor/edit.jsp";
-	}
-	
-	@Transactional
-	@RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
-	public String remove(@PathVariable("itemId") Long itemId, Model model){
-		adminFacade.deleteSponsor(itemId);
-		return "redirect:/admin/sponsor/view";
-	}
+        } else { //empty file is it edit?
+            if (sponsor.getId() != null) {
+                Sponsor oldSponsor = adminFacade.findOneSponsor(sponsor.getId());
+                byte[] oldImage = oldSponsor.getLogo();
+                sponsor.setLogo(oldImage);
+            }
+        }
+        this.adminFacade.saveSponsor(sponsor);
+
+        return "redirect:/admin/sponsor/view";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String edit(Model model) {
+        model.addAttribute("sponsor", new Sponsor());
+        return "/admin/sponsor/edit.jsp";
+    }
+
+    @Transactional
+    @RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
+    public String edit(@PathVariable("itemId") Long itemId, Model model) {
+        Sponsor sponsor = adminFacade.findOneSponsor(itemId);
+        model.addAttribute("sponsor", sponsor);
+        return "/admin/sponsor/edit.jsp";
+    }
+
+    @Transactional
+    @RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
+    public String remove(@PathVariable("itemId") Long itemId, Model model) {
+        adminFacade.deleteSponsor(itemId);
+        return "redirect:/admin/sponsor/view";
+    }
 
 }

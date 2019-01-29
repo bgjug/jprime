@@ -25,69 +25,76 @@ import site.model.Speaker;
 @RequestMapping(value = "/admin/speaker")
 public class AdminSpeakerController {
 
-	@Autowired
-	@Qualifier(AdminService.NAME)
-	private AdminService adminService;
-	
-	@Autowired
-	@Qualifier(ThumbnailService.NAME)
-	private ThumbnailService thumbnailService;
-	
-	@Transactional
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String view(Model model, Pageable pageable){
-		Page<Speaker> speakers = adminService.findAllSpeakers(pageable);
-		
-		model.addAttribute("speakers", speakers);
-		
-		return "/admin/speaker/view.jsp";
-	}
-	
-	@Transactional
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(@Valid final Speaker speaker, BindingResult bindingResult, @RequestParam("file") MultipartFile file, Model model){
-		if(bindingResult.hasErrors()){
-			model.addAttribute("branches", Branch.values());
-			return "/admin/speaker/edit.jsp";
-		}
-		if(!file.isEmpty()){
-			try {
+    @Autowired
+    @Qualifier(AdminService.NAME)
+    private AdminService adminService;
+
+    @Autowired
+    @Qualifier(ThumbnailService.NAME)
+    private ThumbnailService thumbnailService;
+
+    @Transactional
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public String view(Model model, Pageable pageable) {
+        Page<Speaker> speakers = adminService.findAllSpeakers(pageable);
+
+        model.addAttribute("speakers", speakers);
+
+        return "/admin/speaker/view.jsp";
+    }
+
+    @Transactional
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String add(@Valid final Speaker speaker, BindingResult bindingResult,
+                      @RequestParam("file") MultipartFile file, Model model,
+                      @RequestParam(name = "resizeImage", required = false) boolean resize) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("branches", Branch.values());
+            return "/admin/speaker/edit.jsp";
+        }
+        if (!file.isEmpty()) {
+            try {
                 byte[] bytes = file.getBytes();
-                speaker.setPicture(thumbnailService.thumbImage(bytes, 280, 326, ThumbnailService.ResizeType.FIT_TO_RATIO));
+                if (resize == true) {
+                    speaker.setPicture(thumbnailService.thumbImage(bytes, 280, 326,
+                                                                   ThumbnailService.ResizeType.FIT_TO_RATIO));
+                } else {
+                    speaker.setPicture(bytes);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-		} else { //empty file is it edit?
-			if(speaker.getId()!= null){
-				Speaker oldSpeaker = adminService.findOneSpeaker(speaker.getId());
-				byte[] oldImage = oldSpeaker.getPicture();
-				speaker.setPicture(oldImage);
-			}
-		}
-		this.adminService.saveSpeaker(speaker);
-		
-		return "redirect:/admin/speaker/view";
-	}
-	
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String edit(Model model){
-		model.addAttribute("speaker", new Speaker());
-		model.addAttribute("branches", Branch.values());
-		return "/admin/speaker/edit.jsp";
-	}
-	
-	@Transactional
-	@RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
-	public String edit(@PathVariable("itemId") Long itemId, Model model){
-		Speaker speaker = adminService.findOneSpeaker(itemId);
-		model.addAttribute("speaker", speaker);
-		model.addAttribute("branches", Branch.values());
-		return "/admin/speaker/edit.jsp";
-	}
-	
-	@Transactional
-	@RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
-	public String remove(@PathVariable("itemId") Long itemId, Model model) {
+        } else { //empty file is it edit?
+            if (speaker.getId() != null) {
+                Speaker oldSpeaker = adminService.findOneSpeaker(speaker.getId());
+                byte[] oldImage = oldSpeaker.getPicture();
+                speaker.setPicture(oldImage);
+            }
+        }
+        this.adminService.saveSpeaker(speaker);
+
+        return "redirect:/admin/speaker/view";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String edit(Model model) {
+        model.addAttribute("speaker", new Speaker());
+        model.addAttribute("branches", Branch.values());
+        return "/admin/speaker/edit.jsp";
+    }
+
+    @Transactional
+    @RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
+    public String edit(@PathVariable("itemId") Long itemId, Model model) {
+        Speaker speaker = adminService.findOneSpeaker(itemId);
+        model.addAttribute("speaker", speaker);
+        model.addAttribute("branches", Branch.values());
+        return "/admin/speaker/edit.jsp";
+    }
+
+    @Transactional
+    @RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
+    public String remove(@PathVariable("itemId") Long itemId, Model model) {
         adminService.deleteSpeaker(itemId);
         return "redirect:/admin/speaker/view";
     }
