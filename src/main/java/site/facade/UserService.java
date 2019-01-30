@@ -90,7 +90,7 @@ public class UserService {
         return articleRepository.findByPublishedTrueOrderByCreatedDateDesc(pageable);
     }
     public Article getArticleById(long id){
-        return articleRepository.findById(id).get();
+        return articleRepository.findById(id).orElse(null);
     }
     
     public Article getArticleByTitle(String title){
