@@ -33,6 +33,12 @@ public class NavController {
 		model.addAttribute("tags", userFacade.findAllTags());
 
 		Page<Article> articles= userFacade.findArticlesByTag(tagName, pageable);
+
+		if (articles.getTotalElements() == 0) {
+		    logger.error(String.format("Invalid tag name (%1$s)", tagName));
+		    return "/404.jsp";
+        }
+
 		if(articles.getTotalElements() > 1) {
 			model.addAttribute("articles", articles);
 			return "/blog.jsp";
@@ -55,6 +61,12 @@ public class NavController {
     @RequestMapping("/nav/article/{id}")
     public String getById(@PathVariable("id") final long id, Model model) {
         Article article= userFacade.getArticleById(id);
+
+        if (article == null) {
+            logger.error(String.format("Invalid tag id (%1$d)", id));
+            return "/404.jsp";
+        }
+
         //security
         if (article.isPublished()) {
             model.addAttribute("article", article);
@@ -67,6 +79,12 @@ public class NavController {
 	public String getById(@RequestParam(required = true) final String title,
 			Model model) {
         Article article= userFacade.getArticleByTitle(title);
+
+        if (article == null) {
+            logger.error(String.format("Invalid tag title (%1$s)", title));
+            return "/404.jsp";
+        }
+
         //security
         if (article.isPublished()) {
             model.addAttribute("article", article);
