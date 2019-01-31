@@ -70,7 +70,7 @@ public class UserService {
      * @return
      */
     public Speaker findSpeaker(Long id){
-		return speakerRepository.findById(id).get();
+		return speakerRepository.findById(id).orElse(null);
 	}
 
     /**
@@ -148,7 +148,7 @@ public class UserService {
     }
     
     public Session findSessionTalk(long id){
-    	return sessionRepository.findById(id).get();
+    	return sessionRepository.findById(id).orElse(null);
     }
     
     public List<Session> findSessionTalksAndBreaksByHallName(String hallName){

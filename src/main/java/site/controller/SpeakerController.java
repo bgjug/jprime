@@ -1,5 +1,7 @@
 package site.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -15,10 +17,11 @@ import java.util.List;
 
 @Controller
 public class SpeakerController {
-   
+    private static final Logger logger = LogManager.getLogger(SpeakerController.class);
+
    @Autowired
    private UserService userService;
-   
+
    @RequestMapping("/speakers")
    public String speakers(Pageable pageable, Model model) {
       List<Speaker> acceptedSpeakers = userService.findAcceptedSpeakers();
@@ -34,6 +37,10 @@ public class SpeakerController {
    @RequestMapping("/speaker/{id}")
    public String getById(@PathVariable("id") final long id, Model model) {
       Speaker speaker = userService.findSpeaker(id);
+        if (speaker == null) {
+            logger.error(String.format("Invalid speaker id (%1$d)", id));
+            return "/404.jsp";
+        }
       if(speaker.getAccepted()) {
          model.addAttribute("speaker", speaker);
       }
