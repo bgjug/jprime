@@ -2,6 +2,8 @@ package site.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ import site.model.Session;
 
 @Controller
 public class AgendaController {
+
+	private static final Logger logger = LogManager.getLogger(AgendaController.class);
 	
 	@Autowired
 	private UserService userService;
@@ -23,6 +27,10 @@ public class AgendaController {
     @RequestMapping("/agenda/{id}")
     public String getById(@PathVariable("id") final long id, Model model) {
     	Session talk = userService.findSessionTalk(id);
+    	if (talk == null) {
+			logger.error(String.format("Invalid session id (%1$d)", id));
+    		return "/404.jsp";
+		}
     	model.addAttribute("talk", talk);
         return "/talk.jsp";
     }
