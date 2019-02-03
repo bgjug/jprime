@@ -2641,6 +2641,24 @@ ul.icons-list li i {
 
 /*************** Team Members ***************/
 
+@media (min-width: 992px) {
+	.team-member {
+		min-height: 600px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.team-member {
+		min-height: 630px;
+	}
+}
+
+@media (min-width: 768px) {
+	.team-member {
+		min-height: 630px;
+	}
+}
+
 .team-member {
 	padding: 3px;
 	position: relative;
