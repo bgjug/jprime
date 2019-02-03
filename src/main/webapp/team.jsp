@@ -124,6 +124,23 @@
                         Nayden Gochev is Solution Architect at Nemesis Software with with more than 12 years of experience. Developer, Trainer and consultant in many international companies and Bulgarian companies. He took part in many conferences, seminars, technical trainings in multiple academic and non academic structures and companies. One of the organizers of jPrime and jProfessionals conferences and the monthly Bulgarian Java User Group seminars. Huge Java fan with love for all *.java and big community supporter. His personal blog can be found at <a href="http://gochev.org">gochev.org</a>
                     </div>
                 </div>
+                <div class="col-md-3 col-sm-6 col-xs-12" style="width: 230px">
+                    <div class="team-member modern">
+                        <!-- Memebr Photo, Name & Position -->
+                        <div class="member-photo">
+                            <img alt="" src="/images/team/doychin.png"/>
+
+                            <div class="member-name">Doychin&nbsp;Bondzhev
+                            </div>
+                        </div>
+                        <div class="member-socail" style="text-align: left">
+                            <a class="twitter" href="https://twitter.com/dbondzhev"><i
+                                    class="fa fa-twitter"></i></a>
+                        </div>
+                        Doychin Bondzhev is Java developer with experience in many technologies. His work includes software for different businesses like telecommunications, warehouse management, point of sale, service management, billing , service provisioning, customer support, banking and many more. In his free time he contributes to some Open Source projects. He is a big fan of JavaEE and Microprofile.
+                    </div>
+                </div>
+
             </div>
 
         </div>
