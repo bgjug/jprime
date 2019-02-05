@@ -56,7 +56,17 @@
 					<label for="file">logo ( MUST BE 180x64 !!!)</label>
 				</dt>
 				<dd>
-					<input name="file" type="file" />
+					<table>
+						<tr>
+							<td>
+								<input name="file" type="file"/>
+							</td>
+							<td>
+								<label for="resize">Resize Image</label>
+								<input id="resize" type="checkbox" checked name="resizeImage"/>
+							</td>
+						</tr>
+					</table>
 				</dd>
 			</dl>
 			<dl>

@@ -18,16 +18,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.AdminService;
 import site.facade.ThumbnailService;
-import site.model.Branch;
-import site.model.Speaker;
+import site.model.Partner;
 
 @Controller()
-@RequestMapping(value = "/admin/speaker")
-public class AdminSpeakerController {
+@RequestMapping(value = "/admin/partner")
+public class AdminPartnerController {
 
     @Autowired
     @Qualifier(AdminService.NAME)
-    private AdminService adminService;
+    private AdminService adminFacade;
 
     @Autowired
     @Qualifier(ThumbnailService.NAME)
@@ -36,66 +35,65 @@ public class AdminSpeakerController {
     @Transactional
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String view(Model model, Pageable pageable) {
-        Page<Speaker> speakers = adminService.findAllSpeakers(pageable);
+        Page<Partner> partners = adminFacade.findAllPartners(pageable);
 
-        model.addAttribute("speakers", speakers);
+        model.addAttribute("partners", partners);
 
-        return "/admin/speaker/view.jsp";
+        return "/admin/partner/view.jsp";
     }
 
     @Transactional
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(@Valid final Speaker speaker, BindingResult bindingResult,
-                      @RequestParam("file") MultipartFile file, Model model,
+    public String add(@Valid final Partner partner, BindingResult bindingResult,
+                      @RequestParam("file") MultipartFile file,
                       @RequestParam(name = "resizeImage", required = false) boolean resize) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("branches", Branch.values());
-            return "/admin/speaker/edit.jsp";
+            System.out.println(bindingResult.getAllErrors());
+            return "/admin/partner/edit.jsp";
         }
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
                 if (resize == true) {
-                    speaker.setPicture(thumbnailService.thumbImage(bytes, 280, 326,
-                                                                   ThumbnailService.ResizeType.FIT_TO_RATIO));
-                } else {
-                    speaker.setPicture(bytes);
+                    partner.setLogo(thumbnailService.thumbImage(bytes, 180, 64,
+                                                                ThumbnailService.ResizeType.FIT_TO_HEIGHT));
+                }else{
+                    partner.setLogo(bytes);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else { //empty file is it edit?
-            if (speaker.getId() != null) {
-                Speaker oldSpeaker = adminService.findOneSpeaker(speaker.getId());
-                byte[] oldImage = oldSpeaker.getPicture();
-                speaker.setPicture(oldImage);
+            if (partner.getId() != null) {
+                Partner oldPartner = adminFacade.findOnePartner(partner.getId());
+                byte[] oldImage = oldPartner.getLogo();
+                partner.setLogo(oldImage);
             }
         }
-        this.adminService.saveSpeaker(speaker);
+        this.adminFacade.savePartner(partner);
 
-        return "redirect:/admin/speaker/view";
+        return "redirect:/admin/partner/view";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String edit(Model model) {
-        model.addAttribute("speaker", new Speaker());
-        model.addAttribute("branches", Branch.values());
-        return "/admin/speaker/edit.jsp";
+        model.addAttribute("partner", new Partner());
+        return "/admin/partner/edit.jsp";
     }
 
     @Transactional
     @RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
     public String edit(@PathVariable("itemId") Long itemId, Model model) {
-        Speaker speaker = adminService.findOneSpeaker(itemId);
-        model.addAttribute("speaker", speaker);
-        model.addAttribute("branches", Branch.values());
-        return "/admin/speaker/edit.jsp";
+        Partner partner = adminFacade.findOnePartner(itemId);
+        model.addAttribute("partner", partner);
+        return "/admin/partner/edit.jsp";
     }
 
     @Transactional
     @RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
     public String remove(@PathVariable("itemId") Long itemId, Model model) {
-        adminService.deleteSpeaker(itemId);
-        return "redirect:/admin/speaker/view";
+        adminFacade.deletePartner(itemId);
+        return "redirect:/admin/partner/view";
     }
+
 }

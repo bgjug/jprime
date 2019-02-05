@@ -14,20 +14,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.AdminService;
 import site.facade.ThumbnailService;
-import site.model.Branch;
 import site.model.Speaker;
+import site.model.Sponsor;
 
 @Controller()
-@RequestMapping(value = "/admin/speaker")
-public class AdminSpeakerController {
+@RequestMapping(value = "/admin/sponsor")
+public class AdminSponsorController {
 
     @Autowired
     @Qualifier(AdminService.NAME)
-    private AdminService adminService;
+    private AdminService adminFacade;
 
     @Autowired
     @Qualifier(ThumbnailService.NAME)
@@ -36,66 +37,65 @@ public class AdminSpeakerController {
     @Transactional
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String view(Model model, Pageable pageable) {
-        Page<Speaker> speakers = adminService.findAllSpeakers(pageable);
+        Page<Sponsor> sponsors = adminFacade.findAllSponsors(pageable);
 
-        model.addAttribute("speakers", speakers);
+        model.addAttribute("sponsors", sponsors);
 
-        return "/admin/speaker/view.jsp";
+        return "/admin/sponsor/view.jsp";
     }
 
     @Transactional
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(@Valid final Speaker speaker, BindingResult bindingResult,
-                      @RequestParam("file") MultipartFile file, Model model,
+    public String add(@Valid final Sponsor sponsor, BindingResult bindingResult,
+                      @RequestParam("file") MultipartFile file,
                       @RequestParam(name = "resizeImage", required = false) boolean resize) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("branches", Branch.values());
-            return "/admin/speaker/edit.jsp";
+            System.out.println(bindingResult.getAllErrors());
+            return "/admin/sponsor/edit.jsp";
         }
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
                 if (resize == true) {
-                    speaker.setPicture(thumbnailService.thumbImage(bytes, 280, 326,
-                                                                   ThumbnailService.ResizeType.FIT_TO_RATIO));
+                    sponsor.setLogo(thumbnailService.thumbImage(bytes, 180, 64,
+                                                                ThumbnailService.ResizeType.FIT_TO_HEIGHT));
                 } else {
-                    speaker.setPicture(bytes);
+                    sponsor.setLogo(bytes);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else { //empty file is it edit?
-            if (speaker.getId() != null) {
-                Speaker oldSpeaker = adminService.findOneSpeaker(speaker.getId());
-                byte[] oldImage = oldSpeaker.getPicture();
-                speaker.setPicture(oldImage);
+            if (sponsor.getId() != null) {
+                Sponsor oldSponsor = adminFacade.findOneSponsor(sponsor.getId());
+                byte[] oldImage = oldSponsor.getLogo();
+                sponsor.setLogo(oldImage);
             }
         }
-        this.adminService.saveSpeaker(speaker);
+        this.adminFacade.saveSponsor(sponsor);
 
-        return "redirect:/admin/speaker/view";
+        return "redirect:/admin/sponsor/view";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String edit(Model model) {
-        model.addAttribute("speaker", new Speaker());
-        model.addAttribute("branches", Branch.values());
-        return "/admin/speaker/edit.jsp";
+        model.addAttribute("sponsor", new Sponsor());
+        return "/admin/sponsor/edit.jsp";
     }
 
     @Transactional
     @RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
     public String edit(@PathVariable("itemId") Long itemId, Model model) {
-        Speaker speaker = adminService.findOneSpeaker(itemId);
-        model.addAttribute("speaker", speaker);
-        model.addAttribute("branches", Branch.values());
-        return "/admin/speaker/edit.jsp";
+        Sponsor sponsor = adminFacade.findOneSponsor(itemId);
+        model.addAttribute("sponsor", sponsor);
+        return "/admin/sponsor/edit.jsp";
     }
 
     @Transactional
     @RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
     public String remove(@PathVariable("itemId") Long itemId, Model model) {
-        adminService.deleteSpeaker(itemId);
-        return "redirect:/admin/speaker/view";
+        adminFacade.deleteSponsor(itemId);
+        return "redirect:/admin/sponsor/view";
     }
+
 }
