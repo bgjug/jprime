@@ -19,6 +19,8 @@
     <!-- Responsive Metatag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    <jsp:directive.include file="theme-colors.jsp" />
+
     <!-- Page Description and Author -->
     <meta name="description" content="jPrime 2019">
     <meta name="author" content="jPrime">
