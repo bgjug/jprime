@@ -57,7 +57,7 @@ public class TicketsEpayRegisterControllerTest {
 
     @Test
     public void getShouldReturnTicketsEpayRegisterJsp() throws Exception {
-        mockMvc.perform(get("/tickets/epay"))
+        mockMvc.perform(get("/tickets"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("registrant", is(new Registrant())))
                 .andExpect(view().name(Globals.PAGE_TICKETS));
@@ -66,7 +66,7 @@ public class TicketsEpayRegisterControllerTest {
     @Test
     @Ignore("ignored since adding captcha, has to be updated")
     public void postNonCompanyRegistrantShouldSaveVisitorDataAsRegistrant() throws Exception {
-        mockMvc.perform(post("/tickets/epay")
+        mockMvc.perform(post("/tickets")
                 .param("visitors[0].name", "John Doe")
                 .param("visitors[0].email", "john@example.com")
                 .param("visitors[0].company", "Example")
@@ -88,7 +88,7 @@ public class TicketsEpayRegisterControllerTest {
     @Test
     @Ignore("ignored since adding captcha, has to be updated")
     public void postCompanyRegistrantShouldSaveInvoiceData() throws Exception {
-        mockMvc.perform(post("/tickets/epay")
+        mockMvc.perform(post("/tickets")
                 .param("visitors[0].name", "John Doe")
                 .param("visitors[0].email", "john@example.com")
                 .param("visitors[0].company", "Example")
@@ -122,7 +122,7 @@ public class TicketsEpayRegisterControllerTest {
     @Test
     @Ignore("ignored since adding captcha, has to be updated")
     public void shouldBeAbleToSaveMoreVisitorsForOneRegistrant() throws Exception {
-        mockMvc.perform(post("/tickets/epay")
+        mockMvc.perform(post("/tickets")
                 .param("visitors[0].name", "Lurch")
                 .param("visitors[0].email", "lurch@example.com")
                 .param("visitors[1].name", "Morticia Adams")
@@ -146,7 +146,7 @@ public class TicketsEpayRegisterControllerTest {
 
     @Test
     public void getTicketsEpayShouldReturnEmptyRegistrant() throws Exception {
-        mockMvc.perform(get("/tickets/epay"))
+        mockMvc.perform(get("/tickets"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(Globals.PAGE_TICKETS))
                 .andExpect(model().attribute("registrant", new Registrant()));

@@ -58,7 +58,7 @@ public class TicketsController {
     @Qualifier(RegistrantService.NAME)
     private RegistrantService registrantFacade;
 
-    @RequestMapping(value = "/tickets/epay", method = RequestMethod.GET)
+    @RequestMapping(value = "/tickets", method = RequestMethod.GET)
     public String goToRegisterPage(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("registrant", new Registrant());
@@ -69,7 +69,7 @@ public class TicketsController {
      * User submitted the form.
      */
     @Transactional
-    @RequestMapping(value = "/tickets/epay", method = RequestMethod.POST)
+    @RequestMapping(value = "/tickets", method = RequestMethod.POST)
     public String register(Model model, @Valid final Registrant registrant, BindingResult bindingResult, HttpServletRequest request) throws Exception {
 		boolean invalidCaptcha = false;
     	if (registrant.getCaptcha() == null || !registrant.getCaptcha()

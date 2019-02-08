@@ -53,7 +53,7 @@
               <c:if test="${not result}">
                 <h2>There was a problem for purchasing the tickets</h2>
                 <br/>
-                <a href="/tickets/epay">Try again?</a>
+                <a href="/tickets">Try again?</a>
                 <br/><br/><br/>
               </c:if>
 

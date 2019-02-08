@@ -173,7 +173,7 @@
 
         Buy a ticket:
         <form:form modelAttribute="registrant" method="post"
-                   action="/tickets/epay" id="visitorsForm">
+                   action="/tickets" id="visitorsForm">
             <p>
                 <form:errors/>
             </p>
