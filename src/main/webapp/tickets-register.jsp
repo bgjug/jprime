@@ -89,14 +89,22 @@
                     case 0:
                         $(this).attr("id", "visitors" + index + ".name");
                         $(this).attr("name", "visitors[" + index + "].name");
+                        $(this).val("");
                         break;
                     case 1:
                         $(this).attr("id", "visitors" + index + ".email");
                         $(this).attr("name", "visitors[" + index + "].email");
+                        $(this).val("");
                         break;
                     case 2:
                         $(this).attr("id", "visitors" + index + ".company");
                         $(this).attr("name", "visitors[" + index + "].company");
+                        $(this).val("");
+                        break;
+                    case 3:
+                        $(this).attr("id", "visitors" + index + ".student");
+                        $(this).attr("name", "visitors[" + index + "].student");
+                        $(this).prop("checked", false);
                         break;
                 }
             });
@@ -110,6 +118,9 @@
                         break;
                     case 2:
                         $(this).attr("for", "visitors" + index + ".company");
+                        break;
+                    case 3:
+                        $(this).attr("for", "visitors" + index + ".student");
                         break;
                 }
             });
@@ -188,13 +199,13 @@
                     <!-- see https://github.com/bgjug/jprime/issues/28 -->
                     <dt><label for="visitors[0].company">Visitor company</label></dt>
                     <dd><form:input path="visitors[0].company"/></dd>
+                    <dt><label for="visitors[0].student">I am student</label></dt>
+                    <dd><form:checkbox path="visitors[0].student"/></dd>
                 </dl>
             </fieldset>
             <input type="button" id="newVisitor" value="Add new">&nbsp;&nbsp;
             <input type="button" id="removeVisitor" value="Remove last">
             <br><br>
-            <form:checkbox path="student" label="I am student" id="isStudent"/>
-            <br>
             <form:checkbox path="company" label="Issue VAT invoice" id="isCompany"/>
             <br><br>
             <fieldset id="invoiceFieldset">

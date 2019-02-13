@@ -18,6 +18,8 @@ public class Visitor extends AbstractEntity {
 
     private String company;
 
+    private boolean isStudent = false;
+
     @Enumerated(EnumType.STRING)
     private VisitorStatus status;
 
@@ -74,6 +76,14 @@ public class Visitor extends AbstractEntity {
 
     public void setStatus(VisitorStatus status) {
         this.status = status;
+    }
+
+    public boolean isStudent() {
+        return isStudent;
+    }
+
+    public void setStudent(boolean student) {
+        isStudent = student;
     }
 
     @Override
