@@ -1,12 +1,14 @@
 package site.controller.invoice;
 
-import site.config.Globals;
-import site.model.Registrant;
-
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+import site.config.Globals;
+import site.model.Registrant;
+import site.model.Visitor;
 
 /**
  * DTO for the PDF
@@ -16,9 +18,14 @@ public class InvoiceData {
 
     public static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(140D);
     public static final BigDecimal STUDENT_TICKET_PRICE = BigDecimal.valueOf(100D);
-    private static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);
-    private static final String DEFAULT_DESCRIPTION_BG = "jPrime "+ Globals.CURRENT_BRANCH.toString() + " билет за конференция";
+
+    static final String DEFAULT_DESCRIPTION_BG = "jPrime " + Globals.CURRENT_BRANCH.toString() + " билет за конференция";
+    static final String STUDENT_DESCRIPTION_BG = "jPrime " + Globals.CURRENT_BRANCH.toString() + " билет за конференция - студентски";
+
+    static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);
+
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
     public static final String ORIGINAL_BG = "Оригинал";
     public static final String PROFORMA_BG = "Проформа";
 
@@ -30,31 +37,22 @@ public class InvoiceData {
     private String clientEIK;
     private String clientVAT;
     private String mol;
-    private BigDecimal singlePriceWithVAT = DEFAULT_TICKET_PRICE;
-    private Integer passQty;
     private String paymentType;
-    private String description = DEFAULT_DESCRIPTION_BG;
-
     private Long registrantId;
-
-    public double getSinglePriceWithVAT() {
-        return singlePriceWithVAT.doubleValue();
-    }
-
-    public void setSinglePriceWithVAT(double singlePriceWithVAT) {
-        this.singlePriceWithVAT = BigDecimal.valueOf(singlePriceWithVAT);
-    }
-
-    public Double getPrice() {
-        return singlePriceWithVAT.divide(VAT_DECREASE_RATIO, 2, RoundingMode.UP).doubleValue();//one ticket without VAT
-    }
+    private List<InvoiceDetail> invoiceDetails = new ArrayList<>();
 
     public Double getTotalPrice() {
-        return getPrice() * passQty ;
+        return invoiceDetails.stream()
+                             .map(InvoiceDetail::getTotalPrice)
+                             .reduce((d, d1) -> d + d1)
+                             .orElse(0.0);
     }
 
     public Double getTotalPriceWithVAT() {
-        return singlePriceWithVAT.doubleValue() * passQty;
+        return invoiceDetails.stream()
+                             .map(d -> d.getSinglePriceWithVAT() * d.getPassQty())
+                             .reduce((d, d1) -> d + d1)
+                             .orElse(0.0);
     }
 
     public Double getTotalPriceVAT() {
@@ -117,14 +115,6 @@ public class InvoiceData {
         this.clientVAT = clientVAT;
     }
 
-    public Integer getPassQty() {
-        return passQty;
-    }
-
-    public void setPassQty(Integer passQty) {
-        this.passQty = passQty;
-    }
-
     public String getMol() {
         return mol;
     }
@@ -139,14 +129,6 @@ public class InvoiceData {
 
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Long getRegistrantId() {
@@ -168,16 +150,33 @@ public class InvoiceData {
             result.setClientVAT("");
         }
         result.setMol(registrant.getMol());
-        result.setPassQty(registrant.getVisitors().size());
         result.setRegistrantId(registrant.getId());
-        result.setPaymentType(registrant.getPaymentType() != null ?
-                registrant.getPaymentType().getBulgarianValue() :
-                "");
+        result.setPaymentType(
+            registrant.getPaymentType() != null ? registrant.getPaymentType().getBulgarianValue() : "");
         result.setInvoiceNumber(registrant.getRealInvoiceNumber() + "");
         result.setInvoiceDate(LocalDate.now().format(FORMATTER));
-        if (registrant.isStudent()) {
-            result.setSinglePriceWithVAT(STUDENT_TICKET_PRICE.intValue());
+
+        long studentTickets = registrant.getVisitors().stream().filter(Visitor::isStudent).count();
+        long regularTickets = registrant.getVisitors().size() - studentTickets;
+
+        if (regularTickets > 0) {
+            result.addInvoiceDetail(new InvoiceDetail((int) regularTickets));
         }
+
+        if (studentTickets > 0) {
+            result.addInvoiceDetail(
+                new InvoiceDetail(STUDENT_TICKET_PRICE, (int) studentTickets, STUDENT_DESCRIPTION_BG));
+        }
+
         return result;
+    }
+
+    public void addInvoiceDetail(InvoiceDetail invoiceDetail) {
+        invoiceDetails.add(invoiceDetail);
+        invoiceDetail.setIdx(invoiceDetails.size());
+    }
+
+    public List<InvoiceDetail> getInvoiceDetails() {
+        return invoiceDetails;
     }
 }

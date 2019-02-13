@@ -5,18 +5,16 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.stereotype.Service;
 import site.config.Globals;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by mitia on 10.04.15.
@@ -26,8 +24,6 @@ public class InvoiceExporter {
 
 
     public byte[] exportInvoice(InvoiceData data, boolean isCompany) throws Exception{
-
-
         InputStream reportTemplate = null;
         if (isCompany) {
             reportTemplate = getClass().getResourceAsStream("/invoice/invoice_company_template_bg.jrxml");
@@ -36,17 +32,30 @@ public class InvoiceExporter {
         }
         ByteArrayOutputStream result = new ByteArrayOutputStream();
 
-        ArrayList<InvoiceData> exportList = new ArrayList<>();
         // device with some new functionality
-        exportList.add(data);
+        List<InvoiceDetail> exportList = new ArrayList<>(data.getInvoiceDetails());
         JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(
                 exportList);
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("jprime.year", Globals.CURRENT_BRANCH.toString());
 
         JasperDesign jasperDesign = JRXmlLoader.load(reportTemplate);
         JasperReport jasperReport = JasperCompileManager
-                .compileReport(jasperDesign);
+            .compileReport(jasperDesign);
+
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("jprime.year", Globals.CURRENT_BRANCH.toString());
+
+        // Fill in other parameters that have matching properties in invoice data.
+        Arrays.stream(jasperReport.getParameters()).forEach(p-> {
+            try {
+                parameters.put(p.getName(), PropertyUtils.getProperty(data, p.getName()));
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                // this should not happen but any way print exception just in case.
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                // This exception happens when we are asked for property that is not part of our invoice data.
+            }
+        });
+
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
                 parameters, beanColDataSource);
 
@@ -69,11 +78,11 @@ public class InvoiceExporter {
         data.setClientEIK("2464387775");
         data.setClientVAT("BG2464387775");
         data.setMol("fda");
-        data.setPassQty(5);
         data.setInvoiceType("Проформа");
         data.setPaymentType("пеймънт");
-//        data.setPrice(55.5);
+        data.addInvoiceDetail(new InvoiceDetail(5));
+        data.addInvoiceDetail(new InvoiceDetail( InvoiceData.STUDENT_TICKET_PRICE, 3, InvoiceData.STUDENT_DESCRIPTION_BG));
 
-        Files.write(Paths.get("/tmp/result.pdf"), new InvoiceExporter().exportInvoice(data, false));
+        Files.write(Paths.get("/tmp/result.pdf"), new InvoiceExporter().exportInvoice(data, true));
     }
 }
