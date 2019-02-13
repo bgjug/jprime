@@ -80,7 +80,7 @@
                                 <span>2 full days</span>
                             </h3>
 
-                                <p class="animated4"><a href="tickets/epay" class="slider btn btn-primary">Buy a ticket</a>
+                                <p class="animated4"><a href="tickets/" class="slider btn btn-primary">Buy a ticket</a>
 
                             </p>
 
@@ -448,7 +448,7 @@
                             <a href="#"
                                class="btn-system btn-small">Over</a>
                             --%>
-                                <a href="tickets/epay"
+                                <a href="tickets/"
                                class="btn-system btn-small">Get It Now</a>
 
                         </div>
@@ -478,7 +478,7 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <a href="tickets/epay"
+                            <a href="tickets/"
                                class="btn-system btn-small">Get It Now</a>
 
                         </div>
@@ -508,7 +508,7 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <a href="tickets/epay"
+                            <a href="tickets/"
                                class="btn-system btn-small">Get It Now</a>
 
                         </div>
