@@ -71,7 +71,7 @@
         });
 
         var checkQty=function(){
-            var size = $("#visitorsFieldset").find("dl").size()+1;
+            var size = $("#visitorsFieldset").find("dl").size();
             if(size>1) {
                 $("#removeVisitor").show();
             }else{
@@ -82,7 +82,6 @@
         var appendVisitor = function() {
             var visitorsFieldset = $("#visitorsFieldset");
             var index = visitorsFieldset.find("dl").size();
-            checkQty();
             var clone = visitorsFieldset.find("dl:last").clone();
             clone.find("dd label").remove();
             clone.find("dd input").each(function(i) {
@@ -118,15 +117,17 @@
             $("#visitors" + index + "\\.name").rules("add",{required: true,minlength: 5});
             $("#visitors" + index + "\\.email").rules("add",{required: true,email: true});
             $("#visitors" + index + "\\.company").rules("add",{required: true});
+
+            checkQty();
         };
 
         var removeVisitor = function() {
             var visitorsFieldset = $("#visitorsFieldset");
-            checkQty();
             var size = visitorsFieldset.find("dl").size()+1;
             if(size>1) {
                 visitorsFieldset.find("dl:last").remove();
             }
+            checkQty();
         };
 
         var issueInvoiceHandler = function() {
