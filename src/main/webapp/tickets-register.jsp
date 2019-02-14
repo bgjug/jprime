@@ -130,9 +130,19 @@
             checkQty();
         };
 
+        var issueStudentTicketHandler = function() {
+            if (this.checked) {
+                $("#studentFieldset").show();
+                $("#invoiceFieldset").hide();
+            } else {
+                $("#studentFieldset").hide();
+            }
+        };
+
         var issueInvoiceHandler = function() {
             if (this.checked) {
                 $("#invoiceFieldset").show();
+                $("#studentFieldset").hide();
             } else {
                 $("#invoiceFieldset").hide();
             }
@@ -142,6 +152,7 @@
             $("#newVisitor").click(appendVisitor);
             $("#removeVisitor").hide();
             $("#removeVisitor").click(removeVisitor);
+            $("#isStudent").click(issueStudentTicketHandler);
             $("#isCompany").click(issueInvoiceHandler);
         });
     </script>
@@ -193,10 +204,17 @@
             <input type="button" id="newVisitor" value="Add new">&nbsp;&nbsp;
             <input type="button" id="removeVisitor" value="Remove last">
             <br><br>
-            <form:checkbox path="student" label="I am student" id="isStudent"/>
+            <form:checkbox path="student" label="I am student" id="isStudent" onchange="document.getElementById('isCompany').disabled = this.checked; this.checked?document.getElementById('isCompany').checked= false:'';"/>
             <br>
-            <form:checkbox path="company" label="Issue VAT invoice" id="isCompany"/>
+            <form:checkbox path="company" label="Issue company VAT invoice" id="isCompany" onchange="document.getElementById('isStudent').disabled = this.checked; this.checked?document.getElementById('isStudent').checked= false:'';"/>
             <br><br>
+            <fieldset id="studentFieldset" style="display:none">
+                <legend> Student tickets </legend>
+                <dl><dd><dd> Student tickets are for individuals that cannot pay the full price of the conference ticket, however
+                beeing a community conference we do our best to support everyone who want to learn more, so this ticket is for YOU!<br/><br/>
+                There are no limitations of the student ticket compared to the regular one, so you have access to everything jPrime can offer !</dd></dl>
+
+            </fieldset>
             <fieldset id="invoiceFieldset">
                 <legend>Invoice information</legend>
                 <dl>
