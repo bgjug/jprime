@@ -213,6 +213,24 @@ IBAN: BG50PIRB74241605596745]]></text>
 			</textField>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="34" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="349" y="14" width="135" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Bulgarian Java User Group]]></text>
+			</staticText>
+                        <image>
+				<reportElement x="0" y="0" width="111" height="54"/>
+				<imageExpression class="java.lang.String"><![CDATA["invoice/sty.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
 	<summary>
 		<band height="218" splitType="Stretch">
 			<staticText>
@@ -327,20 +345,6 @@ IBAN: BG50PIRB74241605596745]]></text>
 				</textElement>
 				<text><![CDATA[Stamping and signing are not necessary elements according to law]]></text>
 			</staticText>
-			<line>
-				<reportElement x="0" y="184" width="555" height="1"/>
-			</line>
-			<staticText>
-				<reportElement x="349" y="198" width="135" height="20"/>
-				<textElement lineSpacing="Single">
-					<font fontName="DejaVu Sans"/>
-				</textElement>
-				<text><![CDATA[Bulgarian Java User Group]]></text>
-			</staticText>
-			<image>
-				<reportElement x="0" y="0" width="111" height="54"/>
-				<imageExpression class="java.lang.String"><![CDATA["invoice/sty.png"]]></imageExpression>
-			</image>
 		</band>
 	</summary>
 </jasperReport>

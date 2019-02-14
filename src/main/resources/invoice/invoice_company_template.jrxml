@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 3.7.2  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoicetemplate" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="jprime.year" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="invoiceDate" class="java.lang.String"/>
 	<parameter name="invoiceNumber" class="java.lang.String"/>
@@ -216,6 +214,24 @@ IBAN: BG50PIRB74241605596745]]></text>
 			</textField>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="34" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="349" y="14" width="135" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Bulgarian Java User Group]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="111" height="54"/>
+				<imageExpression class="java.lang.String"><![CDATA["invoice/sty.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
 	<summary>
 		<band height="218" splitType="Stretch">
 			<staticText>
@@ -330,20 +346,6 @@ IBAN: BG50PIRB74241605596745]]></text>
 				</textElement>
 				<text><![CDATA[Stamping and signing are not necessary elements according to law]]></text>
 			</staticText>
-			<line>
-				<reportElement x="0" y="184" width="555" height="1"/>
-			</line>
-			<staticText>
-				<reportElement x="349" y="198" width="135" height="20"/>
-				<textElement lineSpacing="Single">
-					<font fontName="DejaVu Sans"/>
-				</textElement>
-				<text><![CDATA[Bulgarian Java User Group]]></text>
-			</staticText>
-			<image>
-				<reportElement x="0" y="0" width="111" height="54"/>
-				<imageExpression class="java.lang.String"><![CDATA["invoice/sty.png"]]></imageExpression>
-			</image>
 		</band>
 	</summary>
 </jasperReport>
