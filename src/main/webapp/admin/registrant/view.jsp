@@ -32,7 +32,6 @@
             <td><i>Proforma Invoice number</i></td>
             <td><i>Payment type</i></td>
             <td><i>Branch</i></td>
-            <td><i>Student?</i></td>
             <td><i>Actions</i></td>
         </tr>
         <c:forEach var="registrant" items="${registrants}">
@@ -45,7 +44,6 @@
                 <td>${registrant.proformaInvoiceNumber}</td>
                 <td>${registrant.paymentType}</td>
                 <td>${registrant.branch}</td>
-                <td>${registrant.student}</td>
                 <td>
                     <span><a href="/admin/registrant/edit/${registrant.id}">Edit</a></span> &nbsp;&nbsp;&nbsp;
                     <span><a href="/admin/registrant/remove/${registrant.id}">Remove</a></span>

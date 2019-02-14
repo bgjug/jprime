@@ -59,6 +59,7 @@
 					<td>${visitor.name}</td>
 					<td>${visitor.email}</td>
                     <td>${visitor.company}</td>
+					<td>${visitor.student}</td>
 					<td>${visitor.status}</td>
 					<td>${visitor.registrant.name}</td>
 					<td>${not empty visitor.registrant and not empty visitor.registrant.realInvoiceNumber ?visitor.registrant.realInvoiceNumber:''}</td>

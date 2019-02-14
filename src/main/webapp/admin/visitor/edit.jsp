@@ -51,6 +51,14 @@
                 <form:input path="company"/>
             </dd>
         </dl>
+        <dl>
+            <dt>
+                <label for="student">Student</label>
+            </dt>
+            <dd>
+                <form:checkbox path="student" id="student"/>
+            </dd>
+        </dl>
             <dl>
                 <dt>
                     <label for="status">Status</label>

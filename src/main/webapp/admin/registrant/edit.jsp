@@ -143,6 +143,7 @@
             <td><i>Name</i></td>
             <td><i>Email</i></td>
             <td><i>Company</i></td>
+            <td><i>Student</i></td>
             <td><i>Actions</i></td>
         </tr>
     <c:forEach var="visitor" items="${registrant.visitors}">
@@ -150,6 +151,7 @@
             <td>${visitor.name}</td>
             <td>${visitor.email}</td>
             <td>${visitor.company}</td>
+            <td>${visitor.student}</td>
             <td>
                 <span><a href="/admin/visitor/edit/${visitor.id}">Edit</a></span> &nbsp;&nbsp;&nbsp;
                 <span><a href="/admin/visitor/remove/${visitor.id}"> Remove </a></span>
