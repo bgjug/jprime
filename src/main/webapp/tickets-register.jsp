@@ -210,10 +210,9 @@
             <br><br>
             <fieldset id="studentFieldset" style="display:none">
                 <legend> Student tickets </legend>
-                <dl><dd><dd> Student tickets are for individuals that cannot pay the full price of the conference ticket, however
-                beeing a community conference we do our best to support everyone who want to learn more, so this ticket is for YOU!<br/><br/>
-                There are no limitations of the student ticket compared to the regular one, so you have access to everything jPrime can offer !</dd></dl>
-
+                <dl><dd><dd> If you are a Student and you can’t afford to pay full price ticket we still have something for YOU! <br/><br/>
+                    Join in our community conference and be part of our event! <br/>
+                    We do our best to support everybody who wants to learn!</dd></dl>
             </fieldset>
             <fieldset id="invoiceFieldset">
                 <legend>Invoice information</legend>
