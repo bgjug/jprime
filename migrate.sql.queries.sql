@@ -23,8 +23,8 @@ SET FOREIGN_KEY_CHECKS=1;
 
 -- Migration script for 2018 - delete visitors and registrants from 2017
 SET FOREIGN_KEY_CHECKS=0;
-delete r, v
-from Registrant r
-left outer join Visitor v on v.registrant=r.id
-where r.branch='YEAR_2017';
+delete r, v \
+from Registrant r \
+left outer join Visitor v on v.registrant=r.id \
+where r.branch='YEAR_2018';
 SET FOREIGN_KEY_CHECKS=1;
