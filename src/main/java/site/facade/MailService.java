@@ -55,7 +55,7 @@ public class MailService {
 
         bais = new ByteArrayResource(pdf);
         try {
-            helper.addAttachment(MimeUtility.encodeWord(pdfFilename), bais);
+            helper.addAttachment(MimeUtility.encodeWord(pdfFilename, "UTF-8", "Q"), bais);
         } catch (UnsupportedEncodingException e) {
             logger.error(e.getMessage());
         }
