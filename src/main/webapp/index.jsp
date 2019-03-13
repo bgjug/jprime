@@ -420,8 +420,8 @@
             </div>
 
             <div class="row pricing-tables">
-
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; margin-bottom: -200px;">
+                <!--   <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5; margin-bottom: -200px;"> -->
+                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; margin-bottom: -200px; opacity: 0.5;">
                     <div class="pricing-table">
                         <div class="plan-name">
                             <h3>Early bird ticket</h3>
@@ -444,12 +444,12 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <%--
                             <a href="#"
                                class="btn-system btn-small">Over</a>
-                            --%>
+                                <%--
                                 <a href="tickets/"
                                class="btn-system btn-small">Get It Now</a>
+                               --%>
 
                         </div>
                     </div>

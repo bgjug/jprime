@@ -178,7 +178,7 @@
         <h2>Buy conference tickets</h2>
         <p>
         <%-- <p style="text-decoration: line-through;"> --%>
-        <p>The <strong>early bird ticket</strong> price for the conference is <strong>140</strong>.00 BGN (VAT included) until 15th of March.</p>
+        <p style="text-decoration: line-through;">The <strong>early bird ticket</strong> price for the conference is <strong>140</strong>.00 BGN (VAT included) until 15th of March.</p>
         <p>* The <strong>regular</strong> ticket price after 15th of March will be <strong>200</strong>.00 BGN (VAT included).</p>
         <p>* There is a ~50% discount of the regular ticket price for students. Student ticket price is <strong>100</strong>.00 BGN (VAT included).</p>
         <p>* There is a free pass for a JUG lead (one per Java User Group).</p>
