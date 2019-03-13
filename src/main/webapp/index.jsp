@@ -327,7 +327,7 @@
 
             <div class="row pricing-tables">
 
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
+                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5;">
                     <div class="pricing-table">
                         <div class="plan-name">
                             <h3>Platinum</h3>
@@ -346,14 +346,18 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
+                            <a href="#"
+                               class="btn-system btn-small">Sold out</a>
+                            <%--
                             <a href="mailto:conference@jprime.io?subject=platinum sponsorship"
                                class="btn-system btn-small">Sign Up Now</a>
+                               --%>
 
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
+                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5;">
                     <div class="pricing-table">
                         <div class="plan-name">
                             <h3>Gold</h3>
@@ -370,10 +374,13 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
+                            <a href="#"
+                               class="btn-system btn-small">Sold out</a>
+                            <%--
                             <a href="mailto:conference@jprime.io?subject=gold sponsorship"
                                class="btn-system btn-small">Sign
                                 Up Now</a>
-
+                            --%>
                         </div>
                     </div>
                 </div>
