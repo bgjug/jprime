@@ -31,4 +31,12 @@ public interface VenueHallRepository extends PagingAndSortingRepository<VenueHal
 	@Override
 	@RestResource(exported = false)
 	void deleteAll();
+
+	@Override
+	@RestResource(exported = false)
+	<S extends VenueHall> S save(S var1);
+
+	@Override
+	@RestResource(exported = false)
+	<S extends VenueHall> Iterable<S> saveAll(Iterable<S> var1);
 }

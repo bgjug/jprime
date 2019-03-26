@@ -36,4 +36,12 @@ public interface SessionRepository extends PagingAndSortingRepository<Session, L
 	@Override
 	@RestResource(exported = false)
 	void deleteAll();
+
+    @Override
+    @RestResource(exported = false)
+    <S extends Session> S save(S var1);
+
+    @Override
+    @RestResource(exported = false)
+    <S extends Session> Iterable<S> saveAll(Iterable<S> var1);
 }

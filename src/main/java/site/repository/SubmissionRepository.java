@@ -44,4 +44,12 @@ public interface SubmissionRepository extends PagingAndSortingRepository<Submiss
     @Override
     @RestResource(exported = false)
     void deleteAll();
+
+    @Override
+    @RestResource(exported = false)
+    <S extends Submission> S save(S var1);
+
+    @Override
+    @RestResource(exported = false)
+    <S extends Submission> Iterable<S> saveAll(Iterable<S> var1);
 }
