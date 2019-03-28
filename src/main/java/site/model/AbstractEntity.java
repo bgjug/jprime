@@ -1,16 +1,9 @@
 package site.model;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,30 +11,29 @@ import javax.persistence.MappedSuperclass;
 
 
 @MappedSuperclass
-@EntityListeners({AuditingEntityListener.class})
-public abstract class AbstractEntity{
+public abstract class AbstractEntity {
 	/**
-     * Default serial version uid.
-     */
-    private static final long serialVersionUID = 1L;
+	 * Default serial version uid.
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-    @Column(name = "created_by")
-    private String createdBy;
-	
-    @Column(name = "created_date")
+
+	@Column(name = "created_by")
+	private String createdBy;
+
+	@Column(name = "created_date")
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime createdDate;
+	private DateTime createdDate;
 
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
+	@Column(name = "last_modified_by")
+	private String lastModifiedBy;
 
-    @Column(name = "last_modified_date")
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime lastModifiedDate;
+	@Column(name = "last_modified_date")
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	private DateTime lastModifiedDate;
 
 	public Long getId() {
 		return id;
