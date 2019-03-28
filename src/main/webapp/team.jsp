@@ -42,7 +42,7 @@
             </div>
             <div class="row">
                     <div class="col-md-4 col-sm-6 col-xs-12" >
-                        <div class="team-member modern">
+                        <div class="the-team team-member modern">
                             <!-- Memebr Photo, Name & Position -->
                             <div class="member-photo text-center">
                                 <img alt="" src="/images/team/ivan.jpg"/>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 <div class="col-md-4 col-sm-6 col-xs-12" >
-                    <div class="team-member modern">
+                    <div class="the-team team-member modern">
                         <!-- Memebr Photo, Name & Position -->
                         <div class="member-photo text-center">
                             <img alt="" src="/images/team/mitia.jpg"/>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 col-xs-12" >
-                    <div class="team-member modern">
+                    <div class="the-team team-member modern">
                         <!-- Memebr Photo, Name & Position -->
                         <div class="member-photo text-center">
                             <img alt="" src="/images/team/martin.jpg"/>
@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 col-xs-12" >
-                    <div class="team-member modern">
+                    <div class="the-team team-member modern">
                         <!-- Memebr Photo, Name & Position -->
                         <div class="member-photo text-center">
                             <img alt="" src="/images/team/mihail.jpg"/>
@@ -109,7 +109,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 col-xs-12" >
-                    <div class="team-member modern">
+                    <div class="the-team team-member modern">
                         <!-- Memebr Photo, Name & Position -->
                         <div class="member-photo text-center">
                             <img alt="" src="/images/team/nayden.jpg"/>
@@ -125,7 +125,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6 col-xs-12" >
-                    <div class="team-member modern">
+                    <div class="the-team team-member modern">
                         <!-- Memebr Photo, Name & Position -->
                         <div class="member-photo text-center">
                             <img alt="" src="/images/team/doychin.png"/>
