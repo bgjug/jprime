@@ -29,20 +29,16 @@ public abstract class AbstractEntity{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@CreatedBy
     @Column(name = "created_by")
     private String createdBy;
 	
-	@CreatedDate
     @Column(name = "created_date")
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime createdDate;
 
-    @LastModifiedBy
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
-    @LastModifiedDate
     @Column(name = "last_modified_date")
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime lastModifiedDate;
