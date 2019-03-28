@@ -2637,24 +2637,22 @@ ul.icons-list li i {
 	font-weight: 600;
 }
 
-
-
 /*************** Team Members ***************/
 
 @media (min-width: 992px) {
-	.team-member {
+	.the-team  {
 		min-height: 600px;
 	}
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-	.team-member {
+	.the-team  {
 		min-height: 630px;
 	}
 }
 
 @media (min-width: 768px) {
-	.team-member {
+	.the-team {
 		min-height: 630px;
 	}
 }
