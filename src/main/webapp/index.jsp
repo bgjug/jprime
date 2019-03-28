@@ -49,16 +49,16 @@
             <!-- Carousel inner -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img class="img-responsive" src="images/slider/artwork.jpg" alt="slider">
+                    <img class="img-responsive" src="images/slider/index2.jpg" alt="slider">
 
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
-                            <h2 class="animated2 white" style="text-shadow: 3px 3px black;">
-                                <span><strong><!--Java Prime Time in Sofia--></strong></span>
+                            <%--h2 class="animated2 white" style="text-shadow: 3px 3px black;">
+                                <span><strong>Java Prime Time in Sofia</strong></span>
                             </h2>
 
                             <h3 class="animated3 white" style="text-shadow: 2px 2px black;">
-                                <span><!--29 and 30 May 2018--></span>
+                                <span>28 and 29 May 2019</span>
                             </h3>
                             <%--
                             <p class="animated4"><a href="#about" class="slider btn btn-primary">read more</a>
@@ -71,7 +71,7 @@
                     <img class="img-responsive" src="images/slider/index1.jpg" alt="slider">
 
                     <div class="slider-content">
-                        <div class="col-md-12 text-center">
+                        <div class="col-md-12 text-centerpartnerChunks">
                             <h2 class="animated4 white" style="text-shadow: 3px 3px black;">
                                 <span><strong>jPrime</strong> wants YOU </span>
                             </h2>
@@ -80,7 +80,8 @@
                                 <span>2 full days</span>
                             </h3>
 
-                            <p class="animated4"><a href="tickets/epay" class="slider btn btn-primary">Buy ticket</a>
+                                <p class="animated4"><a href="tickets/" class="slider btn btn-primary">Buy a ticket</a>
+
                             </p>
 
                         </div>
@@ -93,8 +94,8 @@
                     <div class="slider-content">
                         <div class="col-md-12 text-center">
                             <h2 class="animated7 white" style="text-shadow: 3px 3px black;">
-<!--                                 <span>Become a <strong>Sponsor</strong></span> -->
-									<span>Student <strong>tickets !</strong></span>
+                                    <span>Become a <strong>Sponsor</strong></span>
+									<!-- <span>Student <strong>tickets !</strong></span> -->
                             </h2>
 
                             <h3 class="animated8 white" style="text-shadow: 2px 2px black;">
@@ -102,9 +103,9 @@
                             </h3>
 
                             <div class="">
-                                <a class="animated4 slider btn btn-primary btn-min-block" href="#sponsors">Get Ticket</a>
                                 <a class="animated4 slider btn btn-default btn-min-block"
                                                   href="#sponsors">Learn More</a>
+                                <!--<a class="animated4 slider btn btn-primary btn-min-block" href="#sponsors">Get Ticket</a> -->
                             </div>
                         </div>
                     </div>
@@ -164,6 +165,11 @@
                         <!-- Client 5 -->
                         <div class="client-item item">
                             <a href="http://www.experian.bg"><img src="images/experian.png" alt="Experian"/></a>
+                        </div>
+
+                        <!-- Client 6 -->
+                        <div class="client-item item">
+                            <a href="https://www.paysafe.com/"><img src="images/paysafe.png" alt="Paysafe"/></a>
                         </div>
 
                     </div>
@@ -249,7 +255,7 @@
         <!-- End Big Heading -->
 
         <p class="text-center">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices.
-            <br/> Its forth edition will be held on <strong>29th and 30th May 2018</strong> in Sofia Tech Park.
+            <br/> Its fifth edition will be held on <strong>28th and 29th May 2019</strong> in Sofia Tech Park.
             It's run by the Bulgarian Java User Group and backed by the biggest companies in the city.
             <br/><br/>jPrime features a combination of great international speakers along with the best presenters from
             Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning,
@@ -259,7 +265,7 @@
 
             <!-- Start Big Heading --/>
             <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                <h1>We are done for this year! <strong>See you in 2018!</strong></h1>
+                <h1>We are done for this year! <strong>See you in 2019!</strong></h1>
             </div>
         </div>
 -->
@@ -282,10 +288,7 @@
             <div class="row">
                 <c:forEach var="speaker" items="${acceptedSpeakers}">
                     <div class="col-md-3 col-sm-6 col-xs-12">
-                    	<c:url var="speakerUrl" value="/nav/article">
-                    		<c:param name="title" value="${speaker.firstName} ${speaker.lastName}"/>
-                    	</c:url>
-                        <a href="${speakerUrl}"><div class="team-member modern">
+                        <a href="/speaker/${speaker.id}"><div class="team-member modern">
                             <!-- Memebr Photo, Name & Position -->
                             <div class="member-photo">
                                 <img alt="" src="/image/speaker/${speaker.id}" height="365" width="280"/>
@@ -324,7 +327,7 @@
 
             <div class="row pricing-tables">
 
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
+                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5;">
                     <div class="pricing-table">
                         <div class="plan-name">
                             <h3>Platinum</h3>
@@ -343,14 +346,18 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
+                            <a href="#"
+                               class="btn-system btn-small">Sold out</a>
+                            <%--
                             <a href="mailto:conference@jprime.io?subject=platinum sponsorship"
                                class="btn-system btn-small">Sign Up Now</a>
+                               --%>
 
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
+                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5;">
                     <div class="pricing-table">
                         <div class="plan-name">
                             <h3>Gold</h3>
@@ -367,10 +374,13 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
+                            <a href="#"
+                               class="btn-system btn-small">Sold out</a>
+                            <%--
                             <a href="mailto:conference@jprime.io?subject=gold sponsorship"
                                class="btn-system btn-small">Sign
                                 Up Now</a>
-
+                            --%>
                         </div>
                     </div>
                 </div>
@@ -403,26 +413,26 @@
     </div>
     <!-- End Pricing Table for Sponsors Section -->
 
-    <!-- Start Pricing Table for Sponsors Section -->
-    <div class=" section pricing-section" id="sponsors">
+    <!-- Start Pricing Table for tickets Section -->
+    <div class=" section pricing-section" id="tickets">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <!-- Start Big Heading -->
                     <div class="big-title text-center">
-                        <h1>Buy <strong>Ticket!</strong></h1>
+                        <h1>Buy a <strong>Ticket!</strong></h1>
                     </div>
                     <!-- End Big Heading -->
                 </div>
             </div>
 
             <div class="row pricing-tables">
-
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5; margin-bottom: -200px;">
+                <!--   <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5; margin-bottom: -200px;"> -->
+                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; margin-bottom: -200px; opacity: 0.5;">
                     <div class="pricing-table">
                         <div class="plan-name">
                             <h3>Early bird ticket</h3>
-                            <span>(Until 15th of Match)</span>
+                            <span>(Until 15th of March)</span>
                         </div>
                         <div class="plan-price">
                             <div class="price-value">140<span>.00</span> BGN</div>
@@ -443,6 +453,10 @@
                         <div class="plan-signup">
                             <a href="#"
                                class="btn-system btn-small">Over</a>
+                                <%--
+                                <a href="tickets/"
+                               class="btn-system btn-small">Get It Now</a>
+                               --%>
 
                         </div>
                     </div>
@@ -452,7 +466,7 @@
                     <div class="pricing-table">
                         <div class="plan-name">
                             <h3>Regular ticket</h3>
-                            <span>(After 15th of Match)</span>
+                            <span>(After 15th of March)</span>
                         </div>
                         <div class="plan-price">
                             <div class="price-value">200<span>.00</span> BGN</div>
@@ -471,7 +485,7 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <a href="tickets/epay"
+                            <a href="tickets/"
                                class="btn-system btn-small">Get It Now</a>
 
                         </div>
@@ -501,7 +515,7 @@
                             </ul>
                         </div>
                         <div class="plan-signup">
-                            <a href="tickets/epay"
+                            <a href="tickets/"
                                class="btn-system btn-small">Get It Now</a>
 
                         </div>
@@ -511,7 +525,7 @@
             </div>
         </div>
     </div>
-    <!-- End Pricing Table for Sponsors Section -->
+    <!-- End Pricing Table for tickets Section -->
 
 
     <!-- Start Sponsor Section -->
@@ -526,17 +540,14 @@
                 </div>
 
                 <div class="our-clients">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(platinumSponsors) gt 3 ? '3':fn:length(platinumSponsors)}" data-appeared-items="${fn:length(platinumSponsors)}"
-                         data-navigation="true">
 
-                        <c:forEach var="sponsor" items="${platinumSponsors}">
-                            <div class="client-item item">
-                                <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}"
-                                                                         alt="${sponsor.companyName}"/></a>
-                            </div>
-                        </c:forEach>
+                    <c:forEach var="sponsor" items="${platinumSponsors}">
+                        <div class="client-item item">
+                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}"
+                                                                     alt="${sponsor.companyName}"/></a>
+                        </div>
+                    </c:forEach>
 
-                    </div>
                 </div>
 
                 <div class="big-title text-center">
@@ -544,16 +555,13 @@
                 </div>
 
                 <div class="our-clients text-center" style="text-align: center">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(goldSponsors) gt 3 ? '3':fn:length(goldSponsors)}" data-appeared-items="${fn:length(goldSponsors)}"
-                         data-navigation="true">
 
-                        <c:forEach var="sponsor" items="${goldSponsors}">
-                            <div class="client-item item" style="float: none; display: inline-block">
-                                <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}" /></a>
-                            </div>
-                        </c:forEach>
+                    <c:forEach var="sponsor" items="${goldSponsors}">
+                        <div class="client-item item" style="float: none; display: inline-block">
+                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}"/></a>
+                        </div>
+                    </c:forEach>
 
-                    </div>
                 </div>
 
                 <div class="big-title text-center">
@@ -561,17 +569,14 @@
                 </div>
 
                 <div class="our-clients">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(silverSponsors) gt 3 ? '3':fn:length(silverSponsors)}" data-appeared-items="${fn:length(silverSponsors)}"
-                         data-navigation="true">
 
-                        <c:forEach var="sponsor" items="${silverSponsors}">
-                            <div class="client-item item">
-                                <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}"
-                                                                         alt="${sponsor.companyName}"/></a>
-                            </div>
-                        </c:forEach>
+                    <c:forEach var="sponsor" items="${silverSponsors}">
+                        <div class="client-item item">
+                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}"
+                                                                     alt="${sponsor.companyName}"/></a>
+                        </div>
+                    </c:forEach>
 
-                    </div>
                 </div>
                 <!-- End Clients Carousel -->
             </div><!-- .row -->
@@ -579,9 +584,41 @@
     </div>
     <!-- End Sponsor Section -->
 
+    <!-- Start Official Supporters Partners Section -->
+    <c:if test="${fn:length(officialSupporterPartnersChunks) gt 0}">
+        <div class="partner">
+            <div class="container">
+                <div class="row">
+
+                    <div class="big-title text-center" >
+                        <h1><strong>Official </strong> Supporters</h1>
+                    </div>
+
+                    <div class="our-clients">
+                        <c:forEach var="partners" items="${officialSupporterPartnersChunks}">
+
+                            <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partners) gt 3? '3' : fn:length(partners)}" data-appeared-items="${fn:length(partners)}"
+                                 data-navigation="true">
+
+                                <c:forEach var="partner" items="${partners}">
+                                    <div class="client-item item">
+                                        <a href="${partner.companyWebsite}"><img src="/image/partner/${partner.id}"
+                                                                                 alt="${partner.companyName}"/></a>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </c:forEach>
+
+                    </div>
+                    <!-- End Clients Carousel -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </div>
+    </c:if>
+    <!-- End Official Supporters Partners Section -->
 
     <!-- Start Media Partners Section -->
-    <c:if test="${fn:length(partnerChunks) gt 0}">
+    <c:if test="${fn:length(mediaPartnersChunks) gt 0}">
 	    <div class="partner">
 	        <div class="container">
 	            <div class="row">
@@ -591,7 +628,7 @@
 	                </div>
 
 	                <div class="our-clients">
-	                     <c:forEach var="partners" items="${partnerChunks}">
+	                     <c:forEach var="partners" items="${mediaPartnersChunks}">
 
                                 <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partners) gt 3? '3' : fn:length(partners)}" data-appeared-items="${fn:length(partners)}"
                                              data-navigation="true">

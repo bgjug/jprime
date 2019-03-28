@@ -35,6 +35,9 @@ import site.facade.AdminService;
 import site.facade.CSVService;
 import site.model.Branch;
 import site.model.Submission;
+import site.model.SubmissionStatus;
+
+import static site.controller.ResourceAsString.resourceAsString;
 
 /**
  * @author Ivan St. Ivanov
@@ -53,11 +56,11 @@ public class SubmissionController extends AbstractCfpController {
     @Autowired
     @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
-    
+
     @Autowired
     @Qualifier(CSVService.NAME)
     private CSVService csvFacade;
-    
+
     @RequestMapping(value = "/view/all", method = RequestMethod.GET)
     public String listAllSubmissions(Model model, Pageable pageable) {
         Page<Submission> submissions = adminFacade.findAllSubmissions(pageable);
@@ -65,13 +68,13 @@ public class SubmissionController extends AbstractCfpController {
         model.addAttribute("path", "all");
         return ADMIN_SUBMISSION_VIEW_JSP;
     }
-    
+
     @RequestMapping(value = "/view/{year}", method = RequestMethod.GET)
     public String listSubmissions(Model model, Pageable pageable, @PathVariable String year) {
     	Branch branch = Branch.valueOfYear(year);
         return listSubmissionsForBranch(model, pageable, branch);
     }
-    
+
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String listSubmissions(Model model, Pageable pageable) {
         return listSubmissionsForBranch(model, pageable, Globals.CURRENT_BRANCH);
@@ -103,6 +106,17 @@ public class SubmissionController extends AbstractCfpController {
         return REDIRECT + "/admin/submission/view";
     }
 
+    @RequestMapping(value = "/notify/{submissionId}", method = RequestMethod.GET)
+    public String notify(@PathVariable("submissionId") Long submissionId) {
+        Submission submission = adminFacade.findOneSubmission(submissionId);
+        try {
+            sendNotificationEmails(submission);
+        } catch (Exception e) {
+            logger.error("Could not send notification emails", e);
+        }
+        return REDIRECT + "/admin/submission/view";
+    }
+
     @RequestMapping(value = "/reject/{submissionId}", method = RequestMethod.GET)
     public String reject(@PathVariable("submissionId") Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);
@@ -114,18 +128,30 @@ public class SubmissionController extends AbstractCfpController {
         }
         return REDIRECT + "/admin/submission/view";
     }
-    
+
+    @RequestMapping(value = "/delete/{submissionId}", method = RequestMethod.GET)
+    public String delete(Model model, Pageable pageable, @PathVariable("submissionId") Long submissionId) {
+        Submission submission = adminFacade.findOneSubmission(submissionId);
+        if (submission.getStatus() != SubmissionStatus.SUBMITTED) {
+            model.addAttribute("msg", "Only SUBMITTED submissions can be deleted!");
+        } else {
+            adminFacade.deleteSubmission(submission);
+        }
+
+        return listSubmissions(model, pageable);
+    }
+
     @RequestMapping(value = "/exportCSV", method = RequestMethod.GET, produces = PRODUCES_TYPE)
     public@ResponseBody void exportSubmissionsToCSV(HttpServletResponse response) {
-    	List<Submission> findAllSubmitedSubmissionsForCurrentBranch = adminFacade.findAllSubmitedSubmissionsForCurrentBranch();
+    	List<Submission> findAllSubmittedSubmissionsForCurrentBranch = adminFacade.findAllSubmitedSubmissionsForCurrentBranch();
     	File submissionsCSVFile;
 		try {
-			submissionsCSVFile = csvFacade.exportSubmissions(findAllSubmitedSubmissionsForCurrentBranch);
+			submissionsCSVFile = csvFacade.exportSubmissions(findAllSubmittedSubmissionsForCurrentBranch);
 		} catch (IOException e) {
 			logger.error("Could not create submissions file", e);
 			return;
 		}
-		
+
 		try(InputStream inputStream = new FileInputStream(submissionsCSVFile) ){
 	        response.setContentType(PRODUCES_TYPE);
 	        response.setHeader("Content-Disposition", "attachment; filename=" + submissionsCSVFile.getName());
@@ -140,7 +166,7 @@ public class SubmissionController extends AbstractCfpController {
     }
 
     private void sendEmails(Submission submission, String fileName)
-            throws IOException, URISyntaxException, MessagingException {
+            throws IOException, MessagingException {
         final String mailSubject = "Your jPrime talk proposal status";
         String messageText = buildMessage(submission, fileName);
         mailFacade.sendEmail(submission.getSpeaker().getEmail(), mailSubject, messageText);
@@ -153,11 +179,11 @@ public class SubmissionController extends AbstractCfpController {
     }
 
     private String buildMessage(Submission submission, String fileName)
-            throws IOException, URISyntaxException {
-        String messageText = new String(Files.readAllBytes(Paths.get(getClass().getResource(
-                fileName).toURI())));
+            throws IOException {
+        String messageText = resourceAsString(fileName);
         messageText = messageText.replace("{speaker.firstName}", submission.getSpeaker().getFirstName());
         messageText = messageText.replace("{submission.title}", submission.getTitle());
+        messageText = messageText.replace("{submission.year}", Globals.CURRENT_BRANCH.toString());
         return messageText;
     }
 

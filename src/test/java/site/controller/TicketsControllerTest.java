@@ -36,7 +36,7 @@ public class TicketsControllerTest {
 
     @Test
     public void getShouldReturnTicketsJsp() throws Exception {
-        mockMvc.perform(get("/tickets/epay"))
+        mockMvc.perform(get("/tickets"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(Globals.PAGE_TICKETS));
     }

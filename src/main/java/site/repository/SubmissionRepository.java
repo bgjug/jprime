@@ -1,16 +1,16 @@
 package site.repository;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.stereotype.Repository;
-
 import site.model.Branch;
 import site.model.Submission;
 import site.model.SubmissionStatus;
+
+import java.util.List;
 
 /**
  * @author Ivan St. Ivanov
@@ -28,4 +28,28 @@ public interface SubmissionRepository extends PagingAndSortingRepository<Submiss
     List<Submission> findByBranchAndStatus(Branch branch, SubmissionStatus status);
 
     Page<Submission> findAllByBranch(Branch branch, Pageable pageable);
+
+    @Override
+    @RestResource(exported = false)
+    void deleteById(Long id);
+
+    @Override
+    @RestResource(exported = false)
+    void delete(Submission entity);
+
+    @Override
+    @RestResource(exported = false)
+    void deleteAll(Iterable<? extends Submission> var1);
+
+    @Override
+    @RestResource(exported = false)
+    void deleteAll();
+
+    @Override
+    @RestResource(exported = false)
+    <S extends Submission> S save(S var1);
+
+    @Override
+    @RestResource(exported = false)
+    <S extends Submission> Iterable<S> saveAll(Iterable<S> var1);
 }

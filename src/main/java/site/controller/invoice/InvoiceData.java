@@ -1,5 +1,6 @@
 package site.controller.invoice;
 
+import site.config.Globals;
 import site.model.Registrant;
 
 import java.math.BigDecimal;
@@ -16,7 +17,7 @@ public class InvoiceData {
     public static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(200D);
     public static final BigDecimal STUDENT_TICKET_PRICE = BigDecimal.valueOf(100D);
     private static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);
-    private static final String DEFAULT_DESCRIPTION_BG = "jPrime 2018 билет за конференция";
+    private static final String DEFAULT_DESCRIPTION_BG = "jPrime "+ Globals.CURRENT_BRANCH.toString() + " билет за конференция";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     public static final String ORIGINAL_BG = "Оригинал";
     public static final String PROFORMA_BG = "Проформа";

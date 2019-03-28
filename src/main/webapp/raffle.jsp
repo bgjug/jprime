@@ -12,7 +12,6 @@
 <html lang="en">
 <head>
 
-	<base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
     <!-- Basic -->
     <title>Raffle</title>
 
@@ -23,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2018">
+    <meta name="description" content="jPrime 2019">
     <meta name="author" content="jPrime">
     <user:pageJavaScriptAndCss/>
 

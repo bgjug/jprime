@@ -17,10 +17,6 @@ import site.model.Submission;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * @author Ivan St. Ivanov
@@ -32,8 +28,7 @@ public class CfpController extends AbstractCfpController {
 
     public static final String CFP_OPEN_JSP = "/proposal.jsp";
     public static final String CFP_CLOSED_JSP = "/cfp-closed.jsp";
-
-    public static final String JPRIME_CONF_MAIL_ADDRESS = "conference@jprime.io";
+    public static final String CFP_THANK_YOU = "/cfp-thank-you.jsp";
 
     @RequestMapping(value = "/cfp", method = RequestMethod.GET)
     public String submissionForm(Model model) {
@@ -70,20 +65,18 @@ public class CfpController extends AbstractCfpController {
 
         saveSubmission(submission, speakerImage, coSpeakerImage);
         try {
-            mailFacade.sendEmail(submission.getSpeaker().getEmail(), "jPrime talk proposal",
-                    loadMailContentTemplate("submissionContent.html"));
-            if (submission.getCoSpeaker() != null) {
-                mailFacade.sendEmail(submission.getCoSpeaker().getEmail(), "jPrime talk proposal",
-                        loadMailContentTemplate("submissionContent.html"));
-            }
-            mailFacade.sendEmail(JPRIME_CONF_MAIL_ADDRESS, "New talk proposal",
-                    prepareNewSubmissionContent(submission, loadMailContentTemplate("newSubmission.html")
-            ));
+           sendNotificationEmails(submission);
         } catch (Exception e) {
             logger.error("Could not send confirmation email", e);
         }
 
-        return "redirect:/";
+        return "redirect:/cfp-thank-you";
+    }
+
+        @RequestMapping(value = "/cfp-thank-you", method = RequestMethod.GET)
+    public String thankYou(Model model) {
+        model.addAttribute("tags", userFacade.findAllTags());
+        return CfpController.CFP_THANK_YOU;
     }
 
     private String validateEmail(BindingResult bindingResult, Submission submission, Model model, String email, String role) {
@@ -102,17 +95,5 @@ public class CfpController extends AbstractCfpController {
         model.addAttribute("tags", userFacade.findAllTags());
         buildCfpFormModel(model, submission);
         return Globals.PAGE_CFP;
-    }
-
-    private String loadMailContentTemplate(String templateFileName)
-            throws IOException, URISyntaxException {
-        return new String(Files.readAllBytes(Paths.get(getClass().getResource("/" + templateFileName).toURI())));
-    }
-
-    private String prepareNewSubmissionContent(Submission submission, String template) {
-        return template.replace("{session.title}", submission.getTitle())
-                        .replace("{session.abstract}", submission.getDescription())
-                        .replace("{speaker.name}", submission.getSpeaker().getFirstName() + " " + submission.getSpeaker().getLastName())
-                        .replace("{speaker.bio}", submission.getSpeaker().getBio());
     }
 }

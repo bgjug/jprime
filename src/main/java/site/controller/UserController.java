@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,9 +24,8 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
+import static site.controller.ResourceAsString.resourceAsString;
 
 @Controller
 public class UserController {
@@ -41,11 +39,7 @@ public class UserController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	//@Autowired - Spring cannot find the Bean and it is not used anywhere, so we do not need it
-	//private AuthenticationManager authenticationManager;
 
-	
 	@Autowired
 	protected MailService mailService;
 	
@@ -75,6 +69,13 @@ public class UserController {
 			return "/signup.jsp";
 		}
 
+		User existingUser = userRepository.findUserByEmail(user.getEmail());
+		if (existingUser != null) {
+			bindingResult.rejectValue("email", "email.exists", "This email already exists, please use forgot password");
+
+			return "/signup.jsp";
+		}
+
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 
 		this.getUserRepository().save(user);
@@ -83,7 +84,7 @@ public class UserController {
 			String mailContent = buildWelcomeMailContent(user, "/welcomingMail.html");
 			String mailTitle = "Welcome to JPrime!";
 			mailService.sendEmail(user.getEmail(), mailTitle, mailContent);
-		} catch (MessagingException | IOException | URISyntaxException e) {
+		} catch (MessagingException | IOException e) {
 			logger.error("Error while sending Welcoming Mail to  " + user, e);
 		}
 
@@ -152,7 +153,7 @@ public class UserController {
 				String mailContent = buildResetMailContent(user, tokenId, "/resetPasswordMail.html");
 				String mailTitle = "Reset your JPrime password";
 				mailService.sendEmail(email, mailTitle, mailContent);
-			} catch (MessagingException | IOException | URISyntaxException e) {
+			} catch (MessagingException | IOException e) {
 			    logger.error("Error while sending ResetPassword Mail to  " + user, e);
 			}
 		}
@@ -216,9 +217,8 @@ public class UserController {
 	}
 	
     private String buildResetMailContent(User user, String tokenId, String fileName)
-            throws IOException, URISyntaxException {
-        String messageText = new String(Files.readAllBytes(Paths.get(getClass().getResource(
-                fileName).toURI())));
+            throws IOException {
+        String messageText = resourceAsString(fileName);
         messageText = messageText.replace("{user.firstName}", user.getFirstName());
         String url = createNewPasswordUrl+tokenId;
         messageText = messageText.replace("{url}", url);
@@ -226,9 +226,8 @@ public class UserController {
     }
     
     private String buildWelcomeMailContent(User user, String fileName)
-            throws IOException, URISyntaxException {
-        String messageText = new String(Files.readAllBytes(Paths.get(getClass().getResource(
-                fileName).toURI())));
+            throws IOException {
+        String messageText = resourceAsString(fileName);
         messageText = messageText.replace("{user.firstName}", user.getFirstName());
         return messageText;
     }

@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2018">
+    <meta name="description" content="jPrime 2019">
     <meta name="author" content="jPrime">
 
     <user:pageJavaScriptAndCss/>
@@ -67,7 +67,7 @@ pageEncoding="UTF-8"%>
     <!-- Start Single Post Content -->
     <div class="post-content">
         <h2>Submit your proposal</h2>
-        <br>Call for paper closes on <strong>1st of March!</strong>
+        <br>Call for paper closes on <strong>15th of February!</strong>
         <p>
         <user:cfp action="/cfp"/>
     </div>

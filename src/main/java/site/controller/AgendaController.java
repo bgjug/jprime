@@ -2,20 +2,23 @@ package site.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import site.config.Globals;
 import site.facade.UserService;
-import site.model.Article;
 import site.model.Session;
-import site.repository.SessionRepository;
 
 @Controller
 public class AgendaController {
+
+	private static final Logger logger = LogManager.getLogger(AgendaController.class);
 	
 	@Autowired
 	private UserService userService;
@@ -24,6 +27,10 @@ public class AgendaController {
     @RequestMapping("/agenda/{id}")
     public String getById(@PathVariable("id") final long id, Model model) {
     	Session talk = userService.findSessionTalk(id);
+    	if (talk == null) {
+			logger.error(String.format("Invalid session id (%1$d)", id));
+    		return "/404.jsp";
+		}
     	model.addAttribute("talk", talk);
         return "/talk.jsp";
     }
@@ -38,8 +45,11 @@ public class AgendaController {
     	model.addAttribute("beta", beta);
 	   model.addAttribute("workshops", workshops);
 
-		model.addAttribute("firstDayDate", alpha.get(0).getStartTime());
-	   model.addAttribute("secondDayDate", alpha.get(0).getStartTime().plusDays(1));
+		DateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
+		model.addAttribute("firstDayDate", startDate);
+		model.addAttribute("secondDayDate", startDate.plusDays(1));
+
+		model.addAttribute("agenda", Globals.AGENDA);
 
     	//we have 2 options here
     	//option one iterate on all alpha on the view and with status=i and use i.count in beta to get the beta talk with the same position as in alpha.

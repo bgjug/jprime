@@ -8,19 +8,31 @@
             <div class="top-bar">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-10">
                             <!-- Start Contact Info -->
                             <ul class="contact-details">
                                 <li><a href="https://goo.gl/maps/67NtDSTADcG2" target="_blank"><i class="fa fa-map-marker"></i> Tsarigradsko Shosse 115B, Sofia, Bulgaria</a>
                                 </li>
                                 <li><a href="mailto:conference@jprime.io"><i class="fa fa-envelope-o"></i> conference@jprime.io</a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-phone"></i> +359 887 749 325</a>
+                                <li><a href="#"><i class="fa fa-phone"></i>+359 887 749 325</a>
+                                </li>
+                                <li>
+                                    <a><!-- for the vertical line--></a>
+                                </li>
+                                <li>
+                                    <form action="https://jprime.us13.list-manage.com/subscribe/post?u=968bc6e2a2348118b259c0df2&amp;id=c9a8e30e18" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+                                        <input value="" name="EMAIL" class="email inputsm" id="mce-EMAIL" placeholder="email address" required="" type="email">
+                                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input name="b_968bc6e2a2348118b259c0df2_c9a8e30e18" tabindex="-1" value="" type="text"></div>
+                                        <input class="btn btn-link" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" type="submit">
+                                    </form>
+
                                 </li>
                             </ul>
                             <!-- End Contact Info -->
                         </div><!-- .col-md-6 -->
-                        <div class="col-md-5">
+                        <div class="col-md-2">
                             <!-- Start Social Links -->
                             <ul class="social-list">
                                 <li>
@@ -29,12 +41,15 @@
                                 <li>
                                     <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" href="https://www.facebook.com/jprimeConf"><i class="fa fa-facebook"></i></a>
                                 </li>
+                                <%-- This ones no one uses anymore --%>
+                                <%--
                                 <li>
                                     <a class="google itl-tooltip" data-placement="bottom" title="Google" href="https://plus.google.com/u/2/108212814919981345652/posts"><i class="fa fa-google"></i></a>
                                 </li>
                                 <li>
                                     <a class="linkedin itl-tooltip" data-placement="bottom" title="Linkedin" href="https://www.linkedin.com/groups/jPrime-8290432"><i class="fa fa-linkedin"></i></a>
                                 </li>
+                                --%>
                             </ul>
                             <!-- End Social Links -->
                         </div><!-- .col-md-6 -->
@@ -97,14 +112,14 @@
                                 <a <c:if test='${"/proposal.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/cfp">Call for papers</a>
                             </li>
                             <li>
-                                <a <c:if test='${"/tickets-epay-register.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/tickets/epay">Tickets</a>
+                                <a <c:if test='${"/tickets-epay-register.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/tickets">Tickets</a>
                             </li>
                             <li>
                                 <a <c:if test='${"/team.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/team">The Team</a>
                             </li>
 
                             <li>
-                                <a <c:if test='${"/venue.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/venue">Venue/Useful info</a>
+                                <a <c:if test='${"/venue.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/venue">Useful info</a>
                             </li>
 
                             <li>
@@ -120,6 +135,13 @@
                                     <a href="/nav/${tag.name}"><c:out value="${tag.name}"/></a>
                                 </li>
                             </c:forEach>
+
+                            <%-- not yet required --%>
+                            <%--
+                            <li>
+                                <a <c:if test='${"/login.jsp" eq pageContext.request.requestURI}'> class="active"</c:if> href="/login">Login/Register</a>
+                            </li>
+                            --%>
                             <%--
                             <li>
                                 <a href="#">Shortcodes</a>

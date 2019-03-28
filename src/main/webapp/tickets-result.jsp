@@ -22,9 +22,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <!-- Page Description and Author -->
-  <meta name="description" content="jPrime 2018">
+  <meta name="description" content="jPrime 2019">
   <meta name="author" content="jPrime">
-  <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
 
   <user:pageJavaScriptAndCss/>
 
@@ -54,7 +53,7 @@
               <c:if test="${not result}">
                 <h2>There was a problem for purchasing the tickets</h2>
                 <br/>
-                <a href="/tickets/epay">Try again?</a>
+                <a href="/tickets">Try again?</a>
                 <br/><br/><br/>
               </c:if>
 

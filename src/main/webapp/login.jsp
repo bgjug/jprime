@@ -22,9 +22,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Page Description and Author -->
-	<meta name="description" content="jPrime 2018">
+	<meta name="description" content="jPrime 2019">
 	<meta name="author" content="jPrime">
-    <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
     
     <user:pageJavaScriptAndCss/>
 
@@ -76,16 +75,19 @@
 										<td><input type='password' name='password' /></td>
 									</tr>
 									<tr>
-										<td colspan="2"><a href="<c:out value='/resetPassword'/>" style="margin-left: 100px; position: absolute;">Forgot your password?</a></td>
+										<td>
+										<br/>
+										</td>
+										<td>
+											<a href="<c:out value='/resetPassword'/>" style="margin-left: 30px; position: absolute;">Forgot your password?</a>
+										</td>
 									</tr>
 									<tr>
 										<td>
-										<br/>
-										<input name="submit" type="submit"
-											value="submit" />
+											<input name="submit" type="submit" value="submit" />
 										</td>
 										<td>
-											<a href="<c:out value='/signup'/>" style="margin-left: 80px; position: absolute;"> Register </a>
+											<a href="<c:out value='/signup'/>" style="margin-left: 30px; position: absolute;"> Register </a>
 										</td>
 									</tr>
 								</table>

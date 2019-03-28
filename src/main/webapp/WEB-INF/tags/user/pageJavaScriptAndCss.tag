@@ -1,6 +1,7 @@
     <%@ tag language="java" pageEncoding="UTF-8"%>
 
-    <!-- mihail: icon -->
+    <base href="${pageContext.request.contextPath}/"/>
+
     <link rel="icon" type="image/png"
           href="images/icons/cup.white.transparent.png" />
     

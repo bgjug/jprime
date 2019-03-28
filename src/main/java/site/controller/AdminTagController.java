@@ -29,7 +29,6 @@ public class AdminTagController {
 	public String view(Model model, Pageable pageable){
 		Page<Tag> tags = adminFacade.findAllTags(pageable);
 		
-		
 		model.addAttribute("tags", tags);
 		
 		return "/admin/tag/view.jsp";

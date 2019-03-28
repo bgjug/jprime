@@ -15,15 +15,17 @@ import org.supercsv.io.CsvMapWriter;
 import org.supercsv.io.ICsvMapWriter;
 import org.supercsv.prefs.CsvPreference;
 
+import site.model.Speaker;
 import site.model.Submission;
 
 @Service(CSVService.NAME)
 public class CSVService {
 	private static final Logger logger = LogManager.getLogger(CSVService.class);
 	public static final String NAME = "csvFacade";
-	final String[] submissionHeader = new String[] { "Title", "Abstract", "Session level", "Session type", "Speaker Name", "Speaker Bio",
+	private static final String[]
+        SUBMISSION_HEADER = new String[] { "Title", "Abstract", "Session level", "Session type", "Speaker Name", "Speaker Bio",
 			"Co-Speaker Name", "Co-Speaker Bio" };
-	
+
 	public File exportSubmissions(List<Submission> submissions) throws IOException{
 		File submissionsCSVFile = File.createTempFile("submissions.", ".csv");
 		logger.info("Created submissions file with path: " + submissionsCSVFile.getAbsolutePath());
@@ -32,25 +34,27 @@ public class CSVService {
 		}
 		return submissionsCSVFile;
 	}
-	
+
 	private void writeSubmissions(List<Submission> submissions, ICsvMapWriter mapWriter) throws IOException{
 		CellProcessor[] processors = new CellProcessor[] {null, null, null, null, null, null, null, null};
    	 	Map<String, Object> submissionRow;
-   	 	mapWriter.writeHeader(submissionHeader);
-   	 	
+   	 	mapWriter.writeHeader(SUBMISSION_HEADER);
+
 		for(Submission submission: submissions){
-			submissionRow = new HashMap<String, Object>();
-			submissionRow.put(submissionHeader[0], submission.getTitle());
-			submissionRow.put(submissionHeader[1], submission.getDescription());
-			submissionRow.put(submissionHeader[2], submission.getLevel());
-			submissionRow.put(submissionHeader[3], submission.getType());
-			submissionRow.put(submissionHeader[4], submission.getSpeaker().getFirstName());
-			submissionRow.put(submissionHeader[5], submission.getSpeaker().getBio());
-			if(submission.getCoSpeaker() != null){
-				submissionRow.put(submissionHeader[6], submission.getCoSpeaker().getFirstName());
-				submissionRow.put(submissionHeader[7], submission.getCoSpeaker().getBio());
+			submissionRow = new HashMap<>();
+			submissionRow.put(SUBMISSION_HEADER[0], submission.getTitle());
+			submissionRow.put(SUBMISSION_HEADER[1], submission.getDescription());
+			submissionRow.put(SUBMISSION_HEADER[2], submission.getLevel());
+			submissionRow.put(SUBMISSION_HEADER[3], submission.getType());
+			Speaker speaker = submission.getSpeaker();
+			submissionRow.put(SUBMISSION_HEADER[4], speaker.getFirstName() + " " + speaker.getLastName());
+			submissionRow.put(SUBMISSION_HEADER[5], speaker.getBio());
+			Speaker coSpeaker = submission.getCoSpeaker();
+			if(coSpeaker != null){
+				submissionRow.put(SUBMISSION_HEADER[6], coSpeaker.getFirstName() + " " + coSpeaker.getLastName());
+				submissionRow.put(SUBMISSION_HEADER[7], coSpeaker.getBio());
 			}
-			mapWriter.write(submissionRow, submissionHeader, processors);
+			mapWriter.write(submissionRow, SUBMISSION_HEADER, processors);
 		}
 	}
 }

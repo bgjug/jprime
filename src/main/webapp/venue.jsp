@@ -22,7 +22,6 @@
     <!-- Page Description and Author -->
     <meta name="description" content="JPrime Conference">
     <meta name="author" content="JPrime">
-    <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
 
     <user:pageJavaScriptAndCss/>
 
@@ -38,10 +37,12 @@
     <div id="content">
         <div class="container">
 
-            <p class="text-center"><br/> jPrime is held on <strong>29-30th May 2018</strong> in Sofia Tech Park. </p>
+            <p class="text-center"><br/> jPrime is held on <strong>28-29th May 2019</strong> in
+                "John Atanasoff" Innovation forum in Sofia Tech Park which is one of the leading and most preferable locations for running events connected with hi tech, entrepreneurship, science, ecology, education, innovations, digitalisation and health care.
+            </p>
 
             <center>
-                <img alt="techpark" src="/images/sftp.png" width="100%"/><br/><br/>
+                <img alt="techpark" src="/images/venue.jpg" width="100%"/><br/><br/>
             </center>
             <center>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11734.949903249553!2d23.3733712!3d42.6669183!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcbc66ddbb54d08b3!2z0KHQvtGE0LjRjyDRgtC10YUg0L_QsNGA0Lo!5e0!3m2!1sru!2sbg!4v1494940078038" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>

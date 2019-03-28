@@ -6,6 +6,7 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.springframework.stereotype.Service;
+import site.config.Globals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -41,7 +42,7 @@ public class InvoiceExporter {
         JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(
                 exportList);
         Map<String, Object> parameters = new HashMap<>();
-
+        parameters.put("jprime.year", Globals.CURRENT_BRANCH.toString());
 
         JasperDesign jasperDesign = JRXmlLoader.load(reportTemplate);
         JasperReport jasperReport = JasperCompileManager

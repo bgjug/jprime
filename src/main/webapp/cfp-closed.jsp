@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2018">
+    <meta name="description" content="jPrime 2019">
     <meta name="author" content="jPrime">
     <user:pageJavaScriptAndCss/>
 
@@ -48,7 +48,7 @@
                             <h2>Call for Papers is closed</h2>
                             <p>
                             <p>Stay tuned for the agenda. It will be published soon.</p>
-                            <p>You can also <a href="/tickets/epay">register</a> as attendee.</p>
+                            <p>You can also <a href="/tickets">register</a> as attendee.</p>
                         </div>
                         <!-- End Single Post Content -->
 

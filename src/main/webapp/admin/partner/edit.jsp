@@ -56,7 +56,17 @@
 					<label for="file">logo ( MUST BE 180x64 !!!)</label>
 				</dt>
 				<dd>
-					<input name="file" type="file" />
+					<table>
+						<tr>
+							<td>
+								<input name="file" type="file"/>
+							</td>
+							<td>
+								<label for="resize">Resize Image</label>
+								<input id="resize" type="checkbox" checked name="resizeImage"/>
+							</td>
+						</tr>
+					</table>
 				</dd>
 			</dl>
 			<dl>
@@ -69,7 +79,7 @@
 			</dl>
 			<dl>
 				<dt>
-					<label for="package">package ( type MEDIA, OTHER)</label>
+					<label for="package">package ( type MEDIA, OTHER or SUPPORTER)</label>
 				</dt>
 				<dd>
 					<form:input path="partnerPackage" />

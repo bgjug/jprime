@@ -23,11 +23,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2018">
+    <meta name="description" content="jPrime 2019">
     <meta name="author" content="jPrime">
 
 
-    <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
 
     <user:pageJavaScriptAndCss/>
 
@@ -72,7 +71,7 @@
         });
 
         var checkQty=function(){
-            var size = $("#visitorsFieldset").find("dl").size()+1;
+            var size = $("#visitorsFieldset").find("dl").size();
             if(size>1) {
                 $("#removeVisitor").show();
             }else{
@@ -83,7 +82,6 @@
         var appendVisitor = function() {
             var visitorsFieldset = $("#visitorsFieldset");
             var index = visitorsFieldset.find("dl").size();
-            checkQty();
             var clone = visitorsFieldset.find("dl:last").clone();
             clone.find("dd label").remove();
             clone.find("dd input").each(function(i) {
@@ -119,20 +117,32 @@
             $("#visitors" + index + "\\.name").rules("add",{required: true,minlength: 5});
             $("#visitors" + index + "\\.email").rules("add",{required: true,email: true});
             $("#visitors" + index + "\\.company").rules("add",{required: true});
+
+            checkQty();
         };
 
         var removeVisitor = function() {
             var visitorsFieldset = $("#visitorsFieldset");
-            checkQty();
             var size = visitorsFieldset.find("dl").size()+1;
             if(size>1) {
                 visitorsFieldset.find("dl:last").remove();
+            }
+            checkQty();
+        };
+
+        var issueStudentTicketHandler = function() {
+            if (this.checked) {
+                $("#studentFieldset").show();
+                $("#invoiceFieldset").hide();
+            } else {
+                $("#studentFieldset").hide();
             }
         };
 
         var issueInvoiceHandler = function() {
             if (this.checked) {
                 $("#invoiceFieldset").show();
+                $("#studentFieldset").hide();
             } else {
                 $("#invoiceFieldset").hide();
             }
@@ -142,6 +152,7 @@
             $("#newVisitor").click(appendVisitor);
             $("#removeVisitor").hide();
             $("#removeVisitor").click(removeVisitor);
+            $("#isStudent").click(issueStudentTicketHandler);
             $("#isCompany").click(issueInvoiceHandler);
         });
     </script>
@@ -166,6 +177,7 @@
     <div class="post-content">
         <h2>Buy conference tickets</h2>
         <p>
+        <%-- <p style="text-decoration: line-through;"> --%>
         <p style="text-decoration: line-through;">The <strong>early bird ticket</strong> price for the conference is <strong>140</strong>.00 BGN (VAT included) until 15th of March.</p>
         <p>* The <strong>regular</strong> ticket price after 15th of March will be <strong>200</strong>.00 BGN (VAT included).</p>
         <p>* There is a ~50% discount of the regular ticket price for students. Student ticket price is <strong>100</strong>.00 BGN (VAT included).</p>
@@ -173,7 +185,7 @@
 
         Buy a ticket:
         <form:form modelAttribute="registrant" method="post"
-                   action="/tickets/epay" id="visitorsForm">
+                   action="/tickets" id="visitorsForm">
             <p>
                 <form:errors/>
             </p>
@@ -192,10 +204,16 @@
             <input type="button" id="newVisitor" value="Add new">&nbsp;&nbsp;
             <input type="button" id="removeVisitor" value="Remove last">
             <br><br>
-            <form:checkbox path="student" label="I am student" id="isStudent"/>
+            <form:checkbox path="student" label="I am student" id="isStudent" onchange="document.getElementById('isCompany').disabled = this.checked; this.checked?document.getElementById('isCompany').checked= false:'';"/>
             <br>
-            <form:checkbox path="company" label="Issue VAT invoice" id="isCompany"/>
+            <form:checkbox path="company" label="Issue company VAT invoice" id="isCompany" onchange="document.getElementById('isStudent').disabled = this.checked; this.checked?document.getElementById('isStudent').checked= false:'';"/>
             <br><br>
+            <fieldset id="studentFieldset" style="display:none">
+                <legend> Student tickets </legend>
+                <dl><dd><dd> If you are a Student and you can’t afford to pay full price ticket we still have something for YOU! <br/><br/>
+                    Join in our community conference and be part of our event! <br/>
+                    We do our best to support everybody who wants to learn!</dd></dl>
+            </fieldset>
             <fieldset id="invoiceFieldset">
                 <legend>Invoice information</legend>
                 <dl>
@@ -236,7 +254,11 @@
 		        <form:errors path="captcha"/>
         	</p>
             <p>
-            	<button type="submit">Proceed</button>
+                <input type="checkbox"  onchange="document.getElementById('submitRegistration').disabled = !this.checked;" />
+                &nbsp; I agree with the <a href="/privacy-policy" target="_blank">Privacy policy</a>
+            </p>
+            <p>
+            	<button type="submit" id="submitRegistration" disabled>Proceed</button>
             </p>
 
         </form:form>

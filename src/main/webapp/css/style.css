@@ -44,7 +44,7 @@ body {
     line-height: 21px;
 	font-weight: 300;
 	color: #888;
-	background: url(../images/patterns/1.png) fixed repeat;
+	/*background: url(../images/patterns/1.png) fixed repeat;*/
 }
 strong, b {
 	font-weight: 600;
@@ -2637,9 +2637,25 @@ ul.icons-list li i {
 	font-weight: 600;
 }
 
-
-
 /*************** Team Members ***************/
+
+@media (min-width: 992px) {
+	.the-team  {
+		min-height: 600px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.the-team  {
+		min-height: 630px;
+	}
+}
+
+@media (min-width: 768px) {
+	.the-team {
+		min-height: 630px;
+	}
+}
 
 .team-member {
 	padding: 3px;
@@ -2838,7 +2854,7 @@ ul.icons-list li i {
 }
 
 .big-title h1 strong, .big-title h2 strong {
-	font-weight: 400;
+	font-weight: 900;
 }
 
 .big-title .title-desc {
@@ -5265,10 +5281,10 @@ ul.footer-nav li a:hover {
 	height: 20px;
 }
 .switcher-box .bg-list li a.bg1 {
-	background: url(../images/patterns/1.png) repeat;
+	/*background: url(../images/patterns/1.png) repeat;*/
 }
 .switcher-box .bg-list li a.bg2 {
-	background: url(../images/patterns/2.png) repeat;
+	/*background: url(../images/patterns/2.png) repeat;*/
 }
 .switcher-box .bg-list li a.bg3 {
 	background: url(../images/patterns/3.png) repeat;
@@ -5636,4 +5652,23 @@ ul.footer-nav li a:hover {
 
 .navbar-collapse {
 	max-height: 340px;
+}
+
+.partner .row .our-clients{
+	width: 100%;
+	text-align: center;
+}
+
+.partner .row .big-title h1{
+	font-weight: bold;
+}
+
+.partner .row .our-clients .client-item{
+	display: inline-block;
+	zoom: 1;
+	padding: 15px;
+}
+
+.tcenter tbody tr td[rowspan] {
+	vertical-align: top;
 }
