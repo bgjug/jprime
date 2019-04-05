@@ -1,14 +1,13 @@
 package site.controller.invoice;
 
-import site.config.Globals;
-import site.model.Registrant;
-import site.model.Visitor;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import site.config.Globals;
+import site.model.Registrant;
 
 /**
  * DTO for the PDF
@@ -38,6 +37,9 @@ public class InvoiceData {
     private String paymentType;
     private Long registrantId;
     private List<InvoiceDetail> invoiceDetails = new ArrayList<>();
+    // Used to store data from model
+    private Double singlePriceWithVAT;
+    private String description;
 
     public BigDecimal getTotalPrice() {
         return invoiceDetails.stream()
@@ -171,5 +173,29 @@ public class InvoiceData {
 
     public List<InvoiceDetail> getInvoiceDetails() {
         return invoiceDetails;
+    }
+
+    public Double getSinglePriceWithVAT() {
+        return invoiceDetails.isEmpty() ? singlePriceWithVAT : invoiceDetails.get(0).getSinglePriceWithVAT().doubleValue();
+    }
+
+    public void setSinglePriceWithVAT(Double singlePriceWithVAT) {
+        if (invoiceDetails.isEmpty()) {
+            this.singlePriceWithVAT = singlePriceWithVAT;
+        } else {
+            invoiceDetails.get(0).setSinglePriceWithVAT(singlePriceWithVAT);
+        }
+    }
+
+    public String getDescription() {
+        return invoiceDetails.isEmpty() ? description : invoiceDetails.get(0).getDescription();
+    }
+
+    public void setDescription(String description) {
+        if (invoiceDetails.isEmpty()) {
+            this.description = description;
+        } else {
+            invoiceDetails.get(0).setDescription(description);
+        }
     }
 }

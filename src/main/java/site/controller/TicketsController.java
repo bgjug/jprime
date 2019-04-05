@@ -66,7 +66,7 @@ public class TicketsController {
     @Value("${save.invoice.on.email.failure:false}")
     private boolean saveInvoiceOnFailure;
 
-    @Value("${save.invoice.path.to.save:/tmp    }")
+    @Value("${save.invoice.path.to.save:/tmp}")
     private String pathToSave;
 
     @RequestMapping(value = "/tickets", method = RequestMethod.GET)
