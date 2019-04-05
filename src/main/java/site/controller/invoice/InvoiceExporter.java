@@ -2,9 +2,8 @@ package site.controller.invoice;
 
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.engine.util.JRLoader;
 import org.springframework.stereotype.Service;
 import site.config.Globals;
 
@@ -31,16 +30,16 @@ public class InvoiceExporter {
         switch (language) {
             case EN:
                 if (isCompany) {
-                    resourceName = "/invoice/invoice_company_template.jrxml";
+                    resourceName = "/invoice/invoice_company_template.jasper";
                 } else {
-                    resourceName = "/invoice/invoice_individual_template.jrxml";
+                    resourceName = "/invoice/invoice_individual_template.jasper";
                 }
                 break;
             case BG:
                 if (isCompany) {
-                    resourceName = "/invoice/invoice_company_template_bg.jrxml";
+                    resourceName = "/invoice/invoice_company_template_bg.jasper";
                 } else {
-                    resourceName = "/invoice/invoice_individual_template_bg.jrxml";
+                    resourceName = "/invoice/invoice_individual_template_bg.jasper";
                 }
         }
 
@@ -51,8 +50,7 @@ public class InvoiceExporter {
         List<InvoiceDetail> exportList = new ArrayList<>(data.getInvoiceDetails());
         JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(exportList);
 
-        JasperDesign jasperDesign = JRXmlLoader.load(reportTemplate);
-        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reportTemplate);
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("jprime.year", Globals.CURRENT_BRANCH.toString());
