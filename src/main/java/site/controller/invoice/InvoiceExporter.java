@@ -44,12 +44,6 @@ public class InvoiceExporter {
         }
 
         InputStream reportTemplate = getClass().getResourceAsStream(resourceName);
-        ByteArrayOutputStream result = new ByteArrayOutputStream();
-
-        // device with some new functionality
-        List<InvoiceDetail> exportList = new ArrayList<>(data.getInvoiceDetails());
-        JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(exportList);
-
         JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reportTemplate);
 
         Map<String, Object> parameters = new HashMap<>();
@@ -67,7 +61,12 @@ public class InvoiceExporter {
             }
         });
 
+        List<InvoiceDetail> exportList = new ArrayList<>(data.getInvoiceDetails());
+        JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(exportList);
+
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
+
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
 
         JRPdfExporter pdfExporter = new JRPdfExporter();
         pdfExporter.setParameter(JRExporterParameter.CHARACTER_ENCODING, "UTF-8");
