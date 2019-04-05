@@ -9,14 +9,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import site.controller.invoice.InvoiceData;
-import site.controller.invoice.InvoiceExporter;
+import site.controller.invoice.*;
 import site.facade.MailService;
 import site.facade.RegistrantService;
 import site.model.Registrant;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+
+import static site.controller.TicketsController.*;
+import static site.controller.invoice.InvoiceLanguage.*;
 
 /**
  * @author Ivan St. Ivanov
@@ -64,12 +66,13 @@ public class AdminInvoiceController {
         invoiceData.setInvoiceNumber(String.valueOf(registrant.getRealInvoiceNumber()));
 
         try {
-            byte[] invoice = invoiceExporter.exportInvoice(invoiceData, registrant.isCompany());
+            byte[] invoice = invoiceExporter.exportInvoice(invoiceData, registrant.isCompany(), BG);
             mailFacade.sendInvoice(registrant.getEmail(), "jPrime.io original invoice",
                     "Please find attached the invoice for the conference passes that you purchased.",
-                    invoice, TicketsController.generatePdfFilename(registrant, invoiceData.getSinglePriceWithVAT()));
+                    invoice, generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT()));
             mailFacade.sendInvoice("conference@jprime.io", "jPrime.io invoice",
-                    "The attached invoice was sent to " + registrant.getEmail(), invoice, TicketsController.generatePdfFilename(registrant, invoiceData.getSinglePriceWithVAT()));
+                    "The attached invoice was sent to " + registrant.getEmail(), invoice,
+                generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT()));
 
         } catch (Exception e) {
             e.printStackTrace();

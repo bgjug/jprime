@@ -1,5 +1,9 @@
 package site.controller;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -12,8 +16,7 @@ import javax.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,14 +24,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import site.controller.invoice.InvoiceData;
-import site.controller.invoice.InvoiceExporter;
+import site.controller.invoice.*;
 import site.facade.MailService;
 import site.facade.RegistrantService;
 import site.facade.UserService;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.model.VisitorStatus;
+
+import static org.springframework.util.StringUtils.*;
+import static site.controller.invoice.InvoiceLanguage.*;
 
 /**
  * @author Mihail
@@ -58,6 +63,12 @@ public class TicketsController {
     @Qualifier(RegistrantService.NAME)
     private RegistrantService registrantFacade;
 
+    @Value("${save.invoice.on.email.failure:false}")
+    private boolean saveInvoiceOnFailure;
+
+    @Value("${save.invoice.path.to.save:/tmp    }")
+    private String pathToSave;
+
     @RequestMapping(value = "/tickets", method = RequestMethod.GET)
     public String goToRegisterPage(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
@@ -82,7 +93,7 @@ public class TicketsController {
 		}
 
         //check empty users, server side validation
-        List<Visitor> toBeRemoved = registrant.getVisitors().stream().filter(v -> v.getEmail() == null || v.getEmail().isEmpty() || v.getName() == null || v.getName().isEmpty()).collect(Collectors.toList());
+        List<Visitor> toBeRemoved = registrant.getVisitors().stream().filter(v -> isEmpty(v.getEmail()) || isEmpty(v.getName())).collect(Collectors.toList());
         registrant.getVisitors().removeAll(toBeRemoved);
         registrant.getVisitors().forEach(visitor -> visitor.setStatus(VisitorStatus.REQUESTING));
 
@@ -97,8 +108,8 @@ public class TicketsController {
 
         InvoiceData invoiceData = buildInvoiceData(savedRegistrant);
 
-        byte[] pdf = invoiceExporter.exportInvoice(invoiceData, registrant.isCompany());
-        sendPDF(savedRegistrant, generatePdfFilename(registrant, invoiceData.getSinglePriceWithVAT()), pdf);
+        byte[] pdf = invoiceExporter.exportInvoice(invoiceData, registrant.isCompany(), BG);
+        sendPDF(savedRegistrant, generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT()), pdf);
         return result("ok", model);
     }
 
@@ -111,7 +122,7 @@ public class TicketsController {
 
     private InvoiceData buildInvoiceData(Registrant registrant) {
         InvoiceData invoiceData = InvoiceData.fromRegistrant(registrant);
-        if(registrant.getPaymentType().equals(Registrant.PaymentType.BANK_TRANSFER)) {
+        if(registrant.getPaymentType() == Registrant.PaymentType.BANK_TRANSFER) {
             invoiceData.setInvoiceType(InvoiceData.PROFORMA_BG);//currently hardcoded
             invoiceData.setInvoiceNumber(String.valueOf(registrant.getProformaInvoiceNumber()));
         } else {
@@ -130,6 +141,13 @@ public class TicketsController {
             mailFacade.sendInvoice("conference@jprime.io", "jPrime.io invoice",
                     "We got some registrations: " + registrations, pdfContent, pdfFilename);
         } catch (Exception e) {
+            if (saveInvoiceOnFailure) {
+                try {
+                    Files.write(Paths.get(pathToSave, pdfFilename), pdfContent);
+                } catch (IOException e1) {
+                    logger.error("Could not save confirmation email", e);
+                }
+            }
             logger.error("Could not send confirmation email", e);
         }
     }
@@ -139,14 +157,14 @@ public class TicketsController {
         return TICKETS_RESULT_JSP;
     }
 
-    public static String generatePdfFilename(Registrant registrant, double singlePriceWithVAT) {
+    public static String generatePdfFilename(Registrant registrant, BigDecimal totalPriceWithVAT) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
         String date = dateFormat.format(Calendar.getInstance().getTime());
 
         if(registrant.getRealInvoiceNumber() != 0) {
-            return date+", "+registrant.getRealInvoiceNumber()+", "+registrant.getName()+", "+registrant.getVisitors().size()+"tickets, "+(registrant.getVisitors().size()*singlePriceWithVAT)+".pdf";
+            return date+", "+registrant.getRealInvoiceNumber()+", "+registrant.getName()+", "+registrant.getVisitors().size()+"tickets, "+(totalPriceWithVAT)+".pdf";
         } else {
-            return "P "+date+", "+registrant.getProformaInvoiceNumber()+", "+registrant.getName()+", "+registrant.getVisitors().size()+"tickets, "+(registrant.getVisitors().size()*singlePriceWithVAT)+".pdf";
+            return "P "+date+", "+registrant.getProformaInvoiceNumber()+", "+registrant.getName()+", "+registrant.getVisitors().size()+"tickets, "+(totalPriceWithVAT)+".pdf";
         }
     }
 }
