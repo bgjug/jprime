@@ -34,10 +34,10 @@
         </dl>
         <dl>
             <dt>
-                <label for="totalPriceWithVAT">Total price (VAT included)</label>
+                <label for="singlePriceWithVAT">Single price (VAT included)</label>
             </dt>
             <dd>
-                <form:input readonly="true" path="totalPriceWithVAT"/>
+                <form:input path="singlePriceWithVAT"/>
             </dd>
         </dl>
         <dl>
@@ -74,6 +74,14 @@
         </dl>
         <dl>
             <dt>
+                <label for="description">description</label>
+            </dt>
+            <dd>
+                <form:input path="description"/>
+            </dd>
+        </dl>
+        <dl>
+            <dt>
                 Payment type
             </dt>
             <dd>
@@ -86,29 +94,6 @@
             </dt>
             <dd>
                 <form:input path="invoiceDate"/>
-            </dd>
-        </dl>
-        <dl>
-            <dt><label for="invoiceDetail">Invoice details</label></dt>
-            <dd>
-                <table id="invoiceDetail">
-                    <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th>Pass quantity</th>
-                        <th>Single pass price</th>
-                        <th>total pass price(no VAT)</th>
-                    </tr>
-                    <c:forEach var="detail" items="${invoiceData.invoiceDetails}">
-                        <tr>
-                            <td align="left">${detail.description}</td>
-                            <td align="center">${detail.passQty}</td>
-                            <td align="center">${detail.price}</td>
-                            <td align="center">${detail.totalPrice}</td>
-                        </tr>
-                    </c:forEach>
-                    </thead>
-                </table>
             </dd>
         </dl>
         <sec:csrfInput/>

@@ -1,7 +1,8 @@
 package site.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,10 @@ import site.model.Registrant;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import static site.controller.TicketsController.*;
 import static site.controller.invoice.InvoiceLanguage.*;
 
@@ -26,6 +31,8 @@ import static site.controller.invoice.InvoiceLanguage.*;
 @Controller()
 @RequestMapping(value = "/admin/invoice")
 public class AdminInvoiceController {
+
+    private static final Logger logger = LogManager.getLogger(AdminInvoiceController.class);
 
     public static final String INVOICE_DATA_JSP = "/admin/invoice/invoiceData.jsp";
 
@@ -40,6 +47,12 @@ public class AdminInvoiceController {
     @Lazy
     private MailService mailFacade;
 
+    @Value("${save.invoice.on.email.failure:false}")
+    private boolean saveInvoiceOnFailure;
+
+    @Value("${save.invoice.path.to.save:/tmp}")
+    private String pathToSave;
+
     @RequestMapping(value = "/{itemId}", method = RequestMethod.GET)
     public String invoiceDataForm(@PathVariable("itemId") Long itemId, Model model) {
         InvoiceData invoiceData = InvoiceData.fromRegistrant(registrantFacade.findById(itemId));
@@ -49,13 +62,16 @@ public class AdminInvoiceController {
 
     @Transactional
     @RequestMapping(value = "/send", method = RequestMethod.POST)
-    public String sendInvoice(@Valid final InvoiceData invoiceData, BindingResult bindingResult) {
+    public String sendInvoice(@Valid final InvoiceData modelInvoiceData, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return INVOICE_DATA_JSP;
         }
 
-        Registrant registrant = registrantFacade.findById(invoiceData.getRegistrantId());
+        Registrant  registrant = registrantFacade.findById(modelInvoiceData.getRegistrantId());
+        InvoiceData invoiceData = InvoiceData.fromRegistrant(registrant);
+        invoiceData.setSinglePriceWithVAT(modelInvoiceData.getSinglePriceWithVAT());
+        invoiceData.setDescription(modelInvoiceData.getDescription());
         registrantFacade.setRegistrantPaid(registrant);
 
         invoiceData.setInvoiceType(InvoiceData.ORIGINAL_BG);
@@ -65,17 +81,33 @@ public class AdminInvoiceController {
 
         invoiceData.setInvoiceNumber(String.valueOf(registrant.getRealInvoiceNumber()));
 
+        byte[] invoice;
         try {
-            byte[] invoice = invoiceExporter.exportInvoice(invoiceData, registrant.isCompany(), BG);
+            invoice = invoiceExporter.exportInvoice(invoiceData, registrant.isCompany(), BG);
+        } catch (Exception ex) {
+            logger.error("Could not generate invoice pdf", ex);
+
+            return "redirect:/admin/registrant/view";
+        }
+
+        String pdfFileName = generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT());
+
+        try {
             mailFacade.sendInvoice(registrant.getEmail(), "jPrime.io original invoice",
                     "Please find attached the invoice for the conference passes that you purchased.",
-                    invoice, generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT()));
+                    invoice, pdfFileName);
             mailFacade.sendInvoice("conference@jprime.io", "jPrime.io invoice",
                     "The attached invoice was sent to " + registrant.getEmail(), invoice,
-                generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT()));
-
+                pdfFileName);
         } catch (Exception e) {
-            e.printStackTrace();
+            if (saveInvoiceOnFailure) {
+                try {
+                    Files.write(Paths.get(pathToSave, pdfFileName), invoice);
+                } catch (IOException e1) {
+                    logger.error("Could not save invoice pdf", e);
+                }
+            }
+            logger.error("Could not send invoice email", e);
         }
 
         return "redirect:/admin/registrant/view";
