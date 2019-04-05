@@ -69,10 +69,19 @@ public class AdminInvoiceController {
         }
 
         Registrant  registrant = registrantFacade.findById(modelInvoiceData.getRegistrantId());
+
+        registrantFacade.setRegistrantPaid(registrant);
+
         InvoiceData invoiceData = InvoiceData.fromRegistrant(registrant);
+        // Copy data from model into actual invoice data bean
+        invoiceData.setClient(modelInvoiceData.getClient());
+        invoiceData.setClientAddress(modelInvoiceData.getClientAddress());
+        invoiceData.setClientEIK(modelInvoiceData.getClientEIK());
+        invoiceData.setClientVAT(modelInvoiceData.getClientVAT());
+        invoiceData.setMol(modelInvoiceData.getMol());
+        invoiceData.setInvoiceDate(modelInvoiceData.getInvoiceDate());
         invoiceData.setSinglePriceWithVAT(modelInvoiceData.getSinglePriceWithVAT());
         invoiceData.setDescription(modelInvoiceData.getDescription());
-        registrantFacade.setRegistrantPaid(registrant);
 
         invoiceData.setInvoiceType(InvoiceData.ORIGINAL_BG);
         if (invoiceData.getInvoiceNumber().equals("0")) {
