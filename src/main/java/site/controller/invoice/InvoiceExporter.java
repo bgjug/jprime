@@ -82,8 +82,8 @@ public class InvoiceExporter {
         InvoiceData data = new InvoiceData();
         data.setInvoiceDate("27.05.2016");
         data.setInvoiceNumber("11234");
-        data.setClient("някъв клиент");
-        data.setClientAddress("1111, Sofia, some улица 1, some entrance, some floor, some appt");
+        data.setClient("Много дълго име на клиент за да видим как ще реагира JasperReports");
+        data.setClientAddress("1111, Sofia, some улица 1, some entrance, some floor, some appt and few more symbols");
         data.setClientEIK("2464387775");
         data.setClientVAT("BG2464387775");
         data.setMol("fda");
