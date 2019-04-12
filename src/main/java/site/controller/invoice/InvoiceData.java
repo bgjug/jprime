@@ -158,7 +158,7 @@ public class InvoiceData {
 
         int tickets = registrant.getVisitors().size();
         if (registrant.isStudent()) {
-            new InvoiceDetail(STUDENT_TICKET_PRICE, tickets, DEFAULT_DESCRIPTION_BG);
+            result.addInvoiceDetail(new InvoiceDetail(STUDENT_TICKET_PRICE, tickets, DEFAULT_DESCRIPTION_BG));
         } else {
             result.addInvoiceDetail(new InvoiceDetail(tickets));
         }
