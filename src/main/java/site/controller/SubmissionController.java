@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -143,7 +140,7 @@ public class SubmissionController extends AbstractCfpController {
 
     @RequestMapping(value = "/exportCSV", method = RequestMethod.GET, produces = PRODUCES_TYPE)
     public@ResponseBody void exportSubmissionsToCSV(HttpServletResponse response) {
-    	List<Submission> findAllSubmittedSubmissionsForCurrentBranch = adminFacade.findAllSubmitedSubmissionsForCurrentBranch();
+    	List<Submission> findAllSubmittedSubmissionsForCurrentBranch = adminFacade.findAllSubmittedSubmissionsForCurrentBranch();
     	File submissionsCSVFile;
 		try {
 			submissionsCSVFile = csvFacade.exportSubmissions(findAllSubmittedSubmissionsForCurrentBranch);
