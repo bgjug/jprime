@@ -15,15 +15,24 @@ import java.util.List;
 @RepositoryRestResource(path = "sessions")
 public interface SessionRepository extends PagingAndSortingRepository<Session, Long> {
 
-	String NAME = "sessionRepository";
+    String NAME = "sessionRepository";
 
     List<Session> findAll();
 
     @Query(
-        "select s from Session s where (s.submission.branch = :branch and s.hall = :hall) or s.hall is null" +
-			" order by s.startTime asc")
+        nativeQuery = true, value =
+        //@formatter:off
+        "select s.id, s.created_by, s.created_date, s.last_modified_by, s.last_modified_date, \n" +
+        "s.end_time, s.hall, s.start_time, s.submission, s.title \n" +
+        "from Session s \n" +
+        "left join Submission sbm on (s.submission = sbm.id)\n" +
+        "left join VenueHall vh on (s.hall = vh.id)\n" +
+        "where (vh.name=:hall and sbm.branch=:branch) or s.hall is null\n" +
+        "order by s.start_time asc"
+        //@formatter:on
+    )
     List<Session> findSessionsForBranchAndHallOrHallIsNull(@Param("hall") String hall,
-        @Param("branch") Branch branch);
+        @Param("branch") String branch);
 
     List<Session> findBySubmissionBranchOrSubmissionIsNullOrderByStartTimeAsc(Branch branch);
 
