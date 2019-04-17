@@ -94,7 +94,7 @@ public class SessionControllerTest {
     public void getNewSessionShouldReturnFormWithEmptySession() throws Exception {
         mockMvc.perform(get("/admin/session/add"))
                 .andExpect(model().attribute("halls", hasSize(2)))
-                .andExpect(model().attribute("submissions", hasSize(2)))
+                .andExpect(model().attribute("submissions", hasSize(1)))
                 .andExpect(model().attribute("session", is(new Session())))
                 .andExpect(status().isOk())
                 .andExpect(view().name(SESSIONS_EDIT_JSP));
