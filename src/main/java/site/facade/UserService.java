@@ -34,23 +34,23 @@ import static java.util.stream.Collectors.groupingBy;
 public class UserService {
 
 	public static final String NAME = "userFacade";
-	
+
 	@Autowired
 	@Qualifier(ArticleRepository.NAME)
 	private ArticleRepository articleRepository;
-	
+
 	@Autowired
 	@Qualifier(SpeakerRepository.NAME)
 	private SpeakerRepository speakerRepository;
-	
+
 	@Autowired
 	@Qualifier(SponsorRepository.NAME)
 	private SponsorRepository sponsorRepository;
-	
+
 	@Autowired
 	@Qualifier(PartnerRepository.NAME)
 	private PartnerRepository partnerRepository;
-	
+
 	@Autowired
 	@Qualifier(TagRepository.NAME)
 	private TagRepository tagRepository;
@@ -58,14 +58,14 @@ public class UserService {
     @Autowired
     @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
-    
+
     @Autowired
     @Qualifier(SessionRepository.NAME)
 	private SessionRepository sessionRepository;
-	
 
     /**
      * Speaker
+     *
      * @param id
      * @return
      */
@@ -75,6 +75,7 @@ public class UserService {
 
     /**
      * Article
+     *
      * @param id
      * @return
      */
@@ -89,10 +90,11 @@ public class UserService {
     public Page<Article> allPublishedArticles(Pageable pageable){
         return articleRepository.findByPublishedTrueOrderByCreatedDateDesc(pageable);
     }
+
     public Article getArticleById(long id){
         return articleRepository.findById(id).orElse(null);
     }
-    
+
     public Article getArticleByTitle(String title){
         return articleRepository.findByTitle(title);
     }
@@ -146,12 +148,12 @@ public class UserService {
     public void	submitTalk(Submission submission) {
         submissionRepository.save(submission);
     }
-    
+
     public Session findSessionTalk(long id){
     	return sessionRepository.findById(id).orElse(null);
     }
-    
-    public List<Session> findSessionTalksAndBreaksByHallName(String hallName){
-    	return sessionRepository.findByHallNameOrHallIsNullOrderByStartTimeAsc(hallName);
+
+    public List<Session> findSessionTalksAndBreaksByHallName(String hallName) {
+        return sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH);
     }
 }

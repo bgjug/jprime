@@ -13,8 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import site.config.Globals;
 import site.facade.AdminService;
 import site.model.Session;
+import site.model.Submission;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.util.StringUtils.*;
 
 /**
  * @author Ivan St. Ivanov
@@ -24,6 +29,7 @@ import javax.transaction.Transactional;
 public class AdminSessionController {
 
     public static final String SESSIONS_VIEW_JSP = "/admin/session/view.jsp";
+
     public static final String SESSIONS_EDIT_JSP = "/admin/session/edit.jsp";
 
     @Autowired
@@ -48,16 +54,16 @@ public class AdminSessionController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addSession(@RequestParam String submission,
-                             @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") DateTime startTime,
-                             @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") DateTime endTime,
-                             @RequestParam String title,
-                             @RequestParam String hall,
-                             @RequestParam String id) {
+        @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") DateTime startTime,
+        @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") DateTime endTime,
+        @RequestParam String title,
+        @RequestParam String hall,
+        @RequestParam String id) {
         Session session = new Session();
         if (!"".equals(id)) {
             session = adminFacade.findOneSession(Long.parseLong(id));
         }
-        if (title != null && !title.equals("")) {
+        if (!isEmpty(title)) {
             session.setTitle(title);
             session.setSubmission(null);
             session.setHall(null);
@@ -81,8 +87,24 @@ public class AdminSessionController {
 
     private String getModelAndView(Model model, Session session) {
         model.addAttribute("session", session);
-        model.addAttribute("submissions", adminFacade.findAllAcceptedSubmissionsForBranch(Globals.CURRENT_BRANCH));
+
+        // Reduce list of submissions to only with those that are not scheduled yet
+        List<Submission> acceptedSubmissions =
+            adminFacade.findAllAcceptedSubmissionsForBranch(Globals.CURRENT_BRANCH);
+        List<Submission> scheduledSubmissions =
+            adminFacade.findAllSessions().stream().map(Session::getSubmission).collect(Collectors.toList());
+        acceptedSubmissions = acceptedSubmissions.stream()
+                                                 .filter(
+                                                     submission -> !scheduledSubmissions.contains(submission))
+                                                 .collect(Collectors.toList());
+        if (session.getSubmission() != null) {
+            // For edit - we need to have current submission to
+            acceptedSubmissions.add(session.getSubmission());
+        }
+
+        model.addAttribute("submissions", acceptedSubmissions);
         model.addAttribute("halls", adminFacade.findAllVenueHalls());
+
         return SESSIONS_EDIT_JSP;
     }
 }
