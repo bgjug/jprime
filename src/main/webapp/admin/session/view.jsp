@@ -32,7 +32,7 @@
         <tr>
             <td><i>Title</i></td>
 <%--            <td><i>Abstract</i></td>--%>
-            <td><i>Speaker</i></td>
+<%--            <td><i>Speaker</i></td>--%>
             <td><i>Co-speaker</i></td>
             <td><i>Start time</i></td>
             <td><i>End time</i></td>
@@ -43,7 +43,7 @@
             <tr>
                 <td>${session.title}</td>
 <%--                <td>${session.submission.description}</td>--%>
-                <td>${session.submission.speaker.firstName} ${session.submission.speaker.lastName}</td>
+<%--                <td>${session.submission.speaker.firstName} ${session.submission.speaker.lastName}</td>--%>
                 <td>${session.submission.coSpeaker.firstName} ${session.submission.coSpeaker.lastName}</td>
                 <td><joda:format value="${session.startTime}" pattern="dd.MM.yyyy HH:mm"/></td>
                 <td><joda:format value="${session.endTime}" pattern="dd.MM.yyyy HH:mm"/></td>
