@@ -14,6 +14,11 @@
     <link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css" />
     <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css" />
     <title>Registrants</title>
+    <style>
+        fieldset {
+            width: 50%;
+        }
+    </style>
 </head>
 <body>
 <admin:menu/>
@@ -26,7 +31,7 @@
     <table class="admin-table">
         <tr>
             <td><i>Title</i></td>
-            <td><i>Abstract</i></td>
+<%--            <td><i>Abstract</i></td>--%>
             <td><i>Speaker</i></td>
             <td><i>Co-speaker</i></td>
             <td><i>Start time</i></td>
@@ -37,7 +42,7 @@
         <c:forEach var="session" items="${sessions}">
             <tr>
                 <td>${session.title}</td>
-                <td>${session.submission.description}</td>
+<%--                <td>${session.submission.description}</td>--%>
                 <td>${session.submission.speaker.firstName} ${session.submission.speaker.lastName}</td>
                 <td>${session.submission.coSpeaker.firstName} ${session.submission.coSpeaker.lastName}</td>
                 <td><joda:format value="${session.startTime}" pattern="dd.MM.yyyy HH:mm"/></td>

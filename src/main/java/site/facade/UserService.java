@@ -154,6 +154,6 @@ public class UserService {
     }
 
     public List<Session> findSessionTalksAndBreaksByHallName(String hallName) {
-        return sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH);
+        return sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH.name());
     }
 }
