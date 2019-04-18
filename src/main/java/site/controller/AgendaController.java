@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,10 @@ public class AgendaController {
 	
 	@Autowired
 	private UserService userService;
-	
+
+	@Value("${agenda.published:false}")
+	private boolean agenda;
+
 	//read a single agenda post
     @RequestMapping("/agenda/{id}")
     public String getById(@PathVariable("id") final long id, Model model) {
@@ -49,7 +53,7 @@ public class AgendaController {
 		model.addAttribute("firstDayDate", startDate);
 		model.addAttribute("secondDayDate", startDate.plusDays(1));
 
-		model.addAttribute("agenda", Globals.AGENDA);
+		model.addAttribute("agenda", agenda);
 
     	//we have 2 options here
     	//option one iterate on all alpha on the view and with status=i and use i.count in beta to get the beta talk with the same position as in alpha.
