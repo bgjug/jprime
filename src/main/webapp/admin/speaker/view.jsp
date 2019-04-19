@@ -9,6 +9,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<jsp:directive.include file="../../theme-colors.jsp" />
+
 <script type="text/javascript" src="/js/niceforms.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css" />
@@ -43,8 +45,8 @@
 					<td>${speaker.branch}</td>
 					<td><img src="/image/speaker/${speaker.id}" style="max-width: 280px"/></td>
 					<td>
-						<span style="float:left;"><a href="/admin/speaker/edit/${speaker.id}">Edit</a></span> &nbsp; 
-						<span style="float:right;"><a href="/admin/speaker/remove/${speaker.id}"> Remove </a></span> 
+						<span style="float:left;"><a href="/admin/speaker/edit/${speaker.id}">Edit</a></span> &nbsp;
+						<span style="float:right;"><a href="/admin/speaker/remove/${speaker.id}"> Remove </a></span>
 					</td>
 				</tr>
 			</c:forEach>

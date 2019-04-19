@@ -22,7 +22,9 @@
     <!-- Page Description and Author -->
     <meta name="description" content="JPrime Conference">
     <meta name="author" content="JPrime">
-	
+    
+    <jsp:directive.include file="theme-colors.jsp" />
+
     <user:pageJavaScriptAndCss/>
 
     <script type="text/javascript">
