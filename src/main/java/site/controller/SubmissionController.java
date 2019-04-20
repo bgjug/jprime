@@ -92,38 +92,41 @@ public class SubmissionController extends AbstractCfpController {
     }
 
     @RequestMapping(value = "/accept/{submissionId}", method = RequestMethod.GET)
-    public String accept(@PathVariable("submissionId") Long submissionId) {
+    public String accept(Model model, Pageable pageable, @PathVariable("submissionId") Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         adminFacade.acceptSubmission(submission);
         try {
             sendEmails(submission, "/acceptSubmission.html");
         } catch (Exception e) {
+            model.addAttribute("msg", "Could not send accept email");
             logger.error("Could not send accept email", e);
         }
-        return REDIRECT + "/admin/submission/view";
+        return listSubmissions(model, pageable);
     }
 
     @RequestMapping(value = "/notify/{submissionId}", method = RequestMethod.GET)
-    public String notify(@PathVariable("submissionId") Long submissionId) {
+    public String notify(Model model, Pageable pageable, @PathVariable("submissionId") Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         try {
             sendNotificationEmails(submission);
         } catch (Exception e) {
+            model.addAttribute("msg", "Could not send notification emails");
             logger.error("Could not send notification emails", e);
         }
-        return REDIRECT + "/admin/submission/view";
+        return listSubmissions(model, pageable);
     }
 
     @RequestMapping(value = "/reject/{submissionId}", method = RequestMethod.GET)
-    public String reject(@PathVariable("submissionId") Long submissionId) {
+    public String reject(Model model, Pageable pageable, @PathVariable("submissionId") Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         adminFacade.rejectSubmission(submission);
         try {
             sendEmails(submission, "/rejectSubmission.html");
         } catch (Exception e) {
+            model.addAttribute("msg", "Could not send rejection email");
             logger.error("Could not send rejection email", e);
         }
-        return REDIRECT + "/admin/submission/view";
+        return listSubmissions(model, pageable);
     }
 
     @RequestMapping(value = "/delete/{submissionId}", method = RequestMethod.GET)
