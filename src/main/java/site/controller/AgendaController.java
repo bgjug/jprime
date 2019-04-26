@@ -1,26 +1,30 @@
 package site.controller;
 
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import site.config.Globals;
 import site.facade.UserService;
 import site.model.Session;
+
+import java.util.List;
 
 @Controller
 public class AgendaController {
 
 	private static final Logger logger = LogManager.getLogger(AgendaController.class);
-	
+
+	@Autowired
+	@Qualifier(UserService.NAME)
+	private UserService userFacade;
+
 	@Autowired
 	private UserService userService;
 
@@ -30,6 +34,7 @@ public class AgendaController {
 	//read a single agenda post
     @RequestMapping("/agenda/{id}")
     public String getById(@PathVariable("id") final long id, Model model) {
+	   model.addAttribute("tags", userFacade.findAllTags());
     	Session talk = userService.findSessionTalk(id);
     	if (talk == null) {
 			logger.error(String.format("Invalid session id (%1$d)", id));
@@ -41,6 +46,8 @@ public class AgendaController {
     
     @RequestMapping("/agenda")
 	public String getAgenda(Model model) {
+	   model.addAttribute("tags", userFacade.findAllTags());
+
     	List<Session> alpha = userService.findSessionTalksAndBreaksByHallName("Hall A");
     	List<Session> beta = userService.findSessionTalksAndBreaksByHallName("Hall B");
 	   List<Session> workshops = userService.findSessionTalksAndBreaksByHallName("Workshops");
