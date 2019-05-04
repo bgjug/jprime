@@ -1,12 +1,13 @@
 package site.controller.invoice;
 
-import site.config.Globals;
-import site.model.Registrant;
-
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+import site.config.Globals;
+import site.model.Registrant;
 
 /**
  * DTO for the PDF
@@ -16,9 +17,12 @@ public class InvoiceData {
 
     public static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(200D);
     public static final BigDecimal STUDENT_TICKET_PRICE = BigDecimal.valueOf(100D);
-    private static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);
-    private static final String DEFAULT_DESCRIPTION_BG = "jPrime "+ Globals.CURRENT_BRANCH.toString() + " билет за конференция";
+
+    public static final String DEFAULT_DESCRIPTION_BG = "jPrime "+ Globals.CURRENT_BRANCH.toString() + " билет за конференция";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+    public static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);
+
     public static final String ORIGINAL_BG = "Оригинал";
     public static final String PROFORMA_BG = "Проформа";
 
@@ -30,35 +34,29 @@ public class InvoiceData {
     private String clientEIK;
     private String clientVAT;
     private String mol;
-    private BigDecimal singlePriceWithVAT = DEFAULT_TICKET_PRICE;
-    private Integer passQty;
     private String paymentType;
-    private String description = DEFAULT_DESCRIPTION_BG;
-
     private Long registrantId;
+    private List<InvoiceDetail> invoiceDetails = new ArrayList<>();
+    // Used to store data from model
+    private Double singlePriceWithVAT;
+    private String description;
 
-    public double getSinglePriceWithVAT() {
-        return singlePriceWithVAT.doubleValue();
+    public BigDecimal getTotalPrice() {
+        return invoiceDetails.stream()
+                             .map(InvoiceDetail::getTotalPrice)
+                             .reduce(BigDecimal::add)
+                             .orElse(BigDecimal.valueOf(0.0));
     }
 
-    public void setSinglePriceWithVAT(double singlePriceWithVAT) {
-        this.singlePriceWithVAT = BigDecimal.valueOf(singlePriceWithVAT);
+    public BigDecimal getTotalPriceWithVAT() {
+        return invoiceDetails.stream()
+                             .map(d -> d.getSinglePriceWithVAT().multiply(new BigDecimal(d.getPassQty())))
+                             .reduce(BigDecimal::add)
+                             .orElse(BigDecimal.valueOf(0.0));
     }
 
-    public Double getPrice() {
-        return singlePriceWithVAT.divide(VAT_DECREASE_RATIO, 2, RoundingMode.UP).doubleValue();//one ticket without VAT
-    }
-
-    public Double getTotalPrice() {
-        return getPrice() * passQty ;
-    }
-
-    public Double getTotalPriceWithVAT() {
-        return singlePriceWithVAT.doubleValue() * passQty;
-    }
-
-    public Double getTotalPriceVAT() {
-        return getTotalPriceWithVAT() - getTotalPrice();
+    public BigDecimal getTotalPriceVAT() {
+        return getTotalPriceWithVAT().subtract(getTotalPrice());
     }
 
     public String getInvoiceNumber() {
@@ -117,14 +115,6 @@ public class InvoiceData {
         this.clientVAT = clientVAT;
     }
 
-    public Integer getPassQty() {
-        return passQty;
-    }
-
-    public void setPassQty(Integer passQty) {
-        this.passQty = passQty;
-    }
-
     public String getMol() {
         return mol;
     }
@@ -139,14 +129,6 @@ public class InvoiceData {
 
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Long getRegistrantId() {
@@ -168,16 +150,52 @@ public class InvoiceData {
             result.setClientVAT("");
         }
         result.setMol(registrant.getMol());
-        result.setPassQty(registrant.getVisitors().size());
         result.setRegistrantId(registrant.getId());
-        result.setPaymentType(registrant.getPaymentType() != null ?
-                registrant.getPaymentType().getBulgarianValue() :
-                "");
+        result.setPaymentType(
+            registrant.getPaymentType() != null ? registrant.getPaymentType().getBulgarianValue() : "");
         result.setInvoiceNumber(registrant.getRealInvoiceNumber() + "");
         result.setInvoiceDate(LocalDate.now().format(FORMATTER));
+
+        int tickets = registrant.getVisitors().size();
         if (registrant.isStudent()) {
-            result.setSinglePriceWithVAT(STUDENT_TICKET_PRICE.intValue());
+            result.addInvoiceDetail(new InvoiceDetail(STUDENT_TICKET_PRICE, tickets, DEFAULT_DESCRIPTION_BG));
+        } else {
+            result.addInvoiceDetail(new InvoiceDetail(tickets));
         }
+
         return result;
+    }
+
+    public void addInvoiceDetail(InvoiceDetail invoiceDetail) {
+        invoiceDetails.add(invoiceDetail);
+        invoiceDetail.setIdx(invoiceDetails.size());
+    }
+
+    public List<InvoiceDetail> getInvoiceDetails() {
+        return invoiceDetails;
+    }
+
+    public Double getSinglePriceWithVAT() {
+        return invoiceDetails.isEmpty() ? singlePriceWithVAT : invoiceDetails.get(0).getSinglePriceWithVAT().doubleValue();
+    }
+
+    public void setSinglePriceWithVAT(Double singlePriceWithVAT) {
+        if (invoiceDetails.isEmpty()) {
+            this.singlePriceWithVAT = singlePriceWithVAT;
+        } else {
+            invoiceDetails.get(0).setSinglePriceWithVAT(singlePriceWithVAT);
+        }
+    }
+
+    public String getDescription() {
+        return invoiceDetails.isEmpty() ? description : invoiceDetails.get(0).getDescription();
+    }
+
+    public void setDescription(String description) {
+        if (invoiceDetails.isEmpty()) {
+            this.description = description;
+        } else {
+            invoiceDetails.get(0).setDescription(description);
+        }
     }
 }

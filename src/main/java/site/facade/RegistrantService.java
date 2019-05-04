@@ -44,7 +44,7 @@ public class RegistrantService {
     /** Complicated */
     public synchronized Registrant save(Registrant registrant) {
 
-        if(registrant.getPaymentType().equals(Registrant.PaymentType.BANK_TRANSFER)) {
+        if(registrant.getPaymentType() == Registrant.PaymentType.BANK_TRANSFER) {
             long counter = getProformaInvoiceNumber();
             registrant.setProformaInvoiceNumber(counter);
         } else {
@@ -57,7 +57,6 @@ public class RegistrantService {
             if(registrant.getEpayResponse() != null && registrant.getRealInvoiceNumber() == 0) {
                 generateInvoiceNumber(registrant);
             }
-
         }
         //todo: mihail this is not optimal, but for now it works
         for(Visitor visitor:registrant.getVisitors()) {

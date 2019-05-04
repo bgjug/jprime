@@ -17,25 +17,25 @@ import java.util.List;
 @Service(AdminService.NAME)
 @Transactional
 public class AdminService {
-	
+
 	public static final String NAME = "adminFacade";
-	
+
 	@Autowired
 	@Qualifier(ArticleRepository.NAME)
 	private ArticleRepository articleRepository;
-	
+
 	@Autowired
 	@Qualifier(SpeakerRepository.NAME)
 	private SpeakerRepository speakerRepository;
-	
+
 	@Autowired
 	@Qualifier(SponsorRepository.NAME)
 	private SponsorRepository sponsorRepository;
-	
+
 	@Autowired
 	@Qualifier(PartnerRepository.NAME)
 	private PartnerRepository partnerRepository;
-	
+
 	@Autowired
 	@Qualifier(UserRepository.NAME)
 	private UserRepository userRepository;
@@ -72,15 +72,15 @@ public class AdminService {
 	public List<Article> findAllArticles(){
 		return articleRepository.findAllLatestArticles();
 	}
-	
+
 	public Article findOneArticle(Long id){
 		return articleRepository.findById(id).get();
 	}
-	
+
 	public void deleteArticle(Long id){
 		articleRepository.deleteById(id);
 	}
-	
+
 	public Article saveArticle(Article article){
 		return articleRepository.save(article);
 	}
@@ -88,37 +88,37 @@ public class AdminService {
 
 
 	/* sponsor repo */
-	
+
 	public Page<Sponsor> findAllSponsors(Pageable pageable){
 		return sponsorRepository.findAll(pageable);
 	}
-	
+
 	public Sponsor findOneSponsor(Long id){
 		return sponsorRepository.findById(id).get();
 	}
-	
+
 	public void deleteSponsor(Long id){
 		sponsorRepository.deleteById(id);
 	}
-	
+
 	public Sponsor saveSponsor(Sponsor sponsor){
 		return sponsorRepository.save(sponsor);
 	}
-	
+
 	/* partner repo */
-	
+
 	public Page<Partner> findAllPartners(Pageable pageable){
 		return partnerRepository.findAll(pageable);
 	}
-	
+
 	public Partner findOnePartner(Long id){
 		return partnerRepository.findById(id).get();
 	}
-	
+
 	public void deletePartner(Long id){
 		partnerRepository.deleteById(id);
 	}
-	
+
 	public Partner savePartner(Partner partner){
 		return partnerRepository.save(partner);
 	}
@@ -127,32 +127,32 @@ public class AdminService {
 
 
 	/* speaker repo */
-	
+
 	public Page<Speaker> findAllSpeakers(Pageable pageable){
 		return speakerRepository.findAll(pageable);
 	}
-	
+
 	public Speaker findOneSpeaker(Long id){
 		return speakerRepository.findById(id).get();
 	}
-	
+
 	public void deleteSpeaker(Long id){
 		speakerRepository.deleteById(id);
 	}
-	
+
 	public Speaker saveSpeaker(Speaker speaker){
 		return speakerRepository.save(speaker);
 	}
-	
+
 
 
 
 	/* user repo */
-	
+
 	public Page<User> findAllUsers(Pageable pageable){
 		return userRepository.findAll(pageable);
 	}
-	
+
 	public User findOneUser(Long id){
 		return userRepository.findById(id).get();
 	}
@@ -164,7 +164,7 @@ public class AdminService {
         }
         return null;
     }
-	
+
 	public void deleteUser(Long id){
 		userRepository.deleteById(id);
 	}
@@ -176,23 +176,23 @@ public class AdminService {
 
 
 	/* tag repo */
-	
+
 	public Page<Tag> findAllTags(Pageable pageable){
 		return tagRepository.findAll(pageable);
 	}
-	
+
 	public Iterable<Tag> findAllTags(){
 		return tagRepository.findAll();
 	}
-	
+
 	public Tag findOneTag(Long id){
 		return tagRepository.findById(id).get();
 	}
-	
+
 	public void deleteTag(Long id){
 		tagRepository.deleteById(id);
 	}
-	
+
 	public Tag saveTag(Tag tag){
 		return tagRepository.save(tag);
 	}
@@ -201,11 +201,10 @@ public class AdminService {
     public Page<Submission> findAllSubmissions(Pageable pageable) {
         return submissionRepository.findAll(pageable);
     }
-    
+
     public Page<Submission> findAllSubmissionsForBranch(Branch branch, Pageable pageable) {
         return submissionRepository.findAllByBranch(branch, pageable);
     }
-    
 
     public Submission findOneSubmission(Long submissionId) {
         return submissionRepository.findById(submissionId).get();
@@ -228,13 +227,13 @@ public class AdminService {
         submissionRepository.save(submission);
     }
 
-	public Iterable<Submission> findAllAcceptedSubmissionsForBranch(Branch branch) {
-		return submissionRepository.findByBranchAndStatus(branch, SubmissionStatus.ACCEPTED);
-	}
-	
-	public List<Submission> findAllSubmitedSubmissionsForCurrentBranch(){
-		return submissionRepository.findByBranchAndStatus(Globals.CURRENT_BRANCH, SubmissionStatus.SUBMITTED);
-	}
+    public List<Submission> findAllAcceptedSubmissionsForBranch(Branch branch) {
+        return submissionRepository.findByBranchAndStatus(branch, SubmissionStatus.ACCEPTED);
+    }
+
+    public List<Submission> findAllSubmittedSubmissionsForCurrentBranch() {
+        return submissionRepository.findByBranchAndStatus(Globals.CURRENT_BRANCH, SubmissionStatus.SUBMITTED);
+    }
 
 	/* visitors repo */
 	public Page<Visitor> findAllVisitors(Pageable pageable){
@@ -293,10 +292,11 @@ public class AdminService {
         registrantRepository.deleteById(itemId);
     }
 
-	/* sessions repo */
-	public Iterable<Session> findAllSessions() {
-		return sessionRepository.findAll();
-	}
+    /* sessions repo */
+    public List<Session> findAllSessions() {
+        return sessionRepository.findBySubmissionBranchOrSubmissionIsNullOrderByStartTimeAsc(
+            Globals.CURRENT_BRANCH);
+    }
 
 	public Session saveSession(Session session) {
 		return sessionRepository.save(session);

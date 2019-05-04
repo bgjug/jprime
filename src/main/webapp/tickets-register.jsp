@@ -21,8 +21,10 @@
   
   <!-- Responsive Metatag -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <!-- Page Description and Author -->
+
+  <jsp:directive.include file="theme-colors.jsp" />
+
+    <!-- Page Description and Author -->
     <meta name="description" content="jPrime 2019">
     <meta name="author" content="jPrime">
 
@@ -315,14 +317,6 @@
 
 <!-- Go To Top Link -->
 <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
-
-<div id="loader">
- <div class="spinner">
-  <div class="dot1"></div>
-  <div class="dot2"></div>
-</div>
-</div>
-
 
 
 </body>

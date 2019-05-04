@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 3.7.2  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoicetemplate" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="jprime.year" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="invoiceDate" class="java.lang.String"/>
+	<parameter name="invoiceNumber" class="java.lang.String"/>
+	<parameter name="client" class="java.lang.String"/>
+	<parameter name="clientAddress" class="java.lang.String"/>
+	<parameter name="clientVAT" class="java.lang.String"/>
+	<parameter name="clientEIK" class="java.lang.String"/>
+	<parameter name="invoiceType" class="java.lang.String"/>
+	<parameter name="paymentType" class="java.lang.String"/>
+	<parameter name="totalPriceWithVAT" class="java.math.BigDecimal"/>
+	<parameter name="totalPriceVAT" class="java.math.BigDecimal"/>
+	<parameter name="totalPrice" class="java.math.BigDecimal"/>
+	<field name="passQty" class="java.lang.Integer"/>
+	<field name="price" class="java.math.BigDecimal"/>
+	<field name="totalPrice" class="java.math.BigDecimal"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="idx" class="java.lang.Integer"/>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="111" height="79"/>
+				<imageExpression class="java.lang.String"><![CDATA["invoice/jprime.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="452" y="0" width="111" height="79"/>
+				<imageExpression class="java.lang.String"><![CDATA["invoice/bg-jug.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="111" y="0" width="341" height="79"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font fontName="DejaVu Sans" size="18"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["jPrime " + $P{jprime.year} + "\nInvoice\n"+$P{invoiceType}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="182" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="9" width="555" height="21"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Invoice No. "+ $P{invoiceNumber}+ " / "+$P{invoiceDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="48" width="259" height="86"/>
+				<textElement lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[jPrime Events Ltd.
+Address: Bulgaria, Sofia, Postal Code 1574, r.d. Hristo Smirnenski, bl. 20, entr. B, fl. 6, apt. 20
+UIC: 203915037
+VAT: BG203915037
+MOL: Ivan Stefanov Ivanov
+IBAN: BG50PIRB74241605596745]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="316" y="48" width="239" height="86"/>
+				<textElement lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{client}+"\nEGN: 9999999999"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="162" width="23" height="20"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="162" width="260" height="20"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="283" y="162" width="72" height="20"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Quantity (pcs.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="162" width="97" height="20"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="452" y="162" width="103" height="20"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Total price]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="23" y="0" width="260" height="20"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans" size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="283" y="0" width="72" height="20"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{passQty}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="##0.00" isBlankWhenNull="true">
+				<reportElement x="355" y="0" width="97" height="20"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="##0.00">
+				<reportElement x="452" y="0" width="103" height="20"/>
+				<box rightPadding="2">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{totalPrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="23" height="20"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{idx} + "."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="34" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="349" y="14" width="135" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Bulgarian Java User Group]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="218" splitType="Stretch">
+			<staticText>
+				<reportElement x="355" y="0" width="97" height="20"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Total price]]></text>
+			</staticText>
+			<textField pattern="##0.00">
+				<reportElement x="452" y="0" width="103" height="20"/>
+				<box rightPadding="2">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{totalPrice}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="20" width="97" height="20"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[VAT 20%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="40" width="97" height="20"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Total price with VAT]]></text>
+			</staticText>
+			<textField pattern="##0.00">
+				<reportElement x="452" y="20" width="103" height="20"/>
+				<box rightPadding="2">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{totalPriceVAT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="##0.00">
+				<reportElement x="452" y="40" width="103" height="20"/>
+				<box rightPadding="2">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{totalPriceWithVAT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="378" y="104" width="177" height="21"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Sofia,  "+$P{invoiceDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="40" width="266" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Payment type: "+$P{paymentType}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="20" width="279" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[All prices are in BGN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="125" width="176" height="41"/>
+				<textElement lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Stamping and signing are not necessary elements according to law]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

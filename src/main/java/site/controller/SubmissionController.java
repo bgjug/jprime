@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -95,38 +92,41 @@ public class SubmissionController extends AbstractCfpController {
     }
 
     @RequestMapping(value = "/accept/{submissionId}", method = RequestMethod.GET)
-    public String accept(@PathVariable("submissionId") Long submissionId) {
+    public String accept(Model model, Pageable pageable, @PathVariable("submissionId") Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         adminFacade.acceptSubmission(submission);
         try {
             sendEmails(submission, "/acceptSubmission.html");
         } catch (Exception e) {
+            model.addAttribute("msg", "Could not send accept email");
             logger.error("Could not send accept email", e);
         }
-        return REDIRECT + "/admin/submission/view";
+        return listSubmissions(model, pageable);
     }
 
     @RequestMapping(value = "/notify/{submissionId}", method = RequestMethod.GET)
-    public String notify(@PathVariable("submissionId") Long submissionId) {
+    public String notify(Model model, Pageable pageable, @PathVariable("submissionId") Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         try {
             sendNotificationEmails(submission);
         } catch (Exception e) {
+            model.addAttribute("msg", "Could not send notification emails");
             logger.error("Could not send notification emails", e);
         }
-        return REDIRECT + "/admin/submission/view";
+        return listSubmissions(model, pageable);
     }
 
     @RequestMapping(value = "/reject/{submissionId}", method = RequestMethod.GET)
-    public String reject(@PathVariable("submissionId") Long submissionId) {
+    public String reject(Model model, Pageable pageable, @PathVariable("submissionId") Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         adminFacade.rejectSubmission(submission);
         try {
             sendEmails(submission, "/rejectSubmission.html");
         } catch (Exception e) {
+            model.addAttribute("msg", "Could not send rejection email");
             logger.error("Could not send rejection email", e);
         }
-        return REDIRECT + "/admin/submission/view";
+        return listSubmissions(model, pageable);
     }
 
     @RequestMapping(value = "/delete/{submissionId}", method = RequestMethod.GET)
@@ -143,7 +143,7 @@ public class SubmissionController extends AbstractCfpController {
 
     @RequestMapping(value = "/exportCSV", method = RequestMethod.GET, produces = PRODUCES_TYPE)
     public@ResponseBody void exportSubmissionsToCSV(HttpServletResponse response) {
-    	List<Submission> findAllSubmittedSubmissionsForCurrentBranch = adminFacade.findAllSubmitedSubmissionsForCurrentBranch();
+    	List<Submission> findAllSubmittedSubmissionsForCurrentBranch = adminFacade.findAllSubmittedSubmissionsForCurrentBranch();
     	File submissionsCSVFile;
 		try {
 			submissionsCSVFile = csvFacade.exportSubmissions(findAllSubmittedSubmissionsForCurrentBranch);

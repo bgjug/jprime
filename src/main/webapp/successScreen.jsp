@@ -19,6 +19,8 @@
     <!-- Responsive Metatag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    <jsp:directive.include file="theme-colors.jsp" />
+
     <!-- Page Description and Author -->
 
     <user:pageJavaScriptAndCss/>
@@ -55,13 +57,6 @@
 
 <!-- Go To Top Link -->
 <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
-
-<div id="loader">
-    <div class="spinner">
-        <div class="dot1"></div>
-        <div class="dot2"></div>
-    </div>
-</div>
 
 
 </body>
