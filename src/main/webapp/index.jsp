@@ -11,6 +11,17 @@
 
 <head>
 
+    <link rel="manifest" href="/manifest.json">
+    <script>
+      var deferredPrompt;
+
+      window.addEventListener('beforeinstallprompt', function(e){
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        console.log('here');
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e;
+      });
+    </script>
     <!-- Basic -->
     <title>jPrime | Home</title>
 
