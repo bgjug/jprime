@@ -8,11 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="manifest" href="/manifest.json">
     <title>Title</title>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/js/sw.js')
+          navigator.serviceWorker.register('/sw.js', { scope: '/'});
         })
       }
     </script>
