@@ -124,9 +124,8 @@ public class SubmissionControllerTest {
     @Test
     public void acceptSubmissionShouldChangeTheSubmissionStatus() throws Exception {
         mockMvc.perform(get("/admin/submission/accept/" + valhalla.getId()))
-                .andExpect(status().isFound())
-                .andExpect(result -> assertThat(result.getResponse().getRedirectedUrl(),
-                        is("/admin/submission/view")));
+                .andExpect(status().isOk())
+                .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP));
 
         assertThat(valhalla.getStatus(), is(SubmissionStatus.ACCEPTED));
         assertThat(forge.getStatus(), is(SubmissionStatus.SUBMITTED));
@@ -138,9 +137,8 @@ public class SubmissionControllerTest {
     @Test
     public void rejectSubmissionShouldChangeTheSubmissionStatus() throws Exception {
         mockMvc.perform(get("/admin/submission/reject/" + forge.getId()))
-                .andExpect(status().isFound())
-                .andExpect(result -> assertThat(result.getResponse().getRedirectedUrl(),
-                        is("/admin/submission/view")));
+                .andExpect(status().isOk())
+                .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP));
 
         assertThat(valhalla.getStatus(), is(SubmissionStatus.SUBMITTED));
         assertThat(forge.getStatus(), is(SubmissionStatus.REJECTED));
@@ -152,9 +150,8 @@ public class SubmissionControllerTest {
     @Test
     public void submissionStatusChangeShouldSendEmailToCoSpeakerToo() throws Exception {
         mockMvc.perform(get("/admin/submission/accept/" + bootAddon.getId()))
-                .andExpect(status().isFound())
-                .andExpect(result -> assertThat(result.getResponse().getRedirectedUrl(),
-                        is("/admin/submission/view")));
+                .andExpect(status().isOk())
+               .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP));
 
         assertThat(mailer.recipientAddresses.size(), is(2));
         assertThat(mailer.recipientAddresses, contains(bootAddon.getSpeaker().getEmail(),
