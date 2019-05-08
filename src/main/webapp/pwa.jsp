@@ -8,14 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/sw.js', { scope: '/'});
-        })
-      }
-    </script>
+    <title>PWA</title>
 </head>
 <body>
 <div id="pwa-container"></div>
