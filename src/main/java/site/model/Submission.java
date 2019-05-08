@@ -38,11 +38,11 @@ public class Submission extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private SessionType type = SessionType.ConferenceSession;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
     @JoinColumn(name = "speaker", nullable = false, referencedColumnName = "id")
     private Speaker speaker = new Speaker();
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
     @JoinColumn(name = "coSpeaker", nullable = true, referencedColumnName = "id")
     private Speaker coSpeaker = null;
 
@@ -63,8 +63,7 @@ public class Submission extends AbstractEntity {
         this.type = type;
     }
 
-    public Submission(String title, String description, SessionLevel level, SessionType type, Speaker speaker,
-            Speaker coSpeaker) {
+    public Submission(String title, String description, SessionLevel level, SessionType type, Speaker speaker, Speaker coSpeaker) {
         this.title = title;
         this.description = description;
         this.level = level;
@@ -114,12 +113,12 @@ public class Submission extends AbstractEntity {
     }
 
     public Branch getBranch() {
-		return branch;
-	}
+        return branch;
+    }
 
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
 
     public Speaker getCoSpeaker() {
         return coSpeaker;
@@ -161,11 +160,11 @@ public class Submission extends AbstractEntity {
         return result;
     }
 
-	public String getCaptcha() {
-		return captcha;
-	}
+    public String getCaptcha() {
+        return captcha;
+    }
 
-	public void setCaptcha(String captcha) {
-		this.captcha = captcha;
-	}
+    public void setCaptcha(String captcha) {
+        this.captcha = captcha;
+    }
 }
