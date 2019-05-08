@@ -288,12 +288,6 @@ input[type="submit"] {
     background-color: #fff;
 }
 
-.container {
-	padding-right: 0 !important;
-	padding-left: 0 !important;
-	margin-right: 15px !important;
-	margin-left: 15px !important;
-}
 
 .boxed-page {
   position: relative;
