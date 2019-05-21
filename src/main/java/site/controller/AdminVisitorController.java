@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -143,25 +144,21 @@ public class AdminVisitorController {
     @RequestMapping(value = "/export", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<byte[]>  exportVisitors() throws IOException{
-    	 Iterable<Visitor> visitors = adminFacade.findAllVisitors();
-    	 final String[] header = new String[] { "name", "email", "company", "status"};
-    	 
-    	 ICsvBeanWriter beanWriter = null;
-    	 ByteArrayOutputStream out = new ByteArrayOutputStream();
-         try {
-			beanWriter = new CsvBeanWriter(new BufferedWriter(new OutputStreamWriter(out)),
-                     CsvPreference.STANDARD_PREFERENCE);
-        	 beanWriter.writeHeader(header);
-         for(Visitor visitor : visitors ){
-        	  beanWriter.write(visitor, header, getProcessors());
-			}
-		} finally {
-			if (beanWriter != null) {
-				beanWriter.close();
-			}
-		}
-         HttpHeaders headers = new HttpHeaders();
-         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        Iterable<Visitor> visitors = adminFacade.findAllVisitors();
+    	final String[] header = new String[] { "name", "email", "company", "status"};
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try (ICsvBeanWriter beanWriter = new CsvBeanWriter(
+            new BufferedWriter(new OutputStreamWriter(out, Charset.forName("utf-8"))),
+            CsvPreference.STANDARD_PREFERENCE)) {
+            beanWriter.writeHeader(header);
+            for (Visitor visitor : visitors) {
+                beanWriter.write(visitor, header, getProcessors());
+            }
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         return ResponseEntity.ok().headers(headers).body(out.toByteArray());
 	}
     
