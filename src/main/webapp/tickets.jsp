@@ -59,9 +59,10 @@
  							-->
                              <h2>Registration is closed</h2>
                              <p>
-                             	<p>The registration is currently closed, see you in 2019 :)</p>
+                             	<p>The registration is now over, see you in 2020 :)</p>
                              	<p>Note that the recordings of the previous conference are available at <a href="https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3">https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3</a> .</p>
-                             	<p>The tickets registration for 2019 will be opened at the beginning of 2019.</p>
+                             	<p>The tickets registration for 2020 will be opened at the beginning of 2019.</p>
+                                <p>If you want to join 2019 - dont cry :) there will be streaming probably and there will be recording of everything from 2019 also you can try to buy a ticket on the black market ;)</p>
                              </p>
                         </div>
                         <!-- End Single Post Content -->
