@@ -35,6 +35,8 @@ public class PWAController {
 
         public String coLectorName;
 
+        public String talkDescription;
+
         public DateTime startTime;
 
         public DateTime endTime;
@@ -57,6 +59,7 @@ public class PWAController {
                 }
 
                 this.title = submission.getTitle();
+                this.talkDescription = submission.getDescription();
             }
         }
     }
