@@ -238,18 +238,16 @@
         <!-- End Big Heading -->
 
         <p class="text-center">Track 1 (Beta)</p>
-        <p class="text-center">NOTE: please use the website on https, <a target="_blank" href="http://i.cdn.bg/live/0zI7XuE2Dr">open in new tab</a></p>
+        <p class="text-center">NOTE: please use the website on https, <a target="_blank" href="https://www.youtube.com/watch?v=uVFbLG4rT2U">open in new tab</a></p>
 
         <div class="container" style="text-align: center">
-        	 <iframe title="" width="720" height="405" src="https://www.youtube.com/watch?v=uVFbLG4rT2U" frameborder="0" mozallowfullscreen webkitallowfullscreen allowfullscreen></iframe>
-        </div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/uVFbLG4rT2U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
         <p class="text-center">Track 2 (Alpha)</p>
-        <p class="text-center">NOTE: please use the website on https, <a target="_blank" href="http://i.cdn.bg/live/wC7nBgrPX1">open in new tab</a></p>
+        <p class="text-center">NOTE: please use the website on https, <a target="_blank" href="https://www.youtube.com/watch?v=yNI3cOWukxw">open in new tab</a></p>
 
         <div class="container" style="text-align: center">
-        	 <iframe title="" width="720" height="405" src="https://www.youtube.com/watch?v=yNI3cOWukxw" frameborder="0" mozallowfullscreen webkitallowfullscreen allowfullscreen></iframe>
-        </div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/yNI3cOWukxw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyhttp://i.cdn.bg/live/wC7nBgrPX1roscope; picture-in-picture" allowfullscreen></iframe>       </div>
 
     </div>
     <!-- End Live Stream Section -->
