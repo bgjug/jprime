@@ -227,7 +227,7 @@
      --%>
 
 
-	<%--
+
 	<!-- Start Live Stream Section -->
     <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff;">
 
@@ -238,22 +238,22 @@
         <!-- End Big Heading -->
 
         <p class="text-center">Track 1 (Beta)</p>
-        <p class="text-center">FIX: since the stream is plain http, it won't work in chrome, <a target="_blank" href="http://i.cdn.bg/live/0zI7XuE2Dr">open in new tab</a></p>
+        <p class="text-center">NOTE: please use the website on https, <a target="_blank" href="http://i.cdn.bg/live/0zI7XuE2Dr">open in new tab</a></p>
 
         <div class="container" style="text-align: center">
-        	 <iframe title="" width="720" height="405" src="http://i.cdn.bg/live/0zI7XuE2Dr" frameborder="0" mozallowfullscreen webkitallowfullscreen allowfullscreen></iframe>
+        	 <iframe title="" width="720" height="405" src="https://www.youtube.com/watch?v=uVFbLG4rT2U" frameborder="0" mozallowfullscreen webkitallowfullscreen allowfullscreen></iframe>
         </div>
 
         <p class="text-center">Track 2 (Alpha)</p>
-        <p class="text-center">FIX: since the stream is plain http, it won't work in chrome, <a target="_blank" href="http://i.cdn.bg/live/wC7nBgrPX1">open in new tab</a></p>
+        <p class="text-center">NOTE: please use the website on https, <a target="_blank" href="http://i.cdn.bg/live/wC7nBgrPX1">open in new tab</a></p>
 
         <div class="container" style="text-align: center">
-        	 <iframe title="" width="720" height="405" src="http://i.cdn.bg/live/wC7nBgrPX1" frameborder="0" mozallowfullscreen webkitallowfullscreen allowfullscreen></iframe>
+        	 <iframe title="" width="720" height="405" src="https://www.youtube.com/watch?v=yNI3cOWukxw" frameborder="0" mozallowfullscreen webkitallowfullscreen allowfullscreen></iframe>
         </div>
 
     </div>
     <!-- End Live Stream Section -->
-     --%>
+
 
     <!-- Start Portfolio Section -->
     <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff;"  id="about">
