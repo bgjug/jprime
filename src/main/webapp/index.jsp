@@ -237,17 +237,17 @@
         </div>
         <!-- End Big Heading -->
 
-        <p class="text-center">Track 1 (Beta)</p>
-        <p class="text-center">NOTE: please use the website on https, <a target="_blank" href="https://www.youtube.com/watch?v=uVFbLG4rT2U">open in new tab</a></p>
+        <p class="text-center">Hall A</p>
+        <p class="text-center">NOTE: please use the website on https, <a target="_blank" href="https://www.youtube.com/watch?v=OL4Ye2r7ohY">open in new tab</a></p>
 
         <div class="container" style="text-align: center">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/uVFbLG4rT2U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/OL4Ye2r7ohY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
-        <p class="text-center">Track 2 (Alpha)</p>
-        <p class="text-center">NOTE: please use the website on https, <a target="_blank" href="https://www.youtube.com/watch?v=yNI3cOWukxw">open in new tab</a></p>
+        <p class="text-center">Hall B</p>
+        <p class="text-center">NOTE: please use the website on https, <a target="_blank" href="https://www.youtube.com/watch?v=MbjXTHoQJG4">open in new tab</a></p>
 
         <div class="container" style="text-align: center">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/yNI3cOWukxw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyhttp://i.cdn.bg/live/wC7nBgrPX1roscope; picture-in-picture" allowfullscreen></iframe>       </div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/MbjXTHoQJG4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyhttp://i.cdn.bg/live/wC7nBgrPX1roscope; picture-in-picture" allowfullscreen></iframe>       </div>
 
     </div>
     <!-- End Live Stream Section -->
