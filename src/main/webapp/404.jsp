@@ -22,42 +22,41 @@
     <jsp:directive.include file="theme-colors.jsp" />
 
     <!-- Page Description and Author -->
+    <meta name="description" content="jPrime 2019">
+    <meta name="author" content="jPrime">
 
     <user:pageJavaScriptAndCss/>
 </head>
 
 <body>
 
-<!-- Full Body Container -->
-<div id="container">
+<user:header/>
 
-    <user:header/>
-
-    <!-- Start Client/Partner Section -->
-    <div class="section">
-        <div class="container">
-            <div class="row">
-
-                <!-- Start Big Heading -->
-                <div class="big-title text-center">
-                    <h1><strong>NOT FOUND 404</strong></h1>
-                </div>
-                <!-- End Big Heading -->
-
-            </div>
-            <!-- .row -->
+<!-- Page Banner Start -->
+<div id="page-banner-area" class="page-banner">
+    <div class="page-banner-title">
+        <div class="text-center">
+            <h2>404</h2>
         </div>
-        <!-- .container -->
     </div>
-
-    <jsp:directive.include file="footer.jsp" />
-
 </div>
-<!-- End Full Body Container -->
+<!-- Page Banner End -->
 
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+<!-- error section -->
+<section class="matrl-error-section section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1 class="wow animated fadeInRight" data-wow-delay=".2s">404</h1>
+                <h2 class="wow animated fadeInRight" data-wow-delay=".4s">Page not found! :(</h2>
+                <a href="javascript:void(0)" class="wow animated fadeInUp btn btn-common mt-5" data-wow-delay=".6s"><i class="material-icons mdi mdi-home"></i> Back to home<div class="ripple-container"></div></a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- error section end -->
 
+<user:footer/>
 
 
 </body>
