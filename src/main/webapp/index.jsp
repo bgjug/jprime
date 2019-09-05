@@ -47,27 +47,24 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="assets/img/slider/slide1.jpg" alt="First slide">
+                <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
                 <div class="carousel-caption d-md-block">
-                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime 2020</h1>
-                    <p class="fadeInUp wow" data-wow-delay=".6s">The conference will be held on 28 and 29th of May, 2020 in Sofia Tech Park</p>
-                    <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>
+<%--                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime 2020</h1>--%>
+<%--                    <p class="fadeInUp wow" data-wow-delay=".6s">The conference will be held on 28 and 29th of May, 2020 in Sofia Tech Park</p>--%>
+<%--                    <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
                     <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="assets/img/slider/slide2.jpg" alt="Second slide">
+                <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide">
                 <div class="carousel-caption d-md-block">
                     <h1 class="wow bounceIn heading" data-wow-delay=".7s">36 Amazing Speakers</h1>
-                    <p class="fadeInUp wow" data-wow-delay=".9s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident eum ullam <br> cupiditate nam rerum numquam blanditiis doloribus aspernatur.</p>
-                    <a href="#" class="fadeInUp wow btn btn-border" data-wow-delay=".8s">Learn More</a>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="assets/img/slider/slide3.jpg" alt="Third slide">
+                <img class="d-block w-100" src="images/slider/index3.jpg" alt="Third slide">
                 <div class="carousel-caption d-md-block">
                     <h1 class="wow fadeInUp heading" data-wow-delay=".6s">Book Your Seat Now!</h1>
-                    <p class="fadeInUp wow" data-wow-delay=".8s">The last 2 years the seets were sold out.</p>
                     <a href="tickets/" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">BUY a ticket</a>
                 </div>
             </div>
@@ -138,24 +135,34 @@
                 </div>
             </div>
             <div class="row mb-30">
-                <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="col-md-2 col-sm-2 col-xs-12">
                     <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-1.png" alt=""></a>
+                        <a href="http://java-bg.org/"><img class="img-fluid" src="images/bg-jug.png" style="width:85px;" alt=""></a>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="col-md-2 col-sm-2 col-xs-12">
                     <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-2.png" alt=""></a>
+                        <a href="http://www.vmware.com"><img class="img-fluid" src="images/vmware.png" alt=""></a>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="col-md-2 col-sm-2 col-xs-12">
                     <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-3.png" alt=""></a>
+                        <a href="http://www.softwareag.com"><img class="img-fluid" src="images/softwareag.png" alt=""></a>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="col-md-2 col-sm-2 col-xs-12">
                     <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-4.png" alt=""></a>
+                        <a href="http://www.sap.com/bulgaria"><img class="img-fluid" src="images/sap.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="http://www.experian.bg""><img class="img-fluid" src="images/experian.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="https://www.paysafe.com/"><img class="img-fluid" src="images/paysafe.png" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -169,196 +176,36 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title-header text-center">
-                        <h1 class="section-title">Meet Speakers</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor</p>
+                        <h1 class="section-title">Our Speakers</h1>
+                        <p>Confirmed speakers coming to jPrime !</p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                    <!-- Team Item Starts -->
-                    <div class="team-item text-center">
-                        <div class="team-img">
-                            <img class="img-fluid" src="assets/img/team/team-01.jpg" alt="">
-                            <div class="team-overlay">
-                                <div class="overlay-social-icon text-center">
-                                    <ul class="social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
+                <c:forEach var="speaker" items="${acceptedSpeakers}">
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <!-- Team Item Starts -->
+                        <div class="team-item text-center">
+                            <div class="team-img">
+                                <img class="img-fluid" src="/image/speaker/${speaker.id}" height="365" width="280" alt="">
+                                <div class="team-overlay">
+                                    <div class="overlay-social-icon text-center">
+                                        <ul class="social-icons">
+                                            <li><a href="http://twitter.com/${speaker.twitter}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="info-text">
-                            <h3><a href="#">Emilly Williams</a></h3>
-                            <p>Product Designer, Tesla</p>
-                        </div>
-                    </div>
-                    <!-- Team Item Ends -->
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                    <!-- Team Item Starts -->
-                    <div class="team-item text-center">
-                        <div class="team-img">
-                            <img class="img-fluid" src="assets/img/team/team-02.jpg" alt="">
-                            <div class="team-overlay">
-                                <div class="overlay-social-icon text-center">
-                                    <ul class="social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
+                            <div class="info-text">
+                                <h3><a href="/speaker/${speaker.id}"><c:out value="${speaker.firstName}"/>&nbsp;<c:out value="${speaker.lastName}"/></a></h3>
+                                <p><c:out value="${speaker.headline}"/></p>
                             </div>
                         </div>
-                        <div class="info-text">
-                            <h3><a href="#">Patric Green</a></h3>
-                            <p>Front-end Developer, Dropbox</p>
-                        </div>
+                        <!-- Team Item Ends -->
                     </div>
-                    <!-- Team Item Ends -->
-                </div>
-
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                    <!-- Team Item Starts -->
-                    <div class="team-item text-center">
-                        <div class="team-img">
-                            <img class="img-fluid" src="assets/img/team/team-03.jpg" alt="">
-                            <div class="team-overlay">
-                                <div class="overlay-social-icon text-center">
-                                    <ul class="social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-text">
-                            <h3><a href="#">Paul Kowalsy</a></h3>
-                            <p>Lead Designer, TNW</p>
-                        </div>
-                    </div>
-                    <!-- Team Item Ends -->
-                </div>
-
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                    <!-- Team Item Starts -->
-                    <div class="team-item text-center">
-                        <div class="team-img">
-                            <img class="img-fluid" src="assets/img/team/team-04.jpg" alt="">
-                            <div class="team-overlay">
-                                <div class="overlay-social-icon text-center">
-                                    <ul class="social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-text">
-                            <h3><a href="#">Jhon Doe</a></h3>
-                            <p>Back-end Developer, ASUS</p>
-                        </div>
-                    </div>
-                    <!-- Team Item Ends -->
-                </div>
+                </c:forEach>
             </div>
-            <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                    <!-- Team Item Starts -->
-                    <div class="team-item text-center">
-                        <div class="team-img">
-                            <img class="img-fluid" src="assets/img/team/team-05.jpg" alt="">
-                            <div class="team-overlay">
-                                <div class="overlay-social-icon text-center">
-                                    <ul class="social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-text">
-                            <h3><a href="#">Daryl Dixon</a></h3>
-                            <p>Full-stack Developer, Google</p>
-                        </div>
-                    </div>
-                    <!-- Team Item Ends -->
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                    <!-- Team Item Starts -->
-                    <div class="team-item text-center">
-                        <div class="team-img">
-                            <img class="img-fluid" src="assets/img/team/team-06.jpg" alt="">
-                            <div class="team-overlay">
-                                <div class="overlay-social-icon text-center">
-                                    <ul class="social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-text">
-                            <h3><a href="#">Chris Adams</a></h3>
-                            <p>UI Designer, Apple</p>
-                        </div>
-                    </div>
-                    <!-- Team Item Ends -->
-                </div>
-
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                    <!-- Team Item Starts -->
-                    <div class="team-item text-center">
-                        <div class="team-img">
-                            <img class="img-fluid" src="assets/img/team/team-07.jpg" alt="">
-                            <div class="team-overlay">
-                                <div class="overlay-social-icon text-center">
-                                    <ul class="social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-text">
-                            <h3><a href="#">Lisa Amaira</a></h3>
-                            <p>Product Manager, Uber</p>
-                        </div>
-                    </div>
-                    <!-- Team Item Ends -->
-                </div>
-
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                    <!-- Team Item Starts -->
-                    <div class="team-item text-center">
-                        <div class="team-img">
-                            <img class="img-fluid" src="assets/img/team/team-08.jpg" alt="">
-                            <div class="team-overlay">
-                                <div class="overlay-social-icon text-center">
-                                    <ul class="social-icons">
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-text">
-                            <h3><a href="#">Rick Grimes</a></h3>
-                            <p>QA, Samsung</p>
-                        </div>
-                    </div>
-                    <!-- Team Item Ends -->
-                </div>
-            </div>
-            <a href="speakers.html" class="btn btn-common mt-30">All Speakers</a>
+            <a href="/speakers" class="btn btn-common mt-30">All Speakers</a>
         </div>
     </section>
     <!-- Team Section End -->
@@ -503,76 +350,79 @@
                     <h1 class="section-sub text-center">Book Your Ticket</h1>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-xs-12 mb-3">
+            <div class="row" id="tickets">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>$</span>35</span>
-                            <h5>One Day Ticket</h5>
+                            <span class="price"><span>BGN</span>140.00</span>
+                            <h5>
+                                Untill 15th of March </h5>
                         </div>
                         <div class="pricing-list">
-                            <h4>Bronze pass</h4>
+                            <h4>Early Bird Ticket</h4>
                             <ul>
-                                <li><i class="icon-check"></i><span class="text">Event Access</span></li>
-                                <li><i class="icon-close"></i><span class="text">Free Lunch & Coffees</span></li>
-                                <li><i class="icon-close"></i><span class="text">Free Swags</span></li>
-                                <li><i class="icon-close"></i><span class="text">Free WiFi Token</span></li>
+                                <li><i class="icon-check"></i><span class="text">2 days access!</span></li>
+                                <li><i class="icon-close"></i><span class="text">28+ awesome talks!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Hands-on labs!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Lunch Box</span></li>
+                                <li><i class="icon-close"></i><span class="text">A bag full of goodies</span></li>
+                                <li><i class="icon-close"></i><span class="text">Free T-Shirt!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Raffle!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Beers!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
                             </ul>
-                            <a href="#" class="btn btn-common">Buy Ticket</a>
+<%--                            <a href="tickets" class="btn btn-common">Buy Ticket</a>--%>
+                            <a href="tickets" class="btn btn-common">Not Available</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-xs-12 mb-3">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>$</span>55</span>
-                            <h5>One Day Ticket</h5>
+                            <span class="price"><span>BGN</span>200.00</span>
+                            <h5>
+                                After 15th of March </h5>
                         </div>
                         <div class="pricing-list">
-                            <h4>Silver Pass</h4>
+                            <h4>Regular Ticket</h4>
                             <ul>
-                                <li><i class="icon-check"></i><span class="text">Event Access</span></li>
-                                <li><i class="icon-check"></i><span class="text">Free Lunch & Coffees</span></li>
-                                <li><i class="icon-close"></i><span class="text">Free Swags</span></li>
-                                <li><i class="icon-close"></i><span class="text">Free WiFi Token</span></li>
+                                <li><i class="icon-check"></i><span class="text">2 days access!</span></li>
+                                <li><i class="icon-close"></i><span class="text">28+ awesome talks!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Hands-on labs!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Lunch Box</span></li>
+                                <li><i class="icon-close"></i><span class="text">A bag full of goodies</span></li>
+                                <li><i class="icon-close"></i><span class="text">Free T-Shirt!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Raffle!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Beers!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
                             </ul>
-                            <a href="#" class="btn btn-common">Buy Ticket</a>
+                            <%--                            <a href="tickets" class="btn btn-common">Buy Ticket</a>--%>
+                            <a href="tickets" class="btn btn-common">Not Available</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-xs-12 mb-3">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>$</span>95</span>
-                            <h5>One Day Ticket</h5>
+                            <span class="price"><span>BGN</span>100.00</span>
+                            <h5>
+                                limited to students only</h5>
                         </div>
                         <div class="pricing-list">
-                            <h4>Golden Pass</h4>
+                            <h4>Students ticket</h4>
                             <ul>
-                                <li><i class="icon-check"></i><span class="text">Event Access</span></li>
-                                <li><i class="icon-check"></i><span class="text">Free Lunch & Coffees</span></li>
-                                <li><i class="icon-check"></i><span class="text">Free Swags</span></li>
-                                <li><i class="icon-close"></i><span class="text">Free WiFi Token</span></li>
+                                <li><i class="icon-check"></i><span class="text">2 days access!</span></li>
+                                <li><i class="icon-close"></i><span class="text">28+ awesome talks!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Hands-on labs!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Lunch Box</span></li>
+                                <li><i class="icon-close"></i><span class="text">A bag full of goodies</span></li>
+                                <li><i class="icon-close"></i><span class="text">Free T-Shirt!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Raffle!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Beers!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
                             </ul>
-                            <a href="#" class="btn btn-common">Buy Ticket</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-12 mb-3">
-                    <div class="price-block-wrapper">
-                        <div class="prici-left">
-                            <span class="price"><span>$</span>115</span>
-                            <h5>One Day Ticket</h5>
-                        </div>
-                        <div class="pricing-list">
-                            <h4>Platinum Pass</h4>
-                            <ul>
-                                <li><i class="icon-check"></i><span class="text">Event Access</span></li>
-                                <li><i class="icon-check"></i><span class="text">Free Lunch & Coffees</span></li>
-                                <li><i class="icon-check"></i><span class="text">Free Swags</span></li>
-                                <li><i class="icon-check"></i><span class="text">Free WiFi Token</span></li>
-                            </ul>
-                            <a href="#" class="btn btn-common">Buy Ticket</a>
+                            <%--                            <a href="tickets" class="btn btn-common">Buy Ticket</a>--%>
+                            <a href="tickets" class="btn btn-common">Not Available</a>
                         </div>
                     </div>
                 </div>
@@ -586,228 +436,321 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="section-sub text-center">Gold Sponsors</h1>
+                    <h1 class="section-sub text-center">Platinum Sponsors</h1>
                 </div>
             </div>
             <div class="row mb-30">
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-1.png" alt=""></a>
+                <c:forEach var="sponsor" items="${platinumSponsors}">
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <div class="spnsors-logo">
+                            <a href="${sponsor.companyWebsite}"><img class=img-fluid" src="/image/sponsor/${sponsor.id}"
+                                                                     alt="${sponsor.companyName}"/></a>
+                        </div>
                     </div>
+                </c:forEach>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="section-sub text-center">Gold Sponsors</h1>
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-2.png" alt=""></a>
+                <c:forEach var="sponsor" items="${goldSponsors}">
+                    <div class="col-md-2 col-sm-2 col-xs-12">
+                        <div class="spnsors-logo">
+                            <a href="${sponsor.companyWebsite}"><img class="img-fluid" src="/image/sponsor/${sponsor.id}"
+                                                                     alt="${sponsor.companyName}"/></a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-3.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-4.png" alt=""></a>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="section-sub text-center">Silver Sponsors</h1>
                 </div>
-                <div class="col-md-2 col-sm-2 col-xs-12">
-                    <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/logo-01.jpg" alt=""></a>
+                <c:forEach var="sponsor" items="${silverSponsors}">
+                    <div class="col-md-2 col-sm-2 col-xs-12">
+                        <div class="spnsors-logo">
+                            <a href="${sponsor.companyWebsite}"><img class="img-fluid" src="/image/sponsor/${sponsor.id}"
+                                                                     alt="${sponsor.companyName}"/></a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12">
-                    <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/logo-02.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12">
-                    <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/logo-03.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12">
-                    <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/logo-04.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12">
-                    <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/logo-05.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12">
-                    <div class="spnsors-logo">
-                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/logo-06.jpg" alt=""></a>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
+
         </div>
     </section>
     <!-- Sponsors Section End -->
 
-    <!-- Gallary Section Start -->
+    <!-- Official Supporters Partners Section Start -->
+    <c:if test="${fn:length(officialSupporterPartnersChunks) gt 0}">
+        <section id="sponsors" class="section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="section-sub text-center">Official Supporters</h1>
+                    </div>
+                </div>
+                <div class="row mb-30">
+                    <c:forEach var="partners" items="${officialSupporterPartnersChunks}">
+                        <c:forEach var="partner" items="${partners}">
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <div class="spnsors-logo">
+                                    <a href="${partner.companyWebsite}"><img class=img-fluid" src="/image/partner/${partner.id}"
+                                                                             alt="${partner.companyName}"/></a>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:forEach>
+                </div>
+            </div>
+        </section>
+    </c:if>
+    <!-- Official Supporters Partners Section End -->
+
+    <!-- Media Partners Section Start -->
+    <c:if test="${fn:length(mediaPartnersChunks) gt 0}">
+        <section id="sponsors" class="section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="section-sub text-center">Community and Media Partners</h1>
+                    </div>
+                </div>
+                <div class="row mb-30">
+                    <c:forEach var="partners" items="${mediaPartnersChunks}">
+                        <c:forEach var="partner" items="${partners}">
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <div class="spnsors-logo">
+                                    <a href="${partner.companyWebsite}"><img class=img-fluid" src="/image/partner/${partner.id}"
+                                                                             alt="${partner.companyName}"/></a>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:forEach>
+                </div>
+            </div>
+        </section>
+    </c:if>
+    <!-- Media Partners Section End -->
+
+    <!-- Event Partners Section Start -->
+    <c:if test="${fn:length(eventPartnerChunks) gt 0}">
+        <section id="sponsors" class="section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="section-sub text-center">Event Partners</h1>
+                    </div>
+                </div>
+                <div class="row mb-30">
+                    <c:forEach var="partners" items="${eventPartnerChunks}">
+                        <c:forEach var="partner" items="${partners}">
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <div class="spnsors-logo">
+                                    <a href="${partner.companyWebsite}"><img class=img-fluid" src="/image/partner/${partner.id}"
+                                                                             alt="${partner.companyName}"/></a>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:forEach>
+                </div>
+            </div>
+        </section>
+    </c:if>
+    <!-- Event Partners Section End -->
+
     <section id="gallery-section" class="section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="section-title-header text-center">
-                        <h1 class="section-title">From Last Event</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor</p>
-                    </div>
+                    <h1 class="section-title">Last jPrime in Action</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 col-sm-6 col-lg-4">
-                    <div class="gallery-box">
-                        <div class="img-thumb">
-                            <img class="img-fluid" src="assets/img/gallery/img-1.jpg" alt="">
-                        </div>
-                        <div class="overlay-box text-center">
-                            <a class="lightbox" href="assets/img/gallery/img-1.jpg">
-                                <i class="icon-eye"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ccol-md-6 col-sm-6 col-lg-4">
-                    <div class="gallery-box">
-                        <div class="img-thumb">
-                            <img class="img-fluid" src="assets/img/gallery/img-2.jpg" alt="">
-                        </div>
-                        <div class="overlay-box text-center">
-                            <a class="lightbox" href="assets/img/gallery/img-2.jpg">
-                                <i class="icon-eye"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ccol-md-6 col-sm-6 col-lg-4">
-                    <div class="gallery-box">
-                        <div class="img-thumb">
-                            <img class="img-fluid" src="assets/img/gallery/img-3.jpg" alt="">
-                        </div>
-                        <div class="overlay-box text-center">
-                            <a class="lightbox" href="assets/img/gallery/img-3.jpg">
-                                <i class="icon-eye"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ccol-md-6 col-sm-6 col-lg-4">
-                    <div class="gallery-box">
-                        <div class="img-thumb">
-                            <img class="img-fluid" src="assets/img/gallery/img-4.jpg" alt="">
-                        </div>
-                        <div class="overlay-box text-center">
-                            <a class="lightbox" href="assets/img/gallery/img-4.jpg">
-                                <i class="icon-eye"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ccol-md-6 col-sm-6 col-lg-4">
-                    <div class="gallery-box">
-                        <div class="img-thumb">
-                            <img class="img-fluid" src="assets/img/gallery/img-5.jpg" alt="">
-                        </div>
-                        <div class="overlay-box text-center">
-                            <a class="lightbox" href="assets/img/gallery/img-5.jpg">
-                                <i class="icon-eye"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ccol-md-6 col-sm-6 col-lg-4">
-                    <div class="gallery-box">
-                        <div class="img-thumb">
-                            <img class="img-fluid" src="assets/img/gallery/img-6.jpg" alt="">
-                        </div>
-                        <div class="overlay-box text-center">
-                            <a class="lightbox" href="assets/img/gallery/img-6.jpg">
-                                <i class="icon-eye"></i>
-                            </a>
-                        </div>
-                    </div>
+                <div class="col-12" style="height:550px">
+                    <iframe style="position: relative; top: 0; left: 0; width: 100%; height: 100%;" src="https://flickrembed.com/cms_embed.php?source=flickr&layout=responsive&input=132936671@N08&sort=0&by=user&theme=default_notextpanel&scale=fill&speed=3000&limit=100&skin=default&autoplay=true" scrolling="no" frameborder="0" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"><p><a  href="https://www.codeguesser.co.uk/scottsmenswear.com">Codeguesser</a></p><small>Powered by <a href="https://flickrembed.com">flickr embed</a>.</small></iframe><script type="text/javascript">function showpics(){var a=$("#box").val();$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+a+"&tagmode=any&format=json&jsoncallback=?",function(a){$("#images").hide().html(a).fadeIn("fast"),$.each(a.items,function(a,e){$("<img/>").attr("src",e.media.m).appendTo("#images")})})}</script>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Gallary Section End -->
 
-    <!-- Blog Section Start -->
-    <section id="blog" class="section-padding">
-        <div class="container">
+    <section id="sponsors" class="section-padding">
+        <div class="container" style="text-align: center">
             <div class="row">
                 <div class="col-12">
-                    <div class="section-title-header text-center">
-                        <h2 class="section-title">From The Blog</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
-                    <div class="blog-item text-center">
-                        <div class="blog-image">
-                            <a href="#">
-                                <img class="img-fluid" src="assets/img/blog/img1.jpg" alt="">
-                            </a>
-                            <div class="date"><span class="day">12</span>June</div>
-                        </div>
-                        <div class="descr">
-                            <p class="subtitle">By Korneila</p>
-                            <h3 class="title">
-                                <a href="single-blog.html">
-                                    15 Best Outfit Ideas To Wear in Events
-                                </a>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
-                    <div class="blog-item text-center">
-                        <div class="blog-image">
-                            <a href="#">
-                                <img class="img-fluid" src="assets/img/blog/img2.jpg" alt="">
-                            </a>
-                            <div class="date"><span class="day">12</span>June</div>
-                        </div>
-                        <div class="descr">
-                            <p class="subtitle">By Stuart</p>
-                            <h3 class="title">
-                                <a href="single-blog.html">
-                                    10 Tips for Successful Business Networking
-                                </a>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
-                    <div class="blog-item text-center">
-                        <div class="blog-image">
-                            <a href="#">
-                                <img class="img-fluid" src="assets/img/blog/img3.jpg" alt="">
-                            </a>
-                            <div class="date"><span class="day">12</span>June</div>
-                        </div>
-                        <div class="descr">
-                            <p class="subtitle">By John</p>
-                            <h3 class="title">
-                                <a href="single-blog.html">
-                                    The 9 Design Trends You Need to Know
-                                </a>
-                            </h3>
-                        </div>
-                    </div>
+                    <h1 class="section-title">jPrime Live Stream</h1>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-12">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/OL4Ye2r7ohY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/OL4Ye2r7ohY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
     </section>
-    <!-- Blog Section End -->
+
+<%--    <!-- Gallary Section Start -->--%>
+<%--    <section id="gallery-section" class="section-padding">--%>
+<%--        <div class="container">--%>
+<%--            <div class="row">--%>
+<%--                <div class="col-12">--%>
+<%--                    <div class="section-title-header text-center">--%>
+<%--                        <h1 class="section-title">From Last Event</h1>--%>
+<%--                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="row">--%>
+<%--                <div class="col-md-6 col-sm-6 col-lg-4">--%>
+<%--                    <div class="gallery-box">--%>
+<%--                        <div class="img-thumb">--%>
+<%--                            <img class="img-fluid" src="assets/img/gallery/img-1.jpg" alt="">--%>
+<%--                        </div>--%>
+<%--                        <div class="overlay-box text-center">--%>
+<%--                            <a class="lightbox" href="assets/img/gallery/img-1.jpg">--%>
+<%--                                <i class="icon-eye"></i>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="ccol-md-6 col-sm-6 col-lg-4">--%>
+<%--                    <div class="gallery-box">--%>
+<%--                        <div class="img-thumb">--%>
+<%--                            <img class="img-fluid" src="assets/img/gallery/img-2.jpg" alt="">--%>
+<%--                        </div>--%>
+<%--                        <div class="overlay-box text-center">--%>
+<%--                            <a class="lightbox" href="assets/img/gallery/img-2.jpg">--%>
+<%--                                <i class="icon-eye"></i>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="ccol-md-6 col-sm-6 col-lg-4">--%>
+<%--                    <div class="gallery-box">--%>
+<%--                        <div class="img-thumb">--%>
+<%--                            <img class="img-fluid" src="assets/img/gallery/img-3.jpg" alt="">--%>
+<%--                        </div>--%>
+<%--                        <div class="overlay-box text-center">--%>
+<%--                            <a class="lightbox" href="assets/img/gallery/img-3.jpg">--%>
+<%--                                <i class="icon-eye"></i>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="ccol-md-6 col-sm-6 col-lg-4">--%>
+<%--                    <div class="gallery-box">--%>
+<%--                        <div class="img-thumb">--%>
+<%--                            <img class="img-fluid" src="assets/img/gallery/img-4.jpg" alt="">--%>
+<%--                        </div>--%>
+<%--                        <div class="overlay-box text-center">--%>
+<%--                            <a class="lightbox" href="assets/img/gallery/img-4.jpg">--%>
+<%--                                <i class="icon-eye"></i>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="ccol-md-6 col-sm-6 col-lg-4">--%>
+<%--                    <div class="gallery-box">--%>
+<%--                        <div class="img-thumb">--%>
+<%--                            <img class="img-fluid" src="assets/img/gallery/img-5.jpg" alt="">--%>
+<%--                        </div>--%>
+<%--                        <div class="overlay-box text-center">--%>
+<%--                            <a class="lightbox" href="assets/img/gallery/img-5.jpg">--%>
+<%--                                <i class="icon-eye"></i>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="ccol-md-6 col-sm-6 col-lg-4">--%>
+<%--                    <div class="gallery-box">--%>
+<%--                        <div class="img-thumb">--%>
+<%--                            <img class="img-fluid" src="assets/img/gallery/img-6.jpg" alt="">--%>
+<%--                        </div>--%>
+<%--                        <div class="overlay-box text-center">--%>
+<%--                            <a class="lightbox" href="assets/img/gallery/img-6.jpg">--%>
+<%--                                <i class="icon-eye"></i>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </section>--%>
+<%--    <!-- Gallary Section End -->--%>
+
+<%--    <!-- Blog Section Start -->--%>
+<%--    <section id="blog" class="section-padding">--%>
+<%--        <div class="container">--%>
+<%--            <div class="row">--%>
+<%--                <div class="col-12">--%>
+<%--                    <div class="section-title-header text-center">--%>
+<%--                        <h2 class="section-title">From The Blog</h2>--%>
+<%--                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-lg-4 col-md-6 col-xs-12">--%>
+<%--                    <div class="blog-item text-center">--%>
+<%--                        <div class="blog-image">--%>
+<%--                            <a href="#">--%>
+<%--                                <img class="img-fluid" src="assets/img/blog/img1.jpg" alt="">--%>
+<%--                            </a>--%>
+<%--                            <div class="date"><span class="day">12</span>June</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="descr">--%>
+<%--                            <p class="subtitle">By Korneila</p>--%>
+<%--                            <h3 class="title">--%>
+<%--                                <a href="single-blog.html">--%>
+<%--                                    15 Best Outfit Ideas To Wear in Events--%>
+<%--                                </a>--%>
+<%--                            </h3>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-lg-4 col-md-6 col-xs-12">--%>
+<%--                    <div class="blog-item text-center">--%>
+<%--                        <div class="blog-image">--%>
+<%--                            <a href="#">--%>
+<%--                                <img class="img-fluid" src="assets/img/blog/img2.jpg" alt="">--%>
+<%--                            </a>--%>
+<%--                            <div class="date"><span class="day">12</span>June</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="descr">--%>
+<%--                            <p class="subtitle">By Stuart</p>--%>
+<%--                            <h3 class="title">--%>
+<%--                                <a href="single-blog.html">--%>
+<%--                                    10 Tips for Successful Business Networking--%>
+<%--                                </a>--%>
+<%--                            </h3>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-lg-4 col-md-6 col-xs-12">--%>
+<%--                    <div class="blog-item text-center">--%>
+<%--                        <div class="blog-image">--%>
+<%--                            <a href="#">--%>
+<%--                                <img class="img-fluid" src="assets/img/blog/img3.jpg" alt="">--%>
+<%--                            </a>--%>
+<%--                            <div class="date"><span class="day">12</span>June</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="descr">--%>
+<%--                            <p class="subtitle">By John</p>--%>
+<%--                            <h3 class="title">--%>
+<%--                                <a href="single-blog.html">--%>
+<%--                                    The 9 Design Trends You Need to Know--%>
+<%--                                </a>--%>
+<%--                            </h3>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </section>--%>
+<%--    <!-- Blog Section End -->--%>
 
     <!-- Subscribe Area Start -->
     <div id="subscribe" class="section-padding">
