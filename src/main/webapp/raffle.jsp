@@ -15,93 +15,72 @@
     <!-- Basic -->
     <title>Raffle</title>
 
-    <!-- Define Charset -->
     <meta charset="utf-8">
 
     <!-- Responsive Metatag -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <jsp:directive.include file="theme-colors.jsp" />
+    <%--    <jsp:directive.include file="theme-colors.jsp" />--%>
 
     <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2019">
-    <meta name="author" content="jPrime">
+
     <user:pageJavaScriptAndCss/>
 
 </head>
 <body>
 
-<!-- Container -->
-<div id="container">
+<user:header/>
 
-    <user:header/>
-
-    <!-- Start Content -->
-    <div id="content">
-        <div class="container">
-            <div class="row blog-post-page">
-                <div class="col-md-9 blog-box">
-
-                    <!-- Start Single Post Area -->
-                    <div class="blog-post gallery-post">
-
-                        <!-- Start Single Post Content -->
-                        <h2>Raffle</h2>
-                        <div class="post-content col-md-7 col-md-offset-5">
-                            
-                            
-                            <p> <br/> 
-                            <a href="javascript:void(0)" onclick="shuffle(this)" class="slider btn btn-primary">Start</a>
-                            <h1 id="shuffle-result">Name (Company)</h1>
-                        </div>
-                        <!-- End Single Post Content -->
-
-                    </div>
-                    <!-- End Single Post Area -->
-
-                </div>
-
-
-
-                <user:sidebar/>
-
-            </div>
-
+<!-- Page Banner Start -->
+<div id="page-banner-area" class="page-banner">
+    <div class="page-banner-title">
+        <div class="text-center">
+            <h2>Raffle</h2>
         </div>
     </div>
-    <!-- End content -->
-
-
-    <jsp:directive.include file="footer.jsp" />
-    <script type="text/javascript">
-    
-    var shuffling = false;
-    var visitors = ${visitors};
-    
-    function shuffle(el){
-    	shuffling = !shuffling;
-    	if(shuffling) {
-    		$(el).text("Stop");
-    		setTimeout(getRandomVisitor, 100);
-    	} else {
-    		$(el).text("Start");
-    	}
-    }
-    	
-    function getRandomVisitor(){
-    	var visitor = visitors[Math.floor(Math.random()*visitors.length)];
-    	$("#shuffle-result").text(" " + visitor.name + " (" + visitor.company + ")" )
-    	if(shuffling) {
-    		setTimeout(getRandomVisitor, 100);
-    	}
-    }
-    </script>
 </div>
-<!-- End Container -->
+<!-- Page Banner End -->
 
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
+<section id="about" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 col-md-offset-5">
+                <p>
+                <a href="javascript:void(0)" onclick="shuffle(this)" class="slider btn btn-primary">Start</a>
+                </p> <br/>
+                <h1 id="shuffle-result">Name (Company)</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<user:footer/>
+
+<script type="text/javascript">
+
+var shuffling = false;
+var visitors = ${visitors};
+
+function shuffle(el){
+    shuffling = !shuffling;
+    if(shuffling) {
+        $(el).text("Stop");
+        setTimeout(getRandomVisitor, 100);
+    } else {
+        $(el).text("Start");
+    }
+}
+
+function getRandomVisitor(){
+    var visitor = visitors[Math.floor(Math.random()*visitors.length)];
+    $("#shuffle-result").text(" " + visitor.name + " (" + visitor.company + ")" )
+    if(shuffling) {
+        setTimeout(getRandomVisitor, 100);
+    }
+}
+</script>
 
 </body>
 </html>

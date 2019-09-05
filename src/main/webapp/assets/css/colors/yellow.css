@@ -1,0 +1,175 @@
+a:hover{
+  color: #FFC107;
+}
+.section-title:before{
+  background-color: #FFC107;
+}
+.section-sub:before{
+  background-color: #FFC107;
+}
+.slicknav_menu .slicknav_icon-bar{
+  background: #FFC107;
+}
+.slicknav_btn{
+  border-color: #FFC107;
+}
+.slicknav_nav a:hover, .slicknav_nav .active{
+  color: #FFC107;
+}
+.slicknav_nav .dropdown li a.active{
+  color: #FFC107;
+}
+.navbar li.active a.nav-link{
+  color: #fff!important;
+  background: #FFC107;
+}
+.navbar-expand-lg .navbar-nav li a:hover, .navbar-expand-lg .navbar-nav li .active>a, .navbar-expand-lg .navbar-nav li a:focus{
+  color: #FFC107;
+}
+.dropdown .dropdown-item:focus, .dropdown .dropdown-item:hover, .dropdown .dropdown-item.active{
+  color: #FFC107;
+}
+#hero-area .contents span.year{
+  color: #FFC107;
+}
+.btn-common{
+    background-color: #FFC107;
+}
+.btn-common:hover{
+  color: #fff;
+  background-color: #efb60a;
+}
+.btn-border:hover{
+  background-color: #FFC107;
+}
+.time-entry{
+  background: #FFC107;
+}
+.team-item .overlay-social-icon .social-icons li a i{
+  background: #FFC107;
+}
+.team-item .info-text h3 a:hover{
+  color: #FFC107;
+}
+.schedule .schedule-tab-title .nav-tabs .nav-item.show .nav-link, 
+.schedule .schedule-tab-title .nav-tabs .nav-link.active, 
+.schedule .schedule-tab-title .nav-tabs .nav-item .nav-link:hover{
+  background: #FFC107;
+  border-color: #FFC107;
+}
+.schedule .schedule-tab-title .nav-tabs .nav-item.show .nav-link, 
+.schedule .schedule-tab-title .nav-tabs .nav-link.active, 
+.schedule .schedule-tab-title .nav-tabs .nav-item .nav-link:hover{
+  background: #FFC107;
+  border: #FFC107 transparent transparent transparent
+}
+.schedule .schedule-tab-title .nav-tabs .nav-item.show .nav-link:before, 
+.schedule .schedule-tab-title .nav-tabs .nav-link.active:before, 
+.schedule .schedule-tab-title .nav-tabs .nav-item .nav-link:hover:before{
+  border-color: #FFC107 transparent transparent transparent
+}
+.schedule .tab-content .table>tbody .speakers .speaker h5 a:hover{
+  color: #FFC107;
+}
+
+.services-item .services-content h3 a{
+  color: #FFC107;
+}
+.services-item .icon i{
+  border-color: #FFC107;
+  background: #FFC107;
+}
+.services-item:hover .icon i{
+  color: #FFC107;
+}
+.counter-section .counter .icon i{
+  color: #FFC107;
+}
+.icon-close, .icon-check{
+  color: #FFC107;
+}
+#gallery-section .gallery-box .overlay-box i{
+  background: #FFC107;
+}
+.blog-item .date .day{
+  color: #FFC107;
+}
+.blog-item .descr h3 a:hover{
+  color: #FFC107;
+}
+.post-thumb .date .day{
+  color: #FFC107;
+}
+blockquote{
+  background: #FFC107;
+}
+.post-content .post-title a:hover{
+  color: #FFC107;
+}
+.post-meta a:hover{
+  color: #FFC107;
+}
+.tags-area .post-tags a:hover{
+  background: #FFC107;
+}
+.reply-link{
+  color: #FFC107;
+}
+#sidebar .cat-list li a:hover{
+  color: #FFC107;
+}
+#sidebar .tag a{
+  background: #FFC107;
+}
+.slide-item .inner-box h3 a:hover{
+  color: #FFC107;
+}
+.subscribe-inner .form-control:focus{
+  border-color: #FFC107;
+}
+.contact-map .form-control:focus{
+  border-color: #FFC107;
+}
+.form-control:focus{
+  border-color: #FFC107;
+}
+.contact-item .contact-info h3{
+  color: #FFC107;
+}
+.footer-area .footer-text p a{
+  color: #FFC107;
+}
+.footer-area .footer-text .nav-inline .nav-link:hover{
+  color: #FFC107;
+}
+.footer-2 ul li a:hover{
+  color: #FFC107;
+}
+#copyright p a:hover{
+  color: #FFC107;
+}
+a.back-to-top i{
+  background: #FFC107;
+}
+.settings{
+  color: #FFC107;
+}
+.pagination .page-item .page-link{
+  color: #FFC107;
+}
+.pagination .page-item .page-link:hover{
+  background: #FFC107;
+}
+#main-slide .carousel-control i{
+  color: #FFC107;
+}
+#main-slide .carousel-control i:hover{
+  border-color: #FFC107;
+}
+
+
+
+
+
+
+

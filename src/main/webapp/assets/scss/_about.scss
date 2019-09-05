@@ -1,0 +1,11 @@
+/* Sponsors Area */
+#sponsors{
+	background: #f2f2f2;
+	.spnsors-logo{
+		display: inline-block;
+		border: 1px solid #E8E8E8;
+		box-shadow: 0 0 20px rgba(0,0,0,0.2);
+		-webkit-transition: all 300ms ease-in-out;
+		transition: all 300ms ease-in-out;
+	}
+}

@@ -1,0 +1,212 @@
+
+/* only small desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+    #main-slide{
+        .carousel-caption{
+            top: 32%;
+        }
+    }
+    .carousel-indicators{
+        display: none;
+    }
+    #main-slide .carousel-item .carousel-caption .heading{
+        font-size: 20px;
+    }
+    #main-slide .carousel-item .carousel-caption p{
+        font-size: 13px;
+    }
+     #hero-area .contents .head-title{
+        font-size: 40px;
+     }
+     .schedule .schedule-tab-title .nav-tabs .nav-link{
+        width: 174px;
+     }
+     .schedule .schedule-tab-title .item-text{
+        padding-left: 57px;
+     }
+     #pricing .price-block-wrapper .prici-left{
+        width: 150px;
+     }
+     #pricing .price-block-wrapper .pricing-list{
+        width: 290px;
+     }
+}
+
+/* tablets */
+@media (max-width: 991px) {
+    #main-slide{
+        .carousel-caption{
+            top: 32%;
+        }
+    }
+    .carousel-indicators{
+        display: none;
+    }
+    #main-slide .carousel-item .carousel-caption .heading{
+        font-size: 20px;
+    }
+    #main-slide .carousel-item .carousel-caption p{
+        font-size: 13px;
+    }
+    .page-title-section {
+        padding: 40px 0;
+    } 
+    .section-titile-bg {
+        display: none;
+    }
+    .section-title {
+        position: relative;
+        margin-bottom: 10px;
+    }
+}
+
+/* only small tablets */
+@media (min-width: 768px) and (max-width: 991px) {
+    #main-slide{
+        .carousel-caption{
+            top: 32%;
+        }
+    }
+    .carousel-indicators{
+        display: none;
+    }
+    #main-slide .carousel-item .carousel-caption .heading{
+        font-size: 20px;
+    }
+    #main-slide .carousel-item .carousel-caption p{
+        font-size: 13px;
+    }
+    .countdown-timer .heading-count h2{
+        font-size: 25px;
+    }
+    #pricing .price-block-wrapper .prici-left{
+        padding: 10px 0;
+        margin-top: 45px;
+    }
+    .subscribe-inner .form-control{
+        width: 57%;
+    }
+    .schedule .schedule-tab-title .nav-tabs .nav-item.show .nav-link::before, .schedule .schedule-tab-title .nav-tabs .nav-link.active::before, .schedule .schedule-tab-title .nav-tabs .nav-item .nav-link:hover::before{
+        display: none;
+    }
+}
+
+/* mobile or only mobile */
+@media (max-width: 767px) {
+    .section-title {
+        font-size: 26px;
+    }
+    .section-sub{
+        font-size: 16px;
+    }
+    #main-slide{
+        .carousel-caption{
+            top: 22%;
+        }
+    }
+    .carousel-indicators{
+        display: none;
+    }
+    #main-slide .carousel-item .carousel-caption .heading{
+        font-size: 13px;
+    }
+    #main-slide .carousel-item .carousel-caption p{
+        font-size: 13px;
+    }
+    #hero-area .contents{
+        padding: 100px 0;
+    }
+    #hero-area .contents .head-title{
+        font-size: 15px;
+    }
+    #hero-area .contents .btn{
+        margin:25px 3px 0 0;
+    }
+    .countdown-timer .heading-count{
+        padding: 10px;
+    }
+    .countdown-timer .heading-count h2{
+        font-size: 14px;
+    }
+    .countdown-timer .heading-count h4{
+        font-size: 12px;
+    }
+    #pricing .price-block-wrapper .prici-left{
+        padding: 40px 0;
+    }
+    #pricing .price-block-wrapper .pricing-list{
+        width: 300px;
+        padding: 20px;
+    }
+    #sponsors .spnsors-logo{
+        margin-bottom: 15px;
+    }
+    .blog-item .descr{
+        padding: 0 15px 20px;
+    }
+    .subscribe-inner{
+        padding: 30px 15px;
+    }
+    .subscribe-inner .subscribe-title{
+        font-size: 18px;
+    }
+    .subscribe-inner .form-inline{
+        width: 100%;
+    }
+    .subscribe-inner .form-control{
+        width: 85%;
+    }
+    .subscribe-inner .btn-common{
+        margin: 0 auto;
+        margin-top: 15px;
+    }
+    .contact-item{
+        margin-bottom: 40px;
+    }
+    .schedule .schedule-tab-title .nav-tabs .nav-item.show .nav-link::before, .schedule .schedule-tab-title .nav-tabs .nav-link.active::before, .schedule .schedule-tab-title .nav-tabs .nav-item .nav-link:hover::before{
+        display: none;
+    }
+    .schedule .schedule-tab-title .nav-tabs .nav-link{
+        width: 230px;
+        margin-left: 0;
+    }
+    .pagination .page-item .page-link{
+        padding: 7px 14px;
+    }
+    #comments .comments-list li ul{
+        padding-left: 0;
+    }
+    #comments h3{
+        font-size: 15px;
+    }
+    #comments .comments-list .media .info-body{
+        margin-left: -40px;
+    }
+    .post-tags{
+        margin-bottom: 20px;
+    }
+    .thumb-left{
+        img{
+            width: 60%;
+        }
+    }
+
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    #main-slide .carousel-item .carousel-caption .heading{
+        letter-spacing: 0;
+    }
+    #main-slide .carousel-item .carousel-caption p{
+        display: none;
+    }
+    #main-slide .carousel-caption .btn{
+        margin: 0;
+    }
+    .btn{
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}
+
+

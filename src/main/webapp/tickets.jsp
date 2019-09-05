@@ -24,71 +24,49 @@
     <jsp:directive.include file="theme-colors.jsp" />
 
     <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2019">
-    <meta name="author" content="jPrime">
-    
+    <meta name="description" content="JPrime Conference">
+    <meta name="author" content="JPrime">
+
     <user:pageJavaScriptAndCss/>
 
 </head>
 <body>
 
-<!-- Container -->
-<div id="container">
-
-    <user:header/>
-
-    <!-- Start Content -->
-    <div id="content">
-        <div class="container">
-            <div class="row blog-post-page">
-                <div class="col-md-9 blog-box">
-
-                    <!-- Start Single Post Area -->
-                    <div class="blog-post gallery-post">
-
-                        <!-- Start Single Post Content -->
-                        <div class="post-content">
-                            <!-- 
-                            <h2>Buy conference tickets</h2>
-                            <p>
-                            <p>The conference fee is <strong>140</strong>.00 BGN (VAT included).</p>
-                            <p>For registration contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
-                            <p>* There is a ~25% discount for students. Student ticket price <strong>100</strong>.00 BGN (VAT included).</p>
-                            <p>* There is a free pass for a JUG lead (one per Java User Group).</p>
-
- 							-->
-                             <h2>Registration is closed</h2>
-                             <p>
-                             	<p>The registration is now over, see you in 2020 :)</p>
-                             	<p>Note that the recordings of the previous conference are available at <a href="https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3">https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3</a> .</p>
-                             	<p>The tickets registration for 2020 will be opened at the beginning of 2019.</p>
-                                <p>If you want to join 2019 - dont cry :) there will be streaming probably and there will be recording of everything from 2019 also you can try to buy a ticket on the black market ;)</p>
-                             </p>
-                        </div>
-                        <!-- End Single Post Content -->
-
-                    </div>
-                    <!-- End Single Post Area -->
-
-                </div>
 
 
+<user:header/>
 
-                <user:sidebar/>
-
-            </div>
-
+<!-- Page Banner Start -->
+<div id="page-banner-area" class="page-banner">
+    <div class="page-banner-title">
+        <div class="text-center">
+            <h2>Registration is closed</h2>
+<%--            <h2>Buy conference tickets</h2>--%>
         </div>
     </div>
-    <!-- End content -->
-
-
-    <jsp:directive.include file="footer.jsp" />
 </div>
-<!-- End Container -->
+<!-- Page Banner End -->
 
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+<section id="about" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p>
+                    <p>The registration is now over, see you in 2020 :)</p>
+                    <p>Note that the recordings of the previous conference are available at <a href="https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3">https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3</a> .</p>
+                    <p>The tickets registration for 2020 will be opened at the beginning of 2019.</p>
+                    <p>If you want to join 2019 - dont cry :) there will be streaming probably and there will be recording of everything from 2019 also you can try to buy a ticket on the black market ;)</p>
+                <%--                <p>The conference fee is <strong>140</strong>.00 BGN (VAT included).</p>--%>
+                <%--                <p>For registration contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>--%>
+                <%--                <p>* There is a ~25% discount for students. Student ticket price <strong>100</strong>.00 BGN (VAT included).</p>--%>
+                <%--                <p>* There is a free pass for a JUG lead (one per Java User Group).</p>--%>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<user:footer/>
 
 </body>
 </html>

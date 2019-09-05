@@ -22,42 +22,38 @@
     <jsp:directive.include file="theme-colors.jsp" />
 
     <!-- Page Description and Author -->
+    <meta name="description" content="jPrime 2019">
+    <meta name="author" content="jPrime">
 
     <user:pageJavaScriptAndCss/>
 </head>
 
 <body>
 
-<!-- Full Body Container -->
-<div id="container">
+<user:header/>
 
-    <user:header/>
-
-    <!-- Start Client/Partner Section -->
-    <div class="section">
-        <div class="container">
-            <div class="row">
-
-                <!-- Start Big Heading -->
-                <div class="big-title text-center">
-                    <h3> ${msg}</h3>
-                </div>
-                <!-- End Big Heading -->
-
-            </div>
-            <!-- .row -->
+<!-- Page Banner Start -->
+<div id="page-banner-area" class="page-banner">
+    <div class="page-banner-title">
+        <div class="text-center">
+            <h2></h2>
         </div>
-        <!-- .container -->
     </div>
-
-    <jsp:directive.include file="footer.jsp" />
-
 </div>
-<!-- End Full Body Container -->
+<!-- Page Banner End -->
 
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+<section id="about" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p>
+                <p>${msg}</p>
+            </div>
+        </div>
+    </div>
+</section>
 
+<user:footer/>
 
 </body>
 

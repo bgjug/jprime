@@ -5,19 +5,17 @@
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 
 <!doctype html>
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><html lang="en" class="no-js"> <![endif]-->
 <html lang="en">
 
 <head>
 
     <link rel="manifest" href="/manifest.json">
     <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/sw.js', { scope: '/'});
-        })
-      }
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/sw.js', {scope: '/'});
+            })
+        }
     </script>
     <!-- Basic -->
     <title>jPrime | Home</title>
@@ -26,9 +24,9 @@
     <meta charset="utf-8">
 
     <!-- Responsive Metatag -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <jsp:directive.include file="theme-colors.jsp" />
+    <%--    <jsp:directive.include file="theme-colors.jsp" />--%>
 
     <!-- Page Description and Author -->
 
@@ -38,671 +36,802 @@
 
 <body>
 
-<!-- Full Body Container -->
-<div id="container">
-
     <user:header/>
 
-    <!-- Start Home Page Slider -->
-    <section id="home">
-        <!-- Carousel -->
-        <div id="main-slide" class="carousel slide" data-ride="carousel">
-
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#main-slide" data-slide-to="0" class="active"></li>
-                <li data-target="#main-slide" data-slide-to="1"></li>
-                <li data-target="#main-slide" data-slide-to="2"></li>
-            </ol>
-            <!--/ Indicators end-->
-
-            <!-- Carousel inner -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <img class="img-responsive" src="images/slider/index2.jpg" alt="slider">
-
-                    <div class="slider-content">
-                        <div class="col-md-12 text-center">
-                            <%--h2 class="animated2 white" style="text-shadow: 3px 3px black;">
-                                <span><strong>Java Prime Time in Sofia</strong></span>
-                            </h2>
-
-                            <h3 class="animated3 white" style="text-shadow: 2px 2px black;">
-                                <span>28 and 29 May 2019</span>
-                            </h3>
-                            <%--
-                            <p class="animated4"><a href="#about" class="slider btn btn-primary">read more</a>
-                            --%>
-                        </div>
-                    </div>
+    <!-- Main Carousel Section Start -->
+    <div id="main-slide" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#main-slide" data-slide-to="0" class="active"></li>
+            <li data-target="#main-slide" data-slide-to="1"></li>
+            <li data-target="#main-slide" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="assets/img/slider/slide1.jpg" alt="First slide">
+                <div class="carousel-caption d-md-block">
+                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime 2020</h1>
+                    <p class="fadeInUp wow" data-wow-delay=".6s">The conference will be held on 28 and 29th of May, 2020 in Sofia Tech Park</p>
+                    <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>
+                    <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->
                 </div>
-                <!--/ Carousel item end -->
-                <div class="item">
-                    <img class="img-responsive" src="images/slider/index1.jpg" alt="slider">
-
-                    <div class="slider-content">
-                        <div class="col-md-12 text-centerpartnerChunks">
-                            <h2 class="animated4 white" style="text-shadow: 3px 3px black;">
-                                <span><strong>jPrime</strong> wants YOU </span>
-                            </h2>
-
-                            <h3 class="animated5 white" style="text-shadow: 2px 2px black;">
-                                <span>2 full days</span>
-                            </h3>
-
-                                <p class="animated4"><a href="tickets/" class="slider btn btn-primary">Buy a ticket</a>
-
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <!--/ Carousel item end -->
-                <div class="item">
-                    <img class="img-responsive" src="images/slider/index3.jpg" alt="slider">
-
-                    <div class="slider-content">
-                        <div class="col-md-12 text-center">
-                            <h2 class="animated7 white" style="text-shadow: 3px 3px black;">
-                                    <span>Become a <strong>Sponsor</strong></span>
-									<!-- <span>Student <strong>tickets !</strong></span> -->
-                            </h2>
-
-                            <h3 class="animated8 white" style="text-shadow: 2px 2px black;">
-                                <span>Now available</span>
-                            </h3>
-
-                            <div class="">
-                                <a class="animated4 slider btn btn-default btn-min-block"
-                                                  href="#sponsors">Learn More</a>
-                                <!--<a class="animated4 slider btn btn-primary btn-min-block" href="#sponsors">Get Ticket</a> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--/ Carousel item end -->
             </div>
-            <!-- Carousel inner end-->
-
-            <!-- Controls -->
-            <a class="left carousel-control" href="#main-slide" data-slide="prev">
-                <span><i class="fa fa-angle-left"></i></span>
-            </a>
-            <a class="right carousel-control" href="#main-slide" data-slide="next">
-                <span><i class="fa fa-angle-right"></i></span>
-            </a>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="assets/img/slider/slide2.jpg" alt="Second slide">
+                <div class="carousel-caption d-md-block">
+                    <h1 class="wow bounceIn heading" data-wow-delay=".7s">36 Amazing Speakers</h1>
+                    <p class="fadeInUp wow" data-wow-delay=".9s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident eum ullam <br> cupiditate nam rerum numquam blanditiis doloribus aspernatur.</p>
+                    <a href="#" class="fadeInUp wow btn btn-border" data-wow-delay=".8s">Learn More</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="assets/img/slider/slide3.jpg" alt="Third slide">
+                <div class="carousel-caption d-md-block">
+                    <h1 class="wow fadeInUp heading" data-wow-delay=".6s">Book Your Seat Now!</h1>
+                    <p class="fadeInUp wow" data-wow-delay=".8s">The last 2 years the seets were sold out.</p>
+                    <a href="tickets/" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">BUY a ticket</a>
+                </div>
+            </div>
         </div>
-        <!-- /carousel -->
+        <a class="carousel-control-prev" href="#main-slide" role="button" data-slide="prev">
+            <span class="carousel-control" aria-hidden="true"><i class="icon-arrow-left"></i></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#main-slide" role="button" data-slide="next">
+            <span class="carousel-control" aria-hidden="true"><i class="icon-arrow-right"></i></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <!-- Main Carousel Section End -->
+
+    <!-- Coundown Section Start -->
+    <section class="countdown-timer section-padding">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="heading-count">
+                        <h2>Where Java Developers Meets</h2>
+                        <h4 class="location wow bounce" data-wow-delay="0.2s"><span><i class="icon-location-pin"></i> Sofia Tech Park, Sofia, Bulgaria</span></h4>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row time-countdown justify-content-center">
+                        <div id="clock" class="time-count"></div>
+                    </div>
+                    <a href="tickets/" class="btn btn-common">Book Your Ticket</a>
+                </div>
+            </div>
+        </div>
     </section>
-    <!-- End Home Page Slider -->
+    <!-- Coundown Section End -->
 
-    <!-- Start Client/Partner Section -->
-    <div class="section">
+    <!-- About Section Start -->
+    <section id="about" class="section-padding">
         <div class="container">
             <div class="row">
-
-                <!-- Start Big Heading -->
-                <div class="big-title text-center">
-                    <h1><strong>The conference is organized by</strong></h1>
-                </div>
-                <!-- End Big Heading -->
-
-                <!--Start Clients Carousel-->
-                <div class="our-clients">
-                    <div class="clients-carousel custom-carousel touch-carousel navigation-3" data-appeared-items="6"
-                         data-navigation="true">
-
-                        <!-- Client 1 -->
-                        <div class="client-item item">
-                            <a href="http://java-bg.org/"><img src="images/bg-jug.png" alt="Bulgarian JUG" style="width:85px;"/></a>
-                        </div>
-
-                        <!-- Client 2 -->
-                        <div class="client-item item">
-                            <a href="http://www.vmware.com"><img src="images/vmware.png" alt="VMware"/></a>
-                        </div>
-
-                        <!-- Client 3 -->
-                        <div class="client-item item">
-                            <a href="http://www.softwareag.com"><img src="images/softwareag.png" alt="Software AG"/></a>
-                        </div>
-
-                        <!-- Client 4 -->
-                        <div class="client-item item">
-                            <a href="http://www.sap.com/bulgaria"><img src="images/sap.png" alt="SAP"/></a>
-                        </div>
-
-                        <!-- Client 5 -->
-                        <div class="client-item item">
-                            <a href="http://www.experian.bg"><img src="images/experian.png" alt="Experian"/></a>
-                        </div>
-
-                        <!-- Client 6 -->
-                        <div class="client-item item">
-                            <a href="https://www.paysafe.com/"><img src="images/paysafe.png" alt="Paysafe"/></a>
-                        </div>
-
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                    <h2 class="intro-title">About</h2>
+                    <h3 class="title-sub">The Conference</h3>
+                    <p class="intro-desc">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices.
+                        Its sixth edition will be held on 28th and 29th May 2019 in Sofia Tech Park.
+                    </p>
+                    <p>It's run by the Bulgarian Java User Group and backed by the biggest companies in the city. </p>
+                    <p>jPrime features a combination of great international speakers along with the best presenters from Bulgaria and the Balkans.
+                        It is divided in two tracks and provides great opportunities for learning, hacking, networking and fun.</p>
+                    <div class="mt-3 mb-3">
+                        <a href="venue" class="btn btn-common">Read More</a>
                     </div>
                 </div>
-                <!-- End Clients Carousel -->
-            </div>
-            <!-- .row -->
-        </div>
-        <!-- .container -->
-    </div>
-
-
-    <%--
-    <!-- Start Purchase Section -->
-    <div class="section purchase">
-        <div class="container">
-
-            <!-- Start Video Section Content -->
-            <div class="section-video-content text-center">
-
-                <!-- Start Animations Text -->
-                <h1 class="fittext wite-text uppercase tlt">
-                  <span class="texts">
-                    <span>Modern</span>
-                    <span>Clean</span>
-                    <span>Awesome</span>
-                    <span>Cool</span>
-                    <span>Great</span>
-                  </span>
-
-                </h1>
-                <!-- End Animations Text -->
-
-
-                <!-- Start Buttons -->
-                <a href="#" class="btn-system btn-large border-btn btn-wite"><i class="fa fa-tasks"></i> Check Out Features</a>
-                <a href="#" class="btn-system btn-large btn-wite"><i class="fa fa-download"></i> Purchase This Now</a>
-
-            </div>
-            <!-- End Section Content -->
-
-        </div><!-- .container -->
-    </div>
-    <!-- End Purchase Section -->
-     --%>
-
-
-
-	<!-- Start Live Stream Section -->
-    <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff;">
-
-        <!-- Start Big Heading -->
-        <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-            <h1>jPrime<strong> livestream</strong></h1>
-        </div>
-        <!-- End Big Heading -->
-
-        <p class="text-center">Hall A</p>
-        <p class="text-center">NOTE: please use the website on https, <a target="_blank" href="https://www.youtube.com/watch?v=OL4Ye2r7ohY">open in new tab</a></p>
-
-        <div class="container" style="text-align: center">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/OL4Ye2r7ohY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-
-        <p class="text-center">Hall B</p>
-        <p class="text-center">NOTE: please use the website on https, <a target="_blank" href="https://www.youtube.com/watch?v=MbjXTHoQJG4">open in new tab</a></p>
-
-        <div class="container" style="text-align: center">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/MbjXTHoQJG4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyhttp://i.cdn.bg/live/wC7nBgrPX1roscope; picture-in-picture" allowfullscreen></iframe>       </div>
-
-    </div>
-    <!-- End Live Stream Section -->
-
-
-    <!-- Start Portfolio Section -->
-    <div class="section full-width-portfolio" style="border-top:0; border-bottom:0; background:#fff;"  id="about">
-
-        <!-- Start Big Heading -->
-        <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-            <h1>About <strong>jPrime</strong></h1>
-        </div>
-        <!-- End Big Heading -->
-
-        <p class="text-center">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices.
-            <br/> Its fifth edition will be held on <strong>28th and 29th May 2019</strong> in Sofia Tech Park.
-            It's run by the Bulgarian Java User Group and backed by the biggest companies in the city.
-            <br/><br/>jPrime features a combination of great international speakers along with the best presenters from
-            Bulgaria and the Balkans. <br/>It is divided in two tracks and provides great opportunities for learning,
-            hacking, networking and fun.</p>
-<!--
-        <div class="container">
-
-            <!-- Start Big Heading --/>
-            <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                <h1>We are done for this year! <strong>See you in 2019!</strong></h1>
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                    <img class="img-fluid" src="assets/img/about/about.jpg" alt="">
+                </div>
             </div>
         </div>
--->
-    </div>
-    <!-- End Portfolio Section -->
+    </section>
+    <!-- About Section End -->
 
-    <!-- Start Team Member Section -->
-    <a name="speakers"></a>
-    <div class="section" style="background:#fff;">
-        <div class="container">
-
-            <!-- Start Big Heading -->
-            <div class="big-title text-center" data-animation="fadeInDown" data-animation-delay="01">
-                <h1>Our <strong>Speakers:</strong></h1>
-            </div>
-            <!-- End Big Heading -->
-
-            <!-- Start Team Members -->
-
-            <div class="row">
-                <c:forEach var="speaker" items="${acceptedSpeakers}">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <a href="/speaker/${speaker.id}"><div class="team-member modern">
-                            <!-- Memebr Photo, Name & Position -->
-                            <div class="member-photo">
-                                <img alt="" src="/image/speaker/${speaker.id}" height="365" width="280"/>
-
-                                <div class="member-name"><c:out value="${speaker.firstName}"/>&nbsp;<c:out
-                                        value="${speaker.lastName}"/><span><c:out
-                                        value="${speaker.headline}"/></span>
-                                </div>
-                            </div>
-                            <div class="member-socail" style="text-align: left">
-                                <a class="twitter" href="http://twitter.com/${speaker.twitter}"><i
-                                        class="fa fa-twitter"></i></a>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                </c:forEach>
-            </div>
-        </div>
-        <!-- .container -->
-    </div>
-    <!-- End Team Member Section -->
-
-    <!-- Start Pricing Table for Sponsors Section -->
-    <div class=" section pricing-section" id="sponsors">
+    <!-- Coorganizers Section Start -->
+    <section id="sponsors" class="section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <!-- Start Big Heading -->
-                    <div class="big-title text-center">
-                        <h1>Become a <strong>Sponsor!</strong></h1>
-                    </div>
-                    <!-- End Big Heading -->
+                    <h1 class="section-sub text-center">The conference is organized by</h1>
                 </div>
             </div>
-
-            <div class="row pricing-tables">
-
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5;">
-                    <div class="pricing-table">
-                        <div class="plan-name">
-                            <h3>Platinum</h3>
-                        </div>
-                        <div class="plan-price">
-                            <div class="price-value">5000<span>.00</span> BGN</div>
-                        </div>
-                        <div class="plan-list">
-                            <ul>
-                                <li><strong>9</strong> free passes</li>
-                                <li><strong>15%</strong> discount of passes</li>
-                                <li><strong>Booth</strong> in the conference hall</li>
-                                <li><strong>Presence</strong> on the stage for the raffle</li>
-                                <li><strong>2</strong> banners in the conference rooms</li>
-                                <li><strong>1</strong> invite for the "thank you" dinner</li>
-                            </ul>
-                        </div>
-                        <div class="plan-signup">
-                            <a href="#"
-                               class="btn-system btn-small">Sold out</a>
-                            <%--
-                            <a href="mailto:conference@jprime.io?subject=platinum sponsorship"
-                               class="btn-system btn-small">Sign Up Now</a>
-                               --%>
-
-                        </div>
+            <div class="row mb-30">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-1.png" alt=""></a>
                     </div>
                 </div>
-
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5;">
-                    <div class="pricing-table">
-                        <div class="plan-name">
-                            <h3>Gold</h3>
-                        </div>
-                        <div class="plan-price">
-                            <div class="price-value">4000<span>.00</span> BGN</div>
-                        </div>
-                        <div class="plan-list">
-                            <ul>
-                                <li><strong>6</strong> free passes</li>
-                                <li><strong>10%</strong> discount of passes</li>
-                                <li><strong>Booth</strong> in the conference hall</li>
-                                <li><strong>2</strong> banners in the conference rooms</li>
-                            </ul>
-                        </div>
-                        <div class="plan-signup">
-                            <a href="#"
-                               class="btn-system btn-small">Sold out</a>
-                            <%--
-                            <a href="mailto:conference@jprime.io?subject=gold sponsorship"
-                               class="btn-system btn-small">Sign
-                                Up Now</a>
-                            --%>
-                        </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-2.png" alt=""></a>
                     </div>
                 </div>
-
-
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block">
-                    <div class="pricing-table">
-                        <div class="plan-name">
-                            <h3>Silver</h3>
-                        </div>
-                        <div class="plan-price">
-                            <div class="price-value">1500<span>.00</span> BGN</div>
-                        </div>
-                        <div class="plan-list">
-                            <ul>
-                                <li><strong>3</strong> free passes</li>
-                                <li><strong>10%</strong> discount of passes</li>
-                                <li><strong>2</strong> banners in the conference rooms</li>
-                            </ul>
-                        </div>
-                        <div class="plan-signup">
-                            <a href="mailto:conference@jprime.io?subject=silver sponsorship"
-                               class="btn-system btn-small">Sign Up Now</a>
-                        </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-3.png" alt=""></a>
                     </div>
                 </div>
-
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-4.png" alt=""></a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- End Pricing Table for Sponsors Section -->
+    </section>
+    <!-- Coorganizers Section End -->
 
-    <!-- Start Pricing Table for tickets Section -->
-    <div class=" section pricing-section" id="tickets">
+    <!-- Team Section Start -->
+    <section id="team" class="section-padding text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title-header text-center">
+                        <h1 class="section-title">Meet Speakers</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <!-- Team Item Starts -->
+                    <div class="team-item text-center">
+                        <div class="team-img">
+                            <img class="img-fluid" src="assets/img/team/team-01.jpg" alt="">
+                            <div class="team-overlay">
+                                <div class="overlay-social-icon text-center">
+                                    <ul class="social-icons">
+                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-text">
+                            <h3><a href="#">Emilly Williams</a></h3>
+                            <p>Product Designer, Tesla</p>
+                        </div>
+                    </div>
+                    <!-- Team Item Ends -->
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <!-- Team Item Starts -->
+                    <div class="team-item text-center">
+                        <div class="team-img">
+                            <img class="img-fluid" src="assets/img/team/team-02.jpg" alt="">
+                            <div class="team-overlay">
+                                <div class="overlay-social-icon text-center">
+                                    <ul class="social-icons">
+                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-text">
+                            <h3><a href="#">Patric Green</a></h3>
+                            <p>Front-end Developer, Dropbox</p>
+                        </div>
+                    </div>
+                    <!-- Team Item Ends -->
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <!-- Team Item Starts -->
+                    <div class="team-item text-center">
+                        <div class="team-img">
+                            <img class="img-fluid" src="assets/img/team/team-03.jpg" alt="">
+                            <div class="team-overlay">
+                                <div class="overlay-social-icon text-center">
+                                    <ul class="social-icons">
+                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-text">
+                            <h3><a href="#">Paul Kowalsy</a></h3>
+                            <p>Lead Designer, TNW</p>
+                        </div>
+                    </div>
+                    <!-- Team Item Ends -->
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <!-- Team Item Starts -->
+                    <div class="team-item text-center">
+                        <div class="team-img">
+                            <img class="img-fluid" src="assets/img/team/team-04.jpg" alt="">
+                            <div class="team-overlay">
+                                <div class="overlay-social-icon text-center">
+                                    <ul class="social-icons">
+                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-text">
+                            <h3><a href="#">Jhon Doe</a></h3>
+                            <p>Back-end Developer, ASUS</p>
+                        </div>
+                    </div>
+                    <!-- Team Item Ends -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <!-- Team Item Starts -->
+                    <div class="team-item text-center">
+                        <div class="team-img">
+                            <img class="img-fluid" src="assets/img/team/team-05.jpg" alt="">
+                            <div class="team-overlay">
+                                <div class="overlay-social-icon text-center">
+                                    <ul class="social-icons">
+                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-text">
+                            <h3><a href="#">Daryl Dixon</a></h3>
+                            <p>Full-stack Developer, Google</p>
+                        </div>
+                    </div>
+                    <!-- Team Item Ends -->
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <!-- Team Item Starts -->
+                    <div class="team-item text-center">
+                        <div class="team-img">
+                            <img class="img-fluid" src="assets/img/team/team-06.jpg" alt="">
+                            <div class="team-overlay">
+                                <div class="overlay-social-icon text-center">
+                                    <ul class="social-icons">
+                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-text">
+                            <h3><a href="#">Chris Adams</a></h3>
+                            <p>UI Designer, Apple</p>
+                        </div>
+                    </div>
+                    <!-- Team Item Ends -->
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <!-- Team Item Starts -->
+                    <div class="team-item text-center">
+                        <div class="team-img">
+                            <img class="img-fluid" src="assets/img/team/team-07.jpg" alt="">
+                            <div class="team-overlay">
+                                <div class="overlay-social-icon text-center">
+                                    <ul class="social-icons">
+                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-text">
+                            <h3><a href="#">Lisa Amaira</a></h3>
+                            <p>Product Manager, Uber</p>
+                        </div>
+                    </div>
+                    <!-- Team Item Ends -->
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <!-- Team Item Starts -->
+                    <div class="team-item text-center">
+                        <div class="team-img">
+                            <img class="img-fluid" src="assets/img/team/team-08.jpg" alt="">
+                            <div class="team-overlay">
+                                <div class="overlay-social-icon text-center">
+                                    <ul class="social-icons">
+                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-text">
+                            <h3><a href="#">Rick Grimes</a></h3>
+                            <p>QA, Samsung</p>
+                        </div>
+                    </div>
+                    <!-- Team Item Ends -->
+                </div>
+            </div>
+            <a href="speakers.html" class="btn btn-common mt-30">All Speakers</a>
+        </div>
+    </section>
+    <!-- Team Section End -->
+
+
+
+    <!-- Services Section Start -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title-header text-center">
+                        <h1 class="section-title">Why Attend</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-4 col-xs-12">
+                    <div class="services-item s">
+                        <div class="icon">
+                            <i class="icon-eyeglass"></i>
+                        </div>
+                        <div class="services-content">
+                            <h3><a href="#">Meet Experts</a></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-4 col-xs-12">
+                    <div class="services-item s">
+                        <div class="icon">
+                            <i class="icon-settings"></i>
+                        </div>
+                        <div class="services-content">
+                            <h3><a href="#">Tech Sessions</a></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-4 col-xs-12">
+                    <div class="services-item s">
+                        <div class="icon">
+                            <i class="icon-globe"></i>
+                        </div>
+                        <div class="services-content">
+                            <h3><a href="#">Global Event</a></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-4 col-xs-12">
+                    <div class="services-item s">
+                        <div class="icon">
+                            <i class="icon-present"></i>
+                        </div>
+                        <div class="services-content">
+                            <h3><a href="#">Free Swags</a></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-4 col-xs-12">
+                    <div class="services-item">
+                        <div class="icon">
+                            <i class="icon-bubbles"></i>
+                        </div>
+                        <div class="services-content">
+                            <h3><a href="#">Networking Session</a></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-4 col-xs-12">
+                    <div class="services-item">
+                        <div class="icon">
+                            <i class="icon-graph"></i>
+                        </div>
+                        <div class="services-content">
+                            <h3><a href="#">Design Insights</a></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section End -->
+
+    <!-- Counter Area Start-->
+    <section class="counter-section section-padding" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row">
+                <!-- Counter Item -->
+                <div class="col-md-3 col-sm-6 work-counter-widget text-center">
+                    <div class="counter">
+                        <div class="icon"><i class="icon-microphone"></i></div>
+                        <p>Spekers</p>
+                        <div class="counterUp">36</div>
+                    </div>
+                </div>
+                <!-- Counter Item -->
+                <div class="col-md-3 col-sm-6 work-counter-widget text-center">
+                    <div class="counter">
+                        <div class="icon"><i class="icon-bulb"></i></div>
+                        <p>Participants</p>
+                        <div class="counterUp">950</div>
+                    </div>
+                </div>
+                <!-- Counter Item -->
+                <div class="col-md-3 col-sm-6 work-counter-widget text-center">
+                    <div class="counter">
+                        <div class="icon"><i class="icon-briefcase"></i></div>
+                        <p>Sponsors</p>
+                        <div class="counterUp">17</div>
+                    </div>
+                </div>
+                <!-- Counter Item -->
+                <div class="col-md-3 col-sm-6 work-counter-widget text-center">
+                    <div class="counter">
+                        <div class="icon"><i class="icon-cup"></i></div>
+                        <p>Sessions</p>
+                        <div class="counterUp">52</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Counter Area End-->
+
+    <!-- Ticket Pricing Area Start -->
+    <section id="pricing" class="section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <!-- Start Big Heading -->
-                    <div class="big-title text-center">
-                        <h1>Buy a <strong>Ticket!</strong></h1>
-                    </div>
-                    <!-- End Big Heading -->
+                    <h1 class="section-sub text-center">Book Your Ticket</h1>
                 </div>
             </div>
-
-            <div class="row pricing-tables">
-                <!--   <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5; margin-bottom: -200px;"> -->
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; margin-bottom: -200px; opacity: 0.5;">
-                    <div class="pricing-table">
-                        <div class="plan-name">
-                            <h3>Early bird ticket</h3>
-                            <span>(Until 15th of March)</span>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 mb-3">
+                    <div class="price-block-wrapper">
+                        <div class="prici-left">
+                            <span class="price"><span>$</span>35</span>
+                            <h5>One Day Ticket</h5>
                         </div>
-                        <div class="plan-price">
-                            <div class="price-value">140<span>.00</span> BGN</div>
-                        </div>
-                        <div class="plan-list">
+                        <div class="pricing-list">
+                            <h4>Bronze pass</h4>
                             <ul>
-                                <li><strong>2</strong> days conference</li>
-                                <li><strong>28+</strong> awesome talks!</li>
-                                <li><strong>Hands-on</strong> labs!</li>
-                                <li><strong>Lunch</strong> box</li>
-                                <li><strong>A bag</strong> full of goodies</li>
-                                <li><strong>Free T-shirt!</strong></li>
-                                <li><strong>Raffle !</strong></li>
-                                <li><strong>Beers !</strong></li>
-                                <li><strong>Coffee</strong> and soft drinks</li>
+                                <li><i class="icon-check"></i><span class="text">Event Access</span></li>
+                                <li><i class="icon-close"></i><span class="text">Free Lunch & Coffees</span></li>
+                                <li><i class="icon-close"></i><span class="text">Free Swags</span></li>
+                                <li><i class="icon-close"></i><span class="text">Free WiFi Token</span></li>
                             </ul>
-                        </div>
-                        <div class="plan-signup">
-                            <a href="#"
-                               class="btn-system btn-small">Over</a>
-                                <%--
-                                <a href="tickets/"
-                               class="btn-system btn-small">Get It Now</a>
-                               --%>
-
+                            <a href="#" class="btn btn-common">Buy Ticket</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block;  opacity: 0.5;">
-                    <div class="pricing-table">
-                        <div class="plan-name">
-                            <h3>Regular ticket</h3>
-                            <span>(After 15th of March)</span>
+                <div class="col-lg-6 col-md-6 col-xs-12 mb-3">
+                    <div class="price-block-wrapper">
+                        <div class="prici-left">
+                            <span class="price"><span>$</span>55</span>
+                            <h5>One Day Ticket</h5>
                         </div>
-                        <div class="plan-price">
-                            <div class="price-value">200<span>.00</span> BGN</div>
-                        </div>
-                        <div class="plan-list">
+                        <div class="pricing-list">
+                            <h4>Silver Pass</h4>
                             <ul>
-                                <li><strong>2</strong> days conference</li>
-                                <li><strong>28+</strong> awesome talks!</li>
-                                <li><strong>Hands-on</strong> labs!</li>
-                                <li><strong>Lunch</strong> box</li>
-                                <li><strong>A bag</strong> full of goodies</li>
-                                <li><strong>Free T-shirt!</strong></li>
-                                <li><strong>Raffle !</strong></li>
-                                <li><strong>Beers !</strong></li>
-                                <li><strong>Coffee</strong> and soft drinks</li>
+                                <li><i class="icon-check"></i><span class="text">Event Access</span></li>
+                                <li><i class="icon-check"></i><span class="text">Free Lunch & Coffees</span></li>
+                                <li><i class="icon-close"></i><span class="text">Free Swags</span></li>
+                                <li><i class="icon-close"></i><span class="text">Free WiFi Token</span></li>
                             </ul>
-                        </div>
-                        <div class="plan-signup">
-                            <a href="#"
-                               class="btn-system btn-small">Sold out</a>
-<%--                            <a href="tickets/"--%>
-<%--                               class="btn-system btn-small">Get It Now</a>--%>
-
+                            <a href="#" class="btn btn-common">Buy Ticket</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-3 col-sm-3 col-xs-12" style="float: none; display: inline-block; opacity: 0.5;">
-                    <div class="pricing-table">
-                        <div class="plan-name">
-                            <h3>Student ticket</h3>
-                            <span>(Available at all times)</span>
+                <div class="col-lg-6 col-md-6 col-xs-12 mb-3">
+                    <div class="price-block-wrapper">
+                        <div class="prici-left">
+                            <span class="price"><span>$</span>95</span>
+                            <h5>One Day Ticket</h5>
                         </div>
-                        <div class="plan-price">
-                            <div class="price-value">100<span>.00</span> BGN</div>
-                        </div>
-                        <div class="plan-list">
+                        <div class="pricing-list">
+                            <h4>Golden Pass</h4>
                             <ul>
-                                <li><strong>2</strong> days conference</li>
-                                <li><strong>28+</strong> awesome talks!</li>
-                                <li><strong>Hands-on</strong> labs!</li>
-                                <li><strong>Lunch</strong> box</li>
-                                <li><strong>A bag</strong> full of goodies</li>
-                                <li><strong>Free T-shirt!</strong></li>
-                                <li><strong>Raffle !</strong></li>
-                                <li><strong>Beers !</strong></li>
-                                <li><strong>Coffee</strong> and soft drinks</li>
+                                <li><i class="icon-check"></i><span class="text">Event Access</span></li>
+                                <li><i class="icon-check"></i><span class="text">Free Lunch & Coffees</span></li>
+                                <li><i class="icon-check"></i><span class="text">Free Swags</span></li>
+                                <li><i class="icon-close"></i><span class="text">Free WiFi Token</span></li>
                             </ul>
-                        </div>
-                        <div class="plan-signup">
-                            <a href="#"
-                               class="btn-system btn-small">Sold out</a>
-<%--                            <a href="tickets/"--%>
-<%--                               class="btn-system btn-small">Get It Now</a>--%>
-
+                            <a href="#" class="btn btn-common">Buy Ticket</a>
                         </div>
                     </div>
                 </div>
-
+                <div class="col-lg-6 col-md-6 col-xs-12 mb-3">
+                    <div class="price-block-wrapper">
+                        <div class="prici-left">
+                            <span class="price"><span>$</span>115</span>
+                            <h5>One Day Ticket</h5>
+                        </div>
+                        <div class="pricing-list">
+                            <h4>Platinum Pass</h4>
+                            <ul>
+                                <li><i class="icon-check"></i><span class="text">Event Access</span></li>
+                                <li><i class="icon-check"></i><span class="text">Free Lunch & Coffees</span></li>
+                                <li><i class="icon-check"></i><span class="text">Free Swags</span></li>
+                                <li><i class="icon-check"></i><span class="text">Free WiFi Token</span></li>
+                            </ul>
+                            <a href="#" class="btn btn-common">Buy Ticket</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- End Pricing Table for tickets Section -->
+    </section>
+    <!-- Ticket Pricing Area End -->
 
-
-    <!-- Start Sponsor Section -->
-
-    <div class="partner">
+    <!-- Sponsors Section Start -->
+    <section id="sponsors" class="section-padding">
         <div class="container">
             <div class="row">
-
-                <!--Start Clients Carousel-->
-                <div class="big-title text-center">
-                    <h1><strong>Platinum</strong> Sponsors</h1>
+                <div class="col-md-12">
+                    <h1 class="section-sub text-center">Gold Sponsors</h1>
                 </div>
+            </div>
+            <div class="row mb-30">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-1.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-2.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-3.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/gold-4.png" alt=""></a>
+                    </div>
+                </div>
+            </div>
 
-                <div class="our-clients">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="section-sub text-center">Silver Sponsors</h1>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/logo-01.jpg" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/logo-02.jpg" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/logo-03.jpg" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/logo-04.jpg" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/logo-05.jpg" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="spnsors-logo">
+                        <a href="#"><img class="img-fluid" src="assets/img/sponsors/logo-06.jpg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Sponsors Section End -->
 
-                    <c:forEach var="sponsor" items="${platinumSponsors}">
-                        <div class="client-item item">
-                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}"
-                                                                     alt="${sponsor.companyName}"/></a>
+    <!-- Gallary Section Start -->
+    <section id="gallery-section" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title-header text-center">
+                        <h1 class="section-title">From Last Event</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-lg-4">
+                    <div class="gallery-box">
+                        <div class="img-thumb">
+                            <img class="img-fluid" src="assets/img/gallery/img-1.jpg" alt="">
                         </div>
-                    </c:forEach>
-
-                </div>
-
-                <div class="big-title text-center">
-                    <h1><strong>Gold</strong> Sponsors</h1>
-                </div>
-
-                <div class="our-clients text-center" style="text-align: center">
-
-                    <c:forEach var="sponsor" items="${goldSponsors}">
-                        <div class="client-item item" style="float: none; display: inline-block">
-                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}" alt="${sponsor.companyName}"/></a>
+                        <div class="overlay-box text-center">
+                            <a class="lightbox" href="assets/img/gallery/img-1.jpg">
+                                <i class="icon-eye"></i>
+                            </a>
                         </div>
-                    </c:forEach>
-
+                    </div>
                 </div>
-
-                <div class="big-title text-center">
-                    <h1><strong>Silver</strong> Sponsors</h1>
-                </div>
-
-                <div class="our-clients">
-
-                    <c:forEach var="sponsor" items="${silverSponsors}">
-                        <div class="client-item item">
-                            <a href="${sponsor.companyWebsite}"><img src="/image/sponsor/${sponsor.id}"
-                                                                     alt="${sponsor.companyName}"/></a>
+                <div class="ccol-md-6 col-sm-6 col-lg-4">
+                    <div class="gallery-box">
+                        <div class="img-thumb">
+                            <img class="img-fluid" src="assets/img/gallery/img-2.jpg" alt="">
                         </div>
-                    </c:forEach>
-
+                        <div class="overlay-box text-center">
+                            <a class="lightbox" href="assets/img/gallery/img-2.jpg">
+                                <i class="icon-eye"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <!-- End Clients Carousel -->
-            </div><!-- .row -->
-        </div><!-- .container -->
+                <div class="ccol-md-6 col-sm-6 col-lg-4">
+                    <div class="gallery-box">
+                        <div class="img-thumb">
+                            <img class="img-fluid" src="assets/img/gallery/img-3.jpg" alt="">
+                        </div>
+                        <div class="overlay-box text-center">
+                            <a class="lightbox" href="assets/img/gallery/img-3.jpg">
+                                <i class="icon-eye"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ccol-md-6 col-sm-6 col-lg-4">
+                    <div class="gallery-box">
+                        <div class="img-thumb">
+                            <img class="img-fluid" src="assets/img/gallery/img-4.jpg" alt="">
+                        </div>
+                        <div class="overlay-box text-center">
+                            <a class="lightbox" href="assets/img/gallery/img-4.jpg">
+                                <i class="icon-eye"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ccol-md-6 col-sm-6 col-lg-4">
+                    <div class="gallery-box">
+                        <div class="img-thumb">
+                            <img class="img-fluid" src="assets/img/gallery/img-5.jpg" alt="">
+                        </div>
+                        <div class="overlay-box text-center">
+                            <a class="lightbox" href="assets/img/gallery/img-5.jpg">
+                                <i class="icon-eye"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ccol-md-6 col-sm-6 col-lg-4">
+                    <div class="gallery-box">
+                        <div class="img-thumb">
+                            <img class="img-fluid" src="assets/img/gallery/img-6.jpg" alt="">
+                        </div>
+                        <div class="overlay-box text-center">
+                            <a class="lightbox" href="assets/img/gallery/img-6.jpg">
+                                <i class="icon-eye"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Gallary Section End -->
+
+    <!-- Blog Section Start -->
+    <section id="blog" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title-header text-center">
+                        <h2 class="section-title">From The Blog</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="blog-item text-center">
+                        <div class="blog-image">
+                            <a href="#">
+                                <img class="img-fluid" src="assets/img/blog/img1.jpg" alt="">
+                            </a>
+                            <div class="date"><span class="day">12</span>June</div>
+                        </div>
+                        <div class="descr">
+                            <p class="subtitle">By Korneila</p>
+                            <h3 class="title">
+                                <a href="single-blog.html">
+                                    15 Best Outfit Ideas To Wear in Events
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="blog-item text-center">
+                        <div class="blog-image">
+                            <a href="#">
+                                <img class="img-fluid" src="assets/img/blog/img2.jpg" alt="">
+                            </a>
+                            <div class="date"><span class="day">12</span>June</div>
+                        </div>
+                        <div class="descr">
+                            <p class="subtitle">By Stuart</p>
+                            <h3 class="title">
+                                <a href="single-blog.html">
+                                    10 Tips for Successful Business Networking
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="blog-item text-center">
+                        <div class="blog-image">
+                            <a href="#">
+                                <img class="img-fluid" src="assets/img/blog/img3.jpg" alt="">
+                            </a>
+                            <div class="date"><span class="day">12</span>June</div>
+                        </div>
+                        <div class="descr">
+                            <p class="subtitle">By John</p>
+                            <h3 class="title">
+                                <a href="single-blog.html">
+                                    The 9 Design Trends You Need to Know
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <!-- Subscribe Area Start -->
+    <div id="subscribe" class="section-padding">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-10 col-lg-7">
+                    <div class="subscribe-inner wow fadeInUp" data-wow-delay="0.2s">
+                        <h2 class="subscribe-title">Get Realtime Event Updates</h2>
+                        <p>You can signup for our newsletter to recieve updates related to jPrime.</p>
+                        <form class="text-center form-inline" action="https://jprime.us13.list-manage.com/subscribe/post?u=968bc6e2a2348118b259c0df2&id=c9a8e30e18" method="POST" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <input class="mb-20 form-control" style="text-transform: none" name="EMAIL" placeholder="Your Email Here" required type="email">
+                            <div class="icon-s"><i class="icon-envelope"></i></div>
+                            <button type="submit" class="btn btn-common" data-style="zoom-in" data-spinner-size="30" name="submit" id="submit">
+                                <span class="ladda-label">Submit</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- End Sponsor Section -->
+    <!-- Subscribe Area End -->
 
-    <!-- Start Official Supporters Partners Section -->
-    <c:if test="${fn:length(officialSupporterPartnersChunks) gt 0}">
-        <div class="partner">
-            <div class="container">
-                <div class="row">
-
-                    <div class="big-title text-center" >
-                        <h1><strong>Official </strong> Supporters</h1>
-                    </div>
-
-                    <div class="our-clients">
-                        <c:forEach var="partners" items="${officialSupporterPartnersChunks}">
-
-                            <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partners) gt 3? '3' : fn:length(partners)}" data-appeared-items="${fn:length(partners)}"
-                                 data-navigation="true">
-
-                                <c:forEach var="partner" items="${partners}">
-                                    <div class="client-item item">
-                                        <a href="${partner.companyWebsite}"><img src="/image/partner/${partner.id}"
-                                                                                 alt="${partner.companyName}"/></a>
-                                    </div>
-                                </c:forEach>
-                            </div>
-                        </c:forEach>
-
-                    </div>
-                    <!-- End Clients Carousel -->
-                </div><!-- .row -->
-            </div><!-- .container -->
-        </div>
-    </c:if>
-    <!-- End Official Supporters Partners Section -->
-
-    <!-- Start Media Partners Section -->
-    <c:if test="${fn:length(mediaPartnersChunks) gt 0}">
-	    <div class="partner">
-	        <div class="container">
-	            <div class="row">
-
-	                <div class="big-title text-center" >
-	                    <h1><strong>Community and Media</strong> Partners</h1>
-	                </div>
-
-	                <div class="our-clients">
-	                     <c:forEach var="partners" items="${mediaPartnersChunks}">
-
-                                <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(partners) gt 3? '3' : fn:length(partners)}" data-appeared-items="${fn:length(partners)}"
-                                             data-navigation="true">
-
-                                            <c:forEach var="partner" items="${partners}">
-                                                <div class="client-item item">
-                                                    <a href="${partner.companyWebsite}"><img src="/image/partner/${partner.id}"
-                                                                                             alt="${partner.companyName}"/></a>
-                                                </div>
-                                            </c:forEach>
-                                </div>
-    			       </c:forEach>
-
-	                </div>
-	                <!-- End Clients Carousel -->
-	            </div><!-- .row -->
-	        </div><!-- .container -->
-	    </div>
-    </c:if>
-    <!-- End Media Partners Section -->
-
-    <!-- Start Event Partners Section -->
-    <c:if test="${fn:length(eventPartnerChunks) gt 0}">
-        <div class="event-partner">
-            <div class="container">
-                <div class="row">
-
-                    <div class="big-title text-center" >
-                        <h1><strong>Event</strong> Partners</h1>
-                    </div>
-
-                    <div class="our-clients">
-                        <c:forEach var="eventPartners" items="${eventPartnerChunks}">
-
-                            <div class="clients-carousel custom-carousel touch-carousel navigation-${fn:length(eventPartners) gt 3? '3' : fn:length(eventPartners)}" data-appeared-items="${fn:length(eventPartners)}"
-                                 data-navigation="true">
-
-                                <c:forEach var="eventPartner" items="${eventPartners}">
-                                    <div class="client-item item">
-                                        <a href="${eventPartner.companyWebsite}"><img src="/image/partner/${eventPartner.id}"
-                                                                                 alt="${eventPartner.companyName}"/></a>
-                                    </div>
-                                </c:forEach>
-                            </div>
-                        </c:forEach>
-
-                    </div>
-                    <!-- End Clients Carousel -->
-                </div><!-- .row -->
-            </div><!-- .container -->
-        </div>
-    </c:if>
-    <!-- End Event Partners Section -->
-
-
-    <jsp:directive.include file="footer.jsp" />
-
-</div>
-<!-- End Full Body Container -->
-
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+    <user:footer/>
 
 
 </body>
