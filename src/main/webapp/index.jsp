@@ -58,14 +58,14 @@
             <div class="carousel-item">
                 <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide">
                 <div class="carousel-caption d-md-block">
-                    <h1 class="wow bounceIn heading" data-wow-delay=".7s">36 Amazing Speakers</h1>
+                    <h1 class="wow bounceIn heading" data-wow-delay=".7s">33 Amazing Speakers</h1>
                 </div>
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="images/slider/index3.jpg" alt="Third slide">
                 <div class="carousel-caption d-md-block">
                     <h1 class="wow fadeInUp heading" data-wow-delay=".6s">Book Your Seat Now!</h1>
-                    <a href="tickets/" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">BUY a ticket</a>
+                    <a href="#tickets" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">BUY a ticket</a>
                 </div>
             </div>
         </div>
@@ -310,7 +310,7 @@
                     <div class="counter">
                         <div class="icon"><i class="icon-microphone"></i></div>
                         <p>Spekers</p>
-                        <div class="counterUp">36</div>
+                        <div class="counterUp">33</div>
                     </div>
                 </div>
                 <!-- Counter Item -->
@@ -326,7 +326,7 @@
                     <div class="counter">
                         <div class="icon"><i class="icon-briefcase"></i></div>
                         <p>Sponsors</p>
-                        <div class="counterUp">17</div>
+                        <div class="counterUp">29</div>
                     </div>
                 </div>
                 <!-- Counter Item -->
@@ -334,7 +334,7 @@
                     <div class="counter">
                         <div class="icon"><i class="icon-cup"></i></div>
                         <p>Sessions</p>
-                        <div class="counterUp">52</div>
+                        <div class="counterUp">33</div>
                     </div>
                 </div>
             </div>
@@ -579,19 +579,30 @@
         <div class="container" style="text-align: center">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="section-title">jPrime Live Stream</h1>
+                    <h1 class="section-title">jPrime 2019 recordings</h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/OL4Ye2r7ohY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/DxOVSxpFI8E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/OL4Ye2r7ohY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-            </div>
+<%--            <div class="row">--%>
+<%--                <div class="col-12">--%>
+<%--                    <h1 class="section-title">jPrime Live Stream</h1>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="row">--%>
+<%--                <div class="col-12">--%>
+<%--                    <iframe width="560" height="315" src="https://www.youtube.com/embed/OL4Ye2r7ohY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="row">--%>
+<%--                <div class="col-12">--%>
+<%--                    <iframe width="560" height="315" src="https://www.youtube.com/embed/OL4Ye2r7ohY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+        </div>
     </section>
 
 <%--    <!-- Gallary Section Start -->--%>
@@ -773,6 +784,78 @@
         </div>
     </div>
     <!-- Subscribe Area End -->
+
+    <!-- Sponsors Pricing Area Start -->
+    <section id="pricing" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="section-sub text-center">Become a sponsor !</h1>
+                </div>
+            </div>
+            <div class="row" id="sponsor">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                    <div class="price-block-wrapper">
+                        <div class="prici-left">
+                            <span class="price"><span>BGN</span>5000.00</span>
+                            <h5></h5>
+                        </div>
+                        <div class="pricing-list">
+                            <h4>Platinum</h4>
+                            <ul>
+                                <li><i class="icon-check"></i><span class="text">9 free passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">15% discount on additional passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Booth in the conference hall!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Presence on the stage for the raffle</span></li>
+                                <li><i class="icon-close"></i><span class="text">2 banners in the conference rooms</span></li>
+                                <li><i class="icon-close"></i><span class="text">1 invite for the "thank you" dinner</span></li>
+                            </ul>
+                                <a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn btn-common">Sign Up Now</a>
+<%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                    <div class="price-block-wrapper">
+                        <div class="prici-left">
+                            <span class="price"><span>BGN</span>4000.00</span>
+                            <h5></h5>
+                        </div>
+                        <div class="pricing-list">
+                            <h4>Gold</h4>
+                            <ul>
+                                <li><i class="icon-check"></i><span class="text">6 free passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">15% discount on additional passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Booth in the conference hall!</span></li>
+                                <li><i class="icon-close"></i><span class="text">2 banners in the conference rooms</span></li>
+                            </ul>
+                            <a href="mailto:conference@jprime.io?subject=gold sponsorship" class="btn btn-common">Sign Up Now</a>
+                            <%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                    <div class="price-block-wrapper">
+                        <div class="prici-left">
+                            <span class="price"><span>BGN</span>1500.00</span>
+                            <h5></h5>
+                        </div>
+                        <div class="pricing-list">
+                            <h4>Silver</h4>
+                            <ul>
+                                <li><i class="icon-check"></i><span class="text">9 free passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">10% discount on additional passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">2 banners in the conference rooms</span></li>
+                            </ul>
+                            <a href="mailto:conference@jprime.io?subject=silver sponsorship" class="btn btn-common">Sign Up Now</a>
+                            <%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Sponsors Pricing Area End -->
 
     <user:footer/>
 
