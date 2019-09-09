@@ -1840,7 +1840,7 @@ blockquote {
     font-size: 48px;
     font-weight: 700;
     color: #FFC107;
-    text-shadow: 3px 3px white;
+    text-shadow: 3px 3px #000000;
     text-transform: uppercase;
     letter-spacing: 0.1rem; }
 
