@@ -26,27 +26,6 @@ pageEncoding="UTF-8"%>
     <!-- Page Description and Author -->
 
     <user:pageJavaScriptAndCss/>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var coSpeakerButton = $("#toggleCoSpeaker");
-            var buttonCaption = coSpeakerButton.text();
-            buttonCaption == "Add co speaker" ? $("#coSpeaker").hide() : $("#coSpeaker").show();
-
-            coSpeakerButton.click(function () {
-                var coSpeakerDiv = $("#coSpeaker");
-                coSpeakerDiv.toggle();
-                var coSpeakerButton = $("#toggleCoSpeaker");
-                var buttonCaption = coSpeakerButton.text();
-
-                if (buttonCaption == "Remove co speaker") {
-                    coSpeakerButton.text("Add co speaker");
-                    $("input[id^='coSpeaker']").val("");
-                } else {
-                    coSpeakerButton.text("Remove co speaker");
-                }
-            });
-        });
-    </script>
 </head>
 <body>
 
@@ -78,6 +57,28 @@ pageEncoding="UTF-8"%>
 
 
 <user:footer/>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var coSpeakerButton = $("#toggleCoSpeaker");
+        var buttonCaption = coSpeakerButton.text();
+        buttonCaption == "Add co speaker" ? $("#coSpeaker").hide() : $("#coSpeaker").show();
+
+        coSpeakerButton.click(function () {
+            var coSpeakerDiv = $("#coSpeaker");
+            coSpeakerDiv.toggle();
+            var coSpeakerButton = $("#toggleCoSpeaker");
+            var buttonCaption = coSpeakerButton.text();
+
+            if (buttonCaption == "Remove co speaker") {
+                coSpeakerButton.text("Add co speaker");
+                $("input[id^='coSpeaker']").val("");
+            } else {
+                coSpeakerButton.text("Remove co speaker");
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

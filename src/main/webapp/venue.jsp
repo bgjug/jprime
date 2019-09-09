@@ -109,6 +109,8 @@
 </section>
 
 <user:footer/>
+<script src="assets/js/map.js"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCsa2Mi2HqyEcEnM1urFSIGEpvualYjwwM"></script>
 
 </body>
 </html>

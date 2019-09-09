@@ -45,13 +45,13 @@
         <div class="row">
             <div class="col-12">
                 <p>
-                <p>Stay tuned for contact from our side. The CFP closes 15th of February.</p>
-                <p>Usually after that there is voting in place for about 2 weeks. You should be contacted in the beginning of March ! <br/>
-                    For any questions please mail us to <a href="mailto:conference@jprime.io"><i class="fa fa-envelope-o"></i> conference@jprime.io</a></p>
+                <p>Stay tuned for contact from our side. The CFP closes 15th of February.</p> <br/>
+                <p>Usually after that there is voting in place for about 2 weeks. You should be contacted in the beginning of March ! </p><br/>
+                <p>For any questions please mail us to <a href="mailto:conference@jprime.io"><i class="fa fa-envelope-o"></i> conference@jprime.io</a></p>
 
                 <p>
-                    And lastly - right now you cannot edit a submission that you have already submitted. This functionality is not yet developed however if you need to do so.. you can contact us, or open a PR
-                    <a href="https://github.com/bgjug/jprime/issues/120">https://github.com/bgjug/jprime/issues/120</a> ;)
+                    And lastly - right now you cannot edit a submission that you have already submitted :+( . This functionality is not yet developed however if you need to do so.. you can contact us, or open a PR
+                    <a href="https://github.com/bgjug/jprime/issues/120">https://github.com/bgjug/jprime/issues/120</a> ;+)
                 </p>
             </div>
         </div>
