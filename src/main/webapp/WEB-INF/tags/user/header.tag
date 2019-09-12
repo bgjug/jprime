@@ -1,5 +1,6 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <!-- Header Area wrapper Starts -->
 <header id="header-wrap">
@@ -63,12 +64,31 @@
                             Agenda
                         </a>
                     </li>
-                    <c:forEach var="tag" items="${tags}">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/nav/${tag.name}">
-                                <c:out value="${tag.name}"/>
-                            </a>
-                        </li>
+                    <c:forEach var="tag" items="${tags}" varStatus="i">
+                        <c:choose>
+                            <%-- this part has invalid XML by DESIGN I need to add li and div only ones --%>
+                            <c:when test="${fn:startsWith(tag.name, '20')}">
+                                <c:if test="${i.count eq 1}">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Previous years<i class="fa fa-angle-down"></i>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                </c:if>
+                                        <a class="dropdown-item" href="/nav/${tag.name}"><c:out value="${tag.name}"/></a>
+                                <%-- I dont know when we should close them, it should be after the LAST year tag, but.. :D:D so fck it - ignore --%>
+<%--                                        </div>--%>
+<%--                                    </li>--%>
+                            </c:when>
+                            <%-- end of this part --%>
+                            <c:otherwise>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/nav/${tag.name}">
+                                        <c:out value="${tag.name}"/>
+                                    </a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
                     </c:forEach>
                 </ul>
             </div>
