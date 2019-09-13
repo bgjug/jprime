@@ -68,7 +68,8 @@
                         <c:choose>
                             <%-- this part has invalid XML by DESIGN I need to add li and div only ones --%>
                             <c:when test="${fn:startsWith(tag.name, '20')}">
-                                <c:if test="${i.count eq 1}">
+                                <c:if test="${not firstTagAlreadyPrinted}">
+                                    <c:set var="firstTagAlreadyPrinted" value="true"/>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Previous years<i class="fa fa-angle-down"></i>

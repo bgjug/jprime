@@ -706,13 +706,14 @@ a.back-to-top {
 
 /* Sponsors Area */
 #sponsors {
-  background: #f2f2f2; }
+  background: white; }
   #sponsors .spnsors-logo {
     /*display: inline-block;*/
     /*border: 1px solid #E8E8E8;*/
     /*box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);*/
     -webkit-transition: all 300ms ease-in-out;
-    transition: all 300ms ease-in-out; }
+    transition: all 300ms ease-in-out;
+    padding: 5px;}
 
 /* Schedule Area */
 #schedule-tab {
@@ -855,7 +856,8 @@ a.back-to-top {
 
 /* Gallery Section */
 #gallery-section {
-  position: relative; }
+  position: relative;
+background: #f2f2f2;}
   #gallery-section .gallery-box {
     position: relative;
     margin-bottom: 30px; }

@@ -95,7 +95,7 @@
             </div>
         </c:if>
 
-        <div class="col-sm-6 col-md-6 col-lg-3">
+        <div class="col-sm-6 col-md-6 ${not empty talk.submission.coSpeaker ? 'col-lg-push-9': 'col-lg-9'}">
 
             <!-- Start Post -->
             <div class="post-content-block">
