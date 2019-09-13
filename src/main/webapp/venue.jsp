@@ -13,106 +13,104 @@
     <!-- Basic -->
     <title>jPrime | Venue</title>
 
-    <!-- Define Charset -->
     <meta charset="utf-8">
 
     <!-- Responsive Metatag -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <jsp:directive.include file="theme-colors.jsp" />
+    <%--    <jsp:directive.include file="theme-colors.jsp" />--%>
 
     <!-- Page Description and Author -->
-    <meta name="description" content="JPrime Conference">
-    <meta name="author" content="JPrime">
 
     <user:pageJavaScriptAndCss/>
 
 </head>
 <body>
 
-<!-- Container -->
-<div id="container">
+<user:header/>
 
-    <user:header/>
-
-    <!-- Start Content -->
-    <div id="content">
-        <div class="container">
-
-            <p class="text-center"><br/> jPrime is held on <strong>28-29th May 2019</strong> in
-                "John Atanasoff" Innovation forum in Sofia Tech Park which is one of the leading and most preferable locations for running events connected with hi tech, entrepreneurship, science, ecology, education, innovations, digitalisation and health care.
-            </p>
-
-            <center>
-                <img alt="techpark" src="/images/venue.jpg" width="100%"/><br/><br/>
-            </center>
-            <center>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11734.949903249553!2d23.3733712!3d42.6669183!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcbc66ddbb54d08b3!2z0KHQvtGE0LjRjyDRgtC10YUg0L_QsNGA0Lo!5e0!3m2!1sru!2sbg!4v1494940078038" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-            </center>
-
+<!-- Page Banner Start -->
+<div id="page-banner-area" class="page-banner">
+    <div class="page-banner-title">
+        <div class="text-center">
+            <h2>The Venue !</h2>
         </div>
     </div>
+</div>
+<!-- Page Banner End -->
 
-    <a name="info"></a>
-    <p class="text-center"><br/> <strong>Useful</strong>&nbsp;information</p>
-        <div id="content">
-            <div class="container" style="vertical-align: top">
-                <div class="row" style="display: inline-block;max-width:33%;padding: 20px;vertical-align: top">
-                    <div class="team-member modern">
+<section id="about" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p>
+                <p class="text-center"><br/> jPrime will be held on <strong>27-28th May 2020</strong> in
+                    "John Atanasoff" Innovation forum in Sofia Tech Park which is one of the leading and most preferable locations for running events connected with hi tech, entrepreneurship, science, ecology, education, innovations, digitalisation and health care.
+                </p>
+                <center>
+                    <img alt="techpark" src="/images/venue.jpg" width="100%"/><br/><br/>
+                </center>
+                <center>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11734.949903249553!2d23.3733712!3d42.6669183!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcbc66ddbb54d08b3!2z0KHQvtGE0LjRjyDRgtC10YUg0L_QsNGA0Lo!5e0!3m2!1sru!2sbg!4v1494940078038" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </center>
+                <a name="info"></a>
+                <p class="text-center"><br/> <strong>Useful</strong>&nbsp;information</p>
+                <div id="content">
+                    <div class="container" style="vertical-align: top">
+                        <div class="row" style="display: inline-block;max-width:33%;padding: 20px;vertical-align: top">
+                            <div class="team-member modern">
 
-                        <img alt="" src="/images/bulgaria.png"/><br/><br/>
+                                <img alt="" src="/images/bulgaria.png"/><br/><br/>
 
-                        <div class="member-name"><b>Bulgaria</b><br/><br/>
+                                <div class="member-name"><b>Bulgaria</b><br/><br/>
 
-                            <b>County entrance</b>: EU citizens do not require visa. Free entrance for Schengen visa holders. For other countries check <a href="http://www.mfa.bg/en/pages/109/index.html">here</a><br/>
-                            <b>Local curency</b>: Bulgarian Lev. Fixed rate 1,95583 Lev/Euro<br/>
-                            <br/>
-                            More info: <a href="https://en.wikipedia.org/wiki/Bulgaria">in Wikipedia</a>
+                                    <b>County entrance</b>: EU citizens do not require visa. Free entrance for Schengen visa holders. For other countries check <a href="http://www.mfa.bg/en/pages/109/index.html">here</a><br/>
+                                    <b>Local curency</b>: Bulgarian Lev. Fixed rate 1,95583 Lev/Euro<br/>
+                                    <br/>
+                                    More info: <a href="https://en.wikipedia.org/wiki/Bulgaria">in Wikipedia</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="row" style="display: inline-block;max-width:33%;padding: 20px;vertical-align: top">
-                        <div class="team-member modern">
+                        <div class="row" style="display: inline-block;max-width:33%;padding: 20px;vertical-align: top">
+                            <div class="team-member modern">
 
-                            <img alt="" src="/images/apt.png"/><br/><br/>
+                                <img alt="" src="/images/apt.png"/><br/><br/>
 
-                            <div class="member-name"><b>Transport</b><br/><br/>
-                                <b>Conference hall address</b>: Tsarigradsko Shosse 115B, Sofia, Bulgaria<br/>
-                                Sofia Tech Park is located 6 km away from the Sofia International Airport.<br/>
-                                It usually takes up to 10 min to reach the venue with a car.<br/>
-                                <br/>
-                                Average taxi price <b>0,40/0,45</b> Eurocent per km.
+                                <div class="member-name"><b>Transport</b><br/><br/>
+                                    <b>Conference hall address</b>: Tsarigradsko Shosse 115B, Sofia, Bulgaria<br/>
+                                    Sofia Tech Park is located 6 km away from the Sofia International Airport.<br/>
+                                    It usually takes up to 10 min to reach the venue with a car.<br/>
+                                    <br/>
+                                    Average taxi price <b>0,40/0,45</b> Eurocent per km.
+                                </div>
                             </div>
-                    </div>
-                </div>
+                        </div>
 
-                <div class="row" style="display: inline-block;max-width:33%;padding: 20px;vertical-align: top">
-                        <div class="team-member modern">
+                        <div class="row" style="display: inline-block;max-width:33%;padding: 20px;vertical-align: top">
+                            <div class="team-member modern">
 
-                            <img alt="" src="/images/hotel.png"/><br/><br/>
+                                <img alt="" src="/images/hotel.png"/><br/><br/>
 
-                            <div class="member-name"><b>Accomodation</b><br/><br/>
+                                <div class="member-name"><b>Accomodation</b><br/><br/>
 
-                                For the conference guests we recommend <a href="http://www.hotel-europe-bg.com/en/">Best Western Hotel Europe</a> which is centrally located. <br/>
-                                <br/>
-                                <br/>
-                                For more information please contact <a href="mailto:ivan@jprime.io">Ivan</a>.
+                                    For the conference guests we recommend <a href="http://www.hotel-europe-bg.com/en/">Best Western Hotel Europe</a> which is centrally located. <br/>
+                                    <br/>
+                                    <br/>
+                                    For more information please contact <a href="mailto:ivan@jprime.io">Ivan</a>.
+                                </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Content -->
-
-        <jsp:directive.include file="footer.jsp" />
-
     </div>
-    <!-- End Container -->
+</section>
 
-    <!-- Go To Top Link -->
-    <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
-
+<user:footer/>
+<script src="assets/js/map.js"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCsa2Mi2HqyEcEnM1urFSIGEpvualYjwwM"></script>
 
 </body>
 </html>

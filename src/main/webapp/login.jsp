@@ -7,123 +7,98 @@
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
 
 <!doctype html>
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><html lang="en" class="no-js"> <![endif]-->
 <html lang="en">
 <head>
 
     <!-- Basic -->
     <title>Signup</title>
 
-    <!-- Define Charset -->
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 
-    <!-- Responsive Metatag -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Responsive Metatag -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<jsp:directive.include file="theme-colors.jsp" />
+	<%--    <jsp:directive.include file="theme-colors.jsp" />--%>
 
-    <!-- Page Description and Author -->
-	<meta name="description" content="jPrime 2019">
-	<meta name="author" content="jPrime">
-    
-    <user:pageJavaScriptAndCss/>
+	<!-- Page Description and Author -->
+
+	<user:pageJavaScriptAndCss/>
 
 </head>
 <body>
 
-<!-- Container -->
-<div id="container">
+<user:header/>
 
-    <user:header/>
-
-    <!-- Start Content -->
-    <div id="content">
-        <div class="container">
-            <div class="row blog-post-page">
-                <div class="col-md-9 blog-box">
-
-                    <!-- Start Single Post Area -->
-                    <div class="blog-post gallery-post">
-
-                        <!-- Start Single Post Content -->
-                        <div class="post-content">
-                            
-                            <h3>Login</h3>
-
-							<c:if test="${not empty error}">
-								<div class="error">${error}</div>
-							</c:if>
-							<c:if test="${not empty msg}">
-								<div class="msg">${msg}</div>
-							</c:if>
-							<sec:authorize access="hasRole('USER')">
-								welcome USER
-							</sec:authorize>
-							<sec:authorize access="hasRole('ADMIN')">
-								welcome ADMIN
-							</sec:authorize>
-							<form name='loginForm'
-								action="<c:url value='/login' />" method='POST'>
-					
-					
-								<table>
-									<tr>
-										<td>User:</td>
-										<td><input type='text' name='username' value=''></td>
-									</tr>
-									<tr>
-										<td>Password:</td>
-										<td><input type='password' name='password' /></td>
-									</tr>
-									<tr>
-										<td>
-										<br/>
-										</td>
-										<td>
-											<a href="<c:out value='/resetPassword'/>" style="margin-left: 30px; position: absolute;">Forgot your password?</a>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<input name="submit" type="submit" value="submit" />
-										</td>
-										<td>
-											<a href="<c:out value='/signup'/>" style="margin-left: 30px; position: absolute;"> Register </a>
-										</td>
-									</tr>
-								</table>
-								
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" />
-					
-							</form>
-                            
-                        </div>
-                        <!-- End Single Post Content -->
-
-                    </div>
-                    <!-- End Single Post Area -->
-
-                </div>
-
-
-
-                <user:sidebar/>
-
-            </div>
-
-        </div>
-    </div>
-    <!-- End content -->
-
-
-    <jsp:directive.include file="footer.jsp" />
+<!-- Page Banner Start -->
+<div id="page-banner-area" class="page-banner">
+	<div class="page-banner-title">
+		<div class="text-center">
+			<h2>Login</h2>
+		</div>
+	</div>
 </div>
-<!-- End Container -->
+<!-- Page Banner End -->
 
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<section id="about" class="section-padding">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<p>
+					<c:if test="${not empty error}">
+				<div class="error">${error}</div>
+				</c:if>
+				<c:if test="${not empty msg}">
+					<div class="msg">${msg}</div>
+				</c:if>
+				<sec:authorize access="hasRole('USER')">
+					welcome USER
+				</sec:authorize>
+				<sec:authorize access="hasRole('ADMIN')">
+					welcome ADMIN
+				</sec:authorize>
+				<form name='loginForm'
+					  action="<c:url value='/login' />" method='POST'>
+
+
+					<table>
+						<tr>
+							<td>User:</td>
+							<td><input type='text' name='username' value=''></td>
+						</tr>
+						<tr>
+							<td>Password:</td>
+							<td><input type='password' name='password' /></td>
+						</tr>
+						<tr>
+							<td>
+								<br/>
+							</td>
+							<td>
+								<a href="<c:out value='/resetPassword'/>" style="margin-left: 30px; position: absolute;">Forgot your password?</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input name="submit" type="submit" value="submit" />
+							</td>
+							<td>
+								<a href="<c:out value='/signup'/>" style="margin-left: 30px; position: absolute;"> Register </a>
+							</td>
+						</tr>
+					</table>
+
+					<input type="hidden" name="${_csrf.parameterName}"
+						   value="${_csrf.token}" />
+
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<user:footer/>
 
 
 </body>

@@ -16,87 +16,69 @@ pageEncoding="UTF-8"%>
   <title>Submit a proposal</title>
   
   <!-- Define Charset -->
-  <meta charset="utf-8">
-  
-  <!-- Responsive Metatag -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <jsp:directive.include file="theme-colors.jsp" />
+    <meta charset="utf-8">
+
+    <!-- Responsive Metatag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <%--    <jsp:directive.include file="theme-colors.jsp" />--%>
 
     <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2019">
-    <meta name="author" content="jPrime">
 
     <user:pageJavaScriptAndCss/>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var coSpeakerButton = $("#toggleCoSpeaker");
-            var buttonCaption = coSpeakerButton.text();
-            buttonCaption == "Add co speaker" ? $("#coSpeaker").hide() : $("#coSpeaker").show();
-
-            coSpeakerButton.click(function () {
-                var coSpeakerDiv = $("#coSpeaker");
-                coSpeakerDiv.toggle();
-                var coSpeakerButton = $("#toggleCoSpeaker");
-                var buttonCaption = coSpeakerButton.text();
-
-                if (buttonCaption == "Remove co speaker") {
-                    coSpeakerButton.text("Add co speaker");
-                    $("input[id^='coSpeaker']").val("");
-                } else {
-                    coSpeakerButton.text("Remove co speaker");
-                }
-            });
-        });
-    </script>
 </head>
 <body>
 
-	<!-- Container -->
-	<div id="container">
 
-        <user:header/>
+<user:header/>
 
-<!-- Start Content -->
-<div id="content">
- <div class="container">
-  <div class="row blog-post-page">
-   <div class="col-md-9 blog-box">
-
-    <!-- Start Single Post Area -->
-    <div class="blog-post gallery-post">
-	
-    <!-- Start Single Post Content -->
-    <div class="post-content">
-        <h2>Submit your proposal</h2>
-        <br>Call for paper closes on <strong>15th of February!</strong>
-        <p>
-        <user:cfp action="/cfp"/>
+<!-- Page Banner Start -->
+<div id="page-banner-area" class="page-banner">
+    <div class="page-banner-title">
+        <div class="text-center">
+            <h2>Submit your proposal</h2>
+        </div>
     </div>
- <!-- End Single Post Content -->
- 
 </div>
-<!-- End Single Post Area -->
-
-</div>
+<!-- Page Banner End -->
 
 
+<section id="about" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p>
+                <p>Call for paper closes on <strong>15th of February!</strong></p>
+                <user:cfp action="/cfp"/>
+            </div>
+        </div>
+    </div>
+</section>
 
-<user:sidebar/>
 
-</div>
+<user:footer/>
 
-</div>
-</div>
-<!-- End content -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var coSpeakerButton = $("#toggleCoSpeaker");
+        var buttonCaption = coSpeakerButton.text();
+        buttonCaption == "Add co speaker" ? $("#coSpeaker").hide() : $("#coSpeaker").show();
 
+        coSpeakerButton.click(function () {
+            var coSpeakerDiv = $("#coSpeaker");
+            coSpeakerDiv.toggle();
+            var coSpeakerButton = $("#toggleCoSpeaker");
+            var buttonCaption = coSpeakerButton.text();
 
-        <jsp:directive.include file="footer.jsp" />
-</div>
-<!-- End Container -->
-
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
-
+            if (buttonCaption == "Remove co speaker") {
+                coSpeakerButton.text("Add co speaker");
+                $("input[id^='coSpeaker']").val("");
+            } else {
+                coSpeakerButton.text("Remove co speaker");
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

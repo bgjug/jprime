@@ -16,90 +16,73 @@
     <title>Reset Password</title>
 
     <!-- Define Charset -->
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 
-    <!-- Responsive Metatag -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Responsive Metatag -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <jsp:directive.include file="theme-colors.jsp" />
+	<%--    <jsp:directive.include file="theme-colors.jsp" />--%>
 
-    <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2019">
-    <meta name="author" content="jPrime">
-    
-    <user:pageJavaScriptAndCss/>
+	<!-- Page Description and Author -->
+
+	<user:pageJavaScriptAndCss/>
 
 </head>
 <body>
 
-<!-- Container -->
-<div id="container">
 
-    <user:header/>
+<user:header/>
 
-    <!-- Start Content -->
-    <div id="content">
-        <div class="container">
-            <div class="row blog-post-page">
-                <div class="col-md-9 blog-box">
-
-                    <!-- Start Single Post Area -->
-                    <div class="blog-post gallery-post">
-
-                        <!-- Start Single Post Content -->
-                        <div class="post-content">
-                            
-                             <c:choose>
-							    <c:when test="${not empty sent_to_email}">
-							    	<h2>Check your email</h2>	
-							    	<br/>
-							      	<p> We have sent an email to <strong>${sent_to_email}</strong>. Click the link in the email to reset your password.</p>
-							      	 <br />
-							      	<p>If you don't see the email, check other places it might be, like your junk, spam, social, or other folders. </p>
-							        <br />
-							    </c:when>    
-							    <c:otherwise>
-							    	 <h2>Reset your password</h2>	
-							       	 <p>
-			                             <form:form action="/resetPassword" method="post" enctype="multipart/form-data">
-			                                <div class="form-wrapper">
-			                                    <label for="email">Email</label>
-			                                    <br/>
-			                                    <input type="text" name="email" id="email"/>
-			                                    <br/>
-					                        	<form:errors path="email"/>
-			                                </div>
-			                                <p><strong>${error_msg}<strong><p>
-			                                <br/>
-			                                <input type="submit" value="reset" class="btn">
-			                             </form:form>
-		                             </p>
-							        <br />
-							    </c:otherwise>
-							</c:choose>
-                            
-                        </div>
-                        <!-- End Single Post Content -->
-
-                    </div>
-                    <!-- End Single Post Area -->
-
-                </div>
-
-                <user:sidebar/>
-
-            </div>
-
-        </div>
-    </div>
-    <!-- End content -->
-
-    <jsp:directive.include file="footer.jsp" />
+<!-- Page Banner Start -->
+<div id="page-banner-area" class="page-banner">
+	<div class="page-banner-title">
+		<div class="text-center">
+			<h2>Reset Password</h2>
+		</div>
+	</div>
 </div>
-<!-- End Container -->
+<!-- Page Banner End -->
 
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<section id="about" class="section-padding">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<c:choose>
+					<c:when test="${not empty sent_to_email}">
+						<h2>Check your email</h2>
+						<br/>
+						<p> We have sent an email to <strong>${sent_to_email}</strong>. Click the link in the email to reset your password.</p>
+						<br />
+						<p>If you don't see the email, check other places it might be, like your junk, spam, social, or other folders. </p>
+						<br />
+					</c:when>
+					<c:otherwise>
+						<h2>Reset your password</h2>
+						<p>
+						<form:form action="/resetPassword" method="post" enctype="multipart/form-data">
+							<div class="form-wrapper">
+								<label for="email">Email</label>
+								<br/>
+								<input type="text" name="email" id="email"/>
+								<br/>
+								<form:errors path="email"/>
+							</div>
+							<p><strong>${error_msg}<strong><p>
+							<br/>
+							<input type="submit" value="reset" class="btn">
+						</form:form>
+						</p>
+						<br />
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<user:footer/>
 
 </body>
 </html>

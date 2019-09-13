@@ -22,85 +22,75 @@
     <jsp:directive.include file="theme-colors.jsp" />
 
     <!-- Page Description and Author -->
-    <meta name="description" content="JPrime Conference">
-    <meta name="author" content="JPrime">
-	
+    <meta name="description" content="jPrime 2019">
+    <meta name="author" content="jPrime">
+
     <user:pageJavaScriptAndCss/>
-
-    <script type="text/javascript">
-
-        $(document).ready(function() {
-            $('.truncArt').truncate({length:1500})
-        });
-    </script>
 </head>
 <body>
 
-<!-- Container -->
-<div id="container">
+<user:header/>
 
-    <user:header/>
-
-    <!-- Start Content -->
-    <div id="content">
-        <div class="container">
-            <div class="row blog-page">
-
-                <!-- Start Blog Posts -->
-                <div class="col-md-11 blog-box">
-
-                    <c:forEach var="speaker" items="${speakers.content}">
-                        <div class="blog-post image-post"  style="clear:both;margin-bottom: 100px;">
-                            <div class="col-md-3 col-sm-6 col-xs-12 animated">
-                                <div class="team-member modern">
-                                    <!-- Memebr Photo, Name & Position -->
-                                    <div class="member-photo">
-                                        <img alt="" src="/image/speaker/${speaker.id}"  height="365" width="280">
-                                        <div class="member-name">
-                                            <c:out value="${speaker.firstName}"/>&nbsp;<c:out value="${speaker.lastName}"/><span><c:out value="${speaker.headline}"/></span>
-                                        </div>
-                                    </div>
-                                    <div class="member-socail" style="text-align: left">
-                                        <a class="twitter" href="http://twitter.com/${speaker.twitter}"><i class="fa fa-twitter"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <p>
-                                <div class="truncArt"><c:out value="${speaker.bio}"/></div>
-                            </p>
-                            <p>
-                                <a class="main-button" href="/speaker/${speaker.id}">Read More <i class="fa fa-angle-right"></i></a>
-                            </p>
-                        </div>
-                    </c:forEach>
-                    <!-- Start Pagination // not needed now
-                  <div id="pagination">
-                      <span class="all-pages">Page 1 of 3</span>
-                      <span class="current page-num">1</span>
-                      <a class="page-num" href="#">2</a>
-                      <a class="page-num" href="#">3</a>
-                      <a class="next-page" href="#">Next</a>
-                  </div>
-                  <!-- End Pagination -->
-                </div>
-                <!-- End Blog Posts -->
-
-                <user:sidebar/>
-
-
-            </div>
+<!-- Page Banner Start -->
+<div id="page-banner-area" class="page-banner">
+    <div class="page-banner-title">
+        <div class="text-center">
+            <h2>Speakers</h2>
         </div>
     </div>
-    <!-- End Content -->
-
-   <jsp:directive.include file="footer.jsp" />
-
 </div>
-<!-- End Container -->
+<!-- Page Banner End -->
 
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<!-- Team Section Start -->
+<section id="team" class="section-padding">
+    <div class="container">
+        <div class="row">
+
+            <c:forEach var="speaker" items="${speakers.content}">
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <!-- Team Item Starts -->
+                    <div class="team-item text-center">
+                        <div class="team-img">
+                            <img class="img-fluid" src="/image/speaker/${speaker.id}" alt="">
+                            <div class="team-overlay">
+                                <div class="overlay-social-icon text-center">
+                                    <ul class="social-icons">
+                                        <li><a href="http://twitter.com/${speaker.twitter}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-text">
+                            <h3><a href="/speaker/${speaker.id}"><c:out value="${speaker.firstName}"/>&nbsp;<c:out value="${speaker.lastName}"/></a></h3>
+                            <p><c:out value="${speaker.headline}"/></p>
+                        </div>
+                    </div>
+                    <!-- Team Item Ends -->
+                </div>
+            </c:forEach>
+
+        </div>
+<%--        <div class="row justify-content-center mt-4">--%>
+<%--            <div class="col-xs-12">--%>
+<%--                <nav aria-label="Page navigation justify-content-md-center">--%>
+<%--                    <ul class="pagination">--%>
+<%--                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>--%>
+<%--                        <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
+<%--                        <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
+<%--                        <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
+<%--                        <li class="page-item"><a class="page-link" href="#">Next</a></li>--%>
+<%--                    </ul>--%>
+<%--                </nav>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+    </div>
+</section>
+<!-- Team Section End -->
+
+
+
+<user:footer/>
 
 
 </body>

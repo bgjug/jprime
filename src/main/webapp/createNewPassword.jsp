@@ -7,97 +7,72 @@
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
 
 <!doctype html>
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><html lang="en" class="no-js"> <![endif]-->
 <html lang="en">
 <head>
 
     <!-- Basic -->
     <title>Reset Password</title>
 
-    <!-- Define Charset -->
     <meta charset="utf-8">
 
     <!-- Responsive Metatag -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <jsp:directive.include file="theme-colors.jsp" />
+    <%--    <jsp:directive.include file="theme-colors.jsp" />--%>
 
     <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2019">
-    <meta name="author" content="jPrime">
-    
+
     <user:pageJavaScriptAndCss/>
 
 </head>
 <body>
 
-<!-- Container -->
-<div id="container">
 
-    <user:header/>
+<user:header/>
 
-    <!-- Start Content -->
-    <div id="content">
-        <div class="container">
-            <div class="row blog-post-page">
-                <div class="col-md-9 blog-box">
-
-                    <!-- Start Single Post Area -->
-                    <div class="blog-post gallery-post">
-
-                        <!-- Start Single Post Content -->
-                        <div class="post-content">
-                            <%--<h2>Buy conference tickets</h2>
-                            <p>
-                            <p>The conference fee is <strong>50</strong>.00 EUR (VAT included).</p>
-                            <p>For registration contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
-                             --%>
-                             <h2>Pick a new password</h2>
-                             <p>
-                             	<form:form modelAttribute="changePassword" action="/createNewPassword" method="post" enctype="multipart/form-data">
-	                                <div class="form-wrapper">
-	                                    <label for="password">Password *</label><br/>
-	                                    <input type="password" name="password" id="password"><br/>
-			                        	<form:errors path="password"/>
-	                                </div>
-	                                <div class="form-wrapper">
-	                                    <label for="cpassword">Confirm password *</label><br/>
-	                                    <input type="password" name="cpassword" id="cpassword"><br/>
-			                        	<form:errors path="cpassword"/>
-	                                </div>
-	                                <input type="hidden" name="tokenId"
-										value="${tokenId}" />
-		                            <p><strong>${error_msg}</strong></p>
-	                                <br/>
-	                                <input type="submit" value="Submit" class="btn">
-                            	</form:form>
-                            </p>
-                        </div>
-                        <!-- End Single Post Content -->
-
-                    </div>
-                    <!-- End Single Post Area -->
-
-                </div>
-
-
-
-                <user:sidebar/>
-
-            </div>
-
+<!-- Page Banner Start -->
+<div id="page-banner-area" class="page-banner">
+    <div class="page-banner-title">
+        <div class="text-center">
+            <h2>Pick a new password</h2>
         </div>
     </div>
-    <!-- End content -->
-
-
-    <jsp:directive.include file="footer.jsp" />
 </div>
-<!-- End Container -->
+<!-- Page Banner End -->
 
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<section id="about" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p>
+                <p>
+                <form:form modelAttribute="changePassword" action="/createNewPassword" method="post" enctype="multipart/form-data">
+                    <div class="form-wrapper">
+                        <label for="password">Password *</label><br/>
+                        <input type="password" name="password" id="password"><br/>
+                        <form:errors path="password"/>
+                    </div>
+                    <div class="form-wrapper">
+                        <label for="cpassword">Confirm password *</label><br/>
+                        <input type="password" name="cpassword" id="cpassword"><br/>
+                        <form:errors path="cpassword"/>
+                    </div>
+                    <input type="hidden" name="tokenId"
+                           value="${tokenId}" />
+                    <p><strong>${error_msg}</strong></p>
+                    <br/>
+                    <input type="submit" value="Submit" class="btn">
+                </form:form>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<user:footer/>
+
 
 
 </body>

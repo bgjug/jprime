@@ -13,22 +13,17 @@
 <html lang="en">
 <head>
 
-  <!-- Basic -->
-  <title>Buy conference tickets</title>
-  
-  <!-- Define Charset -->
-  <meta charset="utf-8">
-  
-  <!-- Responsive Metatag -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <!-- Basic -->
+   <title>Buy conference tickets</title>
 
-  <jsp:directive.include file="theme-colors.jsp" />
+    <meta charset="utf-8">
+
+    <!-- Responsive Metatag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <%--    <jsp:directive.include file="theme-colors.jsp" />--%>
 
     <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2019">
-    <meta name="author" content="jPrime">
-
-
 
     <user:pageJavaScriptAndCss/>
 
@@ -161,163 +156,145 @@
 </head>
 <body>
 
-	<!-- Container -->
-	<div id="container">
+<user:header/>
 
-        <user:header/>
-
-<!-- Start Content -->
-<div id="content">
- <div class="container">
-  <div class="row blog-post-page">
-   <div class="col-md-9 blog-box">
-
-    <!-- Start Single Post Area -->
-    <div class="blog-post gallery-post">
-	
-    <!-- Start Single Post Content -->
-    <div class="post-content">
-        <h2>Buy conference tickets</h2>
-        <p>
-        <%-- <p style="text-decoration: line-through;"> --%>
-        <p style="text-decoration: line-through;">The <strong>early bird ticket</strong> price for the conference is <strong>140</strong>.00 BGN (VAT included) until 15th of March.</p>
-        <p>* The <strong>regular</strong> ticket price after 15th of March will be <strong>200</strong>.00 BGN (VAT included).</p>
-        <p>* There is a ~50% discount of the regular ticket price for students. Student ticket price is <strong>100</strong>.00 BGN (VAT included).</p>
-        <p>* There is a free pass for a JUG lead (one per Java User Group).</p>
-
-        Buy a ticket:
-        <form:form modelAttribute="registrant" method="post"
-                   action="/tickets" id="visitorsForm">
-            <p>
-                <form:errors/>
-            </p>
-            <fieldset id="visitorsFieldset">
-                <legend>Visitors</legend>
-                <dl>
-                    <dt><label for="visitors[0].name">Visitor</label></dt>
-                    <dd><form:input path="visitors[0].name"/></dd>
-                    <dt><label for="visitors[0].email">Visitor email</label></dt>
-                    <dd><form:input path="visitors[0].email"/></dd>
-                    <!-- see https://github.com/bgjug/jprime/issues/28 -->
-                    <dt><label for="visitors[0].company">Visitor company</label></dt>
-                    <dd><form:input path="visitors[0].company"/></dd>
-                </dl>
-            </fieldset>
-            <input type="button" id="newVisitor" value="Add new">&nbsp;&nbsp;
-            <input type="button" id="removeVisitor" value="Remove last">
-            <br><br>
-            <form:checkbox path="student" label="I am student" id="isStudent" onchange="document.getElementById('isCompany').disabled = this.checked; this.checked?document.getElementById('isCompany').checked= false:'';"/>
-            <br>
-            <form:checkbox path="company" label="Issue company VAT invoice" id="isCompany" onchange="document.getElementById('isStudent').disabled = this.checked; this.checked?document.getElementById('isStudent').checked= false:'';"/>
-            <br><br>
-            <fieldset id="studentFieldset" style="display:none">
-                <legend> Student tickets </legend>
-                <dl><dd><dd> If you are a Student and you can’t afford to pay full price ticket we still have something for YOU! <br/><br/>
-                    Join in our community conference and be part of our event! <br/>
-                    We do our best to support everybody who wants to learn!</dd></dl>
-            </fieldset>
-            <fieldset id="invoiceFieldset">
-                <legend>Invoice information</legend>
-                <dl>
-                    <dt><label for="name">Name</label></dt>
-                    <dd><form:input path="name" /></dd>
-                </dl>
-                <dl>
-                    <dt><label for="address">Address</label></dt>
-                    <dd><form:input path="address" /></dd>
-                </dl>
-                <dl>
-                    <dt><label for="vatNumber">VAT registration number</label></dt>
-                    <dd><form:input path="vatNumber" /></dd>
-                </dl>
-                <dl>
-                    <dt><label for="eik">Unified Identity Code (EIK)</label></dt>
-                    <dd><form:input path="eik" /></dd>
-                </dl>
-                <dl>
-                    <dt><label for="mol">Accountable person (MOL)</label></dt>
-                    <dd><form:input path="mol" /></dd>
-                </dl>
-                <dl>
-                    <dt><label for="email">e-mail</label></dt>
-                    <dd><form:input path="email" /></dd>
-                </dl>
-            </fieldset>
-            <%--<dl>
-                <dt><label for="paymentType">Pay with</label></dt>
-                <dd><form:select path="paymentType" items="${paymentTypes}"/></dd>
-            </dl>--%>
-            <sec:csrfInput/>
-            <form:hidden path="id"/>
-            <p>
-		        <c:url var="captchaUrl" value="/captcha-image"/>
-		        <img src="${captchaUrl}"/>
-		        <form:input path="captcha"/>
-		        <form:errors path="captcha"/>
-        	</p>
-            <p>
-                <input type="checkbox"  onchange="document.getElementById('submitRegistration').disabled = !this.checked;" />
-                &nbsp; I agree with the <a href="/privacy-policy" target="_blank">Privacy policy</a>
-            </p>
-            <p>
-            	<button type="submit" id="submitRegistration" disabled>Proceed</button>
-            </p>
-
-        </form:form>
-
-
-
-        <%--<form>--%>
-            <%--<input type="text" name="name" placeholder="Name of the registrant"><br>--%>
-            <%--<input type="text" name="name" placeholder="Name of the registrant"><br>--%>
-            <%--<input type="text" name="name" placeholder="Name of the registrant"><br>--%>
-            <%--<input type="text" name="name" placeholder="Name of the registrant"><br>--%>
-            <%--<input type="text" name="name" placeholder="Name of the registrant"><br>--%>
-            <%--<br>--%>
-            <%--Invoice information:<br>--%>
-            <%--<input type="text" name="invoiceName" placeholder="name"><br>--%>
-            <%--<input type="text" name="invoiceAddress" placeholder="address"><br>--%>
-            <%--<input type="text" name="invoiceVATorEGN" placeholder="VATNO or EGN"><br>--%>
-            <%--<input type="text" name="mol" placeholder="mol"><br>--%>
-            <%--<input type="text" name="email" placeholder="email"><br>--%>
-            <%--<input type="submit" value="Register"/>--%>
-        <%--</form>--%>
-        <%--<form action="https://demo.epay.bg/" method=post>--%>
-            <%--<input type="hidden" name="PAGE" value="paylogin">--%>
-            <%--<input type="hidden" name="ENCODED" value="${ENCODED}">--%>
-            <%--<input type="hidden" name="CHECKSUM" value="${CHECKSUM}">--%>
-            <%--<input type="hidden" name="URL_OK" value="http://yahoo.com">--%>
-            <%--<input type="hidden" name="URL_CANCEL" value="http://cnn.com">--%>
-            <%--<input type="submit" value="Buy a ticket from epay.bg"/>--%>
-        <%--</form>--%>
-
-        <p>In case of questions, contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
+<!-- Page Banner Start -->
+<div id="page-banner-area" class="page-banner">
+    <div class="page-banner-title">
+        <div class="text-center">
+            <h2>Buy conference tickets</h2>
+        </div>
+    </div>
 </div>
- <!-- End Single Post Content -->
- 
-</div>
-<!-- End Single Post Area -->
+<!-- Page Banner End -->
 
-</div>
+<section id="about" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p>
+                    <h2>Buy conference tickets</h2>
+                    <p>
+                        <%-- <p style="text-decoration: line-through;"> --%>
+                    <p style="text-decoration: line-through;">The <strong>early bird ticket</strong> price for the conference is <strong>140</strong>.00 BGN (VAT included) until 15th of March.</p>
+                    <p>* The <strong>regular</strong> ticket price after 15th of March will be <strong>200</strong>.00 BGN (VAT included).</p>
+                    <p>* There is a ~50% discount of the regular ticket price for students. Student ticket price is <strong>100</strong>.00 BGN (VAT included).</p>
+                    <p>* There is a free pass for a JUG lead (one per Java User Group).</p>
+
+                    Buy a ticket:
+                    <form:form modelAttribute="registrant" method="post"
+                               action="/tickets" id="visitorsForm">
+                        <p>
+                            <form:errors/>
+                        </p>
+                        <fieldset id="visitorsFieldset">
+                            <legend>Visitors</legend>
+                            <dl>
+                                <dt><label for="visitors[0].name">Visitor</label></dt>
+                                <dd><form:input path="visitors[0].name"/></dd>
+                                <dt><label for="visitors[0].email">Visitor email</label></dt>
+                                <dd><form:input path="visitors[0].email"/></dd>
+                                <!-- see https://github.com/bgjug/jprime/issues/28 -->
+                                <dt><label for="visitors[0].company">Visitor company</label></dt>
+                                <dd><form:input path="visitors[0].company"/></dd>
+                            </dl>
+                        </fieldset>
+                        <input type="button" id="newVisitor" value="Add new">&nbsp;&nbsp;
+                        <input type="button" id="removeVisitor" value="Remove last">
+                        <br><br>
+                        <form:checkbox path="student" label="I am student" id="isStudent" onchange="document.getElementById('isCompany').disabled = this.checked; this.checked?document.getElementById('isCompany').checked= false:'';"/>
+                        <br>
+                        <form:checkbox path="company" label="Issue company VAT invoice" id="isCompany" onchange="document.getElementById('isStudent').disabled = this.checked; this.checked?document.getElementById('isStudent').checked= false:'';"/>
+                        <br><br>
+                        <fieldset id="studentFieldset" style="display:none">
+                            <legend> Student tickets </legend>
+                            <dl><dd><dd> If you are a Student and you can’t afford to pay full price ticket we still have something for YOU! <br/><br/>
+                                Join in our community conference and be part of our event! <br/>
+                                We do our best to support everybody who wants to learn!</dd></dl>
+                        </fieldset>
+                        <fieldset id="invoiceFieldset">
+                            <legend>Invoice information</legend>
+                            <dl>
+                                <dt><label for="name">Name</label></dt>
+                                <dd><form:input path="name" /></dd>
+                            </dl>
+                            <dl>
+                                <dt><label for="address">Address</label></dt>
+                                <dd><form:input path="address" /></dd>
+                            </dl>
+                            <dl>
+                                <dt><label for="vatNumber">VAT registration number</label></dt>
+                                <dd><form:input path="vatNumber" /></dd>
+                            </dl>
+                            <dl>
+                                <dt><label for="eik">Unified Identity Code (EIK)</label></dt>
+                                <dd><form:input path="eik" /></dd>
+                            </dl>
+                            <dl>
+                                <dt><label for="mol">Accountable person (MOL)</label></dt>
+                                <dd><form:input path="mol" /></dd>
+                            </dl>
+                            <dl>
+                                <dt><label for="email">e-mail</label></dt>
+                                <dd><form:input path="email" /></dd>
+                            </dl>
+                        </fieldset>
+                        <%--<dl>
+                            <dt><label for="paymentType">Pay with</label></dt>
+                            <dd><form:select path="paymentType" items="${paymentTypes}"/></dd>
+                        </dl>--%>
+                        <sec:csrfInput/>
+                        <form:hidden path="id"/>
+                        <p>
+                            <c:url var="captchaUrl" value="/captcha-image"/>
+                            <img src="${captchaUrl}"/>
+                            <form:input path="captcha"/>
+                            <form:errors path="captcha"/>
+                        </p>
+                        <p>
+                            <input type="checkbox"  onchange="document.getElementById('submitRegistration').disabled = !this.checked;" />
+                            &nbsp; I agree with the <a href="/privacy-policy" target="_blank">Privacy policy</a>
+                        </p>
+                        <p>
+                            <button type="submit" id="submitRegistration" disabled>Proceed</button>
+                        </p>
+
+                    </form:form>
 
 
 
-<user:sidebar/>
+                    <%--<form>--%>
+                    <%--<input type="text" name="name" placeholder="Name of the registrant"><br>--%>
+                    <%--<input type="text" name="name" placeholder="Name of the registrant"><br>--%>
+                    <%--<input type="text" name="name" placeholder="Name of the registrant"><br>--%>
+                    <%--<input type="text" name="name" placeholder="Name of the registrant"><br>--%>
+                    <%--<input type="text" name="name" placeholder="Name of the registrant"><br>--%>
+                    <%--<br>--%>
+                    <%--Invoice information:<br>--%>
+                    <%--<input type="text" name="invoiceName" placeholder="name"><br>--%>
+                    <%--<input type="text" name="invoiceAddress" placeholder="address"><br>--%>
+                    <%--<input type="text" name="invoiceVATorEGN" placeholder="VATNO or EGN"><br>--%>
+                    <%--<input type="text" name="mol" placeholder="mol"><br>--%>
+                    <%--<input type="text" name="email" placeholder="email"><br>--%>
+                    <%--<input type="submit" value="Register"/>--%>
+                    <%--</form>--%>
+                    <%--<form action="https://demo.epay.bg/" method=post>--%>
+                    <%--<input type="hidden" name="PAGE" value="paylogin">--%>
+                    <%--<input type="hidden" name="ENCODED" value="${ENCODED}">--%>
+                    <%--<input type="hidden" name="CHECKSUM" value="${CHECKSUM}">--%>
+                    <%--<input type="hidden" name="URL_OK" value="http://yahoo.com">--%>
+                    <%--<input type="hidden" name="URL_CANCEL" value="http://cnn.com">--%>
+                    <%--<input type="submit" value="Buy a ticket from epay.bg"/>--%>
+                    <%--</form>--%>
 
-</div>
+                    <p>In case of questions, contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
-</div>
-</div>
-<!-- End content -->
-
-
-        <jsp:directive.include file="footer.jsp" />
-</div>
-<!-- End Container -->
-
-<!-- Go To Top Link -->
-<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
-
+<user:footer/>
 
 </body>
 </html>
