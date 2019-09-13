@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-12">
                 <p>
-                <p class="text-center"><br/> jPrime is held on <strong>28-29th May 2019</strong> in
+                <p class="text-center"><br/> jPrime will be held on <strong>27-28th May 2020</strong> in
                     "John Atanasoff" Innovation forum in Sofia Tech Park which is one of the leading and most preferable locations for running events connected with hi tech, entrepreneurship, science, ecology, education, innovations, digitalisation and health care.
                 </p>
                 <center>
@@ -109,6 +109,8 @@
 </section>
 
 <user:footer/>
+<script src="assets/js/map.js"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCsa2Mi2HqyEcEnM1urFSIGEpvualYjwwM"></script>
 
 </body>
 </html>

@@ -54,8 +54,8 @@
                 <p>
                     <p>The registration is now over, see you in 2020 :)</p>
                     <p>Note that the recordings of the previous conference are available at <a href="https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3">https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3</a> .</p>
-                    <p>The tickets registration for 2020 will be opened at the beginning of 2019.</p>
-                    <p>If you want to join 2019 - dont cry :) there will be streaming probably and there will be recording of everything from 2019 also you can try to buy a ticket on the black market ;)</p>
+                    <p>The tickets registration for 2020 will be opened at the beginning of 2020.</p>
+<%--                    <p>If you want to join 2019 - dont cry :) there will be streaming probably and there will be recording of everything from 2019 also you can try to buy a ticket on the black market ;)</p>--%>
                 <%--                <p>The conference fee is <strong>140</strong>.00 BGN (VAT included).</p>--%>
                 <%--                <p>For registration contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>--%>
                 <%--                <p>* There is a ~25% discount for students. Student ticket price <strong>100</strong>.00 BGN (VAT included).</p>--%>
