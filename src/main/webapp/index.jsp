@@ -219,7 +219,7 @@
                 <div class="col-12">
                     <div class="section-title-header text-center">
                         <h1 class="section-title">Why Attend</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor</p>
+                        <p>The community driven Java conference in Bulgaria ! <br> Come and become part of the community.</p>
                     </div>
                 </div>
             </div>
@@ -231,8 +231,8 @@
                             <i class="icon-eyeglass"></i>
                         </div>
                         <div class="services-content">
-                            <h3><a href="#">Meet Experts</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h3><a href="/speakers">Meet Speakers</a></h3>
+                            <p>One of the main goals to go to a conferences is not only to learn something new from the sessions, but also to speak with the speakers. At jPrime conference there is <b>no speaker room</b>, the speakers are outside with any and all of you, so you can speak with them freely.</p>
                         </div>
                     </div>
                 </div>
@@ -243,8 +243,8 @@
                             <i class="icon-settings"></i>
                         </div>
                         <div class="services-content">
-                            <h3><a href="#">Tech Sessions</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h3><a href="/agenda">Tech Sessions</a></h3>
+                            <p>We are trying to have the best and the best sessions possible. All sessions are selected via CFP process and <b>voting</b>, there are <b>no sponsor sessions</b>, there are 0 marketing and HR talks. This is not a bla bla conference, it's practical and awesome conference!</p>
                         </div>
                     </div>
                 </div>
@@ -255,8 +255,8 @@
                             <i class="icon-globe"></i>
                         </div>
                         <div class="services-content">
-                            <h3><a href="#">Global Event</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h3><a href="/agenda">Workshops</a></h3>
+                            <p>Since 2017 we have also workshops. To participate a workshop just <b>bring your laptop</b> with you, there is no extra cost, there is no pre-workshop signing, just visit the workshop and participate in the training.</p>
                         </div>
                     </div>
                 </div>
@@ -267,8 +267,8 @@
                             <i class="icon-present"></i>
                         </div>
                         <div class="services-content">
-                            <h3><a href="#">Free Swags</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h3><a href="#tickets">Free Swags</a></h3>
+                            <p>We always have a bag of goodies, some of which are quite good and this are not only sponsor goodies but also <b>jPrime goodies</b> like shirts, notebooks, flash drives, stickers, etc.</p>
                         </div>
                     </div>
                 </div>
@@ -279,8 +279,8 @@
                             <i class="icon-bubbles"></i>
                         </div>
                         <div class="services-content">
-                            <h3><a href="#">Networking Session</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h3><a href="#">Networking</a></h3>
+                            <p>Main part of the conference is the networking, speaking with each other, and share experience and knowledge and ... well just have fun.</p>
                         </div>
                     </div>
                 </div>
@@ -291,8 +291,8 @@
                             <i class="icon-graph"></i>
                         </div>
                         <div class="services-content">
-                            <h3><a href="#">Design Insights</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h3><a href="#">Tech Insights</a></h3>
+                            <p>Get additional insights from the community, the speakers and or the sponsors during our lunch breaks, coffee break .. or beer breaks ;)</p>
                         </div>
                     </div>
                 </div>
