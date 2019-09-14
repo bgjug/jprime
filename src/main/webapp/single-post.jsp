@@ -73,8 +73,6 @@
                     </div>
                 </div>
                 <!-- Post Content -->
-                <br/><br/>
-                <a href="" onclick="window.history.back()">Back</a>
             </div>
             <!-- End Post -->
         </div>

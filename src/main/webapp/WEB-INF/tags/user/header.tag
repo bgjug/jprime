@@ -59,7 +59,7 @@
                             Speakers
                         </a>
                     </li>
-                    <li class="nav-item <c:if test='${"/agenda.jsp" eq pageContext.request.requestURI}'> active</c:if>">
+                    <li class="nav-item <c:if test='${"/talks.jsp" eq pageContext.request.requestURI}'> active</c:if>">
                         <a class="nav-link" href="/agenda">
                             Agenda
                         </a>

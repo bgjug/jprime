@@ -295,6 +295,7 @@
     </div>
 </section>
 
-<user:footer/>
 
+<user:footer/>
+</body>
 </html>
