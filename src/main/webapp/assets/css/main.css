@@ -496,6 +496,13 @@ a.back-to-top {
   background: #fff !important; }
   .top-nav-collapse .navbar-brand {
     top: 0px; }
+
+@media only screen and (max-width: 770px) {
+  .top-nav-collapse .navbar-brand img {
+    height: 55px !important;
+    width: 55px !important;
+  }
+}
   .top-nav-collapse .navbar-nav .nav-link {
     color: #333 !important; }
     .top-nav-collapse .navbar-nav .nav-link:hover {
@@ -503,6 +510,7 @@ a.back-to-top {
 
 .top-nav-collapse .navbar-nav li.active a.nav-link {
   color: #fff !important; }
+
 
 .indigo {
   background: transparent; }
