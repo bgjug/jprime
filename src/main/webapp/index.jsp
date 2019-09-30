@@ -86,7 +86,7 @@
             <div class="row text-center">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="heading-count">
-                        <h2>Where Java Developers Meets</h2>
+                        <h2>Where Java Developers Meet</h2>
                         <h4 class="location wow bounce" data-wow-delay="0.2s"><span><i class="icon-location-pin"></i> Sofia Tech Park, Sofia, Bulgaria</span></h4>
                     </div>
                 </div>
