@@ -14,6 +14,7 @@ import java.util.List;
 @Repository(value = VisitorRepository.NAME)
 public interface VisitorRepository extends PagingAndSortingRepository<Visitor, Long> {
 
+
     String NEWEST_VISITORS = "SELECT v FROM Visitor v ORDER BY v.createdDate DESC";
 
     String NAME = "visitorRepository";
@@ -22,5 +23,8 @@ public interface VisitorRepository extends PagingAndSortingRepository<Visitor, L
 
     @Query(NEWEST_VISITORS)
     List<Visitor> findAllNewestUsers();
-    
+
+    List<Visitor> findByNameIgnoreCase(String name);
+
+    List<Visitor> findByNameIgnoreCaseAndCompanyIgnoreCase(String name, String company);
 }

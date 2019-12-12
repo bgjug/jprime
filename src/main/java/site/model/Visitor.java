@@ -15,8 +15,9 @@ public class Visitor extends AbstractEntity {
     private Registrant registrant;
     private String name;
     private String email;
-
     private String company;
+
+    private boolean isPresent;
 
     @Enumerated(EnumType.STRING)
     private VisitorStatus status;
@@ -46,6 +47,9 @@ public class Visitor extends AbstractEntity {
 
     public void setName(String name) {
         this.name = name;
+        if (name != null) {
+            this.name = name.trim();
+        }
     }
 
     public String getEmail() {
@@ -66,6 +70,9 @@ public class Visitor extends AbstractEntity {
 
     public void setCompany(String company) {
         this.company = company;
+        if (company != null) {
+            this.company = company.trim();
+        }
     }
 
     public VisitorStatus getStatus() {
@@ -76,12 +83,23 @@ public class Visitor extends AbstractEntity {
         this.status = status;
     }
 
+
+    public boolean isPresent() {
+        return isPresent;
+    }
+
+    public void setPresent(boolean present) {
+        isPresent = present;
+    }
+
     @Override
     public String toString() {
         return "Visitor{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", company='" + company + '\'' +
+                ", isPresent='" + isPresent + '\'' +
                 '}';
     }
+
 }

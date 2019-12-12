@@ -15,6 +15,7 @@ import site.model.Sponsor;
 import site.model.SponsorPackage;
 import site.model.Submission;
 import site.model.Tag;
+import site.model.Visitor;
 import site.repository.ArticleRepository;
 import site.repository.PartnerRepository;
 import site.repository.SessionRepository;
@@ -22,6 +23,7 @@ import site.repository.SpeakerRepository;
 import site.repository.SponsorRepository;
 import site.repository.SubmissionRepository;
 import site.repository.TagRepository;
+import site.repository.VisitorRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -62,6 +64,10 @@ public class UserService {
     @Autowired
     @Qualifier(SessionRepository.NAME)
 	private SessionRepository sessionRepository;
+
+    @Autowired
+    @Qualifier(VisitorRepository.NAME)
+    private VisitorRepository visitorRepository;
 
     /**
      * Speaker
@@ -155,5 +161,26 @@ public class UserService {
 
     public List<Session> findSessionTalksAndBreaksByHallName(String hallName) {
         return sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH.name());
+    }
+
+    public boolean setPresentByNameIgnoreCase(Visitor visitor) {
+        List<Visitor> matchedVisitors = visitorRepository.findByNameIgnoreCase(visitor.getName());
+
+        if (!matchedVisitors.isEmpty()) {
+            matchedVisitors.forEach(v -> v.setPresent(true));
+            visitorRepository.saveAll(matchedVisitors);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setPresentByNameIgnoreCaseAndCompanyIgnoreCase(Visitor visitor){
+        List<Visitor> matchedVisitors =  visitorRepository.findByNameIgnoreCaseAndCompanyIgnoreCase(visitor.getName(), visitor.getCompany());
+        if (!matchedVisitors.isEmpty()) {
+            matchedVisitors.forEach(v -> v.setPresent(true));
+            visitorRepository.saveAll(matchedVisitors);
+            return true;
+        }
+        return false;
     }
 }
