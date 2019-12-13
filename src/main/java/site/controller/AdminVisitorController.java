@@ -126,6 +126,7 @@ public class AdminVisitorController {
         
         final CellProcessor[] processors = new CellProcessor[] { 
                // new UniqueHashCode(), // customerNo (must be unique)
+                new Optional(), // id
         		new Optional(), // name
                 new Optional(), // email
                 new Optional(), // company
@@ -145,7 +146,7 @@ public class AdminVisitorController {
     @ResponseBody
     public ResponseEntity<byte[]>  exportVisitors() throws IOException{
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();
-    	final String[] header = new String[] { "name", "email", "company", "status"};
+    	final String[] header = new String[] { "id", "name", "email", "company", "status"};
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (ICsvBeanWriter beanWriter = new CsvBeanWriter(
