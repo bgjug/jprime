@@ -111,7 +111,7 @@
                     <p class="intro-desc">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices.
                         Its sixth edition will be held on 27th and 28th May 2020 in Sofia Tech Park.
                     </p>
-                    <p>It's run by the Bulgarian Java User Group and backed by the biggest companies in the city. </p>
+                    <p>It's run by the Bulgarian Java User Group and backed by the biggest companies in the country. </p>
                     <p>jPrime features a combination of great international speakers along with the best presenters from Bulgaria and the Balkans.
                         It is divided in two tracks and provides great opportunities for learning, hacking, networking and fun.</p>
                     <div class="mt-3 mb-3">
