@@ -28,6 +28,7 @@ import site.repository.VisitorRepository;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -163,8 +164,18 @@ public class UserService {
         return sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH.name());
     }
 
-    public boolean setPresentByNameIgnoreCase(Visitor visitor) {
-        List<Visitor> matchedVisitors = visitorRepository.findByNameIgnoreCase(visitor.getName());
+    public boolean setPresentById(Visitor visitorExample){
+	    Optional<Visitor> persistedVisitor = visitorRepository.findById(visitorExample.getId());
+	    if(persistedVisitor.isPresent()){
+	        persistedVisitor.get().setPresent(true);
+	        visitorRepository.save(persistedVisitor.get());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setPresentByNameIgnoreCase(Visitor visitorExample) {
+        List<Visitor> matchedVisitors = visitorRepository.findByNameIgnoreCase(visitorExample.getName());
 
         if (!matchedVisitors.isEmpty()) {
             matchedVisitors.forEach(v -> v.setPresent(true));
@@ -174,8 +185,8 @@ public class UserService {
         return false;
     }
 
-    public boolean setPresentByNameIgnoreCaseAndCompanyIgnoreCase(Visitor visitor){
-        List<Visitor> matchedVisitors =  visitorRepository.findByNameIgnoreCaseAndCompanyIgnoreCase(visitor.getName(), visitor.getCompany());
+    public boolean setPresentByNameIgnoreCaseAndCompanyIgnoreCase(Visitor visitorExample){
+        List<Visitor> matchedVisitors =  visitorRepository.findByNameIgnoreCaseAndCompanyIgnoreCase(visitorExample.getName(), visitorExample.getCompany());
         if (!matchedVisitors.isEmpty()) {
             matchedVisitors.forEach(v -> v.setPresent(true));
             visitorRepository.saveAll(matchedVisitors);
@@ -183,4 +194,5 @@ public class UserService {
         }
         return false;
     }
+
 }

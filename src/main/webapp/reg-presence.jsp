@@ -46,17 +46,29 @@ pageEncoding="UTF-8"%>
 <section id="about" class="section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <p>
-                <p>Write your name and company(optional) exactly as <strong>in the badge !</strong></p>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
                 <form:form modelAttribute="visitor" method="post"
                            action="/qr/tuk" enctype="multipart/form-data">
+                    <h4>I am here ! </h4>
                     <fieldset>
-                        <p>
-                        </p>
                         <dl>
                             <dt style="color:red">${message}</dt>
                         </dl>
+                        <dl>
+                            <dt>
+                                <label for="id">Enter your ID (printed on the badge)</label>
+                            </dt>
+                            <dd>
+                                <form:input path="id" />
+                                <form:errors path="id"/>
+                            </dd>
+                        </dl>
+
+                        <h3 class="text-center">
+                            OR
+                        </h3>
+                        <p>Write your name and company(optional) <br/> exactly as <strong> in the badge !</strong></p>
                         <dl>
                             <dt>
                                 <label for="name">Name</label>
@@ -83,6 +95,7 @@ pageEncoding="UTF-8"%>
 
                 </form:form>
             </div>
+            <div class="col-md-4"></div>
         </div>
     </div>
 </section>

@@ -31,6 +31,14 @@
         </p>
         <dl>
             <dt>
+                <label for="id">ID</label>
+            </dt>
+            <dd>
+                ${visitor.id}
+            </dd>
+        </dl>
+        <dl>
+            <dt>
                 <label for="name">Name</label>
             </dt>
             <dd>
@@ -53,15 +61,23 @@
                 <form:input path="company"/>
             </dd>
         </dl>
-            <dl>
-                <dt>
-                    <label for="status">Status</label>
-                </dt>
-                <dd>
-                    <form:select path="status" items="${statuses}"/>
+        <dl>
+            <dt>
+                <label for="status">Status</label>
+            </dt>
+            <dd>
+                <form:select path="status" items="${statuses}"/>
 
-                </dd>
-            </dl>
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                <label for="present">is present ?</label>
+            </dt>
+            <dd>
+                <form:checkbox path="present"/>
+            </dd>
+        </dl>
         <sec:csrfInput/>
         <form:hidden path="id"/>
         <form:hidden path="registrant.id"/>

@@ -33,7 +33,7 @@
 <div id="page-banner-area" class="page-banner">
     <div class="page-banner-title">
         <div class="text-center">
-            <h2>Done!</h2>
+            <h2>Marked successfully!</h2>
         </div>
     </div>
 </div>
@@ -43,11 +43,13 @@
 <section id="about" class="section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-md-4"> </div>
+            <div class="col-md-4">
                 <p>
-                    You'r presence has been registered and you participate in the raffle ;)
+                    You'r presence has been registered and you will participate in the raffle ;) gl && hf
                 </p>
             </div>
+            <div class="col-md-4"> </div>
         </div>
     </div>
 </section>

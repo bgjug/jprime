@@ -33,20 +33,27 @@ public class QRController {
 
     @RequestMapping(value = "/tuk", method = RequestMethod.POST)
     public String setIsPresent(Visitor visitor, Model model) {
-        boolean updateSuccessful = false;
+        boolean updated = false;
 
-        if (isNameFilled(visitor) && isCompanyFilled(visitor)) {
-            updateSuccessful = userService.setPresentByNameIgnoreCaseAndCompanyIgnoreCase(visitor);
+        if (isIdFilled(visitor)) {
+            updated = userService.setPresentById(visitor);
+        } else if (isNameFilled(visitor) && isCompanyFilled(visitor)) {
+            updated = userService.setPresentByNameIgnoreCaseAndCompanyIgnoreCase(visitor);
         } else if (isNameFilled(visitor)) {
-            updateSuccessful = userService.setPresentByNameIgnoreCase(visitor);
+            updated = userService.setPresentByNameIgnoreCase(visitor);
         }
 
-        if (!updateSuccessful) {
-            model.addAttribute("message", "Your name has not been filled properly since ... well I have no idea - you are welcome to debug it ;))) ");
+        if (!updated) {
+            model.addAttribute("message", "User not found ... well I have no idea why - you are welcome to debug it ;))) ");
             return REG_PRESENCE_JSP;
         }
 
         return SET_PRESENT_SUCCESSFUL_JSP;
+    }
+
+
+    private boolean isIdFilled(Visitor visitor){
+        return visitor.getId() != null && !StringUtils.isEmpty(visitor.getId());
     }
 
     private boolean isCompanyFilled(Visitor visitor){

@@ -43,7 +43,8 @@
 <section id="about" class="section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
                 <p>
                     Scan the QR image:
                 </p>
@@ -53,6 +54,7 @@
                 <p> or open <a href="https://jprime.io/qr/tuk">https://jprime.io/qr/tuk</a>
                 </p>
             </div>
+            <div class="col-md-4"></div>
         </div>
     </div>
 </section>
