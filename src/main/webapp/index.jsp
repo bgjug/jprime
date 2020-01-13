@@ -135,34 +135,41 @@
                 </div>
             </div>
             <div class="row mb-30">
-                <div class="col-md-2 col-sm-2 col-xs-12">
-                    <div class="spnsors-logo">
-                        <a href="http://java-bg.org/"><img class="img-fluid" src="images/bg-jug.png" style="width:85px;" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12">
+                <div class="col-md-2">
                     <div class="spnsors-logo">
                         <a href="http://www.vmware.com"><img class="img-fluid" src="images/vmware.png" alt=""></a>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-2 col-xs-12">
+                <div class="col-md-2">
                     <div class="spnsors-logo">
                         <a href="http://www.softwareag.com"><img class="img-fluid" src="images/softwareag.png" alt=""></a>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-2 col-xs-12">
+                <div class="col-md-2">
                     <div class="spnsors-logo">
                         <a href="http://www.sap.com/bulgaria"><img class="img-fluid" src="images/sap.png" alt=""></a>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-2 col-xs-12">
+                <div class="col-md-2">
                     <div class="spnsors-logo">
-                        <a href="http://www.experian.bg""><img class="img-fluid" src="images/experian.png" alt=""></a>
+                        <a href="http://www.experian.bg"><img class="img-fluid" src="images/experian.png" alt=""></a>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-2 col-xs-12">
+                <div class="col-md-2">
                     <div class="spnsors-logo">
                         <a href="https://www.paysafe.com/"><img class="img-fluid" src="images/paysafe.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="spnsors-logo">
+                        <a href="https://www.ocadotechnology.com/"><img class="img-fluid" src="images/ocado.png" alt=""></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2" style="float:none;margin: 0 auto">
+                    <div class="spnsors-logo">
+                        <a href="http://java-bg.org/"><img class="img-fluid" src="images/bg-jug.png" style="width:85px;" alt=""></a>
                     </div>
                 </div>
             </div>
