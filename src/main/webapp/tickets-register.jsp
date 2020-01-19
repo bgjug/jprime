@@ -26,133 +26,6 @@
     <!-- Page Description and Author -->
 
     <user:pageJavaScriptAndCss/>
-
-    <!--validation-->
-    <script src="js/jquery.validate.min.js"></script>
-
-
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            $('#visitorsForm').validate({ // initialize the plugin
-                rules: {
-                    'visitors[0].name': {
-                        required: true
-                    },
-                    'visitors[0].email': {
-                        required: true,
-                        email: true
-                    },
-                    'visitors[0].company': {
-                            required: true
-                    },
-                    'name': {
-                        required: true
-                    },
-                    'address': {
-                        required: true
-                    },
-                    'eik': {
-                        required: true
-                    },
-                    'mol': {
-                        required: true
-                    },
-                    'email': {
-                        required: true,
-                        email: true
-                    }
-                }
-            })
-        });
-
-        var checkQty=function(){
-            var size = $("#visitorsFieldset").find("dl").size();
-            if(size>1) {
-                $("#removeVisitor").show();
-            }else{
-                $("#removeVisitor").hide();
-            }
-        };
-
-        var appendVisitor = function() {
-            var visitorsFieldset = $("#visitorsFieldset");
-            var index = visitorsFieldset.find("dl").size();
-            var clone = visitorsFieldset.find("dl:last").clone();
-            clone.find("dd label").remove();
-            clone.find("dd input").each(function(i) {
-                switch (i) {
-                    case 0:
-                        $(this).attr("id", "visitors" + index + ".name");
-                        $(this).attr("name", "visitors[" + index + "].name");
-                        break;
-                    case 1:
-                        $(this).attr("id", "visitors" + index + ".email");
-                        $(this).attr("name", "visitors[" + index + "].email");
-                        break;
-                    case 2:
-                        $(this).attr("id", "visitors" + index + ".company");
-                        $(this).attr("name", "visitors[" + index + "].company");
-                        break;
-                }
-            });
-            clone.find("dt label").each(function(i) {
-                switch (i) {
-                    case 0:
-                        $(this).attr("for", "visitors" + index + ".name");
-                        break;
-                    case 1:
-                        $(this).attr("for", "visitors" + index + ".email");
-                        break;
-                    case 2:
-                        $(this).attr("for", "visitors" + index + ".company");
-                        break;
-                }
-            });
-            visitorsFieldset.append(clone);
-            $("#visitors" + index + "\\.name").rules("add",{required: true,minlength: 5});
-            $("#visitors" + index + "\\.email").rules("add",{required: true,email: true});
-            $("#visitors" + index + "\\.company").rules("add",{required: true});
-
-            checkQty();
-        };
-
-        var removeVisitor = function() {
-            var visitorsFieldset = $("#visitorsFieldset");
-            var size = visitorsFieldset.find("dl").size()+1;
-            if(size>1) {
-                visitorsFieldset.find("dl:last").remove();
-            }
-            checkQty();
-        };
-
-        var issueStudentTicketHandler = function() {
-            if (this.checked) {
-                $("#studentFieldset").show();
-                $("#invoiceFieldset").hide();
-            } else {
-                $("#studentFieldset").hide();
-            }
-        };
-
-        var issueInvoiceHandler = function() {
-            if (this.checked) {
-                $("#invoiceFieldset").show();
-                $("#studentFieldset").hide();
-            } else {
-                $("#invoiceFieldset").hide();
-            }
-        };
-
-        $(function() {
-            $("#newVisitor").click(appendVisitor);
-            $("#removeVisitor").hide();
-            $("#removeVisitor").click(removeVisitor);
-            $("#isStudent").click(issueStudentTicketHandler);
-            $("#isCompany").click(issueInvoiceHandler);
-        });
-    </script>
 </head>
 <body>
 
@@ -176,7 +49,7 @@
                     <h2>Buy conference tickets</h2>
                     <p>
                         <%-- <p style="text-decoration: line-through;"> --%>
-                    <p style="text-decoration: line-through;">The <strong>early bird ticket</strong> price for the conference is <strong>140</strong>.00 BGN (VAT included) until 15th of March.</p>
+                    <p>* The <strong>early bird ticket</strong> price for the conference is <strong>140</strong>.00 BGN (VAT included) until 15th of March.</p>
                     <p>* The <strong>regular</strong> ticket price after 15th of March will be <strong>200</strong>.00 BGN (VAT included).</p>
                     <p>* There is a ~50% discount of the regular ticket price for students. Student ticket price is <strong>100</strong>.00 BGN (VAT included).</p>
                     <p>* There is a free pass for a JUG lead (one per Java User Group).</p>
@@ -295,6 +168,133 @@
 </section>
 
 <user:footer/>
+
+<!--validation-->
+<script src="js/jquery.validate.min.js"></script>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#visitorsForm').validate({ // initialize the plugin
+            rules: {
+                'visitors[0].name': {
+                    required: true
+                },
+                'visitors[0].email': {
+                    required: true,
+                    email: true
+                },
+                'visitors[0].company': {
+                    required: true
+                },
+                'name': {
+                    required: true
+                },
+                'address': {
+                    required: true
+                },
+                'eik': {
+                    required: true
+                },
+                'mol': {
+                    required: true
+                },
+                'email': {
+                    required: true,
+                    email: true
+                }
+            }
+        })
+    });
+
+    var checkQty=function(){
+        var size = $("#visitorsFieldset").find("dl").size();
+        if(size>1) {
+            $("#removeVisitor").show();
+        }else{
+            $("#removeVisitor").hide();
+        }
+    };
+
+    var appendVisitor = function() {
+        var visitorsFieldset = $("#visitorsFieldset");
+        var index = visitorsFieldset.find("dl").size();
+        var clone = visitorsFieldset.find("dl:last").clone();
+        clone.find("dd label").remove();
+        clone.find("dd input").each(function(i) {
+            switch (i) {
+                case 0:
+                    $(this).attr("id", "visitors" + index + ".name");
+                    $(this).attr("name", "visitors[" + index + "].name");
+                    break;
+                case 1:
+                    $(this).attr("id", "visitors" + index + ".email");
+                    $(this).attr("name", "visitors[" + index + "].email");
+                    break;
+                case 2:
+                    $(this).attr("id", "visitors" + index + ".company");
+                    $(this).attr("name", "visitors[" + index + "].company");
+                    break;
+            }
+        });
+        clone.find("dt label").each(function(i) {
+            switch (i) {
+                case 0:
+                    $(this).attr("for", "visitors" + index + ".name");
+                    break;
+                case 1:
+                    $(this).attr("for", "visitors" + index + ".email");
+                    break;
+                case 2:
+                    $(this).attr("for", "visitors" + index + ".company");
+                    break;
+            }
+        });
+        visitorsFieldset.append(clone);
+        $("#visitors" + index + "\\.name").rules("add",{required: true,minlength: 5});
+        $("#visitors" + index + "\\.email").rules("add",{required: true,email: true});
+        $("#visitors" + index + "\\.company").rules("add",{required: true});
+
+        checkQty();
+    };
+
+    var removeVisitor = function() {
+        var visitorsFieldset = $("#visitorsFieldset");
+        var size = visitorsFieldset.find("dl").size()+1;
+        if(size>1) {
+            visitorsFieldset.find("dl:last").remove();
+        }
+        checkQty();
+    };
+
+    var issueStudentTicketHandler = function() {
+        if (this.checked) {
+            $("#studentFieldset").show();
+            $("#invoiceFieldset").hide();
+        } else {
+            $("#studentFieldset").hide();
+        }
+    };
+
+    var issueInvoiceHandler = function() {
+        if (this.checked) {
+            $("#invoiceFieldset").show();
+            $("#studentFieldset").hide();
+        } else {
+            $("#invoiceFieldset").hide();
+        }
+    };
+
+    $(function() {
+        $("#newVisitor").click(appendVisitor);
+        $("#removeVisitor").hide();
+        $("#removeVisitor").click(removeVisitor);
+        $("#isStudent").click(issueStudentTicketHandler);
+        $("#isCompany").click(issueInvoiceHandler);
+    });
+</script>
 
 </body>
 </html>
