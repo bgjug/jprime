@@ -15,7 +15,7 @@ import site.model.Registrant;
  */
 public class InvoiceData {
 
-    public static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(200D);
+    public static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(140D);
     public static final BigDecimal STUDENT_TICKET_PRICE = BigDecimal.valueOf(100D);
 
     public static final String DEFAULT_DESCRIPTION_BG = "jPrime "+ Globals.CURRENT_BRANCH.toString() + " билет за конференция";
