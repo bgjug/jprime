@@ -68,7 +68,7 @@
                         <c:choose>
                             <%-- this part has invalid XML by DESIGN I need to add li and div only ones --%>
                             <c:when test="${fn:startsWith(tag.name, '20')}">
-                                <c:if test="${not firstTagAlreadyPrinted}">
+                               <%--  <c:if test="${not firstTagAlreadyPrinted}">
                                     <c:set var="firstTagAlreadyPrinted" value="true"/>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -77,7 +77,7 @@
                                         <div class="dropdown-menu">
                                 </c:if>
                                         <a class="dropdown-item" href="/nav/${tag.name}"><c:out value="${tag.name}"/></a>
-                                <%-- I dont know when we should close them, it should be after the LAST year tag, but.. :D:D so fck it - ignore --%>
+                                I dont know when we should close them, it should be after the LAST year tag, but.. :D:D so fck it - ignore --%>
 <%--                                        </div>--%>
 <%--                                    </li>--%>
                             </c:when>
