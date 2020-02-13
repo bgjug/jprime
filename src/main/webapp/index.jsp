@@ -316,7 +316,7 @@
                 <div class="col-md-3 col-sm-6 work-counter-widget text-center">
                     <div class="counter">
                         <div class="icon"><i class="icon-microphone"></i></div>
-                        <p>Spekers</p>
+                        <p>Speakers</p>
                         <div class="counterUp">33</div>
                     </div>
                 </div>
