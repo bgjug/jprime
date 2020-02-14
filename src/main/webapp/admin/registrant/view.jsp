@@ -54,6 +54,7 @@
                     <c:if test="${registrant.paymentType ne 'EPAY_ACCOUNT'}">
                         <span><a href="/admin/invoice/${registrant.id}">Invoice</a></span>
                     </c:if>
+                    <span><a href="/admin/registrant/send-tickets/${registrant.id}">SEND TICKETS</a></span>
                 </td>
             </tr>
         </c:forEach>
