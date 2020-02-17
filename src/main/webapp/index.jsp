@@ -802,7 +802,7 @@
                 </div>
             </div>
             <div class="row" id="sponsor">
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>5000.00</span>
@@ -818,12 +818,12 @@
                                 <li><i class="icon-close"></i><span class="text">2 banners in the conference rooms</span></li>
                                 <li><i class="icon-close"></i><span class="text">1 invite for the "thank you" dinner</span></li>
                             </ul>
-                                <a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn btn-common">Sign Up Now</a>
-<%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
+<%--                                <a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn btn-common">Sign Up Now</a>--%>
+                            <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>4000.00</span>
@@ -837,8 +837,8 @@
                                 <li><i class="icon-close"></i><span class="text">Booth in the conference hall!</span></li>
                                 <li><i class="icon-close"></i><span class="text">2 banners in the conference rooms</span></li>
                             </ul>
-                            <a href="mailto:conference@jprime.io?subject=gold sponsorship" class="btn btn-common">Sign Up Now</a>
-                            <%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
+<%--                            <a href="mailto:conference@jprime.io?subject=gold sponsorship" class="btn btn-common">Sign Up Now</a>--%>
+                            <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
                         </div>
                     </div>
                 </div>
