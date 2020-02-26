@@ -851,7 +851,7 @@
                         <div class="pricing-list">
                             <h4>Silver</h4>
                             <ul>
-                                <li><i class="icon-check"></i><span class="text">9 free passes!</span></li>
+                                <li><i class="icon-check"></i><span class="text">3 free passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">10% discount on additional passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">2 banners in the conference rooms</span></li>
                             </ul>
