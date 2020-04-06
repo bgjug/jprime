@@ -568,6 +568,7 @@
     </c:if>
     <!-- Event Partners Section End -->
 
+    <%--
     <section id="gallery-section" class="section-padding">
         <div class="container">
             <div class="row">
@@ -582,6 +583,8 @@
             </div>
         </div>
     </section>
+    <!-- remove flickr since it creates 15 mbs :D:D maybe will move it to another page but SHOULD NOT BE ON INDEX -->
+    %-->
 
     <section id="sponsors" class="section-padding">
         <div class="container" style="text-align: center">
