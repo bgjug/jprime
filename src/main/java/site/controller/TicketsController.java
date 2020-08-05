@@ -89,7 +89,7 @@ public class TicketsController {
 			invalidCaptcha = true;
 		}
 		if (bindingResult.hasErrors() || invalidCaptcha) {
-			return TICKETS_REGISTER_JSP;
+			return TICKETS_END_JSP;
 		}
 
         //check empty users, server side validation
