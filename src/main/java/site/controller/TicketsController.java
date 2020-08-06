@@ -24,6 +24,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import site.config.Globals;
 import site.controller.invoice.*;
 import site.facade.MailService;
 import site.facade.RegistrantService;
@@ -89,7 +90,7 @@ public class TicketsController {
 			invalidCaptcha = true;
 		}
 		if (bindingResult.hasErrors() || invalidCaptcha) {
-			return TICKETS_END_JSP;
+			return Globals.PAGE_TICKETS;
 		}
 
         //check empty users, server side validation
