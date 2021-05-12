@@ -81,6 +81,7 @@
     <!-- Main Carousel Section End -->
 
     <!-- Coundown Section Start -->
+    <%-- Hiding the cooldown timer for now 
     <section class="countdown-timer section-padding">
         <div class="container">
             <div class="row text-center">
@@ -99,6 +100,7 @@
             </div>
         </div>
     </section>
+    --%>
     <!-- Coundown Section End -->
 
     <!-- About Section Start -->
