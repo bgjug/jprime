@@ -56,7 +56,7 @@
                                     class="icon-social-youtube"></i></a>
                         </li>
                     </ul>
-                    <p>Copyright jPrime 2019</a></p>
+                    <p>Copyright jPrime 2015-2022</p>
                     <!-- <ul class="nav nav-inline justify-content-center ">
                       <li class="nav-item">
                         <a class="nav-link active" href="#">About Prime</a>

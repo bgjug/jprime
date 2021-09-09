@@ -111,7 +111,7 @@
                     <h2 class="intro-title">About</h2>
                     <h3 class="title-sub">The Conference</h3>
                     <p class="intro-desc">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices.
-                        Its sixth edition of jPrime from 2020 will be held in 2021 :( Yes we are sad too.
+                        Its sixth edition of jPrime from 2020 will be held in 2022, the dates are 25 and 26th of May !
                     </p>
                     <p>It's run by the Bulgarian Java User Group and backed by the biggest companies in the country. </p>
                     <p>jPrime features a combination of great international speakers along with the best presenters from Bulgaria and the Balkans.
@@ -365,7 +365,7 @@
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>140.00</span>
                             <h5>
-                                Until 1st of March 2021! </h5>
+                                Until 1st of March 2022! </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Early Bird Ticket</h4>
@@ -391,7 +391,7 @@
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>200.00</span>
                             <h5>
-                                After 1st of March 2021 </h5>
+                                After 1st of March 2022 </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Regular Ticket</h4>
