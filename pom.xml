@@ -212,6 +212,18 @@
             <version>4.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+
     </dependencies>
 
     <!--mihail: a profile that has the spring-boot:run plugin and a couple of dependencies, so that-->
@@ -262,6 +274,7 @@
         <hazelcast.version>3.4</hazelcast.version>-->
         <!--<rest-assured.version>2.4.0</rest-assured.version>
         <h2-database.version>1.3.156</h2-database.version>-->
+        <log4j2.version>2.15.0</log4j2.version>
     </properties>
 
     <build>
@@ -272,6 +285,11 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.1</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
