@@ -48,7 +48,7 @@ pageEncoding="UTF-8"%>
         <div class="row">
             <div class="col-12">
                 <p>
-                <p>Call for paper closes on <strong>15th of February!</strong></p>
+                <p>Call for paper closes on <strong>15th of March!</strong></p>
                 <user:cfp action="/cfp"/>
             </div>
         </div>
