@@ -365,7 +365,7 @@
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>140.00</span>
                             <h5>
-                                Until 1st of March 2022! </h5>
+                                Until 15th of March 2022! </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Early Bird Ticket</h4>
@@ -391,7 +391,7 @@
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>200.00</span>
                             <h5>
-                                After 1st of March 2022 </h5>
+                                After 15th of March 2022 </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Regular Ticket</h4>
