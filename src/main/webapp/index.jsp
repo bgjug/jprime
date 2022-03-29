@@ -360,7 +360,7 @@
                 </div>
             </div>
             <div class="row" id="tickets">
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>140.00</span>
@@ -386,7 +386,7 @@
                     </div>
                 </div>
 <%--                style="opacity: 0.5;"--%>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>200.00</span>
