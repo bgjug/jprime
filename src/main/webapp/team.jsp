@@ -141,7 +141,7 @@
                     <h3>Nayden Gochev</h3>
                     <p>The Java.Beer guy</p>
                 </div>
-                <div style="text-align: left; padding: 10px 10px 10px 10px">Nayden Gochev is Solution Architect at Nemesis Software with with more than 14 years of experience. Developer, Trainer and consultant in many international companies and Bulgarian companies. He took part in many conferences, seminars, technical trainings in multiple academic and non academic structures and companies. One of the organizers of jPrime and jProfessionals conferences and the monthly Bulgarian Java User Group seminars. Huge Java fan with love for all *.java and big community supporter. His personal blog can be found at <a href="http://gochev.blogspot.com">gochev.blogspot.com</a></div>
+                <div style="text-align: left; padding: 10px 10px 10px 10px">Nayden Gochev is Solution Architect and Software Contractor with with more than 15 years of experience. Developer, Trainer, consultant, whatever you want ;). He took part in many conferences, seminars, technical trainings in multiple academic and non academic structures and companies. One of the organizers of jPrime and jProfessionals conferences and the monthly Bulgarian Java User Group seminars. The main driver behind the Java Beer events which you can track at <a href="http://www.java.beer">www.java.beer</a> , huge Java fan with love for all *.java and big supporter of any Bulgarian IT community. His personal blog is no longer active, but some posts can be found at <a href="http://gochev.blogspot.com">gochev.blogspot.com</a></div>
             </div>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
