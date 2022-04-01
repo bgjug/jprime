@@ -164,7 +164,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="spnsors-logo">
-                        <a href="https://www.ocadotechnology.com/"><img class="img-fluid" src="images/ocado.png" alt=""></a>
+                        <a href="https://www.ocadogroup.com/technology/development-centres/bulgaria"><img class="img-fluid" src="images/ocado.png" alt=""></a>
                     </div>
                 </div>
             </div>
