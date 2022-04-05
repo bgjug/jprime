@@ -136,7 +136,9 @@ public class TicketsController {
     private void sendPDF(Registrant registrant, String pdfFilename, byte[] pdfContent) throws MessagingException {
         try {
             mailFacade.sendInvoice(registrant.getEmail(), "jPrime.io invoice",
-                    "Thank you for registering at jPrime. Your proforma invoice is attached as part of this mail.",
+                    "Thank you for registering at jPrime! Your proforma invoice is attached as part of this mail.\n\n" +
+                    "Once we confirm your payment, we'll send you the original invoice.\n\n" +
+                    "The attendees that you registered will receive the tickets a few days before the event on their emails.",
                     pdfContent, pdfFilename);
             String registrations = registrant.getVisitors().toString();
             mailFacade.sendInvoice("conference@jprime.io", "jPrime.io invoice",
