@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import site.facade.AdminService;
+import site.model.Speaker;
 
 /**
  * @author Ivan St. Ivanov
@@ -39,7 +40,8 @@ public class ImageController {
 			MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE })
 	@ResponseBody
 	public byte[] getSpeakerPhoto(@PathVariable("itemId") Long itemId) {
-		return adminFacade.findOneSpeaker(itemId).getPicture();
+		Speaker speaker = adminFacade.findOneSpeaker(itemId);
+		return speaker != null ? speaker.getPicture() : new byte[0];
 	}
 
 }
