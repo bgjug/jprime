@@ -15,6 +15,7 @@ import site.model.Sponsor;
 import site.model.SponsorPackage;
 import site.model.Submission;
 import site.model.Tag;
+import site.model.User;
 import site.model.Visitor;
 import site.repository.ArticleRepository;
 import site.repository.PartnerRepository;
@@ -23,8 +24,10 @@ import site.repository.SpeakerRepository;
 import site.repository.SponsorRepository;
 import site.repository.SubmissionRepository;
 import site.repository.TagRepository;
+import site.repository.UserRepository;
 import site.repository.VisitorRepository;
 
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
@@ -38,13 +41,20 @@ public class UserService {
 
 	public static final String NAME = "userFacade";
 
-	@Autowired
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Autowired
 	@Qualifier(ArticleRepository.NAME)
 	private ArticleRepository articleRepository;
 
 	@Autowired
 	@Qualifier(SpeakerRepository.NAME)
 	private SpeakerRepository speakerRepository;
+
+    @Autowired
+    @Qualifier(UserRepository.NAME)
+    private UserRepository userRepository;
 
 	@Autowired
 	@Qualifier(SponsorRepository.NAME)
@@ -87,7 +97,7 @@ public class UserService {
      * @return
      */
 	public Article findArticle(Long id){
-		return articleRepository.findById(id).get();
+		return articleRepository.findById(id).orElse(null);
 	}
 
     public Page<Article> allArticles(Pageable pageable){
@@ -130,7 +140,28 @@ public class UserService {
         return speakerRepository.findAcceptedSpeakers(Globals.CURRENT_BRANCH);
     }
 
-    public Speaker findSpeaker(String email) {
+    public Speaker findSpeaker(Speaker speakerToFind) {
+        String email = speakerToFind.getEmail();
+        Speaker speaker = speakerRepository.findByEmail(email);
+        if (speaker != null) {
+            return speaker;
+        }
+
+        User user = userRepository.findUserByEmail(email);
+        if (user == null) {
+            return null;
+        }
+
+        if (!user.getFirstName().equalsIgnoreCase(speakerToFind.getFirstName())) {
+            throw new ServiceException("Invalid user information!!! Can't store the data.");
+        }
+
+        if (!user.getLastName().equalsIgnoreCase(speakerToFind.getLastName())) {
+            throw new ServiceException("Invalid user information!!! Can't store the data.");
+        }
+
+        userRepository.convertToSpeaker(user.getId());
+        entityManager.unwrap(org.hibernate.Session.class).evict(user);
         return speakerRepository.findByEmail(email);
     }
 

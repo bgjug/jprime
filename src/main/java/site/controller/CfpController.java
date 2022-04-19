@@ -38,34 +38,39 @@ public class CfpController extends AbstractCfpController {
     @RequestMapping(value = "/cfp", method = RequestMethod.POST)
     public String submitSession(@Valid final Submission submission,
             BindingResult bindingResult,
-            @RequestParam("speakerImage") MultipartFile speakerImage,
+        @RequestParam("speakerImage") MultipartFile speakerImage,
             @RequestParam("coSpeakerImage") MultipartFile coSpeakerImage,
             Model model, HttpServletRequest request) {
-    	boolean invalidCaptcha = false;
-		if (submission.getCaptcha() == null || !submission.getCaptcha()
-				.equals(request.getSession().getAttribute(CaptchaController.SESSION_PARAM_CAPTCHA_IMAGE))) {
-			invalidCaptcha = true;
-			bindingResult.rejectValue("captcha", "invalid");
-		}
-		if (bindingResult.hasErrors() || invalidCaptcha) {
+        boolean invalidCaptcha = false;
+        if (submission.getCaptcha() == null || !submission.getCaptcha()
+            .equals(request.getSession().getAttribute(CaptchaController.SESSION_PARAM_CAPTCHA_IMAGE))) {
+            invalidCaptcha = true;
+            bindingResult.rejectValue("captcha", "invalid");
+        }
+        if (bindingResult.hasErrors() || invalidCaptcha) {
             return goToCFP(submission, model);
-		}
-
-        String result = validateEmail(bindingResult, submission, model, submission.getSpeaker().getEmail(), "speaker");
-		if (result != null) {
-		    return result;
         }
 
-        if(hasCoSpeaker(submission)) {
-            result = validateEmail(bindingResult, submission, model, submission.getCoSpeaker().getEmail(), "coSpeaker");
+        String result = validateEmail(bindingResult, submission, model, submission.getSpeaker().getEmail(), "speaker");
+        if (result != null) {
+            return result;
+        }
+
+        if (hasCoSpeaker(submission)) {
+            result = validateEmail(bindingResult, submission, model, submission.getCoSpeaker().getEmail(),
+                "coSpeaker");
             if (result != null) {
                 return result;
             }
         }
 
-        saveSubmission(submission, speakerImage, coSpeakerImage);
         try {
-           sendNotificationEmails(submission);
+            saveSubmission(submission, speakerImage, coSpeakerImage);
+        } catch (Exception e) {
+            logger.error("Can't save the submission", e);
+        }
+        try {
+            sendNotificationEmails(submission);
         } catch (Exception e) {
             logger.error("Could not send confirmation email", e);
         }
@@ -73,7 +78,7 @@ public class CfpController extends AbstractCfpController {
         return "redirect:/cfp-thank-you";
     }
 
-        @RequestMapping(value = "/cfp-thank-you", method = RequestMethod.GET)
+    @RequestMapping(value = "/cfp-thank-you", method = RequestMethod.GET)
     public String thankYou(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         return CfpController.CFP_THANK_YOU;
@@ -82,7 +87,7 @@ public class CfpController extends AbstractCfpController {
     private String validateEmail(BindingResult bindingResult, Submission submission, Model model, String email, String role) {
         EmailValidator emailValidator = new EmailValidator();
 
-        if(!StringUtils.isEmpty(email) && emailValidator.isValid(email, null)) {
+        if (!StringUtils.isEmpty(email) && emailValidator.isValid(email, null)) {
             // Email is valid
             return null;
         }
