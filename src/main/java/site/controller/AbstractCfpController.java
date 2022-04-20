@@ -74,8 +74,9 @@ public class AbstractCfpController {
     }
 
     private Speaker handleSubmittedSpeaker(Speaker speaker, MultipartFile image) {
-        Speaker existingSpeaker = userFacade.findSpeaker(speaker.getEmail());
+        Speaker existingSpeaker = userFacade.findSpeaker(speaker);
         if (existingSpeaker != null) {
+            existingSpeaker.setBranch(Globals.CURRENT_BRANCH);
             return existingSpeaker;
         } else {
             //new speaker.. file is required
@@ -87,14 +88,16 @@ public class AbstractCfpController {
     }
 
     private void formatPicture(Speaker speaker, MultipartFile image) {
-        if (!image.isEmpty()) {
-            try {
-                byte[] bytes = image.getBytes();
-                speaker.setPicture(
-                                thumbnailService.thumbImage(bytes, 280, 326, ThumbnailService.ResizeType.FIT_TO_RATIO));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (image.isEmpty()) {
+            return;
+        }
+
+        try {
+            byte[] bytes = image.getBytes();
+            speaker.setPicture(
+                            thumbnailService.thumbImage(bytes, 280, 326, ThumbnailService.ResizeType.FIT_TO_RATIO));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -20,7 +20,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import site.model.User;
+import site.repository.SpeakerRepository;
 import site.repository.UserRepository;
 
 import java.util.Collections;
@@ -36,6 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SpeakerRepository speakerRepository;
     
     @Override
     public void configure(final WebSecurity web) throws Exception {
@@ -68,7 +73,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                }
 	                
 	                User user = userRepository.findUserByEmail(email);
-	                
+	                if (user == null) {
+                        user = speakerRepository.findByEmail(email);
+                        if (StringUtils.isEmpty(user.getPassword())) {
+                            user = null;
+                        }
+                    }
+
 	                if (user == null || !passwordEncoder().matches(providedPassword, user.getPassword())) {
 	                    throw new BadCredentialsException("Username/Password does not match for " + authentication.getPrincipal());
 	                }

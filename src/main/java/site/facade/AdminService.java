@@ -133,7 +133,7 @@ public class AdminService {
 	}
 
 	public Speaker findOneSpeaker(Long id){
-		return speakerRepository.findById(id).get();
+		return speakerRepository.findById(id).orElse(null);
 	}
 
 	public void deleteSpeaker(Long id){

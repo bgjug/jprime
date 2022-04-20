@@ -158,10 +158,10 @@ public class SubmissionController extends AbstractCfpController {
 	        response.setHeader("Content-Length", String.valueOf(submissionsCSVFile.length()));
 	        FileCopyUtils.copy(inputStream, response.getOutputStream());
 	        if(!submissionsCSVFile.delete()) {
-	        	logger.warn("Submission file: " + submissionsCSVFile.getAbsolutePath() + " cannot be deleted");
+	        	logger.warn("Submission file: {} cannot be deleted", submissionsCSVFile::getAbsolutePath);
 	        }
 		} catch (IOException e) {
-			logger.error("Could not download file: " + submissionsCSVFile.getAbsolutePath(), e);
+            logger.error(() -> "Could not download file: " + submissionsCSVFile.getAbsolutePath(), e);
 		}
     }
 
