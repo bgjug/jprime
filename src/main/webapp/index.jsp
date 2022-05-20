@@ -386,7 +386,7 @@
                     </div>
                 </div>
 <%--                style="opacity: 0.5;"--%>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>200.00</span>
@@ -406,12 +406,12 @@
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
                             </ul>
-                            <a href="tickets" class="btn btn-common">Buy Ticket</a>
-<%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
+<%--                            <a href="tickets" class="btn btn-common">Buy Ticket</a>--%>
+                            <a href="tickets" class="btn btn-common">Not Available</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>100.00</span>
@@ -431,8 +431,8 @@
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
                             </ul>
-                            <a href="tickets" class="btn btn-common">Buy Ticket</a>
-<%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
+<%--                            <a href="tickets" class="btn btn-common">Buy Ticket</a>--%>
+                            <a href="tickets" class="btn btn-common">Not Available</a>
                         </div>
                     </div>
                 </div>

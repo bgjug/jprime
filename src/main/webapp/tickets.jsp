@@ -51,18 +51,15 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <p>
-                <p>DON'T PANIC, jPrime 2020 will happen in 2022 ! Dates are 25th and 26th of May and is NOT an online conference !</p>
-                <p>Note that the recordings of the previous conference are available at <a href="https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3">https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3</a> .</p>
-                <p>The tickets registration for 2021 will be opened at the beginning of 2021.</p>
-                <p>If you already have a ticket for 2020 there is no reason to buy a new one. Since the old one is not actually old !</p>
-                <p>Yes we are sad too but COVID-19 was unexpected and demolished our plans for 2020. So see you in person, offline and with a beer in your hand in MAY 2022 ! </p>
-                <%--                    <p>If you want to join 2019 - dont cry :) there will be streaming probably and there will be recording of everything from 2019 also you can try to buy a ticket on the black market ;)</p>--%>
-                <%--                <p>The conference fee is <strong>140</strong>.00 BGN (VAT included).</p>--%>
-                <%--                <p>For registration contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>--%>
-                <%--                <p>* There is a ~25% discount for students. Student ticket price <strong>100</strong>.00 BGN (VAT included).</p>--%>
-                <%--                <p>* There is a free pass for a JUG lead (one per Java User Group).</p>--%>
-                </p>
+                <p>jPrime 2022 is SOLD OUT !</p>
+
+                <p>The tickets registration for 2023 will be opened at the beginning of 2023.</p>
+                <p>If you want to join 2022 - dont cry :) there will be streaming probably and there will be recording
+                    of everything from 2022 also at some point :) you can try to buy a ticket on the black market but I
+                    would just watch online;)</p>
+                <p>Note that the recordings of the previous conference are available at <a
+                        href="https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3">https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3</a>
+                    .</p>
             </div>
         </div>
     </div>
