@@ -97,9 +97,9 @@ public class AdminRegistrantController {
         List<Visitor> visitors = registrant.getVisitors();
         if (visitors != null && visitors.size() > 0) {
             for (Visitor visitor : visitors) {
-                if (visitor.getStatus() != null && visitor.getStatus() != VisitorStatus.REQUESTING && visitor.getEmail() != null && !visitor.getEmail().isEmpty()) {
+                if (visitor.getEmail() != null && !visitor.getEmail().isEmpty()) {
                     try {
-                        mailFacade.sendEmail(registrant.getEmail(), "jPrime " + Globals.CURRENT_BRANCH + " Conference ticket !",
+                        mailFacade.sendEmail(visitor.getEmail(), "jPrime " + Globals.CURRENT_BRANCH + " Conference ticket !",
                                              getTicketEmailBody(visitor));
                     } catch (MessagingException e) {
                         logger.error("Could not send invoice email", e);
