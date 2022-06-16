@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -43,7 +44,7 @@ public class RaffleController {
 	@Autowired
 	private ObjectMapper mapper;
 
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	@GetMapping(value = "/view")
 	public String viewVisitors(Model model) {
 
 		List<RaffleVisitor> visitors = adminService.findAllNewestVisitors().stream()
@@ -59,7 +60,7 @@ public class RaffleController {
 		return RAFFLE_JSP;
 	}
 
-	@RequestMapping(value = "/view/jpro", method = RequestMethod.GET)
+	@GetMapping(value = "/view/jpro")
 	public String viewVisitorsJPro(Model model) {
 
 		List<RaffleVisitor> visitors = userServiceJPro.findAllNewestVisitors().stream()
@@ -83,7 +84,7 @@ public class RaffleController {
 			Collectors.joining()) + email.substring(lastDot);
 	}
 
-	class RaffleVisitor {
+	static class RaffleVisitor {
 		private String name;
 		private String company;
 		
