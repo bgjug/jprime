@@ -11,7 +11,7 @@
 <head>
 
     <!-- Basic -->
-    <title>Call for Papers</title>
+    <title>Raffle registration confirmation</title>
 
     <meta charset="utf-8">
 
@@ -46,7 +46,7 @@
             <div class="col-md-4"> </div>
             <div class="col-md-4">
                 <p>
-                    You'r presence has been registered and you will participate in the raffle ;) gl && hf
+                    Your presence has been registered, and you will participate in the raffle ;) gl && hf
                 </p>
             </div>
             <div class="col-md-4"> </div>

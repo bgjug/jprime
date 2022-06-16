@@ -2,6 +2,7 @@ package site.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +17,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import site.facade.AdminService;
+import site.facade.UserServiceJPro;
+import site.model.VisitorJPro;
 import site.model.VisitorStatus;
 
 /**
@@ -32,6 +35,10 @@ public class RaffleController {
 	@Autowired
 	@Qualifier(AdminService.NAME)
 	private AdminService adminService;
+
+	@Autowired
+	@Qualifier(UserServiceJPro.NAME)
+	private UserServiceJPro userServiceJPro;
 	
 	@Autowired
 	private ObjectMapper mapper;
@@ -51,7 +58,31 @@ public class RaffleController {
 		}
 		return RAFFLE_JSP;
 	}
-	
+
+	@RequestMapping(value = "/view/jpro", method = RequestMethod.GET)
+	public String viewVisitorsJPro(Model model) {
+
+		List<RaffleVisitor> visitors = userServiceJPro.findAllNewestVisitors().stream()
+			.filter(VisitorJPro::isPresent)
+			.map(v -> new RaffleVisitor(v.getName(), maskEmail(v.getEmail())))
+			.collect(Collectors.toList());
+		try {
+			model.addAttribute("visitors", mapper.writeValueAsString(visitors));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return RAFFLE_JSP;
+	}
+
+	static String maskEmail(String email) {
+		int lastDot = email.lastIndexOf(".");
+		int atIndex = email.indexOf("@");
+
+		return email.substring(0, atIndex+1) + IntStream.range(atIndex+1, lastDot).mapToObj(i-> "*").collect(
+			Collectors.joining()) + email.substring(lastDot);
+	}
+
 	class RaffleVisitor {
 		private String name;
 		private String company;
