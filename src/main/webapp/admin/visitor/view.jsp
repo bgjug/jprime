@@ -29,6 +29,7 @@
 			<a href="/admin/visitor/add">Add</a>
 			<a href="/admin/visitor/export">Export</a>
 			<a href="/admin/visitor/send">Send email to ALL </a>
+			<a href="/admin/visitor/upload">Upload from CSV</a>
 		</div>
 		&nbsp;
 		<br/>
@@ -94,8 +95,7 @@
 												$(this).val()
 										);
 
-										column
-												.search(val ? '^' + val + '$' : '', true, false)
+										column.search(val ? '^' + val + '$' : '', true, false)
 												.draw();
 										countVisitors();
 									});
