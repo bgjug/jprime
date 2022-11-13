@@ -360,12 +360,12 @@
                 </div>
             </div>
             <div class="row" id="tickets">
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${early_sold_out}'/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>180.00</span>
                             <h5>
-                                Until 1st of March 2023! </h5>
+                                Until 15th of March 2023! </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Early Bird Ticket</h4>
@@ -380,17 +380,20 @@
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
                             </ul>
-                            <a href="tickets" class="btn btn-common">Buy Ticket</a>
-<%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
+                            <c:if test="${early_sold_out.length() == 0}">
+                                <a href="tickets" class="btn btn-common">Buy Ticket</a>
+                            </c:if>
+                            <c:if test="${early_sold_out.length() > 0}">
+                                <a href="tickets" class="btn btn-common">Not Available</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
-<%--                style="opacity: 0.5;"--%>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${regular_sold_out}'/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>280.00</span>
-                            <h5>After 1st of March 2023 </h5>
+                            <h5>After 15th of March 2023 </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Regular Ticket</h4>
@@ -405,8 +408,12 @@
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
                             </ul>
-<%--                            <a href="tickets" class="btn btn-common">Buy Ticket</a>--%>
-                            <a href="tickets" class="btn btn-common">Not Available</a>
+                            <c:if test="${regular_sold_out.length() == 0}">
+                                <a href="tickets" class="btn btn-common">Buy Ticket</a>
+                            </c:if>
+                            <c:if test="${regular_sold_out.length() > 0}">
+                                <a href="tickets" class="btn btn-common">Not Available</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -805,7 +812,7 @@
                 </div>
             </div>
             <div class="row" id="sponsor">
-                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('PLATINUM')}"/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>7000</span>
@@ -821,12 +828,16 @@
                                 <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                                 <li><i class="icon-close"></i><span class="text">1 invite for the "thank you" dinner</span></li>
                             </ul>
-                            <a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn btn-common">Sign Up Now</a>
-<%--                            <a href="javascript: return 0;" class="btn btn-common">Sold out</a>--%>
+                            <c:if test="${sold_out_sponsor_packages.get('PLATINUM').length() == 0}">
+                                <a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn btn-common">Sign Up Now</a>
+                            </c:if>
+                            <c:if test="${sold_out_sponsor_packages.get('PLATINUM').length() > 0}">
+                                <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('GOLD')}"/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>5500</span>
@@ -840,12 +851,16 @@
                                 <li><i class="icon-close"></i><span class="text">Booth in the conference hall!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                             </ul>
-                            <a href="mailto:conference@jprime.io?subject=gold sponsorship" class="btn btn-common">Sign Up Now</a>
-<%--                            <a href="javascript: return 0;" class="btn btn-common">Sold out</a>--%>
+                            <c:if test="${sold_out_sponsor_packages.get('GOLD').length() == 0}">
+                                <a href="mailto:conference@jprime.io?subject=gold sponsorship" class="btn btn-common">Sign Up Now</a>
+                            </c:if>
+                            <c:if test="${sold_out_sponsor_packages.get('GOLD').length() > 0}">
+                                <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('GOLD_LIGHT')}"/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>4500</span>
@@ -859,12 +874,16 @@
                                 <li><i class="icon-close"></i><span class="text">Booth in the corner area!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                             </ul>
-                            <a href="mailto:conference@jprime.io?subject=gold light_sponsorship" class="btn btn-common">Sign Up Now</a>
-<%--                            <a href="javascript: return 0;" class="btn btn-common">Sold out</a>--%>
+                            <c:if test="${sold_out_sponsor_packages.get('GOLD_LIGHT').length() == 0}">
+                                <a href="mailto:conference@jprime.io?subject=gold light_sponsorship" class="btn btn-common">Sign Up Now</a>
+                            </c:if>
+                            <c:if test="${sold_out_sponsor_packages.get('GOLD_LIGHT').length() > 0}">
+                                <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('SILVER')}"/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>2000</span>
@@ -877,8 +896,12 @@
                                 <li><i class="icon-close"></i><span class="text">10% discount on additional passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                             </ul>
-                            <a href="mailto:conference@jprime.io?subject=silver sponsorship" class="btn btn-common">Sign Up Now</a>
-                            <%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
+                            <c:if test="${sold_out_sponsor_packages.get('SILVER').length() == 0}">
+                                <a href="mailto:conference@jprime.io?subject=silver_sponsorship" class="btn btn-common">Sign Up Now</a>
+                            </c:if>
+                            <c:if test="${sold_out_sponsor_packages.get('SILVER').length() > 0}">
+                                <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
