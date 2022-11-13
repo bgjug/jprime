@@ -365,7 +365,7 @@
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>180.00</span>
                             <h5>
-                                Until 15th of March 2023! </h5>
+                                Until 15th of February 2023! </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Early Bird Ticket</h4>
@@ -393,7 +393,7 @@
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>280.00</span>
-                            <h5>After 15th of March 2023 </h5>
+                            <h5>After 15th of February 2023 </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Regular Ticket</h4>
@@ -875,7 +875,7 @@
                                 <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                             </ul>
                             <c:if test="${sold_out_sponsor_packages.get('GOLD_LIGHT').length() == 0}">
-                                <a href="mailto:conference@jprime.io?subject=gold light_sponsorship" class="btn btn-common">Sign Up Now</a>
+                                <a href="mailto:conference@jprime.io?subject=gold_light_sponsorship" class="btn btn-common">Sign Up Now</a>
                             </c:if>
                             <c:if test="${sold_out_sponsor_packages.get('GOLD_LIGHT').length() > 0}">
                                 <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
