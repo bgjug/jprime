@@ -1,5 +1,6 @@
 package site.model;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -33,7 +34,7 @@ public enum Branch {
         this.startDate = startDate;
         this.cfpOpenDate = startDate.minusMonths(6).minusDays(20);
         this.cfpCloseDate = startDate.minusMonths(3).minusDays(15);
-        soldOutPackages = new HashSet<>();
+        soldOutPackages = new HashSet<>(Arrays.asList(SponsorPackage.values()));
     }
 
     Branch(String label, DateTime startDate, DateTime cfpOpenDate, DateTime cfpCloseDate,
