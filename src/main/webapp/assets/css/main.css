@@ -1783,14 +1783,17 @@ blockquote {
     float: left;
     width: 100%;
     height: 100%;
-    padding: 97px 0;
+    padding: 97px 0 37px;
     text-align: center; }
     #pricing .price-block-wrapper .prici-left .price {
-      font-size: 48px;
+      font-size: 40px;
       font-weight: 700; }
       #pricing .price-block-wrapper .prici-left .price span {
         font-size: 25px;
         margin-right: 7px; }
+#pricing .price-block-wrapper .pricing-list span {
+  font-size: 11px;
+  margin-right: 7px; }
     #pricing .price-block-wrapper .prici-left h5 {
       font-size: 14px;
       margin-top: 15px;

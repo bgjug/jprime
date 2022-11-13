@@ -360,12 +360,12 @@
                 </div>
             </div>
             <div class="row" id="tickets">
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>140.00</span>
+                            <span class="price"><span>BGN</span>180.00</span>
                             <h5>
-                                Until 22th of March 2022! </h5>
+                                Until 1st of March 2023! </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Early Bird Ticket</h4>
@@ -380,8 +380,8 @@
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
                             </ul>
-<%--                            <a href="tickets" class="btn btn-common">Buy Ticket</a>--%>
-                            <a href="tickets" class="btn btn-common">Not Available</a>
+                            <a href="tickets" class="btn btn-common">Buy Ticket</a>
+<%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
                         </div>
                     </div>
                 </div>
@@ -389,9 +389,8 @@
                 <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>200.00</span>
-                            <h5>
-                                After 22th of March 2022 </h5>
+                            <span class="price"><span>BGN</span>280.00</span>
+                            <h5>After 1st of March 2023 </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Regular Ticket</h4>
@@ -411,12 +410,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>100.00</span>
-                            <h5>
-                                limited to students only</h5>
+                            <h5>limited to students only</h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Students ticket</h4>
@@ -431,8 +429,8 @@
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
                             </ul>
-<%--                            <a href="tickets" class="btn btn-common">Buy Ticket</a>--%>
-                            <a href="tickets" class="btn btn-common">Not Available</a>
+                            <a href="tickets" class="btn btn-common">Buy Ticket</a>
+<%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
                         </div>
                     </div>
                 </div>
@@ -807,10 +805,10 @@
                 </div>
             </div>
             <div class="row" id="sponsor">
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>5000.00</span>
+                            <span class="price"><span>BGN</span>7000</span>
                             <h5></h5>
                         </div>
                         <div class="pricing-list">
@@ -820,18 +818,18 @@
                                 <li><i class="icon-close"></i><span class="text">15% discount on additional passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Booth in the conference hall!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Presence on the stage for the raffle</span></li>
-                                <li><i class="icon-close"></i><span class="text">2 banners in the conference rooms</span></li>
+                                <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                                 <li><i class="icon-close"></i><span class="text">1 invite for the "thank you" dinner</span></li>
                             </ul>
-<%--                                <a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn btn-common">Sign Up Now</a>--%>
-                            <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            <a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn btn-common">Sign Up Now</a>
+<%--                            <a href="javascript: return 0;" class="btn btn-common">Sold out</a>--%>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>4000.00</span>
+                            <span class="price"><span>BGN</span>5500</span>
                             <h5></h5>
                         </div>
                         <div class="pricing-list">
@@ -840,17 +838,36 @@
                                 <li><i class="icon-check"></i><span class="text">6 free passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">15% discount on additional passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Booth in the conference hall!</span></li>
-                                <li><i class="icon-close"></i><span class="text">2 banners in the conference rooms</span></li>
+                                <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                             </ul>
-<%--                            <a href="mailto:conference@jprime.io?subject=gold sponsorship" class="btn btn-common">Sign Up Now</a>--%>
-                            <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            <a href="mailto:conference@jprime.io?subject=gold sponsorship" class="btn btn-common">Sign Up Now</a>
+<%--                            <a href="javascript: return 0;" class="btn btn-common">Sold out</a>--%>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>1500.00</span>
+                            <span class="price"><span>BGN</span>4500</span>
+                            <h5></h5>
+                        </div>
+                        <div class="pricing-list">
+                            <h4>Gold Light</h4>
+                            <ul>
+                                <li><i class="icon-check"></i><span class="text">6 free passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">15% discount on additional passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Booth in the corner area!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
+                            </ul>
+                            <a href="mailto:conference@jprime.io?subject=gold light_sponsorship" class="btn btn-common">Sign Up Now</a>
+<%--                            <a href="javascript: return 0;" class="btn btn-common">Sold out</a>--%>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                    <div class="price-block-wrapper">
+                        <div class="prici-left">
+                            <span class="price"><span>BGN</span>2000</span>
                             <h5></h5>
                         </div>
                         <div class="pricing-list">
@@ -858,7 +875,7 @@
                             <ul>
                                 <li><i class="icon-check"></i><span class="text">3 free passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">10% discount on additional passes!</span></li>
-                                <li><i class="icon-close"></i><span class="text">2 banners in the conference rooms</span></li>
+                                <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                             </ul>
                             <a href="mailto:conference@jprime.io?subject=silver sponsorship" class="btn btn-common">Sign Up Now</a>
                             <%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
@@ -871,7 +888,6 @@
     <!-- Sponsors Pricing Area End -->
 
     <user:footer/>
-
 
 </body>
 
