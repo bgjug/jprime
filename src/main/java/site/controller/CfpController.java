@@ -99,6 +99,10 @@ public class CfpController extends AbstractCfpController {
     private String goToCFP(@Valid Submission submission, Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         buildCfpFormModel(model, submission);
-        return Globals.PAGE_CFP;
+
+        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfterNow()) {
+            return CfpController.CFP_OPEN_JSP;
+        }
+        return CFP_CLOSED_JSP;
     }
 }
