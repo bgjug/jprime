@@ -7,9 +7,9 @@ public enum SessionLevel {
 
     BEGINNER("Beginner"), INTERMEDIATE("Intermediate"), ADVANCED("Advanced");
 
-    private String level;
+    private final String level;
 
-    private SessionLevel(String level) {
+    SessionLevel(String level) {
         this.level = level;
     }
 

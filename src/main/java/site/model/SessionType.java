@@ -1,11 +1,11 @@
 package site.model;
 
 public enum SessionType {
-    ConferenceSession("Conference session"), Workshop("Workshop");
+    ConferenceSession("Conference session"), DeepDive("Deep Dive"), Workshop("Workshop");
 
     private final String type;
 
-    private SessionType(String type) {
+    SessionType(String type) {
         this.type = type;
     }
 
