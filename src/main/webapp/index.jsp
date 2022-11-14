@@ -860,7 +860,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('GOLD_LIGHT')}"/>">
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('GOLD_LITE')}"/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>4500</span>
@@ -874,10 +874,10 @@
                                 <li><i class="icon-close"></i><span class="text">Booth in the corner area!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                             </ul>
-                            <c:if test="${sold_out_sponsor_packages.get('GOLD_LIGHT').length() == 0}">
-                                <a href="mailto:conference@jprime.io?subject=gold_light_sponsorship" class="btn btn-common">Sign Up Now</a>
+                            <c:if test="${sold_out_sponsor_packages.get('GOLD_LITE').length() == 0}">
+                                <a href="mailto:conference@jprime.io?subject=gold_lite_sponsorship" class="btn btn-common">Sign Up Now</a>
                             </c:if>
-                            <c:if test="${sold_out_sponsor_packages.get('GOLD_LIGHT').length() > 0}">
+                            <c:if test="${sold_out_sponsor_packages.get('GOLD_LITE').length() > 0}">
                                 <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
                             </c:if>
                         </div>
