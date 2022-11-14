@@ -78,13 +78,13 @@ public class SubmissionControllerTest {
         Speaker ivanIvanov2 = new Speaker("Ivan St.", "Ivanov", "ivan@forge.com", "JBoss Forge", "@ivan_stefanov", false, true);
 
         valhalla = submissionRepository.save(new Submission("Project Valhalla", "Primitives in Generics",
-                SessionLevel.ADVANCED, SessionType.ConferenceSession, brianGoetz));
+                SessionLevel.ADVANCED, SessionType.CONFERENCE_SESSION, brianGoetz));
         valhalla.setBranch(Globals.CURRENT_BRANCH);
         forge = submissionRepository.save(new Submission("JBoss Forge", "Productivity for Java EE",
-                SessionLevel.INTERMEDIATE, SessionType.ConferenceSession, ivanIvanov));
+                SessionLevel.INTERMEDIATE, SessionType.CONFERENCE_SESSION, ivanIvanov));
         forge.setBranch(Globals.CURRENT_BRANCH);
         bootAddon = submissionRepository.save(new Submission("Spring Boot Forge Addon", "We are not hipsters",
-                SessionLevel.BEGINNER, SessionType.ConferenceSession, naydenGochev, ivanIvanov2));
+                SessionLevel.BEGINNER, SessionType.CONFERENCE_SESSION, naydenGochev, ivanIvanov2));
         bootAddon.setBranch(Branch.YEAR_2016);
     }
 

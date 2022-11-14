@@ -36,7 +36,7 @@ public class Submission extends AbstractEntity {
     private SessionLevel level;
 
     @Enumerated(EnumType.STRING)
-    private SessionType type = SessionType.ConferenceSession;
+    private SessionType type = SessionType.CONFERENCE_SESSION;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
     @JoinColumn(name = "speaker", nullable = false, referencedColumnName = "id")
