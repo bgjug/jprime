@@ -111,7 +111,6 @@
                     <h2 class="intro-title">About</h2>
                     <h3 class="title-sub">The Conference</h3>
                     <p class="intro-desc">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices.
-                        Its sixth edition of jPrime from 2020 will be held in 2022, the dates are 25 and 26th of May !
                     </p>
                     <p>It's run by the Bulgarian Java User Group and backed by the biggest companies in the country. </p>
                     <p>jPrime features a combination of great international speakers along with the best presenters from Bulgaria and the Balkans.
