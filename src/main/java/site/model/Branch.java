@@ -2,7 +2,6 @@ package site.model;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +13,7 @@ public enum Branch {
     YEAR_2019("2019", DateTime.parse("2019-05-28")), YEAR_2020("2020", DateTime.parse("2020-05-27")),
     YEAR_2022("2022", DateTime.parse("2022-05-25")),
     YEAR_2023("2023", DateTime.parse("2023-05-30"), DateTime.parse("2022-11-10"),
-        DateTime.parse("2023-02-15"), Arrays.asList(SponsorPackage.GOLD));
+        DateTime.parse("2023-02-15"), Arrays.asList(SponsorPackage.GOLD, SponsorPackage.PLATINUM));
 
     private static final String BRANCH_PREFIX = "YEAR_";
 
