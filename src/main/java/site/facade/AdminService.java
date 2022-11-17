@@ -327,4 +327,7 @@ public class AdminService {
 		venueHallRepository.deleteById(itemId);
 	}
 
+	public Page<Speaker> findSpeakersByBranch(Pageable pageable, Branch branch) {
+		return speakerRepository.findAllByBranch(pageable, branch);
+	}
 }

@@ -68,4 +68,8 @@ public enum Branch {
     public boolean isSoldOut(SponsorPackage sponsorPackage) {
         return soldOutPackages.contains(sponsorPackage);
     }
+
+    public String getLabel() {
+        return label;
+    }
 }
