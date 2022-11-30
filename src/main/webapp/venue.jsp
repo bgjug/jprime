@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-12">
                 <p>
-                <p class="text-center"><br/> jPrime will be held on <strong>25-26th May 2022</strong> in
+                <p class="text-center"><br/> jPrime will be held on <strong>30-31st May 2023</strong> in
                     "John Atanasoff" Innovation forum in Sofia Tech Park which is one of the leading and most preferable locations for running events connected with hi tech, entrepreneurship, science, ecology, education, innovations, digitalisation and health care.
                 </p>
                 <center>

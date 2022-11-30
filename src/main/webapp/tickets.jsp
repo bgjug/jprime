@@ -51,11 +51,11 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <p>jPrime 2022 is SOLD OUT !</p>
+                <p>jPrime 2023 is SOLD OUT !</p>
 
-                <p>The tickets registration for 2023 will be opened at the beginning of 2023.</p>
-                <p>If you want to join 2022 - dont cry :) there will be streaming probably and there will be recording
-                    of everything from 2022 also at some point :) you can try to buy a ticket on the black market but I
+                <p>The tickets registration for 2024 will be opened in November 2023.</p>
+                <p>If you want to join 2023 - don't cry :) there will be streaming probably and there will be recording
+                    of everything from 2023 also at some point :) you can try to buy a ticket on the black market, but I
                     would just watch online;)</p>
                 <p>Note that the recordings of the previous conference are available at <a
                         href="https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3">https://www.youtube.com/playlist?list=PLcqA4DRMgIYvGPZfrK0EcMxEQCrtSl9A3</a>
