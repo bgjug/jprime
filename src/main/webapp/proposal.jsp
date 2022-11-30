@@ -48,6 +48,7 @@ pageEncoding="UTF-8"%>
         <div class="row">
             <div class="col-12">
                 <p>
+                <p>The conference dates are <strong>30th and 31st of May 2023</strong></p>
                 <p>Call for paper closes on <strong>15th of February!</strong></p>
                 <user:cfp action="/cfp"/>
             </div>
