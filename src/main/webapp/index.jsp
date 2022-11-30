@@ -49,8 +49,8 @@
             <div class="carousel-item active">
                 <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
                 <div class="carousel-caption d-md-block">
-<%--                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime 2020</h1>--%>
-<%--                    <p class="fadeInUp wow" data-wow-delay=".6s">The conference will be held on 28 and 29th of May, 2020 in Sofia Tech Park</p>--%>
+                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime 2023</h1>
+                    <p class="fadeInUp wow" data-wow-delay=".6s">The conference will be held on 30th and 31st of May 2023 in Sofia Tech Park</p>
 <%--                    <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
                     <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->
                 </div>
@@ -596,7 +596,7 @@
         <div class="container" style="text-align: center">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="section-title">jPrime 2019 recordings</h1>
+                    <h1 class="section-title">jPrime 2023 recordings</h1>
                 </div>
             </div>
             <div class="row">
