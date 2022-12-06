@@ -1,5 +1,6 @@
 package site.controller;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -84,18 +86,18 @@ public class AdminRegistrantController {
         return "redirect:/admin/registrant/view";
     }
 
-    @RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
+    @GetMapping(value = "/remove/{itemId}")
     public String remove(@PathVariable("itemId") Long itemId) {
         adminFacade.deleteRegistrant(itemId);
         return "redirect:/admin/registrant/view";
     }
 
-    @RequestMapping(value = "/send-tickets/{itemId}", method = RequestMethod.GET)
+    @GetMapping(value = "/send-tickets/{itemId}")
     public String sendTicketsForRegistrant(@PathVariable("itemId") Long itemId, Model model) {
         Registrant registrant = adminFacade.findOneRegistrant(itemId);
 
         List<Visitor> visitors = registrant.getVisitors();
-        if (visitors != null && visitors.size() > 0) {
+        if (CollectionUtils.isNotEmpty(visitors)) {
             for (Visitor visitor : visitors) {
                 if (visitor.getEmail() != null && !visitor.getEmail().isEmpty()) {
                     try {

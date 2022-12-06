@@ -89,8 +89,9 @@ public class InvoiceExporter {
         data.setMol("fda");
         data.setInvoiceType("Проформа");
         data.setPaymentType("пеймънт");
-        data.addInvoiceDetail(new InvoiceDetail(STUDENT_TICKET_PRICE, 3, DEFAULT_DESCRIPTION_BG));
-        data.addInvoiceDetail(new InvoiceDetail(DEFAULT_TICKET_PRICE, 3, DEFAULT_DESCRIPTION_BG));
+        TicketPrices ticketPrices = InvoiceData.getPrices(Globals.CURRENT_BRANCH);
+        data.addInvoiceDetail(new InvoiceDetail(ticketPrices.getStudentPrice(), 3, DEFAULT_DESCRIPTION_BG));
+        data.addInvoiceDetail(new InvoiceDetail(ticketPrices.getPrice(Globals.CURRENT_BRANCH), 3, DEFAULT_DESCRIPTION_BG));
 
         Files.write(Paths.get("/tmp/result.pdf"), new InvoiceExporter().exportInvoice(data, true, EN));
     }

@@ -16,13 +16,14 @@ import javax.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import site.config.Globals;
 import site.controller.invoice.*;
@@ -70,10 +71,23 @@ public class TicketsController {
     @Value("${save.invoice.path.to.save:/tmp}")
     private String pathToSave;
 
-    @RequestMapping(value = "/tickets", method = RequestMethod.GET)
+    @GetMapping(value = "/tickets")
     public String goToRegisterPage(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("registrant", new Registrant());
+
+        InvoiceData.TicketPrices prices = InvoiceData.getPrices(Globals.CURRENT_BRANCH);
+
+        model.addAttribute("early_bird_ticket_price", String.format("%.2f", prices.getEarlyBirdPrice()));
+        model.addAttribute("regular_ticket_price", String.format("%.2f",prices.getRegularPrice()));
+        model.addAttribute("student_ticket_price", String.format("%.2f",prices.getStudentPrice()));
+
+        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(Globals.CURRENT_BRANCH.getCfpCloseDate()));
+        model.addAttribute("cfp_close_date_no_year", DateUtils.dateToStringWithMonth(Globals.CURRENT_BRANCH.getCfpCloseDate()));
+
+        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+        model.addAttribute("jprime_next_year", Globals.CURRENT_BRANCH.getStartDate().getYear() + 1);
+
 		return site.config.Globals.PAGE_TICKETS;
     }
 
@@ -81,7 +95,7 @@ public class TicketsController {
      * User submitted the form.
      */
     @Transactional
-    @RequestMapping(value = "/tickets", method = RequestMethod.POST)
+    @PostMapping(value = "/tickets")
     public String register(Model model, @Valid final Registrant registrant, BindingResult bindingResult, HttpServletRequest request) throws Exception {
 		boolean invalidCaptcha = false;
     	if (registrant.getCaptcha() == null || !registrant.getCaptcha()
@@ -102,6 +116,7 @@ public class TicketsController {
             handlePersonalRegistrant(registrant);
         }
 
+        registrant.setCreatedDate(DateTime.now());
         registrant.setPaymentType(Registrant.PaymentType.BANK_TRANSFER);
         Registrant savedRegistrant = registrantFacade.save(registrant);
 
