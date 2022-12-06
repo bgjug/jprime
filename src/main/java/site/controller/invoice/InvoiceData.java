@@ -175,7 +175,8 @@ public class InvoiceData {
         } else {
             BigDecimal ticketPrice = ticketPrices.getPrice(branch);
 
-            DateTime registrationDate = registrant.getCreatedDate();
+            DateTime registrationDate =
+                registrant.getCreatedDate() != null ? registrant.getCreatedDate() : branch.getCfpOpenDate();
 
             if (registrationDate.isBefore(branch.getCfpCloseDate()) && Days.daysBetween(
                 registrationDate, DateTime.now()).getDays() <= 3) {
