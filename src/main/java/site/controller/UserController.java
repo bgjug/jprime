@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import site.config.Globals;
 import site.facade.MailService;
 import site.facade.ResetPasswordService;
 import site.model.User;
@@ -204,7 +205,8 @@ public class UserController {
 		String msg = "Successfully changed password for user: " + user.getFirstName() + " " + user.getLastName() +
 				" (" + user.getEmail() + ") ";
 		model.addAttribute("msg", msg);
-		
+		model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+
 		return SUCCESS_SCREEN_JSP;
 	}
 	

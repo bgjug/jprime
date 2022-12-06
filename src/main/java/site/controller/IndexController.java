@@ -1,5 +1,6 @@
 package site.controller;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.util.Pair;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import site.config.Globals;
+import site.controller.invoice.InvoiceData;
 import site.facade.UserService;
 import site.model.Partner;
 import site.model.Sponsor;
@@ -79,6 +81,20 @@ public class IndexController {
             .collect(Collectors.toMap(p -> p.getFirst().name(), Pair::getSecond));
 
         model.addAttribute("sold_out_sponsor_packages", soldOutPackages);
+
+        InvoiceData.TicketPrices prices = InvoiceData.getPrices(Globals.CURRENT_BRANCH);
+
+        model.addAttribute("early_bird_ticket_price", String.format("%.2f", prices.getEarlyBirdPrice()));
+        model.addAttribute("regular_ticket_price", String.format("%.2f",prices.getRegularPrice()));
+        model.addAttribute("student_ticket_price", String.format("%.2f",prices.getStudentPrice()));
+
+        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(Globals.CURRENT_BRANCH.getCfpCloseDate()));
+
+        // 30th and 31st of May 2023
+        DateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
+        model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
+            DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
+        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
 
         return PAGE_INDEX;
     }

@@ -49,8 +49,8 @@
             <div class="carousel-item active">
                 <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
                 <div class="carousel-caption d-md-block">
-                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime 2023</h1>
-                    <p class="fadeInUp wow" data-wow-delay=".6s">The conference will be held on 30th and 31st of May 2023 in Sofia Tech Park</p>
+                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>
+                    <p class="fadeInUp wow" data-wow-delay=".6s">The conference will be held on ${conference_dates} in Sofia Tech Park</p>
 <%--                    <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
                     <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->
                 </div>
@@ -362,9 +362,9 @@
                 <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${early_sold_out}'/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>180.00</span>
+                            <span class="price"><span>BGN</span>${early_bird_ticket_price}</span>
                             <h5>
-                                Until 15th of February 2023! </h5>
+                                Until ${cfp_close_date}! </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Early Bird Ticket</h4>
@@ -377,7 +377,7 @@
                                 <li><i class="icon-close"></i><span class="text">Free T-Shirt!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Raffle!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
-                                <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
+                                <li><i class="icon-close"></i><span class="text">Coffee and soft drinks.</span></li>
                             </ul>
                             <c:if test="${early_sold_out.length() == 0}">
                                 <a href="tickets" class="btn btn-common">Buy Ticket</a>
@@ -391,8 +391,8 @@
                 <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${regular_sold_out}'/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>280.00</span>
-                            <h5>After 15th of February 2023 </h5>
+                            <span class="price"><span>BGN</span>${regular_ticket_price}</span>
+                            <h5>After ${cfp_close_date} </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Regular Ticket</h4>
@@ -405,7 +405,7 @@
                                 <li><i class="icon-close"></i><span class="text">Free T-Shirt!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Raffle!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
-                                <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
+                                <li><i class="icon-close"></i><span class="text">Coffee and soft drinks.</span></li>
                             </ul>
                             <c:if test="${regular_sold_out.length() == 0}">
                                 <a href="tickets" class="btn btn-common">Buy Ticket</a>
@@ -419,7 +419,7 @@
                 <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>100.00</span>
+                            <span class="price"><span>BGN</span>${student_ticket_price}</span>
                             <h5>limited to students only</h5>
                         </div>
                         <div class="pricing-list">
@@ -433,7 +433,7 @@
                                 <li><i class="icon-close"></i><span class="text">Free T-Shirt!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Raffle!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
-                                <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
+                                <li><i class="icon-close"></i><span class="text">Coffee and soft drinks.</span></li>
                             </ul>
                             <a href="tickets" class="btn btn-common">Buy Ticket</a>
 <%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
@@ -596,7 +596,7 @@
         <div class="container" style="text-align: center">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="section-title">jPrime 2023 recordings</h1>
+                    <h1 class="section-title">jPrime ${jprime_year} recordings</h1>
                 </div>
             </div>
             <div class="row">

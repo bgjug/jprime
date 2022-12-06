@@ -3,11 +3,13 @@ package site.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,9 +80,10 @@ public class CfpController extends AbstractCfpController {
         return "redirect:/cfp-thank-you";
     }
 
-    @RequestMapping(value = "/cfp-thank-you", method = RequestMethod.GET)
+    @GetMapping(value = "/cfp-thank-you")
     public String thankYou(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
+        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(Globals.CURRENT_BRANCH.getCfpCloseDate()));
         return CfpController.CFP_THANK_YOU;
     }
 
@@ -98,6 +101,11 @@ public class CfpController extends AbstractCfpController {
 
     private String goToCFP(@Valid Submission submission, Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
+        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(Globals.CURRENT_BRANCH.getCfpCloseDate()));
+        DateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
+        model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
+            DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
+
         buildCfpFormModel(model, submission);
 
         if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfterNow()) {
