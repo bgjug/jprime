@@ -58,7 +58,7 @@
             <div class="carousel-item">
                 <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide">
                 <div class="carousel-caption d-md-block">
-                    <h1 class="wow bounceIn heading" data-wow-delay=".7s">17 Amazing Speakers</h1>
+                    <h1 class="wow bounceIn heading" data-wow-delay=".7s">CFP IS STILL OPEN!</h1>
                 </div>
             </div>
             <div class="carousel-item">
