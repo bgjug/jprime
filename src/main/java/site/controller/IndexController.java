@@ -45,6 +45,8 @@ public class IndexController {
         model.addAttribute("platinumSponsors", platinumSponsors);
         List<Sponsor> goldSponsors = shuffleAndGet(allSponsors, SponsorPackage.GOLD);
         model.addAttribute("goldSponsors", goldSponsors);
+        List<Sponsor> goldLiteSponsors = shuffleAndGet(allSponsors, SponsorPackage.GOLD_LITE);
+        model.addAttribute("goldLiteSponsors", goldLiteSponsors);
         List<Sponsor> silverSponsors = shuffleAndGet(allSponsors, SponsorPackage.SILVER);
         model.addAttribute("silverSponsors", silverSponsors);
 
@@ -123,9 +125,9 @@ public class IndexController {
 
     private List<Sponsor> shuffleAndGet(Map<SponsorPackage, List<Sponsor>> allSponsors,
         SponsorPackage sponsorPackage) {
-        List<Sponsor> silverSponsors = allSponsors.getOrDefault(sponsorPackage, new ArrayList<>());
-        Collections.shuffle(silverSponsors);
-        return silverSponsors;
+        List<Sponsor> sponsorsList = allSponsors.getOrDefault(sponsorPackage, new ArrayList<>());
+        Collections.shuffle(sponsorsList);
+        return sponsorsList;
     }
 
 }

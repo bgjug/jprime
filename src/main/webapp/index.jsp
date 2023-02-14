@@ -137,39 +137,39 @@
             </div>
             <div class="row mb-30">
                 <div class="col-md-2">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="http://www.vmware.com"><img class="img-fluid" src="images/vmware.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="http://www.softwareag.com"><img class="img-fluid" src="images/softwareag.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="http://www.sap.com/bulgaria"><img class="img-fluid" src="images/sap.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="http://www.experian.bg"><img class="img-fluid" src="images/experian.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="https://www.paysafe.com/"><img class="img-fluid" src="images/paysafe.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="https://www.ocadogroup.com/technology/development-centres/bulgaria"><img class="img-fluid" src="images/ocado.png" alt=""></a>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-2" style="float:none;margin: 0 auto">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="http://java-bg.org/"><img class="img-fluid" src="images/bg-jug.png" style="width:85px;" alt=""></a>
                     </div>
                 </div>
@@ -448,49 +448,75 @@
     <!-- Sponsors Section Start -->
     <section id="sponsors" class="section-padding">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="section-sub text-center">Platinum Sponsors</h1>
-                </div>
-            </div>
-            <div class="row mb-30">
-                <c:forEach var="sponsor" items="${platinumSponsors}">
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <div class="spnsors-logo">
-                            <a href="${sponsor.companyWebsite}"><img class=img-fluid" src="/image/sponsor/${sponsor.id}"
-                                                                     alt="${sponsor.companyName}"/></a>
-                        </div>
+            <c:if test="${platinumSponsors.size() > 0}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="section-sub text-center">Platinum Sponsors</h1>
                     </div>
-                </c:forEach>
-            </div>
+                </div>
+                <div class="row mb-30">
+                    <c:forEach var="sponsor" items="${platinumSponsors}">
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="sponsors-logo">
+                                <a href="${sponsor.companyWebsite}"><img class=img-fluid"
+                                                                         src="/image/sponsor/${sponsor.id}"
+                                                                         alt="${sponsor.companyName}"/></a>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="section-sub text-center">Gold Sponsors</h1>
-                </div>
-                <c:forEach var="sponsor" items="${goldSponsors}">
-                    <div class="col-md-2 col-sm-2 col-xs-12">
-                        <div class="spnsors-logo">
-                            <a href="${sponsor.companyWebsite}"><img class="img-fluid" src="/image/sponsor/${sponsor.id}"
-                                                                     alt="${sponsor.companyName}"/></a>
-                        </div>
+            <c:if test="${goldSponsors.size() > 0}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="section-sub text-center">Gold Sponsors</h1>
                     </div>
-                </c:forEach>
-            </div>
+                    <c:forEach var="sponsor" items="${goldSponsors}">
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="sponsors-logo">
+                                <a href="${sponsor.companyWebsite}"><img class="img-fluid"
+                                                                         src="/image/sponsor/${sponsor.id}"
+                                                                         alt="${sponsor.companyName}"/></a>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="section-sub text-center">Silver Sponsors</h1>
-                </div>
-                <c:forEach var="sponsor" items="${silverSponsors}">
-                    <div class="col-md-2 col-sm-2 col-xs-12">
-                        <div class="spnsors-logo">
-                            <a href="${sponsor.companyWebsite}"><img class="img-fluid" src="/image/sponsor/${sponsor.id}"
-                                                                     alt="${sponsor.companyName}"/></a>
-                        </div>
+            <c:if test="${goldLiteSponsors.size() > 0}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="section-sub text-center">Gold Lite Sponsors</h1>
                     </div>
-                </c:forEach>
-            </div>
+                    <c:forEach var="sponsor" items="${goldLiteSponsors}">
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="sponsors-logo">
+                                <a href="${sponsor.companyWebsite}"><img class="img-fluid"
+                                                                         src="/image/sponsor/${sponsor.id}"
+                                                                         alt="${sponsor.companyName}"/></a>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
+
+            <c:if test="${silverSponsors.size() > 0}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="section-sub text-center">Silver Sponsors</h1>
+                    </div>
+                    <c:forEach var="sponsor" items="${silverSponsors}">
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="sponsors-logo">
+                                <a href="${sponsor.companyWebsite}"><img class="img-fluid"
+                                                                         src="/image/sponsor/${sponsor.id}"
+                                                                         alt="${sponsor.companyName}"/></a>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
 
         </div>
     </section>
@@ -509,7 +535,7 @@
                     <c:forEach var="partners" items="${officialSupporterPartnersChunks}">
                         <c:forEach var="partner" items="${partners}">
                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                <div class="spnsors-logo">
+                                <div class="sponsors-logo">
                                     <a href="${partner.companyWebsite}"><img class=img-fluid" src="/image/partner/${partner.id}"
                                                                              alt="${partner.companyName}"/></a>
                                 </div>
@@ -535,7 +561,7 @@
                     <c:forEach var="partners" items="${mediaPartnersChunks}">
                         <c:forEach var="partner" items="${partners}">
                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                <div class="spnsors-logo">
+                                <div class="sponsors-logo">
                                     <a href="${partner.companyWebsite}"><img class=img-fluid" src="/image/partner/${partner.id}"
                                                                              alt="${partner.companyName}"/></a>
                                 </div>
@@ -561,7 +587,7 @@
                     <c:forEach var="partners" items="${eventPartnerChunks}">
                         <c:forEach var="partner" items="${partners}">
                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                <div class="spnsors-logo">
+                                <div class="sponsors-logo">
                                     <a href="${partner.companyWebsite}"><img class=img-fluid" src="/image/partner/${partner.id}"
                                                                              alt="${partner.companyName}"/></a>
                                 </div>
