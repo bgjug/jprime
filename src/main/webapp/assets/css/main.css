@@ -38,6 +38,10 @@ p {
   margin: 0px;
   font-size: 14px; }
 
+p.carousel-jprime {
+  font-size: 20px;
+}
+
 ul, ol {
   list-style: outside none none;
   margin: 0;

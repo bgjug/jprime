@@ -50,7 +50,7 @@
                 <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
                 <div class="carousel-caption d-md-block">
                     <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>
-                    <p class="fadeInUp wow" style="font-size: 21px" data-wow-delay=".6s">The conference will be held
+                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s">The conference will be held
                         on ${conference_dates} in Sofia Tech Park</p>
 <%--                    <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
                     <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->
