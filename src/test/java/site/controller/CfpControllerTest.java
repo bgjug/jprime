@@ -62,9 +62,14 @@ public class CfpControllerTest {
 
     @Test
     public void getShouldReturnEmptySubscription() throws Exception {
+        String cfpPage = CfpController.CFP_CLOSED_JSP;
+        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfterNow()) {
+            cfpPage = CfpController.CFP_OPEN_JSP;
+        }
+
         mockMvc.perform(get("/cfp"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(Globals.PAGE_CFP));
+                .andExpect(view().name(cfpPage));
     }
 
     @Test
