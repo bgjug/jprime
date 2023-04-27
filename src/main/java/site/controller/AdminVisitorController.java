@@ -15,6 +15,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,6 +76,8 @@ public class AdminVisitorController {
 
     private static final String FIRST_NAME = "First Name";
 
+    private static final String REGISTRANT = "Registrant";
+
     private static final String ADDRESS = "Address";
 
     private static final String VAT_NUMBER = "VAT Number";
@@ -85,7 +87,7 @@ public class AdminVisitorController {
     private static final String COMPANY_E_MAIL = "Company E-Mail";
 
     private static final String[] JPRIME_FIELDS_LIST = {
-        NAME, EMAIL_ADDRESS, COMPANY, IS_COMPANY, ADDRESS, VAT_NUMBER, MATERIAL_RESPONSIBLE_PERSON,
+        NAME, EMAIL_ADDRESS, COMPANY, IS_COMPANY, REGISTRANT, ADDRESS, VAT_NUMBER, MATERIAL_RESPONSIBLE_PERSON,
         COMPANY_E_MAIL
     };
 
@@ -188,7 +190,9 @@ public class AdminVisitorController {
                     //userServiceJPro.clearVisitors();
                 }
                 registrantsMap = StreamSupport.stream(adminFacade.findAllRegistrants().spliterator(), false)
-                    .collect(Collectors.toMap(Registrant::getName, Function.identity()));
+                    .collect(Collectors.toMap(
+                        r -> StringUtils.isEmpty(r.getVatNumber()) ? r.getName() : r.getVatNumber(),
+                        Function.identity(), (a, b) -> a));
 
                 break;
             case JPROFESSIONALS:
@@ -222,6 +226,7 @@ public class AdminVisitorController {
             }
         } catch (IOException e) {
         }
+
         return getUploadVisitorModel(model);
     }
 
@@ -234,15 +239,22 @@ public class AdminVisitorController {
     private void processJPrimeVisitor(Map<String, String> csvLine, Map<String, Registrant> registrantsMap,
         VisitorStatus visitorStatus) {
         Registrant registrant;
+        String companyName = csvLine.get(COMPANY);
+        String name = csvLine.get(NAME);
+        String email = csvLine.get(EMAIL_ADDRESS);
         if (csvLine.containsKey(IS_COMPANY)) {
-            registrant = registrantsMap.computeIfAbsent(csvLine.get(COMPANY),
-                k -> new Registrant(true, csvLine.get(COMPANY), csvLine.get(ADDRESS), csvLine.get(VAT_NUMBER),
-                    csvLine.get(MATERIAL_RESPONSIBLE_PERSON), csvLine.get(COMPANY_E_MAIL)));
+            String registrantName = csvLine.get(REGISTRANT);
+            String address = csvLine.get(ADDRESS);
+            String vatNumber = csvLine.get(VAT_NUMBER);
+            String mol = csvLine.get(MATERIAL_RESPONSIBLE_PERSON);
+            String companyEmail = csvLine.get(COMPANY_E_MAIL);
+            registrant =
+                registrantsMap.computeIfAbsent(StringUtils.isEmpty(vatNumber) ? registrantName : vatNumber,
+                    k -> new Registrant(true, registrantName, address, vatNumber, mol, companyEmail));
         } else {
-            registrant = new Registrant(csvLine.get(NAME), csvLine.get(EMAIL_ADDRESS));
+            registrant = new Registrant(name, email);
         }
-        Visitor visitor =
-            new Visitor(registrant, csvLine.get(NAME), csvLine.get(EMAIL_ADDRESS), csvLine.get(COMPANY));
+        Visitor visitor = new Visitor(registrant, name, email, companyName);
         visitor.setStatus(visitorStatus);
         adminFacade.saveVisitor(visitor);
     }
@@ -313,13 +325,16 @@ public class AdminVisitorController {
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();
 
          for(Visitor visitor : visitors ){
-        	 if(!StringUtils.isEmpty(visitor))
-                try {
-                    mailFacade.sendEmail(visitor.getEmail(), subject, content);
-                } catch (Throwable t) {
-                    log.error("issue when sending email to" + visitor.getEmail(), t);
-                }
-        }
+             if (StringUtils.isEmpty(visitor.getEmail())) {
+                 continue;
+             }
+
+             try {
+                 mailFacade.sendEmail(visitor.getEmail(), subject, content);
+             } catch (Throwable t) {
+                 log.error("issue when sending email to " + visitor.getEmail(), t);
+             }
+         }
         return "Done ... all emails should be send but check the log for exceptions";
     }
 
