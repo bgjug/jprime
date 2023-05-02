@@ -1,5 +1,8 @@
 package site.app;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -20,11 +23,13 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.util.StringUtils;
 import site.model.User;
 import site.repository.SpeakerRepository;
 import site.repository.UserRepository;
 
+import java.io.IOException;
 import java.util.Collections;
 
 @Configuration
@@ -43,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private SpeakerRepository speakerRepository;
     
     @Override
-    public void configure(final WebSecurity web) throws Exception {
+    public void configure(final WebSecurity web) {
         web
                 .ignoring()
                 .antMatchers("/asset/**")
@@ -55,12 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .inMemoryAuthentication()
-//                .withUser("user").password("password").roles("USER")
-//                .and()
-//                .withUser("admin").password(environment.getProperty("admin.password")).roles("ADMIN", "USER");
+    public void configureGlobal(AuthenticationManagerBuilder auth) {
 	        auth.authenticationProvider(new AuthenticationProvider() {
 	            @Override
 	            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -110,9 +110,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").hasAuthority("USER") //will contain schedule and etc
                 .anyRequest().authenticated() // 8
                 .and()
-                .formLogin()  // #9
+                .formLogin().successHandler(SecurityConfig::redirectToAdmin) // #9
                 .loginPage("/login") // #10
                 .permitAll(); // #5
+    }
+
+    private static void redirectToAdmin(HttpServletRequest request, HttpServletResponse response,
+        Authentication authentication) throws IOException {
+        if (response.isCommitted()) {
+            return;
+        }
+
+        boolean isAdmin = authentication.getAuthorities().stream().anyMatch(p-> "ADMIN".equals(p.getAuthority()));
+        if (isAdmin) {
+            new DefaultRedirectStrategy().sendRedirect(request, response, "/admin");
+        }
     }
 
     @Bean
