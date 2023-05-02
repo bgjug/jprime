@@ -223,7 +223,7 @@ public class AdminVisitorController {
                 csvLine = csvReader.read(fieldsList);
                 do {
                     if (fileModel.getVisitorType() == VisitorType.JPRIME) {
-                        lastRegistrant = processJPrimeVisitor(csvLine, registrantsMap, fileModel.getVisitorStatus(), lastRegistrant, fieldsList);
+                        lastRegistrant = processJPrimeVisitor(csvLine, registrantsMap, fileModel.getVisitorStatus(), lastRegistrant);
                     } else {
                         processJProVisitor(csvLine);
                     }
@@ -243,12 +243,12 @@ public class AdminVisitorController {
     }
 
     private Registrant processJPrimeVisitor(Map<String, String> csvLine, Map<String, Registrant> registrantsMap,
-        VisitorStatus visitorStatus, Registrant lastRegistrant, String[] fieldsList) {
+        VisitorStatus visitorStatus, Registrant lastRegistrant) {
         Registrant registrant;
-        String companyName = csvLine.get(fieldsList[2]);
-        String name = csvLine.get(fieldsList[0]);
-        String email = csvLine.get(fieldsList[1]);
-        if (csvLine.containsKey(fieldsList[3])) {
+        String companyName = csvLine.get(COMPANY);
+        String name = csvLine.get(NAMES);
+        String email = csvLine.get(EMAIL);
+        if (csvLine.containsKey(IS_COMPANY)) {
             String registrantName = csvLine.get(REGISTRANT);
             String address = csvLine.get(ADDRESS);
             String vatNumber = csvLine.get(VAT_NUMBER);
