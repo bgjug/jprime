@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -31,6 +32,9 @@ public class CfpController extends AbstractCfpController {
     public static final String CFP_OPEN_JSP = "/proposal.jsp";
     public static final String CFP_CLOSED_JSP = "/cfp-closed.jsp";
     public static final String CFP_THANK_YOU = "/cfp-thank-you.jsp";
+
+    @Value("${agenda.published:false}")
+    private boolean agendaPublished;
 
     @RequestMapping(value = "/cfp", method = RequestMethod.GET)
     public String submissionForm(Model model) {
@@ -101,6 +105,7 @@ public class CfpController extends AbstractCfpController {
 
     private String goToCFP(@Valid Submission submission, Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
+        model.addAttribute("agenda", agendaPublished);
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(Globals.CURRENT_BRANCH.getCfpCloseDate()));
         DateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
         model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
