@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,9 +64,10 @@ public class AdminVisitorController {
     public static final String VISITOR_UPLOAD_JSP = "/admin/visitor/upload.jsp";
     public static final String VISITOR_EDIT_SEND = "/admin/visitor/send.jsp";
 
+    private static final String EMAIL = "Email";
     private static final String EMAIL_ADDRESS = "Email Address";
 
-    private static final String NAME = "Name";
+    private static final String NAMES = "Names";
 
     private static final String IS_COMPANY = "Is Company";
 
@@ -86,7 +88,7 @@ public class AdminVisitorController {
     private static final String COMPANY_E_MAIL = "Company E-Mail";
 
     private static final String[] JPRIME_FIELDS_LIST = {
-        NAME, EMAIL_ADDRESS, COMPANY, IS_COMPANY, REGISTRANT, ADDRESS, VAT_NUMBER, MATERIAL_RESPONSIBLE_PERSON,
+        NAMES, EMAIL, COMPANY, IS_COMPANY, REGISTRANT, ADDRESS, VAT_NUMBER, MATERIAL_RESPONSIBLE_PERSON,
         COMPANY_E_MAIL
     };
 
@@ -212,11 +214,16 @@ public class AdminVisitorController {
                     return getUploadVisitorModel(model);
                 }
 
+                if (csvLine.entrySet().stream().anyMatch(e-> !e.getKey().equalsIgnoreCase(e.getValue()))) {
+                    fieldsList = Arrays.stream(fieldsList).map(csvLine::get).collect(Collectors.toList()).toArray(new String[]{});
+                }
+
+                Registrant lastRegistrant = null;
                 // Ignore header line
                 csvLine = csvReader.read(fieldsList);
                 do {
                     if (fileModel.getVisitorType() == VisitorType.JPRIME) {
-                        processJPrimeVisitor(csvLine, registrantsMap, fileModel.getVisitorStatus());
+                        lastRegistrant = processJPrimeVisitor(csvLine, registrantsMap, fileModel.getVisitorStatus(), lastRegistrant, fieldsList);
                     } else {
                         processJProVisitor(csvLine);
                     }
@@ -235,27 +242,37 @@ public class AdminVisitorController {
         userServiceJPro.save(visitorJPro);
     }
 
-    private void processJPrimeVisitor(Map<String, String> csvLine, Map<String, Registrant> registrantsMap,
-        VisitorStatus visitorStatus) {
+    private Registrant processJPrimeVisitor(Map<String, String> csvLine, Map<String, Registrant> registrantsMap,
+        VisitorStatus visitorStatus, Registrant lastRegistrant, String[] fieldsList) {
         Registrant registrant;
-        String companyName = csvLine.get(COMPANY);
-        String name = csvLine.get(NAME);
-        String email = csvLine.get(EMAIL_ADDRESS);
-        if (csvLine.containsKey(IS_COMPANY)) {
+        String companyName = csvLine.get(fieldsList[2]);
+        String name = csvLine.get(fieldsList[0]);
+        String email = csvLine.get(fieldsList[1]);
+        if (csvLine.containsKey(fieldsList[3])) {
             String registrantName = csvLine.get(REGISTRANT);
             String address = csvLine.get(ADDRESS);
             String vatNumber = csvLine.get(VAT_NUMBER);
             String mol = csvLine.get(MATERIAL_RESPONSIBLE_PERSON);
             String companyEmail = csvLine.get(COMPANY_E_MAIL);
-            registrant =
-                registrantsMap.computeIfAbsent(StringUtils.isEmpty(vatNumber) ? registrantName : vatNumber,
+            String registrantKey = StringUtils.isEmpty(vatNumber) ? registrantName : vatNumber;
+            if (lastRegistrant != null && (StringUtils.isEmpty(registrantKey) || registrantKey.equals(StringUtils.isEmpty(lastRegistrant.getVatNumber()) ? lastRegistrant.getName() : lastRegistrant.getVatNumber()))) {
+                registrant = lastRegistrant;
+            } else {
+                registrant =
+                    registrantsMap.computeIfAbsent(registrantKey,
                     k -> new Registrant(true, registrantName, address, vatNumber, mol, companyEmail));
+            }
         } else {
             registrant = new Registrant(name, email);
         }
         Visitor visitor = new Visitor(registrant, name, email, companyName);
         visitor.setStatus(visitorStatus);
+        if (registrant.getId() == null) {
+            adminFacade.saveRegistrant(registrant);
+        }
         adminFacade.saveVisitor(visitor);
+
+        return registrant;
     }
 
     @RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
