@@ -104,33 +104,6 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-//	@RequestMapping(value = "/login", method = RequestMethod.POST)
-//	public String login(@RequestParam(required = true) String username, @RequestParam(required = true) String password,
-//			Model model, HttpServletRequest request) {
-//		System.out.println("POSTTT");
-//		if (StringUtils.isEmpty(username) || StringUtils.isEmpty(username)) {
-//			return "/login.jsp";
-//		}
-//
-//		User user = this.getUserRepository().findUserByEmail(username);
-//		if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
-//			return "/login.jsp";
-//		}
-//		request.getSession().setAttribute("user", user);
-//	
-//		 try {
-//             UsernamePasswordAuthenticationToken session = new UsernamePasswordAuthenticationToken(username, password);
-//             session.setDetails(new WebAuthenticationDetails(request));
-//             Authentication authentication = authenticationManager.authenticate(session);
-//             SecurityContextHolder.getContext().setAuthentication(authentication);
-//         } catch (AuthenticationException var8) {
-//        	 return "/login.jsp";
-//         }
-//
-//		return "redirect:/tickets";
-//	}
-
-	
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
 	public String forgottenPass(@ModelAttribute("sent_to_email") String email, HttpServletRequest request) {
 		

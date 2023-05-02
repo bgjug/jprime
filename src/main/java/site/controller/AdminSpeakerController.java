@@ -60,7 +60,7 @@ public class AdminSpeakerController {
     @PostMapping(value = "/add")
     public String add(@Valid final Speaker speaker, BindingResult bindingResult,
                       @RequestParam("file") MultipartFile file, Model model,
-                      @RequestParam(name = "resizeImage", required = false) boolean resize) {
+                      @RequestParam(name = "resizeImage", required = false) boolean resize, @RequestParam(value = "sourcePage", required = false) String sourcePage) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("branches", Branch.values());
             return "/admin/speaker/edit.jsp";
@@ -86,21 +86,23 @@ public class AdminSpeakerController {
         }
         this.adminService.saveSpeaker(speaker);
 
-        return "redirect:/admin/speaker/view";
+        return StringUtils.isEmpty(sourcePage) ? "redirect:/admin/speaker/view" : "redirect:" + sourcePage;
     }
 
     @GetMapping(value = "/add")
-    public String edit(Model model) {
+    public String edit(Model model, @RequestParam(name = "sourcePage", required = false) String sourcePage) {
         model.addAttribute("speaker", new Speaker());
+        model.addAttribute("sourcePage", sourcePage);
         model.addAttribute("branches", Branch.values());
         return "/admin/speaker/edit.jsp";
     }
 
     @Transactional
     @GetMapping(value = "/edit/{itemId}")
-    public String edit(@PathVariable("itemId") Long itemId, Model model) {
+    public String edit(@PathVariable("itemId") Long itemId, Model model,@RequestParam(name = "sourcePage", required = false) String sourcePage) {
         Speaker speaker = adminService.findOneSpeaker(itemId);
         model.addAttribute("speaker", speaker);
+        model.addAttribute("sourcePage", sourcePage);
         model.addAttribute("branches", Branch.values());
         return "/admin/speaker/edit.jsp";
     }

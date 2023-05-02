@@ -21,7 +21,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -309,9 +308,7 @@ public class AdminVisitorController {
             }
         }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        return ResponseEntity.ok().headers(headers).body(out.toByteArray());
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM).body(out.toByteArray());
     }
 
     @RequestMapping(value = "/send", method = RequestMethod.GET)
