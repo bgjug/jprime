@@ -29,6 +29,7 @@ import java.util.List;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -127,8 +128,7 @@ public class SessionControllerTest {
         assertThat(session.getStartTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
         assertThat(session.getEndTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
         assertThat(session.getHall().getName(), is(betaHall.getName()));
-        assertTrue(session.getTitle().startsWith(session.getSubmission().getTitle()) &&
-                session.getTitle().endsWith(session.getSubmission().getSpeaker().getLastName()));
+        assertEquals(session.getTitle(), session.getSubmission().getTitle());
     }
 
     @Test
