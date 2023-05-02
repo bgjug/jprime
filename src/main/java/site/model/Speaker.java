@@ -10,6 +10,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import site.config.Globals;
 
@@ -144,5 +145,10 @@ public class Speaker extends User {
         int result = super.hashCode();
         result = 31 * result + twitter.hashCode();
         return result;
+    }
+
+    @Transient
+    public String getName() {
+        return getFirstName() + " " + getLastName();
     }
 }

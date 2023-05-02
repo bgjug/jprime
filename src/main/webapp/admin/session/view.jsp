@@ -43,10 +43,24 @@
         </tr>
         <c:forEach var="session" items="${sessions}">
             <tr>
-                <td>${session.title}</td>
-<%--                <td>${session.submission.description}</td>--%>
-<%--                <td>${session.submission.speaker.firstName} ${session.submission.speaker.lastName}</td>--%>
-                <td>${session.submission.coSpeaker.firstName} ${session.submission.coSpeaker.lastName}</td>
+                <td>
+                    <c:if test="${session.submission != null}">
+                        <a href="/admin/submission/edit/${session.submission.id}?sourcePage=/admin/session/view">${session.title}</a><p>
+                        <a href="/admin/speaker/edit/${session.submission.speaker.id}?sourcePage=/admin/session/view">${session.submission.speaker.name}</a>
+                    </p>
+                    </c:if>
+                    <c:if test="${session.submission == null}">
+                        ${session.title}
+                    </c:if>
+                </td>
+                <td>
+                    <c:if test="${session.submission != null and session.submission.coSpeaker != null}">
+                        <a href="/admin/speaker/edit/${session.submission.coSpeaker.id}?sourcePage=/admin/session/view">${session.submission.coSpeaker.name}</a>
+                    </c:if>
+                    <c:if test="${session.submission == null or session.submission.coSpeaker == null}">
+                        &nbsp;
+                    </c:if>
+                </td>
                 <td><joda:format value="${session.startTime}" pattern="dd.MM.yyyy HH:mm"/></td>
                 <td><joda:format value="${session.endTime}" pattern="dd.MM.yyyy HH:mm"/></td>
                 <td>${session.hall.name}</td>

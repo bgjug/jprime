@@ -191,13 +191,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title-header text-center">
-                        <h1 class="section-title">Our Speakers</h1>
+                        <h1 class="section-title">Our Featured Speakers</h1>
                         <p>Confirmed speakers coming to jPrime !</p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <c:forEach var="speaker" items="${acceptedSpeakers}">
+                <c:forEach var="speaker" items="${featuredSpeakers}">
                     <div class="col-sm-6 col-md-6 col-lg-3">
                         <!-- Team Item Starts -->
                         <div class="team-item text-center">

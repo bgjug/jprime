@@ -63,10 +63,7 @@ public class Session extends AbstractEntity {
 
     public String getTitle() {
         if (submission != null) {
-            return submission.getTitle() +
-                    "<p>" +
-                    submission.getSpeaker().getFirstName() + " " +
-                    submission.getSpeaker().getLastName();
+            return submission.getTitle();
         }
 
         return title;

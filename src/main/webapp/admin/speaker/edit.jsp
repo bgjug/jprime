@@ -22,7 +22,7 @@
 <body>
 	<admin:menu />
 		<form:form modelAttribute="speaker" method="post"
-		action="/admin/speaker/add" enctype="multipart/form-data">
+			   action="/admin/speaker/add?sourcePage=${sourcePage}" enctype="multipart/form-data">
 		<fieldset>
 			<legend>Add/Edit Speaker</legend>
 			<p>

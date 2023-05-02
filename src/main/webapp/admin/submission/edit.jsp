@@ -25,7 +25,7 @@
 </head>
 <body>
 <admin:menu />
-<user:cfp action="/admin/submission/edit"  admin="true"/>
+<user:cfp action="/admin/submission/edit?sourcePage=${sourcePage}"  admin="true"/>
 
 
 <script type="text/javascript">

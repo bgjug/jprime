@@ -50,7 +50,7 @@ pageEncoding="UTF-8"%>
                 <p>
                 <p>The conference dates are <strong>${conference_dates}</strong></p>
                 <p>Call for paper closes on <strong>${cfp_close_date}!</strong></p>
-                <user:cfp action="/cfp"/>
+                <user:cfp action="/cfp?sourcePage="/>
             </div>
         </div>
     </div>
