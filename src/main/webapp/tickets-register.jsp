@@ -51,7 +51,7 @@
                         <%-- <p style="text-decoration: line-through;"> --%>
                     <p>* The <strong>early bird ticket</strong> price for the conference is <strong>${early_bird_ticket_price}</strong> BGN (VAT included) until ${cfp_close_date}.</p>
                     <p>* The <strong>regular</strong> ticket price after ${cfp_close_date_no_year} will be <strong>${regular_ticket_price}</strong> BGN (VAT included).</p>
-                    <p>* There is a ~50% discount of the regular ticket price for students. Student ticket price is <strong>${student_ticket_price}</strong> BGN (VAT included).</p>
+                    <p>* There is a discount of the regular ticket price for students. Student ticket price is <strong>${student_ticket_price}</strong> BGN (VAT included).</p>
                     <p>* There is a free pass for a JUG lead (one per Java User Group).</p>
 
                     Buy a ticket:
