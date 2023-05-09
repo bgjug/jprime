@@ -29,6 +29,7 @@ import java.util.List;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -73,9 +74,9 @@ public class SessionControllerTest {
     @Before
     public void setup() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        this.forgeSubmission = submissionRepository.save(new Submission("Forge with me", "Forge is the best", SessionLevel.BEGINNER, SessionType.ConferenceSession, new Speaker("Ivan St.", "Ivanov", "ivan.st.ivanov@example.com", "The Forge Guy", "@forge", false, true)));
+        this.forgeSubmission = submissionRepository.save(new Submission("Forge with me", "Forge is the best", SessionLevel.BEGINNER, SessionType.CONFERENCE_SESSION, new Speaker("Ivan St.", "Ivanov", "ivan.st.ivanov@example.com", "The Forge Guy", "@forge", false, true)));
         forgeSubmission.setStatus(SubmissionStatus.ACCEPTED);
-        Submission bootSubmission = submissionRepository.save(new Submission("Spring Boot", "Bootiful or what?", SessionLevel.BEGINNER, SessionType.ConferenceSession, new Speaker("Nayden", "Gochev", "nayden.gochev@example.com", "The Spring Guy", "@sprink", true, true)));
+        Submission bootSubmission = submissionRepository.save(new Submission("Spring Boot", "Bootiful or what?", SessionLevel.BEGINNER, SessionType.CONFERENCE_SESSION, new Speaker("Nayden", "Gochev", "nayden.gochev@example.com", "The Spring Guy", "@sprink", true, true)));
         bootSubmission.setStatus(SubmissionStatus.ACCEPTED);
         this.betaHall = venueHallRepository.save(new VenueHall("Beta", "600 seats"));
         venueHallRepository.save(new VenueHall("Alpha", "400 seats"));
@@ -127,8 +128,7 @@ public class SessionControllerTest {
         assertThat(session.getStartTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
         assertThat(session.getEndTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
         assertThat(session.getHall().getName(), is(betaHall.getName()));
-        assertTrue(session.getTitle().startsWith(session.getSubmission().getTitle()) &&
-                session.getTitle().endsWith(session.getSubmission().getSpeaker().getLastName()));
+        assertEquals(session.getTitle(), session.getSubmission().getTitle());
     }
 
     @Test

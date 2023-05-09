@@ -30,35 +30,43 @@
         <div>
         	<a href="/admin/submission/exportCSV">Export to CSV</a>
         </div>
-		<table class="admin-table">
+		<table class="new-admin-table">
+			<caption><strong>Submissions</strong></caption>
 			<tr>
-				<td><i>Title</i></td>
-				<td><i>Abstract</i></td>
-                <td><i>Level</i></td>
-				<td><i>Type</i></td>
-				<td><i>Speaker</i></td>
-				<td><i>Co-Speaker</i></td>
-				<td><i>Branch</i></td>
-                <td><i>Status</i></td>
-				<td><i>Operations</i></td>
+                <th><em>Level</em></th>
+				<th><em>Type</em></th>
+				<th><em>Speaker</em></th>
+				<th><em>Co-Speaker</em></th>
+				<th><em>Branch</em></th>
+                <th><em>Status</em></th>
+				<th><em>Operations</em></th>
 			</tr>
 			<c:forEach var="submission" items="${submissions.content}">
 				<tr>
-					<td>${submission.title}</td>
-					<td>${submission.description}</td>
-                    <td>${submission.level}</td>
+					<td colspan="6" class="title-column"><em><strong>Title</strong></em>: ${submission.title}</td>
+					<td rowspan="3" class="title-column">
+						<span style="float:left;"><a
+								href="/admin/submission/accept/${submission.id}">Accept</a></span> <br>
+						<span style="float:left;"><a
+								href="/admin/submission/reject/${submission.id}">Reject</a></span> <br>
+						<span style="float:left;"><a
+								href="/admin/submission/edit/${submission.id}">Edit</a></span> <br>
+						<span style="float:left;"><a
+								href="/admin/submission/notify/${submission.id}">Notify</a></span>
+						<span style="float:left;"><a href="/admin/submission/delete/${submission.id}"
+													 class="confirmation">Delete</a></span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="6"><em><strong>Abstract</strong></em>: ${submission.description}</td>
+				</tr>
+				<tr>
+					<td>${submission.level}</td>
 					<td>${submission.type != null ? submission.type.toString() : "Conference session"}</td>
 					<td>${submission.speaker.firstName} ${submission.speaker.lastName}</td>
 					<td>${submission.coSpeaker.firstName} ${submission.coSpeaker.lastName}</td>
 					<td>${submission.branch}</td>
-                    <td>${submission.status}</td>
-					<td>
-						<span style="float:left;"><a href="/admin/submission/accept/${submission.id}">Accept</a></span> <br>
-						<span style="float:left;"><a href="/admin/submission/reject/${submission.id}">Reject</a></span> <br>
-                        <span style="float:left;"><a href="/admin/submission/edit/${submission.id}">Edit</a></span> <br>
-						<span style="float:left;"><a href="/admin/submission/notify/${submission.id}">Notify</a></span>
-						<span style="float:left;"><a href="/admin/submission/delete/${submission.id}" class="confirmation">Delete</a></span>
-					</td>
+					<td>${submission.status}</td>
 				</tr>
 			</c:forEach>
 		</table>

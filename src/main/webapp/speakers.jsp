@@ -22,7 +22,7 @@
     <jsp:directive.include file="theme-colors.jsp" />
 
     <!-- Page Description and Author -->
-    <meta name="description" content="jPrime 2019">
+    <meta name="description" content="jPrime ${jprime_year}">
     <meta name="author" content="jPrime">
 
     <user:pageJavaScriptAndCss/>

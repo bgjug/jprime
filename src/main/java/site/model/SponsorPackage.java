@@ -1,5 +1,5 @@
 package site.model;
 
 public enum SponsorPackage {
-	PLATINUM, GOLD, SILVER, DIAMOND
+    PLATINUM, GOLD, GOLD_LITE, SILVER, DIAMOND
 }

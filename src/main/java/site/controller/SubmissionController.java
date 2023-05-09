@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -188,8 +189,9 @@ public class SubmissionController extends AbstractCfpController {
     }
 
     @RequestMapping(value = "/edit/{submissionId}", method = RequestMethod.GET)
-    public String editSubmissionForm(@PathVariable("submissionId") Long submissionId, Model model) {
+    public String editSubmissionForm(@PathVariable("submissionId") Long submissionId, Model model, @RequestParam(name = "sourcePage", required = false) String sourcePage) {
         buildCfpFormModel(model, adminFacade.findOneSubmission(submissionId));
+        model.addAttribute("sourcePage", sourcePage);
         return ADMIN_SUBMISSION_EDIT_JSP;
     }
 
@@ -198,6 +200,7 @@ public class SubmissionController extends AbstractCfpController {
             BindingResult bindingResult,
             @RequestParam("speakerImage") MultipartFile speakerImage,
             @RequestParam("coSpeakerImage") MultipartFile coSpeakerImage,
+        @RequestParam(name = "sourcePage", required = false) String sourcePage,
             Model model) {
         if (bindingResult.hasErrors()) {
         	buildCfpFormModel(model, submission);
@@ -205,6 +208,6 @@ public class SubmissionController extends AbstractCfpController {
         }
         saveSubmission(submission, speakerImage, coSpeakerImage);
 
-        return REDIRECT + "/admin/submission/view";
+        return REDIRECT + (StringUtils.isEmpty(sourcePage) ? "/admin/submission/view" : sourcePage);
     }
 }

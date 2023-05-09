@@ -138,7 +138,7 @@ public class IndexControllerTest {
                 .andExpect(model().attribute("goldSponsors", containsInAnyOrder(google, apple)))
                 .andExpect(model().attribute("silverSponsors", hasSize(0)))
                 .andExpect(model().attribute("tags", containsInAnyOrder(tag1, tag2)))
-                .andExpect(model().attribute("acceptedSpeakers", contains(brianGoetz)))
+                .andExpect(model().attribute("featuredSpeakers", contains(brianGoetz)))
                 .andExpect(model().attribute("officialSupporterPartnersChunks", IsInstanceOf.instanceOf(List.class)))
                 .andExpect(model().attribute("mediaPartnersChunks", IsInstanceOf.instanceOf(List.class)))
                 .andExpect(model().attribute("eventPartnerChunks", IsInstanceOf.instanceOf(List.class)));

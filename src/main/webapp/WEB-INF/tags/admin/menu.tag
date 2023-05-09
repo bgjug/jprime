@@ -12,4 +12,5 @@
 	<li><a href="/admin/session/view" style="color: blueviolet!important;">Sessions</a></li>
 	<li><a href="/admin/user/view" style="color: blueviolet!important;">Users</a></li>
 	<li><a href="/raffle/view" style="color: blueviolet!important;">Raffle</a></li>
+	<li><a href="/raffle/view/jpro" style="color: blue!important;">Raffle JPro</a></li>
 </ul>

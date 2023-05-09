@@ -62,6 +62,7 @@
 
 var shuffling = false;
 var visitors = ${visitors};
+var lastVisitor = -1;
 
 function shuffle(el){
     shuffling = !shuffling;
@@ -69,12 +70,17 @@ function shuffle(el){
         $(el).text("Stop");
         setTimeout(getRandomVisitor, 100);
     } else {
+        visitors[lastVisitor] = null;
         $(el).text("Start");
     }
 }
 
 function getRandomVisitor(){
-    var visitor = visitors[Math.floor(Math.random()*visitors.length)];
+    var visitor = null;
+    while (visitor == null) {
+        lastVisitor = Math.floor(Math.random()*visitors.length);
+        visitor = visitors[lastVisitor];
+    }
     $("#shuffle-result").text(" " + visitor.name + " (" + visitor.company + ")" )
     if(shuffling) {
         setTimeout(getRandomVisitor, 100);

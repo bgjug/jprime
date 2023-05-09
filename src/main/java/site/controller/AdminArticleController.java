@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import site.config.Globals;
 import site.facade.AdminService;
 import site.model.Article;
 import site.model.User;
@@ -37,6 +38,8 @@ public class AdminArticleController {
     public String getById(@PathVariable("id") final long id, Model model) {
         Article article = adminFacade.findOneArticle(id);
         model.addAttribute("article", article);
+        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+
         return "/single-post.jsp";
     }
 

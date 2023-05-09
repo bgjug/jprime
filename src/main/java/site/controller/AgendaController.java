@@ -35,6 +35,7 @@ public class AgendaController {
     @RequestMapping("/agenda/{id}")
     public String getById(@PathVariable("id") final long id, Model model) {
 	   model.addAttribute("tags", userFacade.findAllTags());
+		model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
     	Session talk = userService.findSessionTalk(id);
     	if (talk == null) {
 			logger.error(String.format("Invalid session id (%1$d)", id));

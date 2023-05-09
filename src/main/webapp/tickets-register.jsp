@@ -49,9 +49,9 @@
                     <h2>Buy conference tickets</h2>
                     <p>
                         <%-- <p style="text-decoration: line-through;"> --%>
-                    <p>* The <strong>early bird ticket</strong> price for the conference is <strong>140</strong>.00 BGN (VAT included) until 22th of March 2022.</p>
-                    <p>* The <strong>regular</strong> ticket price after 1st of March will be <strong>200</strong>.00 BGN (VAT included).</p>
-                    <p>* There is a ~50% discount of the regular ticket price for students. Student ticket price is <strong>100</strong>.00 BGN (VAT included).</p>
+                    <p>* The <strong>early bird ticket</strong> price for the conference is <strong>${early_bird_ticket_price}</strong> BGN (VAT included) until ${cfp_close_date}.</p>
+                    <p>* The <strong>regular</strong> ticket price after ${cfp_close_date_no_year} will be <strong>${regular_ticket_price}</strong> BGN (VAT included).</p>
+                    <p>* There is a ~50% discount of the regular ticket price for students. Student ticket price is <strong>${student_ticket_price}</strong> BGN (VAT included).</p>
                     <p>* There is a free pass for a JUG lead (one per Java User Group).</p>
 
                     Buy a ticket:

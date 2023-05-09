@@ -76,6 +76,10 @@ public class AbstractCfpController {
     private Speaker handleSubmittedSpeaker(Speaker speaker, MultipartFile image) {
         Speaker existingSpeaker = userFacade.findSpeaker(speaker);
         if (existingSpeaker != null) {
+            if (existingSpeaker.getBranch() != Globals.CURRENT_BRANCH) {
+                existingSpeaker.setAccepted(false);
+                existingSpeaker.setFeatured(false);
+            }
             existingSpeaker.setBranch(Globals.CURRENT_BRANCH);
             return existingSpeaker;
         } else {

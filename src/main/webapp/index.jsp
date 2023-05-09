@@ -49,16 +49,23 @@
             <div class="carousel-item active">
                 <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
                 <div class="carousel-caption d-md-block">
-<%--                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime 2020</h1>--%>
-<%--                    <p class="fadeInUp wow" data-wow-delay=".6s">The conference will be held on 28 and 29th of May, 2020 in Sofia Tech Park</p>--%>
+<%--                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>--%>
+<%--                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s">The conference will be held--%>
+<%--                        on ${conference_dates} in Sofia Tech Park</p>--%>
 <%--                    <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
                     <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->
                 </div>
             </div>
+<%--            <div class="carousel-item">--%>
+<%--                <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide">--%>
+<%--                <div class="carousel-caption d-md-block">--%>
+<%--                    <h1 class="wow bounceIn heading" data-wow-delay=".7s">CFP IS STILL OPEN!</h1>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             <div class="carousel-item">
                 <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide">
                 <div class="carousel-caption d-md-block">
-                    <h1 class="wow bounceIn heading" data-wow-delay=".7s">17 Amazing Speakers</h1>
+                    <h1 class="wow bounceIn heading" data-wow-delay=".7s">Many amazing speakers!</h1>
                 </div>
             </div>
             <div class="carousel-item">
@@ -111,7 +118,6 @@
                     <h2 class="intro-title">About</h2>
                     <h3 class="title-sub">The Conference</h3>
                     <p class="intro-desc">jPrime is a conference with talks on Java, various languages on the JVM, mobile, web and best practices.
-                        Its sixth edition of jPrime from 2020 will be held in 2022, the dates are 25 and 26th of May !
                     </p>
                     <p>It's run by the Bulgarian Java User Group and backed by the biggest companies in the country. </p>
                     <p>jPrime features a combination of great international speakers along with the best presenters from Bulgaria and the Balkans.
@@ -138,39 +144,39 @@
             </div>
             <div class="row mb-30">
                 <div class="col-md-2">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="http://www.vmware.com"><img class="img-fluid" src="images/vmware.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="http://www.softwareag.com"><img class="img-fluid" src="images/softwareag.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="http://www.sap.com/bulgaria"><img class="img-fluid" src="images/sap.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="http://www.experian.bg"><img class="img-fluid" src="images/experian.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="https://www.paysafe.com/"><img class="img-fluid" src="images/paysafe.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="https://www.ocadogroup.com/technology/development-centres/bulgaria"><img class="img-fluid" src="images/ocado.png" alt=""></a>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-2" style="float:none;margin: 0 auto">
-                    <div class="spnsors-logo">
+                    <div class="sponsors-logo">
                         <a href="http://java-bg.org/"><img class="img-fluid" src="images/bg-jug.png" style="width:85px;" alt=""></a>
                     </div>
                 </div>
@@ -185,13 +191,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title-header text-center">
-                        <h1 class="section-title">Our Speakers</h1>
+                        <h1 class="section-title">Our Featured Speakers</h1>
                         <p>Confirmed speakers coming to jPrime !</p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <c:forEach var="speaker" items="${acceptedSpeakers}">
+                <c:forEach var="speaker" items="${featuredSpeakers}">
                     <div class="col-sm-6 col-md-6 col-lg-3">
                         <!-- Team Item Starts -->
                         <div class="team-item text-center">
@@ -360,12 +366,12 @@
                 </div>
             </div>
             <div class="row" id="tickets">
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${early_sold_out}'/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>140.00</span>
+                            <span class="price"><span>BGN</span>${early_bird_ticket_price}</span>
                             <h5>
-                                Until 22th of March 2022! </h5>
+                                Until ${cfp_close_date}! </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Early Bird Ticket</h4>
@@ -378,20 +384,22 @@
                                 <li><i class="icon-close"></i><span class="text">Free T-Shirt!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Raffle!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
-                                <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
+                                <li><i class="icon-close"></i><span class="text">Coffee and soft drinks.</span></li>
                             </ul>
-<%--                            <a href="tickets" class="btn btn-common">Buy Ticket</a>--%>
-                            <a href="tickets" class="btn btn-common">Not Available</a>
+                            <c:if test="${early_sold_out.length() == 0}">
+                                <a href="tickets" class="btn btn-common">Buy Ticket</a>
+                            </c:if>
+                            <c:if test="${early_sold_out.length() > 0}">
+                                <a href="tickets" class="btn btn-common">Not Available</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
-<%--                style="opacity: 0.5;"--%>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${regular_sold_out}'/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>200.00</span>
-                            <h5>
-                                After 22th of March 2022 </h5>
+                            <span class="price"><span>BGN</span>${regular_ticket_price}</span>
+                            <h5>After ${cfp_close_date} </h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Regular Ticket</h4>
@@ -404,19 +412,22 @@
                                 <li><i class="icon-close"></i><span class="text">Free T-Shirt!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Raffle!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
-                                <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
+                                <li><i class="icon-close"></i><span class="text">Coffee and soft drinks.</span></li>
                             </ul>
-<%--                            <a href="tickets" class="btn btn-common">Buy Ticket</a>--%>
-                            <a href="tickets" class="btn btn-common">Not Available</a>
+                            <c:if test="${regular_sold_out.length() == 0}">
+                                <a href="tickets" class="btn btn-common">Buy Ticket</a>
+                            </c:if>
+                            <c:if test="${regular_sold_out.length() > 0}">
+                                <a href="tickets" class="btn btn-common">Not Available</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>100.00</span>
-                            <h5>
-                                limited to students only</h5>
+                            <span class="price"><span>BGN</span>${student_ticket_price}</span>
+                            <h5>limited to students only</h5>
                         </div>
                         <div class="pricing-list">
                             <h4>Students ticket</h4>
@@ -429,10 +440,10 @@
                                 <li><i class="icon-close"></i><span class="text">Free T-Shirt!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Raffle!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
-                                <li><i class="icon-close"></i><span class="text">Coffe and soft drinks.</span></li>
+                                <li><i class="icon-close"></i><span class="text">Coffee and soft drinks.</span></li>
                             </ul>
-<%--                            <a href="tickets" class="btn btn-common">Buy Ticket</a>--%>
-                            <a href="tickets" class="btn btn-common">Not Available</a>
+                            <a href="tickets" class="btn btn-common">Buy Ticket</a>
+<%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
                         </div>
                     </div>
                 </div>
@@ -444,49 +455,75 @@
     <!-- Sponsors Section Start -->
     <section id="sponsors" class="section-padding">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="section-sub text-center">Platinum Sponsors</h1>
-                </div>
-            </div>
-            <div class="row mb-30">
-                <c:forEach var="sponsor" items="${platinumSponsors}">
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <div class="spnsors-logo">
-                            <a href="${sponsor.companyWebsite}"><img class=img-fluid" src="/image/sponsor/${sponsor.id}"
-                                                                     alt="${sponsor.companyName}"/></a>
-                        </div>
+            <c:if test="${platinumSponsors.size() > 0}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="section-sub text-center">Platinum Sponsors</h1>
                     </div>
-                </c:forEach>
-            </div>
+                </div>
+                <div class="row mb-30">
+                    <c:forEach var="sponsor" items="${platinumSponsors}">
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="sponsors-logo">
+                                <a href="${sponsor.companyWebsite}"><img class=img-fluid"
+                                                                         src="/image/sponsor/${sponsor.id}"
+                                                                         alt="${sponsor.companyName}"/></a>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="section-sub text-center">Gold Sponsors</h1>
-                </div>
-                <c:forEach var="sponsor" items="${goldSponsors}">
-                    <div class="col-md-2 col-sm-2 col-xs-12">
-                        <div class="spnsors-logo">
-                            <a href="${sponsor.companyWebsite}"><img class="img-fluid" src="/image/sponsor/${sponsor.id}"
-                                                                     alt="${sponsor.companyName}"/></a>
-                        </div>
+            <c:if test="${goldSponsors.size() > 0}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="section-sub text-center">Gold Sponsors</h1>
                     </div>
-                </c:forEach>
-            </div>
+                    <c:forEach var="sponsor" items="${goldSponsors}">
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="sponsors-logo">
+                                <a href="${sponsor.companyWebsite}"><img class="img-fluid"
+                                                                         src="/image/sponsor/${sponsor.id}"
+                                                                         alt="${sponsor.companyName}"/></a>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="section-sub text-center">Silver Sponsors</h1>
-                </div>
-                <c:forEach var="sponsor" items="${silverSponsors}">
-                    <div class="col-md-2 col-sm-2 col-xs-12">
-                        <div class="spnsors-logo">
-                            <a href="${sponsor.companyWebsite}"><img class="img-fluid" src="/image/sponsor/${sponsor.id}"
-                                                                     alt="${sponsor.companyName}"/></a>
-                        </div>
+            <c:if test="${goldLiteSponsors.size() > 0}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="section-sub text-center">Gold Lite Sponsors</h1>
                     </div>
-                </c:forEach>
-            </div>
+                    <c:forEach var="sponsor" items="${goldLiteSponsors}">
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="sponsors-logo">
+                                <a href="${sponsor.companyWebsite}"><img class="img-fluid"
+                                                                         src="/image/sponsor/${sponsor.id}"
+                                                                         alt="${sponsor.companyName}"/></a>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
+
+            <c:if test="${silverSponsors.size() > 0}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="section-sub text-center">Silver Sponsors</h1>
+                    </div>
+                    <c:forEach var="sponsor" items="${silverSponsors}">
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="sponsors-logo">
+                                <a href="${sponsor.companyWebsite}"><img class="img-fluid"
+                                                                         src="/image/sponsor/${sponsor.id}"
+                                                                         alt="${sponsor.companyName}"/></a>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
 
         </div>
     </section>
@@ -505,7 +542,7 @@
                     <c:forEach var="partners" items="${officialSupporterPartnersChunks}">
                         <c:forEach var="partner" items="${partners}">
                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                <div class="spnsors-logo">
+                                <div class="sponsors-logo">
                                     <a href="${partner.companyWebsite}"><img class=img-fluid" src="/image/partner/${partner.id}"
                                                                              alt="${partner.companyName}"/></a>
                                 </div>
@@ -531,7 +568,7 @@
                     <c:forEach var="partners" items="${mediaPartnersChunks}">
                         <c:forEach var="partner" items="${partners}">
                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                <div class="spnsors-logo">
+                                <div class="sponsors-logo">
                                     <a href="${partner.companyWebsite}"><img class=img-fluid" src="/image/partner/${partner.id}"
                                                                              alt="${partner.companyName}"/></a>
                                 </div>
@@ -557,7 +594,7 @@
                     <c:forEach var="partners" items="${eventPartnerChunks}">
                         <c:forEach var="partner" items="${partners}">
                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                <div class="spnsors-logo">
+                                <div class="sponsors-logo">
                                     <a href="${partner.companyWebsite}"><img class=img-fluid" src="/image/partner/${partner.id}"
                                                                              alt="${partner.companyName}"/></a>
                                 </div>
@@ -592,7 +629,7 @@
         <div class="container" style="text-align: center">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="section-title">jPrime 2019 recordings</h1>
+                    <h1 class="section-title">jPrime ${jprime_year} recordings</h1>
                 </div>
             </div>
             <div class="row">
@@ -807,10 +844,10 @@
                 </div>
             </div>
             <div class="row" id="sponsor">
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('PLATINUM')}"/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>5000.00</span>
+                            <span class="price"><span>BGN</span>7000</span>
                             <h5></h5>
                         </div>
                         <div class="pricing-list">
@@ -820,18 +857,22 @@
                                 <li><i class="icon-close"></i><span class="text">15% discount on additional passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Booth in the conference hall!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Presence on the stage for the raffle</span></li>
-                                <li><i class="icon-close"></i><span class="text">2 banners in the conference rooms</span></li>
+                                <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                                 <li><i class="icon-close"></i><span class="text">1 invite for the "thank you" dinner</span></li>
                             </ul>
-<%--                                <a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn btn-common">Sign Up Now</a>--%>
-                            <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            <c:if test="${sold_out_sponsor_packages.get('PLATINUM').length() == 0}">
+                                <a href="mailto:conference@jprime.io?subject=platinum sponsorship" class="btn btn-common">Sign Up Now</a>
+                            </c:if>
+                            <c:if test="${sold_out_sponsor_packages.get('PLATINUM').length() > 0}">
+                                <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="opacity: 0.5;">
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('GOLD')}"/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>4000.00</span>
+                            <span class="price"><span>BGN</span>5500</span>
                             <h5></h5>
                         </div>
                         <div class="pricing-list">
@@ -840,17 +881,44 @@
                                 <li><i class="icon-check"></i><span class="text">6 free passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">15% discount on additional passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Booth in the conference hall!</span></li>
-                                <li><i class="icon-close"></i><span class="text">2 banners in the conference rooms</span></li>
+                                <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                             </ul>
-<%--                            <a href="mailto:conference@jprime.io?subject=gold sponsorship" class="btn btn-common">Sign Up Now</a>--%>
-                            <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            <c:if test="${sold_out_sponsor_packages.get('GOLD').length() == 0}">
+                                <a href="mailto:conference@jprime.io?subject=gold sponsorship" class="btn btn-common">Sign Up Now</a>
+                            </c:if>
+                            <c:if test="${sold_out_sponsor_packages.get('GOLD').length() > 0}">
+                                <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('GOLD_LITE')}"/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>1500.00</span>
+                            <span class="price"><span>BGN</span>4500</span>
+                            <h5></h5>
+                        </div>
+                        <div class="pricing-list">
+                            <h4>Gold Light</h4>
+                            <ul>
+                                <li><i class="icon-check"></i><span class="text">6 free passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">15% discount on additional passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Booth in the corner area!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
+                            </ul>
+                            <c:if test="${sold_out_sponsor_packages.get('GOLD_LITE').length() == 0}">
+                                <a href="mailto:conference@jprime.io?subject=gold_lite_sponsorship" class="btn btn-common">Sign Up Now</a>
+                            </c:if>
+                            <c:if test="${sold_out_sponsor_packages.get('GOLD_LITE').length() > 0}">
+                                <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('SILVER')}"/>">
+                    <div class="price-block-wrapper">
+                        <div class="prici-left">
+                            <span class="price"><span>BGN</span>2000</span>
                             <h5></h5>
                         </div>
                         <div class="pricing-list">
@@ -858,10 +926,14 @@
                             <ul>
                                 <li><i class="icon-check"></i><span class="text">3 free passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">10% discount on additional passes!</span></li>
-                                <li><i class="icon-close"></i><span class="text">2 banners in the conference rooms</span></li>
+                                <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                             </ul>
-                            <a href="mailto:conference@jprime.io?subject=silver sponsorship" class="btn btn-common">Sign Up Now</a>
-                            <%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
+                            <c:if test="${sold_out_sponsor_packages.get('SILVER').length() == 0}">
+                                <a href="mailto:conference@jprime.io?subject=silver_sponsorship" class="btn btn-common">Sign Up Now</a>
+                            </c:if>
+                            <c:if test="${sold_out_sponsor_packages.get('SILVER').length() > 0}">
+                                <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -871,7 +943,6 @@
     <!-- Sponsors Pricing Area End -->
 
     <user:footer/>
-
 
 </body>
 

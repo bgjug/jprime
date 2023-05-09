@@ -9,10 +9,11 @@ public class InvoiceDetail {
 
     private Integer idx;
 
-    private BigDecimal singlePriceWithVAT = DEFAULT_TICKET_PRICE;
+    private BigDecimal singlePriceWithVAT;
     private Integer passQty;
     private String description = DEFAULT_DESCRIPTION_BG;
-    public InvoiceDetail(Integer passQty) {
+    public InvoiceDetail(BigDecimal singlePriceWithVAT, Integer passQty) {
+        this.singlePriceWithVAT = singlePriceWithVAT;
         this.passQty = passQty;
     }
 

@@ -104,7 +104,7 @@ public class EpayUtil {
                 "INVOICE="+facNo+"\r\n" +
                 "AMOUNT="+(overrideAmount==0?(numberOfTickets*100):overrideAmount)+"\r\n" +
                 "CURRENCY=BGN\r\n" +
-                "EXP_TIME=01.08.2020\r\n" +
+                "EXP_TIME=01.08.2023\r\n" +
                 "DESCR="+description+"\r\n" +
                 "ENCODING=utf-8";
         String encoded = BASE64_ENCODER.encodeToString(message.getBytes());

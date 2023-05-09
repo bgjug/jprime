@@ -1,22 +1,28 @@
 package site.controller.invoice;
 
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.util.JRLoader;
-import org.springframework.stereotype.Service;
-import site.config.Globals;
-
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static org.apache.commons.beanutils.PropertyUtils.*;
-import static site.controller.invoice.InvoiceData.*;
-import static site.controller.invoice.InvoiceLanguage.*;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import org.springframework.stereotype.Service;
+import site.config.Globals;
+
+import static org.apache.commons.beanutils.PropertyUtils.getProperty;
+import static site.controller.invoice.InvoiceData.DEFAULT_DESCRIPTION_BG;
+import static site.controller.invoice.InvoiceData.TicketPrices;
+import static site.controller.invoice.InvoiceLanguage.EN;
 
 /**
  * Created by mitia on 10.04.15.
@@ -66,15 +72,7 @@ public class InvoiceExporter {
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
 
-        ByteArrayOutputStream result = new ByteArrayOutputStream();
-
-        JRPdfExporter pdfExporter = new JRPdfExporter();
-        pdfExporter.setParameter(JRExporterParameter.CHARACTER_ENCODING, "UTF-8");
-        pdfExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-        pdfExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, result);
-        pdfExporter.exportReport();
-
-        return result.toByteArray();
+        return JasperExportManager.exportReportToPdf(jasperPrint);
     }
 
     //demonstration purposes only!
@@ -89,9 +87,10 @@ public class InvoiceExporter {
         data.setMol("fda");
         data.setInvoiceType("Проформа");
         data.setPaymentType("пеймънт");
-        data.addInvoiceDetail(new InvoiceDetail(STUDENT_TICKET_PRICE, 3, DEFAULT_DESCRIPTION_BG));
-        data.addInvoiceDetail(new InvoiceDetail(DEFAULT_TICKET_PRICE, 3, DEFAULT_DESCRIPTION_BG));
+        TicketPrices ticketPrices = InvoiceData.getPrices(Globals.CURRENT_BRANCH);
+        data.addInvoiceDetail(new InvoiceDetail(ticketPrices.getStudentPrice(), 3, DEFAULT_DESCRIPTION_BG));
+        data.addInvoiceDetail(new InvoiceDetail(ticketPrices.getPrice(Globals.CURRENT_BRANCH), 3, DEFAULT_DESCRIPTION_BG));
 
-        Files.write(Paths.get("/tmp/result.pdf"), new InvoiceExporter().exportInvoice(data, true, EN));
+        Files.write(Paths.get("invoice_test.pdf"), new InvoiceExporter().exportInvoice(data, true, EN));
     }
 }

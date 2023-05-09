@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-12">
                 <p>
-                <p>Stay tuned for contact from our side. The CFP closes 15th of March.</p> <br/>
+                <p>Stay tuned for contact from our side. The CFP closes ${cfp_close_date}.</p> <br/>
                 <p>Usually after that there is voting in place for about 2 weeks. You should be contacted in the beginning of March ! </p><br/>
                 <p>For any questions please mail us to <a href="mailto:conference@jprime.io"><i class="fa fa-envelope-o"></i> conference@jprime.io</a></p>
 

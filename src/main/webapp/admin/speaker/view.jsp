@@ -20,48 +20,64 @@
 	<admin:menu/>
 	<fieldset>
 	<legend>Speakers</legend>
-		<table class="admin-table">
+		<form action="view">
+			<table>
+				<tr>
+					<td><strong>Year:</strong></td>
+					<td><select name="year" id="year">
+						<option value="" <c:if test="${selected_branch == null or selected_branch.length() == 0}">selected</c:if>>All</option>
+						<c:forEach var="branch" items="${branches}">
+							<option value="${branch.label}" <c:if test="${selected_branch != null && selected_branch.equals(branch.label)}">selected</c:if>>${branch.label}</option>
+						</c:forEach>
+					</select></td>
+					<td><input type="submit" value="Search"></td>
+				</tr>
+			</table>
+		</form>
+		<table class="new-admin-table">
+			<caption><strong>Speakers</strong></caption>
 			<tr>
-				<td><i>Name</i></td>
-                <td><i>Bio</i></td>
-				<td><i>Email</i></td>
-				<td><i>Phone</i></td>
-				<td><i>Twitter</i></td>
-                <td><i>Featured?</i></td>
-				<td><i>Accepted?</i></td>
-				<td><i>Branch?</i></td>
-				<td><i>Picture</i></td>
-				<td><i>Operations</i></td>
+				<th><em>Picture</em></th>
+				<th><em>Name</em></th>
+				<th><em>Email</em></th>
+				<th><em>Phone</em></th>
+				<th><em>Twitter</em></th>
+				<th><em>Featured?</em></th>
+				<th><em>Accepted?</em></th>
+				<th><em>Branch?</em></th>
+				<th><em>Operations</em></th>
 			</tr>
 			<c:forEach var="speaker" items="${speakers.content}">
 				<tr>
+					<td rowspan="2"><img alt="Speaker picture" src="/image/speaker/${speaker.id}" style="max-width: 280px"/></td>
 					<td>${speaker.firstName} ${speaker.lastName} </td>
-                    <td>${speaker.bio}</td>
                     <td>${speaker.email}</td>
 					<td>${speaker.phone}</td>
 					<td>${speaker.twitter}</td>
-                    <td>${speaker.featured}</td>
-					<td>${speaker.accepted}</td>
+					<td><input disabled type="checkbox" <c:if test="${speaker.featured}">checked</c:if>></td>
+					<td><input disabled type="checkbox" <c:if test="${speaker.accepted}">checked</c:if>></td>
 					<td>${speaker.branch}</td>
-					<td><img src="/image/speaker/${speaker.id}" style="max-width: 280px"/></td>
-					<td>
-						<span style="float:left;"><a href="/admin/speaker/edit/${speaker.id}">Edit</a></span> &nbsp;
-						<span style="float:right;"><a href="/admin/speaker/remove/${speaker.id}"> Remove </a></span>
+					<td rowspan="2">
+						<span style="float:left;"><a href="edit/${speaker.id}">Edit</a></span> &nbsp;
+						<span style="float:right;"><a href="remove/${speaker.id}">Remove</a></span>
 					</td>
+				</tr>
+				<tr class="title-column">
+					<td colspan="7"><em><strong>Bio :</strong></em>${speaker.bio}</td>
 				</tr>
 			</c:forEach>
 		</table>
 		&nbsp;
 		<div>
 			<c:if test="${speakers.number > 0}">
-				<span><a href="/admin/speaker/view?page=${speakers.number - 1}">previous</a></span>
+				<span><a href="view?page=${speakers.number - 1}">previous</a></span>
 			</c:if>
 			<c:if test="${speakers.number < (speakers.totalPages - 1)}">
-				<span><a href="/admin/speaker/view?page=${speakers.number + 1}">next</a></span>
+				<span><a href="view?page=${speakers.number + 1}">next</a></span>
 			</c:if>
 		</div>
 		<div>
-			<a style="float:right;" href="/admin/speaker/add">Add</a>
+			<a style="float:right;" href="add">Add</a>
 		</div>
 	</fieldset>
 </body>

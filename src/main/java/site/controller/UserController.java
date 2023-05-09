@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import site.config.Globals;
 import site.facade.MailService;
 import site.facade.ResetPasswordService;
 import site.model.User;
@@ -103,33 +104,6 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-//	@RequestMapping(value = "/login", method = RequestMethod.POST)
-//	public String login(@RequestParam(required = true) String username, @RequestParam(required = true) String password,
-//			Model model, HttpServletRequest request) {
-//		System.out.println("POSTTT");
-//		if (StringUtils.isEmpty(username) || StringUtils.isEmpty(username)) {
-//			return "/login.jsp";
-//		}
-//
-//		User user = this.getUserRepository().findUserByEmail(username);
-//		if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
-//			return "/login.jsp";
-//		}
-//		request.getSession().setAttribute("user", user);
-//	
-//		 try {
-//             UsernamePasswordAuthenticationToken session = new UsernamePasswordAuthenticationToken(username, password);
-//             session.setDetails(new WebAuthenticationDetails(request));
-//             Authentication authentication = authenticationManager.authenticate(session);
-//             SecurityContextHolder.getContext().setAuthentication(authentication);
-//         } catch (AuthenticationException var8) {
-//        	 return "/login.jsp";
-//         }
-//
-//		return "redirect:/tickets";
-//	}
-
-	
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
 	public String forgottenPass(@ModelAttribute("sent_to_email") String email, HttpServletRequest request) {
 		
@@ -204,7 +178,8 @@ public class UserController {
 		String msg = "Successfully changed password for user: " + user.getFirstName() + " " + user.getLastName() +
 				" (" + user.getEmail() + ") ";
 		model.addAttribute("msg", msg);
-		
+		model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+
 		return SUCCESS_SCREEN_JSP;
 	}
 	

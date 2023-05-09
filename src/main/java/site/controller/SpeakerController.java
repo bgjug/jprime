@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import site.config.Globals;
 import site.facade.UserService;
 import site.model.Speaker;
 
@@ -25,7 +26,7 @@ public class SpeakerController {
    @RequestMapping("/speakers")
    public String speakers(Pageable pageable, Model model) {
       List<Speaker> acceptedSpeakers = userService.findAcceptedSpeakers();
-      Page<Speaker> speakers = new PageImpl<Speaker>(acceptedSpeakers, pageable, acceptedSpeakers.size());
+      Page<Speaker> speakers = new PageImpl<>(acceptedSpeakers, pageable, acceptedSpeakers.size());
       model.addAttribute("speakers", speakers);
 
       model.addAttribute("tags", userService.findAllTags());
@@ -37,6 +38,7 @@ public class SpeakerController {
    @RequestMapping("/speaker/{id}")
    public String getById(@PathVariable("id") final long id, Model model) {
       Speaker speaker = userService.findSpeaker(id);
+      model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
         if (speaker == null) {
             logger.error(String.format("Invalid speaker id (%1$d)", id));
             return "/404.jsp";
@@ -45,6 +47,7 @@ public class SpeakerController {
          model.addAttribute("speaker", speaker);
       }
 
+      model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
       model.addAttribute("tags", userService.findAllTags());
       return "/speaker.jsp";
    }

@@ -2,6 +2,7 @@ package site.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -13,8 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import site.config.Globals;
 import site.facade.UserService;
 import site.model.Article;
 
@@ -34,9 +35,11 @@ public class NavController {
 
 		Page<Article> articles= userFacade.findArticlesByTag(tagName, pageable);
 
-		if (articles.getTotalElements() == 0) {
-		    logger.error(String.format("Invalid tag name (%1$s)", tagName));
-		    return "/404.jsp";
+        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+
+        if (articles.getTotalElements() == 0) {
+            logger.error(()->String.format("Invalid tag name (%1$s)", tagName));
+            return "/404.jsp";
         }
 
 		if(articles.getTotalElements() > 1) {
@@ -53,6 +56,7 @@ public class NavController {
         Page<Article> articles= userFacade.allPublishedArticles(pageable);
         model.addAttribute("articles", articles);
         model.addAttribute("tags", userFacade.findAllTags());
+        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
         // redirect to nav
         return "/blog.jsp";
     }
@@ -60,6 +64,7 @@ public class NavController {
     //read a single blog
     @RequestMapping("/nav/article/{id}")
     public String getById(@PathVariable("id") final long id, Model model) {
+        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
         Article article= userFacade.getArticleById(id);
 
         if (article == null) {
@@ -79,6 +84,7 @@ public class NavController {
 	public String getById(@RequestParam(required = true) final String title,
 			Model model) {
         Article article= userFacade.getArticleByTitle(title);
+        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
 
         if (article == null) {
             logger.error(String.format("Invalid tag title (%1$s)", title));
@@ -104,6 +110,10 @@ public class NavController {
     @RequestMapping("/venue")
     public String showVenue(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
+        DateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
+        model.addAttribute("conference_dates", String.format("%d-%s", startDate.getDayOfMonth(),
+            DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
+
         return "/venue.jsp";
     }
 

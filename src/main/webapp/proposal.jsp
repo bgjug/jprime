@@ -48,8 +48,9 @@ pageEncoding="UTF-8"%>
         <div class="row">
             <div class="col-12">
                 <p>
-                <p>Call for paper closes on <strong>15th of March!</strong></p>
-                <user:cfp action="/cfp"/>
+                <p>The conference dates are <strong>${conference_dates}</strong></p>
+                <p>Call for paper closes on <strong>${cfp_close_date}!</strong></p>
+                <user:cfp action="/cfp?sourcePage="/>
             </div>
         </div>
     </div>

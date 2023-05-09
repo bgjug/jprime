@@ -4,9 +4,15 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections4.MapUtils;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 import site.config.Globals;
+import site.model.Branch;
 import site.model.Registrant;
 
 /**
@@ -15,9 +21,6 @@ import site.model.Registrant;
  */
 public class InvoiceData {
 
-    public static final BigDecimal DEFAULT_TICKET_PRICE = BigDecimal.valueOf(200D);
-    public static final BigDecimal STUDENT_TICKET_PRICE = BigDecimal.valueOf(100D);
-
     public static final String DEFAULT_DESCRIPTION_BG = "jPrime "+ Globals.CURRENT_BRANCH.toString() + " билет за конференция";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
@@ -25,6 +28,12 @@ public class InvoiceData {
 
     public static final String ORIGINAL_BG = "Оригинал";
     public static final String PROFORMA_BG = "Проформа";
+
+    private static final Map<Branch, TicketPrices> TICKET_PRICE_MAP = MapUtils.putAll(new HashMap<>(),
+        new Object[] {
+            Branch.YEAR_2023,
+            new TicketPrices(BigDecimal.valueOf(280D), BigDecimal.valueOf(180D), BigDecimal.valueOf(100D))
+        });
 
     private String invoiceNumber;
     private String invoiceDate;
@@ -43,16 +52,16 @@ public class InvoiceData {
 
     public BigDecimal getTotalPrice() {
         return invoiceDetails.stream()
-                             .map(InvoiceDetail::getTotalPrice)
-                             .reduce(BigDecimal::add)
-                             .orElse(BigDecimal.valueOf(0.0));
+            .map(InvoiceDetail::getTotalPrice)
+            .reduce(BigDecimal::add)
+            .orElse(BigDecimal.valueOf(0.0));
     }
 
     public BigDecimal getTotalPriceWithVAT() {
         return invoiceDetails.stream()
-                             .map(d -> d.getSinglePriceWithVAT().multiply(new BigDecimal(d.getPassQty())))
-                             .reduce(BigDecimal::add)
-                             .orElse(BigDecimal.valueOf(0.0));
+            .map(d -> d.getSinglePriceWithVAT().multiply(new BigDecimal(d.getPassQty())))
+            .reduce(BigDecimal::add)
+            .orElse(BigDecimal.valueOf(0.0));
     }
 
     public BigDecimal getTotalPriceVAT() {
@@ -157,13 +166,30 @@ public class InvoiceData {
         result.setInvoiceDate(LocalDate.now().format(FORMATTER));
 
         int tickets = registrant.getVisitors().size();
+        Branch branch = registrant.getBranch();
+        TicketPrices ticketPrices = TICKET_PRICE_MAP.get(branch);
         if (registrant.isStudent()) {
-            result.addInvoiceDetail(new InvoiceDetail(STUDENT_TICKET_PRICE, tickets, DEFAULT_DESCRIPTION_BG));
+            BigDecimal studentPrice = ticketPrices.getStudentPrice();
+            result.addInvoiceDetail(
+                new InvoiceDetail(studentPrice, tickets, DEFAULT_DESCRIPTION_BG));
         } else {
-            result.addInvoiceDetail(new InvoiceDetail(tickets));
+            BigDecimal ticketPrice = ticketPrices.getPrice(branch);
+
+            DateTime registrationDate =
+                registrant.getCreatedDate() != null ? registrant.getCreatedDate() : branch.getCfpOpenDate();
+
+            if (registrationDate.isBefore(branch.getCfpCloseDate()) && Days.daysBetween(
+                registrationDate, DateTime.now()).getDays() <= 3) {
+                ticketPrice = ticketPrices.getPrice(branch, registrationDate);
+            }
+            result.addInvoiceDetail(new InvoiceDetail(ticketPrice, tickets));
         }
 
         return result;
+    }
+
+    public static TicketPrices getPrices(Branch branch) {
+        return TICKET_PRICE_MAP.get(branch);
     }
 
     public void addInvoiceDetail(InvoiceDetail invoiceDetail) {
@@ -196,6 +222,42 @@ public class InvoiceData {
             this.description = description;
         } else {
             invoiceDetails.get(0).setDescription(description);
+        }
+    }
+
+    public static class TicketPrices {
+
+        private final BigDecimal regularPrice;
+
+        private final BigDecimal earlyBirdPrice;
+
+        private final BigDecimal studentPrice;
+
+        public TicketPrices(BigDecimal regularPrice, BigDecimal earlyBirdPrice, BigDecimal studentPrice) {
+            this.regularPrice = regularPrice;
+            this.earlyBirdPrice = earlyBirdPrice;
+            this.studentPrice = studentPrice;
+        }
+
+        public BigDecimal getPrice(Branch branch) {
+            return getPrice(branch, DateTime.now());
+        }
+
+        public BigDecimal getPrice(Branch branch, DateTime atDateTime) {
+            atDateTime = atDateTime != null ? atDateTime : DateTime.now();
+            return branch.getCfpCloseDate().isAfter(atDateTime) ? earlyBirdPrice : regularPrice;
+        }
+
+        public BigDecimal getRegularPrice() {
+            return regularPrice;
+        }
+
+        public BigDecimal getEarlyBirdPrice() {
+            return earlyBirdPrice;
+        }
+
+        public BigDecimal getStudentPrice() {
+            return studentPrice;
         }
     }
 }

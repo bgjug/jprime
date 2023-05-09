@@ -4,6 +4,7 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import site.config.Globals;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ public class CustomErrorController implements ErrorController {
 
     @RequestMapping(value = "/404")
     public String errorPage(Model model) throws IOException {
+        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
         return "/404.jsp";
     }
 
