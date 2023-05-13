@@ -1,9 +1,11 @@
 package site.facade;
 
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class MailService {
     @Value("${spring.mail.username}")
     private String emailAddress;
 
+    @Value("${test.email.address:}")
+    private String testEmailAddress;
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -34,26 +39,29 @@ public class MailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
+        String emailTo = StringUtils.isEmpty(testEmailAddress) ? to: testEmailAddress;
+
         helper.setFrom(emailAddress);
-        helper.setTo(to);
+        helper.setTo(emailTo);
         helper.setSubject(subject);
         helper.setText(messageText, true);
 
         mailSender.send(mimeMessage);
     }
 
-    public void sendInvoice(String to, String subject, String messageText, byte[] pdf, String pdfFilename) throws MessagingException {
+    public void sendEmail(String to, String subject, String messageText, byte[] pdf, String pdfFilename) throws MessagingException {
         System.setProperty("mail.mime.splitlongparameters", "false");
-        ByteArrayResource bais = null;
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
+        String emailTo = StringUtils.isEmpty(testEmailAddress) ? to: testEmailAddress;
+
         helper.setFrom(emailAddress);
-        helper.setTo(to);
+        helper.setTo(emailTo);
         helper.setSubject(subject);
         helper.setText(messageText, true);
 
-        bais = new ByteArrayResource(pdf);
+        ByteArrayResource bais = new ByteArrayResource(pdf);
         try {
             helper.addAttachment(MimeUtility.encodeWord(pdfFilename, "UTF-8", "Q"), bais);
         } catch (UnsupportedEncodingException e) {
@@ -62,4 +70,5 @@ public class MailService {
 
         mailSender.send(mimeMessage);
     }
+
 }

@@ -26,10 +26,11 @@
 	<legend>Visitors</legend>
 
 		<div>
-			<a href="/admin/visitor/add">Add</a>
-			<a href="/admin/visitor/export">Export</a>
-			<a href="/admin/visitor/send">Send email to ALL </a>
-			<a href="/admin/visitor/upload">Upload from CSV</a>
+			<a href="/admin/visitor/add">Add</a>&nbsp;|&nbsp;
+			<a href="/admin/visitor/export">Export</a>&nbsp;|&nbsp;
+			<a href="/admin/visitor/send">Send email to ALL </a>&nbsp;|&nbsp;
+			<a href="/admin/visitor/upload">Upload from CSV</a>&nbsp;|&nbsp;
+			<a href="/admin/visitor/tickets" class="ticket_confirm">Send tickets</a>
 		</div>
 		&nbsp;
 		<br/>
@@ -52,6 +53,7 @@
 				<th><i>Payed</i></th>
 				<th><i>Registrant</i></th>
 				<th><i>Invoice number</i></th>
+				<th><i>Ticket number</i></th>
 				<th><i>Operations</i></th>
 			</tr>
 			</thead>
@@ -63,7 +65,8 @@
                     <td>${visitor.company}</td>
 					<td>${visitor.status}</td>
 					<td>${visitor.registrant.name}</td>
-					<td>${not empty visitor.registrant and not empty visitor.registrant.realInvoiceNumber ?visitor.registrant.realInvoiceNumber:''}</td>
+					<td>${not empty visitor.registrant and not empty visitor.registrant.realInvoiceNumber ? visitor.registrant.realInvoiceNumber:''}</td>
+					<td>${visitor.ticket}</td>
 					<td>
 
 						<span><a href="/admin/visitor/edit/${visitor.id}">Edit</a></span> &nbsp;&nbsp;&nbsp;
@@ -136,6 +139,11 @@
 			// Get the length
 			$('#count').text(oTable._('tr', {"filter": "applied"}).length);
 		}
+	</script>
+	<script type="text/javascript">
+		$('.ticket_confirm').on('click', function () {
+			return confirm('Please confirm that you want to send tickets to all paid and sponsored visitors?');
+		});
 	</script>
 </body>
 </html>
