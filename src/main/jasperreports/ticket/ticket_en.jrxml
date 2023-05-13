@@ -209,7 +209,7 @@
 				<textElement markup="styled">
 					<font fontName="SansSerif" size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA["This Ticket allows you to collect only ONE Badge. Lost or forgotten badges are not replaced! The organization does not take back any badges. Wearing an identification badge is mandatory to access the Conference space. Anyone without a badge will be denied access to <style isBold=\"true\">JPrime 2023</style>."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["You can collect only ONE badge with this Ticket. We will not replace lost or forgotten badges! You have to wear the Badge all the time while you are at the <style isBold=\"true\">JPrime 2023</style> venue! You will not be allowed to enter the <style isBold=\"true\">JPrime 2023</style> conference rooms without a Badge."]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
