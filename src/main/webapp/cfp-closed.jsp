@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec"
-           uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user"%>
+           uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 
 <!doctype html>
 <html lang="en">
@@ -44,7 +44,10 @@
         <div class="row">
             <div class="col-12">
                 <p>
-                <p>Stay tuned for the agenda. It will be published soon.</p>
+                    <c:if test="${agenda}">You can check the agenda for this year <a
+                            href="/agenda">here</a></c:if>
+                    <c:if test="${not agenda}">Stay tuned for the agenda. It will be published soon.</c:if>
+                </p>
                 <p>You can also <a href="/tickets">register</a> as attendee.</p>
             </div>
         </div>

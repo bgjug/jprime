@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.2  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ticket" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a56a745-c559-4ebd-8b0c-b74c551e0341">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="logoStream" class="java.io.InputStream"/>
+	<parameter name="organizer" class="java.lang.String">
+		<defaultValueExpression><![CDATA["ДжейПрайм Ивентс ООД <conference@jprime.io>"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="event" class="java.lang.String">
+		<defaultValueExpression><![CDATA["JPrime 2023"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="location" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Иновационен форум \"Джон Атанасофф\" в София Тех Парк"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dateTime" class="java.lang.String">
+		<defaultValueExpression><![CDATA["30 и 31-ви Май 2023"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="holder" class="java.lang.String"/>
+	<field name="number" class="java.lang.String"/>
+	<field name="type" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="243" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<image scaleImage="RetainShape">
+				<reportElement x="0" y="0" width="550" height="240" uuid="e9f0a62d-e04e-4619-a688-5d6ebb6a1364"/>
+				<imageExpression><![CDATA[$P{logoStream}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="310" splitType="Stretch">
+			<staticText>
+				<reportElement x="170" y="0" width="220" height="23" uuid="64725e36-aee1-4998-a181-8301fc227845"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Информация за събитието]]></text>
+			</staticText>
+			<line>
+				<reportElement x="390" y="13" width="160" height="1" uuid="f800cd86-d205-46ca-b162-d6c784847cd3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="0" y="13" width="170" height="1" uuid="9e5f70e0-ce83-49f8-9816-5d734108aa32">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="240" y="158" width="80" height="23" uuid="d9096617-583c-46ab-af3a-bde67fa2bb4f"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Билет]]></text>
+			</staticText>
+			<line>
+				<reportElement x="320" y="170" width="230" height="1" uuid="715934e8-0a99-4348-b30d-d51f451cb626">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="0" y="170" width="240" height="1" uuid="401a2bb7-b35e-4bba-94e7-d32c62bf34f7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="27" width="101" height="21" uuid="22363617-cea9-4fa6-8e3a-81c7d92d858a"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Дата/Час]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="73" width="101" height="21" uuid="e8ad71ac-808d-43f8-a7f7-1729d69e39f4"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Къде]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="120" width="102" height="20" uuid="4dfb651d-8e2f-42b4-8e0c-e70c68568e99"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Организатор]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="187" width="130" height="21" uuid="2cd26d70-cd88-452f-90ae-e4003b94090d"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Държател]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="228" width="130" height="21" uuid="db72771b-645e-4874-b3e3-f05da14e4ecf">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Тип]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="269" width="130" height="21" uuid="77a9cf4d-dc55-47fa-b53f-fb53866488d1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Номер]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="380" y="20" width="161" height="131" uuid="6cf7c407-435d-49e3-895b-058a96aa35a9"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA["{ " + "\"organizer\" : \"" + $P{organizer} + "\", " + "\"event\" : \"" + $P{event} + "\", " + "\"type\" : \"" + $F{type} + "\", " + "\"ticket\" : \"" + $F{number} + "\" }"]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="140" y="181" width="411" height="33" uuid="a34b4433-1f17-43c7-a6c0-f1c907e4c797"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{holder}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="21" width="241" height="33" uuid="5c2fcc39-a15f-4ee8-a4ce-c10347d8f563"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateTime}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="130" y="67" width="241" height="33" uuid="c8d71379-3467-430c-a0f4-75b9c2556337">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{location}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="114" width="241" height="33" uuid="5e238150-25d6-40e4-9915-cf4f5f7db3ef">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{organizer}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="140" y="222" width="411" height="32" uuid="0dd27fa0-7501-48a5-87b7-879f264416cc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="139" y="264" width="411" height="31" uuid="2f78e751-5e0f-4111-b7db-5dbe83e9c912"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="206" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="180" y="0" width="200" height="23" uuid="5386da21-7583-4e2c-b3f0-7fff44621f28"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Условия за участие]]></text>
+			</staticText>
+			<line>
+				<reportElement x="380" y="13" width="170" height="1" uuid="6eca4f03-6524-4592-bdaf-0d6180ffd702">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="0" y="13" width="180" height="1" uuid="ab8b94b2-9d76-4258-bd99-329584c1cf89">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="10" y="24" width="541" height="171" uuid="42e98d14-6d53-4e89-9c50-0339068c0b1d"/>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA["Participation in <style isBold=\"true\">JPrime 2023</style> entails acceptance of the Conditions for participation. This Ticket allows you to collect only ONE Badge. Lost or forgotten badges are not replaced! The organization does not take back any badges. Wearing an identification badge is mandatory to access the Conference space, as well as the Exhibition space. Anyone without a badge will be denied access to <style isBold=\"true\">JPrime 2023</style>.\n" +
+"In the event of excessive attendance, and for security reasons, the organizers reserve the right to prohibit access to the rooms. The internal rules of the venue space apply without reservation to all participants (no smoking in the venue).The organizers reserve the right to definitively exclude any person, without this giving the right to a refund, whose behavior or attitude is deemed unacceptable.\n" +
+"<style isBold=\"true\">JPrime 2023</style> is organized in an open spirit that allows everyone to participate. The organizers are vigilant about the smooth running of the conference. The speakers are informed that their presentation should not shock and respect all the participants. Any breach of propriety, or any event likely to disrupt the conference can be reported immediately to the organizers present on the site or by email at <style isBold=\"true\">conference@jprime.io</style>"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</summary>
+</jasperReport>

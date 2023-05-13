@@ -1,5 +1,6 @@
 package site.controller;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,11 +13,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +45,11 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.CsvMapReader;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
+import site.config.Globals;
+import site.controller.invoice.InvoiceLanguage;
+import site.controller.ticket.TicketData;
+import site.controller.ticket.TicketDetail;
+import site.controller.ticket.TicketExporter;
 import site.facade.AdminService;
 import site.facade.MailService;
 import site.facade.UserServiceJPro;
@@ -102,7 +110,7 @@ public class AdminVisitorController {
                                                        LAST_NAME, EMAIL_ADDRESS
     };
 
-    private Logger log = LogManager.getLogger(this.getClass());
+    private final Logger log = LogManager.getLogger(this.getClass());
 
     @Autowired
     @Qualifier(AdminService.NAME)
@@ -116,6 +124,9 @@ public class AdminVisitorController {
     @Autowired
     @Qualifier(UserServiceJPro.NAME)
     private UserServiceJPro userServiceJPro;
+
+    @Autowired
+    private TicketExporter ticketExporter;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String viewVisitors(Model model) {
@@ -136,7 +147,7 @@ public class AdminVisitorController {
         if (bindingResult.hasErrors()) {
             return VISITOR_EDIT_JSP;
         }
-        //may be its better to use a set of registrants for sponsors?
+        //may be it's better to use a set of registrants for sponsors?
 
         String redirectUrl = "redirect:/admin/visitor/view";
         Registrant registrant = new Registrant();
@@ -161,6 +172,50 @@ public class AdminVisitorController {
         model.addAttribute("visitor", new Visitor());
         model.addAttribute("statuses", VisitorStatus.values());
         return VISITOR_EDIT_JSP;
+    }
+
+    @GetMapping(value = "/tickets")
+    public String sendTickets(Model model) {
+        Map<String, List<Visitor>> pendingVisitorsList =
+            StreamSupport.stream(adminFacade.findAllVisitors().spliterator(), false)
+                .filter(v -> v.getStatus() != VisitorStatus.REQUESTING)
+                .filter(v -> StringUtils.isEmpty(v.getTicket()))
+                .filter(v -> StringUtils.isNotBlank(v.anyEmail()))
+                //.limit(5) // Remove this before deployment
+                .collect(Collectors.groupingBy(Visitor::anyEmail));
+
+        pendingVisitorsList.forEach(this::generateTickets);
+
+        return viewVisitors(model);
+    }
+
+    private void generateTickets(String email, List<Visitor> visitors) {
+        List<Pair<Visitor, byte[]>> ticketPdfs = visitors.stream().map(visitor ->  {
+            TicketData ticketData = new TicketData();
+            ticketData.setEvent("JPrime " + Globals.CURRENT_BRANCH);
+            ticketData.setOrganizer("JPrime Events");
+            String ticketNumber = UUID.randomUUID().toString();
+            ticketData.addDetail(new TicketDetail(ticketNumber, visitor.getName(), "Visitor"));
+            visitor.setTicket(ticketNumber);
+            return Pair.of(visitor, ticketExporter.exportTicket(ticketData, InvoiceLanguage.EN));
+        }).collect(Collectors.toList());
+
+        String ticketMessage =
+            "Welcome to JPrime conference. You will find attached to this email message your ticket for the" +
+                " event. Please be ready to show it on your mobile phone on the registration. You can also " +
+                "print it if it will be more convenient to you.";
+
+        ticketPdfs.forEach(p -> {
+            Visitor visitor = p.getKey();
+            byte[] ticketPdf = p.getValue();
+            try {
+                mailFacade.sendEmail(email, "JPrime " + Globals.CURRENT_BRANCH + " ticket", ticketMessage,
+                    ticketPdf, "ticket_" + visitor.getId() + ".pdf");
+                adminFacade.saveVisitor(visitor);
+            } catch (MessagingException e) {
+                log.error("Unable to send ticket {} to {}", visitor.getTicket(), email);
+            }
+        });
     }
 
     @GetMapping(value = "/upload")
@@ -338,7 +393,7 @@ public class AdminVisitorController {
     public String  send(@RequestParam String subject, @RequestParam String content) throws IOException{
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();
 
-         for(Visitor visitor : visitors ){
+         for(Visitor visitor : visitors ) {
              if (StringUtils.isEmpty(visitor.getEmail())) {
                  continue;
              }

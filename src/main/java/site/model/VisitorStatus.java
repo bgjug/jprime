@@ -6,9 +6,9 @@ package site.model;
 public enum VisitorStatus {
     REQUESTING("Requesting"), PAYED("Payed"), Sponsored("Sponsored");
 
-    private String status;
+    private final String status;
 
-    private VisitorStatus(String status) {
+    VisitorStatus(String status) {
         this.status = status;
     }
 
