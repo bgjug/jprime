@@ -12,6 +12,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import site.config.Globals;
 
 import java.util.HashSet;
@@ -19,6 +20,7 @@ import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Speaker extends User {
 
     /**

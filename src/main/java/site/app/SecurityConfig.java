@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private SpeakerRepository speakerRepository;
-    
+
     @Override
     public void configure(final WebSecurity web) {
         web
@@ -107,6 +107,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/halls", "/halls/**", "/sessions", "/sessions/**", "/submissions", "/submissions/**", "/sw.js", "/manifest.json").permitAll()
                 .antMatchers("/admin/**").hasAuthority("ADMIN") // #6
                 .antMatchers("/raffle/**").hasAuthority("ADMIN") // #7
+                .antMatchers("/api/**").hasAuthority("ADMIN") // #7
                 .antMatchers("/user/**").hasAuthority("USER") //will contain schedule and etc
                 .anyRequest().authenticated() // 8
                 .and()
