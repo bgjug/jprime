@@ -185,7 +185,7 @@
 		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="70" splitType="Stretch">
+		<band height="86" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
 				<reportElement x="180" y="0" width="200" height="23" uuid="5386da21-7583-4e2c-b3f0-7fff44621f28"/>
@@ -205,11 +205,11 @@
 				</reportElement>
 			</line>
 			<textField>
-				<reportElement x="5" y="23" width="541" height="45" uuid="42e98d14-6d53-4e89-9c50-0339068c0b1d"/>
+				<reportElement x="5" y="23" width="541" height="57" uuid="42e98d14-6d53-4e89-9c50-0339068c0b1d"/>
 				<textElement markup="styled">
 					<font fontName="SansSerif" size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA["You can collect only ONE badge with this Ticket. We will not replace lost or forgotten badges! You have to wear the Badge all the time while you are at the <style isBold=\"true\">JPrime 2023</style> venue! You will not be allowed to enter the <style isBold=\"true\">JPrime 2023</style> conference rooms without a Badge."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["We will provide you with TWO badges for the two days. You have to wear the Badge all the time while you are at the <style isBold=\"true\">JPrime 2023</style> Conference venue! You will not be allowed to enter the <style isBold=\"true\">JPrime 2023</style> conference rooms without a Badge."]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
