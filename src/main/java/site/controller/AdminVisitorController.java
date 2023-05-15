@@ -45,13 +45,9 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.CsvMapReader;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
-import site.config.Globals;
-import site.controller.invoice.InvoiceLanguage;
-import site.controller.ticket.TicketData;
-import site.controller.ticket.TicketDetail;
-import site.controller.ticket.TicketExporter;
 import site.facade.AdminService;
 import site.facade.MailService;
+import site.facade.TicketService;
 import site.facade.UserServiceJPro;
 import site.model.CSVFileModel;
 import site.model.Registrant;
@@ -117,6 +113,9 @@ public class AdminVisitorController {
     private AdminService adminFacade;
 
     @Autowired
+    private TicketService ticketService;
+
+    @Autowired
     @Qualifier(MailService.NAME)
     @Lazy
     private MailService mailFacade;
@@ -124,9 +123,6 @@ public class AdminVisitorController {
     @Autowired
     @Qualifier(UserServiceJPro.NAME)
     private UserServiceJPro userServiceJPro;
-
-    @Autowired
-    private TicketExporter ticketExporter;
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String viewVisitors(Model model) {
@@ -139,6 +135,7 @@ public class AdminVisitorController {
         model.addAttribute("payedCount", payedCount);
         model.addAttribute("requestingCount", requestingCount);
         model.addAttribute("sponsoredCount", sponsoredCount);
+        model.addAttribute("jobs", adminFacade.findBackgroundJobs());
         return VISITORS_JSP;
     }
 
@@ -176,46 +173,10 @@ public class AdminVisitorController {
 
     @GetMapping(value = "/tickets")
     public String sendTickets(Model model) {
-        Map<String, List<Visitor>> pendingVisitorsList =
-            StreamSupport.stream(adminFacade.findAllVisitors().spliterator(), false)
-                .filter(v -> v.getStatus() != VisitorStatus.REQUESTING)
-                .filter(v -> StringUtils.isEmpty(v.getTicket()))
-                .filter(v -> StringUtils.isNotBlank(v.anyEmail()))
-                //.limit(5) // Remove this before deployment
-                .collect(Collectors.groupingBy(Visitor::anyEmail));
-
-        pendingVisitorsList.forEach(this::generateTickets);
-
+        if (ticketService.sendTickets()) {
+            return "redirect:/admin/jobs/view";
+        }
         return viewVisitors(model);
-    }
-
-    private void generateTickets(String email, List<Visitor> visitors) {
-        List<Pair<Visitor, byte[]>> ticketPdfs = visitors.stream().map(visitor ->  {
-            TicketData ticketData = new TicketData();
-            ticketData.setEvent("JPrime " + Globals.CURRENT_BRANCH);
-            ticketData.setOrganizer("JPrime Events");
-            String ticketNumber = UUID.randomUUID().toString();
-            ticketData.addDetail(new TicketDetail(ticketNumber, visitor.getName(), "Visitor"));
-            visitor.setTicket(ticketNumber);
-            return Pair.of(visitor, ticketExporter.exportTicket(ticketData, InvoiceLanguage.EN));
-        }).collect(Collectors.toList());
-
-        String ticketMessage =
-            "Welcome to JPrime conference. You will find attached to this email message your ticket for the" +
-                " event. Please be ready to show it on your mobile phone on the registration. You can also " +
-                "print it if it will be more convenient to you.";
-
-        ticketPdfs.forEach(p -> {
-            Visitor visitor = p.getKey();
-            byte[] ticketPdf = p.getValue();
-            try {
-                mailFacade.sendEmail(email, "JPrime " + Globals.CURRENT_BRANCH + " ticket", ticketMessage,
-                    ticketPdf, "ticket_" + visitor.getId() + ".pdf");
-                adminFacade.saveVisitor(visitor);
-            } catch (MessagingException e) {
-                log.error("Unable to send ticket {} to {}", visitor.getTicket(), email);
-            }
-        });
     }
 
     @GetMapping(value = "/upload")

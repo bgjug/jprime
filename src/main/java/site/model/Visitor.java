@@ -26,6 +26,9 @@ public class Visitor extends AbstractEntity {
     @JsonIgnore
     private String ticket;
 
+    @Transient
+    private boolean withTicket;
+
     private boolean isPresent;
 
     private boolean isRegistered;
@@ -44,12 +47,21 @@ public class Visitor extends AbstractEntity {
         this.company = company;
     }
 
+    public boolean isWithTicket() {
+        return withTicket;
+    }
+
+    public void setWithTicket(boolean withTicket) {
+        this.withTicket = withTicket;
+    }
+
     public String getTicket() {
         return ticket;
     }
 
     public void setTicket(String ticket) {
         this.ticket = ticket;
+        this.withTicket = StringUtils.isNotBlank(ticket);
     }
 
     public Registrant getRegistrant() {

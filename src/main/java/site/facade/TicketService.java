@@ -1,0 +1,126 @@
+package site.facade;
+
+import javax.mail.MessagingException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+import site.config.Globals;
+import site.controller.invoice.InvoiceLanguage;
+import site.controller.ticket.TicketData;
+import site.controller.ticket.TicketDetail;
+import site.controller.ticket.TicketExporter;
+import site.model.Visitor;
+import site.model.VisitorStatus;
+
+@Service
+public class TicketService {
+
+    private final Logger log = LogManager.getLogger(this.getClass());
+
+    @Autowired
+    private TicketExporter ticketExporter;
+
+    @Autowired
+    @Qualifier(MailService.NAME)
+    @Lazy
+    private MailService mailFacade;
+
+    @Autowired
+    private AdminService adminFacade;
+
+    @Autowired
+    private BackgroundJobService jobService;
+
+    /**
+     * Sends tickets to all visitors which have been paid or are sponsored.
+     *
+     * @return True if tickets are sent using a background job
+     */
+    public boolean sendTickets() {
+        Map<String, List<Visitor>> pendingVisitorsMap =
+            StreamSupport.stream(adminFacade.findAllVisitors().spliterator(), false)
+                .filter(v -> v.getStatus() != VisitorStatus.REQUESTING)
+                .filter(v -> StringUtils.isEmpty(v.getTicket()))
+                .filter(v -> StringUtils.isNotBlank(v.anyEmail()))
+                .limit(5) // Remove this before deployment
+                .collect(Collectors.groupingBy(Visitor::anyEmail));
+
+        if (pendingVisitorsMap.values().stream().mapToLong(Collection::size).sum() > 3) {
+            String jobId = jobService.createBackgroundJob("Sending emails with tickets.");
+            jobService.runJob(jobId,
+                pendingVisitorsMap.values().stream().flatMap(Collection::stream).collect(Collectors.toList()),
+                this::sendEmail, this::emailErrorLog);
+            return true;
+        } else {
+            pendingVisitorsMap.forEach(this::generateAndSendTicketEmail);
+            return false;
+        }
+    }
+
+    private String emailErrorLog(Visitor visitor) {
+        return visitor.anyEmail();
+    }
+
+    private Boolean sendEmail(Visitor visitor) {
+        List<Pair<Visitor, Boolean>> result =
+            generateAndSendTicketEmail(visitor.anyEmail(), Collections.singletonList(visitor));
+
+        return result.stream().map(Pair::getValue).reduce(true, (a, b) -> a && b);
+    }
+
+    /**
+     * Generates and sends a ticket email message for each visitor in the list. The provided email is used
+     * as receiver for all ticket messages
+     *
+     * @param email the receiver of the email messages
+     * @param visitors list of the visitors for which a ticket email message will be generated
+     * @return List of pairs of {@link Visitor} and boolean. The boolean indicates success or failure for the operation for that {@link Visitor}
+     */
+    public List<Pair<Visitor, Boolean>> generateAndSendTicketEmail(String email, List<Visitor> visitors) {
+        List<Pair<Visitor, byte[]>> ticketPdfs = visitors.stream().map(visitor -> {
+            TicketData ticketData = new TicketData();
+            ticketData.setEvent("JPrime " + Globals.CURRENT_BRANCH);
+            ticketData.setOrganizer("JPrime Events");
+            String ticketNumber = UUID.randomUUID().toString();
+            ticketData.addDetail(new TicketDetail(ticketNumber, visitor.getName(), "Visitor"));
+            visitor.setTicket(ticketNumber);
+            return Pair.of(visitor, ticketExporter.exportTicket(ticketData, InvoiceLanguage.EN));
+        }).collect(Collectors.toList());
+
+        return ticketPdfs.stream().map(p -> {
+            Visitor visitor = p.getKey();
+            byte[] ticketPdf = p.getValue();
+            try {
+                mailFacade.sendEmail(email, "JPrime " + Globals.CURRENT_BRANCH + " Conference ticket !",
+                    ticketMessage(visitor), ticketPdf, "ticket_" + visitor.getId() + ".pdf");
+                adminFacade.saveVisitor(visitor);
+                return Pair.of(visitor, true);
+            } catch (MessagingException e) {
+                log.error("Unable to send ticket {} to {}", visitor.getTicket(), email);
+                return Pair.of(visitor, false);
+            }
+        }).collect(Collectors.toList());
+    }
+
+    private String ticketMessage(Visitor visitor) {
+        return "<strong>DON'T PANIC !!!</string> jPrime " + Globals.CURRENT_BRANCH + " is here !<br/>" +
+            "You will find attached to this email message your ticket for the event. Please be ready " +
+            "to show it on your mobile phone on the registration. You can also print it if it will be " +
+            "more convenient to you.<br/> " + "The registration is open on the first day morning. We would " +
+            "advice you to come early.<br/>" + "Some other information : <br/>" + "Location :  <a " +
+            "href='https://jprime.io/venue' target='_blank'>Sofia Tech Park</a><br/>" + "Your name : " + visitor.getName() + "<br/>" + "Your ticket ID : " + visitor.getTicket() + " <br/>" + "The conference website : <a href='https://jprime.io/' target='_blank'>https://jprime.io</a> <br/>" + "<br/>" + "And finally, if for some reason you cannot come, a friend of yours or a colleague or someone can use your ticket. Also if you are privacy fanatic, you can use a nickname :+)" + "<br/><br/>" + "See you at jPrime !<br/>" + "The Gang of 6 of the Bulgarian Java User Group!";
+    }
+}

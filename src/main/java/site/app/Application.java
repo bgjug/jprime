@@ -15,6 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -32,6 +33,7 @@ import java.util.Properties;
 @EntityScan(basePackages="site.model")
 @EnableSpringDataWebSupport
 @SpringBootApplication//mihail: so that it can be run as war file
+@EnableAsync
 public class Application  extends SpringBootServletInitializer {
 
     /** mihail: so that it can be run as war file */
