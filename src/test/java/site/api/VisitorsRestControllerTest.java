@@ -2,7 +2,6 @@ package site.api;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -38,8 +37,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 public class VisitorsRestControllerTest {
 
-    private static final TypeReference<List<JsonVisitor>> VISITOR_LIST =
-        new TypeReference<List<JsonVisitor>>() {};
+    private static final TypeReference<List<VisitorFromJSON>> VISITOR_LIST =
+        new TypeReference<List<VisitorFromJSON>>() {};
 
     @Autowired
     private WebApplicationContext wac;
@@ -69,9 +68,9 @@ public class VisitorsRestControllerTest {
             .andReturn();
 
         String jsonResponse = result.getResponse().getContentAsString();
-        List<JsonVisitor> visitorList = new ObjectMapper().readValue(jsonResponse, VISITOR_LIST);
+        List<VisitorFromJSON> visitorList = new ObjectMapper().readValue(jsonResponse, VISITOR_LIST);
         Assertions.assertEquals(1, visitorList.size());
-        JsonVisitor visitor = visitorList.get(0);
+        VisitorFromJSON visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
     }
@@ -83,8 +82,8 @@ public class VisitorsRestControllerTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
-        JsonVisitor visitor =
-            new ObjectMapper().readValue(result.getResponse().getContentAsString(), JsonVisitor.class);
+        VisitorFromJSON visitor =
+            new ObjectMapper().readValue(result.getResponse().getContentAsString(), VisitorFromJSON.class);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
     }
@@ -105,10 +104,10 @@ public class VisitorsRestControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
 
-        List<JsonVisitor> visitorList =
+        List<VisitorFromJSON> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
         Assertions.assertEquals(1, visitorList.size());
-        JsonVisitor visitor = visitorList.get(0);
+        VisitorFromJSON visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
     }
@@ -123,10 +122,10 @@ public class VisitorsRestControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
 
-        List<JsonVisitor> visitorList =
+        List<VisitorFromJSON> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
         Assertions.assertEquals(1, visitorList.size());
-        JsonVisitor visitor = visitorList.get(0);
+        VisitorFromJSON visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
     }
@@ -141,10 +140,10 @@ public class VisitorsRestControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
 
-        List<JsonVisitor> visitorList =
+        List<VisitorFromJSON> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
         Assertions.assertEquals(1, visitorList.size());
-        JsonVisitor visitor = visitorList.get(0);
+        VisitorFromJSON visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
     }
@@ -159,10 +158,10 @@ public class VisitorsRestControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
 
-        List<JsonVisitor> visitorList =
+        List<VisitorFromJSON> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
         Assertions.assertEquals(1, visitorList.size());
-        JsonVisitor visitor = visitorList.get(0);
+        VisitorFromJSON visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
     }
@@ -177,10 +176,10 @@ public class VisitorsRestControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
 
-        List<JsonVisitor> visitorList =
+        List<VisitorFromJSON> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
         Assertions.assertEquals(1, visitorList.size());
-        JsonVisitor visitor = visitorList.get(0);
+        VisitorFromJSON visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
     }
@@ -215,57 +214,5 @@ public class VisitorsRestControllerTest {
         return r;
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    static class JsonVisitor {
 
-        String ticket;
-
-        String registrantName;
-
-        String name;
-
-        String email;
-
-        String company;
-
-        public String getTicket() {
-            return ticket;
-        }
-
-        public void setTicket(String ticket) {
-            this.ticket = ticket;
-        }
-
-        public String getRegistrantName() {
-            return registrantName;
-        }
-
-        public void setRegistrantName(String registrantName) {
-            this.registrantName = registrantName;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getCompany() {
-            return company;
-        }
-
-        public void setCompany(String company) {
-            this.company = company;
-        }
-    }
 }

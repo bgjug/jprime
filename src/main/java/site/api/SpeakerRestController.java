@@ -26,7 +26,7 @@ public class SpeakerRestController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "{branch}")
+    @GetMapping(path = "/{branch}")
     public ResponseEntity<?> allSpeakers(@PathVariable(name = "branch") String branch) {
         try {
             return ResponseEntity.ok(userService.findAcceptedSpeakers());
