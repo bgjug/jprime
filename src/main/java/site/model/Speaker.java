@@ -12,6 +12,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import site.config.Globals;
 
@@ -29,8 +30,10 @@ public class Speaker extends User {
     private static final long serialVersionUID = 1L;
 
     @Column(length = 1024)
+    @JsonIgnore
     private String bio;
 
+    @JsonIgnore
     private String headline;
 
     private String twitter;
@@ -40,9 +43,11 @@ public class Speaker extends User {
     private Boolean accepted = false;
 
     @Lob
+    @JsonIgnore
     private byte[] picture;
 
     @OneToMany(mappedBy = "speaker", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, targetEntity = Submission.class)
+    @JsonIgnore
     private Set<Submission> submissions = new HashSet<>();
     
     @Enumerated(EnumType.STRING)

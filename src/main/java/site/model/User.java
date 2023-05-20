@@ -11,6 +11,8 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 
 import javax.validation.constraints.Email;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 
@@ -29,15 +31,19 @@ public class User extends AbstractEntity {
     @NotBlank
 	@Email
 	private String email;
-	
+
+	@JsonIgnore
 	private String password;
 	
 	@Transient
+	@JsonIgnore
 	private String cpassword;
-	
+
+	@JsonIgnore
 	private String phone;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, targetEntity = Article.class)
+	@JsonIgnore
     private Collection<Article> articles = new HashSet<>();
 	
 	public String getFirstName() {
