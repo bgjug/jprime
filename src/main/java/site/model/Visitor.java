@@ -130,6 +130,10 @@ public class Visitor extends AbstractEntity {
         isPresent = present;
     }
 
+    public String getRegistrantName() {
+        return registrant.getName();
+    }
+
     @Override
     public String toString() {
         return "Visitor{" +

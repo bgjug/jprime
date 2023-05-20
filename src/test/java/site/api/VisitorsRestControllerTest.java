@@ -2,6 +2,7 @@ package site.api;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -25,7 +26,7 @@ import site.model.Visitor;
 import site.repository.RegistrantRepository;
 import site.repository.VisitorRepository;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -38,7 +39,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 public class VisitorsRestControllerTest {
 
-    private static final TypeReference<List<Visitor>> VISITOR_LIST = new TypeReference<List<Visitor>>() {};
+    private static final TypeReference<List<JsonVisitor>> VISITOR_LIST =
+        new TypeReference<List<JsonVisitor>>() {};
 
     @Autowired
     private WebApplicationContext wac;
@@ -67,23 +69,24 @@ public class VisitorsRestControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
 
-        List<Visitor> visitorList =
-            new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
+        String jsonResponse = result.getResponse().getContentAsString();
+        List<JsonVisitor> visitorList = new ObjectMapper().readValue(jsonResponse, VISITOR_LIST);
         Assertions.assertEquals(1, visitorList.size());
-        Visitor visitor = visitorList.get(0);
-        assertNull(visitor.getRegistrant().getId());
+        JsonVisitor visitor = visitorList.get(0);
+        assertNotNull(visitor.getRegistrantName());
         assertTrue(visitor.isWithTicket());
     }
 
     @Test
     public void testFindVisitorByTicket() throws Exception {
-        MvcResult result = mockMvc.perform(get("/api/visitor/" + Globals.CURRENT_BRANCH.getLabel() + "/_TICKET_REFERENCE_ID_"))
+        MvcResult result = mockMvc.perform(
+                get("/api/visitor/" + Globals.CURRENT_BRANCH.getLabel() + "/_TICKET_REFERENCE_ID_"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
-        Visitor visitor =
-            new ObjectMapper().readValue(result.getResponse().getContentAsString(), Visitor.class);
-        assertNull(visitor.getRegistrant().getId());
+        JsonVisitor visitor =
+            new ObjectMapper().readValue(result.getResponse().getContentAsString(), JsonVisitor.class);
+        assertNotNull(visitor.getRegistrantName());
         assertTrue(visitor.isWithTicket());
     }
 
@@ -103,11 +106,11 @@ public class VisitorsRestControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
 
-        List<Visitor> visitorList =
+        List<JsonVisitor> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
         Assertions.assertEquals(1, visitorList.size());
-        Visitor visitor = visitorList.get(0);
-        assertNull(visitor.getRegistrant().getId());
+        JsonVisitor visitor = visitorList.get(0);
+        assertNotNull(visitor.getRegistrantName());
         assertTrue(visitor.isWithTicket());
     }
 
@@ -121,11 +124,11 @@ public class VisitorsRestControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
 
-        List<Visitor> visitorList =
+        List<JsonVisitor> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
         Assertions.assertEquals(1, visitorList.size());
-        Visitor visitor = visitorList.get(0);
-        assertNull(visitor.getRegistrant().getId());
+        JsonVisitor visitor = visitorList.get(0);
+        assertNotNull(visitor.getRegistrantName());
         assertTrue(visitor.isWithTicket());
     }
 
@@ -139,11 +142,11 @@ public class VisitorsRestControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
 
-        List<Visitor> visitorList =
+        List<JsonVisitor> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
         Assertions.assertEquals(1, visitorList.size());
-        Visitor visitor = visitorList.get(0);
-        assertNull(visitor.getRegistrant().getId());
+        JsonVisitor visitor = visitorList.get(0);
+        assertNotNull(visitor.getRegistrantName());
         assertTrue(visitor.isWithTicket());
     }
 
@@ -157,11 +160,11 @@ public class VisitorsRestControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
 
-        List<Visitor> visitorList =
+        List<JsonVisitor> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
         Assertions.assertEquals(1, visitorList.size());
-        Visitor visitor = visitorList.get(0);
-        assertNull(visitor.getRegistrant().getId());
+        JsonVisitor visitor = visitorList.get(0);
+        assertNotNull(visitor.getRegistrantName());
         assertTrue(visitor.isWithTicket());
     }
 
@@ -175,11 +178,11 @@ public class VisitorsRestControllerTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
 
-        List<Visitor> visitorList =
+        List<JsonVisitor> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
         Assertions.assertEquals(1, visitorList.size());
-        Visitor visitor = visitorList.get(0);
-        assertNull(visitor.getRegistrant().getId());
+        JsonVisitor visitor = visitorList.get(0);
+        assertNotNull(visitor.getRegistrantName());
         assertTrue(visitor.isWithTicket());
     }
 
@@ -211,5 +214,59 @@ public class VisitorsRestControllerTest {
         r.setBranch(Globals.CURRENT_BRANCH);
         registrantRepository.save(r);
         return r;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    static class JsonVisitor {
+
+        boolean isWithTicket;
+
+        String registrantName;
+
+        String name;
+
+        String email;
+
+        String company;
+
+        public boolean isWithTicket() {
+            return isWithTicket;
+        }
+
+        public void setWithTicket(boolean withTicket) {
+            isWithTicket = withTicket;
+        }
+
+        public String getRegistrantName() {
+            return registrantName;
+        }
+
+        public void setRegistrantName(String registrantName) {
+            this.registrantName = registrantName;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getCompany() {
+            return company;
+        }
+
+        public void setCompany(String company) {
+            this.company = company;
+        }
     }
 }
