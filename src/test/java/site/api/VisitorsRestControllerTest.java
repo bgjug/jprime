@@ -27,7 +27,6 @@ import site.repository.RegistrantRepository;
 import site.repository.VisitorRepository;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -74,7 +73,7 @@ public class VisitorsRestControllerTest {
         Assertions.assertEquals(1, visitorList.size());
         JsonVisitor visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
-        assertTrue(visitor.isWithTicket());
+        assertNotNull(visitor.getTicket());
     }
 
     @Test
@@ -87,7 +86,7 @@ public class VisitorsRestControllerTest {
         JsonVisitor visitor =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), JsonVisitor.class);
         assertNotNull(visitor.getRegistrantName());
-        assertTrue(visitor.isWithTicket());
+        assertNotNull(visitor.getTicket());
     }
 
     @Test
@@ -111,7 +110,7 @@ public class VisitorsRestControllerTest {
         Assertions.assertEquals(1, visitorList.size());
         JsonVisitor visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
-        assertTrue(visitor.isWithTicket());
+        assertNotNull(visitor.getTicket());
     }
 
     @Test
@@ -129,7 +128,7 @@ public class VisitorsRestControllerTest {
         Assertions.assertEquals(1, visitorList.size());
         JsonVisitor visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
-        assertTrue(visitor.isWithTicket());
+        assertNotNull(visitor.getTicket());
     }
 
     @Test
@@ -147,7 +146,7 @@ public class VisitorsRestControllerTest {
         Assertions.assertEquals(1, visitorList.size());
         JsonVisitor visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
-        assertTrue(visitor.isWithTicket());
+        assertNotNull(visitor.getTicket());
     }
 
     @Test
@@ -165,7 +164,7 @@ public class VisitorsRestControllerTest {
         Assertions.assertEquals(1, visitorList.size());
         JsonVisitor visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
-        assertTrue(visitor.isWithTicket());
+        assertNotNull(visitor.getTicket());
     }
 
     @Test
@@ -183,7 +182,7 @@ public class VisitorsRestControllerTest {
         Assertions.assertEquals(1, visitorList.size());
         JsonVisitor visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
-        assertTrue(visitor.isWithTicket());
+        assertNotNull(visitor.getTicket());
     }
 
     private Visitor createVisitorForRegistrant(Registrant r) {
@@ -219,7 +218,7 @@ public class VisitorsRestControllerTest {
     @JsonIgnoreProperties(ignoreUnknown = true)
     static class JsonVisitor {
 
-        boolean isWithTicket;
+        String ticket;
 
         String registrantName;
 
@@ -229,12 +228,12 @@ public class VisitorsRestControllerTest {
 
         String company;
 
-        public boolean isWithTicket() {
-            return isWithTicket;
+        public String getTicket() {
+            return ticket;
         }
 
-        public void setWithTicket(boolean withTicket) {
-            isWithTicket = withTicket;
+        public void setTicket(String ticket) {
+            this.ticket = ticket;
         }
 
         public String getRegistrantName() {
