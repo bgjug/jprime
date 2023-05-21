@@ -65,8 +65,7 @@
                 <td><joda:format value="${session.endTime}" pattern="dd.MM.yyyy HH:mm"/></td>
                 <td>${session.hall.name}</td>
                 <td>
-                    <span><a href="/admin/session/edit/${session.id}">Edit</a></span> &nbsp;&nbsp;&nbsp;
-                    <span><a href="/admin/session/remove/${session.id}">Remove</a></span>
+                    <a href="/admin/session/edit/${session.id}">Edit</a>&nbsp;|&nbsp;<a href="/admin/session/remove/${session.id}">Remove</a>
                 </td>
             </tr>
         </c:forEach>

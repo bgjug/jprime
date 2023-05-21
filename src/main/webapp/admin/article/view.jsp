@@ -36,9 +36,7 @@
 					<td>${article.title}</td>
 					<td>${article.description }</td>
 					<td>
-                        <span> <a href="/admin/article/view/${article.id}">Preview</a></span> &nbsp;&nbsp;&nbsp;
-                        <span><a href="/admin/article/edit/${article.id}">Edit</a></span> &nbsp;&nbsp;&nbsp;
-						<span><a href="/admin/article/remove/${article.id}"> Remove </a></span>
+                        <a href="/admin/article/view/${article.id}">Preview</a>&nbsp;|&nbsp;<a href="/admin/article/edit/${article.id}">Edit</a>&nbsp;|&nbsp;<a href="/admin/article/remove/${article.id}">Remove</a>
 					</td>
 				</tr>
 			</c:forEach>

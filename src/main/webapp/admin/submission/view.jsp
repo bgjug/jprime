@@ -45,16 +45,9 @@
 				<tr>
 					<td colspan="6" class="title-column"><em><strong>Title</strong></em>: ${submission.title}</td>
 					<td rowspan="3" class="title-column">
-						<span style="float:left;"><a
-								href="/admin/submission/accept/${submission.id}">Accept</a></span> <br>
-						<span style="float:left;"><a
-								href="/admin/submission/reject/${submission.id}">Reject</a></span> <br>
-						<span style="float:left;"><a
-								href="/admin/submission/edit/${submission.id}">Edit</a></span> <br>
-						<span style="float:left;"><a
-								href="/admin/submission/notify/${submission.id}">Notify</a></span>
-						<span style="float:left;"><a href="/admin/submission/delete/${submission.id}"
-													 class="confirmation">Delete</a></span>
+						<a href="/admin/submission/accept/${submission.id}">Accept</a>&nbsp;|&nbsp;<a href="/admin/submission/reject/${submission.id}">Reject</a><br/>
+						<a href="/admin/submission/edit/${submission.id}">Edit</a>&nbsp;|&nbsp;<a href="/admin/submission/notify/${submission.id}">Notify</a><br/>
+						<a href="/admin/submission/delete/${submission.id}" class="confirmation">Delete</a>
 					</td>
 				</tr>
 				<tr>

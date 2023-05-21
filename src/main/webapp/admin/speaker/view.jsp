@@ -58,8 +58,7 @@
 					<td><input disabled type="checkbox" <c:if test="${speaker.accepted}">checked</c:if>></td>
 					<td>${speaker.branch}</td>
 					<td rowspan="2">
-						<span style="float:left;"><a href="edit/${speaker.id}">Edit</a></span> &nbsp;
-						<span style="float:right;"><a href="remove/${speaker.id}">Remove</a></span>
+						<a href="edit/${speaker.id}">Edit</a>&nbsp;|&nbsp;<a href="remove/${speaker.id}">Remove</a>
 					</td>
 				</tr>
 				<tr class="title-column">

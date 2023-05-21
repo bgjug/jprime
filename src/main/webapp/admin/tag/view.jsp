@@ -28,10 +28,9 @@
 			</tr>
 			<c:forEach var="tag" items="${tags.content}">
 				<tr>
-					<td>${tag.name}</td>
-					<td>
-						<span style="float:left;"><a href="/admin/tag/edit/${tag.id}">Edit</a></span> &nbsp; 
-						<span style="float:right;"><a href="/admin/tag/remove/${tag.id}"> Remove </a></span> 
+					<td width="85%">${tag.name}</td>
+					<td width="15%">
+						<a href="/admin/tag/edit/${tag.id}">Edit</a>&nbsp;|&nbsp;<a href="/admin/tag/remove/${tag.id}">Remove</a>
 					</td>
 				</tr>
 			</c:forEach>

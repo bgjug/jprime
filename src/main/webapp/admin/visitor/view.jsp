@@ -68,10 +68,7 @@
 					<td>${not empty visitor.registrant and not empty visitor.registrant.realInvoiceNumber ? visitor.registrant.realInvoiceNumber:''}</td>
 					<td>${visitor.ticket}</td>
 					<td>
-
-						<span><a href="/admin/visitor/edit/${visitor.id}">Edit</a></span> &nbsp;&nbsp;&nbsp;
-
-						<span><a href="/admin/visitor/remove/${visitor.id}"> Remove </a></span>
+						<a href="/admin/visitor/edit/${visitor.id}">Edit</a>&nbsp;|&nbsp;<a href="/admin/visitor/remove/${visitor.id}">Remove</a>
 					</td>
 				</tr>
 			</c:forEach>

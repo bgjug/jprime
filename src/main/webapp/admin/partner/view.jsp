@@ -30,13 +30,12 @@
 			</tr>
 			<c:forEach var="partner" items="${partners.content}">
 				<tr>
-					<td>${partner.companyName}</td>
+					<td width="100%">${partner.companyName}</td>
 					<td><img src="/image/partner/${partner.id}"/></td>
 					<td>${partner.active}</td>
 					<td>${sponsor.partnerPackage}</td>
 					<td>
-						<span style="float:left;"><a href="/admin/partner/edit/${partner.id}">Edit</a></span> &nbsp; 
-						<span style="float:right;"><a href="/admin/partner/remove/${partner.id}"> Remove </a></span> 
+						<a href="/admin/partner/edit/${partner.id}">Edit</a></span>&nbsp;|&nbsp;<a href="/admin/partner/remove/${partner.id}">Remove</a>
 					</td>
 				</tr>
 			</c:forEach>
