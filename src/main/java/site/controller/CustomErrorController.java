@@ -23,9 +23,4 @@ public class CustomErrorController implements ErrorController {
         model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
         return "/404.jsp";
     }
-
-    @Override
-    public String getErrorPath() {
-        return "/404";
-    }
 }
