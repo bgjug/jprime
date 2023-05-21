@@ -24,6 +24,7 @@ import site.model.Speaker;
 import site.repository.SpeakerRepository;
 
 import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -59,6 +60,28 @@ public class SpeakerRestControllerTest {
 
         speaker = new Speaker("ThirdSpeaker", "ThirdLastName", "third@jprime.io", "", "", true, false);
         speakerRepository.save(speaker);
+
+        speaker = new Speaker("ForthSpeaker", "ForthLastName", "fourth@jprime.io", "", "", false, false);
+        speakerRepository.save(speaker);
+    }
+
+    @Test
+    public void searchAllSpeakers() throws Exception {
+        MvcResult result = mockMvc.perform(
+                get("/api/speaker/" + Globals.CURRENT_BRANCH.getLabel()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andReturn();
+
+        List<Speaker> speakerList =
+            new ObjectMapper().readValue(result.getResponse().getContentAsString(), SPEAKER_LIST);
+        Assertions.assertEquals(3, speakerList.size());
+        speakerList.forEach(sp -> {
+            assertNotNull(sp.getName());
+            assertNotNull(sp.getEmail());
+        });
+
+        assertTrue(speakerList.stream().map(sp -> sp.getFeatured() || sp.getAccepted()).reduce(false, Boolean::logicalOr));
     }
 
     @Test

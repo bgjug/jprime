@@ -61,7 +61,7 @@ public class TicketRestControllerTest {
     @Test
     public void registerTicket() throws Exception {
         String ticketReferenceId = "_TICKET_REFERENCE_ID_";
-        Visitor visitor = findVisitorByTicket(ticketReferenceId);
+        VisitorFromJSON visitor = findVisitorByTicket(ticketReferenceId);
         assertFalse(visitor.isRegistered());
 
         mockMvc.perform(post("/api/ticket/" + ticketReferenceId))
@@ -71,12 +71,12 @@ public class TicketRestControllerTest {
         assertTrue(visitor.isRegistered());
     }
 
-    private Visitor findVisitorByTicket(String ticket) throws Exception {
+    private VisitorFromJSON findVisitorByTicket(String ticket) throws Exception {
         MvcResult result = mockMvc.perform(get("/api/visitor/" + Globals.CURRENT_BRANCH.getLabel() + "/" + ticket))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
-        return new ObjectMapper().readValue(result.getResponse().getContentAsString(), Visitor.class);
+        return new ObjectMapper().readValue(result.getResponse().getContentAsString(), VisitorFromJSON.class);
     }
 
     private Visitor createVisitorForRegistrant(Registrant r) {

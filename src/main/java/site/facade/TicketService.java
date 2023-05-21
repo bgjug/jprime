@@ -55,7 +55,7 @@ public class TicketService {
                 .filter(v -> v.getStatus() != VisitorStatus.REQUESTING)
                 .filter(v -> StringUtils.isEmpty(v.getTicket()))
                 .filter(v -> StringUtils.isNotBlank(v.anyEmail()))
-                .limit(5) // Remove this before deployment
+                // .limit(5) // Remove this before deployment
                 .collect(Collectors.groupingBy(Visitor::anyEmail));
 
         if (pendingVisitorsMap.values().stream().mapToLong(Collection::size).sum() > 3) {

@@ -381,7 +381,7 @@ public class AdminService {
         }
 
         if (StringUtils.isNotBlank(company)) {
-            whereClauses.add("lower(v.company) like :company");
+            whereClauses.add("(lower(v.company) like :company or lower(v.registrant.name) like :company)");
             paramsMap.put("company", '%' + company.toLowerCase() + '%');
         }
 
