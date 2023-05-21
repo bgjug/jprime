@@ -49,11 +49,7 @@
                 <td>${registrant.branch}</td>
                 <td>${registrant.student}</td>
                 <td>
-                    <span><a href="/admin/registrant/edit/${registrant.id}">Edit</a></span> &nbsp;&nbsp;&nbsp;
-                    <span><a href="/admin/registrant/remove/${registrant.id}">Remove</a></span>
-                    <c:if test="${registrant.paymentType ne 'EPAY_ACCOUNT'}">
-                        <span><a href="/admin/invoice/${registrant.id}">Invoice</a></span>
-                    </c:if>
+                    <a href="/admin/registrant/edit/${registrant.id}">Edit</a>&nbsp;|&nbsp;<a href="/admin/registrant/remove/${registrant.id}">Remove</a><c:if test="${registrant.paymentType ne 'EPAY_ACCOUNT'}">&nbsp;|&nbsp;<a href="/admin/invoice/${registrant.id}">Invoice</a></c:if>
                     <span><a href="/admin/registrant/send-tickets/${registrant.id}">SEND TICKETS</a></span>
                 </td>
             </tr>

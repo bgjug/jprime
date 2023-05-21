@@ -33,10 +33,9 @@
         <c:forEach var="hall" items="${halls}">
             <tr>
                 <td>${hall.name}</td>
-                <td>${hall.description}</td>
+                <td width="100%">${hall.description}</td>
                 <td>
-                    <span><a href="/admin/hall/edit/${hall.id}">Edit</a></span> &nbsp;&nbsp;&nbsp;
-                    <span><a href="/admin/hall/remove/${hall.id}">Remove</a></span>
+                    <a href="/admin/hall/edit/${hall.id}">Edit</a>&nbsp;|&nbsp;<a href="/admin/hall/remove/${hall.id}">Remove</a>
                 </td>
             </tr>
         </c:forEach>
