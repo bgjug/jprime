@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 <%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
+<%@ page import="site.model.SessionType" %>
 
 <!doctype html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -171,11 +172,11 @@
                                             </c:choose>
                                             <br/>
                                             <c:if test="${not empty talk.submission and not empty talk.submission.speaker}">
-                                                <c:out value="${talk.submission.speaker.firstName}"/>&nbsp;<c:out value="${talk.submission.speaker.lastName}"/>
+                                                <c:out value="${talk.submission.speaker.name}"/>
                                             </c:if>
                                             <c:if test="${not empty talk.submission and not empty talk.submission.coSpeaker}">
                                                 <br/>&& <br/>
-                                                <c:out value="${talk.submission.coSpeaker.firstName}"/>&nbsp;<c:out value="${talk.submission.coSpeaker.lastName}"/>
+                                                <c:out value="${talk.submission.coSpeaker.name}"/>
                                             </c:if>
                                         </td>
                                         <c:if test="${beta[i.count-1].startTime eq talk.startTime}">
@@ -184,11 +185,11 @@
                                                 <a href="/agenda/${talk.id}">${talk.submission.title}</a>
                                                 <br/>
                                                 <c:if test="${not empty talk.submission and not empty talk.submission.speaker}">
-                                                    <c:out value="${talk.submission.speaker.firstName}"/>&nbsp;<c:out value="${talk.submission.speaker.lastName}"/>
+                                                    <c:out value="${talk.submission.speaker.name}"/>
                                                 </c:if>
                                                 <c:if test="${not empty talk.submission and not empty talk.submission.coSpeaker}">
                                                     <br/>&& <br/>
-                                                    <c:out value="${talk.submission.coSpeaker.firstName}"/>&nbsp;<c:out value="${talk.submission.coSpeaker.lastName}"/>
+                                                    <c:out value="${talk.submission.coSpeaker.name}"/>
                                                 </c:if>
                                             </td>
                                         </c:if>
@@ -199,11 +200,14 @@
                                                 <a href="/agenda/${talk.id}">${talk.submission.title}</a>
                                                 <br/>
                                                 <c:if test="${not empty talk.submission and not empty talk.submission.speaker}">
-                                                    <c:out value="${talk.submission.speaker.firstName}"/>&nbsp;<c:out value="${talk.submission.speaker.lastName}"/>
+                                                    <c:out value="${talk.submission.speaker.name}"/>
                                                 </c:if>
                                                 <c:if test="${not empty talk.submission and not empty talk.submission.coSpeaker}">
-                                                    <br/>&& <br/>
-                                                    <c:out value="${talk.submission.coSpeaker.firstName}"/>&nbsp;<c:out value="${talk.submission.coSpeaker.lastName}"/>
+                                                    <br/>&&<br/>
+                                                    <c:out value="${talk.submission.coSpeaker.name}"/>
+                                                </c:if>
+                                                <c:if test="${talk.submission.type == SessionType.DEEP_DIVE}">
+                                                    <br/><c:out value="(Deep Dive)"/>
                                                 </c:if>
                                             </td>
                                         </c:if>
@@ -247,11 +251,11 @@
                                         </c:choose>
                                         <br/>
                                         <c:if test="${not empty talk.submission and not empty talk.submission.speaker}">
-                                            <c:out value="${talk.submission.speaker.firstName}"/>&nbsp;<c:out value="${talk.submission.speaker.lastName}"/>
+                                            <c:out value="${talk.submission.speaker.name}"/>
                                         </c:if>
                                         <c:if test="${not empty talk.submission and not empty talk.submission.coSpeaker}">
                                             <br/>&& <br/>
-                                            <c:out value="${talk.submission.coSpeaker.firstName}"/>&nbsp;<c:out value="${talk.submission.coSpeaker.lastName}"/>
+                                            <c:out value="${talk.submission.coSpeaker.name}"/>
                                         </c:if>
                                     </td>
                                     <c:if test="${beta[i.count-1].startTime eq talk.startTime}">
@@ -260,11 +264,11 @@
                                             <a href="/agenda/${talk.id}">${talk.submission.title}</a>
                                             <br/>
                                             <c:if test="${not empty talk.submission and not empty talk.submission.speaker}">
-                                                <c:out value="${talk.submission.speaker.firstName}"/>&nbsp;<c:out value="${talk.submission.speaker.lastName}"/>
+                                                <c:out value="${talk.submission.speaker.name}"/>
                                             </c:if>
                                             <c:if test="${not empty talk.submission and not empty talk.submission.coSpeaker}">
                                                 <br/>&& <br/>
-                                                <c:out value="${talk.submission.coSpeaker.firstName}"/>&nbsp;<c:out value="${talk.submission.coSpeaker.lastName}"/>
+                                                <c:out value="${talk.submission.coSpeaker.name}"/>
                                             </c:if>
                                         </td>
                                     </c:if>
@@ -275,11 +279,14 @@
                                             <a href="/agenda/${talk.id}">${talk.submission.title}</a>
                                             <br/>
                                             <c:if test="${not empty talk.submission and not empty talk.submission.speaker}">
-                                                <c:out value="${talk.submission.speaker.firstName}"/>&nbsp;<c:out value="${talk.submission.speaker.lastName}"/>
+                                                <c:out value="${talk.submission.speaker.name}"/>
                                             </c:if>
                                             <c:if test="${not empty talk.submission and not empty talk.submission.coSpeaker}">
                                                 <br/>&& <br/>
-                                                <c:out value="${talk.submission.coSpeaker.firstName}"/>&nbsp;<c:out value="${talk.submission.coSpeaker.lastName}"/>
+                                                <c:out value="${talk.submission.coSpeaker.name}"/>
+                                            </c:if>
+                                            <c:if test="${talk.submission.type == SessionType.DEEP_DIVE}">
+                                                <br/><c:out value="(Deep Dive)"/>
                                             </c:if>
                                         </td>
                                     </c:if>
