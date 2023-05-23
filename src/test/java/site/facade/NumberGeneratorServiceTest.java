@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,6 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import site.app.Application;
+import site.model.Registrant;
+import site.repository.RegistrantRealInvoiceNumberGeneratorRepository;
 
 import static org.junit.Assert.*;
 
@@ -34,6 +37,9 @@ public class NumberGeneratorServiceTest {
     @Autowired
     private NumberGeneratorService numberGeneratorService;
 
+    @Autowired
+    private RegistrantRealInvoiceNumberGeneratorRepository invoiceGeneratorRepository;
+
     @BeforeClass
     public static void setupPool() {
         EXECUTION_POOL = new ForkJoinPool(10);
@@ -44,6 +50,11 @@ public class NumberGeneratorServiceTest {
         if (EXECUTION_POOL != null) {
             EXECUTION_POOL.shutdown();
         }
+    }
+
+    @After
+    public void cleanupDb() {
+        invoiceGeneratorRepository.deleteAll();
     }
 
     @Test
@@ -57,5 +68,15 @@ public class NumberGeneratorServiceTest {
         assertEquals(RUNS, invoiceNumbers.size());
         assertEquals(RUNS,
             LongStream.range(START_NUMBER, START_NUMBER + RUNS).filter(invoiceNumbers::contains).count());
+    }
+
+    @Test
+    public void testForExistingNumber() {
+        Registrant.RealInvoiceNumberGenerator invoiceNumberGenerator = new Registrant.RealInvoiceNumberGenerator();
+        invoiceNumberGenerator.setCounter(100000);
+        invoiceGeneratorRepository.save(invoiceNumberGenerator);
+
+        long result = numberGeneratorService.getRealInvoiceNumber();
+        assertEquals(100000, result);
     }
 }
