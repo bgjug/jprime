@@ -8,8 +8,7 @@ import site.model.Registrant;
  * @author Mihail Stoynov
  */
 @Repository(value = RegistrantProformaInvoiceNumberGeneratorRepository.NAME)
-public interface RegistrantProformaInvoiceNumberGeneratorRepository extends PagingAndSortingRepository<Registrant.ProformaInvoiceNumberGenerator, Long> {
+public interface RegistrantProformaInvoiceNumberGeneratorRepository extends RegistrantNumberGeneratorRepository<Registrant.ProformaInvoiceNumberGenerator> {
 
 	String NAME = "registrantProformaInvoiceNumberGeneratorRepository";
-    Registrant.ProformaInvoiceNumberGenerator findFirstByOrderByIdAsc();
 }
