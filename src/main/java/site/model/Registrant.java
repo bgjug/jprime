@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import java.util.ArrayList;
@@ -60,10 +61,10 @@ public class Registrant extends AbstractEntity {
         EPAY_ACCOUNT("ePay account", "epay.bg"), EPAY_CREDIT_CARD("Bank card", "Банкова карта"),
         BANK_TRANSFER("Direct bank transfer", "Банков превод");
 
-        private String value;
-        private String bulgarianValue;
+        private final String value;
+        private final String bulgarianValue;
 
-        private PaymentType(String theValue, String bulgarianValue) {
+        PaymentType(String theValue, String bulgarianValue) {
             this.value = theValue;
             this.bulgarianValue = bulgarianValue;
         }
@@ -77,9 +78,8 @@ public class Registrant extends AbstractEntity {
         }
     }
 
-    /** the entity that generates the unique invoice numbers for epay */
-    @Entity
-    public static class EpayInvoiceNumberGenerator {
+    @MappedSuperclass
+    public static class NumberGenerator {
         @Id
         @GeneratedValue
         private int id;
@@ -100,6 +100,11 @@ public class Registrant extends AbstractEntity {
         public void setCounter(long counter) {
             this.counter = counter;
         }
+    }
+
+    /** the entity that generates the unique invoice numbers for epay */
+    @Entity
+    public static class EpayInvoiceNumberGenerator extends NumberGenerator {
     }
 
     /**
@@ -108,52 +113,12 @@ public class Registrant extends AbstractEntity {
      * wneh a user pays up. The REAL invoice generator. This number is different from the one from the epay generator.
      */
     @Entity
-    public static class RealInvoiceNumberGenerator {
-        @Id
-        @GeneratedValue
-        private int id;
-        private long counter;
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public long getCounter() {
-            return counter;
-        }
-
-        public void setCounter(long counter) {
-            this.counter = counter;
-        }
+    public static class RealInvoiceNumberGenerator extends NumberGenerator{
     }
 
     /** Generates proforma invoice numbers. */
     @Entity
-    public static class ProformaInvoiceNumberGenerator {
-        @Id
-        @GeneratedValue
-        private int id;
-        private long counter;
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public long getCounter() {
-            return counter;
-        }
-
-        public void setCounter(long counter) {
-            this.counter = counter;
-        }
+    public static class ProformaInvoiceNumberGenerator extends NumberGenerator{
     }
 
     public Registrant() {

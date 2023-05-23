@@ -5,8 +5,7 @@ import org.springframework.stereotype.Repository;
 import site.model.Registrant;
 
 @Repository(value = RegistrantEpayInvoiceNumberGeneratorRepository.NAME)
-public interface RegistrantEpayInvoiceNumberGeneratorRepository extends PagingAndSortingRepository<Registrant.EpayInvoiceNumberGenerator, Long> {
+public interface RegistrantEpayInvoiceNumberGeneratorRepository extends RegistrantNumberGeneratorRepository<Registrant.EpayInvoiceNumberGenerator> {
 
 	String NAME = "registrantEpayInvoiceNumberGeneratorRepository";
-    Registrant.EpayInvoiceNumberGenerator findFirstByOrderByIdAsc();
 }

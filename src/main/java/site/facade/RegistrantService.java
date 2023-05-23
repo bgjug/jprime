@@ -8,11 +8,13 @@ import site.model.Registrant;
 import site.model.Visitor;
 import site.model.VisitorStatus;
 import site.repository.RegistrantEpayInvoiceNumberGeneratorRepository;
+import site.repository.RegistrantNumberGeneratorRepository;
 import site.repository.RegistrantProformaInvoiceNumberGeneratorRepository;
 import site.repository.RegistrantRealInvoiceNumberGeneratorRepository;
 import site.repository.RegistrantRepository;
 
 import javax.transaction.Transactional;
+import java.util.function.Supplier;
 
 @Service(RegistrantService.NAME)
 @Transactional
@@ -23,15 +25,9 @@ public class RegistrantService {
     @Autowired
     @Qualifier(RegistrantRepository.NAME)
     private RegistrantRepository registrantRepository;
+
     @Autowired
-    @Qualifier(RegistrantEpayInvoiceNumberGeneratorRepository.NAME)
-    private RegistrantEpayInvoiceNumberGeneratorRepository registrantEpayInvoiceNumberGeneratorRepository;
-    @Autowired
-    @Qualifier(RegistrantRealInvoiceNumberGeneratorRepository.NAME)
-    private RegistrantRealInvoiceNumberGeneratorRepository registrantRealInvoiceNumberGeneratorRepository;
-    @Autowired
-    @Qualifier(RegistrantProformaInvoiceNumberGeneratorRepository.NAME)
-    private RegistrantProformaInvoiceNumberGeneratorRepository registrantProformaInvoiceNumberGeneratorRepository;
+    private NumberGeneratorService numberGeneratorService;
 
     public Registrant findByEpayInvoiceNumber(long invoiceNumber){
         return registrantRepository.findByEpayInvoiceNumber(invoiceNumber);
@@ -45,11 +41,11 @@ public class RegistrantService {
     public synchronized Registrant save(Registrant registrant) {
 
         if(registrant.getPaymentType() == Registrant.PaymentType.BANK_TRANSFER) {
-            long counter = getProformaInvoiceNumber();
+            long counter = numberGeneratorService.getProformaInvoiceNumber();
             registrant.setProformaInvoiceNumber(counter);
         } else {
             if(registrant.getEpayInvoiceNumber()==0) {//only if new registrant
-                long counter = getEpayInvoiceNumber();
+                long counter = numberGeneratorService.getEpayInvoiceNumber();
                 registrant.setEpayInvoiceNumber(counter);
             }
 
@@ -67,73 +63,8 @@ public class RegistrantService {
     }
 
     public void generateInvoiceNumber(Registrant registrant) {
-        long counter = getRealInvoiceNumber();
+        long counter = numberGeneratorService.getRealInvoiceNumber();
         registrant.setRealInvoiceNumber(counter);
-    }
-
-    private long getEpayInvoiceNumber() {
-        //mihail: get the invoice number from the other table
-        long count = registrantEpayInvoiceNumberGeneratorRepository.count();
-        if(count > 1) {
-            throw new JprimeException("Mihail: EpayInvoiceNumberGenerator table has more than one row. Fix that");
-        }
-
-        Registrant.EpayInvoiceNumberGenerator epayInvoiceNumberGenerator;
-        if(count == 0) {
-            epayInvoiceNumberGenerator = new Registrant.EpayInvoiceNumberGenerator();
-            epayInvoiceNumberGenerator.setCounter(8100000001L);
-            epayInvoiceNumberGenerator = registrantEpayInvoiceNumberGeneratorRepository.save(epayInvoiceNumberGenerator);
-        } else {
-            epayInvoiceNumberGenerator = registrantEpayInvoiceNumberGeneratorRepository.findFirstByOrderByIdAsc();
-        }
-
-        long counter = epayInvoiceNumberGenerator.getCounter();
-        epayInvoiceNumberGenerator.setCounter(counter + 1);
-        registrantEpayInvoiceNumberGeneratorRepository.save(epayInvoiceNumberGenerator);
-        return counter;
-    }
-
-    private long getRealInvoiceNumber() {
-        //mihail: get the invoice number from the other table
-        long count = registrantRealInvoiceNumberGeneratorRepository.count();
-        if(count > 1) {
-            throw new JprimeException("Mihail: RealInvoiceNumberGenerator table has more than one row. Fix that");
-        }
-
-        Registrant.RealInvoiceNumberGenerator realInvoiceNumberGenerator;
-        if(count == 0) {
-            realInvoiceNumberGenerator = new Registrant.RealInvoiceNumberGenerator();
-            realInvoiceNumberGenerator.setCounter(8000000001L);
-            realInvoiceNumberGenerator = registrantRealInvoiceNumberGeneratorRepository.save(realInvoiceNumberGenerator);
-        } else {
-            realInvoiceNumberGenerator = registrantRealInvoiceNumberGeneratorRepository.findFirstByOrderByIdAsc();
-        }
-
-        long counter = realInvoiceNumberGenerator.getCounter();
-        realInvoiceNumberGenerator.setCounter(counter + 1);
-        registrantRealInvoiceNumberGeneratorRepository.save(realInvoiceNumberGenerator);
-        return counter;
-    }
-    private long getProformaInvoiceNumber() {
-        //mihail: get the invoice number from the other table
-        long count = registrantProformaInvoiceNumberGeneratorRepository.count();
-        if(count > 1) {
-            throw new JprimeException("Mihail: ProformaInvoiceNumberGenerator table has more than one row. Fix that");
-        }
-
-        Registrant.ProformaInvoiceNumberGenerator proformaInvoiceNumberGenerator;
-        if(count == 0) {
-            proformaInvoiceNumberGenerator = new Registrant.ProformaInvoiceNumberGenerator();
-            proformaInvoiceNumberGenerator.setCounter(7000000001L);
-            proformaInvoiceNumberGenerator = registrantProformaInvoiceNumberGeneratorRepository.save(proformaInvoiceNumberGenerator);
-        } else {
-            proformaInvoiceNumberGenerator = registrantProformaInvoiceNumberGeneratorRepository.findFirstByOrderByIdAsc();
-        }
-
-        long counter = proformaInvoiceNumberGenerator.getCounter();
-        proformaInvoiceNumberGenerator.setCounter(counter + 1);
-        registrantProformaInvoiceNumberGeneratorRepository.save(proformaInvoiceNumberGenerator);
-        return counter;
     }
 
     public void setRegistrantPaid(Registrant registrant) {
