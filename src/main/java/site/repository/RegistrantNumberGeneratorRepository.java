@@ -9,8 +9,7 @@ public interface RegistrantNumberGeneratorRepository<T extends Registrant.Number
     PagingAndSortingRepository<T, Long> {
     T findFirstByOrderByIdAsc();
 
-    // This should provide reference to the actual repository object. Not to a proxy
-    default Object lockObject() {
-        return this;
+    default Class<?> repositoryClass() {
+        return this.getClass();
     }
 }
