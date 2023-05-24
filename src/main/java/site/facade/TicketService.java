@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import site.config.Globals;
 import site.controller.invoice.InvoiceLanguage;
@@ -85,27 +86,32 @@ public class TicketService {
      * Generates and sends a ticket email message for each visitor in the list. The provided email is used
      * as receiver for all ticket messages
      *
-     * @param email the receiver of the email messages
+     * @param email    the receiver of the email messages
      * @param visitors list of the visitors for which a ticket email message will be generated
-     * @return List of pairs of {@link Visitor} and boolean. The boolean indicates success or failure for the operation for that {@link Visitor}
+     * @return List of pairs of {@link Visitor} and boolean. The boolean indicates success or failure for
+     * the operation for that {@link Visitor}
      */
     public List<Pair<Visitor, Boolean>> generateAndSendTicketEmail(String email, List<Visitor> visitors) {
-        List<Pair<Visitor, byte[]>> ticketPdfs = visitors.stream().map(visitor -> {
+        List<Pair<Visitor, Pair<byte[], byte[]>>> ticketPdfs = visitors.stream().map(visitor -> {
             TicketData ticketData = new TicketData();
             ticketData.setEvent("JPrime " + Globals.CURRENT_BRANCH);
             ticketData.setOrganizer("JPrime Events");
             String ticketNumber = UUID.randomUUID().toString();
             ticketData.addDetail(new TicketDetail(ticketNumber, visitor.getName(), "Visitor"));
             visitor.setTicket(ticketNumber);
-            return Pair.of(visitor, ticketExporter.exportTicket(ticketData, InvoiceLanguage.EN));
+            return Pair.of(visitor, Pair.of(ticketExporter.exportTicket(ticketData, InvoiceLanguage.EN), ticketExporter.generateTicketQrCode(ticketData)));
         }).collect(Collectors.toList());
 
         return ticketPdfs.stream().map(p -> {
             Visitor visitor = p.getKey();
-            byte[] ticketPdf = p.getValue();
+            Pair<byte[], byte[]> binaryPair = p.getValue();
+            byte[] ticketPdf = binaryPair.getKey();
+            byte[] qrImage = binaryPair.getValue();
             try {
                 mailFacade.sendEmail(email, "JPrime " + Globals.CURRENT_BRANCH + " Conference ticket !",
-                    ticketMessage(visitor), ticketPdf, "ticket_" + visitor.getId() + ".pdf");
+                    ticketMessage(visitor),
+                    new Attachment(ticketPdf, "ticket_" + visitor.getId() + ".pdf", "utf-8", false, "application/pdf"),
+                    new Attachment(qrImage, "ticket_qr.png", "utf-8", true, MediaType.IMAGE_PNG_VALUE));
                 adminFacade.saveVisitor(visitor);
                 return Pair.of(visitor, true);
             } catch (MessagingException e) {
@@ -116,11 +122,22 @@ public class TicketService {
     }
 
     private String ticketMessage(Visitor visitor) {
-        return "<strong>DON'T PANIC !!!</string> jPrime " + Globals.CURRENT_BRANCH + " is here !<br/>" +
-            "You will find attached to this email message your ticket for the event. Please be ready " +
-            "to show it on your mobile phone on the registration. You can also print it if it will be " +
-            "more convenient to you.<br/> " + "The registration is open on the first day morning. We would " +
-            "advice you to come early.<br/>" + "Some other information : <br/>" + "Location :  <a " +
-            "href='https://jprime.io/venue' target='_blank'>Sofia Tech Park</a><br/>" + "Your name : " + visitor.getName() + "<br/>" + "Your ticket ID : " + visitor.getTicket() + " <br/>" + "The conference website : <a href='https://jprime.io/' target='_blank'>https://jprime.io</a> <br/>" + "<br/>" + "And finally, if for some reason you cannot come, a friend of yours or a colleague or someone can use your ticket. Also if you are privacy fanatic, you can use a nickname :+)" + "<br/><br/>" + "See you at jPrime !<br/>" + "The Gang of 6 of the Bulgarian Java User Group!";
+        return String.format(
+            //@formatter:off
+            "<strong>DON'T PANIC !!!</strong> jPrime %s is here !<br/>\n" +
+                "You will find attached to this email message your ticket for the event. Please be ready to show it on your mobile phone on the registration. \n" +
+                "You can also print it if it will be more convenient to you.<br/>\n " +
+                "The registration is open on the first day morning. We would advise you to come early.<br/>\n" +
+                "Some other information :<br/>\n" +
+                "Location : <a href='https://jprime.io/venue' target='_blank'>Sofia Tech Park</a><br/>\n" +
+                "Your name : %s<br/>\n" +
+                "Your ticket ID : %s <br/>\n" +
+                "<img alt=\"logo\" src=\"cid:ticket_qr.png\"/>\n<br/>" +
+                "The conference website : <a href='https://jprime.io/' target='_blank'>https://jprime.io</a><br/><br/>\n" +
+                "And finally, if for some reason you cannot come, a friend of yours or a colleague or someone can use your ticket.<br/><br/>\n" +
+                "See you at jPrime !<br/>\n" +
+                "The Gang of 6 of the Bulgarian Java User Group",
+            //@formatter:on
+            Globals.CURRENT_BRANCH, visitor.getName(), visitor.getTicket());
     }
 }
