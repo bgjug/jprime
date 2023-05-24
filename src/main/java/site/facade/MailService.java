@@ -11,11 +11,16 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author Ivan St. Ivanov
@@ -49,7 +54,11 @@ public class MailService {
         mailSender.send(mimeMessage);
     }
 
-    public void sendEmail(String to, String subject, String messageText, byte[] pdf, String pdfFilename) throws MessagingException {
+    public void sendEmail(String to, String subject, String messageText, byte[] pdf, String pdfName) throws MessagingException {
+        sendEmail(to, subject, messageText, new Attachment(pdf, pdfName, "utf-8", false, "application/pdf"));
+    }
+
+    public void sendEmail(String to, String subject, String messageText, Attachment ... attachments) throws MessagingException {
         System.setProperty("mail.mime.splitlongparameters", "false");
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -61,12 +70,25 @@ public class MailService {
         helper.setSubject(subject);
         helper.setText(messageText, true);
 
-        ByteArrayResource bais = new ByteArrayResource(pdf);
-        try {
-            helper.addAttachment(MimeUtility.encodeWord(pdfFilename, "UTF-8", "Q"), bais);
-        } catch (UnsupportedEncodingException e) {
-            logger.error(e.getMessage());
-        }
+        Stream.of(attachments).filter(Attachment::isInline).forEach(attachment -> {
+                try {
+                    helper.addInline(attachment.name, new ByteArrayResource(attachment.data), attachment.type);
+                } catch (MessagingException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        );
+
+        Stream.of(attachments).filter(attachment -> !attachment.isInline()).forEach(attachment -> {
+            ByteArrayResource bais = new ByteArrayResource(attachment.data);
+            try {
+                helper.addAttachment(MimeUtility.encodeWord(attachment.name, attachment.charset, "Q"), bais);
+            } catch (UnsupportedEncodingException e) {
+                logger.error(e.getMessage());
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         mailSender.send(mimeMessage);
     }

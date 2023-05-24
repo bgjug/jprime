@@ -1,16 +1,28 @@
 package site.controller.ticket;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.hazelcast.query.impl.bitmap.Bitmap;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -32,6 +44,28 @@ public class TicketExporter {
 
     private static final Logger LOGGER = LogManager.getLogger(TicketExporter.class);
 
+    private static final String JSON =
+        "{ \"organizer\" : \"%s\", \"event\" : \"%s\", \"type\" : \"%s\", \"ticket\" : \"%s\" }";
+
+    public byte[] generateTicketQrCode(TicketData data) {
+        TicketDetail detail = data.getDetails().iterator().next();
+        String qrData = String.format(JSON,
+            data.getOrganizer(), data.getEvent(), detail.getType(), detail.getNumber());
+        QRCodeWriter writer = new QRCodeWriter();
+        try {
+            BitMatrix qrMatrix = writer.encode(qrData, BarcodeFormat.QR_CODE, 164, 164, Collections.singletonMap(
+                EncodeHintType.CHARACTER_SET, "utf-8"));
+            BufferedImage image = MatrixToImageWriter.toBufferedImage(qrMatrix);
+            try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
+                ImageIO.write(image, "png", stream);
+                stream.flush();
+                return stream.toByteArray();
+            }
+        } catch (WriterException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public byte[] exportTicket(TicketData data, InvoiceLanguage language) {
         String resourceName = null;
         switch (language) {
@@ -43,7 +77,7 @@ public class TicketExporter {
         }
 
         InputStream reportTemplate = getClass().getResourceAsStream(resourceName);
-        JasperReport jasperReport = null;
+        JasperReport jasperReport;
         try {
             jasperReport = (JasperReport) JRLoader.loadObject(reportTemplate);
         } catch (JRException e) {
@@ -95,6 +129,8 @@ public class TicketExporter {
         data.addDetail(new TicketDetail(UUID.randomUUID().toString(), "Venkat Subramaniam", "Speaker"));
 
         Files.write(Paths.get("ticket_test.pdf"), new TicketExporter().exportTicket(data, EN));
+
+        Files.write(Paths.get("test_qr_code.png"), new TicketExporter().generateTicketQrCode(data));
     }
 
 }
