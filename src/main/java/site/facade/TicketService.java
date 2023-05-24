@@ -134,8 +134,7 @@ public class TicketService {
                 "Your ticket ID : %s <br/>\n" +
                 "<img alt=\"logo\" src=\"cid:ticket_qr.png\"/>\n<br/>" +
                 "The conference website : <a href='https://jprime.io/' target='_blank'>https://jprime.io</a><br/><br/>\n" +
-                "And finally, if for some reason you cannot come, a friend of yours or a colleague or someone can use your ticket. \n" +
-                "If you are privacy fanatic, you can use a nickname :+)<br/><br/>\n" +
+                "And finally, if for some reason you cannot come, a friend of yours or a colleague or someone can use your ticket.<br/><br/>\n" +
                 "See you at jPrime !<br/>\n" +
                 "The Gang of 6 of the Bulgarian Java User Group",
             //@formatter:on

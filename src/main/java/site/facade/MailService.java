@@ -1,7 +1,6 @@
 package site.facade;
 
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
@@ -11,15 +10,11 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -70,7 +65,7 @@ public class MailService {
         helper.setSubject(subject);
         helper.setText(messageText, true);
 
-        Stream.of(attachments).filter(Attachment::isInline).forEach(attachment -> {
+        Stream.of(attachments).filter(attachment -> attachment.isInline).forEach(attachment -> {
                 try {
                     helper.addInline(attachment.name, new ByteArrayResource(attachment.data), attachment.type);
                 } catch (MessagingException e) {
@@ -79,7 +74,7 @@ public class MailService {
             }
         );
 
-        Stream.of(attachments).filter(attachment -> !attachment.isInline()).forEach(attachment -> {
+        Stream.of(attachments).filter(attachment -> !attachment.isInline).forEach(attachment -> {
             ByteArrayResource bais = new ByteArrayResource(attachment.data);
             try {
                 helper.addAttachment(MimeUtility.encodeWord(attachment.name, attachment.charset, "Q"), bais);
