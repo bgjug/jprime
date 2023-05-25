@@ -96,7 +96,7 @@ public class TicketService {
             TicketData ticketData = new TicketData();
             ticketData.setEvent("JPrime " + Globals.CURRENT_BRANCH);
             ticketData.setOrganizer("JPrime Events");
-            String ticketNumber = UUID.randomUUID().toString();
+            String ticketNumber = StringUtils.isEmpty(visitor.getTicket()) ? UUID.randomUUID().toString() : visitor.getTicket();
             ticketData.addDetail(new TicketDetail(ticketNumber, visitor.getName(), "Visitor"));
             visitor.setTicket(ticketNumber);
             return Pair.of(visitor, Pair.of(ticketExporter.exportTicket(ticketData, InvoiceLanguage.EN), ticketExporter.generateTicketQrCode(ticketData)));
