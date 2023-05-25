@@ -59,7 +59,7 @@ public class TicketsEpayRegisterControllerTest {
         mockMvc.perform(get("/tickets"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("registrant", is(new Registrant())))
-                .andExpect(view().name(Globals.PAGE_TICKETS));
+                .andExpect(view().name(Globals.CURRENT_BRANCH.isSoldOut() ? TicketsController.TICKETS_END_JSP : TicketsController.TICKETS_REGISTER_JSP));
     }
 
     @Test
@@ -147,7 +147,7 @@ public class TicketsEpayRegisterControllerTest {
     public void getTicketsEpayShouldReturnEmptyRegistrant() throws Exception {
         mockMvc.perform(get("/tickets"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(Globals.PAGE_TICKETS))
+                .andExpect(view().name(Globals.CURRENT_BRANCH.isSoldOut() ? TicketsController.TICKETS_END_JSP : TicketsController.TICKETS_REGISTER_JSP))
                 .andExpect(model().attribute("registrant", new Registrant()));
     }
 }

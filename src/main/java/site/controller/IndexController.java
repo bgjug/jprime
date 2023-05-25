@@ -73,9 +73,11 @@ public class IndexController {
             .isBeforeNow()) {
             model.addAttribute("early_sold_out", "");
             model.addAttribute("regular_sold_out", SOLD_OUT_STYLE);
+            model.addAttribute("students_sold_out", "");
         } else {
             model.addAttribute("early_sold_out", SOLD_OUT_STYLE);
-            model.addAttribute("regular_sold_out", "");
+            model.addAttribute("regular_sold_out", Globals.CURRENT_BRANCH.isSoldOut() ? SOLD_OUT_STYLE : "");
+            model.addAttribute("students_sold_out", Globals.CURRENT_BRANCH.isSoldOut() ? SOLD_OUT_STYLE : "");
         }
 
         Map<String, String> soldOutPackages = Arrays.stream(SponsorPackage.values())

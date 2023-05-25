@@ -13,7 +13,7 @@ public enum Branch {
     YEAR_2019("2019", DateTime.parse("2019-05-28")), YEAR_2020("2020", DateTime.parse("2020-05-27")),
     YEAR_2022("2022", DateTime.parse("2022-05-25")),
     YEAR_2023("2023", DateTime.parse("2023-05-30"), DateTime.parse("2022-11-10"),
-        DateTime.parse("2023-02-15T23:59:59"), Arrays.asList(SponsorPackage.GOLD, SponsorPackage.PLATINUM, SponsorPackage.GOLD_LITE));
+        DateTime.parse("2023-02-15T23:59:59"), Arrays.asList(SponsorPackage.GOLD, SponsorPackage.PLATINUM, SponsorPackage.GOLD_LITE), true);
 
     private static final String BRANCH_PREFIX = "YEAR_";
 
@@ -27,21 +27,25 @@ public enum Branch {
 
     private final Set<SponsorPackage> soldOutPackages;
 
+    private final boolean soldOut;
+
     Branch(String label, DateTime startDate) {
         this.label = label;
         this.startDate = startDate;
         this.cfpOpenDate = startDate.minusMonths(6).minusDays(20);
         this.cfpCloseDate = startDate.minusMonths(3).minusDays(15);
         soldOutPackages = new HashSet<>(Arrays.asList(SponsorPackage.values()));
+        soldOut = false;
     }
 
     Branch(String label, DateTime startDate, DateTime cfpOpenDate, DateTime cfpCloseDate,
-        Collection<SponsorPackage> soldOutPackages) {
+        Collection<SponsorPackage> soldOutPackages, boolean soldOut) {
         this.label = label;
         this.startDate = startDate;
         this.cfpOpenDate = cfpOpenDate;
         this.cfpCloseDate = cfpCloseDate;
         this.soldOutPackages = new HashSet<>(soldOutPackages);
+        this.soldOut=soldOut;
     }
 
     public DateTime getCfpCloseDate() {
@@ -71,5 +75,9 @@ public enum Branch {
 
     public String getLabel() {
         return label;
+    }
+
+    public boolean isSoldOut() {
+        return soldOut;
     }
 }

@@ -38,7 +38,7 @@ public class TicketsControllerTest {
     public void getShouldReturnTicketsJsp() throws Exception {
         mockMvc.perform(get("/tickets"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(Globals.PAGE_TICKETS));
+                .andExpect(view().name(Globals.CURRENT_BRANCH.isSoldOut() ? TicketsController.TICKETS_END_JSP : TicketsController.TICKETS_REGISTER_JSP));
     }
 
 }
