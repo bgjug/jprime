@@ -124,7 +124,7 @@ public class TicketService {
     private String ticketMessage(Visitor visitor) {
         return String.format(
             //@formatter:off
-            "<strong>DON'T PANIC !!!</strong> jPrime %s is here !<br/>\n" +
+            "<strong>WELCOME TO THE JAVA DIMENSION!!!</strong> jPrime %s is here !<br/>\n" +
                 "You will find attached to this email message your ticket for the event. Please be ready to show it on your mobile phone on the registration. \n" +
                 "You can also print it if it will be more convenient to you.<br/>\n " +
                 "The registration is open on the first day morning. We would advise you to come early.<br/>\n" +
