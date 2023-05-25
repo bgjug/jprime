@@ -423,7 +423,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" <%-- style="opacity: 0.5;"--%>>
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${students_sold_out}'/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>${student_ticket_price}</span>
@@ -442,8 +442,12 @@
                                 <li><i class="icon-close"></i><span class="text">Beers!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Coffee and soft drinks.</span></li>
                             </ul>
-                            <a href="tickets" class="btn btn-common">Buy Ticket</a>
-<%--                            <a href="tickets" class="btn btn-common">Not Available</a>--%>
+                            <c:if test="${students_sold_out.length() == 0}">
+                                <a href="tickets" class="btn btn-common">Buy Ticket</a>
+                            </c:if>
+                            <c:if test="${students_sold_out.length() > 0}">
+                                <a href="tickets" class="btn btn-common">Not Available</a>
+                            </c:if>
                         </div>
                     </div>
                 </div>

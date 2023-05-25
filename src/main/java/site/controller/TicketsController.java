@@ -88,7 +88,7 @@ public class TicketsController {
         model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
         model.addAttribute("jprime_next_year", Globals.CURRENT_BRANCH.getStartDate().getYear() + 1);
 
-		return site.config.Globals.PAGE_TICKETS;
+		return Globals.CURRENT_BRANCH.isSoldOut() ? TICKETS_END_JSP : TICKETS_REGISTER_JSP;
     }
 
     /**
@@ -104,7 +104,7 @@ public class TicketsController {
 			invalidCaptcha = true;
 		}
 		if (bindingResult.hasErrors() || invalidCaptcha) {
-			return Globals.PAGE_TICKETS;
+			return TICKETS_REGISTER_JSP;
 		}
 
         //check empty users, server side validation
