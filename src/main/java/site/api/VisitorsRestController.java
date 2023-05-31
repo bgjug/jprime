@@ -5,8 +5,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import site.facade.AdminService;
 import site.model.Visitor;
 
@@ -23,7 +24,7 @@ import site.model.Visitor;
 @RequestMapping(value = "/api/visitor", produces = MediaType.APPLICATION_JSON_VALUE)
 public class VisitorsRestController {
 
-    private static final Logger log = LogManager.getLogger(VisitorsRestController.class);
+    private static final Logger log = LoggerFactory.getLogger(VisitorsRestController.class);
 
     private final AdminService adminFacade;
 

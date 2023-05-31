@@ -11,13 +11,14 @@ import java.util.stream.StreamSupport;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import site.config.Globals;
 import site.controller.invoice.InvoiceLanguage;
 import site.controller.ticket.TicketData;
@@ -29,7 +30,7 @@ import site.model.VisitorStatus;
 @Service
 public class TicketService {
 
-    private final Logger log = LogManager.getLogger(this.getClass());
+    private final Logger log = LoggerFactory.getLogger(TicketService.class);
 
     @Autowired
     private TicketExporter ticketExporter;

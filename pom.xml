@@ -340,7 +340,7 @@
     <properties>
         <start-class>site.app.Application</start-class><!-- because we want to start the spring-boot as a war-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <log4j2.version>2.17.1</log4j2.version>
+        <log4j2.version>2.20.0</log4j2.version>
     </properties>
 
     <build>

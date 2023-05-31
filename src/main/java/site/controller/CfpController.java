@@ -1,8 +1,9 @@
 package site.controller;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,7 @@ import javax.validation.Valid;
 @Controller
 public class CfpController extends AbstractCfpController {
 
-    private static final Logger logger = LogManager.getLogger(CfpController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CfpController.class);
 
     public static final String CFP_OPEN_JSP = "/proposal.jsp";
     public static final String CFP_CLOSED_JSP = "/cfp-closed.jsp";
