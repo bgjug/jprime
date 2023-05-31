@@ -1,6 +1,6 @@
 package site.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * A person visiting the conference.
@@ -81,8 +81,10 @@ public class VisitorJPro extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "VisitorJPro{" +
-                "name='" + name + '\'' +
+        return """
+                VisitorJPro{\
+                name='\
+                """ + name + '\'' +
                 ", email='" + email + '\'' +
                 ", company='" + company + '\'' +
                 ", isPresent='" + isPresent + '\'' +

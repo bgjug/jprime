@@ -1,6 +1,6 @@
 package site.facade;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 

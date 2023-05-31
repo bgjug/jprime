@@ -1,8 +1,7 @@
 package site.facade;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -77,7 +76,7 @@ public class TicketService {
 
     private Boolean sendEmail(Visitor visitor) {
         List<Pair<Visitor, Boolean>> result =
-            generateAndSendTicketEmail(visitor.anyEmail(), Collections.singletonList(visitor));
+            generateAndSendTicketEmail(visitor.anyEmail(), List.of(visitor));
 
         return result.stream().map(Pair::getValue).reduce(true, (a, b) -> a && b);
     }
@@ -122,21 +121,25 @@ public class TicketService {
     }
 
     private String ticketMessage(Visitor visitor) {
-        return String.format(
+        return (
             //@formatter:off
-            "<strong>WELCOME TO THE JAVA DIMENSION!!!</strong> jPrime %s is here !<br/>\n" +
-                "You will find attached to this email message your ticket for the event. Please be ready to show it on your mobile phone on the registration. \n" +
-                "You can also print it if it will be more convenient to you.<br/>\n " +
-                "The registration is open on the first day morning. We would advise you to come early.<br/>\n" +
-                "Some other information :<br/>\n" +
-                "Location : <a href='https://jprime.io/venue' target='_blank'>Sofia Tech Park</a><br/>\n" +
-                "Your name : %s<br/>\n" +
-                "Your ticket ID : %s <br/>\n" +
-                "<img alt=\"logo\" src=\"cid:ticket_qr.png\"/>\n<br/>" +
-                "The conference website : <a href='https://jprime.io/' target='_blank'>https://jprime.io</a><br/><br/>\n" +
-                "And finally, if for some reason you cannot come, a friend of yours or a colleague or someone can use your ticket.<br/><br/>\n" +
-                "See you at jPrime !<br/>\n" +
-                "The Gang of 6 of the Bulgarian Java User Group",
+            """
+            <strong>WELCOME TO THE JAVA DIMENSION!!!</strong> jPrime %s is here !<br/>
+            You will find attached to this email message your ticket for the event. Please be ready to show it on your mobile phone on the registration.\s
+            You can also print it if it will be more convenient to you.<br/>
+             \
+            The registration is open on the first day morning. We would advise you to come early.<br/>
+            Some other information :<br/>
+            Location : <a href='https://jprime.io/venue' target='_blank'>Sofia Tech Park</a><br/>
+            Your name : %s<br/>
+            Your ticket ID : %s <br/>
+            <img alt="logo" src="cid:ticket_qr.png"/>
+            <br/>\
+            The conference website : <a href='https://jprime.io/' target='_blank'>https://jprime.io</a><br/><br/>
+            And finally, if for some reason you cannot come, a friend of yours or a colleague or someone can use your ticket.<br/><br/>
+            See you at jPrime !<br/>
+            The Gang of 6 of the Bulgarian Java User Group\
+            """).formatted(
             //@formatter:on
             Globals.CURRENT_BRANCH, visitor.getName(), visitor.getTicket());
     }

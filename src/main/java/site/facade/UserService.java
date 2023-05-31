@@ -27,8 +27,8 @@ import site.repository.TagRepository;
 import site.repository.UserRepository;
 import site.repository.VisitorRepository;
 
-import javax.persistence.*;
-import javax.transaction.Transactional;
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;

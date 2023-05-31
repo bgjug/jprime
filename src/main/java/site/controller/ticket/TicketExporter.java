@@ -10,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,12 +48,11 @@ public class TicketExporter {
 
     public byte[] generateTicketQrCode(TicketData data) {
         TicketDetail detail = data.getDetails().iterator().next();
-        String qrData = String.format(JSON,
+        String qrData = JSON.formatted(
             data.getOrganizer(), data.getEvent(), detail.getType(), detail.getNumber());
         QRCodeWriter writer = new QRCodeWriter();
         try {
-            BitMatrix qrMatrix = writer.encode(qrData, BarcodeFormat.QR_CODE, 164, 164, Collections.singletonMap(
-                EncodeHintType.CHARACTER_SET, "utf-8"));
+            BitMatrix qrMatrix = writer.encode(qrData, BarcodeFormat.QR_CODE, 164, 164, Map.of(EncodeHintType.CHARACTER_SET, "utf-8"));
             BufferedImage image = MatrixToImageWriter.toBufferedImage(qrMatrix);
             try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
                 ImageIO.write(image, "png", stream);

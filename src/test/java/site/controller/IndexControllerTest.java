@@ -1,13 +1,11 @@
 package site.controller;
 
 import org.hamcrest.core.IsInstanceOf;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -43,11 +41,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * @author Ivan St. Ivanov
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
 @Transactional
-public class IndexControllerTest {
+class IndexControllerTest {
 
     @Autowired
     private WebApplicationContext wac;
@@ -94,8 +91,8 @@ public class IndexControllerTest {
 
     private Partner devoxx;
 
-    @Before
-    public void setup() throws IOException {
+    @BeforeEach
+    void setup() throws IOException {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 
         google = new Sponsor(SponsorPackage.GOLD, "Google", "http://www.google.com", "sponsor@google.com");
@@ -130,7 +127,7 @@ public class IndexControllerTest {
     }
 
     @Test
-    public void controllerShouldContainRequiredData() throws Exception {
+    void controllerShouldContainRequiredData() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(IndexController.PAGE_INDEX))

@@ -9,15 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import site.controller.invoice.*;
 import site.facade.MailService;
 import site.facade.RegistrantService;
 import site.model.Registrant;
 
-import javax.transaction.Transactional;
-import javax.validation.Valid;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -55,14 +55,14 @@ public class AdminInvoiceController {
     private String pathToSave;
 
     @GetMapping(value = "/{itemId}")
-    public String invoiceDataForm(@PathVariable("itemId") Long itemId, Model model) {
+    public String invoiceDataForm(@PathVariable Long itemId, Model model) {
         InvoiceData invoiceData = InvoiceData.fromRegistrant(registrantFacade.findById(itemId));
         model.addAttribute("invoiceData", invoiceData);
         return INVOICE_DATA_JSP;
     }
 
     @Transactional
-    @RequestMapping(value = "/send", method = RequestMethod.POST)
+        @PostMapping("/send")
     public String sendInvoice(@Valid final InvoiceData modelInvoiceData, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -104,8 +104,11 @@ public class AdminInvoiceController {
 
         try {
             mailFacade.sendEmail(registrant.getEmail(), "jPrime.io original invoice",
-                    "Please find attached the invoice for the conference passes that you purchased.\n\n" +
-                    "The attendees that you registered will receive the tickets a few days before the event on their emails.",
+                    """
+                    Please find attached the invoice for the conference passes that you purchased.
+                    
+                    The attendees that you registered will receive the tickets a few days before the event on their emails.\
+                    """,
                     invoice, pdfFileName);
             mailFacade.sendEmail("conference@jprime.io", "jPrime.io invoice",
                     "The attached invoice was sent to " + registrant.getEmail(), invoice,

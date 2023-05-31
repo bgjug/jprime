@@ -1,7 +1,7 @@
 package site.controller;
 
-import javax.transaction.Transactional;
-import javax.validation.Valid;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 import java.util.Arrays;
 
@@ -40,7 +40,7 @@ public class AdminSpeakerController {
 
     @Transactional
     @GetMapping(value = "/view")
-    public String view(Model model, Pageable pageable, @RequestParam(value = "year", required = false)String year) {
+    public String view(Model model, Pageable pageable, @RequestParam(required = false)String year) {
         Page<Speaker> speakers;
         if (StringUtils.isNotBlank(year)) {
            Branch branch = Branch.valueOfYear(year);
@@ -59,8 +59,8 @@ public class AdminSpeakerController {
     @Transactional
     @PostMapping(value = "/add")
     public String add(@Valid final Speaker speaker, BindingResult bindingResult,
-                      @RequestParam("file") MultipartFile file, Model model,
-                      @RequestParam(name = "resizeImage", required = false) boolean resize, @RequestParam(value = "sourcePage", required = false) String sourcePage) {
+                      @RequestParam MultipartFile file, Model model,
+                      @RequestParam(name = "resizeImage", required = false) boolean resize, @RequestParam(required = false) String sourcePage) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("branches", Branch.values());
             return "/admin/speaker/edit.jsp";
@@ -90,7 +90,7 @@ public class AdminSpeakerController {
     }
 
     @GetMapping(value = "/add")
-    public String edit(Model model, @RequestParam(name = "sourcePage", required = false) String sourcePage) {
+    public String edit(Model model, @RequestParam(required = false) String sourcePage) {
         model.addAttribute("speaker", new Speaker());
         model.addAttribute("sourcePage", sourcePage);
         model.addAttribute("branches", Branch.values());
@@ -99,7 +99,7 @@ public class AdminSpeakerController {
 
     @Transactional
     @GetMapping(value = "/edit/{itemId}")
-    public String edit(@PathVariable("itemId") Long itemId, Model model,@RequestParam(name = "sourcePage", required = false) String sourcePage) {
+    public String edit(@PathVariable Long itemId, Model model,@RequestParam(required = false) String sourcePage) {
         Speaker speaker = adminService.findOneSpeaker(itemId);
         model.addAttribute("speaker", speaker);
         model.addAttribute("sourcePage", sourcePage);
@@ -109,7 +109,7 @@ public class AdminSpeakerController {
 
     @Transactional
     @GetMapping(value = "/remove/{itemId}")
-    public String remove(@PathVariable("itemId") Long itemId, Model model) {
+    public String remove(@PathVariable Long itemId, Model model) {
         adminService.deleteSpeaker(itemId);
         return "redirect:/admin/speaker/view";
     }

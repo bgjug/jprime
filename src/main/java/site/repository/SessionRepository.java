@@ -22,13 +22,15 @@ public interface SessionRepository extends PagingAndSortingRepository<Session, L
     @Query(
         nativeQuery = true, value =
         //@formatter:off
-        "select s.id, s.created_by, s.created_date, s.last_modified_by, s.last_modified_date, \n" +
-        "s.end_time, s.hall, s.start_time, s.submission, s.title \n" +
-        "from Session s \n" +
-        "left join Submission sbm on (s.submission = sbm.id)\n" +
-        "left join VenueHall vh on (s.hall = vh.id)\n" +
-        "where (vh.name=:hall and sbm.branch=:branch) or s.hall is null\n" +
-        "order by s.start_time asc"
+        """
+        select s.id, s.created_by, s.created_date, s.last_modified_by, s.last_modified_date,\s
+        s.end_time, s.hall, s.start_time, s.submission, s.title\s
+        from Session s\s
+        left join Submission sbm on (s.submission = sbm.id)
+        left join VenueHall vh on (s.hall = vh.id)
+        where (vh.name=:hall and sbm.branch=:branch) or s.hall is null
+        order by s.start_time asc\
+        """
         //@formatter:on
     )
     List<Session> findSessionsForBranchAndHallOrHallIsNull(@Param("hall") String hall,

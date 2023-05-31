@@ -7,15 +7,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import site.config.Globals;
 import site.facade.AdminService;
 import site.model.Article;
 import site.model.User;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 
@@ -27,15 +28,15 @@ public class AdminArticleController {
     @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
 
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    @GetMapping("/view")
     public String view(Model model) {
         List<Article> articles = adminFacade.findAllArticles();
         model.addAttribute("articles", articles);
         return "/admin/article/view.jsp";
     }
 
-    @RequestMapping("/view/{id}")
-    public String getById(@PathVariable("id") final long id, Model model) {
+    @GetMapping("/view/{id}")
+    public String getById(@PathVariable final long id, Model model) {
         Article article = adminFacade.findOneArticle(id);
         model.addAttribute("article", article);
         model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
@@ -43,7 +44,7 @@ public class AdminArticleController {
         return "/single-post.jsp";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping("/add")
     public String add(@Valid final Article article, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/admin/article/edit.jsp";
@@ -64,7 +65,7 @@ public class AdminArticleController {
         return "redirect:/admin/article/view";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping("/add")
     public String edit(Model model) {
         //user info TODO: hardcoded, fixed this!
         model.addAttribute("article", new Article());
@@ -73,16 +74,16 @@ public class AdminArticleController {
         return "/admin/article/edit.jsp";
     }
 
-    @RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
-    public String edit(@PathVariable("itemId") Long itemId, Model model) {
+    @GetMapping("/edit/{itemId}")
+    public String edit(@PathVariable Long itemId, Model model) {
         Article article = adminFacade.findOneArticle(itemId);
         model.addAttribute("article", article);
         model.addAttribute("tags", this.adminFacade.findAllTags());
         return "/admin/article/edit.jsp";
     }
 
-    @RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
-    public String remove(@PathVariable("itemId") Long itemId, Model model) {
+    @GetMapping("/remove/{itemId}")
+    public String remove(@PathVariable Long itemId, Model model) {
         adminFacade.deleteArticle(itemId);
         return "redirect:/admin/article/view";
     }

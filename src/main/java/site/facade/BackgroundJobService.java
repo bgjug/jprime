@@ -9,7 +9,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import site.model.BackgroundJob;
@@ -22,7 +21,6 @@ public class BackgroundJobService {
 
     private final BackgroundJobRepository jobRepository;
 
-    @Autowired
     public BackgroundJobService(BackgroundJobRepository jobRepository) {
         this.jobRepository = jobRepository;
     }
@@ -55,16 +53,16 @@ public class BackgroundJobService {
             if (!success) {
                 failed++;
                 logMessage = logFunction != null ?
-                             String.format("Job execution failed for %s!!!", logFunction.apply(item)) :
-                             String.format("Job execution failed for item %d", complete);
+                    "Job execution failed for %s!!!".formatted(logFunction.apply(item)) :
+                    "Job execution failed for item %d".formatted(complete);
             } else {
                 logMessage = null;
             }
 
             complete++;
-            String status = String.format("%d from %d has been completed.", complete, items.size());
+            String status = "%d from %d has been completed.".formatted(complete, items.size());
             if (failed > 0) {
-                status += String.format(" There are also %d failed jobs!!!", failed);
+                status += " There are also %d failed jobs!!!".formatted(failed);
             }
             job.setStatus(status);
             if (StringUtils.isNotEmpty(logMessage)) {

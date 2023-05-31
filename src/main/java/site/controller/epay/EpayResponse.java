@@ -1,9 +1,9 @@
 package site.controller.epay;
 
-import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Transient;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Transient;
 import java.util.Date;
 
 /**
@@ -84,8 +84,10 @@ public class EpayResponse extends EpayRaw {
 
     @Override
     public String toString() {
-        return "EpayResponse{" +
-                "isValid=" + isValid +
+        return """
+                EpayResponse{\
+                isValid=\
+                """ + isValid +
                 ", invoiceNumber=" + invoiceNumber +
                 ", status=" + status +
                 ", date=" + date +

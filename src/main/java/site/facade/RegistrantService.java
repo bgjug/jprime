@@ -13,7 +13,7 @@ import site.repository.RegistrantProformaInvoiceNumberGeneratorRepository;
 import site.repository.RegistrantRealInvoiceNumberGeneratorRepository;
 import site.repository.RegistrantRepository;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.function.Supplier;
 
 @Service(RegistrantService.NAME)

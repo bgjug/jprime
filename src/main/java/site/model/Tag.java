@@ -1,7 +1,7 @@
 package site.model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import java.util.Collection;
 import java.util.HashSet;
 

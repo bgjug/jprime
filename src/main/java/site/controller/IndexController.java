@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import site.config.Globals;
 import site.controller.invoice.InvoiceData;
 import site.facade.UserService;
@@ -36,7 +36,7 @@ public class IndexController {
     @Qualifier(UserService.NAME)
     private UserService userFacade;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping("/")
     public String index(Model model) {
 
         Map<SponsorPackage, List<Sponsor>> allSponsors = userFacade.findAllActiveSponsors();
@@ -88,15 +88,15 @@ public class IndexController {
 
         InvoiceData.TicketPrices prices = InvoiceData.getPrices(Globals.CURRENT_BRANCH);
 
-        model.addAttribute("early_bird_ticket_price", String.format("%.2f", prices.getEarlyBirdPrice()));
-        model.addAttribute("regular_ticket_price", String.format("%.2f",prices.getRegularPrice()));
-        model.addAttribute("student_ticket_price", String.format("%.2f",prices.getStudentPrice()));
+        model.addAttribute("early_bird_ticket_price", "%.2f".formatted(prices.getEarlyBirdPrice()));
+        model.addAttribute("regular_ticket_price", "%.2f".formatted(prices.getRegularPrice()));
+        model.addAttribute("student_ticket_price", "%.2f".formatted(prices.getStudentPrice()));
 
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(Globals.CURRENT_BRANCH.getCfpCloseDate()));
 
         // 30th and 31st of May 2023
         DateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
-        model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
+        model.addAttribute("conference_dates", "%s and %s".formatted(DateUtils.dateToString(startDate),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
         model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
 

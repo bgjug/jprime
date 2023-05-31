@@ -98,8 +98,9 @@ public class EpayUtil {
      */
     public static EpayRaw encrypt(int numberOfTickets, long facNo, boolean isReal, int overrideAmount) {
         String description = numberOfTickets == 1 ? "One jPrime.io ticket" : numberOfTickets+" jPrime.io tickets";
-        String message = "" +
-                "MIN="+ (isReal?EPAY_KIN:DEMO_EPAY_KIN) +"\r\n" +
+        String message = """
+                MIN=\
+                """+ (isReal?EPAY_KIN:DEMO_EPAY_KIN) +"\r\n" +
                 "EMAIL=mihail@sty.bz\r\n" +
                 "INVOICE="+facNo+"\r\n" +
                 "AMOUNT="+(overrideAmount==0?(numberOfTickets*100):overrideAmount)+"\r\n" +

@@ -9,10 +9,10 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.mail.MessagingException;
-import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
-import javax.validation.Valid;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,7 +34,7 @@ import site.model.Registrant;
 import site.model.Visitor;
 import site.model.VisitorStatus;
 
-import static org.springframework.util.StringUtils.*;
+import static org.springframework.util.ObjectUtils.isEmpty;
 import static site.controller.invoice.InvoiceLanguage.*;
 
 /**
@@ -78,9 +78,9 @@ public class TicketsController {
 
         InvoiceData.TicketPrices prices = InvoiceData.getPrices(Globals.CURRENT_BRANCH);
 
-        model.addAttribute("early_bird_ticket_price", String.format("%.2f", prices.getEarlyBirdPrice()));
-        model.addAttribute("regular_ticket_price", String.format("%.2f",prices.getRegularPrice()));
-        model.addAttribute("student_ticket_price", String.format("%.2f",prices.getStudentPrice()));
+        model.addAttribute("early_bird_ticket_price", "%.2f".formatted(prices.getEarlyBirdPrice()));
+        model.addAttribute("regular_ticket_price", "%.2f".formatted(prices.getRegularPrice()));
+        model.addAttribute("student_ticket_price", "%.2f".formatted(prices.getStudentPrice()));
 
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(Globals.CURRENT_BRANCH.getCfpCloseDate()));
         model.addAttribute("cfp_close_date_no_year", DateUtils.dateToStringWithMonth(Globals.CURRENT_BRANCH.getCfpCloseDate()));
@@ -151,9 +151,13 @@ public class TicketsController {
     private void sendPDF(Registrant registrant, String pdfFilename, byte[] pdfContent) {
         try {
             mailFacade.sendEmail(registrant.getEmail(), "jPrime.io invoice",
-                    "Thank you for registering at jPrime! Your proforma invoice is attached as part of this mail.\n\n" +
-                    "Once we confirm your payment, we'll send you the original invoice.\n\n" +
-                    "The attendees that you registered will receive the tickets a few days before the event on their emails.",
+                    """
+                    Thank you for registering at jPrime! Your proforma invoice is attached as part of this mail.
+                    
+                    Once we confirm your payment, we'll send you the original invoice.
+                    
+                    The attendees that you registered will receive the tickets a few days before the event on their emails.\
+                    """,
                     pdfContent, pdfFilename);
             String registrations = registrant.getVisitors().toString();
             mailFacade.sendEmail("conference@jprime.io", "jPrime.io invoice",

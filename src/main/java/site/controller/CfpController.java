@@ -7,19 +7,18 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import site.config.Globals;
 import site.model.Submission;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 /**
  * @author Ivan St. Ivanov
@@ -36,16 +35,16 @@ public class CfpController extends AbstractCfpController {
     @Value("${agenda.published:false}")
     private boolean agendaPublished;
 
-    @RequestMapping(value = "/cfp", method = RequestMethod.GET)
+    @GetMapping("/cfp")
     public String submissionForm(Model model) {
         return goToCFP(new Submission(), model);
     }
 
-    @RequestMapping(value = "/cfp", method = RequestMethod.POST)
+    @PostMapping("/cfp")
     public String submitSession(@Valid final Submission submission,
             BindingResult bindingResult,
-        @RequestParam("speakerImage") MultipartFile speakerImage,
-            @RequestParam("coSpeakerImage") MultipartFile coSpeakerImage,
+        @RequestParam MultipartFile speakerImage,
+            @RequestParam MultipartFile coSpeakerImage,
             Model model, HttpServletRequest request) {
         boolean invalidCaptcha = false;
         if (submission.getCaptcha() == null || !submission.getCaptcha()
@@ -94,7 +93,7 @@ public class CfpController extends AbstractCfpController {
     private String validateEmail(BindingResult bindingResult, Submission submission, Model model, String email, String role) {
         EmailValidator emailValidator = new EmailValidator();
 
-        if (!StringUtils.isEmpty(email) && emailValidator.isValid(email, null)) {
+        if (!ObjectUtils.isEmpty(email) && emailValidator.isValid(email, null)) {
             // Email is valid
             return null;
         }
@@ -108,7 +107,7 @@ public class CfpController extends AbstractCfpController {
         model.addAttribute("agenda", agendaPublished);
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(Globals.CURRENT_BRANCH.getCfpCloseDate()));
         DateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
-        model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
+        model.addAttribute("conference_dates", "%s and %s".formatted(DateUtils.dateToString(startDate),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
 
         buildCfpFormModel(model, submission);

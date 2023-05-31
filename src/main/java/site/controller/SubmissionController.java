@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import javax.mail.MessagingException;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,13 +19,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.config.Globals;
@@ -59,7 +55,7 @@ public class SubmissionController extends AbstractCfpController {
     @Qualifier(CSVService.NAME)
     private CSVService csvFacade;
 
-    @RequestMapping(value = "/view/all", method = RequestMethod.GET)
+    @GetMapping("/view/all")
     public String listAllSubmissions(Model model, Pageable pageable) {
         Page<Submission> submissions = adminFacade.findAllSubmissions(pageable);
         model.addAttribute("submissions", submissions);
@@ -67,13 +63,13 @@ public class SubmissionController extends AbstractCfpController {
         return ADMIN_SUBMISSION_VIEW_JSP;
     }
 
-    @RequestMapping(value = "/view/{year}", method = RequestMethod.GET)
+    @GetMapping("/view/{year}")
     public String listSubmissions(Model model, Pageable pageable, @PathVariable String year) {
     	Branch branch = Branch.valueOfYear(year);
         return listSubmissionsForBranch(model, pageable, branch);
     }
 
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    @GetMapping("/view")
     public String listSubmissions(Model model, Pageable pageable) {
         return listSubmissionsForBranch(model, pageable, Globals.CURRENT_BRANCH);
     }
@@ -86,14 +82,14 @@ public class SubmissionController extends AbstractCfpController {
         return ADMIN_SUBMISSION_VIEW_JSP;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping("/add")
     public String showSubmissionForm(Model model) {
         buildCfpFormModel(model, new Submission());
         return ADMIN_SUBMISSION_EDIT_JSP;
     }
 
-    @RequestMapping(value = "/accept/{submissionId}", method = RequestMethod.GET)
-    public String accept(Model model, Pageable pageable, @PathVariable("submissionId") Long submissionId) {
+    @GetMapping("/accept/{submissionId}")
+    public String accept(Model model, Pageable pageable, @PathVariable Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         adminFacade.acceptSubmission(submission);
         try {
@@ -105,8 +101,8 @@ public class SubmissionController extends AbstractCfpController {
         return listSubmissions(model, pageable);
     }
 
-    @RequestMapping(value = "/notify/{submissionId}", method = RequestMethod.GET)
-    public String notify(Model model, Pageable pageable, @PathVariable("submissionId") Long submissionId) {
+    @GetMapping("/notify/{submissionId}")
+    public String notify(Model model, Pageable pageable, @PathVariable Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         try {
             sendNotificationEmails(submission);
@@ -117,8 +113,8 @@ public class SubmissionController extends AbstractCfpController {
         return listSubmissions(model, pageable);
     }
 
-    @RequestMapping(value = "/reject/{submissionId}", method = RequestMethod.GET)
-    public String reject(Model model, Pageable pageable, @PathVariable("submissionId") Long submissionId) {
+    @GetMapping("/reject/{submissionId}")
+    public String reject(Model model, Pageable pageable, @PathVariable Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         adminFacade.rejectSubmission(submission);
         try {
@@ -130,8 +126,8 @@ public class SubmissionController extends AbstractCfpController {
         return listSubmissions(model, pageable);
     }
 
-    @RequestMapping(value = "/delete/{submissionId}", method = RequestMethod.GET)
-    public String delete(Model model, Pageable pageable, @PathVariable("submissionId") Long submissionId) {
+    @GetMapping("/delete/{submissionId}")
+    public String delete(Model model, Pageable pageable, @PathVariable Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         if (submission.getStatus() != SubmissionStatus.SUBMITTED) {
             model.addAttribute("msg", "Only SUBMITTED submissions can be deleted!");
@@ -142,7 +138,7 @@ public class SubmissionController extends AbstractCfpController {
         return listSubmissions(model, pageable);
     }
 
-    @RequestMapping(value = "/exportCSV", method = RequestMethod.GET, produces = PRODUCES_TYPE)
+    @GetMapping(value = "/exportCSV", produces = PRODUCES_TYPE)
     public@ResponseBody void exportSubmissionsToCSV(HttpServletResponse response) {
     	List<Submission> findAllSubmittedSubmissionsForCurrentBranch = adminFacade.findAllSubmittedSubmissionsForCurrentBranch();
     	File submissionsCSVFile;
@@ -188,19 +184,19 @@ public class SubmissionController extends AbstractCfpController {
         return messageText;
     }
 
-    @RequestMapping(value = "/edit/{submissionId}", method = RequestMethod.GET)
-    public String editSubmissionForm(@PathVariable("submissionId") Long submissionId, Model model, @RequestParam(name = "sourcePage", required = false) String sourcePage) {
+    @GetMapping("/edit/{submissionId}")
+    public String editSubmissionForm(@PathVariable Long submissionId, Model model, @RequestParam(required = false) String sourcePage) {
         buildCfpFormModel(model, adminFacade.findOneSubmission(submissionId));
         model.addAttribute("sourcePage", sourcePage);
         return ADMIN_SUBMISSION_EDIT_JSP;
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @PostMapping("/edit")
     public String editSubmission(@Valid final Submission submission,
             BindingResult bindingResult,
-            @RequestParam("speakerImage") MultipartFile speakerImage,
-            @RequestParam("coSpeakerImage") MultipartFile coSpeakerImage,
-        @RequestParam(name = "sourcePage", required = false) String sourcePage,
+            @RequestParam MultipartFile speakerImage,
+            @RequestParam MultipartFile coSpeakerImage,
+        @RequestParam(required = false) String sourcePage,
             Model model) {
         if (bindingResult.hasErrors()) {
         	buildCfpFormModel(model, submission);
@@ -208,6 +204,6 @@ public class SubmissionController extends AbstractCfpController {
         }
         saveSubmission(submission, speakerImage, coSpeakerImage);
 
-        return REDIRECT + (StringUtils.isEmpty(sourcePage) ? "/admin/submission/view" : sourcePage);
+        return REDIRECT + (ObjectUtils.isEmpty(sourcePage) ? "/admin/submission/view" : sourcePage);
     }
 }

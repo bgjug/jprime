@@ -1,7 +1,7 @@
 package site.app;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -16,7 +16,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -24,17 +24,19 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.util.StringUtils;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.util.ObjectUtils;
+
 import site.model.User;
 import site.repository.SpeakerRepository;
 import site.repository.UserRepository;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.util.Set;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
     @Autowired
     public ApplicationContext context;
 
@@ -47,9 +49,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SpeakerRepository speakerRepository;
 
-    @Override
-    public void configure(final WebSecurity web) {
-        web
+    @Bean
+    WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> {
+            web
                 .ignoring()
                 .antMatchers("/asset/**")
                 .antMatchers("/assets/**")
@@ -57,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/fonts/**")
                 .antMatchers("/images/**")
                 .antMatchers("/js/**");
+        };
     }
 
     @Autowired
@@ -69,13 +73,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                
 	                //admin hack
 	                if(email.equals("admin") && providedPassword.equals(environment.getProperty("admin.password"))){
-	                	return new UsernamePasswordAuthenticationToken(email, providedPassword, Collections.singleton(new SimpleGrantedAuthority("ADMIN")));
+	                	return new UsernamePasswordAuthenticationToken(email, providedPassword, Set.of(new SimpleGrantedAuthority("ADMIN")));
 	                }
 	                
 	                User user = userRepository.findUserByEmail(email);
 	                if (user == null) {
                         user = speakerRepository.findByEmail(email);
-                        if (StringUtils.isEmpty(user.getPassword())) {
+                        if (ObjectUtils.isEmpty(user.getPassword())) {
                             user = null;
                         }
                     }
@@ -84,7 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                    throw new BadCredentialsException("Username/Password does not match for " + authentication.getPrincipal());
 	                }
 	                
-	                return new UsernamePasswordAuthenticationToken(email, providedPassword, Collections.singleton(new SimpleGrantedAuthority("USER")));
+	                return new UsernamePasswordAuthenticationToken(email, providedPassword, Set.of(new SimpleGrantedAuthority("USER")));
 	            }
 
 	            @Override
@@ -94,8 +98,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        });
     }
 
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
+    @Bean
+    SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                 .and()
@@ -113,7 +117,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().successHandler(SecurityConfig::redirectToAdmin) // #9
                 .loginPage("/login") // #10
-                .permitAll(); // #5
+                .permitAll();
+        return http.build(); // #5
     }
 
     private static void redirectToAdmin(HttpServletRequest request, HttpServletResponse response,

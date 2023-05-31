@@ -11,8 +11,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import site.config.Globals;
@@ -28,7 +28,7 @@ public class NavController {
 	@Qualifier(UserService.NAME)
 	private UserService userFacade;
 	
-	@RequestMapping("/nav/{tag}")
+	@GetMapping("/nav/{tag}")
 	public String getByTag(@PathVariable("tag") final String tagName, @PageableDefault(size = 24)
 			Pageable pageable, Model model) {
 		model.addAttribute("tags", userFacade.findAllTags());
@@ -38,7 +38,7 @@ public class NavController {
         model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
 
         if (articles.getTotalElements() == 0) {
-            logger.error(()->String.format("Invalid tag name (%1$s)", tagName));
+            logger.error(()->"Invalid tag name (%1$s)".formatted(tagName));
             return "/404.jsp";
         }
 
@@ -51,7 +51,7 @@ public class NavController {
 		}
 	}
 
-    @RequestMapping("/nav")
+    @GetMapping("/nav")
     public String index(Pageable pageable, Model model) {
         Page<Article> articles= userFacade.allPublishedArticles(pageable);
         model.addAttribute("articles", articles);
@@ -62,13 +62,13 @@ public class NavController {
     }
 
     //read a single blog
-    @RequestMapping("/nav/article/{id}")
-    public String getById(@PathVariable("id") final long id, Model model) {
+    @GetMapping("/nav/article/{id}")
+    public String getById(@PathVariable final long id, Model model) {
         model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
         Article article= userFacade.getArticleById(id);
 
         if (article == null) {
-            logger.error(String.format("Invalid tag id (%1$d)", id));
+            logger.error("Invalid tag id (%1$d)".formatted(id));
             return "/404.jsp";
         }
 
@@ -80,14 +80,14 @@ public class NavController {
         return "/single-post.jsp";
     }
     
-    @RequestMapping("/nav/article")
+    @GetMapping("/nav/article")
 	public String getById(@RequestParam(required = true) final String title,
 			Model model) {
         Article article= userFacade.getArticleByTitle(title);
         model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
 
         if (article == null) {
-            logger.error(String.format("Invalid tag title (%1$s)", title));
+            logger.error("Invalid tag title (%1$s)".formatted(title));
             return "/404.jsp";
         }
 
@@ -100,18 +100,18 @@ public class NavController {
     }
 
     //read a single blog
-    @RequestMapping("/team")
+    @GetMapping("/team")
     public String showTeam(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         return "/team.jsp";
     }
 
     //read a single blog
-    @RequestMapping("/venue")
+    @GetMapping("/venue")
     public String showVenue(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         DateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
-        model.addAttribute("conference_dates", String.format("%d-%s", startDate.getDayOfMonth(),
+        model.addAttribute("conference_dates", "%d-%s".formatted(startDate.getDayOfMonth(),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
 
         return "/venue.jsp";

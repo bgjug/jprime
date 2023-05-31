@@ -43,8 +43,10 @@ public class EpayRaw {
 
     @Override
     public String toString() {
-        return "EpayRaw{" +
-                "encoded='" + encoded + '\'' +
+        return """
+                EpayRaw{\
+                encoded='\
+                """ + encoded + '\'' +
                 ", checksum='" + checksum + '\'' +
                 '}';
     }

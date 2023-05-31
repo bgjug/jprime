@@ -4,14 +4,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -23,17 +20,16 @@ import site.config.Globals;
 import site.model.Speaker;
 import site.repository.SpeakerRepository;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {Application.class})
 @WebAppConfiguration
 @Transactional
-public class SpeakerRestControllerTest {
+class SpeakerRestControllerTest {
 
     private static final TypeReference<? extends List<Speaker>> SPEAKER_LIST = new TypeReference<List<Speaker>>() {};
 
@@ -45,8 +41,8 @@ public class SpeakerRestControllerTest {
 
     private MockMvc mockMvc;
 
-    @Before
-    public void setup() throws Exception {
+    @BeforeEach
+    void setup() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         createSpeakers();
     }
@@ -66,7 +62,7 @@ public class SpeakerRestControllerTest {
     }
 
     @Test
-    public void searchAllSpeakers() throws Exception {
+    void searchAllSpeakers() throws Exception {
         MvcResult result = mockMvc.perform(
                 get("/api/speaker/" + Globals.CURRENT_BRANCH.getLabel()))
             .andExpect(status().isOk())
@@ -75,7 +71,7 @@ public class SpeakerRestControllerTest {
 
         List<Speaker> speakerList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), SPEAKER_LIST);
-        Assertions.assertEquals(3, speakerList.size());
+        assertEquals(3, speakerList.size());
         speakerList.forEach(sp -> {
             assertNotNull(sp.getName());
             assertNotNull(sp.getEmail());
@@ -85,7 +81,7 @@ public class SpeakerRestControllerTest {
     }
 
     @Test
-    public void searchForSpeaker() throws Exception {
+    void searchForSpeaker() throws Exception {
         SpeakerSearch search = new SpeakerSearch("first", "", null);
         MvcResult result = mockMvc.perform(
                 post("/api/speaker/search/" + Globals.CURRENT_BRANCH.getLabel()).contentType(
@@ -96,7 +92,7 @@ public class SpeakerRestControllerTest {
 
         List<Speaker> speakerList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), SPEAKER_LIST);
-        Assertions.assertEquals(1, speakerList.size());
+        assertEquals(1, speakerList.size());
         Speaker spe = speakerList.get(0);
         assertTrue(spe.getAccepted());
         assertFalse(spe.getFeatured());

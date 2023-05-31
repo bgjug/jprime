@@ -1,6 +1,6 @@
 package site.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -123,8 +123,10 @@ public class Visitor extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "Visitor{" +
-                "name='" + name + '\'' +
+        return """
+                Visitor{\
+                name='\
+                """ + name + '\'' +
                 ", email='" + email + '\'' +
                 ", company='" + company + '\'' +
                 ", isPresent='" + isPresent + '\'' +
