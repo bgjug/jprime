@@ -21,6 +21,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -44,7 +45,7 @@ public class CaptchaController {
 	
 	private static final Logger logger = LogManager.getLogger(CaptchaController.class);
 
-	@RequestMapping(produces = {
+	@GetMapping(produces = {
 			MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE })
 	@ResponseBody
 	public byte[] getCaptchaImage(HttpServletRequest request){

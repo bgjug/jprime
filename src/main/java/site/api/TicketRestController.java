@@ -2,7 +2,6 @@ package site.api;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +17,12 @@ public class TicketRestController {
 
     private final AdminService adminFacade;
 
-    @Autowired
     public TicketRestController(AdminService adminFacade) {
         this.adminFacade = adminFacade;
     }
 
     @PostMapping(path = "{ticket}")
-    public ResponseEntity<?> registerTicket(@PathVariable("ticket") String ticket) {
+    public ResponseEntity<?> registerTicket(@PathVariable String ticket) {
         try {
             Optional<Visitor> visitor = adminFacade.findVisitorByTicket(ticket);
 

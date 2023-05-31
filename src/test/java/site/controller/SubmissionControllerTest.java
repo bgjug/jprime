@@ -1,12 +1,10 @@
 package site.controller;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -39,11 +37,10 @@ import static site.controller.SubmissionController.ADMIN_SUBMISSION_VIEW_JSP;
 /**
  * @author Ivan St. Ivanov
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
 @Transactional
-public class SubmissionControllerTest {
+class SubmissionControllerTest {
 
     @Autowired
     private WebApplicationContext wac;
@@ -64,8 +61,8 @@ public class SubmissionControllerTest {
     private Submission forge;
     private Submission bootAddon;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         final SubmissionController bean = wac.getBean(SubmissionController.class);
         this.mailer = new MailServiceMock();
         bean.setMailFacade(mailer);
@@ -89,7 +86,7 @@ public class SubmissionControllerTest {
     }
 
     @Test
-    public void viewAllSubmissionsShouldReturnAllSubmissions() throws Exception {
+    void viewAllSubmissionsShouldReturnAllSubmissions() throws Exception {
         mockMvc.perform(get("/admin/submission/view/all"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP))
@@ -97,7 +94,7 @@ public class SubmissionControllerTest {
     }
 
     @Test
-    public void viewSubmissionsShouldReturnSubmissionsForCurrentYear() throws Exception {
+    void viewSubmissionsShouldReturnSubmissionsForCurrentYear() throws Exception {
         mockMvc.perform(get("/admin/submission/view"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP))
@@ -106,7 +103,7 @@ public class SubmissionControllerTest {
 
 
     @Test
-    public void viewSubmissionsShouldReturnAllSubmissionsForPrevYear() throws Exception {
+    void viewSubmissionsShouldReturnAllSubmissionsForPrevYear() throws Exception {
         mockMvc.perform(get("/admin/submission/view/2016"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP))
@@ -114,7 +111,7 @@ public class SubmissionControllerTest {
     }
 
     @Test
-    public void showSubmissionFormShouldReturnTheFormAndEmptySubmission() throws Exception {
+    void showSubmissionFormShouldReturnTheFormAndEmptySubmission() throws Exception {
         mockMvc.perform(get("/admin/submission/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ADMIN_SUBMISSION_EDIT_JSP))
@@ -122,7 +119,7 @@ public class SubmissionControllerTest {
     }
 
     @Test
-    public void acceptSubmissionShouldChangeTheSubmissionStatus() throws Exception {
+    void acceptSubmissionShouldChangeTheSubmissionStatus() throws Exception {
         mockMvc.perform(get("/admin/submission/accept/" + valhalla.getId()))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP));
@@ -135,7 +132,7 @@ public class SubmissionControllerTest {
     }
 
     @Test
-    public void rejectSubmissionShouldChangeTheSubmissionStatus() throws Exception {
+    void rejectSubmissionShouldChangeTheSubmissionStatus() throws Exception {
         mockMvc.perform(get("/admin/submission/reject/" + forge.getId()))
                 .andExpect(status().isOk())
                 .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP));
@@ -148,7 +145,7 @@ public class SubmissionControllerTest {
     }
 
     @Test
-    public void submissionStatusChangeShouldSendEmailToCoSpeakerToo() throws Exception {
+    void submissionStatusChangeShouldSendEmailToCoSpeakerToo() throws Exception {
         mockMvc.perform(get("/admin/submission/accept/" + bootAddon.getId()))
                 .andExpect(status().isOk())
                .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP));
@@ -159,7 +156,7 @@ public class SubmissionControllerTest {
     }
 
     @Test
-    public void editSubmissionFormShouldContainInModelSubmissionToBeEdited() throws Exception {
+    void editSubmissionFormShouldContainInModelSubmissionToBeEdited() throws Exception {
         mockMvc.perform(get("/admin/submission/edit/" + forge.getId()))
                 .andExpect(view().name(ADMIN_SUBMISSION_EDIT_JSP))
                 .andExpect(status().isOk())
@@ -167,7 +164,7 @@ public class SubmissionControllerTest {
     }
 
     @Test
-    public void exportSubmissionsAsCSVShouldReturnSubmissionsCSVFile() throws Exception{
+    void exportSubmissionsAsCSVShouldReturnSubmissionsCSVFile() throws Exception{
     	File exportSubmissions = csvFacade.exportSubmissions(submissionRepository.
     			findByBranchAndStatus(Globals.CURRENT_BRANCH, SubmissionStatus.SUBMITTED));
     	String length = Long.toString(exportSubmissions.length());

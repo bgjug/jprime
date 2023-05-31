@@ -34,7 +34,7 @@ import site.model.Registrant;
 import site.model.Visitor;
 import site.model.VisitorStatus;
 
-import static org.springframework.util.StringUtils.*;
+import static org.springframework.util.ObjectUtils.isEmpty;
 import static site.controller.invoice.InvoiceLanguage.*;
 
 /**
