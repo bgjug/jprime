@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import site.config.Globals;
 import site.controller.invoice.InvoiceData;
 import site.facade.UserService;
@@ -36,7 +36,7 @@ public class IndexController {
     @Qualifier(UserService.NAME)
     private UserService userFacade;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping("/")
     public String index(Model model) {
 
         Map<SponsorPackage, List<Sponsor>> allSponsors = userFacade.findAllActiveSponsors();

@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 import site.config.Globals;
 import site.facade.AdminService;
 import site.model.Session;
@@ -36,23 +34,23 @@ public class AdminSessionController {
     @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
 
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    @GetMapping("/view")
     public String viewSessions(Model model) {
         model.addAttribute("sessions", adminFacade.findAllSessions());
         return SESSIONS_VIEW_JSP;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping("/add")
     public String getNewSessionForm(Model model) {
         return getModelAndView(model, new Session());
     }
 
-    @RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
-    public String getEditVenueHallForm(@PathVariable("itemId") Long itemId, Model model) {
+    @GetMapping("/edit/{itemId}")
+    public String getEditVenueHallForm(@PathVariable Long itemId, Model model) {
         return getModelAndView(model, adminFacade.findOneSession(itemId));
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping("/add")
     public String addSession(@RequestParam String submission,
         @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") DateTime startTime,
         @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") DateTime endTime,
@@ -79,8 +77,8 @@ public class AdminSessionController {
     }
 
     @Transactional
-    @RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
-    public String remove(@PathVariable("itemId") Long itemId, Model model) {
+        @GetMapping("/remove/{itemId}")
+    public String remove(@PathVariable Long itemId, Model model) {
         adminFacade.deleteSession(itemId);
         return "redirect:/admin/session/view";
     }

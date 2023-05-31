@@ -9,7 +9,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import site.model.BackgroundJob;
@@ -22,7 +21,6 @@ public class BackgroundJobService {
 
     private final BackgroundJobRepository jobRepository;
 
-    @Autowired
     public BackgroundJobService(BackgroundJobRepository jobRepository) {
         this.jobRepository = jobRepository;
     }

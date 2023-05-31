@@ -6,9 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import site.facade.AdminService;
 import site.model.User;
 
@@ -28,19 +29,19 @@ public class AdminUserController {
     @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
 
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    @GetMapping("/view")
     public String viewUsers(Model model, Pageable pageable) {
         model.addAttribute("users", adminFacade.findAllUsers(pageable));
         return USER_VIEW_JSP;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping("/add")
     public String getNewUserForm(Model model) {
         model.addAttribute("user", new User());
         return USER_EDIT_JSP;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping("/add")
     public String addUser(@Valid final User user, BindingResult bindingResult,Model model) {
         if (bindingResult.hasErrors()) {
             return USER_EDIT_JSP;
@@ -49,8 +50,8 @@ public class AdminUserController {
         return "redirect:/admin/user/view";
     }
 
-    @RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
-    public String remove(@PathVariable("itemId") Long itemId) {
+    @GetMapping("/remove/{itemId}")
+    public String remove(@PathVariable Long itemId) {
         adminFacade.deleteUser(itemId);
         return "redirect:/admin/user/view";
     }

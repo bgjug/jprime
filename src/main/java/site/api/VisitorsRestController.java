@@ -32,7 +32,7 @@ public class VisitorsRestController {
     }
 
     @GetMapping(path = "{branch}")
-    public ResponseEntity<?> allByBranch(@PathVariable(name = "branch") String branch) {
+    public ResponseEntity<?> allByBranch(@PathVariable String branch) {
         try {
             log.debug("Requesting all visitors for branch {}", branch);
             return ResponseEntity.ok(StreamSupport.stream(adminFacade.findAllWithTicket().spliterator(), false)
@@ -43,8 +43,8 @@ public class VisitorsRestController {
     }
 
     @GetMapping(path = "{branch}/{ticket}")
-    public ResponseEntity<?> findVisitorByTicket(@PathVariable(name = "branch") String branch,
-        @PathVariable("ticket") String ticket) {
+    public ResponseEntity<?> findVisitorByTicket(@PathVariable String branch,
+        @PathVariable String ticket) {
         try {
             Optional<Visitor> visitor = adminFacade.findVisitorByTicket(ticket);
             return visitor.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
@@ -54,7 +54,7 @@ public class VisitorsRestController {
     }
 
     @PostMapping(path = "search/{branch}")
-    public ResponseEntity<?> findVisitor(@PathVariable("branch") String branch,
+    public ResponseEntity<?> findVisitor(@PathVariable String branch,
         @RequestBody VisitorSearch visitorSearch) {
         try {
             List<Visitor> visitorList =
