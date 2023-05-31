@@ -54,7 +54,7 @@ public class AdminPartnerController {
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
-                if (resize == true) {
+                if (resize) {
                     partner.setLogo(thumbnailService.thumbImage(bytes, 180, 64,
                                                                 ThumbnailService.ResizeType.FIT_TO_HEIGHT));
                 }else{

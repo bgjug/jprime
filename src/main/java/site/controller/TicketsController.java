@@ -171,7 +171,7 @@ public class TicketsController {
     }
 
     private String result(final String r, Model model) {
-        model.addAttribute("result", r.equals("ok"));
+        model.addAttribute("result", "ok".equals(r));
         return TICKETS_RESULT_JSP;
     }
 
@@ -180,9 +180,9 @@ public class TicketsController {
         String date = dateFormat.format(Calendar.getInstance().getTime());
 
         if(registrant.getRealInvoiceNumber() != 0) {
-            return date+", "+registrant.getRealInvoiceNumber()+", "+registrant.getVisitors().size()+"tickets, "+(totalPriceWithVAT)+".pdf";
+            return date+", "+registrant.getRealInvoiceNumber()+", "+registrant.getVisitors().size()+"tickets, "+totalPriceWithVAT+".pdf";
         } else {
-            return "P "+date+", "+registrant.getProformaInvoiceNumber()+", "+registrant.getVisitors().size()+"tickets, "+(totalPriceWithVAT)+".pdf";
+            return "P "+date+", "+registrant.getProformaInvoiceNumber()+", "+registrant.getVisitors().size()+"tickets, "+totalPriceWithVAT+".pdf";
         }
     }
 }
