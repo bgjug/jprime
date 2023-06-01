@@ -1,8 +1,9 @@
 package site.controller;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,7 +48,7 @@ public class UserController {
 	@Autowired
 	private ResetPasswordService resetPassService;
 	
-	private static final Logger logger = LogManager.getLogger(UserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Value("${site.url.reset.password:https://jprime.io/createNewPassword?tokenId=}")
 	private  String createNewPasswordUrl;
@@ -86,7 +87,7 @@ public class UserController {
 			String mailTitle = "Welcome to JPrime!";
 			mailService.sendEmail(user.getEmail(), mailTitle, mailContent);
 		} catch (MessagingException | IOException e) {
-			logger.error("Error while sending Welcoming Mail to  " + user, e);
+			logger.error("Error while sending Welcoming Mail to  {}", user, e);
 		}
 
 		request.getSession().setAttribute("user", user);
@@ -128,7 +129,7 @@ public class UserController {
 				String mailTitle = "Reset your JPrime password";
 				mailService.sendEmail(email, mailTitle, mailContent);
 			} catch (MessagingException | IOException e) {
-			    logger.error("Error while sending ResetPassword Mail to  " + user, e);
+			    logger.error("Error while sending ResetPassword Mail to  {}", user, e);
 			}
 		}
 		redirectAttrs.addFlashAttribute("sent_to_email", email);

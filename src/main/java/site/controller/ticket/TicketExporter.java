@@ -30,8 +30,9 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Service;
 import site.config.Globals;
 import site.controller.invoice.InvoiceLanguage;
@@ -42,7 +43,7 @@ import static site.controller.invoice.InvoiceLanguage.EN;
 @Service
 public class TicketExporter {
 
-    private static final Logger LOGGER = LogManager.getLogger(TicketExporter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TicketExporter.class);
 
     private static final String JSON =
         "{ \"organizer\" : \"%s\", \"event\" : \"%s\", \"type\" : \"%s\", \"ticket\" : \"%s\" }";

@@ -7,9 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.supercsv.cellprocessor.ift.CellProcessor;
 import org.supercsv.io.CsvMapWriter;
 import org.supercsv.io.ICsvMapWriter;
@@ -20,7 +21,7 @@ import site.model.Submission;
 
 @Service(CSVService.NAME)
 public class CSVService {
-	private static final Logger logger = LogManager.getLogger(CSVService.class);
+	private static final Logger logger = LoggerFactory.getLogger(CSVService.class);
 	public static final String NAME = "csvFacade";
 	private static final String[]
         SUBMISSION_HEADER = new String[] { "Title", "Abstract", "Session level", "Session type", "Speaker Name", "Speaker Bio",
@@ -28,7 +29,7 @@ public class CSVService {
 
 	public File exportSubmissions(List<Submission> submissions) throws IOException{
 		File submissionsCSVFile = File.createTempFile("submissions.", ".csv");
-		logger.info("Created submissions file with path: " + submissionsCSVFile.getAbsolutePath());
+		logger.info("Created submissions file with path: {}", submissionsCSVFile.getAbsolutePath());
         try(ICsvMapWriter mapWriter = new CsvMapWriter(new FileWriter(submissionsCSVFile.getAbsolutePath()), CsvPreference.STANDARD_PREFERENCE)) {
         	writeSubmissions(submissions, mapWriter);
 		}

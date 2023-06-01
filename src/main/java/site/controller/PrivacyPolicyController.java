@@ -1,10 +1,11 @@
 package site.controller;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class PrivacyPolicyController {
@@ -13,7 +14,7 @@ public class PrivacyPolicyController {
 
     static final String PAGE_PRIVACY_POLICY_EN = "privacy-policy.jsp";
 
-    private static final Logger logger = LogManager.getLogger(NavController.class);
+    private static final Logger logger = LoggerFactory.getLogger(PrivacyPolicyController.class);
 
     @GetMapping("/privacy-policy")
     public String getPrivacyPolicy(@RequestParam(value = "bg", required = false) String bgLang,

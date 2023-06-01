@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.Lazy;
@@ -25,6 +23,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import site.config.Globals;
 import site.controller.invoice.*;
 import site.facade.MailService;
@@ -43,7 +43,7 @@ import static site.controller.invoice.InvoiceLanguage.*;
 @Controller
 public class TicketsController {
 
-    private static final Logger logger = LogManager.getLogger(TicketsController.class);
+    private static final Logger logger = LoggerFactory.getLogger(TicketsController.class);
 
     public static final String TICKETS_END_JSP = "/tickets.jsp";
     public static final String TICKETS_REGISTER_JSP = "/tickets-register.jsp";

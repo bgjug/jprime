@@ -17,13 +17,14 @@ import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping(value = "/captcha-image")
@@ -43,7 +44,7 @@ public class CaptchaController {
 	private static final int MAX_CIRCLES_TO_DRAW = 10;
 	private static final int MIN_CIRCLES_TO_DRAW = 6;
 	
-	private static final Logger logger = LogManager.getLogger(CaptchaController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CaptchaController.class);
 
 	@GetMapping(produces = {
 			MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE })
@@ -191,7 +192,7 @@ public class CaptchaController {
 			int secoundDigit = Integer.parseInt(finalString.substring(3, 4));
 			int result = firstDigit + secoundDigit;
 
-			logger.debug("Generated captcha code:" + result);
+			logger.debug("Generated captcha code:{}", result);
 
 			request.getSession().setAttribute(SESSION_PARAM_CAPTCHA_IMAGE, String.valueOf(result));
 

@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import site.facade.AdminService;
 import site.facade.UserServiceJPro;
 import site.model.VisitorJPro;
@@ -31,7 +30,7 @@ public class RaffleController {
 
 	public static final String RAFFLE_JSP = "/raffle.jsp";
 
-	private Logger log = LogManager.getLogger(this.getClass());
+	private Logger log = LoggerFactory.getLogger(RaffleController.class);
 
 	@Autowired
 	@Qualifier(AdminService.NAME)

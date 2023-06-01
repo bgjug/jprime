@@ -5,14 +5,14 @@ import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.token.Sha512DigestUtils;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import site.model.ResetPasswordToken;
 import site.model.User;
 import site.repository.ResetPasswordTokenRepository;
@@ -26,7 +26,7 @@ public class ResetPasswordService {
 	@Value("${site.reset.password.token.duration.hours:2}")
 	private int tokenDurationInHours;
 
-	private static final Logger logger = LogManager.getLogger(ResetPasswordService.class);
+	private static final Logger logger = LoggerFactory.getLogger(ResetPasswordService.class);
 
 	@Autowired
 	private ResetPasswordTokenRepository resetPassRepository;
@@ -51,22 +51,19 @@ public class ResetPasswordService {
 		String tokenShaHex = Sha512DigestUtils.shaHex(tokenId);
 		ResetPasswordToken resetPasswordToken = resetPassRepository.findByTokenId(tokenShaHex);
 		if (resetPasswordToken == null) {
-			logger.debug("ResetPasswordToken id=" + tokenId + " , ShaHex: " + tokenShaHex
-					+ " NOT found. This could be an attacker brute forcing the token!");
+			logger.debug("ResetPasswordToken id={} , ShaHex: {} NOT found. This could be an attacker brute forcing the token!", tokenId, tokenShaHex);
 			return null;
 		}
 		User owner = resetPasswordToken.getOwner();
 		if (resetPasswordToken.isUsed()) {
-			logger.debug("ResetPassworToken for user: " + owner + " with Id=" + tokenId + ", ShaHex: " + tokenShaHex
-					+ " is aleady used.");
+			logger.debug("ResetPassworToken for user: {} with Id={}, ShaHex: {} is aleady used.", owner, tokenId, tokenShaHex);
 			return null;
 		}
 
 		DateTime createdDate = resetPasswordToken.getCreatedDate();
 		DateTime deadline = createdDate.plusHours(tokenDurationInHours);
 		if (deadline.isBeforeNow()) {
-			logger.debug("ResetPassworToken for user: " + owner + " with Id=" + tokenId + ", ShaHex: " + tokenShaHex
-					+ "  is expired.");
+			logger.debug("ResetPassworToken for user: {} with Id={}, ShaHex: {}  is expired.", owner, tokenId, tokenShaHex);
 			return null;
 		}
 		return owner;

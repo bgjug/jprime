@@ -1,7 +1,5 @@
 package site.controller;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -11,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import site.controller.invoice.*;
 import site.facade.MailService;
 import site.facade.RegistrantService;
@@ -33,7 +34,7 @@ import static site.controller.invoice.InvoiceLanguage.*;
 @RequestMapping(value = "/admin/invoice")
 public class AdminInvoiceController {
 
-    private static final Logger logger = LogManager.getLogger(AdminInvoiceController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AdminInvoiceController.class);
 
     public static final String INVOICE_DATA_JSP = "/admin/invoice/invoiceData.jsp";
 
