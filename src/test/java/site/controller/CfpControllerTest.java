@@ -1,14 +1,12 @@
 package site.controller;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -35,11 +33,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * @author Ivan St. Ivanov
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
 @Transactional
-public class CfpControllerTest {
+class CfpControllerTest {
 
     @Autowired
     private WebApplicationContext wac;
@@ -52,8 +49,8 @@ public class CfpControllerTest {
     @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
 
-    @Before
-    public void setup() throws Exception {
+    @BeforeEach
+    void setup() throws Exception {
         final CfpController bean = wac.getBean(CfpController.class);
         this.mailer = new MailServiceMock();
         bean.setMailFacade(mailer);
@@ -61,7 +58,7 @@ public class CfpControllerTest {
     }
 
     @Test
-    public void getShouldReturnEmptySubscription() throws Exception {
+    void getShouldReturnEmptySubscription() throws Exception {
         String cfpPage = CfpController.CFP_CLOSED_JSP;
         if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfterNow()) {
             cfpPage = CfpController.CFP_OPEN_JSP;
@@ -73,8 +70,8 @@ public class CfpControllerTest {
     }
 
     @Test
-    @Ignore("ignored since adding captcha, has to be updated")
-    public void shouldSubmitSessionWithSingleSpeaker() throws Exception {
+    @Disabled("ignored since adding captcha, has to be updated")
+    void shouldSubmitSessionWithSingleSpeaker() throws Exception {
         mockMvc.perform(fileUpload("/cfp")
                 .file(new MockMultipartFile("speakerImage", new byte[] {}))
                 .file(new MockMultipartFile("coSpeakerImage", new byte[] {}))
@@ -103,8 +100,8 @@ public class CfpControllerTest {
     }
 
     @Test
-    @Ignore("ignored since adding captcha, has to be updated")
-    public void shouldSubmitSessionWithCoSpeaker() throws Exception {
+    @Disabled("ignored since adding captcha, has to be updated")
+    void shouldSubmitSessionWithCoSpeaker() throws Exception {
         mockMvc.perform(fileUpload("/cfp")
                 .file(new MockMultipartFile("speakerImage", new byte[] {}))
                 .file(new MockMultipartFile("coSpeakerImage", new byte[] {}))

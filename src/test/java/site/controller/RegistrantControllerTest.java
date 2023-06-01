@@ -1,12 +1,10 @@
 package site.controller;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -20,11 +18,11 @@ import site.repository.RegistrantRepository;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -36,11 +34,10 @@ import static site.controller.AdminRegistrantController.REGISTRANT_VIEW_JSP;
 /**
  * @author Ivan St. Ivanov
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
 @Transactional
-public class RegistrantControllerTest {
+class RegistrantControllerTest {
 
     @Autowired
     private WebApplicationContext wac;
@@ -53,8 +50,8 @@ public class RegistrantControllerTest {
     private Registrant adamsFamily;
     private Registrant ivan;
 
-    @Before
-    public void setup() throws Exception {
+    @BeforeEach
+    void setup() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         insertTestRegistrants();
     }
@@ -75,7 +72,7 @@ public class RegistrantControllerTest {
     }
 
     @Test
-    public void getViewShouldReturnRegistrantViewWithAllRegistrants() throws Exception {
+    void getViewShouldReturnRegistrantViewWithAllRegistrants() throws Exception {
         mockMvc.perform(get("/admin/registrant/view"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("registrants", hasSize(2)))
@@ -84,7 +81,7 @@ public class RegistrantControllerTest {
     }
 
     @Test
-    public void getAddShouldReturnRegistrantFormWithEmptyRegistrant() throws Exception {
+    void getAddShouldReturnRegistrantFormWithEmptyRegistrant() throws Exception {
         mockMvc.perform(get("/admin/registrant/add"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("registrant", is(new Registrant())))
@@ -92,7 +89,7 @@ public class RegistrantControllerTest {
     }
 
     @Test
-    public void shouldAddNewRegistrant() throws Exception {
+    void shouldAddNewRegistrant() throws Exception {
         mockMvc.perform(post("/admin/registrant/add")
                 .param("company", "true")
                 .param("name", "SAP Labs Bulgaria")
@@ -106,12 +103,12 @@ public class RegistrantControllerTest {
                 .andExpect(view().name("redirect:/admin/registrant/view"));
         List<Registrant> registrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(registrants.size(), is(3));
-        assertThat(registrants.stream().filter(registrant -> registrant.getName().equals("SAP Labs Bulgaria")).count(), is(
+        assertThat(registrants.stream().filter(registrant -> "SAP Labs Bulgaria".equals(registrant.getName())).count(), is(
                 1L));
     }
 
     @Test
-    public void getEditShouldReturnRegisterFormWithRequestedRegistrant() throws Exception {
+    void getEditShouldReturnRegisterFormWithRequestedRegistrant() throws Exception {
         mockMvc.perform(get("/admin/registrant/edit/" + ivan.getId()))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("registrant", is(ivan)))
@@ -119,21 +116,21 @@ public class RegistrantControllerTest {
     }
 
     @Test
-    public void getDeleteShouldRemoveRegistrant() throws Exception {
+    void getDeleteShouldRemoveRegistrant() throws Exception {
         List<Registrant> registrants = (List<Registrant>) registrantRepository.findAll();
-        assertThat(registrants.stream().filter(registrant -> registrant.getName().equals("Ivan St. Ivanov")).count(), is(
+        assertThat(registrants.stream().filter(registrant -> "Ivan St. Ivanov".equals(registrant.getName())).count(), is(
                 1L));
         mockMvc.perform(get("/admin/registrant/remove/" + ivan.getId()))
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/admin/registrant/view"));
         registrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(registrants.size(), is(1));
-        assertThat(registrants.stream().filter(registrant -> registrant.getName().equals("Ivan St. Ivanov")).count(), is(
+        assertThat(registrants.stream().filter(registrant -> "Ivan St. Ivanov".equals(registrant.getName())).count(), is(
                 0L));
     }
 
     @Test
-    public void getAddVisitorFormShouldReturnVisitorFormWithCurrentRegistrant() throws Exception {
+    void getAddVisitorFormShouldReturnVisitorFormWithCurrentRegistrant() throws Exception {
         mockMvc.perform(get("/admin/registrant/" + ivan.getId() + "/addVisitor"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("visitor", hasProperty("registrant", is(ivan))))
@@ -141,7 +138,7 @@ public class RegistrantControllerTest {
     }
 
     @Test
-    public void shouldBeAbleToAddExistingRegistrantOnceAgain() throws Exception {
+    void shouldBeAbleToAddExistingRegistrantOnceAgain() throws Exception {
         mockMvc.perform(post("/admin/registrant/add")
                 .param("company", "true")
                 .param("name", "Adams Family")
@@ -155,7 +152,7 @@ public class RegistrantControllerTest {
                 .andExpect(view().name("redirect:/admin/registrant/view"));
         List<Registrant> registrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(registrants.size(), is(3));
-        assertThat(registrants.stream().filter(registrant -> registrant.getName().equals("Adams Family")).count(), is(
+        assertThat(registrants.stream().filter(registrant -> "Adams Family".equals(registrant.getName())).count(), is(
                 2L));
     }
 }

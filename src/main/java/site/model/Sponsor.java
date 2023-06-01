@@ -82,8 +82,9 @@ public class Sponsor extends User {
 	}
 
 	public Boolean getActive() {
-        if (active == null)
+        if (active == null) {
             return false;
+        }
 		return active;
 	}
 
@@ -93,17 +94,16 @@ public class Sponsor extends User {
 
 	@Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof Sponsor))
+        }
+        if (!(o instanceof Sponsor)) {
             return false;
+        }
 
         Sponsor sponsor = (Sponsor) o;
 
-        if (!companyName.equals(sponsor.companyName))
-            return false;
-
-        return true;
+        return companyName.equals(sponsor.companyName);
     }
 
     @Override

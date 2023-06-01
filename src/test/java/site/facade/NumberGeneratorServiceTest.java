@@ -8,31 +8,27 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import site.app.Application;
 import site.model.Registrant;
 import site.repository.RegistrantRealInvoiceNumberGeneratorRepository;
 
-import static org.junit.Assert.*;
-
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
-public class NumberGeneratorServiceTest {
+class NumberGeneratorServiceTest {
 
     private static final long START_NUMBER = 8000000001L;
 
     private static final int RUNS = 100;
 
-    private static ForkJoinPool EXECUTION_POOL;
+    private static ForkJoinPool executionPool;
 
     @Autowired
     private NumberGeneratorService numberGeneratorService;
@@ -40,28 +36,28 @@ public class NumberGeneratorServiceTest {
     @Autowired
     private RegistrantRealInvoiceNumberGeneratorRepository invoiceGeneratorRepository;
 
-    @BeforeClass
+    @BeforeAll
     public static void setupPool() {
-        EXECUTION_POOL = new ForkJoinPool(10);
+        executionPool = new ForkJoinPool(10);
     }
 
-    @AfterClass
+    @AfterAll
     public static void shutdownPool() {
-        if (EXECUTION_POOL != null) {
-            EXECUTION_POOL.shutdown();
+        if (executionPool != null) {
+            executionPool.shutdown();
         }
     }
 
-    @After
-    public void cleanupDb() {
+    @AfterEach
+    void cleanupDb() {
         invoiceGeneratorRepository.deleteAll();
     }
 
     @Test
-    public void generateInvoiceNumbersInParallel() throws ExecutionException, InterruptedException {
+    void generateInvoiceNumbersInParallel() throws ExecutionException, InterruptedException {
         List<Integer> list = IntStream.range(0, RUNS).boxed().collect(Collectors.toList());
 
-        Set<Long> invoiceNumbers = EXECUTION_POOL.submit(() -> list.parallelStream()
+        Set<Long> invoiceNumbers = executionPool.submit(() -> list.parallelStream()
             .map(i -> numberGeneratorService.getRealInvoiceNumber())
             .collect(Collectors.toSet())).get();
 
@@ -71,7 +67,7 @@ public class NumberGeneratorServiceTest {
     }
 
     @Test
-    public void testForExistingNumber() {
+    void testForExistingNumber() {
         Registrant.RealInvoiceNumberGenerator invoiceNumberGenerator = new Registrant.RealInvoiceNumberGenerator();
         invoiceNumberGenerator.setCounter(100000);
         invoiceGeneratorRepository.save(invoiceNumberGenerator);

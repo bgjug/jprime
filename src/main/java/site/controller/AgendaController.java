@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +33,8 @@ public class AgendaController {
 	private boolean agenda;
 
 	//read a single agenda post
-    @RequestMapping("/agenda/{id}")
-    public String getById(@PathVariable("id") final long id, Model model) {
+    @GetMapping("/agenda/{id}")
+    public String getById(@PathVariable final long id, Model model) {
 	   model.addAttribute("tags", userFacade.findAllTags());
 		model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
     	Session talk = userService.findSessionTalk(id);
@@ -46,7 +46,7 @@ public class AgendaController {
         return "/talk.jsp";
     }
     
-    @RequestMapping("/agenda")
+    @GetMapping("/agenda")
 	public String getAgenda(Model model) {
 	   model.addAttribute("tags", userFacade.findAllTags());
 

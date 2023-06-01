@@ -1,10 +1,13 @@
 package site.controller;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class RaffleControllerTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-    public void testMaskEmail() {
+class RaffleControllerTest {
+
+    @Test
+    void testMaskEmail() {
         assertEquals("abc@***.com", RaffleController.maskEmail("abc@one.com"));
     }
 }

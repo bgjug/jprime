@@ -7,7 +7,6 @@ import java.util.function.Function;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,6 @@ public class BackgroundJobService {
 
     private final BackgroundJobRepository jobRepository;
 
-    @Autowired
     public BackgroundJobService(BackgroundJobRepository jobRepository) {
         this.jobRepository = jobRepository;
     }

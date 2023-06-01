@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -125,7 +124,7 @@ public class AdminVisitorController {
     @Qualifier(UserServiceJPro.NAME)
     private UserServiceJPro userServiceJPro;
 
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    @GetMapping("/view")
     public String viewVisitors(Model model) {
 
         List<Visitor> visitors = adminFacade.findAllNewestVisitors();
@@ -140,7 +139,7 @@ public class AdminVisitorController {
         return VISITORS_JSP;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping("/add")
     public String add(@Valid final Visitor visitor, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return VISITOR_EDIT_JSP;
@@ -165,7 +164,7 @@ public class AdminVisitorController {
         return redirectUrl;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping("/add")
     public String getNewVisitorForm(Model model) {
         model.addAttribute("visitor", new Visitor());
         model.addAttribute("statuses", VisitorStatus.values());
@@ -292,23 +291,23 @@ public class AdminVisitorController {
         return registrant;
     }
 
-    @RequestMapping(value = "/edit/{itemId}", method = RequestMethod.GET)
-    public String getEditVisitorForm(@PathVariable("itemId") Long itemId, Model model) {
+    @GetMapping("/edit/{itemId}")
+    public String getEditVisitorForm(@PathVariable Long itemId, Model model) {
         Visitor visitor = adminFacade.findOneVisitor(itemId);
         model.addAttribute("statuses", VisitorStatus.values());
         model.addAttribute("visitor", visitor);
         return VISITOR_EDIT_JSP;
     }
 
-    @RequestMapping(value = "/remove/{itemId}", method = RequestMethod.GET)
-    public String remove(@PathVariable("itemId") Long itemId) {
+    @GetMapping("/remove/{itemId}")
+    public String remove(@PathVariable Long itemId) {
         adminFacade.deleteVisitor(itemId);
         return "redirect:/admin/visitor/view";
     }
 
     private CellProcessor[] getProcessors() {
 
-        final CellProcessor[] processors = new CellProcessor[] {
+        return new CellProcessor[] {
             // new UniqueHashCode(), // customerNo (must be unique)
             new Optional(), // id
             new Optional(), // name
@@ -322,11 +321,9 @@ public class AdminVisitorController {
 //                new NotNull(), // email
 //                new LMinMax(0L, LMinMax.MAX_LONG) // loyaltyPoints
         };
-
-        return processors;
     }
 
-    @RequestMapping(value = "/export", method = RequestMethod.GET)
+    @GetMapping("/export")
     @ResponseBody
     public ResponseEntity<byte[]>  exportVisitors() throws IOException{
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();
@@ -345,12 +342,12 @@ public class AdminVisitorController {
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM).body(out.toByteArray());
     }
 
-    @RequestMapping(value = "/send", method = RequestMethod.GET)
+    @GetMapping("/send")
     public String send() {
         return VISITOR_EDIT_SEND;
     }
 
-    @RequestMapping(value = "/send", method = RequestMethod.POST)
+    @PostMapping("/send")
     @ResponseBody
     public String  send(@RequestParam String subject, @RequestParam String content) throws IOException{
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();

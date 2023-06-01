@@ -1,6 +1,6 @@
 package site.controller;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import site.model.Speaker;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -10,14 +10,14 @@ import static org.hamcrest.core.IsNull.nullValue;
 /**
  * @author Ivan St. Ivanov
  */
-public class CommonCfpControllerTest {
+class CommonCfpControllerTest {
 
     private static class TestCfpController extends AbstractCfpController {}
 
-    private TestCfpController testCfpController = new TestCfpController();
+    private final TestCfpController testCfpController = new TestCfpController();
 
     @Test
-    public void twitterHandleShouldNotStartWithAt() throws Exception {
+    void twitterHandleShouldNotStartWithAt() throws Exception {
         Speaker testSpeaker = new Speaker();
         testSpeaker.setTwitter("@speaker");
         testCfpController.fixTwitterHandle(testSpeaker);
@@ -25,7 +25,7 @@ public class CommonCfpControllerTest {
     }
 
     @Test
-    public void shouldSupportSpeakerWithNullTwitterHandle() throws Exception {
+    void shouldSupportSpeakerWithNullTwitterHandle() throws Exception {
         Speaker testSpeaker = new Speaker();
         testCfpController.fixTwitterHandle(testSpeaker);
         assertThat(testSpeaker.getTwitter(), is(nullValue()));

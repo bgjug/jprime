@@ -3,10 +3,10 @@ package site.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import site.facade.UserService;
 import site.facade.UserServiceJPro;
 import site.model.Visitor;
@@ -30,18 +30,18 @@ public class QRController {
         return QR_JSP;
     }
 
-    @RequestMapping(value = "/tuk", method = RequestMethod.GET)
+    @GetMapping("/tuk")
     public String registerPresence(Model model) {
         model.addAttribute(new Visitor());
         return REG_PRESENCE_JSP;
     }
-    @RequestMapping(value = "/tukjpro", method = RequestMethod.GET)
+    @GetMapping("/tukjpro")
     public String registerPresenceJpro(Model model) {
         model.addAttribute(new Visitor());
         return REG_PRESENCE_JPRO_JSP;
     }
 
-    @RequestMapping(value = "/tuk", method = RequestMethod.POST)
+    @PostMapping("/tuk")
     public String setIsPresent(Visitor visitor, Model model) {
         boolean updated = false;
 
@@ -61,7 +61,7 @@ public class QRController {
         return SET_PRESENT_SUCCESSFUL_JSP;
     }
 
-    @RequestMapping(value = "/tukjpro", method = RequestMethod.POST)
+    @PostMapping("/tukjpro")
     public String setIsPresentJpro(Visitor visitor, Model model) {
         boolean updated = false;
 
@@ -80,18 +80,18 @@ public class QRController {
     }
 
     private boolean isEmailFilled(Visitor visitor) {
-        return visitor.getEmail() != null && !StringUtils.isEmpty(visitor.getEmail());
+        return visitor.getEmail() != null && !ObjectUtils.isEmpty(visitor.getEmail());
     }
 
     private boolean isIdFilled(Visitor visitor){
-        return visitor.getId() != null && !StringUtils.isEmpty(visitor.getId());
+        return visitor.getId() != null && !ObjectUtils.isEmpty(visitor.getId());
     }
 
     private boolean isCompanyFilled(Visitor visitor){
-        return visitor.getCompany() != null && !StringUtils.isEmpty(visitor.getCompany());
+        return visitor.getCompany() != null && !ObjectUtils.isEmpty(visitor.getCompany());
     }
 
     private boolean isNameFilled(Visitor visitor){
-        return visitor.getName() != null && !StringUtils.isEmpty(visitor.getName());
+        return visitor.getName() != null && !ObjectUtils.isEmpty(visitor.getName());
     }
 }

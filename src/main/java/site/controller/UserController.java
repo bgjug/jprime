@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import site.config.Globals;
@@ -53,19 +53,19 @@ public class UserController {
 	@Value("${site.url.reset.password:https://jprime.io/createNewPassword?tokenId=}")
 	private  String createNewPasswordUrl;
 	
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	@GetMapping("/signup")
 	public String signup(Model model) {
 		model.addAttribute("user", new User());
 		return "/signup.jsp";
 	}
 
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	@PostMapping("/signup")
 	public String signip(@Valid final User user, BindingResult bindingResult, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return "/signup.jsp";
 		}
 
-		if (StringUtils.isEmpty(user.getPassword()) || !user.getPassword().equals(user.getCpassword())) {
+		if (ObjectUtils.isEmpty(user.getPassword()) || !user.getPassword().equals(user.getCpassword())) {
 			bindingResult.rejectValue("cpassword", "notmatch.password", "Passwords dont match!");
 
 			return "/signup.jsp";
@@ -94,26 +94,26 @@ public class UserController {
 		return "redirect:/home";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@GetMapping("/login")
 	public String login(Model model) {
 		return "/login.jsp";
 	}
 	
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		request.getSession().removeAttribute("user");
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
+	@GetMapping("/resetPassword")
 	public String forgottenPass(@ModelAttribute("sent_to_email") String email, HttpServletRequest request) {
 		
 		return RESET_PASSWORD_JSP;
 	}
 	
 	
-	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
-	public String resetPassword(@RequestParam(value = "email") String email, Model model, final RedirectAttributes redirectAttrs) {
+	@PostMapping("/resetPassword")
+	public String resetPassword(@RequestParam String email, Model model, final RedirectAttributes redirectAttrs) {
 		EmailValidator mailValidator = new EmailValidator();
 		if(!mailValidator.isValid(email, null)){
 			model.addAttribute("error_msg", "Please, enter a valid mail address");
@@ -136,8 +136,8 @@ public class UserController {
 		return "redirect:/resetPassword";
 	}
 	
-	@RequestMapping(value = "createNewPassword", method  = RequestMethod.GET)
-	public String createNewPass(@RequestParam(value = "tokenId", required = true)  String tokenId, Model model){
+	@GetMapping("createNewPassword")
+	public String createNewPass(@RequestParam(required = true)  String tokenId, Model model){
 		
 		User owner = resetPassService.checkTokenValidity(tokenId);
 		if(owner == null) {
@@ -148,10 +148,10 @@ public class UserController {
 		return CREATE_NEW_PASSWORD_JSP;
 	}
 
-	@RequestMapping(value = "createNewPassword", method = RequestMethod.POST)
-	public String createNewPassPost(@RequestParam(value = "tokenId", required = true) String tokenId,
-			@RequestParam(value = "password", required = true) String password,
-			@RequestParam(value = "cpassword", required = true) String cpassword, final RedirectAttributes redirectAttrs, Model model) {
+	@PostMapping("createNewPassword")
+	public String createNewPassPost(@RequestParam(required = true) String tokenId,
+			@RequestParam(required = true) String password,
+			@RequestParam(required = true) String cpassword, final RedirectAttributes redirectAttrs, Model model) {
 
 		User owner = resetPassService.checkTokenValidity(tokenId);
 		if (owner == null) {
@@ -160,7 +160,7 @@ public class UserController {
 			return CREATE_NEW_PASSWORD_JSP;
 		}
 		
-		if(StringUtils.isEmpty(password) || !password.equals(cpassword)){
+		if(ObjectUtils.isEmpty(password) || !password.equals(cpassword)){
 			model.addAttribute("error_msg", "Passwords did not match");
 			model.addAttribute("tokenId", tokenId);
 			return CREATE_NEW_PASSWORD_JSP;
@@ -174,8 +174,8 @@ public class UserController {
 		return "redirect:/successfulPasswordChange";
 	}
 	
-	@RequestMapping(value = "successfulPasswordChange", method = RequestMethod.GET)
-	public String successfulPasswordChange(@ModelAttribute("user") User user, Model model){
+	@GetMapping("successfulPasswordChange")
+	public String successfulPasswordChange(@ModelAttribute User user, Model model){
 		String msg = "Successfully changed password for user: " + user.getFirstName() + " " + user.getLastName() +
 				" (" + user.getEmail() + ") ";
 		model.addAttribute("msg", msg);

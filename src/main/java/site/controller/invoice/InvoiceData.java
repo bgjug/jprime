@@ -45,7 +45,7 @@ public class InvoiceData {
     private String mol;
     private String paymentType;
     private Long registrantId;
-    private List<InvoiceDetail> invoiceDetails = new ArrayList<>();
+    private final List<InvoiceDetail> invoiceDetails = new ArrayList<>();
     // Used to store data from model
     private Double singlePriceWithVAT;
     private String description;

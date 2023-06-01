@@ -173,7 +173,7 @@ public class AdminService {
 
     //currently used for admin TODO:to be fixed with normal authentication with spring
     public User findUserByEmail(String email){
-        if(userRepository.findByEmail(email).size()>0) {
+        if(!userRepository.findByEmail(email).isEmpty()) {
             return userRepository.findByEmail(email).get(0);
         }
         return null;

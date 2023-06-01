@@ -24,7 +24,7 @@ import site.repository.ResetPasswordTokenRepository;
 public class ResetPasswordService {
 
 	@Value("${site.reset.password.token.duration.hours:2}")
-	private int TOKEN_DURATION_IN_HOURS;
+	private int tokenDurationInHours;
 
 	private static final Logger logger = LoggerFactory.getLogger(ResetPasswordService.class);
 
@@ -61,7 +61,7 @@ public class ResetPasswordService {
 		}
 
 		DateTime createdDate = resetPasswordToken.getCreatedDate();
-		DateTime deadline = createdDate.plusHours(TOKEN_DURATION_IN_HOURS);
+		DateTime deadline = createdDate.plusHours(tokenDurationInHours);
 		if (deadline.isBeforeNow()) {
 			logger.debug("ResetPassworToken for user: {} with Id={}, ShaHex: {}  is expired.", owner, tokenId, tokenShaHex);
 			return null;
@@ -89,8 +89,7 @@ public class ResetPasswordService {
 			char c = chars[random.nextInt(chars.length)];
 			sb.append(c);
 		}
-		String output = sb.toString();
-		return output;
+		return sb.toString();
 	}
 
 	private SecureRandom getRandom() {

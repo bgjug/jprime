@@ -6,8 +6,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class SpeakerController {
    @Autowired
    private UserService userService;
 
-   @RequestMapping("/speakers")
+   @GetMapping("/speakers")
    public String speakers(Pageable pageable, Model model) {
       List<Speaker> acceptedSpeakers = userService.findAcceptedSpeakers();
       Page<Speaker> speakers = new PageImpl<>(acceptedSpeakers, pageable, acceptedSpeakers.size());
@@ -36,8 +36,8 @@ public class SpeakerController {
    }
 
    //read a single blog
-   @RequestMapping("/speaker/{id}")
-   public String getById(@PathVariable("id") final long id, Model model) {
+   @GetMapping("/speaker/{id}")
+   public String getById(@PathVariable final long id, Model model) {
       Speaker speaker = userService.findSpeaker(id);
       model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
         if (speaker == null) {
