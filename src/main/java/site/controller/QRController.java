@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import site.facade.UserService;
 import site.facade.UserServiceJPro;
 import site.model.Visitor;
@@ -30,18 +30,18 @@ public class QRController {
         return QR_JSP;
     }
 
-    @RequestMapping(value = "/tuk", method = RequestMethod.GET)
+    @GetMapping("/tuk")
     public String registerPresence(Model model) {
         model.addAttribute(new Visitor());
         return REG_PRESENCE_JSP;
     }
-    @RequestMapping(value = "/tukjpro", method = RequestMethod.GET)
+    @GetMapping("/tukjpro")
     public String registerPresenceJpro(Model model) {
         model.addAttribute(new Visitor());
         return REG_PRESENCE_JPRO_JSP;
     }
 
-    @RequestMapping(value = "/tuk", method = RequestMethod.POST)
+    @PostMapping("/tuk")
     public String setIsPresent(Visitor visitor, Model model) {
         boolean updated = false;
 
@@ -61,7 +61,7 @@ public class QRController {
         return SET_PRESENT_SUCCESSFUL_JSP;
     }
 
-    @RequestMapping(value = "/tukjpro", method = RequestMethod.POST)
+    @PostMapping("/tukjpro")
     public String setIsPresentJpro(Visitor visitor, Model model) {
         boolean updated = false;
 

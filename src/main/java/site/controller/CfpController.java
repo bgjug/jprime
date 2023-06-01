@@ -11,8 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import site.config.Globals;
@@ -36,16 +35,16 @@ public class CfpController extends AbstractCfpController {
     @Value("${agenda.published:false}")
     private boolean agendaPublished;
 
-    @RequestMapping(value = "/cfp", method = RequestMethod.GET)
+    @GetMapping("/cfp")
     public String submissionForm(Model model) {
         return goToCFP(new Submission(), model);
     }
 
-    @RequestMapping(value = "/cfp", method = RequestMethod.POST)
+    @PostMapping("/cfp")
     public String submitSession(@Valid final Submission submission,
             BindingResult bindingResult,
-        @RequestParam("speakerImage") MultipartFile speakerImage,
-            @RequestParam("coSpeakerImage") MultipartFile coSpeakerImage,
+        @RequestParam MultipartFile speakerImage,
+            @RequestParam MultipartFile coSpeakerImage,
             Model model, HttpServletRequest request) {
         boolean invalidCaptcha = false;
         if (submission.getCaptcha() == null || !submission.getCaptcha()

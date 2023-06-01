@@ -4,7 +4,7 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import site.config.Globals;
 import site.model.Session;
@@ -65,13 +65,13 @@ public class PWAController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/pwa/findSessionsByHall")
+        @GetMapping("/pwa/findSessionsByHall")
     public List<SessionDTO> getSessionByHall(String hallName) {
         List<Session> sessions = sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH.name());
         return sessions.stream().map(session -> new SessionDTO(session, hallName)).collect(Collectors.toList());
     }
 
-    @RequestMapping(value = { "/pwa", "/pwa/**" })
+    @GetMapping({"/pwa", "/pwa/**"})
     public String getPwaPage() {
         return "/pwa.jsp";
     }

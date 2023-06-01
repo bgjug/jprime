@@ -1,6 +1,5 @@
 package site.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +19,13 @@ public class SpeakerRestController {
 
     private final UserService userService;
 
-    @Autowired
     public SpeakerRestController(AdminService adminService, UserService userService) {
         this.adminService = adminService;
         this.userService = userService;
     }
 
     @GetMapping(path = "/{branch}")
-    public ResponseEntity<?> allSpeakers(@PathVariable(name = "branch") String branch) {
+    public ResponseEntity<?> allSpeakers(@PathVariable String branch) {
         try {
             return ResponseEntity.ok(userService.findAcceptedSpeakers());
         } catch (Exception e) {
@@ -36,7 +34,7 @@ public class SpeakerRestController {
     }
 
     @PostMapping(path = "/search/{branch}")
-    public ResponseEntity<?> findSpeaker(@PathVariable(name = "branch") String branch,
+    public ResponseEntity<?> findSpeaker(@PathVariable String branch,
         @RequestBody SpeakerSearch speakerSearch) {
 
         try {
