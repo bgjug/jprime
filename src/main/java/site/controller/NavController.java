@@ -3,11 +3,9 @@ package site.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +22,13 @@ public class NavController {
 	
 	private static final Logger logger = LogManager.getLogger(NavController.class);
 
-	@Autowired
-	@Qualifier(UserService.NAME)
-	private UserService userFacade;
-	
-	@GetMapping("/nav/{tag}")
+	private final UserService userFacade;
+
+    public NavController(@Qualifier(UserService.NAME) UserService userFacade) {
+        this.userFacade = userFacade;
+    }
+
+    @GetMapping("/nav/{tag}")
 	public String getByTag(@PathVariable("tag") final String tagName, @PageableDefault(size = 24)
 			Pageable pageable, Model model) {
 		model.addAttribute("tags", userFacade.findAllTags());
@@ -38,14 +38,15 @@ public class NavController {
         model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
 
         if (articles.getTotalElements() == 0) {
-            logger.error(()->String.format("Invalid tag name (%1$s)", tagName));
+            logger.error("Invalid tag name ({}})", tagName);
             return "/404.jsp";
         }
 
 		if(articles.getTotalElements() > 1) {
 			model.addAttribute("articles", articles);
 			return "/blog.jsp";
-		} else { //just 1 for example Agenda will be such an article 1 article in a tag.. no need for paging and so on
+		} else { //just 1 for example Agenda will be such an article 1 article in a tag.
+            // no need for paging and so on
 			model.addAttribute("article", articles.getContent().iterator().next());
 			return "/single-post.jsp";
 		}
@@ -81,7 +82,7 @@ public class NavController {
     }
     
     @GetMapping("/nav/article")
-	public String getById(@RequestParam(required = true) final String title,
+	public String getById(@RequestParam final String title,
 			Model model) {
         Article article= userFacade.getArticleByTitle(title);
         model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
