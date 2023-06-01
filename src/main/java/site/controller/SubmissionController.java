@@ -19,7 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -204,6 +204,6 @@ public class SubmissionController extends AbstractCfpController {
         }
         saveSubmission(submission, speakerImage, coSpeakerImage);
 
-        return REDIRECT + (StringUtils.isEmpty(sourcePage) ? "/admin/submission/view" : sourcePage);
+        return REDIRECT + (ObjectUtils.isEmpty(sourcePage) ? "/admin/submission/view" : sourcePage);
     }
 }

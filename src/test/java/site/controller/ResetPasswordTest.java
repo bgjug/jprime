@@ -1,11 +1,9 @@
 package site.controller;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -31,11 +29,10 @@ import static site.controller.UserController.RESET_PASSWORD_JSP;
 /**
  * @author Zhorzh Raychev
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
 @Transactional
-public class ResetPasswordTest {
+class ResetPasswordTest {
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -47,8 +44,8 @@ public class ResetPasswordTest {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Before
-	public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
 		UserController userControllerBean = wac.getBean(UserController.class);
 		this.mailServiceMock = new MailServiceMock();
 		userControllerBean.setMailService(mailServiceMock);
@@ -63,16 +60,16 @@ public class ResetPasswordTest {
 		user.setPassword("abcd1234");
 		userRepository.save(user);
 	}
-	
-	@Test
-	public void showResetPasswordForm() throws Exception{
+
+    @Test
+    void showResetPasswordForm() throws Exception{
 		mockMvc.perform(get("/resetPassword"))
         .andExpect(status().isOk())
         .andExpect(view().name(RESET_PASSWORD_JSP));
 	}
-	
-	@Test
-	public void resetPasswordFullTest() throws Exception {
+
+    @Test
+    void resetPasswordFullTest() throws Exception {
 		
 		 mockMvc.perform(post("/resetPassword")
 	                .param("email", "testEmail@gmail.com"))

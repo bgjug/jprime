@@ -14,10 +14,10 @@ import site.model.Session;
 import site.model.Submission;
 
 import javax.transaction.Transactional;
+
+import static org.springframework.util.ObjectUtils.isEmpty;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.springframework.util.StringUtils.*;
 
 /**
  * @author Ivan St. Ivanov

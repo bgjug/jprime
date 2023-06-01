@@ -1,13 +1,11 @@
 package site.controller;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -34,11 +32,10 @@ import static site.controller.TicketsController.TICKETS_RESULT_JSP;
 /**
  * @author Ivan St. Ivanov
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
 @Transactional
-public class TicketsEpayRegisterControllerTest {
+class TicketsEpayRegisterControllerTest {
 
     @Autowired
     private WebApplicationContext wac;
@@ -49,13 +46,13 @@ public class TicketsEpayRegisterControllerTest {
 
     private MockMvc mockMvc;
 
-    @Before
-    public void setup() throws Exception {
+    @BeforeEach
+    void setup() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
     @Test
-    public void getShouldReturnTicketsEpayRegisterJsp() throws Exception {
+    void getShouldReturnTicketsEpayRegisterJsp() throws Exception {
         mockMvc.perform(get("/tickets"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("registrant", is(new Registrant())))
@@ -63,8 +60,8 @@ public class TicketsEpayRegisterControllerTest {
     }
 
     @Test
-    @Ignore("ignored since adding captcha, has to be updated")
-    public void postNonCompanyRegistrantShouldSaveVisitorDataAsRegistrant() throws Exception {
+    @Disabled("ignored since adding captcha, has to be updated")
+    void postNonCompanyRegistrantShouldSaveVisitorDataAsRegistrant() throws Exception {
         mockMvc.perform(post("/tickets")
                 .param("visitors[0].name", "John Doe")
                 .param("visitors[0].email", "john@example.com")
@@ -85,8 +82,8 @@ public class TicketsEpayRegisterControllerTest {
     }
 
     @Test
-    @Ignore("ignored since adding captcha, has to be updated")
-    public void postCompanyRegistrantShouldSaveInvoiceData() throws Exception {
+    @Disabled("ignored since adding captcha, has to be updated")
+    void postCompanyRegistrantShouldSaveInvoiceData() throws Exception {
         mockMvc.perform(post("/tickets")
                 .param("visitors[0].name", "John Doe")
                 .param("visitors[0].email", "john@example.com")
@@ -119,8 +116,8 @@ public class TicketsEpayRegisterControllerTest {
     }
 
     @Test
-    @Ignore("ignored since adding captcha, has to be updated")
-    public void shouldBeAbleToSaveMoreVisitorsForOneRegistrant() throws Exception {
+    @Disabled("ignored since adding captcha, has to be updated")
+    void shouldBeAbleToSaveMoreVisitorsForOneRegistrant() throws Exception {
         mockMvc.perform(post("/tickets")
                 .param("visitors[0].name", "Lurch")
                 .param("visitors[0].email", "lurch@example.com")
@@ -144,7 +141,7 @@ public class TicketsEpayRegisterControllerTest {
     }
 
     @Test
-    public void getTicketsEpayShouldReturnEmptyRegistrant() throws Exception {
+    void getTicketsEpayShouldReturnEmptyRegistrant() throws Exception {
         mockMvc.perform(get("/tickets"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(Globals.CURRENT_BRANCH.isSoldOut() ? TicketsController.TICKETS_END_JSP : TicketsController.TICKETS_REGISTER_JSP))

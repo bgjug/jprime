@@ -1,13 +1,11 @@
 package site.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -21,17 +19,17 @@ import site.model.Visitor;
 import site.repository.RegistrantRepository;
 import site.repository.VisitorRepository;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {Application.class})
 @WebAppConfiguration
 @Transactional
-public class TicketRestControllerTest {
+class TicketRestControllerTest {
     @Autowired
     private WebApplicationContext wac;
 
@@ -43,8 +41,8 @@ public class TicketRestControllerTest {
 
     private MockMvc mockMvc;
 
-    @Before
-    public void setup() throws Exception {
+    @BeforeEach
+    void setup() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         Registrant r = createRegistrant();
 
@@ -53,13 +51,13 @@ public class TicketRestControllerTest {
     }
 
     @Test
-    public void registerTicketNotFound() throws Exception {
+    void registerTicketNotFound() throws Exception {
         mockMvc.perform(post("/api/ticket/_Invalid_ticket_id"))
             .andExpect(status().isNotFound());
     }
 
     @Test
-    public void registerTicket() throws Exception {
+    void registerTicket() throws Exception {
         String ticketReferenceId = "_TICKET_REFERENCE_ID_";
         VisitorFromJSON visitor = findVisitorByTicket(ticketReferenceId);
         assertFalse(visitor.isRegistered());

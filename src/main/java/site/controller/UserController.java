@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -64,7 +64,7 @@ public class UserController {
 			return "/signup.jsp";
 		}
 
-		if (StringUtils.isEmpty(user.getPassword()) || !user.getPassword().equals(user.getCpassword())) {
+		if (ObjectUtils.isEmpty(user.getPassword()) || !user.getPassword().equals(user.getCpassword())) {
 			bindingResult.rejectValue("cpassword", "notmatch.password", "Passwords dont match!");
 
 			return "/signup.jsp";
@@ -159,7 +159,7 @@ public class UserController {
 			return CREATE_NEW_PASSWORD_JSP;
 		}
 		
-		if(StringUtils.isEmpty(password) || !password.equals(cpassword)){
+		if(ObjectUtils.isEmpty(password) || !password.equals(cpassword)){
 			model.addAttribute("error_msg", "Passwords did not match");
 			model.addAttribute("tokenId", tokenId);
 			return CREATE_NEW_PASSWORD_JSP;

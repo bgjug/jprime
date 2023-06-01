@@ -4,14 +4,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -25,17 +22,17 @@ import site.model.Visitor;
 import site.repository.RegistrantRepository;
 import site.repository.VisitorRepository;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {Application.class})
 @WebAppConfiguration
 @Transactional
-public class VisitorsRestControllerTest {
+class VisitorsRestControllerTest {
 
     private static final TypeReference<List<VisitorFromJSON>> VISITOR_LIST =
         new TypeReference<List<VisitorFromJSON>>() {};
@@ -51,8 +48,8 @@ public class VisitorsRestControllerTest {
 
     private MockMvc mockMvc;
 
-    @Before
-    public void setup() throws Exception {
+    @BeforeEach
+    void setup() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         Registrant r = createRegistrant();
 
@@ -61,7 +58,7 @@ public class VisitorsRestControllerTest {
     }
 
     @Test
-    public void testFindAllVisitors() throws Exception {
+    void testFindAllVisitors() throws Exception {
         MvcResult result = mockMvc.perform(get("/api/visitor/" + Globals.CURRENT_BRANCH.getLabel()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -69,14 +66,14 @@ public class VisitorsRestControllerTest {
 
         String jsonResponse = result.getResponse().getContentAsString();
         List<VisitorFromJSON> visitorList = new ObjectMapper().readValue(jsonResponse, VISITOR_LIST);
-        Assertions.assertEquals(1, visitorList.size());
+        assertEquals(1, visitorList.size());
         VisitorFromJSON visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
     }
 
     @Test
-    public void testFindVisitorByTicket() throws Exception {
+    void testFindVisitorByTicket() throws Exception {
         MvcResult result = mockMvc.perform(
                 get("/api/visitor/" + Globals.CURRENT_BRANCH.getLabel() + "/_TICKET_REFERENCE_ID_"))
             .andExpect(status().isOk())
@@ -89,13 +86,13 @@ public class VisitorsRestControllerTest {
     }
 
     @Test
-    public void testFindVisitorByTicketBadTicket() throws Exception {
+    void testFindVisitorByTicketBadTicket() throws Exception {
         mockMvc.perform(get("/api/visitor/" + Globals.CURRENT_BRANCH.getLabel() + "/_INVALID_TICKET_ID_"))
             .andExpect(status().isNotFound());
     }
 
     @Test
-    public void testSearchForVisitorByFirstName() throws Exception {
+    void testSearchForVisitorByFirstName() throws Exception {
         VisitorSearch search = new VisitorSearch(null, "fu", null, null);
         MvcResult result = mockMvc.perform(
                 post("/api/visitor/search/" + Globals.CURRENT_BRANCH.getLabel()).contentType(
@@ -106,14 +103,14 @@ public class VisitorsRestControllerTest {
 
         List<VisitorFromJSON> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
-        Assertions.assertEquals(1, visitorList.size());
+        assertEquals(1, visitorList.size());
         VisitorFromJSON visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
     }
 
     @Test
-    public void testSearchForVisitorByLastName() throws Exception {
+    void testSearchForVisitorByLastName() throws Exception {
         VisitorSearch search = new VisitorSearch(null, null, "na", null);
         MvcResult result = mockMvc.perform(
                 post("/api/visitor/search/" + Globals.CURRENT_BRANCH.getLabel()).contentType(
@@ -124,14 +121,14 @@ public class VisitorsRestControllerTest {
 
         List<VisitorFromJSON> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
-        Assertions.assertEquals(1, visitorList.size());
+        assertEquals(1, visitorList.size());
         VisitorFromJSON visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
     }
 
     @Test
-    public void testSearchForVisitorByFirstAndLastName() throws Exception {
+    void testSearchForVisitorByFirstAndLastName() throws Exception {
         VisitorSearch search = new VisitorSearch(null, "fu", "na", null);
         MvcResult result = mockMvc.perform(
                 post("/api/visitor/search/" + Globals.CURRENT_BRANCH.getLabel()).contentType(
@@ -142,14 +139,14 @@ public class VisitorsRestControllerTest {
 
         List<VisitorFromJSON> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
-        Assertions.assertEquals(1, visitorList.size());
+        assertEquals(1, visitorList.size());
         VisitorFromJSON visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
     }
 
     @Test
-    public void testSearchForVisitorByCompany() throws Exception {
+    void testSearchForVisitorByCompany() throws Exception {
         VisitorSearch search = new VisitorSearch(null, null, null, "fun");
         MvcResult result = mockMvc.perform(
                 post("/api/visitor/search/" + Globals.CURRENT_BRANCH.getLabel()).contentType(
@@ -160,14 +157,14 @@ public class VisitorsRestControllerTest {
 
         List<VisitorFromJSON> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
-        Assertions.assertEquals(1, visitorList.size());
+        assertEquals(1, visitorList.size());
         VisitorFromJSON visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
     }
 
     @Test
-    public void testSearchForVisitorByEmail() throws Exception {
+    void testSearchForVisitorByEmail() throws Exception {
         VisitorSearch search = new VisitorSearch("funky.com", null, null, null);
         MvcResult result = mockMvc.perform(
                 post("/api/visitor/search/" + Globals.CURRENT_BRANCH.getLabel()).contentType(
@@ -178,7 +175,7 @@ public class VisitorsRestControllerTest {
 
         List<VisitorFromJSON> visitorList =
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), VISITOR_LIST);
-        Assertions.assertEquals(1, visitorList.size());
+        assertEquals(1, visitorList.size());
         VisitorFromJSON visitor = visitorList.get(0);
         assertNotNull(visitor.getRegistrantName());
         assertNotNull(visitor.getTicket());
