@@ -88,21 +88,22 @@ public class User extends AbstractEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof User))
+        }
+        if (!(o instanceof User)) {
             return false;
+        }
 
         User user = (User) o;
 
-        if (email != null && !email.equals(user.email))
+        if (email != null && !email.equals(user.email)) {
             return false;
-        if (firstName != null && !firstName.equals(user.firstName))
+        }
+        if (firstName != null && !firstName.equals(user.firstName)) {
             return false;
-        if (lastName != null && !lastName.equals(user.lastName))
-            return false;
-
-        return true;
+        }
+        return !(lastName != null && !lastName.equals(user.lastName));
     }
 
     @Override

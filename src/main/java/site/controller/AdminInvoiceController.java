@@ -85,7 +85,7 @@ public class AdminInvoiceController {
         invoiceData.setDescription(modelInvoiceData.getDescription());
 
         invoiceData.setInvoiceType(InvoiceData.ORIGINAL_BG);
-        if (invoiceData.getInvoiceNumber().equals("0")) {
+        if ("0".equals(invoiceData.getInvoiceNumber())) {
             registrantFacade.generateInvoiceNumber(registrant);
         }
 

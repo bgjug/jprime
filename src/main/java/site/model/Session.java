@@ -87,8 +87,12 @@ public class Session extends AbstractEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Session session = (Session) o;
         return Objects.equals(getTitle(), session.getTitle()) &&
                 Objects.equals(getStartTime(), session.getStartTime()) &&

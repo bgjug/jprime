@@ -103,7 +103,7 @@ class RegistrantControllerTest {
                 .andExpect(view().name("redirect:/admin/registrant/view"));
         List<Registrant> registrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(registrants.size(), is(3));
-        assertThat(registrants.stream().filter(registrant -> registrant.getName().equals("SAP Labs Bulgaria")).count(), is(
+        assertThat(registrants.stream().filter(registrant -> "SAP Labs Bulgaria".equals(registrant.getName())).count(), is(
                 1L));
     }
 
@@ -118,14 +118,14 @@ class RegistrantControllerTest {
     @Test
     void getDeleteShouldRemoveRegistrant() throws Exception {
         List<Registrant> registrants = (List<Registrant>) registrantRepository.findAll();
-        assertThat(registrants.stream().filter(registrant -> registrant.getName().equals("Ivan St. Ivanov")).count(), is(
+        assertThat(registrants.stream().filter(registrant -> "Ivan St. Ivanov".equals(registrant.getName())).count(), is(
                 1L));
         mockMvc.perform(get("/admin/registrant/remove/" + ivan.getId()))
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/admin/registrant/view"));
         registrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(registrants.size(), is(1));
-        assertThat(registrants.stream().filter(registrant -> registrant.getName().equals("Ivan St. Ivanov")).count(), is(
+        assertThat(registrants.stream().filter(registrant -> "Ivan St. Ivanov".equals(registrant.getName())).count(), is(
                 0L));
     }
 
@@ -152,7 +152,7 @@ class RegistrantControllerTest {
                 .andExpect(view().name("redirect:/admin/registrant/view"));
         List<Registrant> registrants = (List<Registrant>) registrantRepository.findAll();
         assertThat(registrants.size(), is(3));
-        assertThat(registrants.stream().filter(registrant -> registrant.getName().equals("Adams Family")).count(), is(
+        assertThat(registrants.stream().filter(registrant -> "Adams Family".equals(registrant.getName())).count(), is(
                 2L));
     }
 }

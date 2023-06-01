@@ -33,7 +33,7 @@ public class Registrant extends AbstractEntity {
     @OneToMany(mappedBy = "registrant", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Visitor> visitors = new ArrayList<>();
     private boolean isCompany = true;
-    private boolean isStudent = false;
+    private boolean isStudent;
     private String name = "";
     private String address;
     private String vatNumber;
@@ -269,32 +269,36 @@ public class Registrant extends AbstractEntity {
 
 	@Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof Registrant))
+        }
+        if (!(o instanceof Registrant)) {
             return false;
+        }
 
         Registrant that = (Registrant) o;
 
-        if (isCompany != that.isCompany)
+        if (isCompany != that.isCompany) {
             return false;
-        if (address != null ? !address.equals(that.address) : that.address != null)
+        }
+        if (address != null ? !address.equals(that.address) : that.address != null) {
             return false;
-        if (!email.equals(that.email))
+        }
+        if (!email.equals(that.email)) {
             return false;
-        if (mol != null ? !mol.equals(that.mol) : that.mol != null)
+        }
+        if (mol != null ? !mol.equals(that.mol) : that.mol != null) {
             return false;
-        if (!name.equals(that.name))
+        }
+        if (!name.equals(that.name)) {
             return false;
-        if (vatNumber != null ? !vatNumber.equals(that.vatNumber) : that.vatNumber != null)
-            return false;
-
-        return true;
+        }
+        return !(vatNumber != null ? !vatNumber.equals(that.vatNumber) : that.vatNumber != null);
     }
 
     @Override
     public int hashCode() {
-        int result = (isCompany ? 1 : 0);
+        int result = isCompany ? 1 : 0;
         result = 31 * result + name.hashCode();
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (vatNumber != null ? vatNumber.hashCode() : 0);

@@ -4,7 +4,7 @@ import site.controller.CfpController;
 import site.controller.TicketsController;
 import site.model.Branch;
 
-public class Globals {
+public final class Globals {
 
 	private Globals(){
 	}
