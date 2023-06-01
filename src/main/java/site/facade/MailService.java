@@ -5,6 +5,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
@@ -13,9 +15,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.util.stream.Stream;
 
 /**
@@ -25,7 +24,7 @@ import java.util.stream.Stream;
 public class MailService {
     public static final String NAME = "mailFacade";
 
-    private static final Logger logger = LoggerFactory.getLogger(MailService.class);
+    private static final Logger logger = LogManager.getLogger(MailService.class);
 
     @Value("${spring.mail.username}")
     private String emailAddress;

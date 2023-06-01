@@ -3,6 +3,8 @@ package site.controller;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
@@ -13,9 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import site.facade.AdminService;
 import site.facade.BackgroundJobService;
 import site.facade.TicketService;
@@ -35,7 +34,7 @@ import java.util.List;
 @RequestMapping(value = "/admin/registrant")
 public class AdminRegistrantController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminRegistrantController.class);
+    private static final Logger logger = LogManager.getLogger(AdminRegistrantController.class);
 
     public static final String REGISTRANT_VIEW_JSP = "/admin/registrant/view.jsp";
 
