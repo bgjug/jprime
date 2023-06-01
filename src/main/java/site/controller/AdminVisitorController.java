@@ -307,7 +307,7 @@ public class AdminVisitorController {
 
     private CellProcessor[] getProcessors() {
 
-        final CellProcessor[] processors = new CellProcessor[] {
+        return new CellProcessor[] {
             // new UniqueHashCode(), // customerNo (must be unique)
             new Optional(), // id
             new Optional(), // name
@@ -321,8 +321,6 @@ public class AdminVisitorController {
 //                new NotNull(), // email
 //                new LMinMax(0L, LMinMax.MAX_LONG) // loyaltyPoints
         };
-
-        return processors;
     }
 
     @RequestMapping(value = "/export", method = RequestMethod.GET)

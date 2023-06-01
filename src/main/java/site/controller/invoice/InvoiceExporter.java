@@ -33,20 +33,18 @@ public class InvoiceExporter {
     public byte[] exportInvoice(InvoiceData data, boolean isCompany, InvoiceLanguage language)
         throws Exception {
         String resourceName = null;
-        switch (language) {
-            case EN:
-                if (isCompany) {
-                    resourceName = "/invoice/invoice_company_template.jasper";
-                } else {
-                    resourceName = "/invoice/invoice_individual_template.jasper";
-                }
-                break;
-            case BG:
-                if (isCompany) {
-                    resourceName = "/invoice/invoice_company_template_bg.jasper";
-                } else {
-                    resourceName = "/invoice/invoice_individual_template_bg.jasper";
-                }
+        if (language == InvoiceLanguage.EN) {
+            if (isCompany) {
+                resourceName = "/invoice/invoice_company_template.jasper";
+            } else {
+                resourceName = "/invoice/invoice_individual_template.jasper";
+            }
+        } else if (language == InvoiceLanguage.BG) {
+            if (isCompany) {
+                resourceName = "/invoice/invoice_company_template_bg.jasper";
+            } else {
+                resourceName = "/invoice/invoice_individual_template_bg.jasper";
+            }
         }
 
         InputStream reportTemplate = getClass().getResourceAsStream(resourceName);

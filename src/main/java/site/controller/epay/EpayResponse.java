@@ -102,6 +102,6 @@ public class EpayResponse extends EpayRaw {
     public enum Status {
         PAID,
         EXPIRED,
-        DENIED;
+        DENIED
     }
 }
