@@ -1,5 +1,7 @@
 package site.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import site.config.Globals;
 import site.facade.UserService;
 import site.model.Session;
@@ -20,7 +19,7 @@ import java.util.List;
 @Controller
 public class AgendaController {
 
-	private static final Logger logger = LoggerFactory.getLogger(AgendaController.class);
+	private static final Logger logger = LogManager.getLogger(AgendaController.class);
 
 	@Autowired
 	@Qualifier(UserService.NAME)

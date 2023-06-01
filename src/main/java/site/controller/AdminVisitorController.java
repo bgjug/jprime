@@ -20,6 +20,8 @@ import java.util.stream.StreamSupport;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
@@ -36,9 +38,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.ift.CellProcessor;
 import org.supercsv.io.CsvBeanWriter;
@@ -106,7 +105,7 @@ public class AdminVisitorController {
                                                        LAST_NAME, EMAIL_ADDRESS
     };
 
-    private final Logger log = LoggerFactory.getLogger(AdminVisitorController.class);
+    private final Logger log = LogManager.getLogger(this.getClass());
 
     @Autowired
     @Qualifier(AdminService.NAME)
@@ -360,7 +359,7 @@ public class AdminVisitorController {
              try {
                  mailFacade.sendEmail(visitor.getEmail(), subject, content);
              } catch (Throwable t) {
-                 log.error("issue when sending email to {}", visitor.getEmail(), t);
+                 log.error("issue when sending email to " + visitor.getEmail(), t);
              }
          }
         return "Done ... all emails should be send but check the log for exceptions";
