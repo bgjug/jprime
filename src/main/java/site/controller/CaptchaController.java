@@ -63,8 +63,8 @@ public class CaptchaController {
 			int height = request.getParameter(REQUEST_PARAM_HEIGHT) != null
 					? Integer.parseInt(request.getParameter(REQUEST_PARAM_HEIGHT)) : 30;
 
-			float horizMargin = 20.0f;
-			float imageQuality = 0.95f; // max is 1.0 (this is for jpeg)
+			float horizMargin = 20.0F;
+			float imageQuality = 0.95F; // max is 1.0 (this is for jpeg)
 			double rotationRange = 0.7; // this is radians
 			BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
@@ -79,7 +79,7 @@ public class CaptchaController {
 					+ MIN_CIRCLES_TO_DRAW;
 
 			for (int i = 0; i < circlesToDraw; i++) {
-				g.setColor((i % 2 == 0) ? (circleColor)
+				g.setColor((i % 2 == 0) ? circleColor
 						: (new Color(circleColor.getRed(), 123 + (int) (Math.random() * 122), circleColor.getGreen())));
 
 				int circleWidth = (int) ((Math.random() * width / 2.0) * (Math.random() * 2));
@@ -141,7 +141,7 @@ public class CaptchaController {
 				// we can rotate it independently
 				int charWidth = fontMetrics.charWidth(characterToShow);
 				int charDim = Math.max(maxAdvance, fontHeight);
-				int halfCharDim = (charDim / 2);
+				int halfCharDim = charDim / 2;
 
 				BufferedImage charImage = new BufferedImage(charDim, charDim, BufferedImage.TYPE_INT_ARGB);
 				Graphics2D charGraphics = charImage.createGraphics();
@@ -158,8 +158,8 @@ public class CaptchaController {
 				charGraphics.drawString("" + characterToShow, charX,
 						((charDim - fontMetrics.getAscent()) / 2 + fontMetrics.getAscent()));
 
-				float x = horizMargin + spacePerChar * (i) - charDim / 2.0f;
-				int y = ((height - charDim) / 2);
+				float x = horizMargin + spacePerChar * i - charDim / 2.0f;
+				int y = (height - charDim) / 2;
 				// System.out.println("x=" + x + " height=" + height + "
 				// charDim=" + charDim + " y=" + y + " advance=" +
 				// maxAdvance + " fontHeight=" + fontHeight + " ascent=" +

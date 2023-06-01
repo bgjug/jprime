@@ -69,25 +69,33 @@ public class VenueHall extends AbstractEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 		VenueHall other = (VenueHall) obj;
 		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (!Arrays.equals(map, other.map))
-			return false;
+            if (other.description != null) {
+                return false;
+            }
+		} else if (!description.equals(other.description)) {
+            return false;
+        }
+        if (!Arrays.equals(map, other.map)) {
+            return false;
+        }
 		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
+            if (other.name != null) {
+                return false;
+            }
+		} else if (!name.equals(other.name)) {
+            return false;
+        }
 		return true;
 	}
 }

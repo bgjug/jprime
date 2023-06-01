@@ -72,7 +72,7 @@ public class SecurityConfig {
 	                String providedPassword = (String) authentication.getCredentials();
 	                
 	                //admin hack
-	                if(email.equals("admin") && providedPassword.equals(environment.getProperty("admin.password"))){
+	                if("admin".equals(email) && providedPassword.equals(environment.getProperty("admin.password"))){
 	                	return new UsernamePasswordAuthenticationToken(email, providedPassword, Set.of(new SimpleGrantedAuthority("ADMIN")));
 	                }
 	                

@@ -132,19 +132,19 @@ public class Speaker extends User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof Speaker))
+        }
+        if (!(o instanceof Speaker)) {
             return false;
-        if (!super.equals(o))
+        }
+        if (!super.equals(o)) {
             return false;
+        }
 
         Speaker speaker = (Speaker) o;
 
-        if (twitter != null && !twitter.equals(speaker.twitter))
-            return false;
-
-        return true;
+        return !(twitter != null && !twitter.equals(speaker.twitter));
     }
 
     @Override

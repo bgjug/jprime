@@ -28,7 +28,7 @@ public class ResetPasswordToken extends AbstractEntity {
     @NotBlank
 	private String tokenId;
 	
-	private boolean used = false;
+	private boolean used;
 
 	public ResetPasswordToken() {
 		
@@ -76,26 +76,31 @@ public class ResetPasswordToken extends AbstractEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 		ResetPasswordToken other = (ResetPasswordToken) obj;
 		if (owner == null) {
-			if (other.owner != null)
-				return false;
-		} else if (!owner.equals(other.owner))
-			return false;
+            if (other.owner != null) {
+                return false;
+            }
+		} else if (!owner.equals(other.owner)) {
+            return false;
+        }
 		if (tokenId == null) {
-			if (other.tokenId != null)
-				return false;
-		} else if (!tokenId.equals(other.tokenId))
-			return false;
-		if (used != other.used)
-			return false;
-		return true;
+            if (other.tokenId != null) {
+                return false;
+            }
+		} else if (!tokenId.equals(other.tokenId)) {
+            return false;
+        }
+        return used == other.used;
 	}
 
 	@Override

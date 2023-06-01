@@ -14,7 +14,7 @@ class CommonCfpControllerTest {
 
     private static class TestCfpController extends AbstractCfpController {}
 
-    private TestCfpController testCfpController = new TestCfpController();
+    private final TestCfpController testCfpController = new TestCfpController();
 
     @Test
     void twitterHandleShouldNotStartWithAt() throws Exception {

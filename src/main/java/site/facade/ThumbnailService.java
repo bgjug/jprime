@@ -51,13 +51,13 @@ public class ThumbnailService {
         return rescaled;
     }
 
-    public BufferedImage myPad(BufferedImage image, int Width, int Height) {
-        BufferedImage pad = new BufferedImage(Width, Height, BufferedImage.TYPE_INT_RGB);
+    public BufferedImage myPad(BufferedImage image, int width, int height) {
+        BufferedImage pad = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = pad.createGraphics();
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, pad.getWidth(), pad.getHeight());
-        int outLineI = (Width - image.getWidth()) / 2;
-        int outLineJ = (Height - image.getHeight()) / 2;
+        int outLineI = (width - image.getWidth()) / 2;
+        int outLineJ = (height - image.getHeight()) / 2;
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 pad.setRGB(outLineI + i, outLineJ + j, image.getRGB(i, j));

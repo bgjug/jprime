@@ -44,7 +44,7 @@ public class Submission extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
     @JoinColumn(name = "coSpeaker", nullable = true, referencedColumnName = "id")
-    private Speaker coSpeaker = null;
+    private Speaker coSpeaker;
 
     @Enumerated(EnumType.STRING)
     private Branch branch = Globals.CURRENT_BRANCH;
@@ -138,19 +138,19 @@ public class Submission extends AbstractEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof Submission))
+        }
+        if (!(o instanceof Submission)) {
             return false;
+        }
 
         Submission that = (Submission) o;
 
-        if (speaker != null && !speaker.equals(that.speaker))
+        if (speaker != null && !speaker.equals(that.speaker)) {
             return false;
-        if (title != null && !title.equals(that.title))
-            return false;
-
-        return true;
+        }
+        return !(title != null && !title.equals(that.title));
     }
 
     @Override

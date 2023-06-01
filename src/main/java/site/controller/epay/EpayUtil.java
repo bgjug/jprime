@@ -84,8 +84,7 @@ public class EpayUtil {
      */
     private static String getChecksum(String encoded, boolean real) {
         byte[] encrypted = (real?HMAC:DEMO_HMAC).doFinal(encoded.getBytes());
-        String checksum = bytesToHex(encrypted);
-        return checksum;
+        return bytesToHex(encrypted);
     }
 
     /**

@@ -28,21 +28,22 @@ public class Partner extends AbstractEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof Partner))
+        }
+        if (!(o instanceof Partner)) {
             return false;
+        }
 
         Partner user = (Partner) o;
 
-        if (companyName != null && !companyName.equals(user.companyName))
+        if (companyName != null && !companyName.equals(user.companyName)) {
             return false;
-        if (companyWebsite != null && !companyWebsite.equals(user.companyWebsite))
+        }
+        if (companyWebsite != null && !companyWebsite.equals(user.companyWebsite)) {
             return false;
-        if (description != null && !description.equals(user.description))
-            return false;
-
-        return true;
+        }
+        return !(description != null && !description.equals(user.description));
     }
 
 	@Override
@@ -86,8 +87,9 @@ public class Partner extends AbstractEntity {
 	}
 
 	public Boolean getActive() {
-		if (active == null)
-			return false;
+        if (active == null) {
+            return false;
+        }
 		return active;
 	}
 

@@ -42,17 +42,16 @@ public class Tag extends AbstractEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof Tag))
+        }
+        if (!(o instanceof Tag)) {
             return false;
+        }
 
         Tag tag = (Tag) o;
 
-        if (!name.equals(tag.name))
-            return false;
-
-        return true;
+        return name.equals(tag.name);
     }
 
     @Override

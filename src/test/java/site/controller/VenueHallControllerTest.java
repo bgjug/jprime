@@ -86,7 +86,7 @@ class VenueHallControllerTest {
                 .andExpect(view().name("redirect:/admin/hall/view"));
         List<VenueHall> venueHalls = venueHallRepository.findAll();
         assertThat(venueHalls.size(), is(2));
-        assertThat(venueHalls.stream().filter(hall -> hall.getName().equals("Alpha")).count(), is(
+        assertThat(venueHalls.stream().filter(hall -> "Alpha".equals(hall.getName())).count(), is(
                 1L));
     }
 

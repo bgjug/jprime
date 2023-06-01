@@ -25,7 +25,7 @@ public class Article extends AbstractEntity{
 	
 	private String description;
 
-    private boolean published = false;
+    private boolean published;
 	
 	@NotNull
     @Lob
@@ -104,17 +104,16 @@ public class Article extends AbstractEntity{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof Article))
+        }
+        if (!(o instanceof Article)) {
             return false;
+        }
 
         Article article = (Article) o;
 
-        if (!title.equals(article.title))
-            return false;
-
-        return true;
+        return title.equals(article.title);
     }
 
     @Override
