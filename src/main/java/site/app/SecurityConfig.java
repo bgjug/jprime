@@ -3,6 +3,7 @@ package site.app;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +26,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.util.ObjectUtils;
 
 import site.model.User;
 import site.repository.SpeakerRepository;
@@ -79,7 +79,7 @@ public class SecurityConfig {
 	                User user = userRepository.findUserByEmail(email);
 	                if (user == null) {
                         user = speakerRepository.findByEmail(email);
-                        if (ObjectUtils.isEmpty(user.getPassword())) {
+                        if (StringUtils.isEmpty(user.getPassword())) {
                             user = null;
                         }
                     }

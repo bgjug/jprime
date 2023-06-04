@@ -10,6 +10,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -204,6 +204,6 @@ public class SubmissionController extends AbstractCfpController {
         }
         saveSubmission(submission, speakerImage, coSpeakerImage);
 
-        return REDIRECT + (ObjectUtils.isEmpty(sourcePage) ? "/admin/submission/view" : sourcePage);
+        return REDIRECT + (StringUtils.isEmpty(sourcePage) ? "/admin/submission/view" : sourcePage);
     }
 }

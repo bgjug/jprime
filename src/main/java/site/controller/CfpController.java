@@ -1,5 +1,6 @@
 package site.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
@@ -7,7 +8,6 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -93,7 +93,7 @@ public class CfpController extends AbstractCfpController {
     private String validateEmail(BindingResult bindingResult, Submission submission, Model model, String email, String role) {
         EmailValidator emailValidator = new EmailValidator();
 
-        if (!ObjectUtils.isEmpty(email) && emailValidator.isValid(email, null)) {
+        if (!StringUtils.isEmpty(email) && emailValidator.isValid(email, null)) {
             // Email is valid
             return null;
         }

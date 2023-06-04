@@ -6,11 +6,11 @@ import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.config.Globals;
@@ -51,7 +51,7 @@ public class AbstractCfpController {
         model.addAttribute("sessionTypes", Arrays.stream(SessionType.values()).collect(
                         Collectors.toMap(Function.identity(), SessionType::toString)));
         model.addAttribute("branches", Branch.values());
-        model.addAttribute("coSpeaker_caption", submission.getCoSpeaker() == null || ObjectUtils.isEmpty(
+        model.addAttribute("coSpeaker_caption", submission.getCoSpeaker() == null || StringUtils.isEmpty(
                         submission.getCoSpeaker().getFirstName()) ? "Add co speaker" : "Remove co speaker");
 
         return model;
@@ -69,7 +69,7 @@ public class AbstractCfpController {
     }
 
     protected boolean hasCoSpeaker(Submission submission) {
-        return submission.getCoSpeaker() != null && !ObjectUtils.isEmpty(
+        return submission.getCoSpeaker() != null && !StringUtils.isEmpty(
                         submission.getCoSpeaker().getLastName());
     }
 
