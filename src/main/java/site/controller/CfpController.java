@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +18,7 @@ import site.model.Submission;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 /**
  * @author Ivan St. Ivanov
@@ -106,13 +106,13 @@ public class CfpController extends AbstractCfpController {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("agenda", agendaPublished);
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(Globals.CURRENT_BRANCH.getCfpCloseDate()));
-        DateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
+        LocalDateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
         model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
 
         buildCfpFormModel(model, submission);
 
-        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfterNow()) {
+        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfter(LocalDateTime.now())) {
             return CfpController.CFP_OPEN_JSP;
         }
         return CFP_CLOSED_JSP;

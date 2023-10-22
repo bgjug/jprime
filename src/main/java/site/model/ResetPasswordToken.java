@@ -8,8 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 
 /**
  * @author Zhorzh Raychev
@@ -37,7 +36,7 @@ public class ResetPasswordToken extends AbstractEntity {
 	public ResetPasswordToken(User owner, String tokenId) {
 		this.owner = owner;
 		this.tokenId = tokenId;
-		setCreatedDate(DateTime.now());
+		setCreatedDate(LocalDateTime.now());
 	}
 
 	public User getOwner() {

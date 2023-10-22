@@ -1,35 +1,34 @@
 package site.model;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.joda.time.DateTime;
-
 public enum Branch {
-    YEAR_2015("2015", DateTime.parse("2015-05-27")), YEAR_2016("2016", DateTime.parse("2016-05-28")),
-    YEAR_2017("2017", DateTime.parse("2017-05-30")), YEAR_2018("2018", DateTime.parse("2018-05-29")),
-    YEAR_2019("2019", DateTime.parse("2019-05-28")), YEAR_2020("2020", DateTime.parse("2020-05-27")),
-    YEAR_2022("2022", DateTime.parse("2022-05-25")),
-    YEAR_2023("2023", DateTime.parse("2023-05-30"), DateTime.parse("2022-11-10"),
-        DateTime.parse("2023-02-15T23:59:59"), Arrays.asList(SponsorPackage.GOLD, SponsorPackage.PLATINUM, SponsorPackage.GOLD_LITE), true);
+    YEAR_2015("2015", LocalDateTime.parse("2015-05-27T00:00:00")), YEAR_2016("2016", LocalDateTime.parse("2016-05-28T00:00:00")),
+    YEAR_2017("2017", LocalDateTime.parse("2017-05-30T00:00:00")), YEAR_2018("2018", LocalDateTime.parse("2018-05-29T00:00:00")),
+    YEAR_2019("2019", LocalDateTime.parse("2019-05-28T00:00:00")), YEAR_2020("2020", LocalDateTime.parse("2020-05-27T00:00:00")),
+    YEAR_2022("2022", LocalDateTime.parse("2022-05-25T00:00:00")),
+    YEAR_2023("2023", LocalDateTime.parse("2023-05-30T00:00:00"), LocalDateTime.parse("2022-11-10T00:00:00"),
+        LocalDateTime.parse("2023-02-15T23:59:59"), Arrays.asList(SponsorPackage.GOLD, SponsorPackage.PLATINUM, SponsorPackage.GOLD_LITE), true);
 
     private static final String BRANCH_PREFIX = "YEAR_";
 
     private final String label;
 
-    private final DateTime startDate;
+    private final LocalDateTime startDate;
 
-    private final DateTime cfpOpenDate;
+    private final LocalDateTime cfpOpenDate;
 
-    private final DateTime cfpCloseDate;
+    private final LocalDateTime cfpCloseDate;
 
     private final Set<SponsorPackage> soldOutPackages;
 
     private final boolean soldOut;
 
-    Branch(String label, DateTime startDate) {
+    Branch(String label, LocalDateTime startDate) {
         this.label = label;
         this.startDate = startDate;
         this.cfpOpenDate = startDate.minusMonths(6).minusDays(20);
@@ -38,7 +37,7 @@ public enum Branch {
         soldOut = false;
     }
 
-    Branch(String label, DateTime startDate, DateTime cfpOpenDate, DateTime cfpCloseDate,
+    Branch(String label, LocalDateTime startDate, LocalDateTime cfpOpenDate, LocalDateTime cfpCloseDate,
         Collection<SponsorPackage> soldOutPackages, boolean soldOut) {
         this.label = label;
         this.startDate = startDate;
@@ -48,7 +47,7 @@ public enum Branch {
         this.soldOut=soldOut;
     }
 
-    public DateTime getCfpCloseDate() {
+    public LocalDateTime getCfpCloseDate() {
         return cfpCloseDate;
     }
 
@@ -56,7 +55,7 @@ public enum Branch {
         return Branch.valueOf(BRANCH_PREFIX + year);
     }
 
-    public DateTime getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
@@ -65,7 +64,7 @@ public enum Branch {
         return label;
     }
 
-    public DateTime getCfpOpenDate() {
+    public LocalDateTime getCfpOpenDate() {
         return cfpOpenDate;
     }
 

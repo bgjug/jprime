@@ -3,11 +3,11 @@ package site.facade;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.token.Sha512DigestUtils;
@@ -62,11 +62,12 @@ public class ResetPasswordService {
 			return null;
 		}
 
-		DateTime createdDate = resetPasswordToken.getCreatedDate();
-		DateTime deadline = createdDate.plusHours(tokenDurationInHours);
-		if (deadline.isBeforeNow()) {
-			logger.debug("ResetPassworToken for user: " + owner + " with Id=" + tokenId + ", ShaHex: " + tokenShaHex
-					+ "  is expired.");
+		LocalDateTime createdDate = resetPasswordToken.getCreatedDate();
+		LocalDateTime deadline = createdDate.plusHours(tokenDurationInHours);
+		if (deadline.isBefore(LocalDateTime.now())) {
+			logger.debug(()->
+                "ResetPasswordToken for user: %s with Id=%s, ShaHex: %s  is expired.".formatted(owner, tokenId,
+                    tokenShaHex));
 			return null;
 		}
 		return owner;

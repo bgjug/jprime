@@ -1,6 +1,5 @@
 package site.controller;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,6 +15,8 @@ import site.model.Submission;
 import javax.transaction.Transactional;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,8 +53,8 @@ public class AdminSessionController {
 
     @PostMapping("/add")
     public String addSession(@RequestParam String submission,
-        @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") DateTime startTime,
-        @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") DateTime endTime,
+        @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") LocalDateTime startTime,
+        @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm") LocalDateTime endTime,
         @RequestParam String title,
         @RequestParam String hall,
         @RequestParam String id) {

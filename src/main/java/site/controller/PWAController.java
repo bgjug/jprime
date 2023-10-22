@@ -1,6 +1,5 @@
 package site.controller;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,6 +10,7 @@ import site.model.Session;
 import site.model.Submission;
 import site.repository.SessionRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,9 +37,9 @@ public class PWAController {
 
         public String talkDescription;
 
-        public DateTime startTime;
+        public LocalDateTime startTime;
 
-        public DateTime endTime;
+        public LocalDateTime endTime;
 
         SessionDTO(Session session, String hallName) {
             this.hallName = hallName;

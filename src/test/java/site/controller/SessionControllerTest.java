@@ -1,6 +1,5 @@
 package site.controller;
 
-import org.joda.time.DateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,8 @@ import site.repository.SessionRepository;
 import site.repository.SubmissionRepository;
 import site.repository.VenueHallRepository;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -76,7 +77,7 @@ class SessionControllerTest {
         bootSubmission.setStatus(SubmissionStatus.ACCEPTED);
         this.betaHall = venueHallRepository.save(new VenueHall("Beta", "600 seats"));
         venueHallRepository.save(new VenueHall("Alpha", "400 seats"));
-        this.bootSession = sessionRepository.save(new Session(bootSubmission, DateTime.now(), DateTime.now(), betaHall));
+        this.bootSession = sessionRepository.save(new Session(bootSubmission, LocalDateTime.now(), LocalDateTime.now(), betaHall));
     }
 
     @Test
@@ -121,8 +122,8 @@ class SessionControllerTest {
 
         Session session = sessions.get(1);
         assertThat(session.getSubmission().getTitle(), is(forgeSubmission.getTitle()));
-        assertThat(session.getStartTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
-        assertThat(session.getEndTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getStartTime(), is(LocalDateTime.of(2017, Month.MAY, 26, 10, 15, 0, 0)));
+        assertThat(session.getEndTime(), is(LocalDateTime.of(2017, Month.MAY, 26, 11, 15, 0, 0)));
         assertThat(session.getHall().getName(), is(betaHall.getName()));
         assertEquals(session.getTitle(), session.getSubmission().getTitle());
     }
@@ -144,8 +145,8 @@ class SessionControllerTest {
         Session session = sessions.get(1);
         assertNull(session.getSubmission());
         assertThat(session.getTitle(), is("Coffee break"));
-        assertThat(session.getStartTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
-        assertThat(session.getEndTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(26).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getStartTime(), is(LocalDateTime.of(2017, Month.MAY, 26, 10, 15, 0, 0)));
+        assertThat(session.getEndTime(), is(LocalDateTime.of(2017, Month.MAY, 26, 11, 15, 0, 0)));
         assertNull(session.getHall());
     }
 
@@ -166,8 +167,8 @@ class SessionControllerTest {
 
         Session session = sessions.get(0);
         assertThat(session.getSubmission().getTitle(), is(bootSubmission.getTitle()));
-        assertThat(session.getStartTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
-        assertThat(session.getEndTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getStartTime(), is(LocalDateTime.of(2017, Month.MAY, 27, 10, 15, 0, 0)));
+        assertThat(session.getEndTime(), is(LocalDateTime.of(2017, Month.MAY, 27, 11, 15, 0, 0)));
         assertThat(session.getHall().getName(), is(betaHall.getName()));
     }
 
@@ -187,8 +188,8 @@ class SessionControllerTest {
 
         Session session = sessions.get(0);
         assertNull(session.getSubmission());
-        assertThat(session.getStartTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(10).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
-        assertThat(session.getEndTime(), is(new DateTime().withYear(2017).withMonthOfYear(5).withDayOfMonth(27).withHourOfDay(11).withMinuteOfHour(15).withSecondOfMinute(0).withMillisOfSecond(0)));
+        assertThat(session.getStartTime(), is(LocalDateTime.of(2017, Month.MAY, 27, 10, 15, 0, 0)));
+        assertThat(session.getEndTime(), is(LocalDateTime.of(2017, Month.MAY, 27, 11, 15, 0, 0)));
         assertNull(session.getHall());
         assertThat(session.getTitle(), is("Opening"));
     }

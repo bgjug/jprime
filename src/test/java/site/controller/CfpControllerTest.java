@@ -19,6 +19,7 @@ import site.model.Submission;
 import site.model.SubmissionStatus;
 import site.repository.SubmissionRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -60,7 +61,7 @@ class CfpControllerTest {
     @Test
     void getShouldReturnEmptySubscription() throws Exception {
         String cfpPage = CfpController.CFP_CLOSED_JSP;
-        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfterNow()) {
+        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfter(LocalDateTime.now())) {
             cfpPage = CfpController.CFP_OPEN_JSP;
         }
 

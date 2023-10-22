@@ -1,6 +1,5 @@
 package site.controller;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.util.Pair;
@@ -15,6 +14,7 @@ import site.model.Partner;
 import site.model.Sponsor;
 import site.model.SponsorPackage;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -69,8 +69,8 @@ public class IndexController {
         List<List<Partner>> eventPartnerChunks = getPartnerChunks(eventPartners);
         model.addAttribute("eventPartnerChunks", eventPartnerChunks);
 
-        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfterNow() && Globals.CURRENT_BRANCH.getCfpOpenDate()
-            .isBeforeNow()) {
+        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfter(LocalDateTime.now()) && Globals.CURRENT_BRANCH.getCfpOpenDate()
+            .isBefore(LocalDateTime.now())) {
             model.addAttribute("early_sold_out", "");
             model.addAttribute("regular_sold_out", SOLD_OUT_STYLE);
             model.addAttribute("students_sold_out", "");
@@ -95,7 +95,7 @@ public class IndexController {
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(Globals.CURRENT_BRANCH.getCfpCloseDate()));
 
         // 30th and 31st of May 2023
-        DateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
+        LocalDateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
         model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
         model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());

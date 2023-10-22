@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +17,6 @@ import javax.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -116,7 +116,7 @@ public class TicketsController {
             handlePersonalRegistrant(registrant);
         }
 
-        registrant.setCreatedDate(DateTime.now());
+        registrant.setCreatedDate(LocalDateTime.now());
         registrant.setPaymentType(Registrant.PaymentType.BANK_TRANSFER);
         Registrant savedRegistrant = registrantFacade.save(registrant);
 
