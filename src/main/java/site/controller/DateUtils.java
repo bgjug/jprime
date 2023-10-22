@@ -11,19 +11,12 @@ public class DateUtils {
         int day = dateTime.getDayOfMonth();
         String suffix = "th";
         if (day < 11 || day > 13) {
-            switch (day % 10) {
-                case 1:
-                    suffix = "st";
-                    break;
-                case 2:
-                    suffix = "nd";
-                    break;
-                case 3:
-                    suffix = "rd";
-                    break;
-                default:
-                    suffix = "th";
-            }
+            suffix = switch (day % 10) {
+                case 1 -> "st";
+                case 2 -> "nd";
+                case 3 -> "rd";
+                default -> "th";
+            };
         }
 
         String format = "%1$te%2$s";

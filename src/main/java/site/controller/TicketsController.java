@@ -10,7 +10,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -108,7 +107,7 @@ public class TicketsController {
 		}
 
         //check empty users, server side validation
-        List<Visitor> toBeRemoved = registrant.getVisitors().stream().filter(v -> isEmpty(v.getEmail()) || isEmpty(v.getName())).collect(Collectors.toList());
+        List<Visitor> toBeRemoved = registrant.getVisitors().stream().filter(v -> isEmpty(v.getEmail()) || isEmpty(v.getName())).toList();
         registrant.getVisitors().removeAll(toBeRemoved);
         registrant.getVisitors().forEach(visitor -> visitor.setStatus(VisitorStatus.REQUESTING));
 
@@ -150,10 +149,12 @@ public class TicketsController {
 
     private void sendPDF(Registrant registrant, String pdfFilename, byte[] pdfContent) {
         try {
-            mailFacade.sendEmail(registrant.getEmail(), "jPrime.io invoice",
-                    "Thank you for registering at jPrime! Your proforma invoice is attached as part of this mail.\n\n" +
-                    "Once we confirm your payment, we'll send you the original invoice.\n\n" +
-                    "The attendees that you registered will receive the tickets a few days before the event on their emails.",
+            mailFacade.sendEmail(registrant.getEmail(), "jPrime.io invoice", """
+                    Thank you for registering at jPrime! Your proforma invoice is attached as part of this mail.
+
+                    Once we confirm your payment, we'll send you the original invoice.
+
+                    The attendees that you registered will receive the tickets a few days before the event on their emails.""",
                     pdfContent, pdfFilename);
             String registrations = registrant.getVisitors().toString();
             mailFacade.sendEmail("conference@jprime.io", "jPrime.io invoice",

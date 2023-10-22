@@ -20,9 +20,11 @@ import java.util.stream.Collectors;
 @Controller
 public class PWAController {
 
-    @Autowired
-    @Qualifier(SessionRepository.NAME)
-    private SessionRepository sessionRepository;
+    private final SessionRepository sessionRepository;
+
+    public PWAController(@Qualifier(SessionRepository.NAME) SessionRepository sessionRepository) {
+        this.sessionRepository = sessionRepository;
+    }
 
     private static class SessionDTO {
         public Long id;
@@ -65,8 +67,8 @@ public class PWAController {
     }
 
     @ResponseBody
-        @GetMapping("/pwa/findSessionsByHall")
-    public List<SessionDTO> getSessionByHall(String hallName) {
+    @GetMapping("/pwa/findSessionsByHall")
+    public List<?> getSessionByHall(String hallName) {
         List<Session> sessions = sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH.name());
         return sessions.stream().map(session -> new SessionDTO(session, hallName)).collect(Collectors.toList());
     }

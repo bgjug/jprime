@@ -22,7 +22,7 @@ import site.model.Registrant;
  */
 public class InvoiceData {
 
-    public static final String DEFAULT_DESCRIPTION_BG = "jPrime "+ Globals.CURRENT_BRANCH.toString() + " билет за конференция";
+    public static final String DEFAULT_DESCRIPTION_BG = "jPrime "+ Globals.CURRENT_BRANCH + " билет за конференция";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);

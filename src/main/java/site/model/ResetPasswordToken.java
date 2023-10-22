@@ -17,8 +17,6 @@ import java.time.LocalDateTime;
 @Table(name = "ResetPasswordToken")
 public class ResetPasswordToken extends AbstractEntity {
 
-	private static final long serialVersionUID = -3626660176280247512L;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "id")
 	private User owner;

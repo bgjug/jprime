@@ -2,8 +2,6 @@ package site.model;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +11,6 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class AbstractEntity {
-	/**
-	 * Default serial version uid.
-	 */
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,12 +67,6 @@ public abstract class AbstractEntity {
 	public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
 	}
-
-	public boolean isNew() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 
 }
 

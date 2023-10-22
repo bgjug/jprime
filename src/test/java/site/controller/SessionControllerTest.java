@@ -69,7 +69,7 @@ class SessionControllerTest {
     private Session bootSession;
 
     @BeforeEach
-    void setup() throws Exception {
+    void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         this.forgeSubmission = submissionRepository.save(new Submission("Forge with me", "Forge is the best", SessionLevel.BEGINNER, SessionType.CONFERENCE_SESSION, new Speaker("Ivan St.", "Ivanov", "ivan.st.ivanov@example.com", "The Forge Guy", "@forge", false, true)));
         forgeSubmission.setStatus(SubmissionStatus.ACCEPTED);

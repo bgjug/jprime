@@ -91,7 +91,7 @@ public class AdminSessionController {
         List<Submission> acceptedSubmissions =
             adminFacade.findAllAcceptedSubmissionsForBranch(Globals.CURRENT_BRANCH);
         List<Submission> scheduledSubmissions =
-            adminFacade.findAllSessions().stream().map(Session::getSubmission).collect(Collectors.toList());
+            adminFacade.findAllSessions().stream().map(Session::getSubmission).toList();
         acceptedSubmissions = acceptedSubmissions.stream()
                                                  .filter(
                                                      submission -> !scheduledSubmissions.contains(submission))

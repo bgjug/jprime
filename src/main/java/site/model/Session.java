@@ -1,7 +1,5 @@
 package site.model;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
@@ -9,10 +7,6 @@ import java.util.Objects;
 
 @Entity
 public class Session extends AbstractEntity {
-	/**
-     * Default serial version uid.
-     */
-    private static final long serialVersionUID = 1L;
 
 	private String title;
 
