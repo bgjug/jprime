@@ -19,6 +19,7 @@ import site.model.Submission;
 import site.model.SubmissionStatus;
 import site.repository.SubmissionRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -62,7 +63,8 @@ class CfpControllerTest {
     @Test
     void getShouldReturnEmptySubscription() throws Exception {
         String cfpPage = CfpController.CFP_CLOSED_JSP;
-        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfter(LocalDateTime.now())) {
+        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfter(LocalDateTime.now()) && Globals.CURRENT_BRANCH.getCfpOpenDate().isBefore(
+            LocalDateTime.now())) {
             cfpPage = CfpController.CFP_OPEN_JSP;
         }
 
