@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import site.config.Globals;
+import site.model.Branch;
 import site.model.Submission;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,9 @@ public class CfpController extends AbstractCfpController {
 
     @Value("${agenda.published:false}")
     private boolean agendaPublished;
+
+    @Value("${agenda.year:2020}")
+    private int agendaYear;
 
     @GetMapping("/cfp")
     public String submissionForm(Model model) {
@@ -103,16 +107,18 @@ public class CfpController extends AbstractCfpController {
     }
 
     private String goToCFP(@Valid Submission submission, Model model) {
+        Branch currentBranch = Globals.CURRENT_BRANCH;
+
         model.addAttribute("tags", userFacade.findAllTags());
-        model.addAttribute("agenda", agendaPublished);
-        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(Globals.CURRENT_BRANCH.getCfpCloseDate()));
-        LocalDateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
+        model.addAttribute("agenda", agendaPublished && agendaYear == currentBranch.getYear());
+        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(currentBranch.getCfpCloseDate()));
+        LocalDateTime startDate = currentBranch.getStartDate();
         model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
 
         buildCfpFormModel(model, submission);
 
-        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfter(LocalDateTime.now())) {
+        if (currentBranch.getCfpCloseDate().isAfter(LocalDateTime.now()) && currentBranch.getCfpOpenDate().isBefore(LocalDateTime.now())) {
             return CfpController.CFP_OPEN_JSP;
         }
         return CFP_CLOSED_JSP;
