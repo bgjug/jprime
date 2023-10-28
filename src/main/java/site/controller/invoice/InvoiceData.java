@@ -1,16 +1,17 @@
 package site.controller.invoice;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.MapUtils;
-import org.joda.time.DateTime;
-import org.joda.time.Days;
 import site.config.Globals;
 import site.model.Branch;
 import site.model.Registrant;
@@ -21,7 +22,7 @@ import site.model.Registrant;
  */
 public class InvoiceData {
 
-    public static final String DEFAULT_DESCRIPTION_BG = "jPrime "+ Globals.CURRENT_BRANCH.toString() + " билет за конференция";
+    public static final String DEFAULT_DESCRIPTION_BG = "jPrime "+ Globals.CURRENT_BRANCH + " билет за конференция";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);
@@ -175,11 +176,11 @@ public class InvoiceData {
         } else {
             BigDecimal ticketPrice = ticketPrices.getPrice(branch);
 
-            DateTime registrationDate =
+            LocalDateTime registrationDate =
                 registrant.getCreatedDate() != null ? registrant.getCreatedDate() : branch.getCfpOpenDate();
 
-            if (registrationDate.isBefore(branch.getCfpCloseDate()) && Days.daysBetween(
-                registrationDate, DateTime.now()).getDays() <= 3) {
+            if (registrationDate.isBefore(branch.getCfpCloseDate()) && Duration.between(
+                registrationDate, LocalDateTime.now()).get(ChronoUnit.DAYS) <= 3) {
                 ticketPrice = ticketPrices.getPrice(branch, registrationDate);
             }
             result.addInvoiceDetail(new InvoiceDetail(ticketPrice, tickets));
@@ -240,11 +241,11 @@ public class InvoiceData {
         }
 
         public BigDecimal getPrice(Branch branch) {
-            return getPrice(branch, DateTime.now());
+            return getPrice(branch, LocalDateTime.now());
         }
 
-        public BigDecimal getPrice(Branch branch, DateTime atDateTime) {
-            atDateTime = atDateTime != null ? atDateTime : DateTime.now();
+        public BigDecimal getPrice(Branch branch, LocalDateTime atDateTime) {
+            atDateTime = atDateTime != null ? atDateTime : LocalDateTime.now();
             return branch.getCfpCloseDate().isAfter(atDateTime) ? earlyBirdPrice : regularPrice;
         }
 

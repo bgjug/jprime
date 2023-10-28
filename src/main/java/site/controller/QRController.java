@@ -1,9 +1,9 @@
 package site.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,18 +80,18 @@ public class QRController {
     }
 
     private boolean isEmailFilled(Visitor visitor) {
-        return visitor.getEmail() != null && !ObjectUtils.isEmpty(visitor.getEmail());
+        return visitor.getEmail() != null && !StringUtils.isEmpty(visitor.getEmail());
     }
 
     private boolean isIdFilled(Visitor visitor){
-        return visitor.getId() != null && !ObjectUtils.isEmpty(visitor.getId());
+        return visitor.getId() != null;
     }
 
     private boolean isCompanyFilled(Visitor visitor){
-        return visitor.getCompany() != null && !ObjectUtils.isEmpty(visitor.getCompany());
+        return visitor.getCompany() != null && !StringUtils.isEmpty(visitor.getCompany());
     }
 
     private boolean isNameFilled(Visitor visitor){
-        return visitor.getName() != null && !ObjectUtils.isEmpty(visitor.getName());
+        return visitor.getName() != null && !StringUtils.isEmpty(visitor.getName());
     }
 }

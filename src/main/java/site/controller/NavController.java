@@ -1,8 +1,9 @@
 package site.controller;
 
+import java.time.LocalDateTime;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -111,7 +112,7 @@ public class NavController {
     @GetMapping("/venue")
     public String showVenue(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
-        DateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
+        LocalDateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
         model.addAttribute("conference_dates", String.format("%d-%s", startDate.getDayOfMonth(),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
 

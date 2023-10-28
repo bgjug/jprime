@@ -1,27 +1,20 @@
 package site.model;
 
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-
 import javax.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 public class Session extends AbstractEntity {
-	/**
-     * Default serial version uid.
-     */
-    private static final long serialVersionUID = 1L;
 
 	private String title;
 
 	@Column(name = "start_time")
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	private DateTime startTime;
+	private LocalDateTime startTime;
 
 	@Column(name = "end_time")
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	private DateTime endTime;
+	private LocalDateTime endTime;
 
 	public void setTitle(String title) {
 		this.title = title;
@@ -38,7 +31,7 @@ public class Session extends AbstractEntity {
 	public Session() {
 	}
 
-	public Session(Submission submission, DateTime startTime, DateTime endTime, VenueHall hall) {
+	public Session(Submission submission, LocalDateTime startTime, LocalDateTime endTime, VenueHall hall) {
 		this.submission = submission;
 		setStartTime(startTime);
 		setEndTime(endTime);
@@ -69,19 +62,19 @@ public class Session extends AbstractEntity {
         return title;
     }
 
-    public DateTime getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(DateTime startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public DateTime getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(DateTime endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 

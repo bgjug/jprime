@@ -23,3 +23,4 @@ target/
 .forge_settings
 .DS_Store
 /.metadata/
+/.jpb/

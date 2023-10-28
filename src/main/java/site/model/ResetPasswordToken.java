@@ -8,8 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 
 /**
  * @author Zhorzh Raychev
@@ -18,8 +17,6 @@ import org.joda.time.DateTime;
 @Table(name = "ResetPasswordToken")
 public class ResetPasswordToken extends AbstractEntity {
 
-	private static final long serialVersionUID = -3626660176280247512L;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "id")
 	private User owner;
@@ -37,7 +34,7 @@ public class ResetPasswordToken extends AbstractEntity {
 	public ResetPasswordToken(User owner, String tokenId) {
 		this.owner = owner;
 		this.tokenId = tokenId;
-		setCreatedDate(DateTime.now());
+		setCreatedDate(LocalDateTime.now());
 	}
 
 	public User getOwner() {

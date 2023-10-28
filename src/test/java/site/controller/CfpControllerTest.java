@@ -19,6 +19,7 @@ import site.model.Submission;
 import site.model.SubmissionStatus;
 import site.repository.SubmissionRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -27,6 +28,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -50,7 +52,7 @@ class CfpControllerTest {
     private SubmissionRepository submissionRepository;
 
     @BeforeEach
-    void setup() throws Exception {
+    void setup() {
         final CfpController bean = wac.getBean(CfpController.class);
         this.mailer = new MailServiceMock();
         bean.setMailFacade(mailer);
@@ -60,7 +62,7 @@ class CfpControllerTest {
     @Test
     void getShouldReturnEmptySubscription() throws Exception {
         String cfpPage = CfpController.CFP_CLOSED_JSP;
-        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfterNow()) {
+        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfter(LocalDateTime.now())) {
             cfpPage = CfpController.CFP_OPEN_JSP;
         }
 
@@ -72,7 +74,7 @@ class CfpControllerTest {
     @Test
     @Disabled("ignored since adding captcha, has to be updated")
     void shouldSubmitSessionWithSingleSpeaker() throws Exception {
-        mockMvc.perform(fileUpload("/cfp")
+        mockMvc.perform(multipart("/cfp")
                 .file(new MockMultipartFile("speakerImage", new byte[] {}))
                 .file(new MockMultipartFile("coSpeakerImage", new byte[] {}))
                 .param("title", "JBoss Forge")
@@ -102,7 +104,7 @@ class CfpControllerTest {
     @Test
     @Disabled("ignored since adding captcha, has to be updated")
     void shouldSubmitSessionWithCoSpeaker() throws Exception {
-        mockMvc.perform(fileUpload("/cfp")
+        mockMvc.perform(multipart("/cfp")
                 .file(new MockMultipartFile("speakerImage", new byte[] {}))
                 .file(new MockMultipartFile("coSpeakerImage", new byte[] {}))
                 .param("title", "Boot Forge Addon")

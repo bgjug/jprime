@@ -1,7 +1,6 @@
 package site.model;
 
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -12,10 +11,6 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class AbstractEntity {
-	/**
-	 * Default serial version uid.
-	 */
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,15 +20,13 @@ public abstract class AbstractEntity {
 	private String createdBy;
 
 	@Column(name = "created_date")
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	private DateTime createdDate;
+	private LocalDateTime createdDate;
 
 	@Column(name = "last_modified_by")
 	private String lastModifiedBy;
 
 	@Column(name = "last_modified_date")
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	private DateTime lastModifiedDate;
+	private LocalDateTime lastModifiedDate;
 
 	public Long getId() {
 		return id;
@@ -51,11 +44,11 @@ public abstract class AbstractEntity {
 		this.createdBy = createdBy;
 	}
 
-	public DateTime getCreatedDate() {
+	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 
@@ -67,19 +60,13 @@ public abstract class AbstractEntity {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
-	public DateTime getLastModifiedDate() {
+	public LocalDateTime getLastModifiedDate() {
 		return lastModifiedDate;
 	}
 
-	public void setLastModifiedDate(DateTime lastModifiedDate) {
+	public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
 	}
-
-	public boolean isNew() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 
 }
 

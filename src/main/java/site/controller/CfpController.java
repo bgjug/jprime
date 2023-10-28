@@ -1,13 +1,12 @@
 package site.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +18,7 @@ import site.model.Submission;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 /**
  * @author Ivan St. Ivanov
@@ -93,7 +93,7 @@ public class CfpController extends AbstractCfpController {
     private String validateEmail(BindingResult bindingResult, Submission submission, Model model, String email, String role) {
         EmailValidator emailValidator = new EmailValidator();
 
-        if (!ObjectUtils.isEmpty(email) && emailValidator.isValid(email, null)) {
+        if (!StringUtils.isEmpty(email) && emailValidator.isValid(email, null)) {
             // Email is valid
             return null;
         }
@@ -106,13 +106,13 @@ public class CfpController extends AbstractCfpController {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("agenda", agendaPublished);
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(Globals.CURRENT_BRANCH.getCfpCloseDate()));
-        DateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
+        LocalDateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
         model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
 
         buildCfpFormModel(model, submission);
 
-        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfterNow()) {
+        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfter(LocalDateTime.now())) {
             return CfpController.CFP_OPEN_JSP;
         }
         return CFP_CLOSED_JSP;

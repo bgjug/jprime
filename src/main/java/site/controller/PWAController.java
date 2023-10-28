@@ -1,6 +1,5 @@
 package site.controller;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,6 +10,7 @@ import site.model.Session;
 import site.model.Submission;
 import site.repository.SessionRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +20,11 @@ import java.util.stream.Collectors;
 @Controller
 public class PWAController {
 
-    @Autowired
-    @Qualifier(SessionRepository.NAME)
-    private SessionRepository sessionRepository;
+    private final SessionRepository sessionRepository;
+
+    public PWAController(@Qualifier(SessionRepository.NAME) SessionRepository sessionRepository) {
+        this.sessionRepository = sessionRepository;
+    }
 
     private static class SessionDTO {
         public Long id;
@@ -37,9 +39,9 @@ public class PWAController {
 
         public String talkDescription;
 
-        public DateTime startTime;
+        public LocalDateTime startTime;
 
-        public DateTime endTime;
+        public LocalDateTime endTime;
 
         SessionDTO(Session session, String hallName) {
             this.hallName = hallName;
@@ -65,8 +67,8 @@ public class PWAController {
     }
 
     @ResponseBody
-        @GetMapping("/pwa/findSessionsByHall")
-    public List<SessionDTO> getSessionByHall(String hallName) {
+    @GetMapping("/pwa/findSessionsByHall")
+    public List<?> getSessionByHall(String hallName) {
         List<Session> sessions = sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH.name());
         return sessions.stream().map(session -> new SessionDTO(session, hallName)).collect(Collectors.toList());
     }
