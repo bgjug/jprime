@@ -64,7 +64,7 @@
                                 <div class="member-name"><b>Bulgaria</b><br/><br/>
 
                                     <b>County entrance</b>: EU citizens do not require visa. Free entrance for Schengen visa holders. For other countries check <a href="https://visaguide.world/europe/bulgaria-visa/">here</a><br/>
-                                    <b>Local curency</b>: Bulgarian Lev. Fixed rate 1,95583 Lev/Euro<br/>
+                                    <b>Local currency</b>: Bulgarian Lev. Fixed rate 1,95583 Lev/Euro<br/>
                                     <br/>
                                     More info: <a href="https://en.wikipedia.org/wiki/Bulgaria">in Wikipedia</a>
                                 </div>
@@ -91,9 +91,11 @@
 
                                 <img alt="" src="/images/hotel.png"/><br/><br/>
 
-                                <div class="member-name"><b>Accomodation</b><br/><br/>
-
-                                    For the conference guests we recommend <a href="http://www.hotel-europe-bg.com/en/">Best Western Hotel Europe</a> which is centrally located. <br/>
+                                <div class="member-name"><b>Accommodation</b><br/><br/>
+                                    For the conference guests,
+                                    we recommend <a href="https://hotelvegasofia.bg/">Vega Hotel Sofia</a>
+                                    which is located around a 20 -
+                                    minute walk from the Venue. <br/>
                                     <br/>
                                     <br/>
                                     For more information please contact <a href="mailto:ivan@jprime.io">Ivan</a>.
