@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    static class JodaDateTimeConverter implements Converter<LocalDateTime, String> {
+    static class LocalDateTimeConverter implements Converter<LocalDateTime, String> {
 
         @Override
         public String convert(LocalDateTime dateTime) {
@@ -21,6 +21,6 @@ public class WebConfig implements WebMvcConfigurer {
  
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new JodaDateTimeConverter());
+        registry.addConverter(new LocalDateTimeConverter());
     }
 }

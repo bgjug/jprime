@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
-<%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 
 <!doctype html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -41,7 +40,7 @@
                     <h2>No talk information available</h2>
                 </c:when>
                 <c:otherwise>
-                    <h2>${talk.submission.title} (<joda:format pattern="HH:mm" value="${talk.startTime}" /> - <joda:format pattern="HH:mm" value="${talk.endTime}" /> on <joda:format locale="en" pattern="EEEE" value="${talk.endTime}" />)</h2>
+                    <h2>${talk.submission.title} (<fmt:formatDate pattern="HH:mm" value="${talk.startDateTime}" /> - <fmt:formatDate pattern="HH:mm" value="${talk.endDateTime}" /> on <fmt:formatDate pattern="EEEE" value="${talk.endDateTime}" />)</h2>
                 </c:otherwise>
             </c:choose>
         </div>

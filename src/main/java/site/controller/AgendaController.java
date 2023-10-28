@@ -13,6 +13,7 @@ import site.config.Globals;
 import site.facade.UserService;
 import site.model.Session;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -58,8 +59,8 @@ public class AgendaController {
 	   model.addAttribute("workshops", workshops);
 
 		LocalDateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
-		model.addAttribute("firstDayDate", startDate);
-		model.addAttribute("secondDayDate", startDate.plusDays(1));
+		model.addAttribute("firstDayDate", DateUtils.fromLocalDateTime(startDate));
+		model.addAttribute("secondDayDate", DateUtils.fromLocalDateTime(startDate.plusDays(1)));
 
 		model.addAttribute("agenda", agenda);
 
