@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import site.config.Globals;
 import site.controller.invoice.InvoiceData;
 import site.facade.UserService;
+import site.model.Branch;
 import site.model.Partner;
 import site.model.Sponsor;
 import site.model.SponsorPackage;
@@ -69,36 +70,37 @@ public class IndexController {
         List<List<Partner>> eventPartnerChunks = getPartnerChunks(eventPartners);
         model.addAttribute("eventPartnerChunks", eventPartnerChunks);
 
-        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfter(LocalDateTime.now()) && Globals.CURRENT_BRANCH.getCfpOpenDate()
+        Branch currentBranch = Globals.CURRENT_BRANCH;
+        if (currentBranch.getCfpCloseDate().isAfter(LocalDateTime.now()) && currentBranch.getCfpOpenDate().minusDays(30)
             .isBefore(LocalDateTime.now())) {
             model.addAttribute("early_sold_out", "");
             model.addAttribute("regular_sold_out", SOLD_OUT_STYLE);
             model.addAttribute("students_sold_out", "");
         } else {
             model.addAttribute("early_sold_out", SOLD_OUT_STYLE);
-            model.addAttribute("regular_sold_out", Globals.CURRENT_BRANCH.isSoldOut() ? SOLD_OUT_STYLE : "");
-            model.addAttribute("students_sold_out", Globals.CURRENT_BRANCH.isSoldOut() ? SOLD_OUT_STYLE : "");
+            model.addAttribute("regular_sold_out", currentBranch.isSoldOut() ? SOLD_OUT_STYLE : "");
+            model.addAttribute("students_sold_out", currentBranch.isSoldOut() ? SOLD_OUT_STYLE : "");
         }
 
         Map<String, String> soldOutPackages = Arrays.stream(SponsorPackage.values())
-            .map(sp -> Pair.of(sp, Globals.CURRENT_BRANCH.isSoldOut(sp) ? SOLD_OUT_STYLE : ""))
+            .map(sp -> Pair.of(sp, currentBranch.isSoldOut(sp) ? SOLD_OUT_STYLE : ""))
             .collect(Collectors.toMap(p -> p.getFirst().name(), Pair::getSecond));
 
         model.addAttribute("sold_out_sponsor_packages", soldOutPackages);
 
-        InvoiceData.TicketPrices prices = InvoiceData.getPrices(Globals.CURRENT_BRANCH);
+        InvoiceData.TicketPrices prices = InvoiceData.getPrices(currentBranch);
 
         model.addAttribute("early_bird_ticket_price", String.format("%.2f", prices.getEarlyBirdPrice()));
         model.addAttribute("regular_ticket_price", String.format("%.2f",prices.getRegularPrice()));
         model.addAttribute("student_ticket_price", String.format("%.2f",prices.getStudentPrice()));
 
-        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(Globals.CURRENT_BRANCH.getCfpCloseDate()));
+        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(currentBranch.getCfpCloseDate()));
 
         // 30th and 31st of May 2023
-        LocalDateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
+        LocalDateTime startDate = currentBranch.getStartDate();
         model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
-        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+        model.addAttribute("jprime_year", currentBranch.getStartDate().getYear());
 
         return PAGE_INDEX;
     }
