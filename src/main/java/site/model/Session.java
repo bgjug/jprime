@@ -3,7 +3,10 @@ package site.model;
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
+
+import site.controller.DateUtils;
 
 @Entity
 public class Session extends AbstractEntity {
@@ -66,6 +69,10 @@ public class Session extends AbstractEntity {
         return startTime;
     }
 
+    public Date getStartDateTime() {
+        return DateUtils.fromLocalDateTime(startTime);
+    }
+
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
@@ -74,6 +81,9 @@ public class Session extends AbstractEntity {
         return endTime;
     }
 
+    public Date getEndDateTime() {
+        return DateUtils.fromLocalDateTime(endTime);
+    }
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }

@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
-<%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 <%@ page import="site.model.SessionType" %>
 
 <!doctype html>
@@ -50,7 +49,7 @@
                 <!-- Agenda Content Start -->
                 <h2>${talk.submission.title}</h2>
                 <c:if test="${not agenda}"><p>The agenda is not yet available </p></c:if>
-                <c:if test="${agenda}"><p>The agenda for jPrime <joda:format pattern="YYYY" value="${firstDayDate}" /> is now available!</p>
+                <c:if test="${agenda}"><p>The agenda for jPrime <fmt:formatDate pattern="YYYY" value="${firstDayDate}" /> is now available!</p>
                     <div class="entry-content">
                         <style>
                             table{
@@ -123,11 +122,11 @@
 
                         <ul class="list-group list-group-horizontal" style="flex-direction:row">
                             <li class="list-group-item">
-                                <a href="javascript:return false;" onclick="select('link-1','agenda-1')" id="link-1"><joda:format locale="en" pattern="EEEE (dd/MM/YYYY)" value="${firstDayDate}" /></a>
+                                <a href="javascript:return false;" onclick="select('link-1','agenda-1')" id="link-1"><fmt:formatDate pattern="EEEE (dd/MM/YYYY)" value="${firstDayDate}" /></a>
 
                             </li>
                             <li class="list-group-item">
-                                <a href="javascript:return false;"  onclick="select('link-2','agenda-2')" id="link-2"><joda:format locale="en" pattern="EEEE (dd/MM/YYYY)" value="${secondDayDate}"/> </a>
+                                <a href="javascript:return false;"  onclick="select('link-2','agenda-2')" id="link-2"><fmt:formatDate pattern="EEEE (dd/MM/YYYY)" value="${secondDayDate}"/> </a>
                             </li>
                         </ul>
 
@@ -145,21 +144,21 @@
                             <tbody>
 
                             <c:set var="firstDay">
-                                <joda:format pattern="D" value="${alpha[0].startTime}" />
+                                <fmt:formatDate pattern="D" value="${alpha[0].startDateTime}" />
                             </c:set>
 
                             <c:set var="workshopsCounter" value="0"/>
                             <c:forEach var="talk" items="${alpha}" varStatus="i">
                                 <c:set var="talkDay">
-                                    <joda:format pattern="D" value="${talk.startTime}" />
+                                    <fmt:formatDate pattern="D" value="${talk.startDateTime}" />
                                 </c:set>
                                 <%-- e.g. first day talk --%>
                                 <c:if test="${talkDay eq firstDay}">
                                     <tr>
                                         <td>
-                                            <joda:format pattern="HH:mm" value="${talk.startTime}" />
+                                            <fmt:formatDate pattern="HH:mm" value="${talk.startDateTime}" />
                                             <br/>
-                                            <joda:format pattern="HH:mm" value="${talk.endTime}" />
+                                            <fmt:formatDate pattern="HH:mm" value="${talk.endDateTime}" />
                                         </td>
                                         <td colspan=" ${beta[i.count-1].startTime eq talk.startTime ? (empty talk.submission ? 2 : 1 ) : 2}">
                                             <c:choose>
@@ -230,15 +229,15 @@
                         <tbody>
                         <c:forEach var="talk" items="${alpha}" varStatus="i">
                             <c:set var="talkDay">
-                                <joda:format pattern="D" value="${talk.startTime}" />
+                                <fmt:formatDate pattern="D" value="${talk.startDateTime}" />
                             </c:set>
                             <%-- e.g. second day talk --%>
                             <c:if test="${talkDay eq (firstDay+1)}">
                                 <tr>
                                     <td>
-                                        <joda:format pattern="HH:mm" value="${talk.startTime}" />
+                                        <fmt:formatDate pattern="HH:mm" value="${talk.startDateTime}" />
                                         <br/>
-                                        <joda:format pattern="HH:mm" value="${talk.endTime}" />
+                                        <fmt:formatDate pattern="HH:mm" value="${talk.endDateTime}" />
                                     </td>
                                     <td colspan=" ${beta[i.count-1].startTime eq talk.startTime ? (empty talk.submission ? 2 : 1 ) : 2}">
                                         <c:choose>
