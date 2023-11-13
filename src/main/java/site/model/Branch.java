@@ -3,6 +3,7 @@ package site.model;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ public enum Branch {
     YEAR_2023(2023, LocalDateTime.parse("2023-05-30T00:00:00"), LocalDateTime.parse("2022-11-10T00:00:00"),
         LocalDateTime.parse("2023-02-15T23:59:59"), Arrays.asList(SponsorPackage.GOLD, SponsorPackage.PLATINUM, SponsorPackage.GOLD_LITE), true),
     YEAR_2024(2024, LocalDateTime.parse("2024-05-28T00:00:00"), LocalDateTime.parse("2023-11-01T00:00:00"),
-        LocalDateTime.parse("2024-02-15T23:59:59"), Arrays.asList(SponsorPackage.GOLD, SponsorPackage.PLATINUM, SponsorPackage.GOLD_LITE, SponsorPackage.SILVER), false);
+        LocalDateTime.parse("2024-02-15T23:59:59"), Collections.emptyList(), false);
 
     private static final String BRANCH_PREFIX = "YEAR_";
 
