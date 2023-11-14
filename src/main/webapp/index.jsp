@@ -883,7 +883,7 @@
                             <h4>Gold</h4>
                             <ul>
                                 <li><i class="icon-check"></i><span class="text">6 free passes!</span></li>
-                                <li><i class="icon-close"></i><span class="text">15% discount on additional passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">10% discount on additional passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Booth in the conference hall!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                             </ul>
@@ -906,7 +906,7 @@
                             <h4>Gold Light</h4>
                             <ul>
                                 <li><i class="icon-check"></i><span class="text">6 free passes!</span></li>
-                                <li><i class="icon-close"></i><span class="text">15% discount on additional passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">10% discount on additional passes!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Booth in the corner area!</span></li>
                                 <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
                             </ul>
