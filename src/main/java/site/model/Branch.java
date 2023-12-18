@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public enum Branch {
@@ -13,9 +14,9 @@ public enum Branch {
     YEAR_2019(2019, LocalDateTime.parse("2019-05-28T00:00:00")), YEAR_2020(2020, LocalDateTime.parse("2020-05-27T00:00:00")),
     YEAR_2022(2022, LocalDateTime.parse("2022-05-25T00:00:00")),
     YEAR_2023(2023, LocalDateTime.parse("2023-05-30T00:00:00"), LocalDateTime.parse("2022-11-10T00:00:00"),
-        LocalDateTime.parse("2023-02-15T23:59:59"), Arrays.asList(SponsorPackage.GOLD, SponsorPackage.PLATINUM, SponsorPackage.GOLD_LITE), true),
+        LocalDateTime.parse("2023-02-15T23:59:59"), List.of(SponsorPackage.GOLD, SponsorPackage.PLATINUM, SponsorPackage.GOLD_LITE), true),
     YEAR_2024(2024, LocalDateTime.parse("2024-05-28T00:00:00"), LocalDateTime.parse("2023-11-01T00:00:00"),
-        LocalDateTime.parse("2024-02-15T23:59:59"), Collections.emptyList(), false);
+        LocalDateTime.parse("2024-02-15T23:59:59"), List.of(SponsorPackage.GOLD, SponsorPackage.PLATINUM), false);
 
     private static final String BRANCH_PREFIX = "YEAR_";
 
