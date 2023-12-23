@@ -8,14 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AdminController {
-	
-	private static final Logger logger = LogManager.getLogger(AdminController.class);
 
-	private static final String PAGE_ADMIN_INDEX = "/admin/index.jsp";
+    private static final String PAGE_ADMIN_INDEX = "/admin/index.jsp";
 
-	@GetMapping("/admin")
+    @GetMapping("/admin")
 	public String index(Model model) {
-		return PAGE_ADMIN_INDEX;
-	}
+        return PAGE_ADMIN_INDEX;
+    }
 
 }

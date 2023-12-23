@@ -6,6 +6,8 @@ import javax.validation.Valid;
 import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +29,8 @@ import site.model.Speaker;
 @Controller()
 @RequestMapping(value = "/admin/speaker")
 public class AdminSpeakerController {
+
+    private static final Logger log = LogManager.getLogger(AdminSpeakerController.class);
 
     private final AdminService adminService;
 
@@ -75,7 +79,7 @@ public class AdminSpeakerController {
                     speaker.setPicture(bytes);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("Error while processing speaker image!!!", e);
             }
         } else { //empty file is it edit?
             if (speaker.getId() != null) {
@@ -99,7 +103,7 @@ public class AdminSpeakerController {
 
     @Transactional
     @GetMapping(value = "/edit/{itemId}")
-    public String edit(@PathVariable Long itemId, Model model,@RequestParam(required = false) String sourcePage) {
+    public String edit(@PathVariable Long itemId, Model model, @RequestParam(required = false) String sourcePage) {
         Speaker speaker = adminService.findOneSpeaker(itemId);
         model.addAttribute("speaker", speaker);
         model.addAttribute("sourcePage", sourcePage);
@@ -109,7 +113,7 @@ public class AdminSpeakerController {
 
     @Transactional
     @GetMapping(value = "/remove/{itemId}")
-    public String remove(@PathVariable Long itemId, Model model) {
+    public String remove(@PathVariable Long itemId) {
         adminService.deleteSpeaker(itemId);
         return "redirect:/admin/speaker/view";
     }
