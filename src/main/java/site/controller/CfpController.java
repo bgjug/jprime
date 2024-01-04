@@ -116,7 +116,7 @@ public class CfpController extends AbstractCfpController {
         model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
 
-        buildCfpFormModel(model, submission);
+        updateCfpModel(model, submission);
 
         if (currentBranch.getCfpCloseDate().isAfter(LocalDateTime.now()) && currentBranch.getCfpOpenDate().isBefore(LocalDateTime.now())) {
             return CfpController.CFP_OPEN_JSP;

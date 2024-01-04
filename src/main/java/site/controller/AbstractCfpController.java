@@ -7,6 +7,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
@@ -30,6 +32,8 @@ import static site.controller.ResourceAsString.resourceAsString;
  */
 public class AbstractCfpController {
 
+    private static final Logger log = LogManager.getLogger(AbstractCfpController.class);
+
     public static final String JPRIME_CONF_MAIL_ADDRESS = "conference@jprime.io";
 
     @Autowired
@@ -39,13 +43,13 @@ public class AbstractCfpController {
     @Autowired
     @Qualifier(MailService.NAME)
     @Lazy
-    protected MailService mailFacade;
+    private MailService mailFacade;
 
     @Autowired
     @Qualifier(ThumbnailService.NAME)
     private ThumbnailService thumbnailService;
 
-    protected Model buildCfpFormModel(Model model, Submission submission) {
+    protected void updateCfpModel(Model model, Submission submission) {
         model.addAttribute("submission", submission);
         model.addAttribute("levels", SessionLevel.values());
         model.addAttribute("sessionTypes", Arrays.stream(SessionType.values()).collect(
@@ -53,8 +57,6 @@ public class AbstractCfpController {
         model.addAttribute("branches", Branch.values());
         model.addAttribute("coSpeaker_caption", submission.getCoSpeaker() == null || StringUtils.isEmpty(
                         submission.getCoSpeaker().getFirstName()) ? "Add co speaker" : "Remove co speaker");
-
-        return model;
     }
 
     protected void saveSubmission(Submission submission, MultipartFile speakerImage,
@@ -83,7 +85,7 @@ public class AbstractCfpController {
             existingSpeaker.setBranch(Globals.CURRENT_BRANCH);
             return existingSpeaker;
         } else {
-            //new speaker.. file is required
+            //new speaker. file is required
             fixTwitterHandle(speaker);
             speaker.setBranch(Globals.CURRENT_BRANCH);
             formatPicture(speaker, image);
@@ -101,20 +103,23 @@ public class AbstractCfpController {
             speaker.setPicture(
                             thumbnailService.thumbImage(bytes, 280, 326, ThumbnailService.ResizeType.FIT_TO_RATIO));
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error while processing speaker picture!!!", e);
         }
     }
 
-    Speaker fixTwitterHandle(Speaker speaker) {
+    void fixTwitterHandle(Speaker speaker) {
         String twitterHandle = speaker.getTwitter();
         if (twitterHandle != null && twitterHandle.startsWith("@")) {
             speaker.setTwitter(twitterHandle.substring(1));
         }
-        return speaker;
     }
 
     void setMailFacade(MailService mailFacade) {
         this.mailFacade = mailFacade;
+    }
+
+    public MailService getMailFacade() {
+        return mailFacade;
     }
 
     private String loadMailContentTemplate(String templateFileName) throws IOException {

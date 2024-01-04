@@ -84,7 +84,7 @@ public class SubmissionController extends AbstractCfpController {
 
     @GetMapping("/add")
     public String showSubmissionForm(Model model) {
-        buildCfpFormModel(model, new Submission());
+        updateCfpModel(model, new Submission());
         return ADMIN_SUBMISSION_EDIT_JSP;
     }
 
@@ -166,12 +166,12 @@ public class SubmissionController extends AbstractCfpController {
             throws IOException, MessagingException {
         final String mailSubject = "Your jPrime talk proposal status";
         String messageText = buildMessage(submission, fileName);
-        mailFacade.sendEmail(submission.getSpeaker().getEmail(), mailSubject, messageText);
+        getMailFacade().sendEmail(submission.getSpeaker().getEmail(), mailSubject, messageText);
         if (submission.getCoSpeaker() != null) {
             final String messageForCoSpeaker = messageText.replace(
                     submission.getSpeaker().getFirstName(),
                     submission.getCoSpeaker().getFirstName());
-            mailFacade.sendEmail(submission.getCoSpeaker().getEmail(), mailSubject, messageForCoSpeaker);
+            getMailFacade().sendEmail(submission.getCoSpeaker().getEmail(), mailSubject, messageForCoSpeaker);
         }
     }
 
@@ -186,7 +186,7 @@ public class SubmissionController extends AbstractCfpController {
 
     @GetMapping("/edit/{submissionId}")
     public String editSubmissionForm(@PathVariable Long submissionId, Model model, @RequestParam(required = false) String sourcePage) {
-        buildCfpFormModel(model, adminFacade.findOneSubmission(submissionId));
+        updateCfpModel(model, adminFacade.findOneSubmission(submissionId));
         model.addAttribute("sourcePage", sourcePage);
         return ADMIN_SUBMISSION_EDIT_JSP;
     }
@@ -199,7 +199,7 @@ public class SubmissionController extends AbstractCfpController {
         @RequestParam(required = false) String sourcePage,
             Model model) {
         if (bindingResult.hasErrors()) {
-        	buildCfpFormModel(model, submission);
+        	updateCfpModel(model, submission);
         	return ADMIN_SUBMISSION_EDIT_JSP;
         }
         saveSubmission(submission, speakerImage, coSpeakerImage);

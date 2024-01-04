@@ -16,7 +16,7 @@ public enum Branch {
     YEAR_2023(2023, LocalDateTime.parse("2023-05-30T00:00:00"), LocalDateTime.parse("2022-11-10T00:00:00"),
         LocalDateTime.parse("2023-02-15T23:59:59"), List.of(SponsorPackage.GOLD, SponsorPackage.PLATINUM, SponsorPackage.GOLD_LITE), true),
     YEAR_2024(2024, LocalDateTime.parse("2024-05-28T00:00:00"), LocalDateTime.parse("2023-11-01T00:00:00"),
-        LocalDateTime.parse("2024-02-15T23:59:59"), List.of(SponsorPackage.GOLD, SponsorPackage.PLATINUM), false);
+        LocalDateTime.parse("2024-02-15T23:59:59"), List.of(SponsorPackage.GOLD, SponsorPackage.PLATINUM, SponsorPackage.GOLD_LITE), false);
 
     private static final String BRANCH_PREFIX = "YEAR_";
 
