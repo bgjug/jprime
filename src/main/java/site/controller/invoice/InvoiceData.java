@@ -180,7 +180,7 @@ public class InvoiceData {
                 registrant.getCreatedDate() != null ? registrant.getCreatedDate() : branch.getCfpOpenDate();
 
             if (registrationDate.isBefore(branch.getCfpCloseDate()) && Duration.between(
-                registrationDate, LocalDateTime.now()).get(ChronoUnit.DAYS) <= 3) {
+                registrationDate, LocalDateTime.now()).abs().getSeconds() <= Duration.of(3, ChronoUnit.DAYS).getSeconds()) {
                 ticketPrice = ticketPrices.getPrice(branch, registrationDate);
             }
             result.addInvoiceDetail(new InvoiceDetail(ticketPrice, tickets));
