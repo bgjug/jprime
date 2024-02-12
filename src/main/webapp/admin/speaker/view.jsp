@@ -23,7 +23,7 @@
 		<form action="view">
 			<table>
 				<tr>
-					<td><strong>Year:</strong></td>
+					<td><label for="year"><strong>Year:</strong></label></td>
 					<td><select name="year" id="year">
 						<option value="" <c:if test="${selected_branch == null or selected_branch.length() == 0}">selected</c:if>>All</option>
 						<c:forEach var="branch" items="${branches}">

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import site.config.Globals;
 import site.facade.AdminService;
 import site.facade.UserServiceJPro;
 import site.model.VisitorJPro;
@@ -31,31 +32,32 @@ public class RaffleController {
 
 	public static final String RAFFLE_JSP = "/raffle.jsp";
 
-	private Logger log = LogManager.getLogger(this.getClass());
+	private static final Logger log = LogManager.getLogger(RaffleController.class);
 
-	@Autowired
-	@Qualifier(AdminService.NAME)
-	private AdminService adminService;
+	private final AdminService adminService;
 
-	@Autowired
-	@Qualifier(UserServiceJPro.NAME)
-	private UserServiceJPro userServiceJPro;
+	private final UserServiceJPro userServiceJPro;
 	
-	@Autowired
-	private ObjectMapper mapper;
+	private final ObjectMapper mapper;
+
+	public RaffleController(@Qualifier(AdminService.NAME) AdminService adminService,
+		@Qualifier(UserServiceJPro.NAME) UserServiceJPro userServiceJPro, ObjectMapper mapper) {
+		this.adminService = adminService;
+		this.userServiceJPro = userServiceJPro;
+		this.mapper = mapper;
+	}
 
 	@GetMapping(value = "/view")
 	public String viewVisitors(Model model) {
 
-		List<RaffleVisitor> visitors = adminService.findAllNewestVisitors().stream()
+		List<RaffleVisitor> visitors = adminService.findAllNewestVisitors(Globals.CURRENT_BRANCH).stream()
 												   .filter(v -> v.isPresent() && (v.getStatus() == VisitorStatus.PAYED || v.getStatus() == VisitorStatus.Sponsored))
 												   .map(v -> new RaffleVisitor(v.getName(), v.getCompany()))
 												   .collect(Collectors.toList());
 		try {
 			model.addAttribute("visitors", mapper.writeValueAsString(visitors));
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return RAFFLE_JSP;
 	}
@@ -70,8 +72,7 @@ public class RaffleController {
 		try {
 			model.addAttribute("visitors", mapper.writeValueAsString(visitors));
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return RAFFLE_JSP;
 	}

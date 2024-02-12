@@ -30,6 +30,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,14 +42,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.ift.CellProcessor;
+import org.supercsv.exception.SuperCsvException;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.CsvMapReader;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
+import site.config.Globals;
 import site.facade.AdminService;
 import site.facade.MailService;
 import site.facade.TicketService;
 import site.facade.UserServiceJPro;
+import site.model.Branch;
 import site.model.CSVFileModel;
 import site.model.Registrant;
 import site.model.Visitor;
@@ -124,9 +129,11 @@ public class AdminVisitorController {
     private UserServiceJPro userServiceJPro;
 
     @GetMapping("/view")
-    public String viewVisitors(Model model) {
+    public String viewVisitors(Model model, @RequestParam(required = false)String year) {
+        int year_int = StringUtils.isNotBlank(year) ? Integer.parseInt(year) : Globals.CURRENT_BRANCH.getYear();
+        Branch branch = Branch.valueOfYear(Integer.toString(year_int));
 
-        List<Visitor> visitors = adminFacade.findAllNewestVisitors();
+        List<Visitor> visitors = adminFacade.findAllNewestVisitors(branch);
         long payedCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.PAYED).count();
         long requestingCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.REQUESTING).count();
         long sponsoredCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.Sponsored).count();
@@ -135,6 +142,8 @@ public class AdminVisitorController {
         model.addAttribute("requestingCount", requestingCount);
         model.addAttribute("sponsoredCount", sponsoredCount);
         model.addAttribute("jobs", adminFacade.findBackgroundJobs());
+        model.addAttribute("branches", Arrays.asList(Branch.values()));
+        model.addAttribute("selected_branch", Integer.toString(branch.getYear()));
         return VISITORS_JSP;
     }
 
@@ -171,11 +180,14 @@ public class AdminVisitorController {
     }
 
     @GetMapping(value = "/tickets")
-    public String sendTickets(Model model) {
+    public String sendTickets(Model model, @RequestParam(required = false)String year) {
+//        int year_int = StringUtils.isNotBlank(year) ? Integer.parseInt(year) : Globals.CURRENT_BRANCH.getYear();
+//        Branch branch = Branch.valueOfYear(Integer.toString(year_int));
+
         if (ticketService.sendTickets()) {
             return "redirect:/admin/jobs/view";
         }
-        return viewVisitors(model);
+        return viewVisitors(model, year);
     }
 
     @GetMapping(value = "/upload")
@@ -205,7 +217,7 @@ public class AdminVisitorController {
                 if (fileModel.isEmptyVisitorsBeforeUpload()) {
                     //userServiceJPro.clearVisitors();
                 }
-                registrantsMap = StreamSupport.stream(adminFacade.findAllRegistrants().spliterator(), false)
+                registrantsMap = StreamSupport.stream(adminFacade.findRegistrantsByBranch(Globals.CURRENT_BRANCH).spliterator(), false)
                     .collect(Collectors.toMap(
                         r -> StringUtils.isEmpty(r.getVatNumber()) ? r.getName() : r.getVatNumber(),
                         Function.identity(), (a, b) -> a));
@@ -230,7 +242,7 @@ public class AdminVisitorController {
                 }
 
                 if (csvLine.entrySet().stream().anyMatch(e-> !e.getKey().equalsIgnoreCase(e.getValue()))) {
-                    fieldsList = Arrays.stream(fieldsList).map(csvLine::get).collect(Collectors.toList()).toArray(new String[]{});
+                    fieldsList = Arrays.stream(fieldsList).map(csvLine::get).toList().toArray(new String[]{});
                 }
 
                 Registrant lastRegistrant = null;
@@ -244,8 +256,11 @@ public class AdminVisitorController {
                     }
                     csvLine = csvReader.read(fieldsList);
                 } while (csvLine != null);
+            } catch (SuperCsvException csvException) {
+                result.addError(new FieldError("", "csvFile", csvException.getMessage()));
             }
         } catch (IOException e) {
+            result.addError(new FieldError("", "csvFile", e.getMessage()));
         }
 
         return getUploadVisitorModel(model);

@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
+import site.config.Globals;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.repository.RegistrantRepository;
@@ -63,11 +64,12 @@ class RegistrantControllerTest {
                 new Visitor(adamsFamily, "Morticia Adams", "morticia@adams.com", "Adams Family")
         );
         adamsFamily.setVisitors(adamsVisitors);
+        adamsFamily.setBranch(Globals.CURRENT_BRANCH);
         adamsFamily = registrantRepository.save(adamsFamily);
 
         ivan = new Registrant("Ivan St. Ivanov", "ivan.st.ivanov@gmail.com");
-        ivan.setVisitors(Arrays.asList(
-                new Visitor(ivan, "Ivan St. Ivanov", "ivan.st.ivanov@gmail.com", "JUG")));
+        ivan.setVisitors(List.of(new Visitor(ivan, "Ivan St. Ivanov", "ivan.st.ivanov@gmail.com", "JUG")));
+        ivan.setBranch(Globals.CURRENT_BRANCH);
         ivan = registrantRepository.save(ivan);
     }
 
@@ -75,7 +77,7 @@ class RegistrantControllerTest {
     void getViewShouldReturnRegistrantViewWithAllRegistrants() throws Exception {
         mockMvc.perform(get("/admin/registrant/view"))
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("registrants", hasSize(2)))
+                // .andExpect(model().attribute("registrants", is(2)))
                 .andExpect(model().attribute("registrants", containsInAnyOrder(adamsFamily, ivan)))
                 .andExpect(view().name(REGISTRANT_VIEW_JSP));
     }

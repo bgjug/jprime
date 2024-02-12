@@ -258,12 +258,12 @@ public class AdminService {
         return visitorRepository.findAll();
     }
 
-    public Iterable<Visitor> findAllWithTicket() {
-        return visitorRepository.findAllWithTicket();
+    public Iterable<Visitor> findAllWithTicket(Branch branch) {
+        return visitorRepository.findAllWithTicket(branch);
     }
 
-    public List<Visitor> findAllNewestVisitors(){
-        return visitorRepository.findAllNewestUsers();
+    public List<Visitor> findAllNewestVisitors(Branch branch){
+        return visitorRepository.findAllNewestUsers(branch);
     }
 
 	public Visitor findOneVisitor(Long id){
@@ -290,6 +290,14 @@ public class AdminService {
     /* registrants repo*/
 	public Page<Registrant> findAllRegistrants(Pageable pageable){
         return registrantRepository.findAll(pageable);
+    }
+
+    public Page<Registrant> findRegistrantsByBranch(Pageable pageable, Branch branch){
+        return registrantRepository.findAllByBranch(pageable, branch);
+    }
+
+    public Iterable<Registrant> findRegistrantsByBranch(Branch branch){
+        return registrantRepository.findAllByBranch(branch);
     }
 
 	public Registrant saveRegistrant(Registrant registrant){
