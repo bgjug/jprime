@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import site.facade.AdminService;
+import site.model.Branch;
 import site.model.Visitor;
 
 @RestController
@@ -35,7 +36,7 @@ public class VisitorsRestController {
     public ResponseEntity<?> allByBranch(@PathVariable String branch) {
         try {
             log.debug("Requesting all visitors for branch {}", branch);
-            return ResponseEntity.ok(StreamSupport.stream(adminFacade.findAllWithTicket().spliterator(), false)
+            return ResponseEntity.ok(StreamSupport.stream(adminFacade.findAllWithTicket(Branch.valueOfYear(branch)).spliterator(), false)
                 .collect(Collectors.toList()));
         } catch (Exception e) {
             return ResponseEntity.status(500).contentType(MediaType.TEXT_PLAIN).body(e.getMessage());
