@@ -3,7 +3,8 @@ package site.controller;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,12 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.AdminService;
 import site.facade.ThumbnailService;
-import site.model.Speaker;
 import site.model.Sponsor;
 
 @Controller()
 @RequestMapping(value = "/admin/sponsor")
 public class AdminSponsorController {
+
+    private static final Logger log = LogManager.getLogger(AdminSponsorController.class);
 
     private final AdminService adminFacade;
 
@@ -63,7 +65,7 @@ public class AdminSponsorController {
                     sponsor.setLogo(bytes);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error(e.getMessage(), e);
             }
         } else { //empty file is it edit?
             if (sponsor.getId() != null) {

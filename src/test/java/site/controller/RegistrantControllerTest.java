@@ -52,7 +52,7 @@ class RegistrantControllerTest {
     private Registrant ivan;
 
     @BeforeEach
-    void setup() throws Exception {
+    void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         insertTestRegistrants();
     }
