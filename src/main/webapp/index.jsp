@@ -143,11 +143,11 @@
                 </div>
             </div>
             <div class="row mb-30">
-                <div class="col-md-2">
+                <!--div class="col-md-2">
                     <div class="sponsors-logo">
                         <a href="http://www.vmware.com"><img class="img-fluid" src="images/vmware.png" alt=""></a>
                     </div>
-                </div>
+                </div-->
                 <div class="col-md-2">
                     <div class="sponsors-logo">
                         <a href="http://www.softwareag.com"><img class="img-fluid" src="images/softwareag.png" alt=""></a>
