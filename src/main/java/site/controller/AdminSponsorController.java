@@ -3,7 +3,8 @@ package site.controller;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,27 +16,32 @@ import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.AdminService;
 import site.facade.ThumbnailService;
-import site.model.Speaker;
 import site.model.Sponsor;
 
 @Controller()
 @RequestMapping(value = "/admin/sponsor")
 public class AdminSponsorController {
 
-    @Autowired
-    @Qualifier(AdminService.NAME)
-    private AdminService adminFacade;
+    private static final Logger log = LogManager.getLogger(AdminSponsorController.class);
 
-    @Autowired
-    @Qualifier(ThumbnailService.NAME)
-    private ThumbnailService thumbnailService;
+    private final AdminService adminFacade;
+
+    private final ThumbnailService thumbnailService;
+
+    public AdminSponsorController(@Qualifier(AdminService.NAME) AdminService adminFacade,
+        @Qualifier(ThumbnailService.NAME) ThumbnailService thumbnailService) {
+        this.adminFacade = adminFacade;
+        this.thumbnailService = thumbnailService;
+    }
 
     @Transactional
         @GetMapping("/view")
     public String view(Model model, Pageable pageable) {
         Page<Sponsor> sponsors = adminFacade.findAllSponsors(pageable);
 
-        model.addAttribute("sponsors", sponsors);
+        model.addAttribute("sponsors", sponsors.getContent());
+        model.addAttribute("totalPages", sponsors.getTotalPages());
+        model.addAttribute("number", sponsors.getNumber());
 
         return "/admin/sponsor/view.jsp";
     }
@@ -59,7 +65,7 @@ public class AdminSponsorController {
                     sponsor.setLogo(bytes);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error(e.getMessage(), e);
             }
         } else { //empty file is it edit?
             if (sponsor.getId() != null) {

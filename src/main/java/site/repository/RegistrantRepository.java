@@ -1,7 +1,11 @@
 package site.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+import site.model.Branch;
 import site.model.Registrant;
 
 @Repository(value = RegistrantRepository.NAME)
@@ -24,4 +28,9 @@ public interface RegistrantRepository extends PagingAndSortingRepository<Registr
 //    @Query(SELECT_PUBLISHED_ARTICLES)
 //    Page<Article> findAllPublishedArticles(Pageable pageable);
 	Registrant findByEpayInvoiceNumber(long epayInvoiceNumber);
+
+	@Query("SELECT r FROM Registrant r WHERE r.branch = :branch")
+	Page<Registrant> findAllByBranch(Pageable pageable, Branch branch);
+
+	Iterable<Registrant> findAllByBranch(Branch branch);
 }

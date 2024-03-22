@@ -8,6 +8,10 @@ public class CSVFileModel {
 
     private VisitorType visitorType;
 
+    private VisitorStatus visitorStatus;
+
+    private boolean emptyVisitorsBeforeUpload;
+
     public VisitorStatus getVisitorStatus() {
         return visitorStatus;
     }
@@ -15,10 +19,6 @@ public class CSVFileModel {
     public void setVisitorStatus(VisitorStatus visitorStatus) {
         this.visitorStatus = visitorStatus;
     }
-
-    private VisitorStatus visitorStatus;
-
-    private boolean emptyVisitorsBeforeUpload;
 
     public boolean isEmptyVisitorsBeforeUpload() {
         return emptyVisitorsBeforeUpload;

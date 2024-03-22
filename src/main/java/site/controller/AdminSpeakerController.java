@@ -53,7 +53,9 @@ public class AdminSpeakerController {
            speakers = adminService.findAllSpeakers(pageable);
         }
 
-        model.addAttribute("speakers", speakers);
+        model.addAttribute("speakers", speakers.getContent());
+        model.addAttribute("number", speakers.getNumber());
+        model.addAttribute("totalPages", speakers.getTotalPages());
         model.addAttribute("branches", Arrays.asList(Branch.values()));
         model.addAttribute("selected_branch", year);
 

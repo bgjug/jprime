@@ -21,6 +21,20 @@
 <fieldset>
     <legend>Registrants</legend>
     &nbsp;
+    <form action="view">
+        <table>
+            <tr>
+                <td><label for="year"><strong>Year:</strong></label></td>
+                <td><select name="year" id="year">
+                    <option value="" <c:if test="${selected_branch == null or selected_branch.length() == 0}">selected</c:if>>All</option>
+                    <c:forEach var="branch" items="${branches}">
+                        <option value="${branch.label}" <c:if test="${selected_branch != null && selected_branch.equals(branch.label)}">selected</c:if>>${branch.label}</option>
+                    </c:forEach>
+                </select></td>
+                <td><input type="submit" value="Search"></td>
+            </tr>
+        </table>
+    </form>
     <div>
         <a href="/admin/registrant/add">Add</a>
     </div>
@@ -55,6 +69,14 @@
             </tr>
         </c:forEach>
     </table>
+    <div>
+        <c:if test="${number > 0}">
+            <span><a href="view?year=${selected_branch}&page=${number - 1}">previous</a></span>
+        </c:if>
+        <c:if test="${number < (totalPages - 1)}">
+            <span><a href="view?year=${selected_branch}&page=${number + 1}">next</a></span>
+        </c:if>
+    </div>
 </fieldset>
 </body>
 </html>

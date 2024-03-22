@@ -28,7 +28,7 @@
                 <td><i>Active</i></td>
 				<td><i>Operations</i></td>
 			</tr>
-			<c:forEach var="sponsor" items="${sponsors.content}">
+			<c:forEach var="sponsor" items="${sponsors}">
 				<tr>
 					<td width="100%">${sponsor.companyName}</td>
 					<td>${sponsor.sponsorPackage}</td>
@@ -42,11 +42,11 @@
 		</table>
 		&nbsp;
 		<div>
-			<c:if test="${sponsors.number > 0}">
-				<span><a href="/admin/sponsor/view?page=${sponsors.number - 1}">previous</a></span>
+			<c:if test="${number > 0}">
+				<span><a href="/admin/sponsor/view?page=${number - 1}">previous</a></span>
 			</c:if>
-			<c:if test="${sponsors.number < (sponsors.totalPages - 1)}">
-				<span><a href="/admin/sponsor/view?page=${sponsors.number + 1}">next</a></span>
+			<c:if test="${number < (totalPages - 1)}">
+				<span><a href="/admin/sponsor/view?page=${number + 1}">next</a></span>
 			</c:if>
 		</div>
 		<div>

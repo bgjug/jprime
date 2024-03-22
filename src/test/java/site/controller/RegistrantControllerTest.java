@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
+import site.config.Globals;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.repository.RegistrantRepository;
@@ -51,7 +52,7 @@ class RegistrantControllerTest {
     private Registrant ivan;
 
     @BeforeEach
-    void setup() throws Exception {
+    void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         insertTestRegistrants();
     }
@@ -63,11 +64,12 @@ class RegistrantControllerTest {
                 new Visitor(adamsFamily, "Morticia Adams", "morticia@adams.com", "Adams Family")
         );
         adamsFamily.setVisitors(adamsVisitors);
+        adamsFamily.setBranch(Globals.CURRENT_BRANCH);
         adamsFamily = registrantRepository.save(adamsFamily);
 
         ivan = new Registrant("Ivan St. Ivanov", "ivan.st.ivanov@gmail.com");
-        ivan.setVisitors(Arrays.asList(
-                new Visitor(ivan, "Ivan St. Ivanov", "ivan.st.ivanov@gmail.com", "JUG")));
+        ivan.setVisitors(List.of(new Visitor(ivan, "Ivan St. Ivanov", "ivan.st.ivanov@gmail.com", "JUG")));
+        ivan.setBranch(Globals.CURRENT_BRANCH);
         ivan = registrantRepository.save(ivan);
     }
 

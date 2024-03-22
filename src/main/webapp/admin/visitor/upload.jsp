@@ -27,7 +27,7 @@
     <fieldset>
         <legend>Upload visitors from CSV File</legend>
         <p>
-            <form:errors/>
+            <form:errors />
         </p>
         <dl>
             <dt>

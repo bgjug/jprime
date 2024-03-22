@@ -28,7 +28,7 @@
 				<td><i>Package</i></td>
 				<td><i>Operations</i></td>
 			</tr>
-			<c:forEach var="partner" items="${partners.content}">
+			<c:forEach var="partner" items="${partners}">
 				<tr>
 					<td width="100%">${partner.companyName}</td>
 					<td><img src="/image/partner/${partner.id}"/></td>
@@ -42,11 +42,11 @@
 		</table>
 		&nbsp;
 		<div>
-			<c:if test="${partners.number > 0}">
-				<span><a href="/admin/partner/view?page=${partners.number - 1}">previous</a></span>
+			<c:if test="${number > 0}">
+				<span><a href="/admin/partner/view?page=${number - 1}">previous</a></span>
 			</c:if>
-			<c:if test="${partners.number < (partners.totalPages - 1)}">
-				<span><a href="/admin/partner/view?page=${partners.number + 1}">next</a></span>
+			<c:if test="${number < (totalPages - 1)}">
+				<span><a href="/admin/partner/view?page=${number + 1}">next</a></span>
 			</c:if>
 		</div>
 		<div>

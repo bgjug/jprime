@@ -31,7 +31,9 @@ public class AdminTagController {
 		Page<Tag> tags = adminFacade.findAllTags(pageable);
 		
 		model.addAttribute("tags", tags);
-		
+		model.addAttribute("totalPages", tags.getTotalPages());
+		model.addAttribute("number", tags.getNumber());
+
 		return "/admin/tag/view.jsp";
 	}
 	
