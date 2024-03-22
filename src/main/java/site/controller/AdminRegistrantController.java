@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,8 +59,10 @@ public class AdminRegistrantController {
         int year_int = StringUtils.isNotBlank(year) ? Integer.parseInt(year) : Globals.CURRENT_BRANCH.getYear();
         Branch branch = Branch.valueOfYear(Integer.toString(year_int));
 
-        model.addAttribute("registrants",
-            adminFacade.findRegistrantsByBranch(pageable, branch));
+        Page<Registrant> registrantsPage = adminFacade.findRegistrantsByBranch(pageable, branch);
+        model.addAttribute("registrants", registrantsPage.getContent());
+        model.addAttribute("totalPages", registrantsPage.getTotalPages());
+        model.addAttribute("number", registrantsPage.getNumber());
 
         model.addAttribute("branches", Arrays.asList(Branch.values()));
         model.addAttribute("selected_branch", Integer.toString(branch.getYear()));

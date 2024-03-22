@@ -22,20 +22,24 @@ import site.model.Sponsor;
 @RequestMapping(value = "/admin/sponsor")
 public class AdminSponsorController {
 
-    @Autowired
-    @Qualifier(AdminService.NAME)
-    private AdminService adminFacade;
+    private final AdminService adminFacade;
 
-    @Autowired
-    @Qualifier(ThumbnailService.NAME)
-    private ThumbnailService thumbnailService;
+    private final ThumbnailService thumbnailService;
+
+    public AdminSponsorController(@Qualifier(AdminService.NAME) AdminService adminFacade,
+        @Qualifier(ThumbnailService.NAME) ThumbnailService thumbnailService) {
+        this.adminFacade = adminFacade;
+        this.thumbnailService = thumbnailService;
+    }
 
     @Transactional
         @GetMapping("/view")
     public String view(Model model, Pageable pageable) {
         Page<Sponsor> sponsors = adminFacade.findAllSponsors(pageable);
 
-        model.addAttribute("sponsors", sponsors);
+        model.addAttribute("sponsors", sponsors.getContent());
+        model.addAttribute("totalPages", sponsors.getTotalPages());
+        model.addAttribute("number", sponsors.getNumber());
 
         return "/admin/sponsor/view.jsp";
     }

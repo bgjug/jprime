@@ -41,7 +41,7 @@
                 <th><em>Status</em></th>
 				<th><em>Operations</em></th>
 			</tr>
-			<c:forEach var="submission" items="${submissions.content}">
+			<c:forEach var="submission" items="${submissions}">
 				<tr>
 					<td colspan="6" class="title-column"><em><strong>Title</strong></em>: ${submission.title}</td>
 					<td rowspan="3" class="title-column">
@@ -65,11 +65,11 @@
 		</table>
 		&nbsp;
 		<div>
-			<c:if test="${submissions.number > 0}">
-				<span><a href="/admin/submission/view/${path}?page=${submissions.number - 1}">previous</a></span>
+			<c:if test="${number > 0}">
+				<span><a href="/admin/submission/view/${path}?page=${number - 1}">previous</a></span>
 			</c:if>
-			<c:if test="${submissions.number < (submissions.totalPages - 1)}">
-				<span><a href="/admin/submission/view/${path}?page=${submissions.number + 1}">next</a></span>
+			<c:if test="${number < (totalPages - 1)}">
+				<span><a href="/admin/submission/view/${path}?page=${number + 1}">next</a></span>
 			</c:if>
 		</div>
 		<div>

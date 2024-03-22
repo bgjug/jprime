@@ -58,7 +58,9 @@ public class SubmissionController extends AbstractCfpController {
     @GetMapping("/view/all")
     public String listAllSubmissions(Model model, Pageable pageable) {
         Page<Submission> submissions = adminFacade.findAllSubmissions(pageable);
-        model.addAttribute("submissions", submissions);
+        model.addAttribute("submissions", submissions.getContent());
+        model.addAttribute("number", submissions.getNumber());
+        model.addAttribute("totalPages", submissions.getTotalPages());
         model.addAttribute("path", "all");
         return ADMIN_SUBMISSION_VIEW_JSP;
     }

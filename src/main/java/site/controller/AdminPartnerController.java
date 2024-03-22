@@ -3,7 +3,8 @@ package site.controller;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,20 +22,26 @@ import site.model.Partner;
 @RequestMapping(value = "/admin/partner")
 public class AdminPartnerController {
 
-    @Autowired
-    @Qualifier(AdminService.NAME)
-    private AdminService adminFacade;
+    private static final Logger log = LoggerFactory.getLogger(AdminPartnerController.class);
 
-    @Autowired
-    @Qualifier(ThumbnailService.NAME)
-    private ThumbnailService thumbnailService;
+    private final AdminService adminFacade;
+
+    private final ThumbnailService thumbnailService;
+
+    public AdminPartnerController(@Qualifier(AdminService.NAME) AdminService adminFacade,
+        @Qualifier(ThumbnailService.NAME) ThumbnailService thumbnailService) {
+        this.adminFacade = adminFacade;
+        this.thumbnailService = thumbnailService;
+    }
 
     @Transactional
         @GetMapping("/view")
     public String view(Model model, Pageable pageable) {
         Page<Partner> partners = adminFacade.findAllPartners(pageable);
 
-        model.addAttribute("partners", partners);
+        model.addAttribute("partners", partners.getContent());
+        model.addAttribute("totalPages", partners.getTotalPages());
+        model.addAttribute("number", partners.getNumber());
 
         return "/admin/partner/view.jsp";
     }
@@ -58,7 +65,7 @@ public class AdminPartnerController {
                     partner.setLogo(bytes);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error(e.getMessage(), e);
             }
         } else { //empty file is it edit?
             if (partner.getId() != null) {

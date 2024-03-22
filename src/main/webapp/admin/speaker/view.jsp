@@ -47,7 +47,7 @@
 				<th><em>Branch?</em></th>
 				<th><em>Operations</em></th>
 			</tr>
-			<c:forEach var="speaker" items="${speakers.content}">
+			<c:forEach var="speaker" items="${speakers}">
 				<tr>
 					<td rowspan="2"><img alt="Speaker picture" src="/image/speaker/${speaker.id}" style="max-width: 280px"/></td>
 					<td>${speaker.firstName} ${speaker.lastName} </td>
@@ -68,11 +68,11 @@
 		</table>
 		&nbsp;
 		<div>
-			<c:if test="${speakers.number > 0}">
-				<span><a href="view?page=${speakers.number - 1}">previous</a></span>
+			<c:if test="${number > 0}">
+				<span><a href="view?page=${number - 1}">previous</a></span>
 			</c:if>
-			<c:if test="${speakers.number < (speakers.totalPages - 1)}">
-				<span><a href="view?page=${speakers.number + 1}">next</a></span>
+			<c:if test="${number < (totalPages - 1)}">
+				<span><a href="view?page=${number + 1}">next</a></span>
 			</c:if>
 		</div>
 		<div>

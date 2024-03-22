@@ -77,7 +77,7 @@ class RegistrantControllerTest {
     void getViewShouldReturnRegistrantViewWithAllRegistrants() throws Exception {
         mockMvc.perform(get("/admin/registrant/view"))
                 .andExpect(status().isOk())
-                // .andExpect(model().attribute("registrants", is(2)))
+                .andExpect(model().attribute("registrants", hasSize(2)))
                 .andExpect(model().attribute("registrants", containsInAnyOrder(adamsFamily, ivan)))
                 .andExpect(view().name(REGISTRANT_VIEW_JSP));
     }

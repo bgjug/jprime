@@ -51,7 +51,7 @@
             <td><i>Student?</i></td>
             <td><i>Actions</i></td>
         </tr>
-        <c:forEach var="registrant" items="${registrants.content}">
+        <c:forEach var="registrant" items="${registrants}">
             <tr>
                 <td>${registrant.name}</td>
                 <td>${registrant.email}</td>
@@ -70,11 +70,11 @@
         </c:forEach>
     </table>
     <div>
-        <c:if test="${registrants.number > 0}">
-            <span><a href="view?year=${selected_branch}&page=${registrants.number - 1}">previous</a></span>
+        <c:if test="${number > 0}">
+            <span><a href="view?year=${selected_branch}&page=${number - 1}">previous</a></span>
         </c:if>
-        <c:if test="${registrants.number < (registrants.totalPages - 1)}">
-            <span><a href="view?year=${selected_branch}&page=${registrants.number + 1}">next</a></span>
+        <c:if test="${number < (totalPages - 1)}">
+            <span><a href="view?year=${selected_branch}&page=${number + 1}">next</a></span>
         </c:if>
     </div>
 </fieldset>

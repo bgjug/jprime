@@ -26,7 +26,7 @@
 				<td><i>Name</i></td>
 				<td><i>Operations</i></td>
 			</tr>
-			<c:forEach var="tag" items="${tags.content}">
+			<c:forEach var="tag" items="${tags}">
 				<tr>
 					<td width="85%">${tag.name}</td>
 					<td width="15%">
@@ -37,11 +37,11 @@
 		</table>
 		&nbsp;
 		<div>
-			<c:if test="${tags.number > 0}">
-				<span><a href="/admin/tag/view?page=${tags.number - 1}">previous</a></span>
+			<c:if test="${number > 0}">
+				<span><a href="/admin/tag/view?page=${number - 1}">previous</a></span>
 			</c:if>
-			<c:if test="${tags.number < (tags.totalPages - 1)}">
-				<span><a href="/admin/tag/view?page=${tags.number + 1}">next</a></span>
+			<c:if test="${number < (totalPages - 1)}">
+				<span><a href="/admin/tag/view?page=${number + 1}">next</a></span>
 			</c:if>
 		</div>
 		<div>
