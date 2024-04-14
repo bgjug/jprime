@@ -135,14 +135,12 @@ public class Speaker extends User {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Speaker)) {
+        if (!(o instanceof Speaker speaker)) {
             return false;
         }
         if (!super.equals(o)) {
             return false;
         }
-
-        Speaker speaker = (Speaker) o;
 
         return !(twitter != null && !twitter.equals(speaker.twitter));
     }

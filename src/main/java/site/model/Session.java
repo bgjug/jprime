@@ -93,10 +93,14 @@ public class Session extends AbstractEntity {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null) {
             return false;
         }
-        Session session = (Session) o;
+
+        if (!(o instanceof Session session)) {
+            return false;
+        }
+        
         return Objects.equals(getTitle(), session.getTitle()) &&
                 Objects.equals(getStartTime(), session.getStartTime()) &&
                 Objects.equals(getEndTime(), session.getEndTime());

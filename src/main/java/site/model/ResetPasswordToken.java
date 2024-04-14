@@ -79,25 +79,25 @@ public class ResetPasswordToken extends AbstractEntity {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-		ResetPasswordToken other = (ResetPasswordToken) obj;
+        if (!(obj instanceof ResetPasswordToken passwordToken)) {
+			return false;
+		}
+
 		if (owner == null) {
-            if (other.owner != null) {
+            if (passwordToken.owner != null) {
                 return false;
             }
-		} else if (!owner.equals(other.owner)) {
+		} else if (!owner.equals(passwordToken.owner)) {
             return false;
         }
 		if (tokenId == null) {
-            if (other.tokenId != null) {
+            if (passwordToken.tokenId != null) {
                 return false;
             }
-		} else if (!tokenId.equals(other.tokenId)) {
+		} else if (!tokenId.equals(passwordToken.tokenId)) {
             return false;
         }
-        return used == other.used;
+        return used == passwordToken.used;
 	}
 
 	@Override

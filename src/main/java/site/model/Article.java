@@ -107,11 +107,9 @@ public class Article extends AbstractEntity{
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Article)) {
+        if (!(o instanceof Article article)) {
             return false;
         }
-
-        Article article = (Article) o;
 
         return title.equals(article.title);
     }

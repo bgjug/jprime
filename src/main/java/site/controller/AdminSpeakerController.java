@@ -66,7 +66,7 @@ public class AdminSpeakerController {
     @PostMapping(value = "/add")
     public String add(@Valid final Speaker speaker, BindingResult bindingResult,
                       @RequestParam MultipartFile file, Model model,
-                      @RequestParam(name = "resizeImage", required = false) boolean resize, @RequestParam(required = false) String sourcePage) {
+                      @RequestParam(name = "resizeImage", required = false, defaultValue = "false") boolean resize, @RequestParam(required = false) String sourcePage) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("branches", Branch.values());
             return "/admin/speaker/edit.jsp";

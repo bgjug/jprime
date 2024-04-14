@@ -69,6 +69,7 @@ public class Registrant extends AbstractEntity {
             this.bulgarianValue = bulgarianValue;
         }
 
+        @Override
         public String toString() {
             return value;
         }
@@ -272,28 +273,26 @@ public class Registrant extends AbstractEntity {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Registrant)) {
+        if (!(o instanceof Registrant registrant)) {
             return false;
         }
 
-        Registrant that = (Registrant) o;
-
-        if (isCompany != that.isCompany) {
+        if (isCompany != registrant.isCompany) {
             return false;
         }
-        if (address != null ? !address.equals(that.address) : that.address != null) {
+        if (address != null ? !address.equals(registrant.address) : registrant.address != null) {
             return false;
         }
-        if (!email.equals(that.email)) {
+        if (!email.equals(registrant.email)) {
             return false;
         }
-        if (mol != null ? !mol.equals(that.mol) : that.mol != null) {
+        if (mol != null ? !mol.equals(registrant.mol) : registrant.mol != null) {
             return false;
         }
-        if (!name.equals(that.name)) {
+        if (!name.equals(registrant.name)) {
             return false;
         }
-        return !(vatNumber != null ? !vatNumber.equals(that.vatNumber) : that.vatNumber != null);
+        return !(vatNumber != null ? !vatNumber.equals(registrant.vatNumber) : registrant.vatNumber != null);
     }
 
     @Override
