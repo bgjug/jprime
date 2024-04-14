@@ -13,6 +13,6 @@ public class PaymentTypeEditor extends PropertyEditorSupport {
         setValue(Arrays.stream(Registrant.PaymentType.values())
                 .filter(paymentType -> paymentType.toString().equals(text))
                 .findAny()
-                .get());
+                .orElseGet(()-> Registrant.PaymentType.BANK_TRANSFER));
     }
 }

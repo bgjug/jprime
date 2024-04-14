@@ -31,19 +31,17 @@ public class Partner extends AbstractEntity {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Partner)) {
+        if (!(o instanceof Partner partner)) {
             return false;
         }
 
-        Partner user = (Partner) o;
-
-        if (companyName != null && !companyName.equals(user.companyName)) {
+        if (companyName != null && !companyName.equals(partner.companyName)) {
             return false;
         }
-        if (companyWebsite != null && !companyWebsite.equals(user.companyWebsite)) {
+        if (companyWebsite != null && !companyWebsite.equals(partner.companyWebsite)) {
             return false;
         }
-        return !(description != null && !description.equals(user.description));
+        return !(description != null && !description.equals(partner.description));
     }
 
 	@Override

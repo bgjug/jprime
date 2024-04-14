@@ -97,11 +97,9 @@ public class Sponsor extends User {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Sponsor)) {
+        if (!(o instanceof Sponsor sponsor)) {
             return false;
         }
-
-        Sponsor sponsor = (Sponsor) o;
 
         return companyName.equals(sponsor.companyName);
     }

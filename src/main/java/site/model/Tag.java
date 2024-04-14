@@ -45,11 +45,9 @@ public class Tag extends AbstractEntity {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Tag)) {
+        if (!(o instanceof Tag tag)) {
             return false;
         }
-
-        Tag tag = (Tag) o;
 
         return name.equals(tag.name);
     }

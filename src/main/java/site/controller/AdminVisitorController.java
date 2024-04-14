@@ -1,6 +1,5 @@
 package site.controller;
 
-import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,13 +12,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +28,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -136,7 +132,7 @@ public class AdminVisitorController {
         List<Visitor> visitors = adminFacade.findAllNewestVisitors(branch);
         long payedCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.PAYED).count();
         long requestingCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.REQUESTING).count();
-        long sponsoredCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.Sponsored).count();
+        long sponsoredCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.SPONSORED).count();
         model.addAttribute("visitors", visitors);
         model.addAttribute("payedCount", payedCount);
         model.addAttribute("requestingCount", requestingCount);

@@ -43,7 +43,7 @@ public class Submission extends AbstractEntity {
     private Speaker speaker = new Speaker();
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
-    @JoinColumn(name = "coSpeaker", nullable = true, referencedColumnName = "id")
+    @JoinColumn(name = "coSpeaker", referencedColumnName = "id")
     private Speaker coSpeaker;
 
     @Enumerated(EnumType.STRING)
@@ -141,16 +141,14 @@ public class Submission extends AbstractEntity {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Submission)) {
+        if (!(o instanceof Submission submission)) {
             return false;
         }
 
-        Submission that = (Submission) o;
-
-        if (speaker != null && !speaker.equals(that.speaker)) {
+        if (speaker != null && !speaker.equals(submission.speaker)) {
             return false;
         }
-        return !(title != null && !title.equals(that.title));
+        return !(title != null && !title.equals(submission.title));
     }
 
     @Override

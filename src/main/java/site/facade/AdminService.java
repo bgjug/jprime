@@ -155,6 +155,10 @@ public class AdminService {
     }
 
 	public Speaker saveSpeaker(Speaker speaker){
+        Speaker existing = speakerRepository.findByEmail(speaker.getEmail());
+        if (existing != null) {
+            speaker.setId(existing.getId());
+        }
         return speakerRepository.save(speaker);
     }
 

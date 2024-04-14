@@ -75,27 +75,24 @@ public class VenueHall extends AbstractEntity {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof VenueHall venueHall)) {
             return false;
         }
-		VenueHall other = (VenueHall) obj;
+
 		if (description == null) {
-            if (other.description != null) {
+            if (venueHall.description != null) {
                 return false;
             }
-		} else if (!description.equals(other.description)) {
+		} else if (!description.equals(venueHall.description)) {
             return false;
         }
-        if (!Arrays.equals(map, other.map)) {
+        if (!Arrays.equals(map, venueHall.map)) {
             return false;
         }
+
 		if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-		} else if (!name.equals(other.name)) {
-            return false;
-        }
-		return true;
-	}
+            return venueHall.name == null;
+		} else
+            return name.equals(venueHall.name);
+    }
 }
