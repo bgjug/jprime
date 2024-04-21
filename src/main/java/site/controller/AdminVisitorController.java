@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.ift.CellProcessor;
@@ -60,7 +59,7 @@ import site.model.VisitorType;
 /**
  * @author Mitia
  */
-@RestController
+@Controller
 @RequestMapping(value = "/admin/visitor")
 public class AdminVisitorController {
 
@@ -340,6 +339,7 @@ public class AdminVisitorController {
     }
 
     @GetMapping("/export")
+    @ResponseBody
     public ResponseEntity<byte[]>  exportVisitors() throws IOException{
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();
     	final String[] header = new String[] { "id", "name", "email", "company", "status"};
@@ -363,6 +363,7 @@ public class AdminVisitorController {
     }
 
     @PostMapping("/send")
+    @ResponseBody
     public String  send(@RequestParam String subject, @RequestParam String content) throws IOException{
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();
 
