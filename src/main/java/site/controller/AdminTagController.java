@@ -18,7 +18,7 @@ import site.facade.AdminService;
 import site.model.Tag;
 
 
-@Controller()
+@Controller
 @RequestMapping(value = "/admin/tag")
 public class AdminTagController {
 
@@ -30,7 +30,7 @@ public class AdminTagController {
 	public String view(Model model, Pageable pageable){
 		Page<Tag> tags = adminFacade.findAllTags(pageable);
 		
-		model.addAttribute("tags", tags);
+		model.addAttribute("tags", tags.getContent());
 		model.addAttribute("totalPages", tags.getTotalPages());
 		model.addAttribute("number", tags.getNumber());
 

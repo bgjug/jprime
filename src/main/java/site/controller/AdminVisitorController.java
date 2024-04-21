@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.ift.CellProcessor;
@@ -59,7 +60,7 @@ import site.model.VisitorType;
 /**
  * @author Mitia
  */
-@Controller()
+@RestController
 @RequestMapping(value = "/admin/visitor")
 public class AdminVisitorController {
 
@@ -229,6 +230,11 @@ public class AdminVisitorController {
                 return getUploadVisitorModel(model);
         }
 
+        return processCsvInputStream(fileModel, result, model, csvFile, fieldsList, registrantsMap);
+    }
+
+    private String processCsvInputStream(CSVFileModel fileModel, BindingResult result, Model model, MultipartFile csvFile,
+        String[] fieldsList, Map<String, Registrant> registrantsMap) {
         try (BufferedReader reader = new BufferedReader(
             new InputStreamReader(csvFile.getInputStream(), StandardCharsets.UTF_8))) {
             try (CsvMapReader csvReader = new CsvMapReader(reader, CsvPreference.STANDARD_PREFERENCE)) {
@@ -334,7 +340,6 @@ public class AdminVisitorController {
     }
 
     @GetMapping("/export")
-    @ResponseBody
     public ResponseEntity<byte[]>  exportVisitors() throws IOException{
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();
     	final String[] header = new String[] { "id", "name", "email", "company", "status"};
@@ -358,7 +363,6 @@ public class AdminVisitorController {
     }
 
     @PostMapping("/send")
-    @ResponseBody
     public String  send(@RequestParam String subject, @RequestParam String content) throws IOException{
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();
 
@@ -370,7 +374,7 @@ public class AdminVisitorController {
              try {
                  mailFacade.sendEmail(visitor.getEmail(), subject, content);
              } catch (Throwable t) {
-                 log.error("issue when sending email to " + visitor.getEmail(), t);
+                 log.error("issue when sending email to {}", visitor.getEmail(), t);
              }
          }
         return "Done ... all emails should be send but check the log for exceptions";
