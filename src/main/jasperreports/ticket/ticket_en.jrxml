@@ -209,7 +209,7 @@
 				<textElement markup="styled">
 					<font fontName="SansSerif" size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA["We will provide you with TWO badges for the two days. You have to wear the Badge all the time while you are at the <style isBold=\"true\">JPrime 2023</style> Conference venue! You will not be allowed to enter the <style isBold=\"true\">JPrime 2023</style> conference rooms without a Badge."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["We will provide you with TWO badges for the two days. You have to wear the Badge all the time while you are at the <style isBold=\"true\">JPrime 2024</style> Conference venue! You will not be allowed to enter the <style isBold=\"true\">JPrime 2024</style> conference rooms without a Badge."]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
