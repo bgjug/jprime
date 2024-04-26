@@ -7,13 +7,13 @@
 		<defaultValueExpression><![CDATA["ДжейПрайм Ивентс ООД <conference@jprime.io>"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="event" class="java.lang.String">
-		<defaultValueExpression><![CDATA["JPrime 2023"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["JPrime 2024"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="location" class="java.lang.String">
 		<defaultValueExpression><![CDATA["Иновационен форум \"Джон Атанасофф\" в София Тех Парк"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="dateTime" class="java.lang.String">
-		<defaultValueExpression><![CDATA["30 и 31-ви Май 2023"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["28 и 29-и Май 2024"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[]]>
