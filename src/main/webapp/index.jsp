@@ -648,17 +648,17 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=TBgWyM2l0Mg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/TBgWyM2l0Mg?si=dpZCo43-u6vbSNn8&amp;start=1790" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <iframe width="560" height="315" src="https://www.youtube.com/live/aApQjogPsZo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/aApQjogPsZo?si=LMcUrIl8jxA6XFJT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=7QFQkmZ0VNI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/7QFQkmZ0VNI?si=N07yuKKsddAIXUyM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </div>
             <div class="row">
@@ -668,12 +668,12 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=vuzTgaeU5TI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/vuzTgaeU5TI?si=pyHlBYjXaidDBYJ0&amp;start=4639" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=5Cvqava5J54" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/5Cvqava5J54?si=xQlMEBci9S12RVej&amp;start=2961" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
