@@ -643,7 +643,7 @@
 <%--            </div>--%>
             <div class="row">
                 <div class="col-12">
-                    <h1 class="section-title">jPrime 2024 Live Stream</h1>
+                    <h1 class="section-title">jPrime 2024 Live Streams</h1>
                 </div>
             </div>
             <div class="row">
@@ -659,6 +659,21 @@
             <div class="row">
                 <div class="col-12">
                     <iframe width="560" height="315" src="https://www.youtube.com/watch?v=7QFQkmZ0VNI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="section-title">jPrime 2024 Day 2 Live Streams</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=vuzTgaeU5TI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=5Cvqava5J54" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
