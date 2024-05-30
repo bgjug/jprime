@@ -627,7 +627,7 @@
         </div>
     </section>
     <!-- remove flickr since it creates 15 mbs :D:D maybe will move it to another page but SHOULD NOT BE ON INDEX -->
-    %-->
+    --%>
 
     <section id="sponsors" class="section-padding">
         <div class="container" style="text-align: center">
@@ -636,26 +636,31 @@
                     <h1 class="section-title">jPrime ${jprime_year} recordings</h1>
                 </div>
             </div>
+<%--            <div class="row">--%>
+<%--                <div class="col-12">--%>
+<%--                    <iframe width="560" height="315" src="https://www.youtube.com/embed/DxOVSxpFI8E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             <div class="row">
                 <div class="col-12">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/DxOVSxpFI8E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <h1 class="section-title">jPrime 2024 Live Stream</h1>
                 </div>
             </div>
-<%--            <div class="row">--%>
-<%--                <div class="col-12">--%>
-<%--                    <h1 class="section-title">jPrime Live Stream</h1>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="row">--%>
-<%--                <div class="col-12">--%>
-<%--                    <iframe width="560" height="315" src="https://www.youtube.com/embed/OL4Ye2r7ohY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="row">--%>
-<%--                <div class="col-12">--%>
-<%--                    <iframe width="560" height="315" src="https://www.youtube.com/embed/OL4Ye2r7ohY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+            <div class="row">
+                <div class="col-12">
+                    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=TBgWyM2l0Mg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <iframe width="560" height="315" src="https://www.youtube.com/live/aApQjogPsZo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=7QFQkmZ0VNI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
     </section>
 
