@@ -9,6 +9,6 @@ public final class Globals {
 	private Globals(){
 	}
 
-	public static final Branch CURRENT_BRANCH = Branch.YEAR_2024;
+	public static final Branch CURRENT_BRANCH = Branch.YEAR_2025;
 
 }

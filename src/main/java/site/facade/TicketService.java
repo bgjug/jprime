@@ -100,7 +100,7 @@ public class TicketService {
             ticketData.addDetail(new TicketDetail(ticketNumber, visitor.getName(), "Visitor"));
             visitor.setTicket(ticketNumber);
             return Pair.of(visitor, Pair.of(ticketExporter.exportTicket(ticketData, InvoiceLanguage.EN), ticketExporter.generateTicketQrCode(ticketData)));
-        }).collect(Collectors.toList());
+        }).toList();
 
         return ticketPdfs.stream().map(p -> {
             Visitor visitor = p.getKey();

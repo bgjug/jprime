@@ -33,6 +33,8 @@ public class InvoiceData {
     private static final Map<Branch, TicketPrices> TICKET_PRICE_MAP = MapUtils.putAll(new HashMap<>(),
         new Object[] {
             Branch.YEAR_2024,
+            new TicketPrices(BigDecimal.valueOf(280D), BigDecimal.valueOf(180D), BigDecimal.valueOf(100D)),
+            Branch.YEAR_2025,
             new TicketPrices(BigDecimal.valueOf(280D), BigDecimal.valueOf(180D), BigDecimal.valueOf(100D))
         });
 
