@@ -39,7 +39,12 @@ p {
   font-size: 14px; }
 
 p.carousel-jprime {
-  font-size: 20px;
+  font-size: 25px;
+  color: black;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  line-height: initial;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 ul, ol {
@@ -1916,3 +1921,7 @@ blockquote {
   background: rgba(255, 255, 255, 0.2);
   color: #fff;
   border-color: #fff; }
+
+#pricing .pricing-list ul {
+  min-height: 185px;
+}

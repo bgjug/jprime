@@ -48,6 +48,8 @@ public class IndexController {
         model.addAttribute("goldSponsors", goldSponsors);
         List<Sponsor> goldLiteSponsors = shuffleAndGet(allSponsors, SponsorPackage.GOLD_LITE);
         model.addAttribute("goldLiteSponsors", goldLiteSponsors);
+        List<Sponsor> goldOpenSponsors = shuffleAndGet(allSponsors, SponsorPackage.GOLD_OPEN);
+        model.addAttribute("goldOpenSponsors", goldOpenSponsors);
         List<Sponsor> silverSponsors = shuffleAndGet(allSponsors, SponsorPackage.SILVER);
         model.addAttribute("silverSponsors", silverSponsors);
 
@@ -95,6 +97,7 @@ public class IndexController {
         model.addAttribute("student_ticket_price", String.format("%.2f",prices.getStudentPrice()));
 
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(currentBranch.getCfpCloseDate()));
+        model.addAttribute("cfp_closed", currentBranch.getCfpCloseDate().isAfter(LocalDateTime.now()));
 
         // 30th and 31st of May 2023
         LocalDateTime startDate = currentBranch.getStartDate();
