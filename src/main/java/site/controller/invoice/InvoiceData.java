@@ -33,9 +33,9 @@ public class InvoiceData {
     private static final Map<Branch, TicketPrices> TICKET_PRICE_MAP = MapUtils.putAll(new HashMap<>(),
         new Object[] {
             Branch.YEAR_2024,
-            new TicketPrices(BigDecimal.valueOf(280D), BigDecimal.valueOf(180D), BigDecimal.valueOf(100D)),
+            new TicketPrices(BigDecimal.valueOf(280.0), BigDecimal.valueOf(180.0), BigDecimal.valueOf(100.0)),
             Branch.YEAR_2025,
-            new TicketPrices(BigDecimal.valueOf(280D), BigDecimal.valueOf(180D), BigDecimal.valueOf(100D))
+            new TicketPrices(BigDecimal.valueOf(340.0), BigDecimal.valueOf(230.0), BigDecimal.valueOf(130.0))
         });
 
     private String invoiceNumber;

@@ -18,7 +18,7 @@
         }
     </script>
     <!-- Basic -->
-    <title>jPrime | Home</title>
+    <title>jPrime ${conference_dates} | Home</title>
 
     <!-- Define Charset -->
     <meta charset="utf-8">
@@ -49,19 +49,21 @@
             <div class="carousel-item active">
                 <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
                 <div class="carousel-caption d-md-block">
-<%--                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>--%>
-<%--                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s">The conference will be held--%>
-<%--                        on ${conference_dates} in Sofia Tech Park</p>--%>
-<%--                    <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
+                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>
+                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s">The conference will be held
+                        <br/>on ${conference_dates} in Sofia Tech Park</p>
+                    <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>
                     <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->
                 </div>
             </div>
-<%--            <div class="carousel-item">--%>
-<%--                <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide">--%>
-<%--                <div class="carousel-caption d-md-block">--%>
-<%--                    <h1 class="wow bounceIn heading" data-wow-delay=".7s">CFP IS STILL OPEN!</h1>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+            <c:if test="${!cfp_closed}">
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
+                    <div class="carousel-caption d-md-block">
+                        <h1 class="wow bounceIn heading" data-wow-delay=".7s">CFP IS STILL OPEN!</h1>
+                    </div>
+                </div>
+            </c:if>
             <div class="carousel-item">
                 <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide">
                 <div class="carousel-caption d-md-block">
@@ -512,6 +514,23 @@
                 </div>
             </c:if>
 
+            <c:if test="${goldOpenSponsors.size() > 0}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="section-sub text-center">Gold Tent Sponsors</h1>
+                    </div>
+                    <c:forEach var="sponsor" items="${goldOpenSponsors}">
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="sponsors-logo">
+                                <a href="${sponsor.companyWebsite}"><img class="img-fluid"
+                                                                         src="/image/sponsor/${sponsor.id}"
+                                                                         alt="${sponsor.companyName}"/></a>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
+
             <c:if test="${silverSponsors.size() > 0}">
                 <div class="row">
                     <div class="col-md-12">
@@ -864,14 +883,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="section-sub text-center">Become a sponsor !</h1>
+                    <h1 class="section-sub text-center">Become a sponsor!</h1>
                 </div>
             </div>
             <div class="row" id="sponsor">
-                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('PLATINUM')}"/>">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-4" style="<c:out value="${sold_out_sponsor_packages.get('PLATINUM')}"/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>7000</span>
+                            <span class="price"><span>BGN</span>8500</span>
                             <h5></h5>
                         </div>
                         <div class="pricing-list">
@@ -893,10 +912,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('GOLD')}"/>">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-4" style="<c:out value="${sold_out_sponsor_packages.get('GOLD')}"/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>5500</span>
+                            <span class="price"><span>BGN</span>6500</span>
                             <h5></h5>
                         </div>
                         <div class="pricing-list">
@@ -916,10 +935,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('GOLD_LITE')}"/>">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-4" style="<c:out value="${sold_out_sponsor_packages.get('GOLD_LITE')}"/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
-                            <span class="price"><span>BGN</span>4500</span>
+                            <span class="price"><span>BGN</span>5300</span>
                             <h5></h5>
                         </div>
                         <div class="pricing-list">
@@ -939,7 +958,32 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-xs-12 mb-3" style="<c:out value="${sold_out_sponsor_packages.get('SILVER')}"/>">
+            </div>
+            <div class="row" id="sponsor1">
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-4" style="<c:out value="${sold_out_sponsor_packages.get('GOLD_OPEN')}"/>">
+                    <div class="price-block-wrapper">
+                        <div class="prici-left">
+                            <span class="price"><span>BGN</span>4500</span>
+                            <h5></h5>
+                        </div>
+                        <div class="pricing-list">
+                            <h4>Gold Tent</h4>
+                            <ul>
+                                <li><i class="icon-check"></i><span class="text">6 free passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">10% discount on additional passes!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Booth under the tent in the area in front of the venue!</span></li>
+                                <li><i class="icon-close"></i><span class="text">Logo on the presentation screens</span></li>
+                            </ul>
+                            <c:if test="${sold_out_sponsor_packages.get('GOLD_OPEN').length() == 0}">
+                                <a href="mailto:conference@jprime.io?subject=gold_open_sponsorship" class="btn btn-common">Sign Up Now</a>
+                            </c:if>
+                            <c:if test="${sold_out_sponsor_packages.get('GOLD_OPEN').length() > 0}">
+                                <a href="javascript: return 0;" class="btn btn-common">Sold out</a>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 mb-4" style="<c:out value="${sold_out_sponsor_packages.get('SILVER')}"/>">
                     <div class="price-block-wrapper">
                         <div class="prici-left">
                             <span class="price"><span>BGN</span>2000</span>
