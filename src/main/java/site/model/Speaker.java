@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import site.config.Globals;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -37,6 +38,8 @@ public class Speaker extends User {
     private String headline;
 
     private String twitter;
+
+    private String bsky;
 
     private Boolean featured = false;
 
@@ -130,6 +133,14 @@ public class Speaker extends User {
         this.accepted = accepted;
     }
 
+    public String getBsky() {
+        return bsky;
+    }
+
+    public void setBsky(String bsky) {
+        this.bsky = bsky;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -142,13 +153,13 @@ public class Speaker extends User {
             return false;
         }
 
-        return !(twitter != null && !twitter.equals(speaker.twitter));
+        return Objects.equals(this.twitter, speaker.twitter) && Objects.equals(this.bsky, speaker.bsky);
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + twitter.hashCode();
+        result = 31 * result + Objects.hashCode(twitter) + Objects.hashCode(bsky);
         return result;
     }
 

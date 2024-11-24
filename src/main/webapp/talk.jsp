@@ -63,6 +63,7 @@
                         <div class="overlay-social-icon text-center">
                             <ul class="social-icons">
                                 <li><a href="http://twitter.com/${talk.submission.speaker.twitter}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="${talk.submission.speaker.bsky}"><i class="fa-brands fa-bluesky" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -82,6 +83,7 @@
                             <div class="overlay-social-icon text-center">
                                 <ul class="social-icons">
                                     <li><a href="http://twitter.com/${talk.submission.coSpeaker.twitter}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                    <li><a href="${talk.submission.coSpeaker.bsky}"><i class="fa-brands fa-bluesky" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
                         </div>
