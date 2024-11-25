@@ -67,7 +67,7 @@
         <div class="carousel-item">
             <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide">
             <div class="carousel-caption d-md-block">
-                <h1 class="wow bounceIn heading" data-wow-delay=".7s">Many amazing speakers!</h1>
+                <h1 class="wow bounceIn heading" data-wow-delay=".7s">Submit your proposal before ${cfp_close_date}!</h1>
             </div>
         </div>
         <div class="carousel-item">
@@ -696,61 +696,61 @@
         <%--                    <iframe width="560" height="315" src="https://www.youtube.com/embed/DxOVSxpFI8E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>--%>
         <%--                </div>--%>
         <%--            </div>--%>
-        <div class="row">
-            <div class="col-12">
-                <h1 class="section-title">jPrime 2024 Live Streams</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/TBgWyM2l0Mg?si=dpZCo43-u6vbSNn8&amp;start=1790"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/aApQjogPsZo?si=LMcUrIl8jxA6XFJT"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/7QFQkmZ0VNI?si=N07yuKKsddAIXUyM"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <h1 class="section-title">jPrime 2024 Day 2 Live Streams</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/vuzTgaeU5TI?si=pyHlBYjXaidDBYJ0&amp;start=4639"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/5Cvqava5J54?si=xQlMEBci9S12RVej&amp;start=2961"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-        </div>
+<%--        <div class="row">--%>
+<%--            <div class="col-12">--%>
+<%--                <h1 class="section-title">jPrime 2024 Live Streams</h1>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="row">--%>
+<%--            <div class="col-12">--%>
+<%--                <iframe width="560" height="315"--%>
+<%--                        src="https://www.youtube.com/embed/TBgWyM2l0Mg?si=dpZCo43-u6vbSNn8&amp;start=1790"--%>
+<%--                        title="YouTube video player" frameborder="0"--%>
+<%--                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"--%>
+<%--                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="row">--%>
+<%--            <div class="col-12">--%>
+<%--                <iframe width="560" height="315"--%>
+<%--                        src="https://www.youtube.com/embed/aApQjogPsZo?si=LMcUrIl8jxA6XFJT"--%>
+<%--                        title="YouTube video player" frameborder="0"--%>
+<%--                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"--%>
+<%--                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="row">--%>
+<%--            <div class="col-12">--%>
+<%--                <iframe width="560" height="315"--%>
+<%--                        src="https://www.youtube.com/embed/7QFQkmZ0VNI?si=N07yuKKsddAIXUyM"--%>
+<%--                        title="YouTube video player" frameborder="0"--%>
+<%--                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"--%>
+<%--                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="row">--%>
+<%--            <div class="col-12">--%>
+<%--                <h1 class="section-title">jPrime 2024 Day 2 Live Streams</h1>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="row">--%>
+<%--            <div class="col-12">--%>
+<%--                <iframe width="560" height="315"--%>
+<%--                        src="https://www.youtube.com/embed/vuzTgaeU5TI?si=pyHlBYjXaidDBYJ0&amp;start=4639"--%>
+<%--                        title="YouTube video player" frameborder="0"--%>
+<%--                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"--%>
+<%--                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="row">--%>
+<%--            <div class="col-12">--%>
+<%--                <iframe width="560" height="315"--%>
+<%--                        src="https://www.youtube.com/embed/5Cvqava5J54?si=xQlMEBci9S12RVej&amp;start=2961"--%>
+<%--                        title="YouTube video player" frameborder="0"--%>
+<%--                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"--%>
+<%--                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>--%>
+<%--            </div>--%>
+<%--        </div>--%>
     </div>
 </section>
 
