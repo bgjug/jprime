@@ -18,7 +18,7 @@
     <!-- Responsive Metatag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <jsp:directive.include file="theme-colors.jsp" />
+    <jsp:directive.include file="theme-colors.jsp"/>
 
     <!-- Page Description and Author -->
     <meta name="description" content="jPrime ${jprime_year}">
@@ -28,7 +28,6 @@
 </head>
 
 <body>
-
 
 
 <user:header/>
@@ -53,12 +52,18 @@
         <div class="col-sm-6 col-md-6 col-lg-3">
             <div class="team-item text-center" style="margin: 0px">
                 <div class="team-img">
-                    <img class="img-fluid" src="/image/speaker/${speaker.id}"  height="365" width="280"/>
+                    <img class="img-fluid" src="/image/speaker/${speaker.id}" height="365" width="280"/>
                     <div class="team-overlay">
                         <div class="overlay-social-icon text-center">
                             <ul class="social-icons">
-                                <li><a href="http://twitter.com/${speaker.twitter}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="${speaker.bsky}"><i class="fa-brands fa-bluesky" aria-hidden="true"></i></a></li>
+                                <c:if test="${speaker.twitter != null and speaker.twitter.length() > 0}">
+                                    <li><a href="https://x.com/${speaker.twitter}"><i
+                                            class="fa-brands fa-x" aria-hidden="true"></i></a></li>
+                                </c:if>
+                                <c:if test="${speaker.bsky != null and speaker.bsky.length() > 0}">
+                                    <li><a href="${speaker.bsky}"><i class="fa-brands fa-bluesky"
+                                                                     aria-hidden="true"></i></a></li>
+                                </c:if>
                             </ul>
                         </div>
                     </div>

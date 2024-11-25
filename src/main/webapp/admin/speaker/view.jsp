@@ -41,7 +41,7 @@
 				<th><em>Name</em></th>
 				<th><em>Email</em></th>
 				<th><em>Phone</em></th>
-				<th><em>Twitter</em></th>
+				<th><em>Twitter/X</em></th>
 				<th><em>Bluesky</em></th>
 				<th><em>Featured?</em></th>
 				<th><em>Accepted?</em></th>

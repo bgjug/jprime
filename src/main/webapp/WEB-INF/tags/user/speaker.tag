@@ -30,7 +30,7 @@
 </dl>
 <dl>
     <dt>
-        <label for="${role}.twitter">Twitter</label>
+        <label for="${role}.twitter">X</label>
     </dt>
     <dd>
         <form:input path="${role}.twitter" />

@@ -49,7 +49,7 @@
                                     class="icon-social-facebook"></i></a>
                         </li>
                         <li>
-                            <a class="twitter" href="https://twitter.com/bgjug"><i class="icon-social-twitter"></i></a>
+                            <a class="twitter" href="https://x.com/bgjug"><i class="icon-social-twitter"></i></a>
                         </li>
                         <li>
                             <a class="youtube" href="https://www.youtube.com/user/BulgarianJUG/videos"><i

@@ -62,7 +62,7 @@
 			</dl>
 			<dl>
 				<dt>
-					<label for="twitter">Twitter</label>
+					<label for="twitter">X</label>
 				</dt>
 				<dd>
 					<form:input path="twitter" />

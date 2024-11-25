@@ -18,7 +18,7 @@
     <!-- Responsive Metatag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <jsp:directive.include file="theme-colors.jsp" />
+    <jsp:directive.include file="theme-colors.jsp"/>
 
     <!-- Page Description and Author -->
     <meta name="description" content="JPrime Conference">
@@ -40,14 +40,16 @@
                     <h2>No talk information available</h2>
                 </c:when>
                 <c:otherwise>
-                    <h2>${talk.submission.title} (<fmt:formatDate pattern="HH:mm" value="${talk.startDateTime}" /> - <fmt:formatDate pattern="HH:mm" value="${talk.endDateTime}" /> on <fmt:formatDate pattern="EEEE" value="${talk.endDateTime}" />)</h2>
+                    <h2>${talk.submission.title} (<fmt:formatDate pattern="HH:mm"
+                                                                  value="${talk.startDateTime}"/> -
+                        <fmt:formatDate pattern="HH:mm" value="${talk.endDateTime}"/> on <fmt:formatDate
+                                pattern="EEEE" value="${talk.endDateTime}"/>)</h2>
                 </c:otherwise>
             </c:choose>
         </div>
     </div>
 </div>
 <!-- Page Banner End -->
-
 
 
 <br/>
@@ -58,18 +60,26 @@
         <div class="col-sm-6 col-md-6 col-lg-3">
             <div class="team-item text-center" style="margin: 0px">
                 <div class="team-img">
-                    <img class="img-fluid" src="/image/speaker/${talk.submission.speaker.id}"  height="365" width="280"/>
+                    <img class="img-fluid" src="/image/speaker/${talk.submission.speaker.id}" height="365"
+                         width="280"/>
                     <div class="team-overlay">
                         <div class="overlay-social-icon text-center">
                             <ul class="social-icons">
-                                <li><a href="http://twitter.com/${talk.submission.speaker.twitter}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="${talk.submission.speaker.bsky}"><i class="fa-brands fa-bluesky" aria-hidden="true"></i></a></li>
+                                <c:if test="${talk.submission.speaker.twitter != null and talk.submission.speaker.twitter.length() > 0}">
+                                    <li><a href="https://x.com/${talk.submission.speaker.twitter}"><i
+                                            class="fa-brands fa-x" aria-hidden="true"></i></a></li>
+                                </c:if>
+                                <c:if test="${talk.submission.speaker.bsky != null and talk.submission.speaker.bsky.length() > 0}">
+                                    <li><a href="${talk.submission.speaker.bsky}"><i
+                                            class="fa-brands fa-bluesky" aria-hidden="true"></i></a></li>
+                                </c:if>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="info-text">
-                    <h3><c:out value="${talk.submission.speaker.firstName}"/>&nbsp;<c:out value="${talk.submission.speaker.lastName}"/></h3>
+                    <h3><c:out value="${talk.submission.speaker.firstName}"/>&nbsp;<c:out
+                            value="${talk.submission.speaker.lastName}"/></h3>
                     <p><c:out value="${talk.submission.speaker.headline}"/></p>
                 </div>
             </div>
@@ -78,18 +88,26 @@
             <div class="col-sm-6 col-md-6 col-lg-3">
                 <div class="team-item text-center" style="margin: 0px">
                     <div class="team-img">
-                        <img class="img-fluid" src="/image/speaker/${talk.submission.coSpeaker.id}"  height="365" width="280"/>
+                        <img class="img-fluid" src="/image/speaker/${talk.submission.coSpeaker.id}"
+                             height="365" width="280"/>
                         <div class="team-overlay">
                             <div class="overlay-social-icon text-center">
                                 <ul class="social-icons">
-                                    <li><a href="http://twitter.com/${talk.submission.coSpeaker.twitter}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="${talk.submission.coSpeaker.bsky}"><i class="fa-brands fa-bluesky" aria-hidden="true"></i></a></li>
+                                    <c:if test="${talk.submission.coSpeaker.twitter != null and talk.submission.coSpeaker.twitter.length() > 0}">
+                                        <li><a href="https://x.com/${talk.submission.coSpeaker.twitter}"><i
+                                                class="fa-brands fa-x" aria-hidden="true"></i></a></li>
+                                    </c:if>
+                                    <c:if test="${talk.submission.coSpeaker.bsky != null and talk.submission.coSpeaker.bsky.length() > 0}">
+                                        <li><a href="${talk.submission.coSpeaker.bsky}"><i
+                                                class="fa-brands fa-bluesky" aria-hidden="true"></i></a></li>
+                                    </c:if>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="info-text">
-                        <h3><c:out value="${talk.submission.coSpeaker.firstName}"/>&nbsp;<c:out value="${talk.submission.coSpeaker.lastName}"/></h3>
+                        <h3><c:out value="${talk.submission.coSpeaker.firstName}"/>&nbsp;<c:out
+                                value="${talk.submission.coSpeaker.lastName}"/></h3>
                         <p><c:out value="${talk.submission.coSpeaker.headline}"/></p>
                     </div>
                 </div>
@@ -107,19 +125,21 @@
                             ${talk.submission.description}
                         </p>
                         <p><b>Talk Level:</b><br/>
-                        ${talk.submission.level}
+                            ${talk.submission.level}
                         </p>
                         <c:choose>
                             <c:when test="${not empty talk.submission.coSpeaker}">
                                 <p>
                                     <b>Speakers:</b><br/>
                                 <p>
-                                    <b><c:out value="${talk.submission.speaker.firstName}"/>&nbsp;<c:out value="${talk.submission.speaker.lastName}"/>: </b>
-                                    ${talk.submission.speaker.bio}
+                                    <b><c:out value="${talk.submission.speaker.firstName}"/>&nbsp;<c:out
+                                            value="${talk.submission.speaker.lastName}"/>: </b>
+                                        ${talk.submission.speaker.bio}
                                 </p>
                                 <p>
-                                    <b><c:out value="${talk.submission.coSpeaker.firstName}"/>&nbsp;<c:out value="${talk.submission.coSpeaker.lastName}"/>: </b>
-                                    ${talk.submission.coSpeaker.bio}
+                                    <b><c:out value="${talk.submission.coSpeaker.firstName}"/>&nbsp;<c:out
+                                            value="${talk.submission.coSpeaker.lastName}"/>: </b>
+                                        ${talk.submission.coSpeaker.bio}
                                 </p>
                                 </p>
                             </c:when>
@@ -143,7 +163,6 @@
 
 
 <user:footer/>
-
 
 
 </body>
