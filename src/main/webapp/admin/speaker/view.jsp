@@ -41,7 +41,8 @@
 				<th><em>Name</em></th>
 				<th><em>Email</em></th>
 				<th><em>Phone</em></th>
-				<th><em>Twitter</em></th>
+				<th><em>Twitter/X</em></th>
+				<th><em>Bluesky</em></th>
 				<th><em>Featured?</em></th>
 				<th><em>Accepted?</em></th>
 				<th><em>Branch?</em></th>
@@ -54,6 +55,7 @@
                     <td>${speaker.email}</td>
 					<td>${speaker.phone}</td>
 					<td>${speaker.twitter}</td>
+					<td>${speaker.bsky}</td>
 					<td><input disabled type="checkbox" <c:if test="${speaker.featured}">checked</c:if>></td>
 					<td><input disabled type="checkbox" <c:if test="${speaker.accepted}">checked</c:if>></td>
 					<td>${speaker.branch}</td>

@@ -62,10 +62,18 @@
 			</dl>
 			<dl>
 				<dt>
-					<label for="twitter">Twitter</label>
+					<label for="twitter">X</label>
 				</dt>
 				<dd>
 					<form:input path="twitter" />
+				</dd>
+			</dl>
+			<dl>
+				<dt>
+					<label for="bsky">Bluesky Profile</label>
+				</dt>
+				<dd>
+					<form:input path="bsky" placeholder="A link to Bluesky profile" pattern="^https:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\/profile\/\b[-a-zA-Z0-9()@:%_\+.~#?&=]*$" size="30" maxlength="100"/>
 				</dd>
 			</dl>
 			<dl>

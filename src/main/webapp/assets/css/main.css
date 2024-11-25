@@ -1042,6 +1042,8 @@ background: #f2f2f2;}
           background: #3B5998; }
         .team-item .overlay-social-icon .social-icons li a:hover .fa-twitter {
           background: #00aced; }
+        .team-item .overlay-social-icon .social-icons li a:hover .fa-bluesky {
+          background: #00aced; }
         .team-item .overlay-social-icon .social-icons li a:hover .fa-instagram {
           background: #fb3958; }
   .team-item .info-text {

@@ -30,10 +30,18 @@
 </dl>
 <dl>
     <dt>
-        <label for="${role}.twitter">Twitter</label>
+        <label for="${role}.twitter">X</label>
     </dt>
     <dd>
         <form:input path="${role}.twitter" />
+    </dd>
+</dl>
+<dl>
+    <dt>
+        <label for="${role}.bsky">Bluesky Profile</label>
+    </dt>
+    <dd>
+        <form:input path="${role}.bsky" placeholder="The link to your Bluesky profile" pattern="^https:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\/profile\/\b[-a-zA-Z0-9()@:%_\+.~#?&=]*$" size="30" maxlength="100"/>
     </dd>
 </dl>
 <dl>

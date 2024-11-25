@@ -5,7 +5,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" >
     <!-- Fonts -->
-    <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/fontawesome/css/brands.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/fontawesome/css/solid.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/fontawesome/css/regular.min.css">
     <!-- Icon -->
     <link rel="stylesheet" type="text/css" href="assets/fonts/simple-line-icons.css">
     <!-- Slicknav -->

@@ -8,7 +8,7 @@
 <!--[if (gte IE 9)|!(IE)]><html lang="en" class="no-js"> <![endif]-->
 <html lang="en">
 <head>
-	
+
     <!-- Basic -->
     <title>jPrime | Blog</title>
 
@@ -18,7 +18,7 @@
     <!-- Responsive Metatag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <jsp:directive.include file="theme-colors.jsp" />
+    <jsp:directive.include file="theme-colors.jsp"/>
 
     <!-- Page Description and Author -->
     <meta name="description" content="jPrime ${jprime_year}">
@@ -55,13 +55,23 @@
                             <div class="team-overlay">
                                 <div class="overlay-social-icon text-center">
                                     <ul class="social-icons">
-                                        <li><a href="http://twitter.com/${speaker.twitter}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <c:if test="${speaker.twitter != null and speaker.twitter.length() > 0}">
+                                            <li><a href="https://x.com/${speaker.twitter}"><i
+                                                    class="fa-brands fa-x" aria-hidden="true"></i></a>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${speaker.bsky != null and speaker.bsky.length() > 0}">
+                                            <li><a href="${speaker.bsky}"><i class="fa-brands fa-bluesky"
+                                                                             aria-hidden="true"></i></a></li>
+                                        </c:if>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="info-text">
-                            <h3><a href="/speaker/${speaker.id}"><c:out value="${speaker.firstName}"/>&nbsp;<c:out value="${speaker.lastName}"/></a></h3>
+                            <h3><a href="/speaker/${speaker.id}"><c:out
+                                    value="${speaker.firstName}"/>&nbsp;<c:out
+                                    value="${speaker.lastName}"/></a></h3>
                             <p><c:out value="${speaker.headline}"/></p>
                         </div>
                     </div>
@@ -70,23 +80,22 @@
             </c:forEach>
 
         </div>
-<%--        <div class="row justify-content-center mt-4">--%>
-<%--            <div class="col-xs-12">--%>
-<%--                <nav aria-label="Page navigation justify-content-md-center">--%>
-<%--                    <ul class="pagination">--%>
-<%--                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>--%>
-<%--                        <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
-<%--                        <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
-<%--                        <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
-<%--                        <li class="page-item"><a class="page-link" href="#">Next</a></li>--%>
-<%--                    </ul>--%>
-<%--                </nav>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+        <%--        <div class="row justify-content-center mt-4">--%>
+        <%--            <div class="col-xs-12">--%>
+        <%--                <nav aria-label="Page navigation justify-content-md-center">--%>
+        <%--                    <ul class="pagination">--%>
+        <%--                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>--%>
+        <%--                        <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
+        <%--                        <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
+        <%--                        <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
+        <%--                        <li class="page-item"><a class="page-link" href="#">Next</a></li>--%>
+        <%--                    </ul>--%>
+        <%--                </nav>--%>
+        <%--            </div>--%>
+        <%--        </div>--%>
     </div>
 </section>
 <!-- Team Section End -->
-
 
 
 <user:footer/>
