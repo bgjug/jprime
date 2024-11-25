@@ -686,11 +686,11 @@
 
 <section id="sponsors" class="section-padding">
     <div class="container" style="text-align: center">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="section-title">jPrime ${jprime_year} recordings</h1>
-            </div>
-        </div>
+<%--        <div class="row">--%>
+<%--            <div class="col-12">--%>
+<%--                <h1 class="section-title">jPrime ${jprime_year} recordings</h1>--%>
+<%--            </div>--%>
+<%--        </div>--%>
         <%--            <div class="row">--%>
         <%--                <div class="col-12">--%>
         <%--                    <iframe width="560" height="315" src="https://www.youtube.com/embed/DxOVSxpFI8E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>--%>
