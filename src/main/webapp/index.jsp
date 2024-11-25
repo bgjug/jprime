@@ -154,12 +154,12 @@
                     <a href="https://www.vmware.com"><img class="img-fluid" src="images/vmware.png" alt=""></a>
                 </div>
             </div-->
-            <div class="col-md-2">
-                <div class="sponsors-logo">
-                    <a href="https://www.softwareag.com"><img class="img-fluid" src="images/softwareag.png"
-                                                             alt=""></a>
-                </div>
-            </div>
+<%--            <div class="col-md-2">--%>
+<%--                <div class="sponsors-logo">--%>
+<%--                    <a href="https://www.softwareag.com"><img class="img-fluid" src="images/softwareag.png"--%>
+<%--                                                             alt=""></a>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             <div class="col-md-2">
                 <div class="sponsors-logo">
                     <a href="https://www.sap.com/bulgaria"><img class="img-fluid" src="images/sap.png" alt=""></a>
