@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,9 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import site.config.Globals;
 import site.facade.AdminService;
@@ -28,7 +27,7 @@ import site.model.VisitorStatus;
 @RequestMapping(value = "/raffle")
 public class RaffleController {
 
-	public static final String RAFFLE_JSP = "/raffle.jsp";
+	public static final String RAFFLE_JSP = "raffle";
 
 	private static final Logger log = LogManager.getLogger(RaffleController.class);
 

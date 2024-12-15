@@ -1,13 +1,14 @@
 package site.facade;
 
+import java.awt.image.BufferedImage;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
-import site.app.Application;
 
-import java.awt.image.BufferedImage;
+import site.app.Application;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

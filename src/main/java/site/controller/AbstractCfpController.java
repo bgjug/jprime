@@ -1,10 +1,11 @@
 package site.controller;
 
-import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import jakarta.mail.MessagingException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -21,9 +22,9 @@ import site.facade.ThumbnailService;
 import site.facade.UserService;
 import site.model.Branch;
 import site.model.SessionLevel;
+import site.model.SessionType;
 import site.model.Speaker;
 import site.model.Submission;
-import site.model.SessionType;
 
 import static site.controller.ResourceAsString.resourceAsString;
 
@@ -126,8 +127,7 @@ public class AbstractCfpController {
         return resourceAsString("/" + templateFileName);
     }
 
-    public void sendNotificationEmails(Submission submission)
-                    throws IOException, MessagingException {
+    public void sendNotificationEmails(Submission submission) throws IOException, MessagingException {
 
         mailFacade.sendEmail(submission.getSpeaker().getEmail(), "jPrime talk proposal",
                              loadMailContentTemplate("submissionContent.html"));

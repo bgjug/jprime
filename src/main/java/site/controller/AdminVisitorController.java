@@ -1,6 +1,5 @@
 package site.controller;
 
-import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -15,6 +14,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import jakarta.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -43,6 +44,7 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.CsvMapReader;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
+
 import site.config.Globals;
 import site.facade.AdminService;
 import site.facade.MailService;
@@ -63,10 +65,10 @@ import site.model.VisitorType;
 @RequestMapping(value = "/admin/visitor")
 public class AdminVisitorController {
 
-    public static final String VISITORS_JSP = "/admin/visitor/view.jsp";
-    public static final String VISITOR_EDIT_JSP = "/admin/visitor/edit.jsp";
-    public static final String VISITOR_UPLOAD_JSP = "/admin/visitor/upload.jsp";
-    public static final String VISITOR_EDIT_SEND = "/admin/visitor/send.jsp";
+    public static final String VISITORS_JSP = "admin/visitor/view";
+    public static final String VISITOR_EDIT_JSP = "admin/visitor/edit";
+    public static final String VISITOR_UPLOAD_JSP = "admin/visitor/upload";
+    public static final String VISITOR_EDIT_SEND = "admin/visitor/send";
 
     private static final String EMAIL = "Email";
     private static final String EMAIL_ADDRESS = "Email Address";

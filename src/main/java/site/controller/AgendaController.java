@@ -1,5 +1,8 @@
 package site.controller;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
 import site.config.Globals;
 import site.facade.UserService;
 import site.model.Session;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Controller
 public class AgendaController {
@@ -40,10 +40,10 @@ public class AgendaController {
     	Session talk = userService.findSessionTalk(id);
     	if (talk == null) {
 			logger.error(String.format("Invalid session id (%1$d)", id));
-    		return "/404.jsp";
+    		return "404";
 		}
     	model.addAttribute("talk", talk);
-        return "/talk.jsp";
+        return "talk";
     }
     
     @GetMapping("/agenda")
@@ -74,6 +74,6 @@ public class AgendaController {
 
 		 //implementing variant 1 since we are in a rush + we do
 
-        return "/talks.jsp";
+        return "talks";
     }
 }

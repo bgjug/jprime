@@ -1,6 +1,6 @@
 package site.controller;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,13 +34,13 @@ public class AdminTagController {
 		model.addAttribute("totalPages", tags.getTotalPages());
 		model.addAttribute("number", tags.getNumber());
 
-		return "/admin/tag/view.jsp";
+		return "admin/tag/view";
 	}
 	
 	@PostMapping("/add")
 	public String add(@Valid final Tag tag, BindingResult bindingResult){
 		if(bindingResult.hasErrors()){
-			return "/admin/tag/edit.jsp";
+			return "admin/tag/edit";
 		}
 		this.adminFacade.saveTag(tag);
 		
@@ -50,14 +50,14 @@ public class AdminTagController {
 	@GetMapping("/add")
 	public String edit(Model model){
 		model.addAttribute("tag", new Tag());
-		return "/admin/tag/edit.jsp";
+		return "admin/tag/edit";
 	}
 	
 	@GetMapping("/edit/{itemId}")
 	public String edit(@PathVariable Long itemId, Model model){
 		Tag tag = adminFacade.findOneTag(itemId);
 		model.addAttribute("tag", tag);
-		return "/admin/tag/edit.jsp";
+		return "admin/tag/edit";
 	}
 	
 	@GetMapping("/remove/{itemId}")

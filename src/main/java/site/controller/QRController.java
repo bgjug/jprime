@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import site.facade.UserService;
 import site.facade.UserServiceJPro;
 import site.model.Visitor;
@@ -14,10 +15,10 @@ import site.model.Visitor;
 @Controller()
 @RequestMapping(value = "/qr")
 public class QRController {
-    public static final String QR_JSP = "/qr.jsp";
-    public static final String REG_PRESENCE_JSP = "/reg-presence.jsp";
-    public static final String REG_PRESENCE_JPRO_JSP = "/reg-presence-jpro.jsp";
-    public static final String SET_PRESENT_SUCCESSFUL_JSP = "/set-present-successful.jsp";
+    public static final String QR_JSP = "qr";
+    public static final String REG_PRESENCE_JSP = "reg-presence";
+    public static final String REG_PRESENCE_JPRO_JSP = "reg-presence-jpro";
+    public static final String SET_PRESENT_SUCCESSFUL_JSP = "set-present-successful";
 
     @Autowired
     UserService userService;

@@ -17,6 +17,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import org.springframework.stereotype.Service;
+
 import site.config.Globals;
 
 import static org.apache.commons.beanutils.PropertyUtils.getProperty;

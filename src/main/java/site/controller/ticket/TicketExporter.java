@@ -32,6 +32,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+
 import site.config.Globals;
 import site.controller.invoice.InvoiceLanguage;
 

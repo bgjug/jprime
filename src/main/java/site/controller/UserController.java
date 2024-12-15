@@ -1,8 +1,15 @@
 package site.controller;
 
+import java.io.IOException;
+
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.FormattedMessage;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,25 +22,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import site.config.Globals;
 import site.facade.MailService;
 import site.facade.ResetPasswordService;
 import site.model.User;
 import site.repository.UserRepository;
 
-import javax.mail.MessagingException;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.io.IOException;
-
 import static site.controller.ResourceAsString.resourceAsString;
 
 @Controller
 public class UserController {
 
-	public static final String RESET_PASSWORD_JSP = "/resetPassword.jsp";
-	public static final String CREATE_NEW_PASSWORD_JSP = "/createNewPassword.jsp";
-	public static final String SUCCESS_SCREEN_JSP = "/successScreen.jsp";
+	public static final String RESET_PASSWORD_JSP = "resetPassword";
+	public static final String CREATE_NEW_PASSWORD_JSP = "createNewPassword";
+	public static final String SUCCESS_SCREEN_JSP = "successScreen";
 
 	@Autowired
 	private UserRepository userRepository;
@@ -55,26 +58,26 @@ public class UserController {
 	@GetMapping("/signup")
 	public String signup(Model model) {
 		model.addAttribute("user", new User());
-		return "/signup.jsp";
+		return "signup";
 	}
 
 	@PostMapping("/signup")
 	public String signip(@Valid final User user, BindingResult bindingResult, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
-			return "/signup.jsp";
+			return "signup";
 		}
 
 		if (StringUtils.isEmpty(user.getPassword()) || !user.getPassword().equals(user.getCpassword())) {
 			bindingResult.rejectValue("cpassword", "notmatch.password", "Passwords dont match!");
 
-			return "/signup.jsp";
+			return "signup";
 		}
 
 		User existingUser = userRepository.findUserByEmail(user.getEmail());
 		if (existingUser != null) {
 			bindingResult.rejectValue("email", "email.exists", "This email already exists, please use forgot password");
 
-			return "/signup.jsp";
+			return "signup";
 		}
 
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -86,7 +89,7 @@ public class UserController {
 			String mailTitle = "Welcome to JPrime!";
 			mailService.sendEmail(user.getEmail(), mailTitle, mailContent);
 		} catch (MessagingException | IOException e) {
-			logger.error("Error while sending Welcoming Mail to  " + user, e);
+			logger.error(new FormattedMessage("Error while sending Welcoming Mail to {}", user), e);
 		}
 
 		request.getSession().setAttribute("user", user);
@@ -95,7 +98,7 @@ public class UserController {
 
 	@GetMapping("/login")
 	public String login(Model model) {
-		return "/login.jsp";
+		return "login";
 	}
 	
 	@GetMapping("/logout")

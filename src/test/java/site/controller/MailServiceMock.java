@@ -1,10 +1,11 @@
 package site.controller;
 
-import site.facade.MailService;
-
-import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.mail.MessagingException;
+
+import site.facade.MailService;
 
 /**
  * @author Ivan St. Ivanov

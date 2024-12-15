@@ -40,16 +40,16 @@ public class NavController {
 
         if (articles.getTotalElements() == 0) {
             logger.error("Invalid tag name ({}})", tagName);
-            return "/404.jsp";
+            return "404";
         }
 
 		if(articles.getTotalElements() > 1) {
 			model.addAttribute("articles", articles);
-			return "/blog.jsp";
+			return "blog";
 		} else { //just 1 for example Agenda will be such an article 1 article in a tag.
             // no need for paging and so on
 			model.addAttribute("article", articles.getContent().iterator().next());
-			return "/single-post.jsp";
+			return "single-post";
 		}
 	}
 
@@ -60,7 +60,7 @@ public class NavController {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
         // redirect to nav
-        return "/blog.jsp";
+        return "blog";
     }
 
     //read a single blog
@@ -71,7 +71,7 @@ public class NavController {
 
         if (article == null) {
             logger.error(String.format("Invalid tag id (%1$d)", id));
-            return "/404.jsp";
+            return "404";
         }
 
         //security
@@ -79,7 +79,7 @@ public class NavController {
             model.addAttribute("article", article);
         }
         model.addAttribute("tags", userFacade.findAllTags());
-        return "/single-post.jsp";
+        return "single-post";
     }
     
     @GetMapping("/nav/article")
@@ -90,7 +90,7 @@ public class NavController {
 
         if (article == null) {
             logger.error(String.format("Invalid tag title (%1$s)", title));
-            return "/404.jsp";
+            return "404";
         }
 
         //security
@@ -98,14 +98,14 @@ public class NavController {
             model.addAttribute("article", article);
         }
         model.addAttribute("tags", userFacade.findAllTags());
-        return "/single-post.jsp";
+        return "single-post";
     }
 
     //read a single blog
     @GetMapping("/team")
     public String showTeam(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
-        return "/team.jsp";
+        return "team";
     }
 
     //read a single blog
@@ -116,7 +116,7 @@ public class NavController {
         model.addAttribute("conference_dates", String.format("%d-%s", startDate.getDayOfMonth(),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
 
-        return "/venue.jsp";
+        return "venue";
     }
 
 }

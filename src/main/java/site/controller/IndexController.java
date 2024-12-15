@@ -1,5 +1,14 @@
 package site.controller;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.util.Pair;
@@ -15,19 +24,10 @@ import site.model.Partner;
 import site.model.Sponsor;
 import site.model.SponsorPackage;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 @Controller
 public class IndexController {
 
-    static final String PAGE_INDEX = "index.jsp";
+    static final String PAGE_INDEX = "index";
 
     static final int PARTNERS_CHUNK_SIZE = 6;
 

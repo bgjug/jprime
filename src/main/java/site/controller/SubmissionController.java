@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import javax.mail.MessagingException;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -17,11 +17,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.config.Globals;
@@ -42,10 +47,9 @@ public class SubmissionController extends AbstractCfpController {
 
     private static final Logger logger = LogManager.getLogger(SubmissionController.class);
 
-    static final String ADMIN_SUBMISSION_VIEW_JSP = "/admin/submission/view.jsp";
-    static final String ADMIN_SUBMISSION_EDIT_JSP = "/admin/submission/edit.jsp";
+    static final String ADMIN_SUBMISSION_VIEW_JSP = "admin/submission/view";
+    static final String ADMIN_SUBMISSION_EDIT_JSP = "admin/submission/edit";
     public static final String REDIRECT = "redirect:";
-    public static final String PRODUCES_TYPE = "application/octet-stream";
 
     @Autowired
     @Qualifier(AdminService.NAME)
@@ -142,8 +146,8 @@ public class SubmissionController extends AbstractCfpController {
         return listSubmissions(model, pageable);
     }
 
-    @GetMapping(value = "/exportCSV", produces = PRODUCES_TYPE)
-    public@ResponseBody void exportSubmissionsToCSV(HttpServletResponse response) {
+    @GetMapping(path = "/exportCSV", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public void exportSubmissionsToCSV(HttpServletResponse response) {
     	List<Submission> findAllSubmittedSubmissionsForCurrentBranch = adminFacade.findAllSubmittedSubmissionsForCurrentBranch();
     	File submissionsCSVFile;
 		try {
@@ -154,7 +158,7 @@ public class SubmissionController extends AbstractCfpController {
 		}
 
 		try(InputStream inputStream = new FileInputStream(submissionsCSVFile) ){
-	        response.setContentType(PRODUCES_TYPE);
+	        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
 	        response.setHeader("Content-Disposition", "attachment; filename=" + submissionsCSVFile.getName());
 	        response.setHeader("Content-Length", String.valueOf(submissionsCSVFile.length()));
 	        FileCopyUtils.copy(inputStream, response.getOutputStream());

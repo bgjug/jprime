@@ -1,5 +1,8 @@
 package site.controller;
 
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -9,11 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import site.facade.AdminService;
 import site.model.VenueHall;
-
-import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 /**
  * @author Ivan St. Ivanov
@@ -22,8 +23,8 @@ import javax.validation.Valid;
 @RequestMapping("/admin/hall")
 public class AdminVenueHallController {
 
-    public static final String HALLS_VIEW_JSP = "/admin/hall/view.jsp";
-    public static final String HALLS_EDIT_JSP = "/admin/hall/edit.jsp";
+    public static final String HALLS_VIEW_JSP = "admin/hall/view";
+    public static final String HALLS_EDIT_JSP = "admin/hall/edit";
 
     @Autowired
     @Qualifier(AdminService.NAME)

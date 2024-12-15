@@ -28,7 +28,7 @@ public class CSVService {
 
 	public File exportSubmissions(List<Submission> submissions) throws IOException{
 		File submissionsCSVFile = File.createTempFile("submissions.", ".csv");
-		logger.info("Created submissions file with path: " + submissionsCSVFile.getAbsolutePath());
+		logger.info("Created submissions file with path: {}", submissionsCSVFile.getAbsolutePath());
         try(ICsvMapWriter mapWriter = new CsvMapWriter(new FileWriter(submissionsCSVFile.getAbsolutePath()), CsvPreference.STANDARD_PREFERENCE)) {
         	writeSubmissions(submissions, mapWriter);
 		}

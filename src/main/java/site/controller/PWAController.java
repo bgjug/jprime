@@ -1,18 +1,18 @@
 package site.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import site.config.Globals;
 import site.model.Session;
 import site.model.Submission;
 import site.repository.SessionRepository;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Teodor Tunev
@@ -75,7 +75,7 @@ public class PWAController {
 
     @GetMapping({"/pwa", "/pwa/**"})
     public String getPwaPage() {
-        return "/pwa.jsp";
+        return "pwa";
     }
 
 }

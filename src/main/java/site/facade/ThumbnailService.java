@@ -1,17 +1,11 @@
 package site.facade;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-
-import javax.imageio.ImageIO;
-
-import net.coobird.thumbnailator.Thumbnails;
 
 import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;

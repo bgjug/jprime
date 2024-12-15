@@ -1,12 +1,13 @@
 package site.facade;
 
-import javax.transaction.Transactional;
-
 import java.util.List;
+
+import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
 import site.model.Visitor;
 import site.model.VisitorJPro;
 import site.repository.VisitorJProRepository;

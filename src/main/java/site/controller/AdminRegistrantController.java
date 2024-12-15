@@ -1,5 +1,11 @@
 package site.controller;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import jakarta.validation.Valid;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -17,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import site.config.Globals;
 import site.facade.AdminService;
 import site.facade.BackgroundJobService;
@@ -25,11 +32,6 @@ import site.model.Branch;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.model.VisitorStatus;
-
-import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author Ivan St. Ivanov
@@ -40,9 +42,9 @@ public class AdminRegistrantController {
 
     private static final Logger logger = LogManager.getLogger(AdminRegistrantController.class);
 
-    public static final String REGISTRANT_VIEW_JSP = "/admin/registrant/view.jsp";
+    public static final String REGISTRANT_VIEW_JSP = "admin/registrant/view";
 
-    public static final String REGISTRANT_EDIT_JSP = "/admin/registrant/edit.jsp";
+    public static final String REGISTRANT_EDIT_JSP = "admin/registrant/edit";
 
     @Autowired
     @Qualifier(AdminService.NAME)
