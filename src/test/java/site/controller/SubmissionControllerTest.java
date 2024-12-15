@@ -5,7 +5,6 @@ import java.io.File;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -51,11 +50,9 @@ class SubmissionControllerTest {
     private MailServiceMock mailer;
 
     @Autowired
-    @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
     
     @Autowired
-    @Qualifier(CSVService.NAME)
     private CSVService csvFacade;
 
     private Submission valhalla;

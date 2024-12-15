@@ -4,8 +4,11 @@ import org.springframework.stereotype.Repository;
 
 import site.model.Registrant;
 
-@Repository(value = RegistrantEpayInvoiceNumberGeneratorRepository.NAME)
+@Repository(value="epayInvoiceNumberGenerator")
 public interface RegistrantEpayInvoiceNumberGeneratorRepository extends RegistrantNumberGeneratorRepository<Registrant.EpayInvoiceNumberGenerator> {
 
-	String NAME = "registrantEpayInvoiceNumberGeneratorRepository";
+    @Override
+    default Registrant.EpayInvoiceNumberGenerator newInstance() {
+        return new Registrant.EpayInvoiceNumberGenerator();
+    }
 }

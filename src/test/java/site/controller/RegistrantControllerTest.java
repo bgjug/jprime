@@ -6,7 +6,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -45,7 +44,6 @@ class RegistrantControllerTest {
     private WebApplicationContext wac;
 
     @Autowired
-    @Qualifier(RegistrantRepository.NAME)
     private RegistrantRepository registrantRepository;
 
     private MockMvc mockMvc;
@@ -104,7 +102,7 @@ class RegistrantControllerTest {
                 .param("paymentType", Registrant.PaymentType.BANK_TRANSFER.name()))
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/admin/registrant/view"));
-        List<Registrant> registrants = (List<Registrant>) registrantRepository.findAll();
+        List<Registrant> registrants = registrantRepository.findAll();
         assertThat(registrants.size(), is(3));
         assertThat(registrants.stream().filter(registrant -> "SAP Labs Bulgaria".equals(registrant.getName())).count(), is(
                 1L));
@@ -120,13 +118,13 @@ class RegistrantControllerTest {
 
     @Test
     void getDeleteShouldRemoveRegistrant() throws Exception {
-        List<Registrant> registrants = (List<Registrant>) registrantRepository.findAll();
+        List<Registrant> registrants = registrantRepository.findAll();
         assertThat(registrants.stream().filter(registrant -> "Ivan St. Ivanov".equals(registrant.getName())).count(), is(
                 1L));
         mockMvc.perform(get("/admin/registrant/remove/" + ivan.getId()))
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/admin/registrant/view"));
-        registrants = (List<Registrant>) registrantRepository.findAll();
+        registrants = registrantRepository.findAll();
         assertThat(registrants.size(), is(1));
         assertThat(registrants.stream().filter(registrant -> "Ivan St. Ivanov".equals(registrant.getName())).count(), is(
                 0L));
@@ -153,7 +151,7 @@ class RegistrantControllerTest {
                 .param("paymentType", Registrant.PaymentType.BANK_TRANSFER.name()))
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/admin/registrant/view"));
-        List<Registrant> registrants = (List<Registrant>) registrantRepository.findAll();
+        List<Registrant> registrants = registrantRepository.findAll();
         assertThat(registrants.size(), is(3));
         assertThat(registrants.stream().filter(registrant -> "Adams Family".equals(registrant.getName())).count(), is(
                 2L));

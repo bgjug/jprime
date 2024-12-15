@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +36,8 @@ public class RaffleController {
 	
 	private final ObjectMapper mapper;
 
-	public RaffleController(@Qualifier(AdminService.NAME) AdminService adminService,
-		@Qualifier(UserServiceJPro.NAME) UserServiceJPro userServiceJPro, ObjectMapper mapper) {
+	public RaffleController(AdminService adminService,
+		UserServiceJPro userServiceJPro, ObjectMapper mapper) {
 		this.adminService = adminService;
 		this.userServiceJPro = userServiceJPro;
 		this.mapper = mapper;

@@ -16,7 +16,6 @@ import jakarta.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -51,19 +50,16 @@ public class TicketsController {
     public static final String TICKETS_RESULT_JSP = "tickets-result";
 
     @Autowired
-    @Qualifier(MailService.NAME)
     @Lazy
     private MailService mailFacade;
 
     @Autowired
-    @Qualifier(UserService.NAME)
     private UserService userFacade;
 
     @Autowired
     private InvoiceExporter invoiceExporter;
 
     @Autowired
-    @Qualifier(RegistrantService.NAME)
     private RegistrantService registrantFacade;
 
     @Value("${save.invoice.on.email.failure:false}")

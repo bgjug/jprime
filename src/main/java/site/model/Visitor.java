@@ -86,7 +86,7 @@ public class Visitor extends AbstractEntity {
 
     /**
      * retrieves the company related to the visitor. <br />
-     * Check https://github.com/bgjug/jprime/issues/28
+     * Check <a href="https://github.com/bgjug/jprime/issues/28">...</a>
      */
     public String getCompany() {
         return company;

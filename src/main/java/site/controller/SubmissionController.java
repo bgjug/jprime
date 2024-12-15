@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
@@ -52,11 +51,9 @@ public class SubmissionController extends AbstractCfpController {
     public static final String REDIRECT = "redirect:";
 
     @Autowired
-    @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
 
     @Autowired
-    @Qualifier(CSVService.NAME)
     private CSVService csvFacade;
 
     @GetMapping("/view/all")

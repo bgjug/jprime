@@ -9,10 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import site.model.User;
 
-@Repository(value = UserRepository.NAME)
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
-	String NAME = "userRepository";
 
 	List<User> findByEmail(String email);
 	

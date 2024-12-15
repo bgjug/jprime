@@ -3,7 +3,6 @@ package site.controller;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,6 @@ import site.model.Tag;
 public class AdminTagController {
 
 	@Autowired
-	@Qualifier(AdminService.NAME)
 	private AdminService adminFacade;
 	
 	@GetMapping("/view")

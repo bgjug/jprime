@@ -13,11 +13,8 @@ import site.model.Visitor;
 /**
  * Created by mitia on 28.04.15.
  */
-@Repository(value = VisitorRepository.NAME)
+@Repository
 public interface VisitorRepository extends JpaRepository<Visitor, Long> {
-
-
-    String NAME = "visitorRepository";
 
     @Query("SELECT v FROM Registrant r join r.visitors v where r.branch = :branch ORDER BY v.createdDate DESC")
     List<Visitor> findAllNewestUsers(Branch branch);

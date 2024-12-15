@@ -11,11 +11,9 @@ import site.model.User;
 /**
  * @author Zhorzh Raychev
  */
-@Repository(value = ResetPasswordTokenRepository.NAME)
+@Repository
 public interface ResetPasswordTokenRepository extends JpaRepository<ResetPasswordToken, Long> {
 
-	String NAME = "resetPasswordTokenRepository";
-	
 	ResetPasswordToken findByTokenId(String tokenId);
 
 	List<ResetPasswordToken> findAllByOwner(User owner);

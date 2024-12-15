@@ -13,7 +13,6 @@ import jakarta.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,57 +21,44 @@ import site.config.Globals;
 import site.model.*;
 import site.repository.*;
 
-@Service(AdminService.NAME)
+@Service
 @Transactional
 public class AdminService {
-
-    public static final String NAME = "adminFacade";
 
     @Autowired
     private EntityManager entityManager;
 
     @Autowired
-    @Qualifier(ArticleRepository.NAME)
     private ArticleRepository articleRepository;
 
     @Autowired
-    @Qualifier(SpeakerRepository.NAME)
     private SpeakerRepository speakerRepository;
 
     @Autowired
-    @Qualifier(SponsorRepository.NAME)
     private SponsorRepository sponsorRepository;
 
     @Autowired
-    @Qualifier(PartnerRepository.NAME)
     private PartnerRepository partnerRepository;
 
     @Autowired
-    @Qualifier(UserRepository.NAME)
     private UserRepository userRepository;
 
     @Autowired
-    @Qualifier(TagRepository.NAME)
     private TagRepository tagRepository;
 
     @Autowired
-    @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
 
     @Autowired
-    @Qualifier(VisitorRepository.NAME)
     private VisitorRepository visitorRepository;
 
     @Autowired
-    @Qualifier(RegistrantRepository.NAME)
     private RegistrantRepository registrantRepository;
 
     @Autowired
-    @Qualifier(SessionRepository.NAME)
     private SessionRepository sessionRepository;
 
     @Autowired
-    @Qualifier(VenueHallRepository.NAME)
     private VenueHallRepository venueHallRepository;
 
     @Autowired

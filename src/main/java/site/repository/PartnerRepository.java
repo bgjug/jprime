@@ -8,10 +8,8 @@ import org.springframework.stereotype.Repository;
 import site.model.Partner;
 import site.model.PartnerPackage;
 
-@Repository(value = PartnerRepository.NAME)
+@Repository
 public interface PartnerRepository extends JpaRepository<Partner, Long> {
-
-	String NAME = "partnerRepository";
 
     List<Partner> findByActiveAndPartnerPackage(Boolean active, PartnerPackage partnerPackage);
 }

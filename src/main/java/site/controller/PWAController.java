@@ -2,12 +2,9 @@ package site.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import site.config.Globals;
 import site.model.Session;
@@ -17,60 +14,67 @@ import site.repository.SessionRepository;
 /**
  * @author Teodor Tunev
  */
-@Controller
+@RestController
 public class PWAController {
 
     private final SessionRepository sessionRepository;
 
-    public PWAController(@Qualifier(SessionRepository.NAME) SessionRepository sessionRepository) {
+    public PWAController(SessionRepository sessionRepository) {
         this.sessionRepository = sessionRepository;
     }
 
-    private static class SessionDTO {
-        public Long id;
+    public static class SessionDTO {
+        public final Long id;
 
-        public String hallName;
+        public final String hallName;
 
-        public String title;
+        public final String title;
 
-        public String lectorName;
+        public final String lectorName;
 
-        public String coLectorName;
+        public final String coLectorName;
 
-        public String talkDescription;
+        public final String talkDescription;
 
-        public LocalDateTime startTime;
+        public final LocalDateTime startTime;
 
-        public LocalDateTime endTime;
+        public final LocalDateTime endTime;
 
         SessionDTO(Session session, String hallName) {
             this.hallName = hallName;
             this.id = session.getId();
             this.startTime = session.getStartTime();
             this.endTime = session.getEndTime();
-            this.title = session.getTitle();
 
             Submission submission = session.getSubmission();
             if (submission != null) {
                 if (submission.getSpeaker() != null) {
-                    this.lectorName = submission.getSpeaker().getFirstName() + " " + submission.getSpeaker().getLastName();
+                    lectorName = submission.getSpeaker().getFirstName() + " " + submission.getSpeaker().getLastName();
+                } else {
+                    lectorName = null;
                 }
 
                 if (submission.getCoSpeaker() != null) {
-                    this.coLectorName = submission.getCoSpeaker().getFirstName() + " " + submission.getCoSpeaker().getLastName();
+                    coLectorName = submission.getCoSpeaker().getFirstName() + " " + submission.getCoSpeaker().getLastName();
+                } else {
+                    coLectorName = null;
                 }
 
-                this.title = submission.getTitle();
-                this.talkDescription = submission.getDescription();
+                title = submission.getTitle();
+                talkDescription = submission.getDescription();
+            } else {
+                coLectorName = null;
+                lectorName = null;
+                title = session.getTitle();
+                talkDescription = null;
             }
         }
     }
 
-    @ResponseBody
     @GetMapping("/pwa/findSessionsByHall")
-    public List<?> getSessionByHall(String hallName) {
+    public List<SessionDTO> getSessionByHall(String hallName) {
         List<Session> sessions = sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH.name());
-        return sessions.stream().map(session -> new SessionDTO(session, hallName)).collect(Collectors.toList());
+        return sessions.stream().map(session -> new SessionDTO(session, hallName)).toList();
     }
 
     @GetMapping({"/pwa", "/pwa/**"})

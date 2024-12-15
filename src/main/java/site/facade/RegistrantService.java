@@ -3,7 +3,6 @@ package site.facade;
 import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import site.model.Registrant;
@@ -11,14 +10,11 @@ import site.model.Visitor;
 import site.model.VisitorStatus;
 import site.repository.RegistrantRepository;
 
-@Service(RegistrantService.NAME)
+@Service
 @Transactional
 public class RegistrantService {
 
-	public static final String NAME = "registrantFacade";
-
     @Autowired
-    @Qualifier(RegistrantRepository.NAME)
     private RegistrantRepository registrantRepository;
 
     @Autowired

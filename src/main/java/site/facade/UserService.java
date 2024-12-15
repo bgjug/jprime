@@ -9,7 +9,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,49 +27,38 @@ import site.repository.VisitorRepository;
 
 import static java.util.stream.Collectors.groupingBy;
 
-@Service(UserService.NAME)
+@Service
 @Transactional
 public class UserService {
-
-	public static final String NAME = "userFacade";
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Autowired
-	@Qualifier(ArticleRepository.NAME)
 	private ArticleRepository articleRepository;
 
 	@Autowired
-	@Qualifier(SpeakerRepository.NAME)
 	private SpeakerRepository speakerRepository;
 
     @Autowired
-    @Qualifier(UserRepository.NAME)
     private UserRepository userRepository;
 
 	@Autowired
-	@Qualifier(SponsorRepository.NAME)
 	private SponsorRepository sponsorRepository;
 
 	@Autowired
-	@Qualifier(PartnerRepository.NAME)
 	private PartnerRepository partnerRepository;
 
 	@Autowired
-	@Qualifier(TagRepository.NAME)
 	private TagRepository tagRepository;
 
     @Autowired
-    @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
 
     @Autowired
-    @Qualifier(SessionRepository.NAME)
-	private SessionRepository sessionRepository;
+    private SessionRepository sessionRepository;
 
     @Autowired
-    @Qualifier(VisitorRepository.NAME)
     private VisitorRepository visitorRepository;
 
     /**

@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +35,6 @@ public class AdminSessionController {
     public static final String SESSIONS_EDIT_JSP = "admin/session/edit";
 
     @Autowired
-    @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
 
     @GetMapping("/view")
@@ -83,7 +81,7 @@ public class AdminSessionController {
 
     @Transactional
         @GetMapping("/remove/{itemId}")
-    public String remove(@PathVariable Long itemId, Model model) {
+    public String remove(@PathVariable Long itemId) {
         adminFacade.deleteSession(itemId);
         return "redirect:/admin/session/view";
     }

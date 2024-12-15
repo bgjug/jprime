@@ -12,7 +12,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -46,8 +45,9 @@ public class AdminRegistrantController {
 
     public static final String REGISTRANT_EDIT_JSP = "admin/registrant/edit";
 
+    private static final String REDIRECT_ADMIN_REGISTRANT_VIEW = "redirect:/admin/registrant/view";
+
     @Autowired
-    @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
 
     @Autowired
@@ -58,8 +58,8 @@ public class AdminRegistrantController {
 
     @GetMapping("/view")
     public String viewRegistrants(Pageable pageable, Model model, @RequestParam(required = false)String year) {
-        int year_int = StringUtils.isNotBlank(year) ? Integer.parseInt(year) : Globals.CURRENT_BRANCH.getYear();
-        Branch branch = Branch.valueOfYear(Integer.toString(year_int));
+        int yearInt = StringUtils.isNotBlank(year) ? Integer.parseInt(year) : Globals.CURRENT_BRANCH.getYear();
+        Branch branch = Branch.valueOfYear(Integer.toString(yearInt));
 
         Page<Registrant> registrantsPage = adminFacade.findRegistrantsByBranch(pageable, branch);
         model.addAttribute("registrants", registrantsPage.getContent());
@@ -105,22 +105,22 @@ public class AdminRegistrantController {
             return REGISTRANT_EDIT_JSP;
         }
         adminFacade.saveRegistrant(registrant);
-        return "redirect:/admin/registrant/view";
+        return REDIRECT_ADMIN_REGISTRANT_VIEW;
     }
 
     @GetMapping(value = "/remove/{itemId}")
     public String remove(@PathVariable Long itemId) {
         adminFacade.deleteRegistrant(itemId);
-        return "redirect:/admin/registrant/view";
+        return REDIRECT_ADMIN_REGISTRANT_VIEW;
     }
 
     @GetMapping(value = "/send-tickets/{itemId}")
-    public String sendTicketsForRegistrant(@PathVariable Long itemId, Model model) {
+    public String sendTicketsForRegistrant(@PathVariable Long itemId) {
         Registrant registrant = adminFacade.findOneRegistrant(itemId);
 
         List<Visitor> visitors = registrant.getVisitors();
         if (CollectionUtils.isEmpty(visitors)) {
-            return "redirect:/admin/registrant/view";
+            return REDIRECT_ADMIN_REGISTRANT_VIEW;
         }
 
         if (visitors.size() > 2) {
@@ -132,7 +132,7 @@ public class AdminRegistrantController {
             visitors.forEach(this::sendTicket);
         }
 
-        return "redirect:/admin/registrant/view";
+        return REDIRECT_ADMIN_REGISTRANT_VIEW;
     }
 
     private String emailErrorLog(Visitor visitor) {

@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,16 +37,13 @@ public class AbstractCfpController {
     public static final String JPRIME_CONF_MAIL_ADDRESS = "conference@jprime.io";
 
     @Autowired
-    @Qualifier(UserService.NAME)
     protected UserService userFacade;
 
     @Autowired
-    @Qualifier(MailService.NAME)
     @Lazy
     private MailService mailFacade;
 
     @Autowired
-    @Qualifier(ThumbnailService.NAME)
     private ThumbnailService thumbnailService;
 
     protected void updateCfpModel(Model model, Submission submission) {

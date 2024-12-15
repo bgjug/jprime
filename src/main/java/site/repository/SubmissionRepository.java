@@ -15,11 +15,9 @@ import site.model.SubmissionStatus;
 /**
  * @author Ivan St. Ivanov
  */
-@Repository(value = SubmissionRepository.NAME)
+@Repository
 @RepositoryRestResource(path = "submissions", exported = false)
 public interface SubmissionRepository extends JpaRepository<Submission, Long> {
-
-    String NAME = "submissionRepository";
 
     List<Submission> findByStatus(SubmissionStatus status);
 

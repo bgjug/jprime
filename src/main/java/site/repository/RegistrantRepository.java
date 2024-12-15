@@ -9,10 +9,9 @@ import org.springframework.stereotype.Repository;
 import site.model.Branch;
 import site.model.Registrant;
 
-@Repository(value = RegistrantRepository.NAME)
+@Repository
 public interface RegistrantRepository extends JpaRepository<Registrant, Long> {
 
-	String NAME = "registrantRepository";
 //    String SELECT_ARTICLES_BY_TAG_STMT = "SELECT a FROM Article a JOIN a.tags t WHERE t.name = :tagName and a.published=true";
 
 //    @Query(SELECT_ARTICLES_BY_TAG_STMT)

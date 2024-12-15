@@ -11,11 +11,10 @@ import org.springframework.stereotype.Repository;
 
 import site.model.Article;
 
-@Repository(value = ArticleRepository.NAME)
+@Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-	String NAME = "articleRepository";
-    String SELECT_ARTICLES_BY_TAG_STMT = "SELECT a FROM Article a JOIN a.tags t WHERE t.name = :tagName and a.published=true ORDER BY a.createdDate DESC ";
+	String SELECT_ARTICLES_BY_TAG_STMT = "SELECT a FROM Article a JOIN a.tags t WHERE t.name = :tagName and a.published=true ORDER BY a.createdDate DESC ";
     String SELECT_PUBLISHED_ARTICLES = "SELECT a FROM Article a WHERE a.published=true";
     String SELECT_NEWEST_ARTICLES = "SELECT a FROM Article a ORDER BY a.createdDate DESC";
 

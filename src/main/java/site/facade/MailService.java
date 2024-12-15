@@ -20,10 +20,8 @@ import org.springframework.stereotype.Service;
 /**
  * @author Ivan St. Ivanov
  */
-@Service(MailService.NAME)
+@Service
 public class MailService {
-    public static final String NAME = "mailFacade";
-
     private static final Logger logger = LogManager.getLogger(MailService.class);
 
     @Value("${spring.mail.username}")

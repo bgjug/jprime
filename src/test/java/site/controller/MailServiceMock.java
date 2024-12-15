@@ -3,8 +3,6 @@ package site.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.mail.MessagingException;
-
 import site.facade.MailService;
 
 /**
@@ -17,8 +15,7 @@ class MailServiceMock extends MailService {
     String lastMessageText;
     
     @Override
-    public void sendEmail(String to, String subject, String messageText)
-            throws MessagingException {
+    public void sendEmail(String to, String subject, String messageText) {
         recipientAddresses.add(to);
         lastMessageText = messageText;
     }

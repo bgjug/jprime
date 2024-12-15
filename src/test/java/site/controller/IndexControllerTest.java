@@ -9,7 +9,6 @@ import org.hamcrest.core.IsInstanceOf;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -53,28 +52,22 @@ class IndexControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    @Qualifier(TagRepository.NAME)
     private TagRepository tagRepository;
 
     @Autowired
-    @Qualifier(SponsorRepository.NAME)
     private SponsorRepository sponsorRepository;
 
     @Autowired
-    @Qualifier(ArticleRepository.NAME)
     private ArticleRepository articleRepository;
 
     @Autowired
-    @Qualifier(SpeakerRepository.NAME)
     private SpeakerRepository speakerRepository;
     
     @Autowired
-    @Qualifier(PartnerRepository.NAME)
     private PartnerRepository partnerRepository;
     
     
     @Autowired
-    @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
 
     private Sponsor google;

@@ -7,21 +7,19 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import org.apache.logging.log4j.Logger;
 import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;
 
-@Service(ThumbnailService.NAME)
+@Service
 public class ThumbnailService {
+
+    private static final Logger logger = org.apache.logging.log4j.LogManager.getLogger(ThumbnailService.class);
 
     public enum ResizeType {
         FIT_TO_HEIGHT,
         //		FIT_TO_WIDTH, //not yet used
         FIT_TO_RATIO
-    }
-
-    public static final String NAME = "ThumbnailService";
-
-    public ThumbnailService() {
     }
 
     public BufferedImage rescale(BufferedImage image, int newWidth, int newHeight, ResizeType resizeType) {
@@ -74,7 +72,7 @@ public class ThumbnailService {
             readyImageInBytes = out.toByteArray();
             out.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("An error occurred while generating image thumbnail: {}", e.getMessage());
         }
         return readyImageInBytes;
 

@@ -12,10 +12,8 @@ import org.springframework.stereotype.Repository;
 import site.model.Branch;
 import site.model.Speaker;
 
-@Repository(value = SpeakerRepository.NAME)
+@Repository
 public interface SpeakerRepository extends JpaRepository<Speaker, Long> {
-
-	String NAME = "speakerRepository";
 
     @Query("SELECT s FROM Speaker s WHERE s.firstName = :firstName AND s.lastName = :lastName")
     Speaker findSpeakerByName(@Param("firstName") String firstName, @Param("lastName") String lastName);

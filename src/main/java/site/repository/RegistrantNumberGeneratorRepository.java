@@ -13,4 +13,6 @@ public interface RegistrantNumberGeneratorRepository<T extends Registrant.Number
     default Class<?> repositoryClass() {
         return this.getClass();
     }
+
+    T newInstance();
 }

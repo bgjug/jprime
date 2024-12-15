@@ -3,7 +3,6 @@ package site.controller;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +26,6 @@ public class AdminUserController {
     public static final String USER_EDIT_JSP = "admin/user/edit";
 
     @Autowired
-    @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
 
     @GetMapping("/view")
@@ -43,7 +41,7 @@ public class AdminUserController {
     }
 
     @PostMapping("/add")
-    public String addUser(@Valid final User user, BindingResult bindingResult,Model model) {
+    public String addUser(@Valid final User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return USER_EDIT_JSP;
         }

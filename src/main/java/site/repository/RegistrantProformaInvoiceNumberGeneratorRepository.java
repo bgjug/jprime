@@ -7,8 +7,11 @@ import site.model.Registrant;
 /**
  * @author Mihail Stoynov
  */
-@Repository(value = RegistrantProformaInvoiceNumberGeneratorRepository.NAME)
+@Repository("proformaNumberGenerator")
 public interface RegistrantProformaInvoiceNumberGeneratorRepository extends RegistrantNumberGeneratorRepository<Registrant.ProformaInvoiceNumberGenerator> {
 
-	String NAME = "registrantProformaInvoiceNumberGeneratorRepository";
+    @Override
+    default Registrant.ProformaInvoiceNumberGenerator newInstance() {
+        return new Registrant.ProformaInvoiceNumberGenerator();
+    }
 }

@@ -8,7 +8,6 @@ import jakarta.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -36,8 +35,8 @@ public class AdminSpeakerController {
 
     private final ThumbnailService thumbnailService;
 
-    public AdminSpeakerController(@Qualifier(AdminService.NAME) AdminService adminService,
-        @Qualifier(ThumbnailService.NAME) ThumbnailService thumbnailService) {
+    public AdminSpeakerController(AdminService adminService,
+        ThumbnailService thumbnailService) {
         this.adminService = adminService;
         this.thumbnailService = thumbnailService;
     }

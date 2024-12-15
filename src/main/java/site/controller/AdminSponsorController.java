@@ -5,7 +5,6 @@ import jakarta.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -32,8 +31,8 @@ public class AdminSponsorController {
 
     private final ThumbnailService thumbnailService;
 
-    public AdminSponsorController(@Qualifier(AdminService.NAME) AdminService adminFacade,
-        @Qualifier(ThumbnailService.NAME) ThumbnailService thumbnailService) {
+    public AdminSponsorController(AdminService adminFacade,
+        ThumbnailService thumbnailService) {
         this.adminFacade = adminFacade;
         this.thumbnailService = thumbnailService;
     }
@@ -99,7 +98,7 @@ public class AdminSponsorController {
 
     @Transactional
         @GetMapping("/remove/{itemId}")
-    public String remove(@PathVariable Long itemId, Model model) {
+    public String remove(@PathVariable Long itemId) {
         adminFacade.deleteSponsor(itemId);
         return "redirect:/admin/sponsor/view";
     }

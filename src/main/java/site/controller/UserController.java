@@ -34,6 +34,8 @@ import static site.controller.ResourceAsString.resourceAsString;
 @Controller
 public class UserController {
 
+	private static final Logger logger = LogManager.getLogger(UserController.class);
+
 	public static final String RESET_PASSWORD_JSP = "resetPassword";
 	public static final String CREATE_NEW_PASSWORD_JSP = "createNewPassword";
 	public static final String SUCCESS_SCREEN_JSP = "successScreen";
@@ -46,11 +48,9 @@ public class UserController {
 
 	@Autowired
 	protected MailService mailService;
-	
+
 	@Autowired
 	private ResetPasswordService resetPassService;
-	
-	private static final Logger logger = LogManager.getLogger(UserController.class);
 
 	@Value("${site.url.reset.password:https://jprime.io/createNewPassword?tokenId=}")
 	private  String createNewPasswordUrl;
@@ -82,7 +82,7 @@ public class UserController {
 
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-		this.getUserRepository().save(user);
+		userRepository.save(user);
 
 		try {
 			String mailContent = buildWelcomeMailContent(user, "/welcomingMail.html");
@@ -97,7 +97,7 @@ public class UserController {
 	}
 
 	@GetMapping("/login")
-	public String login(Model model) {
+	public String login() {
 		return "login";
 	}
 	
@@ -108,7 +108,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/resetPassword")
-	public String forgottenPass(@ModelAttribute("sent_to_email") String email, HttpServletRequest request) {
+	public String forgottenPass(@ModelAttribute("sent_to_email") String email) {
 		
 		return RESET_PASSWORD_JSP;
 	}
@@ -122,7 +122,7 @@ public class UserController {
 			return RESET_PASSWORD_JSP;
 		}
 		
-		User user = getUserRepository().findUserByEmail(email);
+		User user = userRepository.findUserByEmail(email);
 		if(user != null) {
 			String tokenId = resetPassService.createNewToken(user);
 
@@ -131,7 +131,7 @@ public class UserController {
 				String mailTitle = "Reset your JPrime password";
 				mailService.sendEmail(email, mailTitle, mailContent);
 			} catch (MessagingException | IOException e) {
-			    logger.error("Error while sending ResetPassword Mail to  " + user, e);
+                logger.error(new FormattedMessage("Error while sending ResetPassword Mail to  {}", user), e);
 			}
 		}
 		redirectAttrs.addFlashAttribute("sent_to_email", email);
@@ -139,7 +139,7 @@ public class UserController {
 	}
 	
 	@GetMapping("createNewPassword")
-	public String createNewPass(@RequestParam(required = true)  String tokenId, Model model){
+	public String createNewPass(@RequestParam  String tokenId, Model model){
 		
 		User owner = resetPassService.checkTokenValidity(tokenId);
 		if(owner == null) {
@@ -151,9 +151,9 @@ public class UserController {
 	}
 
 	@PostMapping("createNewPassword")
-	public String createNewPassPost(@RequestParam(required = true) String tokenId,
-			@RequestParam(required = true) String password,
-			@RequestParam(required = true) String cpassword, final RedirectAttributes redirectAttrs, Model model) {
+	public String createNewPassPost(@RequestParam() String tokenId,
+			@RequestParam() String password,
+			@RequestParam() String cpassword, final RedirectAttributes redirectAttrs, Model model) {
 
 		User owner = resetPassService.checkTokenValidity(tokenId);
 		if (owner == null) {
@@ -169,7 +169,7 @@ public class UserController {
 		}
 		
 		owner.setPassword(passwordEncoder.encode(password));
-		getUserRepository().save(owner);
+		userRepository.save(owner);
 		
 		resetPassService.setTokenToUsed(tokenId);
 		redirectAttrs.addFlashAttribute("user", owner);
@@ -184,14 +184,6 @@ public class UserController {
 		model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
 
 		return SUCCESS_SCREEN_JSP;
-	}
-	
-	public UserRepository getUserRepository() {
-		return userRepository;
-	}
-
-	public void setUserRepository(UserRepository userRepository) {
-		this.userRepository = userRepository;
 	}
 	
     private String buildResetMailContent(User user, String tokenId, String fileName)

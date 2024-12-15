@@ -11,10 +11,8 @@ import site.model.VisitorJPro;
 /**
  * Created by mitia on 28.04.15.
  */
-@Repository(value = VisitorJProRepository.NAME)
+@Repository
 public interface VisitorJProRepository extends JpaRepository<VisitorJPro, Long> {
-
-    String NAME = "visitorJProRepository";
 
     String NEWEST_VISITORS = "SELECT v FROM VisitorJPro v ORDER BY v.createdDate DESC";
 

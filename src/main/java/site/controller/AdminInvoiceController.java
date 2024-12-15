@@ -10,7 +10,6 @@ import jakarta.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -42,7 +41,6 @@ public class AdminInvoiceController {
     public static final String INVOICE_DATA_JSP = "admin/invoice/invoiceData";
 
     @Autowired
-    @Qualifier(RegistrantService.NAME)
     private RegistrantService registrantFacade;
 
     @Autowired
@@ -107,9 +105,10 @@ public class AdminInvoiceController {
         String pdfFileName = generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT());
 
         try {
-            mailFacade.sendEmail(registrant.getEmail(), "jPrime.io original invoice",
-                    "Please find attached the invoice for the conference passes that you purchased.\n\n" +
-                    "The attendees that you registered will receive the tickets a few days before the event on their emails.",
+            mailFacade.sendEmail(registrant.getEmail(), "jPrime.io original invoice", """
+                    Please find attached the invoice for the conference passes that you purchased.
+                    
+                    The attendees that you registered will receive the tickets a few days before the event on their emails.""",
                     invoice, pdfFileName);
             mailFacade.sendEmail("conference@jprime.io", "jPrime.io invoice",
                     "The attached invoice was sent to " + registrant.getEmail(), invoice,

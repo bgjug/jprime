@@ -5,8 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import site.model.Tag;
 
-@Repository(value = TagRepository.NAME)
+@Repository
 public interface TagRepository extends JpaRepository<Tag, Long> {
-
-	String NAME = "tagRepository";
 }

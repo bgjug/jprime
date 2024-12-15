@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -42,13 +41,12 @@ class TicketsEpayRegisterControllerTest {
     private WebApplicationContext wac;
 
     @Autowired
-    @Qualifier(RegistrantRepository.NAME)
     private RegistrantRepository registrantRepository;
 
     private MockMvc mockMvc;
 
     @BeforeEach
-    void setup() throws Exception {
+    void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
@@ -70,7 +68,7 @@ class TicketsEpayRegisterControllerTest {
                 .param("company", "false"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(TICKETS_RESULT_JSP));
-        List<Registrant> allRegistrants = (List<Registrant>) registrantRepository.findAll();
+        List<Registrant> allRegistrants = registrantRepository.findAll();
         assertThat(allRegistrants.size(), is(1));
         Registrant registrant = allRegistrants.get(0);
         assertThat("John Doe", is(registrant.getName()));
@@ -98,7 +96,7 @@ class TicketsEpayRegisterControllerTest {
                 .param("email", "gomez@adams.com"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(TICKETS_RESULT_JSP));
-        List<Registrant> allRegistrants = (List<Registrant>) registrantRepository.findAll();
+        List<Registrant> allRegistrants = registrantRepository.findAll();
         assertThat(allRegistrants.size(), is(1));
         Registrant registrant = allRegistrants.get(0);
         assertThat("Adams Family", is(registrant.getName()));
@@ -132,7 +130,7 @@ class TicketsEpayRegisterControllerTest {
                 .param("email", "gomez@adams.com"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(TICKETS_RESULT_JSP));
-        List<Registrant> allRegistrants = (List<Registrant>) registrantRepository.findAll();
+        List<Registrant> allRegistrants = registrantRepository.findAll();
         assertThat(allRegistrants.size(), is(1));
         Registrant registrant = allRegistrants.get(0);
         assertThat(2, is(registrant.getVisitors().size()));

@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 class SpeakerRestControllerTest {
 
-    private static final TypeReference<? extends List<Speaker>> SPEAKER_LIST = new TypeReference<List<Speaker>>() {};
+    private static final TypeReference<? extends List<Speaker>> SPEAKER_LIST = new TypeReference<>() {};
 
     @Autowired
     private WebApplicationContext wac;
@@ -46,7 +46,7 @@ class SpeakerRestControllerTest {
     private MockMvc mockMvc;
 
     @BeforeEach
-    void setup() throws Exception {
+    void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         createSpeakers();
     }

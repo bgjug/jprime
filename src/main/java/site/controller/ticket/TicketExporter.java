@@ -67,12 +67,10 @@ public class TicketExporter {
     }
 
     public byte[] exportTicket(TicketData data, InvoiceLanguage language) {
-        String resourceName = null;
-        if (language == InvoiceLanguage.EN) {
-            resourceName = "/ticket/ticket_en.jasper";
-        } else if (language == InvoiceLanguage.BG) {
-            resourceName = "/ticket/ticket_bg.jasper";
-        }
+        String resourceName = switch (language) {
+            case EN -> "/ticket/ticket_en.jasper";
+            case BG -> "/ticket/ticket_bg.jasper";
+        };
 
         InputStream reportTemplate = getClass().getResourceAsStream(resourceName);
         JasperReport jasperReport;

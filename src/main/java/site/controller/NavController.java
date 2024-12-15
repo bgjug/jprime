@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -25,7 +24,7 @@ public class NavController {
 
 	private final UserService userFacade;
 
-    public NavController(@Qualifier(UserService.NAME) UserService userFacade) {
+    public NavController(UserService userFacade) {
         this.userFacade = userFacade;
     }
 

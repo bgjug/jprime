@@ -5,7 +5,6 @@ import jakarta.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -32,8 +31,8 @@ public class AdminPartnerController {
 
     private final ThumbnailService thumbnailService;
 
-    public AdminPartnerController(@Qualifier(AdminService.NAME) AdminService adminFacade,
-        @Qualifier(ThumbnailService.NAME) ThumbnailService thumbnailService) {
+    public AdminPartnerController(AdminService adminFacade,
+        ThumbnailService thumbnailService) {
         this.adminFacade = adminFacade;
         this.thumbnailService = thumbnailService;
     }
@@ -99,7 +98,7 @@ public class AdminPartnerController {
 
     @Transactional
         @GetMapping("/remove/{itemId}")
-    public String remove(@PathVariable Long itemId, Model model) {
+    public String remove(@PathVariable Long itemId) {
         adminFacade.deletePartner(itemId);
         return "redirect:/admin/partner/view";
     }

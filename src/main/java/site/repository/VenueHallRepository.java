@@ -6,9 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import site.model.VenueHall;
 
-@Repository(value = VenueHallRepository.NAME)
+@Repository
 @RepositoryRestResource(path = "halls", exported = false)
 public interface VenueHallRepository extends JpaRepository<VenueHall, Long> {
-
-	String NAME = "hallRepository";
 }

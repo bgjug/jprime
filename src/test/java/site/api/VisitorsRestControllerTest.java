@@ -35,8 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 class VisitorsRestControllerTest {
 
-    private static final TypeReference<List<VisitorFromJSON>> VISITOR_LIST =
-        new TypeReference<List<VisitorFromJSON>>() {};
+    private static final TypeReference<List<VisitorFromJSON>> VISITOR_LIST = new TypeReference<>() {};
 
     @Autowired
     private WebApplicationContext wac;
@@ -50,7 +49,7 @@ class VisitorsRestControllerTest {
     private MockMvc mockMvc;
 
     @BeforeEach
-    void setup() throws Exception {
+    void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         Registrant r = createRegistrant();
 

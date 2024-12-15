@@ -7,10 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import site.model.Sponsor;
 
-@Repository(value = SponsorRepository.NAME)
+@Repository
 public interface SponsorRepository extends JpaRepository<Sponsor, Long> {
-
-	String NAME = "sponsorRepository";
 
     List<Sponsor> findByActive(Boolean active);
 }
