@@ -1,20 +1,20 @@
 package site.controller;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
+
 import site.app.Application;
 import site.model.VenueHall;
 import site.repository.VenueHallRepository;
-
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -40,7 +40,6 @@ class VenueHallControllerTest {
     private WebApplicationContext wac;
 
     @Autowired
-    @Qualifier(VenueHallRepository.NAME)
     private VenueHallRepository venueHallRepository;
 
     private MockMvc mockMvc;

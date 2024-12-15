@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
 import site.model.BackgroundJob;
 import site.repository.BackgroundJobRepository;
 
@@ -35,7 +37,7 @@ public class BackgroundJobService {
     }
 
     @Async
-    public <T> void runJob(String jobId, List<T> items, Function<T, Boolean> jobExecutor,
+    public <T> void runJob(String jobId, List<T> items, Predicate<T> jobExecutor,
         Function<T, String> logFunction) {
         if (jobExecutor == null || CollectionUtils.isEmpty(items) || StringUtils.isEmpty(jobId)) {
             logger.error("[initiateJob] Invalid parameter value!!!");
@@ -48,7 +50,7 @@ public class BackgroundJobService {
         int complete = 0;
         int failed = 0;
         for (T item : items) {
-            boolean success = jobExecutor.apply(item);
+            boolean success = jobExecutor.test(item);
             String logMessage;
             if (!success) {
                 failed++;

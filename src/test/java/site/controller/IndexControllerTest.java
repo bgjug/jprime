@@ -1,16 +1,21 @@
 package site.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
+
 import site.app.Application;
 import site.model.Partner;
 import site.model.PartnerPackage;
@@ -24,11 +29,6 @@ import site.repository.SpeakerRepository;
 import site.repository.SponsorRepository;
 import site.repository.SubmissionRepository;
 import site.repository.TagRepository;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
@@ -52,28 +52,22 @@ class IndexControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    @Qualifier(TagRepository.NAME)
     private TagRepository tagRepository;
 
     @Autowired
-    @Qualifier(SponsorRepository.NAME)
     private SponsorRepository sponsorRepository;
 
     @Autowired
-    @Qualifier(ArticleRepository.NAME)
     private ArticleRepository articleRepository;
 
     @Autowired
-    @Qualifier(SpeakerRepository.NAME)
     private SpeakerRepository speakerRepository;
     
     @Autowired
-    @Qualifier(PartnerRepository.NAME)
     private PartnerRepository partnerRepository;
     
     
     @Autowired
-    @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
 
     private Sponsor google;
@@ -98,7 +92,7 @@ class IndexControllerTest {
         google = new Sponsor(SponsorPackage.GOLD, "Google", "http://www.google.com", "sponsor@google.com");
         apple = new Sponsor(SponsorPackage.GOLD, "Apple", "http://www.apple.com", "sponsor@apple.com");
         sap = new Sponsor(SponsorPackage.PLATINUM, "SAP", "http://www.sap.com", "sponsor@sap.com");
-        sap.setLogo(Files.readAllBytes(Paths.get("src/main/webapp/images/sap.png")));
+        sap.setLogo(Files.readAllBytes(Paths.get("src/main/resources/static/images/sap.png")));
         hater = new Sponsor(SponsorPackage.SILVER, "Now I hate Java", "http://hatejava.com", "hater@hatejava.com", false);
         sponsorRepository.save(google); sponsorRepository.save(apple); sponsorRepository.save(sap); sponsorRepository.save(hater);
 

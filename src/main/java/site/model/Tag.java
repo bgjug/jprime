@@ -1,9 +1,10 @@
 package site.model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import java.util.Collection;
 import java.util.HashSet;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Tag extends AbstractEntity {

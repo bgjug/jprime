@@ -8,15 +8,15 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +25,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import site.config.Globals;
-import site.controller.invoice.*;
+import site.controller.invoice.InvoiceData;
+import site.controller.invoice.InvoiceExporter;
 import site.facade.MailService;
 import site.facade.RegistrantService;
 import site.facade.UserService;
@@ -34,7 +35,7 @@ import site.model.Visitor;
 import site.model.VisitorStatus;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
-import static site.controller.invoice.InvoiceLanguage.*;
+import static site.controller.invoice.InvoiceLanguage.BG;
 
 /**
  * @author Mihail
@@ -44,24 +45,21 @@ public class TicketsController {
 
     private static final Logger logger = LogManager.getLogger(TicketsController.class);
 
-    public static final String TICKETS_END_JSP = "/tickets.jsp";
-    public static final String TICKETS_REGISTER_JSP = "/tickets-register.jsp";
-    public static final String TICKETS_RESULT_JSP = "/tickets-result.jsp";
+    public static final String TICKETS_END_JSP = "tickets";
+    public static final String TICKETS_REGISTER_JSP = "tickets-register";
+    public static final String TICKETS_RESULT_JSP = "tickets-result";
 
     @Autowired
-    @Qualifier(MailService.NAME)
     @Lazy
     private MailService mailFacade;
 
     @Autowired
-    @Qualifier(UserService.NAME)
     private UserService userFacade;
 
     @Autowired
     private InvoiceExporter invoiceExporter;
 
     @Autowired
-    @Qualifier(RegistrantService.NAME)
     private RegistrantService registrantFacade;
 
     @Value("${save.invoice.on.email.failure:false}")

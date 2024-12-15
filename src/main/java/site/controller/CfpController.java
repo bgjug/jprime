@@ -1,5 +1,10 @@
 package site.controller;
 
+import java.time.LocalDateTime;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,13 +18,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
 import site.config.Globals;
 import site.model.Branch;
 import site.model.Submission;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.time.LocalDateTime;
 
 /**
  * @author Ivan St. Ivanov
@@ -29,9 +31,9 @@ public class CfpController extends AbstractCfpController {
 
     private static final Logger logger = LogManager.getLogger(CfpController.class);
 
-    public static final String CFP_OPEN_JSP = "/proposal.jsp";
-    public static final String CFP_CLOSED_JSP = "/cfp-closed.jsp";
-    public static final String CFP_THANK_YOU = "/cfp-thank-you.jsp";
+    public static final String CFP_OPEN_JSP = "proposal";
+    public static final String CFP_CLOSED_JSP = "cfp-closed";
+    public static final String CFP_THANK_YOU = "cfp-thank-you";
 
     @Value("${agenda.published:false}")
     private boolean agendaPublished;

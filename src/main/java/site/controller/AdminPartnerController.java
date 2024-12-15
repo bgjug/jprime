@@ -1,17 +1,20 @@
 package site.controller;
 
-import javax.transaction.Transactional;
-import javax.validation.Valid;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.AdminService;
@@ -28,8 +31,8 @@ public class AdminPartnerController {
 
     private final ThumbnailService thumbnailService;
 
-    public AdminPartnerController(@Qualifier(AdminService.NAME) AdminService adminFacade,
-        @Qualifier(ThumbnailService.NAME) ThumbnailService thumbnailService) {
+    public AdminPartnerController(AdminService adminFacade,
+        ThumbnailService thumbnailService) {
         this.adminFacade = adminFacade;
         this.thumbnailService = thumbnailService;
     }
@@ -43,7 +46,7 @@ public class AdminPartnerController {
         model.addAttribute("totalPages", partners.getTotalPages());
         model.addAttribute("number", partners.getNumber());
 
-        return "/admin/partner/view.jsp";
+        return "admin/partner/view";
     }
 
     @Transactional
@@ -53,7 +56,7 @@ public class AdminPartnerController {
                       @RequestParam(name = "resizeImage", required = false) boolean resize) {
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
-            return "/admin/partner/edit.jsp";
+            return "admin/partner/edit";
         }
         if (!file.isEmpty()) {
             try {
@@ -82,7 +85,7 @@ public class AdminPartnerController {
     @GetMapping("/add")
     public String edit(Model model) {
         model.addAttribute("partner", new Partner());
-        return "/admin/partner/edit.jsp";
+        return "admin/partner/edit";
     }
 
     @Transactional
@@ -90,12 +93,12 @@ public class AdminPartnerController {
     public String edit(@PathVariable Long itemId, Model model) {
         Partner partner = adminFacade.findOnePartner(itemId);
         model.addAttribute("partner", partner);
-        return "/admin/partner/edit.jsp";
+        return "admin/partner/edit";
     }
 
     @Transactional
         @GetMapping("/remove/{itemId}")
-    public String remove(@PathVariable Long itemId, Model model) {
+    public String remove(@PathVariable Long itemId) {
         adminFacade.deletePartner(itemId);
         return "redirect:/admin/partner/view";
     }

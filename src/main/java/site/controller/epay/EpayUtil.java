@@ -1,7 +1,5 @@
 package site.controller.epay;
 
-import site.model.JprimeException;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
@@ -13,6 +11,8 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import site.model.JprimeException;
 
 /**
  * This class does the epay Hmac magic

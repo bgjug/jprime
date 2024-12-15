@@ -1,14 +1,17 @@
 package site.repository;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+
 import site.model.Registrant;
 
 /**
  * @author Mihail Stoynov
  */
-@Repository(value = RegistrantRealInvoiceNumberGeneratorRepository.NAME)
+@Repository("realInvoiceNumberGenerator")
 public interface RegistrantRealInvoiceNumberGeneratorRepository extends RegistrantNumberGeneratorRepository<Registrant.RealInvoiceNumberGenerator> {
 
-	String NAME = "registrantRealInvoiceNumberGeneratorRepository";
+    @Override
+    default Registrant.RealInvoiceNumberGenerator newInstance() {
+        return new Registrant.RealInvoiceNumberGenerator();
+    }
 }

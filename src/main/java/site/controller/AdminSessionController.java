@@ -1,24 +1,27 @@
 package site.controller;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import site.config.Globals;
 import site.facade.AdminService;
 import site.model.Session;
 import site.model.Submission;
 
-import javax.transaction.Transactional;
-
 import static org.springframework.util.ObjectUtils.isEmpty;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Ivan St. Ivanov
@@ -27,12 +30,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/admin/session")
 public class AdminSessionController {
 
-    public static final String SESSIONS_VIEW_JSP = "/admin/session/view.jsp";
+    public static final String SESSIONS_VIEW_JSP = "admin/session/view";
 
-    public static final String SESSIONS_EDIT_JSP = "/admin/session/edit.jsp";
+    public static final String SESSIONS_EDIT_JSP = "admin/session/edit";
 
     @Autowired
-    @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
 
     @GetMapping("/view")
@@ -79,7 +81,7 @@ public class AdminSessionController {
 
     @Transactional
         @GetMapping("/remove/{itemId}")
-    public String remove(@PathVariable Long itemId, Model model) {
+    public String remove(@PathVariable Long itemId) {
         adminFacade.deleteSession(itemId);
         return "redirect:/admin/session/view";
     }

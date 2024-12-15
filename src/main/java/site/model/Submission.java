@@ -1,19 +1,11 @@
 package site.model;
 
-import site.config.Globals;
+import java.util.Objects;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
+import site.config.Globals;
 
 /**
  * @author Ivan St. Ivanov
@@ -47,6 +39,7 @@ public class Submission extends AbstractEntity {
     private Speaker coSpeaker;
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 32)
     private Branch branch = Globals.CURRENT_BRANCH;
 
     @Transient
@@ -145,17 +138,15 @@ public class Submission extends AbstractEntity {
             return false;
         }
 
-        if (speaker != null && !speaker.equals(submission.speaker)) {
+        if (!Objects.equals(speaker, submission.speaker)) {
             return false;
         }
-        return !(title != null && !title.equals(submission.title));
+        return Objects.equals(title, submission.title);
     }
 
     @Override
     public int hashCode() {
-        int result = title.hashCode();
-        result = 31 * result + speaker.hashCode();
-        return result;
+        return Objects.hash(title, speaker);
     }
 
     public String getCaptcha() {

@@ -1,17 +1,14 @@
 package site.repository;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.stereotype.Repository;
-import site.model.Sponsor;
-
 import java.util.List;
 
-@Repository(value = SponsorRepository.NAME)
-public interface SponsorRepository extends PagingAndSortingRepository<Sponsor, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-	String NAME = "sponsorRepository";
+import site.model.Sponsor;
 
-    List<Sponsor> findAll();
+@Repository
+public interface SponsorRepository extends JpaRepository<Sponsor, Long> {
 
     List<Sponsor> findByActive(Boolean active);
 }

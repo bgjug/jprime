@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.MapUtils;
+
 import site.config.Globals;
 import site.model.Branch;
 import site.model.Registrant;

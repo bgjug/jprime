@@ -1,15 +1,17 @@
 package site.controller;
 
+import java.io.File;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
+
 import site.app.Application;
 import site.config.Globals;
 import site.facade.CSVService;
@@ -20,8 +22,6 @@ import site.model.Speaker;
 import site.model.Submission;
 import site.model.SubmissionStatus;
 import site.repository.SubmissionRepository;
-
-import java.io.File;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
@@ -50,11 +50,9 @@ class SubmissionControllerTest {
     private MailServiceMock mailer;
 
     @Autowired
-    @Qualifier(SubmissionRepository.NAME)
     private SubmissionRepository submissionRepository;
     
     @Autowired
-    @Qualifier(CSVService.NAME)
     private CSVService csvFacade;
 
     private Submission valhalla;
@@ -169,7 +167,7 @@ class SubmissionControllerTest {
     			findByBranchAndStatus(Globals.CURRENT_BRANCH, SubmissionStatus.SUBMITTED));
     	String length = Long.toString(exportSubmissions.length());
     	
-    	mockMvc.perform(get("/admin/submission/exportCSV/"))
+    	mockMvc.perform(get("/admin/submission/exportCSV"))
     	.andExpect(status().isOk())
     	.andExpect(header().string("Content-Length", length));
     	

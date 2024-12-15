@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import site.facade.AdminService;
 import site.model.Visitor;
+
+import static org.springframework.http.ResponseEntity.notFound;
+import static org.springframework.http.ResponseEntity.ok;
+import static org.springframework.http.ResponseEntity.status;
 
 @RestController
 @RequestMapping(value = "/api/ticket", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -26,9 +31,9 @@ public class TicketRestController {
         try {
             Optional<Visitor> visitor = adminFacade.findVisitorByTicket(ticket);
 
-            return visitor.map(this::registerVisitor).orElse(ResponseEntity.notFound().build());
+            return visitor.map(this::registerVisitor).orElse(notFound().build());
         } catch (Exception e) {
-            return ResponseEntity.status(500).contentType(MediaType.TEXT_PLAIN).body(e.getMessage());
+            return status(500).contentType(MediaType.TEXT_PLAIN).body(e.getMessage());
         }
     }
 
@@ -36,6 +41,6 @@ public class TicketRestController {
         visitor.setRegistered(true);
         adminFacade.saveVisitor(visitor);
 
-        return ResponseEntity.ok().build();
+        return ok().build();
     }
 }

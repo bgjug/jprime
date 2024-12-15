@@ -1,7 +1,8 @@
 package site.controller;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import site.facade.AdminService;
 import site.model.User;
-
-import javax.validation.Valid;
 
 /**
  * @author Ivan St. Ivanov
@@ -22,11 +22,10 @@ import javax.validation.Valid;
 @RequestMapping(value = "/admin/user")
 public class AdminUserController {
 
-    public static final String USER_VIEW_JSP = "/admin/user/view.jsp";
-    public static final String USER_EDIT_JSP = "/admin/user/edit.jsp";
+    public static final String USER_VIEW_JSP = "admin/user/view";
+    public static final String USER_EDIT_JSP = "admin/user/edit";
 
     @Autowired
-    @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
 
     @GetMapping("/view")
@@ -42,7 +41,7 @@ public class AdminUserController {
     }
 
     @PostMapping("/add")
-    public String addUser(@Valid final User user, BindingResult bindingResult,Model model) {
+    public String addUser(@Valid final User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return USER_EDIT_JSP;
         }

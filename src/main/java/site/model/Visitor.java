@@ -1,6 +1,12 @@
 package site.model;
 
-import javax.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -80,7 +86,7 @@ public class Visitor extends AbstractEntity {
 
     /**
      * retrieves the company related to the visitor. <br />
-     * Check https://github.com/bgjug/jprime/issues/28
+     * Check <a href="https://github.com/bgjug/jprime/issues/28">...</a>
      */
     public String getCompany() {
         return company;

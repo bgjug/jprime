@@ -1,14 +1,13 @@
 package site.controller;
 
-import javax.transaction.Transactional;
-import javax.validation.Valid;
-
 import java.util.Arrays;
+
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -36,8 +35,8 @@ public class AdminSpeakerController {
 
     private final ThumbnailService thumbnailService;
 
-    public AdminSpeakerController(@Qualifier(AdminService.NAME) AdminService adminService,
-        @Qualifier(ThumbnailService.NAME) ThumbnailService thumbnailService) {
+    public AdminSpeakerController(AdminService adminService,
+        ThumbnailService thumbnailService) {
         this.adminService = adminService;
         this.thumbnailService = thumbnailService;
     }
@@ -59,7 +58,7 @@ public class AdminSpeakerController {
         model.addAttribute("branches", Arrays.asList(Branch.values()));
         model.addAttribute("selected_branch", year);
 
-        return "/admin/speaker/view.jsp";
+        return "admin/speaker/view";
     }
 
     @Transactional
@@ -69,7 +68,7 @@ public class AdminSpeakerController {
                       @RequestParam(name = "resizeImage", required = false, defaultValue = "false") boolean resize, @RequestParam(required = false) String sourcePage) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("branches", Branch.values());
-            return "/admin/speaker/edit.jsp";
+            return "admin/speaker/edit";
         }
         if (!file.isEmpty()) {
             try {
@@ -100,7 +99,7 @@ public class AdminSpeakerController {
         model.addAttribute("speaker", new Speaker());
         model.addAttribute("sourcePage", sourcePage);
         model.addAttribute("branches", Branch.values());
-        return "/admin/speaker/edit.jsp";
+        return "/admin/speaker/edit";
     }
 
     @Transactional
@@ -110,7 +109,7 @@ public class AdminSpeakerController {
         model.addAttribute("speaker", speaker);
         model.addAttribute("sourcePage", sourcePage);
         model.addAttribute("branches", Branch.values());
-        return "/admin/speaker/edit.jsp";
+        return "/admin/speaker/edit";
     }
 
     @Transactional

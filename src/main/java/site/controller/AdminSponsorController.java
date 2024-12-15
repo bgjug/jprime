@@ -1,17 +1,20 @@
 package site.controller;
 
-import javax.transaction.Transactional;
-import javax.validation.Valid;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.AdminService;
@@ -28,8 +31,8 @@ public class AdminSponsorController {
 
     private final ThumbnailService thumbnailService;
 
-    public AdminSponsorController(@Qualifier(AdminService.NAME) AdminService adminFacade,
-        @Qualifier(ThumbnailService.NAME) ThumbnailService thumbnailService) {
+    public AdminSponsorController(AdminService adminFacade,
+        ThumbnailService thumbnailService) {
         this.adminFacade = adminFacade;
         this.thumbnailService = thumbnailService;
     }
@@ -43,7 +46,7 @@ public class AdminSponsorController {
         model.addAttribute("totalPages", sponsors.getTotalPages());
         model.addAttribute("number", sponsors.getNumber());
 
-        return "/admin/sponsor/view.jsp";
+        return "admin/sponsor/view";
     }
 
     @Transactional
@@ -53,7 +56,7 @@ public class AdminSponsorController {
                       @RequestParam(name = "resizeImage", required = false) boolean resize) {
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
-            return "/admin/sponsor/edit.jsp";
+            return "admin/sponsor/edit";
         }
         if (!file.isEmpty()) {
             try {
@@ -82,7 +85,7 @@ public class AdminSponsorController {
     @GetMapping("/add")
     public String edit(Model model) {
         model.addAttribute("sponsor", new Sponsor());
-        return "/admin/sponsor/edit.jsp";
+        return "admin/sponsor/edit";
     }
 
     @Transactional
@@ -90,12 +93,12 @@ public class AdminSponsorController {
     public String edit(@PathVariable Long itemId, Model model) {
         Sponsor sponsor = adminFacade.findOneSponsor(itemId);
         model.addAttribute("sponsor", sponsor);
-        return "/admin/sponsor/edit.jsp";
+        return "admin/sponsor/edit";
     }
 
     @Transactional
         @GetMapping("/remove/{itemId}")
-    public String remove(@PathVariable Long itemId, Model model) {
+    public String remove(@PathVariable Long itemId) {
         adminFacade.deleteSponsor(itemId);
         return "redirect:/admin/sponsor/view";
     }

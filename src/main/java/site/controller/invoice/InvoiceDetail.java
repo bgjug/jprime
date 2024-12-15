@@ -3,7 +3,8 @@ package site.controller.invoice;
 import java.math.BigDecimal;
 
 import static java.math.RoundingMode.HALF_EVEN;
-import static site.controller.invoice.InvoiceData.*;
+import static site.controller.invoice.InvoiceData.DEFAULT_DESCRIPTION_BG;
+import static site.controller.invoice.InvoiceData.VAT_DECREASE_RATIO;
 
 public class InvoiceDetail {
 

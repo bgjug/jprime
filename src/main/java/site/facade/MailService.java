@@ -1,8 +1,11 @@
 package site.facade;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
+import java.io.UnsupportedEncodingException;
+import java.util.stream.Stream;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeUtility;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -14,16 +17,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
-import java.util.stream.Stream;
-
 /**
  * @author Ivan St. Ivanov
  */
-@Service(MailService.NAME)
+@Service
 public class MailService {
-    public static final String NAME = "mailFacade";
-
     private static final Logger logger = LogManager.getLogger(MailService.class);
 
     @Value("${spring.mail.username}")

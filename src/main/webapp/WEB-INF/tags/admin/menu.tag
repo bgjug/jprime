@@ -13,5 +13,6 @@
 	<li><a href="/admin/user/view" style="color: blueviolet!important;">Users</a>&nbsp;|&nbsp;</li>
 	<li><a href="/admin/jobs/view" style="color: blueviolet!important;">Background jobs</a>&nbsp;|&nbsp;</li>
 	<li><a href="/raffle/view" style="color: blueviolet!important;">Raffle</a>&nbsp;|&nbsp;</li>
-	<li><a href="/raffle/view/jpro" style="color: blue!important;">Raffle JPro</a></li>
+	<li><a href="/raffle/view/jpro" style="color: blue!important;">Raffle JPro</a>&nbsp;|&nbsp;</li>
+	<li><a href="/logout" style="color: blue!important;">Logout</a></li>
 </ul>

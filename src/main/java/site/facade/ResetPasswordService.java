@@ -20,19 +20,16 @@ import site.repository.ResetPasswordTokenRepository;
 /**
  * @author Zhorzh Raychev
  */
-@Service()
+@Service
 public class ResetPasswordService {
+
+    private static final Logger logger = LogManager.getLogger(ResetPasswordService.class);
 
     @Value("${site.reset.password.token.duration.hours:2}")
     private int tokenDurationInHours;
 
-    private static final Logger logger = LogManager.getLogger(ResetPasswordService.class);
-
-    private final ResetPasswordTokenRepository resetPassRepository;
-
-    public ResetPasswordService(ResetPasswordTokenRepository resetPassRepository) {
-        this.resetPassRepository = resetPassRepository;
-    }
+    @Autowired
+    private ResetPasswordTokenRepository resetPassRepository;
 
     public String createNewToken(User user) {
         String tokenId = getNewTokenId();

@@ -1,24 +1,15 @@
 package site.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import site.config.Globals;
-
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import jakarta.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import site.config.Globals;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -30,7 +21,7 @@ public class Speaker extends User {
      */
     private static final long serialVersionUID = 1L;
 
-    @Column(length = 1024)
+    @Column(length = 3000, columnDefinition = "TEXT")
     @JsonIgnore
     private String bio;
 
@@ -158,9 +149,7 @@ public class Speaker extends User {
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + Objects.hashCode(twitter) + Objects.hashCode(bsky);
-        return result;
+        return 31 * super.hashCode() + Objects.hash(twitter, bsky);
     }
 
     @Transient

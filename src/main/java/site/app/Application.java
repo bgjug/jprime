@@ -1,5 +1,8 @@
 package site.app;
 
+import javax.sql.DataSource;
+import java.util.Properties;
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,9 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,32 +19,28 @@ import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
-import java.util.Properties;
-
 /**
  * to make this deployable as war, this is necessary:
- * http://docs.spring.io/spring-boot/docs/current/reference/html/howto-traditional-deployment.html
+ * <a href="http://docs.spring.io/spring-boot/docs/current/reference/html/howto-traditional-deployment.html">...</a>
  */
 @Configuration
-@ConfigurationProperties//mihail: so that the conf properties are supplied here
 @ComponentScan(basePackages = "site")
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = { "site.repository" } )
 @EntityScan(basePackages="site.model")
 @EnableSpringDataWebSupport
-@SpringBootApplication//mihail: so that it can be run as war file
+@SpringBootApplication//mihail: so that it can be run as a war file
 @EnableAsync
 public class Application  extends SpringBootServletInitializer {
 
-    /** mihail: so that it can be run as war file */
+    /** mihail: so that it can be run as a war file */
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(Application.class);
     }
 
     public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
     @Value("${spring.datasource.username}")

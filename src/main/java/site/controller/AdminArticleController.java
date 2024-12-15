@@ -1,9 +1,10 @@
 package site.controller;
 
+import java.util.List;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,13 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import site.config.Globals;
 import site.facade.AdminService;
 import site.model.Article;
 import site.model.User;
-
-import javax.validation.Valid;
-import java.util.List;
 
 
 @Controller()
@@ -25,14 +24,13 @@ import java.util.List;
 public class AdminArticleController {
 
     @Autowired
-    @Qualifier(AdminService.NAME)
     private AdminService adminFacade;
 
     @GetMapping("/view")
     public String view(Model model) {
         List<Article> articles = adminFacade.findAllArticles();
         model.addAttribute("articles", articles);
-        return "/admin/article/view.jsp";
+        return "admin/article/view";
     }
 
     @GetMapping("/view/{id}")
@@ -41,13 +39,13 @@ public class AdminArticleController {
         model.addAttribute("article", article);
         model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
 
-        return "/single-post.jsp";
+        return "single-post";
     }
 
     @PostMapping("/add")
     public String add(@Valid final Article article, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/admin/article/edit.jsp";
+            return "admin/article/edit";
         }
         User admin = this.adminFacade.findUserByEmail("admin@jsprime.io");
         if (admin == null) {
@@ -71,7 +69,7 @@ public class AdminArticleController {
         model.addAttribute("article", new Article());
         model.addAttribute("tags", this.adminFacade.findAllTags());
 
-        return "/admin/article/edit.jsp";
+        return "admin/article/edit";
     }
 
     @GetMapping("/edit/{itemId}")
@@ -79,11 +77,11 @@ public class AdminArticleController {
         Article article = adminFacade.findOneArticle(itemId);
         model.addAttribute("article", article);
         model.addAttribute("tags", this.adminFacade.findAllTags());
-        return "/admin/article/edit.jsp";
+        return "admin/article/edit";
     }
 
     @GetMapping("/remove/{itemId}")
-    public String remove(@PathVariable Long itemId, Model model) {
+    public String remove(@PathVariable Long itemId) {
         adminFacade.deleteArticle(itemId);
         return "redirect:/admin/article/view";
     }
