@@ -18,7 +18,7 @@ import site.model.User;
 /**
  * @author Ivan St. Ivanov
  */
-@Controller()
+@Controller
 @RequestMapping(value = "/admin/user")
 public class AdminUserController {
 

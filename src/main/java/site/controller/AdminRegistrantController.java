@@ -35,7 +35,7 @@ import site.model.VisitorStatus;
 /**
  * @author Ivan St. Ivanov
  */
-@Controller()
+@Controller
 @RequestMapping(value = "/admin/registrant")
 public class AdminRegistrantController {
 

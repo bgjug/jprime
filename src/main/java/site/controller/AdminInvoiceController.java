@@ -32,7 +32,7 @@ import static site.controller.invoice.InvoiceLanguage.BG;
 /**
  * @author Ivan St. Ivanov
  */
-@Controller()
+@Controller
 @RequestMapping(value = "/admin/invoice")
 public class AdminInvoiceController {
 
