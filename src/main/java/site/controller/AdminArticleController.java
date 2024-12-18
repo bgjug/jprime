@@ -19,7 +19,7 @@ import site.model.Article;
 import site.model.User;
 
 
-@Controller()
+@Controller
 @RequestMapping(value = "/admin/article")
 public class AdminArticleController {
 

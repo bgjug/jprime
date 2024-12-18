@@ -3,8 +3,11 @@ package site.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import site.config.Globals;
 import site.model.Session;
@@ -14,7 +17,8 @@ import site.repository.SessionRepository;
 /**
  * @author Teodor Tunev
  */
-@RestController
+@Controller
+@RequestMapping("/pwa")
 public class PWAController {
 
     private final SessionRepository sessionRepository;
@@ -71,13 +75,14 @@ public class PWAController {
         }
     }
 
-    @GetMapping("/pwa/findSessionsByHall")
+    @GetMapping(value = "/findSessionsByHall", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public List<SessionDTO> getSessionByHall(String hallName) {
         List<Session> sessions = sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH.name());
         return sessions.stream().map(session -> new SessionDTO(session, hallName)).toList();
     }
 
-    @GetMapping({"/pwa", "/pwa/**"})
+    @GetMapping({"/", "/**"})
     public String getPwaPage() {
         return "pwa";
     }

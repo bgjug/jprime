@@ -25,7 +25,7 @@ import site.facade.ThumbnailService;
 import site.model.Branch;
 import site.model.Speaker;
 
-@Controller()
+@Controller
 @RequestMapping(value = "/admin/speaker")
 public class AdminSpeakerController {
 

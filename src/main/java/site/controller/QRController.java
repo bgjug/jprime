@@ -12,7 +12,7 @@ import site.facade.UserService;
 import site.facade.UserServiceJPro;
 import site.model.Visitor;
 
-@Controller()
+@Controller
 @RequestMapping(value = "/qr")
 public class QRController {
     public static final String QR_JSP = "qr";

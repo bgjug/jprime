@@ -336,7 +336,7 @@ public class AdminVisitorController {
         };
     }
 
-    @GetMapping("/export")
+    @GetMapping(value = "/export", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
     public ResponseEntity<byte[]>  exportVisitors() throws IOException{
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();
@@ -360,7 +360,7 @@ public class AdminVisitorController {
         return VISITOR_EDIT_SEND;
     }
 
-    @PostMapping("/send")
+    @PostMapping(value = "/send", produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
     public String  send(@RequestParam String subject, @RequestParam String content) throws IOException{
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();

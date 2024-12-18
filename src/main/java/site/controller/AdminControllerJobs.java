@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import site.facade.AdminService;
 
-@Controller()
+@Controller
 @RequestMapping(value = "/admin/jobs")
 public class AdminControllerJobs {
 

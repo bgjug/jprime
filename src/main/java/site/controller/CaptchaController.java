@@ -16,12 +16,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
+@RestController
 @RequestMapping(value = "/captcha-image")
 public class CaptchaController {
 	
@@ -43,7 +42,6 @@ public class CaptchaController {
 
 	@GetMapping(produces = {
 			MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE })
-	@ResponseBody
 	public byte[] getCaptchaImage(HttpServletRequest request){
 		try {
 
@@ -119,7 +117,7 @@ public class CaptchaController {
 			float spaceForLetters = -horizMargin * 2 + width;
 			float spacePerChar = spaceForLetters / (charsToPrint - 1.0f);
 
-			StringBuffer finalString = new StringBuffer();
+			StringBuilder finalString = new StringBuilder();
 
 			for (int i = 0; i < charsToPrint; i++) {
 				double randomValue = Math.random();
@@ -187,7 +185,7 @@ public class CaptchaController {
 			int secoundDigit = Integer.parseInt(finalString.substring(3, 4));
 			int result = firstDigit + secoundDigit;
 
-			logger.debug("Generated captcha code:" + result);
+            logger.debug("Generated captcha code:{}", result);
 
 			request.getSession().setAttribute(SESSION_PARAM_CAPTCHA_IMAGE, String.valueOf(result));
 

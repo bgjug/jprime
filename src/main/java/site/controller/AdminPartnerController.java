@@ -21,7 +21,7 @@ import site.facade.AdminService;
 import site.facade.ThumbnailService;
 import site.model.Partner;
 
-@Controller()
+@Controller
 @RequestMapping(value = "/admin/partner")
 public class AdminPartnerController {
 

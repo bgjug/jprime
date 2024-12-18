@@ -21,7 +21,7 @@ import site.facade.AdminService;
 import site.facade.ThumbnailService;
 import site.model.Sponsor;
 
-@Controller()
+@Controller
 @RequestMapping(value = "/admin/sponsor")
 public class AdminSponsorController {
 
@@ -38,7 +38,7 @@ public class AdminSponsorController {
     }
 
     @Transactional
-        @GetMapping("/view")
+    @GetMapping("/view")
     public String view(Model model, Pageable pageable) {
         Page<Sponsor> sponsors = adminFacade.findAllSponsors(pageable);
 
@@ -50,10 +50,10 @@ public class AdminSponsorController {
     }
 
     @Transactional
-        @PostMapping("/add")
+    @PostMapping("/add")
     public String add(@Valid final Sponsor sponsor, BindingResult bindingResult,
-                      @RequestParam MultipartFile file,
-                      @RequestParam(name = "resizeImage", required = false) boolean resize) {
+        @RequestParam MultipartFile file,
+        @RequestParam(name = "resizeImage", required = false) boolean resize) {
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
             return "admin/sponsor/edit";
@@ -63,7 +63,7 @@ public class AdminSponsorController {
                 byte[] bytes = file.getBytes();
                 if (resize) {
                     sponsor.setLogo(thumbnailService.thumbImage(bytes, 180, 64,
-                                                                ThumbnailService.ResizeType.FIT_TO_HEIGHT));
+                        ThumbnailService.ResizeType.FIT_TO_HEIGHT));
                 } else {
                     sponsor.setLogo(bytes);
                 }
@@ -89,7 +89,7 @@ public class AdminSponsorController {
     }
 
     @Transactional
-        @GetMapping("/edit/{itemId}")
+    @GetMapping("/edit/{itemId}")
     public String edit(@PathVariable Long itemId, Model model) {
         Sponsor sponsor = adminFacade.findOneSponsor(itemId);
         model.addAttribute("sponsor", sponsor);
@@ -97,7 +97,7 @@ public class AdminSponsorController {
     }
 
     @Transactional
-        @GetMapping("/remove/{itemId}")
+    @GetMapping("/remove/{itemId}")
     public String remove(@PathVariable Long itemId) {
         adminFacade.deleteSponsor(itemId);
         return "redirect:/admin/sponsor/view";
