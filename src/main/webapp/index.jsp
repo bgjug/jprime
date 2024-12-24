@@ -550,7 +550,7 @@
         <c:if test="${goldOpenSponsors.size() > 0}">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="section-sub text-center">Gold Tent Sponsors</h1>
+                    <h1 class="section-sub text-center">Gold Open Sponsors</h1>
                 </div>
                 <c:forEach var="sponsor" items="${goldOpenSponsors}">
                     <div class="col-md-2 col-sm-2 col-xs-12">
@@ -1046,7 +1046,7 @@
                         <h5></h5>
                     </div>
                     <div class="pricing-list">
-                        <h4>Gold Tent</h4>
+                        <h4>Gold Open</h4>
                         <ul>
                             <li><i class="icon-check"></i><span class="text">6 free passes!</span></li>
                             <li><i class="icon-close"></i><span class="text">10% discount on additional passes!</span>
