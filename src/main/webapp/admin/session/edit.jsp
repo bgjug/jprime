@@ -14,8 +14,6 @@
 
     <title>Insert title here</title>
     <script type="text/javascript" src="/js/niceforms.js"></script>
-    <link rel="stylesheet" href="/js/tinyeditor/style.css"/>
-    <script type="text/javascript" src="/js/tinyeditor/tinyeditor.js"></script>
     <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="/js/datetime/jquery.datetimepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css"/>
