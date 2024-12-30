@@ -13,43 +13,49 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import site.config.Globals;
+import site.facade.BranchService;
 import site.facade.UserService;
+import site.model.Branch;
 import site.model.Speaker;
 
 @Controller
 public class SpeakerController {
+
     private static final Logger logger = LogManager.getLogger(SpeakerController.class);
 
-   @Autowired
-   private UserService userService;
+    @Autowired
+    private UserService userService;
 
-   @GetMapping("/speakers")
-   public String speakers(Pageable pageable, Model model) {
-      List<Speaker> acceptedSpeakers = userService.findAcceptedSpeakers();
-      Page<Speaker> speakers = new PageImpl<>(acceptedSpeakers, pageable, acceptedSpeakers.size());
-      model.addAttribute("speakers", speakers);
+    @Autowired
+    private BranchService branchService;
 
-      model.addAttribute("tags", userService.findAllTags());
+    @GetMapping("/speakers")
+    public String speakers(Pageable pageable, Model model) {
+        List<Speaker> acceptedSpeakers = userService.findAcceptedSpeakers();
+        Page<Speaker> speakers = new PageImpl<>(acceptedSpeakers, pageable, acceptedSpeakers.size());
+        model.addAttribute("speakers", speakers);
 
-      return "speakers";
-   }
+        model.addAttribute("tags", userService.findAllTags());
 
-   //read a single blog
-   @GetMapping("/speaker/{id}")
-   public String getById(@PathVariable final long id, Model model) {
-      Speaker speaker = userService.findSpeaker(id);
-      model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+        return "speakers";
+    }
+
+    //read a single blog
+    @GetMapping("/speaker/{id}")
+    public String getById(@PathVariable final long id, Model model) {
+        Speaker speaker = userService.findSpeaker(id);
         if (speaker == null) {
-            logger.error(String.format("Invalid speaker id (%1$d)", id));
+            logger.error("Invalid speaker id ({})", id);
             return "404";
         }
-      if(speaker.getAccepted()) {
-         model.addAttribute("speaker", speaker);
-      }
 
-      model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
-      model.addAttribute("tags", userService.findAllTags());
-      return "speaker";
-   }
+        if (userService.isSpeakerAccepted(speaker)) {
+            model.addAttribute("speaker", speaker);
+        }
+
+        Branch currentBranch = branchService.getCurrentBranch();
+        model.addAttribute("jprime_year", currentBranch.getYear());
+        model.addAttribute("tags", userService.findAllTags());
+        return "speaker";
+    }
 }

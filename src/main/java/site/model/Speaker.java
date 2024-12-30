@@ -1,5 +1,7 @@
 package site.model;
 
+import java.io.Serial;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -9,8 +11,6 @@ import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import site.config.Globals;
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -19,6 +19,7 @@ public class Speaker extends User {
     /**
      *
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Column(length = 3000, columnDefinition = "TEXT")
@@ -32,10 +33,6 @@ public class Speaker extends User {
 
     private String bsky;
 
-    private Boolean featured = false;
-
-    private Boolean accepted = false;
-
     @Lob
     @JsonIgnore
     private byte[] picture;
@@ -43,21 +40,22 @@ public class Speaker extends User {
     @OneToMany(mappedBy = "speaker", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, targetEntity = Submission.class)
     @JsonIgnore
     private Set<Submission> submissions = new HashSet<>();
-    
-    @Enumerated(EnumType.STRING)
-    private Branch branch = Globals.CURRENT_BRANCH;
+
+    @Transient
+    private boolean accepted;
+
+    @Transient
+    private boolean featured;
 
     public Speaker() {
     }
 
-    public Speaker(String firstName, String lastName, String email, String headline, String twitter, boolean featured, boolean accepted) {
+    public Speaker(String firstName, String lastName, String email, String headline, String twitter) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
         this.headline = headline;
         this.twitter = twitter;
-        this.featured = featured;
-        this.accepted = accepted;
     }
 
     public byte[] getPicture() {
@@ -100,30 +98,6 @@ public class Speaker extends User {
         this.submissions = submissions;
     }
 
-    public Boolean getFeatured() {
-        return featured;
-    }
-
-    public void setFeatured(Boolean featured) {
-        this.featured = featured;
-    }
-
-    public Branch getBranch() {
-		return branch;
-	}
-
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
-
-    public Boolean getAccepted() {
-        return accepted;
-    }
-
-    public void setAccepted(Boolean accepted) {
-        this.accepted = accepted;
-    }
-
     public String getBsky() {
         return bsky;
     }
@@ -155,5 +129,28 @@ public class Speaker extends User {
     @Transient
     public String getName() {
         return getFirstName() + " " + getLastName();
+    }
+
+    public Speaker updateFlags(Branch branch) {
+        Collection<Submission> currentSubmissions = this.getSubmissions().stream().filter(s -> s.getBranch().equals(branch)).toList();
+        this.accepted = currentSubmissions.stream().anyMatch(s->s.getStatus() == SubmissionStatus.ACCEPTED);
+        this.featured = currentSubmissions.stream().anyMatch(s->Boolean.TRUE.equals(s.getFeatured()));
+        return this;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    public boolean isFeatured() {
+        return featured;
+    }
+
+    public void setFeatured(boolean featured) {
+        this.featured = featured;
     }
 }

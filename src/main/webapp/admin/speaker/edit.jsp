@@ -108,14 +108,6 @@
 					<form:checkbox path="accepted"/>
 				</dd>
 			</dl>
-			<dl>
-                <dt>
-                    <label for="branch">branch</label>
-                </dt>
-                <dd>
-                    <form:select path="branch" items="${branches}"/>
-                </dd>
-            </dl>
 			<c:if test="${not empty multipartException}">
 				<p style="color:darkred">${multipartException}</p>
 			</c:if>

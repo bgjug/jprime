@@ -63,15 +63,15 @@ pageEncoding="UTF-8"%>
     $(document).ready(function () {
         var coSpeakerButton = $("#toggleCoSpeaker");
         var buttonCaption = coSpeakerButton.text();
-        buttonCaption == "Add co speaker" ? $("#coSpeaker").hide() : $("#coSpeaker").show();
+        let $coSpeaker = $("#coSpeaker");
+        buttonCaption === "Add co speaker" ? $coSpeaker.hide() : $coSpeaker.show();
 
         coSpeakerButton.click(function () {
-            var coSpeakerDiv = $("#coSpeaker");
-            coSpeakerDiv.toggle();
+            $coSpeaker.toggle();
             var coSpeakerButton = $("#toggleCoSpeaker");
             var buttonCaption = coSpeakerButton.text();
 
-            if (buttonCaption == "Remove co speaker") {
+            if (buttonCaption === "Remove co speaker") {
                 coSpeakerButton.text("Add co speaker");
                 $("input[id^='coSpeaker']").val("");
             } else {

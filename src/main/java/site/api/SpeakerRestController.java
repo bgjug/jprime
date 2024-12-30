@@ -13,7 +13,7 @@ import site.facade.AdminService;
 import site.facade.UserService;
 
 @RestController
-@RequestMapping(value = "/api/speaker", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SpeakerRestController {
 
     private final AdminService adminService;
@@ -25,8 +25,8 @@ public class SpeakerRestController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "/{branch}")
-    public ResponseEntity<?> allSpeakers(@PathVariable String branch) {
+    @GetMapping(path = "/speaker")
+    public ResponseEntity<?> allSpeakers() {
         try {
             return ResponseEntity.ok(userService.findAcceptedSpeakers());
         } catch (Exception e) {
@@ -34,13 +34,12 @@ public class SpeakerRestController {
         }
     }
 
-    @PostMapping(path = "/search/{branch}")
-    public ResponseEntity<?> findSpeaker(@PathVariable String branch,
-        @RequestBody SpeakerSearch speakerSearch) {
+    @PostMapping(path = "/speaker/search")
+    public ResponseEntity<?> findSpeaker(@RequestBody SpeakerSearch speakerSearch) {
 
         try {
             return ResponseEntity.ok(
-                adminService.searchSpeaker(branch, speakerSearch.getFirstName(), speakerSearch.getLastName(),
+                adminService.searchSpeaker(speakerSearch.getFirstName(), speakerSearch.getLastName(),
                     speakerSearch.getEmail()));
         } catch (Exception e) {
             return ResponseEntity.status(500).contentType(MediaType.TEXT_PLAIN).body(e.getMessage());
