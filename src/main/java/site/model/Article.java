@@ -3,15 +3,7 @@ package site.model;
 import java.util.Collection;
 import java.util.HashSet;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Index;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -34,7 +26,7 @@ public class Article extends AbstractEntity{
 	private String text;
 	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "author", referencedColumnName = "id")
+    @JoinColumn(name = "author", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_article_author"))
     private User author;
 
     //Changed to eager, session problems! TODO:rethink!

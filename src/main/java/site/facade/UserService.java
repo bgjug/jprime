@@ -13,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import site.config.Globals;
 import site.model.*;
 import site.repository.ArticleRepository;
 import site.repository.PartnerRepository;
@@ -35,22 +34,22 @@ public class UserService {
     private EntityManager entityManager;
 
     @Autowired
-	private ArticleRepository articleRepository;
+    private ArticleRepository articleRepository;
 
-	@Autowired
-	private SpeakerRepository speakerRepository;
+    @Autowired
+    private SpeakerRepository speakerRepository;
 
     @Autowired
     private UserRepository userRepository;
 
-	@Autowired
-	private SponsorRepository sponsorRepository;
+    @Autowired
+    private SponsorRepository sponsorRepository;
 
-	@Autowired
-	private PartnerRepository partnerRepository;
+    @Autowired
+    private PartnerRepository partnerRepository;
 
-	@Autowired
-	private TagRepository tagRepository;
+    @Autowired
+    private TagRepository tagRepository;
 
     @Autowired
     private SubmissionRepository submissionRepository;
@@ -61,15 +60,18 @@ public class UserService {
     @Autowired
     private VisitorRepository visitorRepository;
 
+    @Autowired
+    private BranchService branchService;
+
     /**
      * Speaker
      *
      * @param id
      * @return
      */
-    public Speaker findSpeaker(Long id){
-		return speakerRepository.findById(id).orElse(null);
-	}
+    public Speaker findSpeaker(Long id) {
+        return speakerRepository.findById(id).orElse(null);
+    }
 
     /**
      * Article
@@ -77,29 +79,29 @@ public class UserService {
      * @param id
      * @return
      */
-	public Article findArticle(Long id){
-		return articleRepository.findById(id).orElse(null);
-	}
-
-    public Page<Article> allArticles(Pageable pageable){
-        return articleRepository.findAll(pageable);
-    }
-
-    public Page<Article> allPublishedArticles(Pageable pageable){
-        return articleRepository.findByPublishedTrueOrderByCreatedDateDesc(pageable);
-    }
-
-    public Article getArticleById(long id){
+    public Article findArticle(Long id) {
         return articleRepository.findById(id).orElse(null);
     }
 
-    public Article getArticleByTitle(String title){
+    public Page<Article> allArticles(Pageable pageable) {
+        return articleRepository.findAll(pageable);
+    }
+
+    public Page<Article> allPublishedArticles(Pageable pageable) {
+        return articleRepository.findByPublishedTrueOrderByCreatedDateDesc(pageable);
+    }
+
+    public Article getArticleById(long id) {
+        return articleRepository.findById(id).orElse(null);
+    }
+
+    public Article getArticleByTitle(String title) {
         return articleRepository.findByTitle(title);
     }
 
-	public List<Article> findArticlesByTag(String tagName){
-		return articleRepository.findByTag(tagName);
-	}
+    public List<Article> findArticlesByTag(String tagName) {
+        return articleRepository.findByTag(tagName);
+    }
 
     public Page<Article> findArticlesByTag(String tagName, Pageable pageable) {
         return articleRepository.findByTag(tagName, pageable);
@@ -109,16 +111,22 @@ public class UserService {
         return tagRepository.findAll();
     }
 
-	public Page<Speaker> findAllSpeakers(Pageable pageable){
-		return speakerRepository.findAll(pageable);
-	}
+    public Page<Speaker> findAllSpeakers(Pageable pageable) {
+        return speakerRepository.findAll(pageable).map(s -> s.updateFlags(branchService.getCurrentBranch()));
+    }
 
     public List<Speaker> findFeaturedSpeakers() {
-        return speakerRepository.findFeaturedSpeakers(Globals.CURRENT_BRANCH);
+        Branch currentBranch = branchService.getCurrentBranch();
+        return speakerRepository.findFeaturedSpeakers(currentBranch)
+            .stream()
+            .map(s -> s.updateFlags(currentBranch))
+            .toList();
     }
 
     public List<Speaker> findAcceptedSpeakers() {
-        return speakerRepository.findAcceptedSpeakers(Globals.CURRENT_BRANCH);
+        Branch currentBranch = branchService.getCurrentBranch();
+        List<Speaker> acceptedSpeakers = speakerRepository.findAcceptedSpeakers(currentBranch);
+        return acceptedSpeakers.stream().map(s -> s.updateFlags(currentBranch)).toList();
     }
 
     public Speaker findSpeaker(Speaker speakerToFind) {
@@ -143,44 +151,45 @@ public class UserService {
 
         userRepository.convertToSpeaker(user.getId());
         entityManager.unwrap(org.hibernate.Session.class).evict(user);
-        return speakerRepository.findByEmail(email);
+        return speakerRepository.findByEmail(email).updateFlags(branchService.getCurrentBranch());
     }
 
-	public Map<SponsorPackage, List<Sponsor>> findAllActiveSponsors(){
+    public Map<SponsorPackage, List<Sponsor>> findAllActiveSponsors() {
         return sponsorRepository.findByActive(true).stream().collect(groupingBy(Sponsor::getSponsorPackage));
     }
 
-    public List<Partner> findAllActiveOfficalSupportingPartners(){
+    public List<Partner> findAllActiveOfficalSupportingPartners() {
         return partnerRepository.findByActiveAndPartnerPackage(true, PartnerPackage.SUPPORTERS);
     }
 
-    public List<Partner> findAllActiveMediaPartners(){
+    public List<Partner> findAllActiveMediaPartners() {
         List<Partner> partners = partnerRepository.findByActiveAndPartnerPackage(true, PartnerPackage.MEDIA);
         partners.addAll(partnerRepository.findByActiveAndPartnerPackage(true, null));
         return partners;
     }
 
-    public List<Partner> findAllActiveEventPartners(){
+    public List<Partner> findAllActiveEventPartners() {
         return partnerRepository.findByActiveAndPartnerPackage(true, PartnerPackage.OTHER);
     }
 
-    public void	submitTalk(Submission submission) {
+    public void submitTalk(Submission submission) {
         submissionRepository.save(submission);
     }
 
-    public Session findSessionTalk(long id){
-    	return sessionRepository.findById(id).orElse(null);
+    public Session findSessionTalk(long id) {
+        return sessionRepository.findById(id).orElse(null);
     }
 
     public List<Session> findSessionTalksAndBreaksByHallName(String hallName) {
-        return sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH.name());
+        return sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName,
+            branchService.getCurrentBranch());
     }
 
-    public boolean setPresentById(Visitor visitorExample){
-	    Optional<Visitor> persistedVisitor = visitorRepository.findById(visitorExample.getId());
-	    if(persistedVisitor.isPresent()){
-	        persistedVisitor.get().setPresent(true);
-	        visitorRepository.save(persistedVisitor.get());
+    public boolean setPresentById(Visitor visitorExample) {
+        Optional<Visitor> persistedVisitor = visitorRepository.findById(visitorExample.getId());
+        if (persistedVisitor.isPresent()) {
+            persistedVisitor.get().setPresent(true);
+            visitorRepository.save(persistedVisitor.get());
             return true;
         }
         return false;
@@ -197,8 +206,10 @@ public class UserService {
         return false;
     }
 
-    public boolean setPresentByNameIgnoreCaseAndCompanyIgnoreCase(Visitor visitorExample){
-        List<Visitor> matchedVisitors =  visitorRepository.findByNameIgnoreCaseAndCompanyIgnoreCase(visitorExample.getName(), visitorExample.getCompany());
+    public boolean setPresentByNameIgnoreCaseAndCompanyIgnoreCase(Visitor visitorExample) {
+        List<Visitor> matchedVisitors =
+            visitorRepository.findByNameIgnoreCaseAndCompanyIgnoreCase(visitorExample.getName(),
+                visitorExample.getCompany());
         if (!matchedVisitors.isEmpty()) {
             matchedVisitors.forEach(v -> v.setPresent(true));
             visitorRepository.saveAll(matchedVisitors);
@@ -207,4 +218,9 @@ public class UserService {
         return false;
     }
 
+    public boolean isSpeakerAccepted(Speaker speaker) {
+        Optional<Speaker> acceptedSpeaker =
+            speakerRepository.findAcceptedSpeaker(speaker.getId(), branchService.getCurrentBranch());
+        return acceptedSpeaker.isPresent();
+    }
 }

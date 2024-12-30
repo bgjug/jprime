@@ -5,7 +5,6 @@ import java.util.List;
 
 import jakarta.persistence.*;
 
-import site.config.Globals;
 import site.controller.epay.EpayResponse;
 
 /**
@@ -19,28 +18,43 @@ public class Registrant extends AbstractEntity {
 
     @OneToMany(mappedBy = "registrant", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Visitor> visitors = new ArrayList<>();
+
     private boolean isCompany = true;
+
     private boolean isStudent;
+
     private String name = "";
+
     private String address;
+
     private String vatNumber;
+
     private String mol;
+
     private String email = "";
+
     private String eik;
-//    @Generated(GenerationTime.INSERT)
+
+    //    @Generated(GenerationTime.INSERT)
     @Column(unique = false)
     private Long epayInvoiceNumber;//the one for epay
+
     @Column(unique = false)//because initially it is zero
     private Long realInvoiceNumber;//the real one, only after they pay
+
     @Column(unique = false)//because might not always be initialized
     private Long proformaInvoiceNumber;
+
     private PaymentType paymentType;
-    @Enumerated(EnumType.STRING)
-    private Branch branch = Globals.CURRENT_BRANCH;
+
+    @ManyToOne
+    @JoinColumn(name = "branch", referencedColumnName = "label",
+        foreignKey = @ForeignKey(name = "fk_registrant_branch"))
+    private Branch branch;
 
     @Embedded
     private EpayResponse epayResponse;
-    
+
     @Transient
     private String captcha;
 
@@ -49,6 +63,7 @@ public class Registrant extends AbstractEntity {
         BANK_TRANSFER("Direct bank transfer", "Банков превод");
 
         private final String value;
+
         private final String bulgarianValue;
 
         PaymentType(String theValue, String bulgarianValue) {
@@ -68,9 +83,11 @@ public class Registrant extends AbstractEntity {
 
     @MappedSuperclass
     public static class NumberGenerator {
+
         @Id
         @GeneratedValue
         private int id;
+
         private long counter;
 
         public int getId() {
@@ -90,24 +107,28 @@ public class Registrant extends AbstractEntity {
         }
     }
 
-    /** the entity that generates the unique invoice numbers for epay */
-    @Entity
-    public static class EpayInvoiceNumberGenerator extends NumberGenerator {
-    }
-
     /**
-     * The {@link site.model.Registrant.EpayInvoiceNumberGenerator} generates unique invoice numbers, but one user can
-     * generate too many of these. I have decided to implement another invoice generator, that generates a number only
-     * wneh a user pays up. The REAL invoice generator. This number is different from the one from the epay generator.
+     * the entity that generates the unique invoice numbers for epay
      */
     @Entity
-    public static class RealInvoiceNumberGenerator extends NumberGenerator{
-    }
+    public static class EpayInvoiceNumberGenerator extends NumberGenerator {}
 
-    /** Generates proforma invoice numbers. */
+    /**
+     * The {@link site.model.Registrant.EpayInvoiceNumberGenerator} generates unique invoice numbers, but
+     * one user can
+     * generate too many of these. I have decided to implement another invoice generator, that generates a
+     * number only
+     * wneh a user pays up. The REAL invoice generator. This number is different from the one from the epay
+     * generator.
+     */
     @Entity
-    public static class ProformaInvoiceNumberGenerator extends NumberGenerator{
-    }
+    public static class RealInvoiceNumberGenerator extends NumberGenerator {}
+
+    /**
+     * Generates proforma invoice numbers.
+     */
+    @Entity
+    public static class ProformaInvoiceNumberGenerator extends NumberGenerator {}
 
     public Registrant() {
     }
@@ -116,11 +137,13 @@ public class Registrant extends AbstractEntity {
         this(false, name, null, null, null, email);
     }
 
-    public Registrant(boolean isCompany, String name, String address, String vatNumber, String mol, String email) {
+    public Registrant(boolean isCompany, String name, String address, String vatNumber, String mol,
+        String email) {
         this(isCompany, name, address, vatNumber, vatNumber, mol, email, PaymentType.BANK_TRANSFER);
     }
 
-    public Registrant(boolean isCompany, String name, String address, String vatNumber, String eik, String mol, String email, PaymentType paymentType) {
+    public Registrant(boolean isCompany, String name, String address, String vatNumber, String eik,
+        String mol, String email, PaymentType paymentType) {
         this.isCompany = isCompany;
         this.name = name;
         this.address = address;
@@ -208,7 +231,7 @@ public class Registrant extends AbstractEntity {
 
     public Long getEpayInvoiceNumber() {
 
-        return epayInvoiceNumber==null?Long.valueOf(0):epayInvoiceNumber;
+        return epayInvoiceNumber == null ? Long.valueOf(0) : epayInvoiceNumber;
     }
 
     public void setEpayInvoiceNumber(long epayInvoiceNumber) {
@@ -216,7 +239,7 @@ public class Registrant extends AbstractEntity {
     }
 
     public Long getRealInvoiceNumber() {
-        return realInvoiceNumber==null?Long.valueOf(0):realInvoiceNumber;
+        return realInvoiceNumber == null ? Long.valueOf(0) : realInvoiceNumber;
     }
 
     public void setRealInvoiceNumber(long realInvoiceNumber) {
@@ -224,7 +247,7 @@ public class Registrant extends AbstractEntity {
     }
 
     public Long getProformaInvoiceNumber() {
-        return proformaInvoiceNumber==null?Long.valueOf(0):proformaInvoiceNumber;
+        return proformaInvoiceNumber == null ? Long.valueOf(0) : proformaInvoiceNumber;
     }
 
     public void setProformaInvoiceNumber(Long proformaInvoiceNumber) {
@@ -247,15 +270,7 @@ public class Registrant extends AbstractEntity {
         this.epayResponse = epayResponse;
     }
 
-    public Branch getBranch() {
-		return branch;
-	}
-
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
-
-	@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -293,11 +308,19 @@ public class Registrant extends AbstractEntity {
         return result;
     }
 
-	public String getCaptcha() {
-		return captcha;
-	}
+    public String getCaptcha() {
+        return captcha;
+    }
 
-	public void setCaptcha(String captcha) {
-		this.captcha = captcha;
-	}
+    public void setCaptcha(String captcha) {
+        this.captcha = captcha;
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
 }

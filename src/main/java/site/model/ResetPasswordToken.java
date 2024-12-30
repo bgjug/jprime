@@ -2,27 +2,27 @@ package site.model;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
 
 /**
  * @author Zhorzh Raychev
  */
 @Entity
-@Table(name = "ResetPasswordToken")
+@Table(name = "ResetPasswordToken", uniqueConstraints = @UniqueConstraint(name = "UNQ_TOKEN", columnNames = {"tokenId"}))
 public class ResetPasswordToken extends AbstractEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @JoinColumn(name = "userId", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_token_user"))
 	private User owner;
 	
-	@Column(unique = true)
-    @NotBlank
+	@NotBlank
 	private String tokenId;
 	
 	private boolean used;

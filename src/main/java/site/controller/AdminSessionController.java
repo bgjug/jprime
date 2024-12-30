@@ -1,6 +1,7 @@
 package site.controller;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,8 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import site.config.Globals;
 import site.facade.AdminService;
+import site.facade.BranchService;
 import site.model.Session;
 import site.model.Submission;
 
@@ -36,6 +37,9 @@ public class AdminSessionController {
 
     @Autowired
     private AdminService adminFacade;
+
+    @Autowired
+    private BranchService branchService;
 
     @GetMapping("/view")
     public String viewSessions(Model model) {
@@ -89,9 +93,9 @@ public class AdminSessionController {
     private String getModelAndView(Model model, Session session) {
         model.addAttribute("session", session);
 
-        // Reduce list of submissions to only with those that are not scheduled yet
+        // Reduce the list of submissions to only with those that are not scheduled yet
         List<Submission> acceptedSubmissions =
-            adminFacade.findAllAcceptedSubmissionsForBranch(Globals.CURRENT_BRANCH);
+            adminFacade.findAllAcceptedSubmissionsForBranch(branchService.getCurrentBranch());
         List<Submission> scheduledSubmissions =
             adminFacade.findAllSessions().stream().map(Session::getSubmission).toList();
         acceptedSubmissions = acceptedSubmissions.stream()

@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import site.config.Globals;
+import site.facade.BranchService;
 import site.facade.MailService;
 import site.facade.ResetPasswordService;
 import site.model.User;
@@ -54,7 +54,10 @@ public class UserController {
 
 	@Value("${site.url.reset.password:https://jprime.io/createNewPassword?tokenId=}")
 	private  String createNewPasswordUrl;
-	
+
+    @Autowired
+    private BranchService branchService;
+
 	@GetMapping("/signup")
 	public String signup(Model model) {
 		model.addAttribute("user", new User());
@@ -181,7 +184,7 @@ public class UserController {
 		String msg = "Successfully changed password for user: " + user.getFirstName() + " " + user.getLastName() +
 				" (" + user.getEmail() + ") ";
 		model.addAttribute("msg", msg);
-		model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+		model.addAttribute("jprime_year", branchService.getCurrentBranch().getStartDate().getYear());
 
 		return SUCCESS_SCREEN_JSP;
 	}
@@ -200,9 +203,5 @@ public class UserController {
         String messageText = resourceAsString(fileName);
         messageText = messageText.replace("{user.firstName}", user.getFirstName());
         return messageText;
-    }
-    
-    public void setMailService(MailService mailService) {
-    	this.mailService = mailService;
     }
 }

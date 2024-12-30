@@ -1,21 +1,8 @@
 package site.controller.invoice;
 
 import java.math.BigDecimal;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.collections4.MapUtils;
-
-import site.config.Globals;
-import site.model.Branch;
-import site.model.Registrant;
 
 /**
  * DTO for the PDF
@@ -23,21 +10,10 @@ import site.model.Registrant;
  */
 public class InvoiceData {
 
-    public static final String DEFAULT_DESCRIPTION_BG = "jPrime "+ Globals.CURRENT_BRANCH + " билет за конференция";
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-
     public static final BigDecimal VAT_DECREASE_RATIO = BigDecimal.valueOf(1.2D);
 
     public static final String ORIGINAL_BG = "Оригинал";
     public static final String PROFORMA_BG = "Проформа";
-
-    private static final Map<Branch, TicketPrices> TICKET_PRICE_MAP = MapUtils.putAll(new HashMap<>(),
-        new Object[] {
-            Branch.YEAR_2024,
-            new TicketPrices(BigDecimal.valueOf(280.0), BigDecimal.valueOf(180.0), BigDecimal.valueOf(100.0)),
-            Branch.YEAR_2025,
-            new TicketPrices(BigDecimal.valueOf(340.0), BigDecimal.valueOf(230.0), BigDecimal.valueOf(130.0))
-        });
 
     private String invoiceNumber;
     private String invoiceDate;
@@ -50,7 +26,7 @@ public class InvoiceData {
     private String paymentType;
     private Long registrantId;
     private final List<InvoiceDetail> invoiceDetails = new ArrayList<>();
-    // Used to store data from model
+    // Used to store data from the model
     private Double singlePriceWithVAT;
     private String description;
 
@@ -152,50 +128,6 @@ public class InvoiceData {
         this.registrantId = registrantId;
     }
 
-    public static InvoiceData fromRegistrant(Registrant registrant) {
-        InvoiceData result = new InvoiceData();
-        result.setClient(registrant.getName());
-        result.setClientAddress(registrant.getAddress());
-        result.setClientEIK(registrant.getEik());
-        if (registrant.getVatNumber() != null) {
-            result.setClientVAT(registrant.getVatNumber());
-        } else {
-            result.setClientVAT("");
-        }
-        result.setMol(registrant.getMol());
-        result.setRegistrantId(registrant.getId());
-        result.setPaymentType(
-            registrant.getPaymentType() != null ? registrant.getPaymentType().getBulgarianValue() : "");
-        result.setInvoiceNumber(registrant.getRealInvoiceNumber() + "");
-        result.setInvoiceDate(LocalDate.now().format(FORMATTER));
-
-        int tickets = registrant.getVisitors().size();
-        Branch branch = registrant.getBranch();
-        TicketPrices ticketPrices = TICKET_PRICE_MAP.get(branch);
-        if (registrant.isStudent()) {
-            BigDecimal studentPrice = ticketPrices.getStudentPrice();
-            result.addInvoiceDetail(
-                new InvoiceDetail(studentPrice, tickets, DEFAULT_DESCRIPTION_BG));
-        } else {
-            BigDecimal ticketPrice = ticketPrices.getPrice(branch);
-
-            LocalDateTime registrationDate =
-                registrant.getCreatedDate() != null ? registrant.getCreatedDate() : branch.getCfpOpenDate();
-
-            if (registrationDate.isBefore(branch.getCfpCloseDate()) && Duration.between(
-                registrationDate, LocalDateTime.now()).abs().getSeconds() <= Duration.of(3, ChronoUnit.DAYS).getSeconds()) {
-                ticketPrice = ticketPrices.getPrice(branch, registrationDate);
-            }
-            result.addInvoiceDetail(new InvoiceDetail(ticketPrice, tickets));
-        }
-
-        return result;
-    }
-
-    public static TicketPrices getPrices(Branch branch) {
-        return TICKET_PRICE_MAP.get(branch);
-    }
-
     public void addInvoiceDetail(InvoiceDetail invoiceDetail) {
         invoiceDetails.add(invoiceDetail);
         invoiceDetail.setIdx(invoiceDetails.size());
@@ -226,42 +158,6 @@ public class InvoiceData {
             this.description = description;
         } else {
             invoiceDetails.get(0).setDescription(description);
-        }
-    }
-
-    public static class TicketPrices {
-
-        private final BigDecimal regularPrice;
-
-        private final BigDecimal earlyBirdPrice;
-
-        private final BigDecimal studentPrice;
-
-        public TicketPrices(BigDecimal regularPrice, BigDecimal earlyBirdPrice, BigDecimal studentPrice) {
-            this.regularPrice = regularPrice;
-            this.earlyBirdPrice = earlyBirdPrice;
-            this.studentPrice = studentPrice;
-        }
-
-        public BigDecimal getPrice(Branch branch) {
-            return getPrice(branch, LocalDateTime.now());
-        }
-
-        public BigDecimal getPrice(Branch branch, LocalDateTime atDateTime) {
-            atDateTime = atDateTime != null ? atDateTime : LocalDateTime.now();
-            return branch.getCfpCloseDate().isAfter(atDateTime) ? earlyBirdPrice : regularPrice;
-        }
-
-        public BigDecimal getRegularPrice() {
-            return regularPrice;
-        }
-
-        public BigDecimal getEarlyBirdPrice() {
-            return earlyBirdPrice;
-        }
-
-        public BigDecimal getStudentPrice() {
-            return studentPrice;
         }
     }
 }

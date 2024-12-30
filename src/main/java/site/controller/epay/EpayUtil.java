@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import site.model.JprimeException;
+import site.model.JPrimeException;
 
 /**
  * This class does the epay Hmac magic
@@ -61,7 +61,7 @@ public class EpayUtil {
             mac.init(keySpec);
             return mac;
         } catch (NoSuchAlgorithmException | InvalidKeyException e) {
-            throw new JprimeException(e);
+            throw new JPrimeException(e);
         }
     }
 
@@ -116,7 +116,7 @@ public class EpayUtil {
         try {
             return new String(BASE64_DECODER.decode(base64), "utf-8");
         } catch (UnsupportedEncodingException e) {
-            throw new JprimeException("while decoding base64", e);
+            throw new JPrimeException("while decoding base64", e);
         }
     }
 
@@ -153,7 +153,7 @@ public class EpayUtil {
                 Date date = simpleDateFormat.parse(parsed.get("PAY_TIME"));
                 epayResponse.setDate(date);
             } catch (ParseException e) {
-                throw new JprimeException("parsing date failed: "+parsed.get("PAY_TIME"), e);
+                throw new JPrimeException("parsing date failed: "+parsed.get("PAY_TIME"), e);
             }
         }
 
@@ -175,7 +175,7 @@ public class EpayUtil {
             }
             return parsed;
         } catch (Throwable t) {
-            throw new JprimeException("parsing failed", t);
+            throw new JPrimeException("parsing failed", t);
         }
     }
 }

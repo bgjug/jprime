@@ -44,8 +44,8 @@ import org.supercsv.io.CsvMapReader;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
-import site.config.Globals;
 import site.facade.AdminService;
+import site.facade.BranchService;
 import site.facade.MailService;
 import site.facade.TicketService;
 import site.facade.UserServiceJPro;
@@ -122,10 +122,13 @@ public class AdminVisitorController {
     @Autowired
     private UserServiceJPro userServiceJPro;
 
+    @Autowired
+    private BranchService branchService;
+
     @GetMapping("/view")
-    public String viewVisitors(Model model, @RequestParam(required = false)String year) {
-        int year_int = StringUtils.isNotBlank(year) ? Integer.parseInt(year) : Globals.CURRENT_BRANCH.getYear();
-        Branch branch = Branch.valueOfYear(Integer.toString(year_int));
+    public String viewVisitors(Model model, @RequestParam(required = false)String yearStr) {
+        int year = StringUtils.isNotBlank(yearStr) ? Integer.parseInt(yearStr) : branchService.getCurrentBranch().getYear();
+        Branch branch = branchService.findBranchByYear(year);
 
         List<Visitor> visitors = adminFacade.findAllNewestVisitors(branch);
         long payedCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.PAYED).count();
@@ -136,7 +139,7 @@ public class AdminVisitorController {
         model.addAttribute("requestingCount", requestingCount);
         model.addAttribute("sponsoredCount", sponsoredCount);
         model.addAttribute("jobs", adminFacade.findBackgroundJobs());
-        model.addAttribute("branches", Arrays.asList(Branch.values()));
+        model.addAttribute("branches", branchService.allBranches());
         model.addAttribute("selected_branch", Integer.toString(branch.getYear()));
         return VISITORS_JSP;
     }
@@ -175,9 +178,6 @@ public class AdminVisitorController {
 
     @GetMapping(value = "/tickets")
     public String sendTickets(Model model, @RequestParam(required = false)String year) {
-//        int year_int = StringUtils.isNotBlank(year) ? Integer.parseInt(year) : Globals.CURRENT_BRANCH.getYear();
-//        Branch branch = Branch.valueOfYear(Integer.toString(year_int));
-
         if (ticketService.sendTickets()) {
             return "redirect:/admin/jobs/view";
         }
@@ -211,7 +211,7 @@ public class AdminVisitorController {
                 if (fileModel.isEmptyVisitorsBeforeUpload()) {
                     //userServiceJPro.clearVisitors();
                 }
-                registrantsMap = StreamSupport.stream(adminFacade.findRegistrantsByBranch(Globals.CURRENT_BRANCH).spliterator(), false)
+                registrantsMap = StreamSupport.stream(adminFacade.findRegistrantsByBranch(branchService.getCurrentBranch()).spliterator(), false)
                     .collect(Collectors.toMap(
                         r -> StringUtils.isEmpty(r.getVatNumber()) ? r.getName() : r.getVatNumber(),
                         Function.identity(), (a, b) -> a));
@@ -234,35 +234,40 @@ public class AdminVisitorController {
         String[] fieldsList, Map<String, Registrant> registrantsMap) {
         try (BufferedReader reader = new BufferedReader(
             new InputStreamReader(csvFile.getInputStream(), StandardCharsets.UTF_8))) {
-            try (CsvMapReader csvReader = new CsvMapReader(reader, CsvPreference.STANDARD_PREFERENCE)) {
-                Map<String, String> csvLine = csvReader.read(fieldsList);
-                if (csvLine == null) {
-                    return getUploadVisitorModel(model);
-                }
-
-                if (csvLine.entrySet().stream().anyMatch(e-> !e.getKey().equalsIgnoreCase(e.getValue()))) {
-                    fieldsList = Arrays.stream(fieldsList).map(csvLine::get).toList().toArray(new String[]{});
-                }
-
-                Registrant lastRegistrant = null;
-                // Ignore header line
-                csvLine = csvReader.read(fieldsList);
-                do {
-                    if (fileModel.getVisitorType() == VisitorType.JPRIME) {
-                        lastRegistrant = processJPrimeVisitor(csvLine, registrantsMap, fileModel.getVisitorStatus(), lastRegistrant);
-                    } else {
-                        processJProVisitor(csvLine);
-                    }
-                    csvLine = csvReader.read(fieldsList);
-                } while (csvLine != null);
-            } catch (SuperCsvException csvException) {
-                result.addError(new FieldError("", "csvFile", csvException.getMessage()));
-            }
+            processCSVFile(fileModel, result, fieldsList, registrantsMap, reader);
         } catch (IOException e) {
             result.addError(new FieldError("", "csvFile", e.getMessage()));
         }
 
         return getUploadVisitorModel(model);
+    }
+
+    private void processCSVFile(CSVFileModel fileModel, BindingResult result, String[] fieldsList,
+        Map<String, Registrant> registrantsMap, BufferedReader reader) throws IOException {
+        try (CsvMapReader csvReader = new CsvMapReader(reader, CsvPreference.STANDARD_PREFERENCE)) {
+            Map<String, String> csvLine = csvReader.read(fieldsList);
+            if (csvLine == null) {
+                return;
+            }
+
+            if (csvLine.entrySet().stream().anyMatch(e-> !e.getKey().equalsIgnoreCase(e.getValue()))) {
+                fieldsList = Arrays.stream(fieldsList).map(csvLine::get).toList().toArray(new String[]{});
+            }
+
+            Registrant lastRegistrant = null;
+            // Ignore header line
+            csvLine = csvReader.read(fieldsList);
+            do {
+                if (fileModel.getVisitorType() == VisitorType.JPRIME) {
+                    lastRegistrant = processJPrimeVisitor(csvLine, registrantsMap, fileModel.getVisitorStatus(), lastRegistrant);
+                } else {
+                    processJProVisitor(csvLine);
+                }
+                csvLine = csvReader.read(fieldsList);
+            } while (csvLine != null);
+        } catch (SuperCsvException csvException) {
+            result.addError(new FieldError("", "csvFile", csvException.getMessage()));
+        }
     }
 
     private void processJProVisitor(Map<String, String> csvLine) {

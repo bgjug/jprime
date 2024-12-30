@@ -1,27 +1,31 @@
 package site.facade;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import site.model.JprimeException;
+import site.model.JPrimeException;
 import site.model.Registrant;
 import site.repository.RegistrantNumberGeneratorRepository;
 
 @Service
 public class NumberGeneratorService {
 
-    @Autowired
-    @Qualifier("epayInvoiceNumberGenerator")
-    private RegistrantNumberGeneratorRepository<?> epayInvoiceNumberGeneratorRepository;
+    private final RegistrantNumberGeneratorRepository<?> epayInvoiceNumberGeneratorRepository;
 
-    @Autowired
-    @Qualifier("realInvoiceNumberGenerator")
-    private RegistrantNumberGeneratorRepository<?> realInvoiceNumberGeneratorRepository;
+    private final RegistrantNumberGeneratorRepository<?> realInvoiceNumberGeneratorRepository;
 
-    @Autowired
-    @Qualifier("proformaNumberGenerator")
-    private RegistrantNumberGeneratorRepository<?> proformaNumberGeneratorRepository;
+    private final RegistrantNumberGeneratorRepository<?> proformaNumberGeneratorRepository;
+
+    public NumberGeneratorService(@Qualifier(
+            "epayInvoiceNumberGenerator") RegistrantNumberGeneratorRepository<?> epayInvoiceNumberGeneratorRepository,
+        @Qualifier(
+            "realInvoiceNumberGenerator") RegistrantNumberGeneratorRepository<?> realInvoiceNumberGeneratorRepository,
+        @Qualifier(
+            "proformaNumberGenerator") RegistrantNumberGeneratorRepository<?> proformaNumberGeneratorRepository) {
+        this.epayInvoiceNumberGeneratorRepository = epayInvoiceNumberGeneratorRepository;
+        this.realInvoiceNumberGeneratorRepository = realInvoiceNumberGeneratorRepository;
+        this.proformaNumberGeneratorRepository = proformaNumberGeneratorRepository;
+    }
 
     private <T extends Registrant.NumberGenerator> long getInvoiceNumber(
         RegistrantNumberGeneratorRepository<T> repository, long initialValue) {
@@ -29,7 +33,7 @@ public class NumberGeneratorService {
         synchronized (repository.repositoryClass()) {
             long count = repository.count();
             if (count > 1) {
-                throw new JprimeException(
+                throw new JPrimeException(
                     "Mihail: RealInvoiceNumberGenerator table has more than one row. Fix that");
             }
 

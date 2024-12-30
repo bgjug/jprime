@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
-import site.config.Globals;
+import site.facade.BranchService;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.repository.RegistrantRepository;
@@ -48,6 +48,9 @@ class VisitorsRestControllerTest {
 
     private MockMvc mockMvc;
 
+    @Autowired
+    private BranchService branchService;
+
     @BeforeEach
     void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
@@ -59,7 +62,7 @@ class VisitorsRestControllerTest {
 
     @Test
     void testFindAllVisitors() throws Exception {
-        MvcResult result = mockMvc.perform(get("/api/visitor/" + Globals.CURRENT_BRANCH.getLabel()))
+        MvcResult result = mockMvc.perform(get("/api/visitor/" + branchService.getCurrentBranch().getYear()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
@@ -75,7 +78,7 @@ class VisitorsRestControllerTest {
     @Test
     void testFindVisitorByTicket() throws Exception {
         MvcResult result = mockMvc.perform(
-                get("/api/visitor/" + Globals.CURRENT_BRANCH.getLabel() + "/_TICKET_REFERENCE_ID_"))
+                get("/api/visitor/" + branchService.getCurrentBranch().getLabel() + "/_TICKET_REFERENCE_ID_"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
@@ -87,7 +90,7 @@ class VisitorsRestControllerTest {
 
     @Test
     void testFindVisitorByTicketBadTicket() throws Exception {
-        mockMvc.perform(get("/api/visitor/" + Globals.CURRENT_BRANCH.getLabel() + "/_INVALID_TICKET_ID_"))
+        mockMvc.perform(get("/api/visitor/" + branchService.getCurrentBranch().getLabel() + "/_INVALID_TICKET_ID_"))
             .andExpect(status().isNotFound());
     }
 
@@ -95,7 +98,7 @@ class VisitorsRestControllerTest {
     void testSearchForVisitorByFirstName() throws Exception {
         VisitorSearch search = new VisitorSearch(null, "fu", null, null);
         MvcResult result = mockMvc.perform(
-                post("/api/visitor/search/" + Globals.CURRENT_BRANCH.getLabel()).contentType(
+                post("/api/visitor/search/" + branchService.getCurrentBranch().getLabel()).contentType(
                     MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(search)))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -113,7 +116,7 @@ class VisitorsRestControllerTest {
     void testSearchForVisitorByLastName() throws Exception {
         VisitorSearch search = new VisitorSearch(null, null, "na", null);
         MvcResult result = mockMvc.perform(
-                post("/api/visitor/search/" + Globals.CURRENT_BRANCH.getLabel()).contentType(
+                post("/api/visitor/search/" + branchService.getCurrentBranch().getLabel()).contentType(
                     MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(search)))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -131,7 +134,7 @@ class VisitorsRestControllerTest {
     void testSearchForVisitorByFirstAndLastName() throws Exception {
         VisitorSearch search = new VisitorSearch(null, "fu", "na", null);
         MvcResult result = mockMvc.perform(
-                post("/api/visitor/search/" + Globals.CURRENT_BRANCH.getLabel()).contentType(
+                post("/api/visitor/search/" + branchService.getCurrentBranch().getLabel()).contentType(
                     MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(search)))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -149,7 +152,7 @@ class VisitorsRestControllerTest {
     void testSearchForVisitorByCompany() throws Exception {
         VisitorSearch search = new VisitorSearch(null, null, null, "fun");
         MvcResult result = mockMvc.perform(
-                post("/api/visitor/search/" + Globals.CURRENT_BRANCH.getLabel()).contentType(
+                post("/api/visitor/search/" + branchService.getCurrentBranch().getLabel()).contentType(
                     MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(search)))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -167,7 +170,7 @@ class VisitorsRestControllerTest {
     void testSearchForVisitorByEmail() throws Exception {
         VisitorSearch search = new VisitorSearch("funky.com", null, null, null);
         MvcResult result = mockMvc.perform(
-                post("/api/visitor/search/" + Globals.CURRENT_BRANCH.getLabel()).contentType(
+                post("/api/visitor/search/" + branchService.getCurrentBranch().getLabel()).contentType(
                     MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(search)))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -206,7 +209,7 @@ class VisitorsRestControllerTest {
         Registrant r = new Registrant();
         r.setEmail("funky@email.com");
         r.setName("Funky company Ltd.");
-        r.setBranch(Globals.CURRENT_BRANCH);
+        r.setBranch(branchService.getCurrentBranch());
         registrantRepository.save(r);
         return r;
     }

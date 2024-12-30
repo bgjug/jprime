@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
-import site.config.Globals;
+import site.facade.BranchService;
 import site.model.Registrant;
 import site.model.VisitorStatus;
 import site.repository.RegistrantRepository;
@@ -45,6 +45,9 @@ class TicketsEpayRegisterControllerTest {
 
     private MockMvc mockMvc;
 
+    @Autowired
+    private BranchService branchService;
+
     @BeforeEach
     void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
@@ -55,7 +58,7 @@ class TicketsEpayRegisterControllerTest {
         mockMvc.perform(get("/tickets"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("registrant", is(new Registrant())))
-                .andExpect(view().name(Globals.CURRENT_BRANCH.isSoldOut() ? TicketsController.TICKETS_END_JSP : TicketsController.TICKETS_REGISTER_JSP));
+                .andExpect(view().name(branchService.getCurrentBranch().isSoldOut() ? TicketsController.TICKETS_END_JSP : TicketsController.TICKETS_REGISTER_JSP));
     }
 
     @Test
@@ -143,7 +146,7 @@ class TicketsEpayRegisterControllerTest {
     void getTicketsEpayShouldReturnEmptyRegistrant() throws Exception {
         mockMvc.perform(get("/tickets"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(Globals.CURRENT_BRANCH.isSoldOut() ? TicketsController.TICKETS_END_JSP : TicketsController.TICKETS_REGISTER_JSP))
+                .andExpect(view().name(branchService.getCurrentBranch().isSoldOut() ? TicketsController.TICKETS_END_JSP : TicketsController.TICKETS_REGISTER_JSP))
                 .andExpect(model().attribute("registrant", new Registrant()));
     }
 }

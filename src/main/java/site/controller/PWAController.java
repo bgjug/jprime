@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import site.config.Globals;
+import site.facade.BranchService;
 import site.model.Session;
 import site.model.Submission;
 import site.repository.SessionRepository;
@@ -23,8 +23,11 @@ public class PWAController {
 
     private final SessionRepository sessionRepository;
 
-    public PWAController(SessionRepository sessionRepository) {
+    private final BranchService branchService;
+
+    public PWAController(SessionRepository sessionRepository, BranchService branchService) {
         this.sessionRepository = sessionRepository;
+        this.branchService = branchService;
     }
 
     public static class SessionDTO {
@@ -78,7 +81,7 @@ public class PWAController {
     @GetMapping(value = "/findSessionsByHall", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<SessionDTO> getSessionByHall(String hallName) {
-        List<Session> sessions = sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH.name());
+        List<Session> sessions = sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, branchService.getCurrentBranch());
         return sessions.stream().map(session -> new SessionDTO(session, hallName)).toList();
     }
 

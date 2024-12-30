@@ -15,13 +15,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import site.config.Globals;
-import site.controller.invoice.InvoiceData;
+import site.facade.BranchService;
 import site.facade.UserService;
 import site.model.Branch;
 import site.model.Partner;
 import site.model.Sponsor;
 import site.model.SponsorPackage;
+import site.model.TicketPrice;
+import site.model.TicketType;
 
 @Controller
 public class IndexController {
@@ -34,6 +35,9 @@ public class IndexController {
 
     @Autowired
     private UserService userFacade;
+
+    @Autowired
+    private BranchService branchService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -70,7 +74,7 @@ public class IndexController {
         List<List<Partner>> eventPartnerChunks = getPartnerChunks(eventPartners);
         model.addAttribute("eventPartnerChunks", eventPartnerChunks);
 
-        Branch currentBranch = Globals.CURRENT_BRANCH;
+        Branch currentBranch = branchService.getCurrentBranch();
         if (currentBranch.getCfpCloseDate().isAfter(LocalDateTime.now()) && currentBranch.getCfpOpenDate().minusDays(30)
             .isBefore(LocalDateTime.now())) {
             model.addAttribute("early_sold_out", "");
@@ -83,16 +87,16 @@ public class IndexController {
         }
 
         Map<String, String> soldOutPackages = Arrays.stream(SponsorPackage.values())
-            .map(sp -> Pair.of(sp, currentBranch.isSoldOut(sp) ? SOLD_OUT_STYLE : ""))
+            .map(sp -> Pair.of(sp, currentBranch.soldOutPackages().contains(sp) ? SOLD_OUT_STYLE : ""))
             .collect(Collectors.toMap(p -> p.getFirst().name(), Pair::getSecond));
 
         model.addAttribute("sold_out_sponsor_packages", soldOutPackages);
 
-        InvoiceData.TicketPrices prices = InvoiceData.getPrices(currentBranch);
+        Map<TicketType, TicketPrice> prices = branchService.getTicketPrices(currentBranch);
 
-        model.addAttribute("early_bird_ticket_price", String.format("%.2f", prices.getEarlyBirdPrice()));
-        model.addAttribute("regular_ticket_price", String.format("%.2f",prices.getRegularPrice()));
-        model.addAttribute("student_ticket_price", String.format("%.2f",prices.getStudentPrice()));
+        model.addAttribute("early_bird_ticket_price", String.format("%.2f", prices.get(TicketType.EARLY_BIRD).getPrice()));
+        model.addAttribute("regular_ticket_price", String.format("%.2f",prices.get(TicketType.REGULAR).getPrice()));
+        model.addAttribute("student_ticket_price", String.format("%.2f",prices.get(TicketType.STUDENT).getPrice()));
 
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(currentBranch.getCfpCloseDate()));
         model.addAttribute("cfp_closed", currentBranch.getCfpCloseDate().isAfter(LocalDateTime.now()));

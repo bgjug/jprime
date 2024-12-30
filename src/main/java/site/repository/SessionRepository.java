@@ -27,7 +27,7 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
         "order by s.start_time asc"
     )
     List<Session> findSessionsForBranchAndHallOrHallIsNull(@Param("hall") String hall,
-        @Param("branch") String branch);
+        @Param("branch") Branch branch);
 
     List<Session> findBySubmissionBranchOrSubmissionIsNullOrderByStartTimeAsc(Branch branch);
 

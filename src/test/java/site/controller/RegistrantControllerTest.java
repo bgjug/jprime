@@ -14,10 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
-import site.config.Globals;
+import site.facade.BranchService;
+import site.model.Branch;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.repository.RegistrantRepository;
+import site.repository.VisitorRepository;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -47,28 +49,35 @@ class RegistrantControllerTest {
     private RegistrantRepository registrantRepository;
 
     private MockMvc mockMvc;
-    private Registrant adamsFamily;
-    private Registrant ivan;
+    private static Registrant adamsFamily;
+    private static Registrant ivan;
+
+    @Autowired
+    private BranchService branchService;
+
+    @Autowired
+    private VisitorRepository visitorRepository;
 
     @BeforeEach
     void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        insertTestRegistrants();
-    }
 
-    private void insertTestRegistrants() {
+        Branch currentBranch = branchService.getCurrentBranch();
+        visitorRepository.deleteAll();
+        registrantRepository.deleteAll();
+
         adamsFamily = new Registrant(true, "Adams Family", "0001 Cemetery Lane", "666", "Gomez Adamz", "gomez@adams.com");
         List<Visitor> adamsVisitors = Arrays.asList(
-                new Visitor(adamsFamily, "Lurch Adams", "lurch@adams.com", "Adams Family"),
-                new Visitor(adamsFamily, "Morticia Adams", "morticia@adams.com", "Adams Family")
+            new Visitor(adamsFamily, "Lurch Adams", "lurch@adams.com", "Adams Family"),
+            new Visitor(adamsFamily, "Morticia Adams", "morticia@adams.com", "Adams Family")
         );
         adamsFamily.setVisitors(adamsVisitors);
-        adamsFamily.setBranch(Globals.CURRENT_BRANCH);
+        adamsFamily.setBranch(currentBranch);
         adamsFamily = registrantRepository.save(adamsFamily);
 
         ivan = new Registrant("Ivan St. Ivanov", "ivan.st.ivanov@gmail.com");
         ivan.setVisitors(List.of(new Visitor(ivan, "Ivan St. Ivanov", "ivan.st.ivanov@gmail.com", "JUG")));
-        ivan.setBranch(Globals.CURRENT_BRANCH);
+        ivan.setBranch(currentBranch);
         ivan = registrantRepository.save(ivan);
     }
 

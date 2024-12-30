@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import site.controller.invoice.InvoiceData;
 import site.controller.invoice.InvoiceExporter;
+import site.facade.InvoiceService;
 import site.facade.MailService;
 import site.facade.RegistrantService;
 import site.model.Registrant;
@@ -50,6 +51,9 @@ public class AdminInvoiceController {
     @Lazy
     private MailService mailFacade;
 
+    @Autowired
+    private InvoiceService invoiceService;
+
     @Value("${save.invoice.on.email.failure:false}")
     private boolean saveInvoiceOnFailure;
 
@@ -58,7 +62,7 @@ public class AdminInvoiceController {
 
     @GetMapping(value = "/{itemId}")
     public String invoiceDataForm(@PathVariable Long itemId, Model model) {
-        InvoiceData invoiceData = InvoiceData.fromRegistrant(registrantFacade.findById(itemId));
+        InvoiceData invoiceData = invoiceService.fromRegistrant(registrantFacade.findById(itemId));
         model.addAttribute("invoiceData", invoiceData);
         return INVOICE_DATA_JSP;
     }
@@ -75,7 +79,7 @@ public class AdminInvoiceController {
 
         registrantFacade.setRegistrantPaid(registrant);
 
-        InvoiceData invoiceData = InvoiceData.fromRegistrant(registrant);
+        InvoiceData invoiceData = invoiceService.fromRegistrant(registrant);
         // Copy data from model into actual invoice data bean
         invoiceData.setClient(modelInvoiceData.getClient());
         invoiceData.setClientAddress(modelInvoiceData.getClientAddress());
