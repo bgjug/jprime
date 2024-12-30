@@ -3,7 +3,6 @@ package site.api;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,7 @@ import site.facade.AdminService;
 import site.facade.UserService;
 
 @RestController
-@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/speaker", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SpeakerRestController {
 
     private final AdminService adminService;
@@ -25,7 +24,7 @@ public class SpeakerRestController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "/speaker")
+    @GetMapping
     public ResponseEntity<?> allSpeakers() {
         try {
             return ResponseEntity.ok(userService.findAcceptedSpeakers());
@@ -34,7 +33,7 @@ public class SpeakerRestController {
         }
     }
 
-    @PostMapping(path = "/speaker/search")
+    @PostMapping(path = "/search")
     public ResponseEntity<?> findSpeaker(@RequestBody SpeakerSearch speakerSearch) {
 
         try {
