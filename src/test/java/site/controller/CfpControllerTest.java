@@ -5,6 +5,8 @@ import java.util.List;
 
 import jakarta.servlet.http.HttpSession;
 
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import site.app.Application;
 import site.facade.BranchService;
+import site.facade.DefaultBranchUtil;
 import site.facade.MailService;
 import site.model.Branch;
 import site.model.SessionLevel;
@@ -59,6 +62,11 @@ class CfpControllerTest {
 
     private MailServiceMock mailerMock;
 
+    @BeforeAll
+    public static void beforeAll(@Autowired BranchService branchService) {
+        DefaultBranchUtil.createDefaultBranch(branchService);
+    }
+
     @BeforeEach
     void cleanupSubmissionRepository () {
         submissionRepository.deleteAll();
@@ -72,6 +80,8 @@ class CfpControllerTest {
     void getShouldReturnEmptySubscription() throws Exception {
         String cfpPage = CfpController.CFP_CLOSED_JSP;
         Branch currentBranch = branchService.getCurrentBranch();
+        Assertions.assertThat(currentBranch).isNotNull();
+
         if (currentBranch.getCfpCloseDate().isAfter(LocalDateTime.now()) && currentBranch.getCfpOpenDate()
             .isBefore(LocalDateTime.now())) {
             cfpPage = CfpController.CFP_OPEN_JSP;
@@ -84,6 +94,7 @@ class CfpControllerTest {
     void shouldSubmitSessionWithSingleSpeaker() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/captcha-image")).andExpect(status().isOk()).andReturn();
         HttpSession session = mvcResult.getRequest().getSession();
+        Assertions.assertThat(session).isNotNull();
         String captcha = (String) session.getAttribute("session_captcha");
 
         mockMvc.perform(multipart("/cfp").file(new MockMultipartFile("speakerImage", new byte[] {}))
@@ -118,6 +129,7 @@ class CfpControllerTest {
     void shouldSubmitSessionWithCoSpeaker() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/captcha-image")).andExpect(status().isOk()).andReturn();
         HttpSession session = mvcResult.getRequest().getSession();
+        Assertions.assertThat(session).isNotNull();
         String captcha = (String) session.getAttribute("session_captcha");
 
         mockMvc.perform(multipart("/cfp").file(new MockMultipartFile("speakerImage", new byte[] {}))

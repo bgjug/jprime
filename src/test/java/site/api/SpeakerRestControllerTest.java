@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import site.app.Application;
 import site.facade.BranchService;
+import site.facade.DefaultBranchUtil;
 import site.model.Branch;
 import site.model.SessionLevel;
 import site.model.SessionType;
@@ -52,10 +54,13 @@ class SpeakerRestControllerTest {
         @Autowired SubmissionRepository submissionRepository, @Autowired BranchService branchService) {
         // Perform actions after all test beans are created in the Spring context
 
+        DefaultBranchUtil.createDefaultBranch(branchService);
+
         submissionRepository.deleteAll();
         speakerRepository.deleteAll();
 
         Branch branch = branchService.getCurrentBranch();
+        Assertions.assertThat(branch).isNotNull();
         createSpeakers(branch, speakerRepository, submissionRepository);
     }
 

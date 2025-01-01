@@ -35,10 +35,23 @@ public class TicketPrice extends AbstractEntity {
     public TicketPrice() {
     }
 
+    public TicketPrice(BigDecimal price, TicketType ticketType) {
+        this.price = price;
+        this.ticketType = ticketType;
+    }
+
     public TicketPrice(BigDecimal price, TicketType ticketType, Branch branch) {
         this.price = price;
         this.ticketType = ticketType;
         this.branch = branch;
+    }
+
+    public TicketPrice(BigDecimal price, TicketType ticketType, LocalDateTime validFrom,
+        LocalDateTime validUntil) {
+        this.price = price;
+        this.ticketType = ticketType;
+        this.validFrom = validFrom;
+        this.validUntil = validUntil;
     }
 
     public TicketPrice(BigDecimal price, TicketType ticketType, Branch branch, LocalDateTime validFrom,
@@ -100,5 +113,13 @@ public class TicketPrice extends AbstractEntity {
     @Override
     public int hashCode() {
         return Objects.hash(getTicketType(), getBranch());
+    }
+
+    public TicketPrice branchIfNotSet(Branch branch) {
+        if (this.branch != null) {
+            return this;
+        }
+        this.branch = branch;
+        return this;
     }
 }

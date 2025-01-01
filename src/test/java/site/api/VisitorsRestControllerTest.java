@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
 import site.facade.BranchService;
+import site.facade.DefaultBranchUtil;
+import site.model.Branch;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.repository.RegistrantRepository;
@@ -51,10 +55,19 @@ class VisitorsRestControllerTest {
     @Autowired
     private BranchService branchService;
 
+    @BeforeAll
+    public static void beforeAll(@Autowired BranchService branchService) {
+        DefaultBranchUtil.createDefaultBranch(branchService);
+    }
+
     @BeforeEach
     void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        Registrant r = createRegistrant();
+
+        Branch currentBranch = branchService.getCurrentBranch();
+        Assertions.assertThat(currentBranch).isNotNull();
+
+        Registrant r = createRegistrant(currentBranch);
 
         createVisitorForRegistrant(r);
         createVisitorForRegistrantWithoutTicket(r);
@@ -62,7 +75,9 @@ class VisitorsRestControllerTest {
 
     @Test
     void testFindAllVisitors() throws Exception {
-        MvcResult result = mockMvc.perform(get("/api/visitor/" + branchService.getCurrentBranch().getYear()))
+        Branch currentBranch = branchService.getCurrentBranch();
+        Assertions.assertThat(currentBranch).isNotNull();
+        MvcResult result = mockMvc.perform(get("/api/visitor/" + currentBranch.getYear()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
@@ -77,8 +92,11 @@ class VisitorsRestControllerTest {
 
     @Test
     void testFindVisitorByTicket() throws Exception {
+        Branch currentBranch = branchService.getCurrentBranch();
+        Assertions.assertThat(currentBranch).isNotNull();
+
         MvcResult result = mockMvc.perform(
-                get("/api/visitor/" + branchService.getCurrentBranch().getLabel() + "/_TICKET_REFERENCE_ID_"))
+                get("/api/visitor/" + currentBranch.getLabel() + "/_TICKET_REFERENCE_ID_"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
@@ -90,15 +108,22 @@ class VisitorsRestControllerTest {
 
     @Test
     void testFindVisitorByTicketBadTicket() throws Exception {
-        mockMvc.perform(get("/api/visitor/" + branchService.getCurrentBranch().getLabel() + "/_INVALID_TICKET_ID_"))
+        Branch currentBranch = branchService.getCurrentBranch();
+        Assertions.assertThat(currentBranch).isNotNull();
+
+        mockMvc.perform(
+                get("/api/visitor/" + currentBranch.getLabel() + "/_INVALID_TICKET_ID_"))
             .andExpect(status().isNotFound());
     }
 
     @Test
     void testSearchForVisitorByFirstName() throws Exception {
+        Branch currentBranch = branchService.getCurrentBranch();
+        Assertions.assertThat(currentBranch).isNotNull();
+
         VisitorSearch search = new VisitorSearch(null, "fu", null, null);
         MvcResult result = mockMvc.perform(
-                post("/api/visitor/search/" + branchService.getCurrentBranch().getLabel()).contentType(
+                post("/api/visitor/search/" + currentBranch.getLabel()).contentType(
                     MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(search)))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -114,9 +139,12 @@ class VisitorsRestControllerTest {
 
     @Test
     void testSearchForVisitorByLastName() throws Exception {
+        Branch currentBranch = branchService.getCurrentBranch();
+        Assertions.assertThat(currentBranch).isNotNull();
+
         VisitorSearch search = new VisitorSearch(null, null, "na", null);
         MvcResult result = mockMvc.perform(
-                post("/api/visitor/search/" + branchService.getCurrentBranch().getLabel()).contentType(
+                post("/api/visitor/search/" + currentBranch.getLabel()).contentType(
                     MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(search)))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -132,9 +160,12 @@ class VisitorsRestControllerTest {
 
     @Test
     void testSearchForVisitorByFirstAndLastName() throws Exception {
+        Branch currentBranch = branchService.getCurrentBranch();
+        Assertions.assertThat(currentBranch).isNotNull();
+
         VisitorSearch search = new VisitorSearch(null, "fu", "na", null);
         MvcResult result = mockMvc.perform(
-                post("/api/visitor/search/" + branchService.getCurrentBranch().getLabel()).contentType(
+                post("/api/visitor/search/" + currentBranch.getLabel()).contentType(
                     MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(search)))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -150,9 +181,12 @@ class VisitorsRestControllerTest {
 
     @Test
     void testSearchForVisitorByCompany() throws Exception {
+        Branch currentBranch = branchService.getCurrentBranch();
+        Assertions.assertThat(currentBranch).isNotNull();
+
         VisitorSearch search = new VisitorSearch(null, null, null, "fun");
         MvcResult result = mockMvc.perform(
-                post("/api/visitor/search/" + branchService.getCurrentBranch().getLabel()).contentType(
+                post("/api/visitor/search/" + currentBranch.getLabel()).contentType(
                     MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(search)))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -168,9 +202,12 @@ class VisitorsRestControllerTest {
 
     @Test
     void testSearchForVisitorByEmail() throws Exception {
+        Branch currentBranch = branchService.getCurrentBranch();
+        Assertions.assertThat(currentBranch).isNotNull();
+
         VisitorSearch search = new VisitorSearch("funky.com", null, null, null);
         MvcResult result = mockMvc.perform(
-                post("/api/visitor/search/" + branchService.getCurrentBranch().getLabel()).contentType(
+                post("/api/visitor/search/" + currentBranch.getLabel()).contentType(
                     MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsString(search)))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -184,7 +221,7 @@ class VisitorsRestControllerTest {
         assertNotNull(visitor.getTicket());
     }
 
-    private Visitor createVisitorForRegistrant(Registrant r) {
+    private void createVisitorForRegistrant(Registrant r) {
         Visitor v = new Visitor();
         v.setName("Funny Name");
         v.setEmail("funny.name@funky.com");
@@ -192,27 +229,24 @@ class VisitorsRestControllerTest {
         v.setTicket("_TICKET_REFERENCE_ID_");
         v.setRegistrant(r);
         visitorRepository.save(v);
-        return v;
     }
 
-    private Visitor createVisitorForRegistrantWithoutTicket(Registrant r) {
+    private void createVisitorForRegistrantWithoutTicket(Registrant r) {
         Visitor v = new Visitor();
         v.setName("Visitor NoTicket");
         v.setEmail("no.ticket.visitor@funky.com");
         v.setCompany("Funky company Ltd.");
         v.setRegistrant(r);
         visitorRepository.save(v);
-        return v;
     }
 
-    private Registrant createRegistrant() {
+    private Registrant createRegistrant(Branch currentBranch) {
         Registrant r = new Registrant();
         r.setEmail("funky@email.com");
         r.setName("Funky company Ltd.");
-        r.setBranch(branchService.getCurrentBranch());
+        r.setBranch(currentBranch);
         registrantRepository.save(r);
         return r;
     }
-
 
 }

@@ -2,6 +2,7 @@ package site.controller;
 
 import java.io.File;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
 import site.facade.BranchService;
 import site.facade.CSVService;
+import site.facade.DefaultBranchUtil;
 import site.facade.MailService;
 import site.model.Branch;
 import site.model.SessionLevel;
@@ -75,6 +77,13 @@ class SubmissionControllerTest {
     @Autowired
     private SessionRepository sessionRepository;
 
+    private MailServiceMock mockMailer;
+
+    @BeforeAll
+    public static void beforeAll(@Autowired BranchService branchService) {
+        DefaultBranchUtil.createDefaultBranch(branchService);
+    }
+
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
@@ -112,6 +121,10 @@ class SubmissionControllerTest {
                 true).branch(branchService.findBranchByYear(2016)));
         naydenGochev.getSubmissions().add(bootAddon);
         speakerRepository.save(naydenGochev);
+
+        assertThat(mailer, instanceOf(MailServiceMock.class));
+        mockMailer = (MailServiceMock) this.mailer;
+        mockMailer.clear();
     }
 
     @Test
@@ -148,10 +161,6 @@ class SubmissionControllerTest {
 
     @Test
     void acceptSubmissionShouldChangeTheSubmissionStatus() throws Exception {
-        assertThat(mailer, instanceOf(MailServiceMock.class));
-        MailServiceMock mailer = (MailServiceMock) this.mailer;
-        mailer.clear();
-
         mockMvc.perform(get("/admin/submission/accept/" + valhalla.getId()))
             .andExpect(status().isOk())
             .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP));
@@ -159,16 +168,12 @@ class SubmissionControllerTest {
         assertThat(valhalla.getStatus(), is(SubmissionStatus.ACCEPTED));
         assertThat(forge.getStatus(), is(SubmissionStatus.SUBMITTED));
 
-        assertThat(mailer.getRecipientAddresses().size(), is(1));
-        assertThat(mailer.getRecipientAddresses(), contains(valhalla.getSpeaker().getEmail()));
+        assertThat(mockMailer.getRecipientAddresses().size(), is(1));
+        assertThat(mockMailer.getRecipientAddresses(), contains(valhalla.getSpeaker().getEmail()));
     }
 
     @Test
     void rejectSubmissionShouldChangeTheSubmissionStatus() throws Exception {
-        assertThat(mailer, instanceOf(MailServiceMock.class));
-        MailServiceMock mailer = (MailServiceMock) this.mailer;
-        mailer.clear();
-
         mockMvc.perform(get("/admin/submission/reject/" + forge.getId()))
             .andExpect(status().isOk())
             .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP));
@@ -176,22 +181,18 @@ class SubmissionControllerTest {
         assertThat(valhalla.getStatus(), is(SubmissionStatus.SUBMITTED));
         assertThat(forge.getStatus(), is(SubmissionStatus.REJECTED));
 
-        assertThat(mailer.getRecipientAddresses().size(), is(1));
-        assertThat(mailer.getRecipientAddresses(), contains(forge.getSpeaker().getEmail()));
+        assertThat(mockMailer.getRecipientAddresses().size(), is(1));
+        assertThat(mockMailer.getRecipientAddresses(), contains(forge.getSpeaker().getEmail()));
     }
 
     @Test
     void submissionStatusChangeShouldSendEmailToCoSpeakerToo() throws Exception {
-        assertThat(mailer, instanceOf(MailServiceMock.class));
-        MailServiceMock mailer = (MailServiceMock) this.mailer;
-        mailer.clear();
-
         mockMvc.perform(get("/admin/submission/accept/" + bootAddon.getId()))
             .andExpect(status().isOk())
             .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP));
 
-        assertThat(mailer.getRecipientAddresses().size(), is(2));
-        assertThat(mailer.getRecipientAddresses(),
+        assertThat(mockMailer.getRecipientAddresses().size(), is(2));
+        assertThat(mockMailer.getRecipientAddresses(),
             contains(bootAddon.getSpeaker().getEmail(), bootAddon.getCoSpeaker().getEmail()));
     }
 
