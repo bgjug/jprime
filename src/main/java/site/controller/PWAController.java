@@ -81,7 +81,7 @@ public class PWAController {
     @GetMapping(value = "/findSessionsByHall", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<SessionDTO> getSessionByHall(String hallName) {
-        List<Session> sessions = sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, branchService.getCurrentBranch());
+        List<Session> sessions = sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, branchService.getCurrentBranch().getLabel());
         return sessions.stream().map(session -> new SessionDTO(session, hallName)).toList();
     }
 

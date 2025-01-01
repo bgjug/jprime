@@ -182,7 +182,7 @@ public class UserService {
 
     public List<Session> findSessionTalksAndBreaksByHallName(String hallName) {
         return sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName,
-            branchService.getCurrentBranch());
+            branchService.getCurrentBranch().getLabel());
     }
 
     public boolean setPresentById(Visitor visitorExample) {
