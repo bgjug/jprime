@@ -21,6 +21,8 @@ import site.model.Tag;
 @RequestMapping(value = "/admin/tag")
 public class AdminTagController {
 
+	private static final String ADMIN_TAG_EDIT_JSP = "admin/tag/edit";
+
 	@Autowired
 	private AdminService adminFacade;
 	
@@ -38,7 +40,7 @@ public class AdminTagController {
 	@PostMapping("/add")
 	public String add(@Valid final Tag tag, BindingResult bindingResult){
 		if(bindingResult.hasErrors()){
-			return "admin/tag/edit";
+			return ADMIN_TAG_EDIT_JSP;
 		}
 		this.adminFacade.saveTag(tag);
 		
@@ -48,14 +50,14 @@ public class AdminTagController {
 	@GetMapping("/add")
 	public String edit(Model model){
 		model.addAttribute("tag", new Tag());
-		return "admin/tag/edit";
+		return ADMIN_TAG_EDIT_JSP;
 	}
 	
 	@GetMapping("/edit/{itemId}")
 	public String edit(@PathVariable Long itemId, Model model){
 		Tag tag = adminFacade.findOneTag(itemId);
 		model.addAttribute("tag", tag);
-		return "admin/tag/edit";
+		return ADMIN_TAG_EDIT_JSP;
 	}
 	
 	@GetMapping("/remove/{itemId}")

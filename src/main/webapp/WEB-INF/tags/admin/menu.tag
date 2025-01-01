@@ -2,6 +2,7 @@
 <ul id="menu" style="margin-bottom: 28px">
 	<li><a href="/admin/tag/view" style="color: blueviolet!important;">Tags</a>&nbsp;|&nbsp;</li>
 	<li><a href="/admin/article/view" style="color: blueviolet!important;">Articles</a>&nbsp;|&nbsp;</li>
+	<li><a href="/admin/branch/view" style="color: blueviolet!important;">Branches</a>&nbsp;|&nbsp;</li>
 	<li><a href="/admin/sponsor/view" style="color: blueviolet!important;">Sponsors</a>&nbsp;|&nbsp;</li>
 	<li><a href="/admin/partner/view" style="color: blueviolet!important;">Partners</a>&nbsp;|&nbsp;</li>
 	<li><a href="/admin/speaker/view" style="color: blueviolet!important;">Speakers</a>&nbsp;|&nbsp;</li>

@@ -33,7 +33,7 @@
 					<td width="100%">${partner.companyName}</td>
 					<td><img src="/image/partner/${partner.id}"/></td>
 					<td>${partner.active}</td>
-					<td>${sponsor.partnerPackage}</td>
+					<td>${partner.partnerPackage}</td>
 					<td>
 						<a href="/admin/partner/edit/${partner.id}">Edit</a></span>&nbsp;|&nbsp;<a href="/admin/partner/remove/${partner.id}">Remove</a>
 					</td>

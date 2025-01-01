@@ -1,5 +1,6 @@
 package site.model;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -23,6 +24,7 @@ public class User extends AbstractEntity {
     /**
      * Default serial version uid.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String firstName;

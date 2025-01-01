@@ -5,8 +5,6 @@ import java.util.Objects;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import site.config.Globals;
-
 /**
  * @author Ivan St. Ivanov
  */
@@ -30,39 +28,49 @@ public class Submission extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private SessionType type = SessionType.CONFERENCE_SESSION;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
-    @JoinColumn(name = "speaker", nullable = false, referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class,
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "speaker", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_submission_speaker"))
     private Speaker speaker = new Speaker();
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
-    @JoinColumn(name = "coSpeaker", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Speaker.class,
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "coSpeaker", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_submission_coSpeaker"))
     private Speaker coSpeaker;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 32)
-    private Branch branch = Globals.CURRENT_BRANCH;
+    @ManyToOne
+    @JoinColumn(name = "branch", referencedColumnName = "label", foreignKey = @ForeignKey(name = "fk_submission_branch"))
+    private Branch branch;
 
     @Transient
     private String captcha;
 
+    private Boolean featured = false;
+
     public Submission() {
     }
 
-    public Submission(String title, String description, SessionLevel level, SessionType type, Speaker speaker) {
+    public Submission(String title, String description, SessionLevel level, SessionType type, Speaker speaker,
+        SubmissionStatus status, boolean featured) {
         this.title = title;
         this.description = description;
         this.level = level;
         this.speaker = speaker;
         this.type = type;
+        this.status = status;
+        this.featured = featured;
     }
 
-    public Submission(String title, String description, SessionLevel level, SessionType type, Speaker speaker, Speaker coSpeaker) {
+    public Submission(String title, String description, SessionLevel level, SessionType type, Speaker speaker,
+        Speaker coSpeaker, SubmissionStatus status, boolean featured) {
         this.title = title;
         this.description = description;
         this.level = level;
         this.type = type;
         this.speaker = speaker;
         this.coSpeaker = coSpeaker;
+        this.status = status;
+        this.featured = featured;
     }
 
     public String getTitle() {
@@ -103,14 +111,6 @@ public class Submission extends AbstractEntity {
 
     public void setSpeaker(Speaker speaker) {
         this.speaker = speaker;
-    }
-
-    public Branch getBranch() {
-        return branch;
-    }
-
-    public void setBranch(Branch branch) {
-        this.branch = branch;
     }
 
     public Speaker getCoSpeaker() {
@@ -155,5 +155,26 @@ public class Submission extends AbstractEntity {
 
     public void setCaptcha(String captcha) {
         this.captcha = captcha;
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
+
+    public Submission branch(Branch branch) {
+        this.branch = branch;
+        return this;
+    }
+
+    public Boolean getFeatured() {
+        return featured;
+    }
+
+    public void setFeatured(Boolean featured) {
+        this.featured = featured;
     }
 }

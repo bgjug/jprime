@@ -1,7 +1,5 @@
 package site.controller;
 
-import java.util.Arrays;
-
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.AdminService;
+import site.facade.BranchService;
 import site.facade.ThumbnailService;
 import site.model.Branch;
 import site.model.Speaker;
@@ -35,10 +34,13 @@ public class AdminSpeakerController {
 
     private final ThumbnailService thumbnailService;
 
+    private final BranchService branchService;
+
     public AdminSpeakerController(AdminService adminService,
-        ThumbnailService thumbnailService) {
+        ThumbnailService thumbnailService, BranchService branchService) {
         this.adminService = adminService;
         this.thumbnailService = thumbnailService;
+        this.branchService = branchService;
     }
 
     @Transactional
@@ -46,7 +48,7 @@ public class AdminSpeakerController {
     public String view(Model model, Pageable pageable, @RequestParam(required = false)String year) {
         Page<Speaker> speakers;
         if (StringUtils.isNotBlank(year)) {
-           Branch branch = Branch.valueOfYear(year);
+           Branch branch = branchService.findBranchByYear(Integer.parseInt(year));
            speakers = adminService.findSpeakersByBranch(pageable, branch);
         } else {
            speakers = adminService.findAllSpeakers(pageable);
@@ -55,7 +57,7 @@ public class AdminSpeakerController {
         model.addAttribute("speakers", speakers.getContent());
         model.addAttribute("number", speakers.getNumber());
         model.addAttribute("totalPages", speakers.getTotalPages());
-        model.addAttribute("branches", Arrays.asList(Branch.values()));
+        model.addAttribute("branches", branchService.allBranches());
         model.addAttribute("selected_branch", year);
 
         return "admin/speaker/view";
@@ -67,7 +69,7 @@ public class AdminSpeakerController {
                       @RequestParam MultipartFile file, Model model,
                       @RequestParam(name = "resizeImage", required = false, defaultValue = "false") boolean resize, @RequestParam(required = false) String sourcePage) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("branches", Branch.values());
+            model.addAttribute("branches", branchService.allBranches());
             return "admin/speaker/edit";
         }
         if (!file.isEmpty()) {
@@ -98,7 +100,7 @@ public class AdminSpeakerController {
     public String edit(Model model, @RequestParam(required = false) String sourcePage) {
         model.addAttribute("speaker", new Speaker());
         model.addAttribute("sourcePage", sourcePage);
-        model.addAttribute("branches", Branch.values());
+        model.addAttribute("branches", branchService.allBranches());
         return "/admin/speaker/edit";
     }
 
@@ -108,7 +110,7 @@ public class AdminSpeakerController {
         Speaker speaker = adminService.findOneSpeaker(itemId);
         model.addAttribute("speaker", speaker);
         model.addAttribute("sourcePage", sourcePage);
-        model.addAttribute("branches", Branch.values());
+        model.addAttribute("branches", branchService.allBranches());
         return "/admin/speaker/edit";
     }
 

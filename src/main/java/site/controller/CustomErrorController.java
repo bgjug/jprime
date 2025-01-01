@@ -10,10 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import site.config.Globals;
+import site.facade.BranchService;
 
 @Controller
 public class CustomErrorController implements ErrorController {
+
+    private final BranchService branchService;
+
+    public CustomErrorController(BranchService branchService) {
+        this.branchService = branchService;
+    }
 
     @GetMapping("/error")
     public void error(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -21,8 +27,12 @@ public class CustomErrorController implements ErrorController {
     }
 
     @GetMapping("/404")
-    public String errorPage(Model model) throws IOException {
-        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+    public String errorPage(Model model) {
+        if (branchService.getCurrentBranch() == null) {
+            model.addAttribute("jprime_year", -1);
+        } else {
+            model.addAttribute("jprime_year", branchService.getCurrentBranch().getStartDate().getYear());
+        }
         return "404";
     }
 }

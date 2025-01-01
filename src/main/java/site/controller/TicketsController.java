@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
@@ -24,13 +25,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import site.config.Globals;
 import site.controller.invoice.InvoiceData;
 import site.controller.invoice.InvoiceExporter;
+import site.facade.BranchService;
+import site.facade.InvoiceService;
 import site.facade.MailService;
 import site.facade.RegistrantService;
 import site.facade.UserService;
+import site.model.Branch;
 import site.model.Registrant;
+import site.model.TicketPrice;
+import site.model.TicketType;
 import site.model.Visitor;
 import site.model.VisitorStatus;
 
@@ -62,30 +67,37 @@ public class TicketsController {
     @Autowired
     private RegistrantService registrantFacade;
 
+    @Autowired
+    private InvoiceService invoiceService;
+
     @Value("${save.invoice.on.email.failure:false}")
     private boolean saveInvoiceOnFailure;
 
     @Value("${save.invoice.path.to.save:/tmp}")
     private String pathToSave;
 
+    @Autowired
+    private BranchService branchService;
+
     @GetMapping(value = "/tickets")
     public String goToRegisterPage(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("registrant", new Registrant());
 
-        InvoiceData.TicketPrices prices = InvoiceData.getPrices(Globals.CURRENT_BRANCH);
+        Branch currentBranch = branchService.getCurrentBranch();
+        Map<TicketType, TicketPrice> prices = branchService.getTicketPrices(currentBranch);
 
-        model.addAttribute("early_bird_ticket_price", String.format("%.2f", prices.getEarlyBirdPrice()));
-        model.addAttribute("regular_ticket_price", String.format("%.2f",prices.getRegularPrice()));
-        model.addAttribute("student_ticket_price", String.format("%.2f",prices.getStudentPrice()));
+        model.addAttribute("early_bird_ticket_price", String.format("%.2f", prices.get(TicketType.EARLY_BIRD).getPrice()));
+        model.addAttribute("regular_ticket_price", String.format("%.2f",prices.get(TicketType.REGULAR).getPrice()));
+        model.addAttribute("student_ticket_price", String.format("%.2f",prices.get(TicketType.STUDENT).getPrice()));
 
-        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(Globals.CURRENT_BRANCH.getCfpCloseDate()));
-        model.addAttribute("cfp_close_date_no_year", DateUtils.dateToStringWithMonth(Globals.CURRENT_BRANCH.getCfpCloseDate()));
+        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(currentBranch.getCfpCloseDate()));
+        model.addAttribute("cfp_close_date_no_year", DateUtils.dateToStringWithMonth(currentBranch.getCfpCloseDate()));
 
-        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
-        model.addAttribute("jprime_next_year", Globals.CURRENT_BRANCH.getStartDate().getYear() + 1);
+        model.addAttribute("jprime_year", currentBranch.getStartDate().getYear());
+        model.addAttribute("jprime_next_year", currentBranch.getStartDate().getYear() + 1);
 
-		return Globals.CURRENT_BRANCH.isSoldOut() ? TICKETS_END_JSP : TICKETS_REGISTER_JSP;
+		return currentBranch.isSoldOut() ? TICKETS_END_JSP : TICKETS_REGISTER_JSP;
     }
 
     /**
@@ -134,7 +146,7 @@ public class TicketsController {
     }
 
     private InvoiceData buildInvoiceData(Registrant registrant) {
-        InvoiceData invoiceData = InvoiceData.fromRegistrant(registrant);
+        InvoiceData invoiceData = invoiceService.fromRegistrant(registrant);
         if(registrant.getPaymentType() == Registrant.PaymentType.BANK_TRANSFER) {
             invoiceData.setInvoiceType(InvoiceData.PROFORMA_BG);//currently hardcoded
             invoiceData.setInvoiceNumber(String.valueOf(registrant.getProformaInvoiceNumber()));

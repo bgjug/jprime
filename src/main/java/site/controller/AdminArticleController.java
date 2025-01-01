@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import site.config.Globals;
 import site.facade.AdminService;
+import site.facade.BranchService;
 import site.model.Article;
 import site.model.User;
 
@@ -25,6 +25,9 @@ public class AdminArticleController {
 
     @Autowired
     private AdminService adminFacade;
+
+    @Autowired
+    private BranchService branchService;
 
     @GetMapping("/view")
     public String view(Model model) {
@@ -37,7 +40,7 @@ public class AdminArticleController {
     public String getById(@PathVariable final long id, Model model) {
         Article article = adminFacade.findOneArticle(id);
         model.addAttribute("article", article);
-        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+        model.addAttribute("jprime_year", branchService.getCurrentBranch().getYear());
 
         return "single-post";
     }

@@ -14,8 +14,6 @@
 
     <title>Insert title here</title>
     <script type="text/javascript" src="/js/niceforms.js"></script>
-    <link rel="stylesheet" href="/js/tinyeditor/style.css"/>
-    <script type="text/javascript" src="/js/tinyeditor/tinyeditor.js"></script>
     <link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css"/>
 
@@ -47,7 +45,7 @@
     </dl>
     <dl>
         <dt>
-            <label for="company">Company</label>
+            <label for="isCompany">Company</label>
         </dt>
         <dd>
             <form:checkbox path="company" id="isCompany" value="${registrant.company}"/>

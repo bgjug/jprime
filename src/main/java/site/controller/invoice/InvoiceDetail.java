@@ -3,7 +3,6 @@ package site.controller.invoice;
 import java.math.BigDecimal;
 
 import static java.math.RoundingMode.HALF_EVEN;
-import static site.controller.invoice.InvoiceData.DEFAULT_DESCRIPTION_BG;
 import static site.controller.invoice.InvoiceData.VAT_DECREASE_RATIO;
 
 public class InvoiceDetail {
@@ -12,7 +11,7 @@ public class InvoiceDetail {
 
     private BigDecimal singlePriceWithVAT;
     private Integer passQty;
-    private String description = DEFAULT_DESCRIPTION_BG;
+    private String description;
     public InvoiceDetail(BigDecimal singlePriceWithVAT, Integer passQty) {
         this.singlePriceWithVAT = singlePriceWithVAT;
         this.passQty = passQty;

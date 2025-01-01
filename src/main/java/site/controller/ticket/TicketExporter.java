@@ -33,7 +33,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import site.config.Globals;
 import site.controller.invoice.InvoiceLanguage;
 
 import static org.apache.commons.beanutils.PropertyUtils.getProperty;
@@ -118,7 +117,7 @@ public class TicketExporter {
     public static void main(String[] args) throws Exception {
         TicketData data = new TicketData();
         data.setOrganizer("JPrime Events");
-        data.setEvent("JPrime " + Globals.CURRENT_BRANCH);
+        data.setEvent("JPrime " + "2025");
         data.addDetail(new TicketDetail(UUID.randomUUID().toString(), "Doychin Bondzhev", "Organizer"));
         data.addDetail(new TicketDetail(UUID.randomUUID().toString(), "Iva Bondzheva", "Volunteer"));
         data.addDetail(new TicketDetail(UUID.randomUUID().toString(), "Hristo Kolev", "Visitor - Sponsored"));

@@ -9,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import site.config.Globals;
+import site.facade.BranchService;
 import site.model.Branch;
 import site.model.Submission;
 
@@ -35,11 +34,11 @@ public class CfpController extends AbstractCfpController {
     public static final String CFP_CLOSED_JSP = "cfp-closed";
     public static final String CFP_THANK_YOU = "cfp-thank-you";
 
-    @Value("${agenda.published:false}")
-    private boolean agendaPublished;
+    private final BranchService branchService;
 
-    @Value("${agenda.year:2020}")
-    private int agendaYear;
+    public CfpController(BranchService branchService) {
+        this.branchService = branchService;
+    }
 
     @GetMapping("/cfp")
     public String submissionForm(Model model) {
@@ -91,8 +90,10 @@ public class CfpController extends AbstractCfpController {
 
     @GetMapping(value = "/cfp-thank-you")
     public String thankYou(Model model) {
+        Branch currentBranch = branchService.getCurrentBranch();
+
         model.addAttribute("tags", userFacade.findAllTags());
-        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(Globals.CURRENT_BRANCH.getCfpCloseDate()));
+        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(currentBranch.getCfpCloseDate()));
         return CfpController.CFP_THANK_YOU;
     }
 
@@ -109,10 +110,10 @@ public class CfpController extends AbstractCfpController {
     }
 
     private String goToCFP(@Valid Submission submission, Model model) {
-        Branch currentBranch = Globals.CURRENT_BRANCH;
+        Branch currentBranch = branchService.getCurrentBranch();
 
         model.addAttribute("tags", userFacade.findAllTags());
-        model.addAttribute("agenda", agendaPublished && agendaYear == currentBranch.getYear());
+        model.addAttribute("agenda", currentBranch.isAgendaPublished());
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(currentBranch.getCfpCloseDate()));
         LocalDateTime startDate = currentBranch.getStartDate();
         model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
@@ -120,7 +121,8 @@ public class CfpController extends AbstractCfpController {
 
         updateCfpModel(model, submission);
 
-        if (currentBranch.getCfpCloseDate().isAfter(LocalDateTime.now()) && currentBranch.getCfpOpenDate().isBefore(LocalDateTime.now())) {
+        LocalDateTime now = LocalDateTime.now();
+        if (currentBranch.getCfpCloseDate().isAfter(now) && currentBranch.getCfpOpenDate().isBefore(now)) {
             return CfpController.CFP_OPEN_JSP;
         }
         return CFP_CLOSED_JSP;

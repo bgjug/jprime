@@ -1,6 +1,5 @@
 package site.controller;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,9 +22,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import site.config.Globals;
 import site.facade.AdminService;
 import site.facade.BackgroundJobService;
+import site.facade.BranchService;
 import site.facade.TicketService;
 import site.model.Branch;
 import site.model.Registrant;
@@ -56,17 +55,20 @@ public class AdminRegistrantController {
     @Autowired
     private BackgroundJobService jobService;
 
+    @Autowired
+    private BranchService branchService;
+
     @GetMapping("/view")
     public String viewRegistrants(Pageable pageable, Model model, @RequestParam(required = false)String year) {
-        int yearInt = StringUtils.isNotBlank(year) ? Integer.parseInt(year) : Globals.CURRENT_BRANCH.getYear();
-        Branch branch = Branch.valueOfYear(Integer.toString(yearInt));
+        int yearInt = StringUtils.isNotBlank(year) ? Integer.parseInt(year) : branchService.getCurrentBranch().getYear();
+        Branch branch = branchService.findBranchByYear(yearInt);
 
         Page<Registrant> registrantsPage = adminFacade.findRegistrantsByBranch(pageable, branch);
         model.addAttribute("registrants", registrantsPage.getContent());
         model.addAttribute("totalPages", registrantsPage.getTotalPages());
         model.addAttribute("number", registrantsPage.getNumber());
 
-        model.addAttribute("branches", Arrays.asList(Branch.values()));
+        model.addAttribute("branches", branchService.allBranches());
         model.addAttribute("selected_branch", Integer.toString(branch.getYear()));
 
         return REGISTRANT_VIEW_JSP;
@@ -76,7 +78,7 @@ public class AdminRegistrantController {
     public String getNewRegistrantForm(Model model) {
         model.addAttribute("registrant", new Registrant());
         model.addAttribute("paymentTypes", Registrant.PaymentType.values());
-        model.addAttribute("branches", Branch.values());
+        model.addAttribute("branches", branchService.allBranches());
         return REGISTRANT_EDIT_JSP;
     }
 
@@ -84,7 +86,7 @@ public class AdminRegistrantController {
     public String getEditRegistrantForm(@PathVariable Long itemId, Model model) {
         model.addAttribute("registrant", adminFacade.findOneRegistrant(itemId));
         model.addAttribute("paymentTypes", Registrant.PaymentType.values());
-        model.addAttribute("branches", Branch.values());
+        model.addAttribute("branches", branchService.allBranches());
         return REGISTRANT_EDIT_JSP;
     }
 
@@ -101,7 +103,7 @@ public class AdminRegistrantController {
     public String addRegistrant(@Valid final Registrant registrant, BindingResult bindingResult,
         Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("branches", Branch.values());
+            model.addAttribute("branches", branchService.allBranches());
             return REGISTRANT_EDIT_JSP;
         }
         adminFacade.saveRegistrant(registrant);

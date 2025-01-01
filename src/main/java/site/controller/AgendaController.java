@@ -6,14 +6,14 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import site.config.Globals;
+import site.facade.BranchService;
 import site.facade.UserService;
+import site.model.Branch;
 import site.model.Session;
 
 @Controller
@@ -27,14 +27,15 @@ public class AgendaController {
 	@Autowired
 	private UserService userService;
 
-	@Value("${agenda.published:false}")
-	private boolean agenda;
+	@Autowired
+	private BranchService branchService;
 
 	//read a single agenda post
     @GetMapping("/agenda/{id}")
     public String getById(@PathVariable final long id, Model model) {
+		Branch currentBranch = branchService.getCurrentBranch();
 	   model.addAttribute("tags", userFacade.findAllTags());
-		model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+		model.addAttribute("jprime_year", currentBranch.getYear());
     	Session talk = userService.findSessionTalk(id);
     	if (talk == null) {
 			logger.error(String.format("Invalid session id (%1$d)", id));
@@ -56,11 +57,12 @@ public class AgendaController {
     	model.addAttribute("beta", beta);
 	   model.addAttribute("workshops", workshops);
 
-		LocalDateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
+		Branch currentBranch = branchService.getCurrentBranch();
+		LocalDateTime startDate = currentBranch.getStartDate();
 		model.addAttribute("firstDayDate", DateUtils.fromLocalDateTime(startDate));
 		model.addAttribute("secondDayDate", DateUtils.fromLocalDateTime(startDate.plusDays(1)));
 
-		model.addAttribute("agenda", agenda);
+		model.addAttribute("agenda", currentBranch.isAgendaPublished());
 
     	//we have 2 options here
     	//option one iterate on all alpha on the view and with status=i and use i.count in beta to get the beta talk with the same position as in alpha.

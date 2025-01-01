@@ -13,8 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import site.config.Globals;
 import site.facade.AdminService;
+import site.facade.BranchService;
 import site.facade.UserServiceJPro;
 import site.model.VisitorJPro;
 import site.model.VisitorStatus;
@@ -36,17 +36,20 @@ public class RaffleController {
 	
 	private final ObjectMapper mapper;
 
+	private final BranchService branchService;
+
 	public RaffleController(AdminService adminService,
-		UserServiceJPro userServiceJPro, ObjectMapper mapper) {
+		UserServiceJPro userServiceJPro, ObjectMapper mapper, BranchService branchService) {
 		this.adminService = adminService;
 		this.userServiceJPro = userServiceJPro;
 		this.mapper = mapper;
+		this.branchService = branchService;
 	}
 
 	@GetMapping(value = "/view")
 	public String viewVisitors(Model model) {
 
-		List<RaffleVisitor> visitors = adminService.findAllNewestVisitors(Globals.CURRENT_BRANCH).stream()
+		List<RaffleVisitor> visitors = adminService.findAllNewestVisitors(branchService.getCurrentBranch()).stream()
 												   .filter(v -> v.isPresent() && (v.getStatus() == VisitorStatus.PAYED || v.getStatus() == VisitorStatus.SPONSORED))
 												   .map(v -> new RaffleVisitor(v.getName(), v.getCompany()))
 												   .collect(Collectors.toList());
@@ -64,7 +67,7 @@ public class RaffleController {
 		List<RaffleVisitor> visitors = userServiceJPro.findAllNewestVisitors().stream()
 			.filter(VisitorJPro::isPresent)
 			.map(v -> new RaffleVisitor(v.getName(), maskEmail(v.getEmail())))
-			.collect(Collectors.toList());
+			.toList();
 		try {
 			model.addAttribute("visitors", mapper.writeValueAsString(visitors));
 		} catch (JsonProcessingException e) {

@@ -28,9 +28,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import site.config.Globals;
 import site.facade.AdminService;
+import site.facade.BranchService;
 import site.facade.CSVService;
+import site.facade.MailService;
 import site.model.Branch;
 import site.model.Submission;
 import site.model.SubmissionStatus;
@@ -56,6 +57,12 @@ public class SubmissionController extends AbstractCfpController {
     @Autowired
     private CSVService csvFacade;
 
+    @Autowired
+    private BranchService branchService;
+
+    @Autowired
+    private MailService mailService;
+
     @GetMapping("/view/all")
     public String listAllSubmissions(Model model, Pageable pageable) {
         Page<Submission> submissions = adminFacade.findAllSubmissions(pageable);
@@ -68,13 +75,13 @@ public class SubmissionController extends AbstractCfpController {
 
     @GetMapping("/view/{year}")
     public String listSubmissions(Model model, Pageable pageable, @PathVariable String year) {
-    	Branch branch = Branch.valueOfYear(year);
+    	Branch branch = branchService.findBranchByYear(Integer.parseInt(year));
         return listSubmissionsForBranch(model, pageable, branch);
     }
 
     @GetMapping("/view")
     public String listSubmissions(Model model, Pageable pageable) {
-        return listSubmissionsForBranch(model, pageable, Globals.CURRENT_BRANCH);
+        return listSubmissionsForBranch(model, pageable, branchService.getCurrentBranch());
     }
 
     private String listSubmissionsForBranch(Model model, Pageable pageable, Branch branch) {
@@ -171,12 +178,12 @@ public class SubmissionController extends AbstractCfpController {
             throws IOException, MessagingException {
         final String mailSubject = "Your jPrime talk proposal status";
         String messageText = buildMessage(submission, fileName);
-        getMailFacade().sendEmail(submission.getSpeaker().getEmail(), mailSubject, messageText);
+        mailService.sendEmail(submission.getSpeaker().getEmail(), mailSubject, messageText);
         if (submission.getCoSpeaker() != null) {
             final String messageForCoSpeaker = messageText.replace(
                     submission.getSpeaker().getFirstName(),
                     submission.getCoSpeaker().getFirstName());
-            getMailFacade().sendEmail(submission.getCoSpeaker().getEmail(), mailSubject, messageForCoSpeaker);
+            mailService.sendEmail(submission.getCoSpeaker().getEmail(), mailSubject, messageForCoSpeaker);
         }
     }
 
@@ -185,7 +192,7 @@ public class SubmissionController extends AbstractCfpController {
         String messageText = resourceAsString(fileName);
         messageText = messageText.replace("{speaker.firstName}", submission.getSpeaker().getFirstName());
         messageText = messageText.replace("{submission.title}", submission.getTitle());
-        messageText = messageText.replace("{submission.year}", Globals.CURRENT_BRANCH.toString());
+        messageText = messageText.replace("{submission.year}", Integer.toString(branchService.getCurrentBranch().getYear()));
         return messageText;
     }
 

@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
-import site.config.Globals;
+import site.facade.BranchService;
 import site.model.Registrant;
 import site.model.Visitor;
 import site.repository.RegistrantRepository;
@@ -41,6 +41,9 @@ class TicketRestControllerTest {
     private RegistrantRepository registrantRepository;
 
     private MockMvc mockMvc;
+
+    @Autowired
+    private BranchService branchService;
 
     @BeforeEach
     void setup() throws Exception {
@@ -71,7 +74,7 @@ class TicketRestControllerTest {
     }
 
     private VisitorFromJSON findVisitorByTicket(String ticket) throws Exception {
-        MvcResult result = mockMvc.perform(get("/api/visitor/" + Globals.CURRENT_BRANCH.getLabel() + "/" + ticket))
+        MvcResult result = mockMvc.perform(get("/api/visitor/" + branchService.getCurrentBranch().getLabel() + "/" + ticket))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andReturn();
@@ -103,7 +106,7 @@ class TicketRestControllerTest {
         Registrant r = new Registrant();
         r.setEmail("funky@email.com");
         r.setName("Funky company Ltd.");
-        r.setBranch(Globals.CURRENT_BRANCH);
+        r.setBranch(branchService.getCurrentBranch());
         registrantRepository.save(r);
         return r;
     }

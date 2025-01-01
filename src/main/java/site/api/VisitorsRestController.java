@@ -2,7 +2,6 @@ package site.api;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import site.facade.AdminService;
+import site.facade.BranchService;
 import site.model.Branch;
 import site.model.Visitor;
 
@@ -28,24 +28,28 @@ public class VisitorsRestController {
 
     private final AdminService adminFacade;
 
-    public VisitorsRestController(AdminService adminFacade) {
+    private final BranchService branchService;
+
+    public VisitorsRestController(AdminService adminFacade, BranchService branchService) {
         this.adminFacade = adminFacade;
+        this.branchService = branchService;
     }
 
-    @GetMapping(path = "{branch}")
-    public ResponseEntity<?> allByBranch(@PathVariable String branch) {
+    @GetMapping(path = "{branchId}")
+    public ResponseEntity<?> allByBranch(@PathVariable String branchId) {
         try {
-            log.debug("Requesting all visitors for branch {}", branch);
-            return ResponseEntity.ok(StreamSupport.stream(adminFacade.findAllWithTicket(Branch.valueOfYear(branch)).spliterator(), false)
-                .collect(Collectors.toList()));
+            log.debug("Requesting all visitors for branch {}", branchId);
+            Branch branch = branchService.findBranchByYear(Integer.parseInt(branchId));
+            return ResponseEntity.ok(
+                StreamSupport.stream(adminFacade.findAllWithTicket(branch).spliterator(), false)
+                    .toList());
         } catch (Exception e) {
             return ResponseEntity.status(500).contentType(MediaType.TEXT_PLAIN).body(e.getMessage());
         }
     }
 
     @GetMapping(path = "{branch}/{ticket}")
-    public ResponseEntity<?> findVisitorByTicket(@PathVariable String branch,
-        @PathVariable String ticket) {
+    public ResponseEntity<?> findVisitorByTicket(@PathVariable String branch, @PathVariable String ticket) {
         try {
             Optional<Visitor> visitor = adminFacade.findVisitorByTicket(ticket);
             return visitor.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
@@ -58,9 +62,9 @@ public class VisitorsRestController {
     public ResponseEntity<?> findVisitor(@PathVariable String branch,
         @RequestBody VisitorSearch visitorSearch) {
         try {
-            List<Visitor> visitorList =
-                adminFacade.searchVisitor(branch, visitorSearch.getEmail(), visitorSearch.getFirstName(),
-                    visitorSearch.getLastName(), visitorSearch.getCompany());
+            Branch currentBranch = branchService.getCurrentBranch();
+            List<Visitor> visitorList = adminFacade.searchVisitor(currentBranch, visitorSearch.getEmail(),
+                visitorSearch.getFirstName(), visitorSearch.getLastName(), visitorSearch.getCompany());
             return ResponseEntity.ok(visitorList);
         } catch (Exception e) {
             return ResponseEntity.status(500).contentType(MediaType.TEXT_PLAIN).body(e.getMessage());

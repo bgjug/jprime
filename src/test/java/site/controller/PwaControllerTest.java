@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +12,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import site.app.Application;
-import site.config.Globals;
+import site.model.Branch;
 import site.model.Session;
 import site.model.Speaker;
 import site.model.Submission;
@@ -51,7 +52,8 @@ public class PwaControllerTest {
         submission.setDescription("A description of the session");
         mockSession.setSubmission(submission);
 
-        when(sessionRepository.findSessionsForBranchAndHallOrHallIsNull(hallName, Globals.CURRENT_BRANCH.name()))
+        when(sessionRepository.findSessionsForBranchAndHallOrHallIsNull(Mockito.eq(hallName), Mockito.any(
+            Branch.class)))
             .thenReturn(List.of(mockSession));
 
         // Perform GET request

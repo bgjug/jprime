@@ -17,6 +17,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import site.model.JPrimeException;
+
 /**
  * @author Ivan St. Ivanov
  */
@@ -67,7 +69,7 @@ public class MailService {
                 try {
                     helper.addInline(attachment.name, new ByteArrayResource(attachment.data), attachment.type);
                 } catch (MessagingException e) {
-                    throw new RuntimeException(e);
+                    throw new JPrimeException(e);
                 }
             }
         );
@@ -79,7 +81,7 @@ public class MailService {
             } catch (UnsupportedEncodingException e) {
                 logger.error(e.getMessage());
             } catch (MessagingException e) {
-                throw new RuntimeException(e);
+                throw new JPrimeException(e);
             }
         });
 

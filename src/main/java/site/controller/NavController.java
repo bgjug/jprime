@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import site.config.Globals;
+import site.facade.BranchService;
 import site.facade.UserService;
 import site.model.Article;
 
@@ -24,8 +24,11 @@ public class NavController {
 
 	private final UserService userFacade;
 
-    public NavController(UserService userFacade) {
+    private final BranchService branchService;
+
+    public NavController(UserService userFacade, BranchService branchService) {
         this.userFacade = userFacade;
+        this.branchService = branchService;
     }
 
     @GetMapping("/nav/{tag}")
@@ -35,7 +38,7 @@ public class NavController {
 
 		Page<Article> articles= userFacade.findArticlesByTag(tagName, pageable);
 
-        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+        model.addAttribute("jprime_year", branchService.getCurrentBranch().getStartDate().getYear());
 
         if (articles.getTotalElements() == 0) {
             logger.error("Invalid tag name ({}})", tagName);
@@ -57,7 +60,7 @@ public class NavController {
         Page<Article> articles= userFacade.allPublishedArticles(pageable);
         model.addAttribute("articles", articles);
         model.addAttribute("tags", userFacade.findAllTags());
-        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+        model.addAttribute("jprime_year", branchService.getCurrentBranch().getStartDate().getYear());
         // redirect to nav
         return "blog";
     }
@@ -65,11 +68,11 @@ public class NavController {
     //read a single blog
     @GetMapping("/nav/article/{id}")
     public String getById(@PathVariable final long id, Model model) {
-        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+        model.addAttribute("jprime_year", branchService.getCurrentBranch().getStartDate().getYear());
         Article article= userFacade.getArticleById(id);
 
         if (article == null) {
-            logger.error(String.format("Invalid tag id (%1$d)", id));
+            logger.error("Invalid tag id ({})", id);
             return "404";
         }
 
@@ -85,10 +88,10 @@ public class NavController {
 	public String getById(@RequestParam final String title,
 			Model model) {
         Article article= userFacade.getArticleByTitle(title);
-        model.addAttribute("jprime_year", Globals.CURRENT_BRANCH.getStartDate().getYear());
+        model.addAttribute("jprime_year", branchService.getCurrentBranch().getStartDate().getYear());
 
         if (article == null) {
-            logger.error(String.format("Invalid tag title (%1$s)", title));
+            logger.error("Invalid tag title ({})", title);
             return "404";
         }
 
@@ -111,7 +114,7 @@ public class NavController {
     @GetMapping("/venue")
     public String showVenue(Model model) {
         model.addAttribute("tags", userFacade.findAllTags());
-        LocalDateTime startDate = Globals.CURRENT_BRANCH.getStartDate();
+        LocalDateTime startDate = branchService.getCurrentBranch().getStartDate();
         model.addAttribute("conference_dates", String.format("%d-%s", startDate.getDayOfMonth(),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
 

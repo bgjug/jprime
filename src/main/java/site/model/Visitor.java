@@ -3,6 +3,7 @@ package site.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
@@ -23,7 +24,7 @@ public class Visitor extends AbstractEntity {
 
     @JsonIgnore
     @ManyToOne(optional = false)
-    @JoinColumn(name = "registrant")
+    @JoinColumn(name = "registrant", foreignKey = @ForeignKey(name = "FK_registrant_visitor"))
     private Registrant registrant;
     private String name;
     private String email;

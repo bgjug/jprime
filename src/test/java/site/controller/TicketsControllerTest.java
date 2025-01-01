@@ -10,7 +10,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
-import site.config.Globals;
+import site.facade.BranchService;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,6 +28,9 @@ class TicketsControllerTest {
 
     private MockMvc mockMvc;
 
+    @Autowired
+    private BranchService branchService;
+
     @BeforeEach
     void setup() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
@@ -37,7 +40,7 @@ class TicketsControllerTest {
     void getShouldReturnTicketsJsp() throws Exception {
         mockMvc.perform(get("/tickets"))
                 .andExpect(status().isOk())
-                .andExpect(view().name(Globals.CURRENT_BRANCH.isSoldOut() ? TicketsController.TICKETS_END_JSP : TicketsController.TICKETS_REGISTER_JSP));
+                .andExpect(view().name(branchService.getCurrentBranch().isSoldOut() ? TicketsController.TICKETS_END_JSP : TicketsController.TICKETS_REGISTER_JSP));
     }
 
 }

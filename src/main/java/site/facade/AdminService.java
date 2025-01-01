@@ -17,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import site.config.Globals;
 import site.model.*;
 import site.repository.*;
 
@@ -63,6 +62,9 @@ public class AdminService {
 
     @Autowired
     private BackgroundJobRepository jobRepository;
+
+    @Autowired
+    private BranchService branchService;
 
     /* article repo */
 	public Page<Article> findAllArticles(Pageable pageable){
@@ -236,7 +238,7 @@ public class AdminService {
     }
 
     public List<Submission> findAllSubmittedSubmissionsForCurrentBranch() {
-        return submissionRepository.findByBranchAndStatus(Globals.CURRENT_BRANCH, SubmissionStatus.SUBMITTED);
+        return submissionRepository.findByBranchAndStatus(branchService.getCurrentBranch(), SubmissionStatus.SUBMITTED);
     }
 
     /* visitors repo */
@@ -308,8 +310,7 @@ public class AdminService {
 
     /* sessions repo */
     public List<Session> findAllSessions() {
-        return sessionRepository.findBySubmissionBranchOrSubmissionIsNullOrderByStartTimeAsc(
-            Globals.CURRENT_BRANCH);
+        return sessionRepository.findBySubmissionBranchOrSubmissionIsNullOrderByStartTimeAsc(branchService.getCurrentBranch());
     }
 
     public Session saveSession(Session session) {
@@ -349,11 +350,13 @@ public class AdminService {
         return visitorRepository.findByTicket(ticket);
     }
 
-    public List<Visitor> searchVisitor(String branch, String email, String firstName, String lastName,
+    public List<Visitor> searchVisitor(Branch branch, String email, String firstName, String lastName,
         String company) {
-        String query = "select v from Visitor as v where v.ticket is not null and ";
-        Map<String, String> paramsMap = new HashMap<>();
+        String query = "select v from Visitor as v where v.ticket is not null and v.registrant.branch = :branch and ";
+        Map<String, Object> paramsMap = new HashMap<>();
         List<String> whereClauses = new ArrayList<>();
+
+        paramsMap.put("branch", branch);
 
         if (StringUtils.isNotBlank(email)) {
             whereClauses.add("lower(v.email) like :email");
@@ -391,7 +394,7 @@ public class AdminService {
         return searchQuery.getResultList();
     }
 
-    public List<Speaker> searchSpeaker(String branch, String firstName, String lastName, String email) {
+    public List<Speaker> searchSpeaker(String firstName, String lastName, String email) {
         String query = "select s from Speaker as s where ";
         Map<String, String> paramsMap = new HashMap<>();
         List<String> whereClauses = new ArrayList<>();
@@ -416,7 +419,7 @@ public class AdminService {
         TypedQuery<Speaker> searchQuery = entityManager.createQuery(query, Speaker.class);
         paramsMap.forEach(searchQuery::setParameter);
 
-        return searchQuery.getResultList();
+        return searchQuery.getResultList().stream().map(s->s.updateFlags(branchService.getCurrentBranch())).toList();
     }
 
     public List<BackgroundJob> findBackgroundJobs() {

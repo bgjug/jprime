@@ -11,11 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
+import site.facade.MailService;
 import site.model.User;
 import site.repository.UserRepository;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
@@ -40,17 +42,14 @@ class ResetPasswordTest {
 
 	private MockMvc mockMvc;
 
-	private MailServiceMock mailServiceMock;
-	
 	@Autowired
 	private UserRepository userRepository;
 
-    @BeforeEach
-    void setUp() throws Exception {
-		UserController userControllerBean = wac.getBean(UserController.class);
-		this.mailServiceMock = new MailServiceMock();
-		userControllerBean.setMailService(mailServiceMock);
+	@Autowired
+	private MailService mailService;
 
+    @BeforeEach
+    void setUp() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 
 		User user = new User();
@@ -71,14 +70,17 @@ class ResetPasswordTest {
 
     @Test
     void resetPasswordFullTest() throws Exception {
-		
+		assertThat(mailService, instanceOf(MailServiceMock.class));
+		MailServiceMock mailService = (MailServiceMock) this.mailService;
+		mailService.recipientAddresses.clear();
+
 		 mockMvc.perform(post("/resetPassword")
 	                .param("email", "testEmail@gmail.com"))
 	                .andExpect(status().isFound())
 	                .andExpect(view().name("redirect:/resetPassword"));
-		
-		 assertThat(mailServiceMock.recipientAddresses.size(), is(1));
-		 String lastMessageText = mailServiceMock.lastMessageText;
+
+		 assertThat(mailService.recipientAddresses.size(), is(1));
+		 String lastMessageText = mailService.lastMessageText;
 		 assertThat(lastMessageText, notNullValue());
 		 String resetPassURL = getResetPassURL(lastMessageText);
 		 assertThat(resetPassURL, notNullValue());
@@ -133,5 +135,4 @@ class ResetPasswordTest {
 		int endOfURL = lastMessageText.indexOf("\"", startOfURL + 24);
 		return lastMessageText.substring(startOfURL + 23, endOfURL);
 	}
-
 }

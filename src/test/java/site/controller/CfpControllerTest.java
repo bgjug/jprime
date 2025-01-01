@@ -16,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
-import site.config.Globals;
+import site.facade.BranchService;
+import site.facade.MailService;
+import site.model.Branch;
 import site.model.SessionLevel;
 import site.model.Submission;
 import site.model.SubmissionStatus;
@@ -26,6 +28,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -44,23 +47,25 @@ class CfpControllerTest {
 
     private MockMvc mockMvc;
 
-    private MailServiceMock mailer;
+    @Autowired
+    private MailService mailer;
 
     @Autowired
     private SubmissionRepository submissionRepository;
 
+    @Autowired
+    private BranchService branchService;
+
     @BeforeEach
     void setup() {
-        final CfpController bean = wac.getBean(CfpController.class);
-        this.mailer = new MailServiceMock();
-        bean.setMailFacade(mailer);
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
     @Test
     void getShouldReturnEmptySubscription() throws Exception {
         String cfpPage = CfpController.CFP_CLOSED_JSP;
-        if (Globals.CURRENT_BRANCH.getCfpCloseDate().isAfter(LocalDateTime.now()) && Globals.CURRENT_BRANCH.getCfpOpenDate().isBefore(
+        Branch currentBranch = branchService.getCurrentBranch();
+        if (currentBranch.getCfpCloseDate().isAfter(LocalDateTime.now()) && currentBranch.getCfpOpenDate().isBefore(
             LocalDateTime.now())) {
             cfpPage = CfpController.CFP_OPEN_JSP;
         }
@@ -73,6 +78,10 @@ class CfpControllerTest {
     @Test
     @Disabled("ignored since adding captcha, has to be updated")
     void shouldSubmitSessionWithSingleSpeaker() throws Exception {
+        assertThat(mailer, instanceOf(MailServiceMock.class));
+        MailServiceMock mailer = (MailServiceMock) this.mailer;
+        mailer.recipientAddresses.clear();
+
         mockMvc.perform(multipart("/cfp")
                 .file(new MockMultipartFile("speakerImage", new byte[] {}))
                 .file(new MockMultipartFile("coSpeakerImage", new byte[] {}))
@@ -103,6 +112,10 @@ class CfpControllerTest {
     @Test
     @Disabled("ignored since adding captcha, has to be updated")
     void shouldSubmitSessionWithCoSpeaker() throws Exception {
+        assertThat(mailer, instanceOf(MailServiceMock.class));
+        MailServiceMock mailer = (MailServiceMock) this.mailer;
+        mailer.recipientAddresses.clear();
+
         mockMvc.perform(multipart("/cfp")
                 .file(new MockMultipartFile("speakerImage", new byte[] {}))
                 .file(new MockMultipartFile("coSpeakerImage", new byte[] {}))

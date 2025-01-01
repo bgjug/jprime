@@ -17,12 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
-import site.model.Partner;
-import site.model.PartnerPackage;
-import site.model.Speaker;
-import site.model.Sponsor;
-import site.model.SponsorPackage;
-import site.model.Tag;
+import site.facade.BranchService;
+import site.model.*;
 import site.repository.ArticleRepository;
 import site.repository.PartnerRepository;
 import site.repository.SpeakerRepository;
@@ -62,19 +58,23 @@ class IndexControllerTest {
 
     @Autowired
     private SpeakerRepository speakerRepository;
-    
+
     @Autowired
     private PartnerRepository partnerRepository;
-    
-    
+
     @Autowired
     private SubmissionRepository submissionRepository;
 
     private Sponsor google;
+
     private Sponsor apple;
+
     private Sponsor sap;
+
     private Sponsor hater;
+
     private Tag tag1;
+
     private Tag tag2;
 
     private Speaker brianGoetz;
@@ -85,23 +85,53 @@ class IndexControllerTest {
 
     private Partner devoxx;
 
+    @Autowired
+    private BranchService branchService;
+
     @BeforeEach
     void setup() throws IOException {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+
+        sponsorRepository.deleteAll();
+        tagRepository.deleteAll();
+        articleRepository.deleteAll();
+        partnerRepository.deleteAll();
+        submissionRepository.deleteAll();
+        speakerRepository.deleteAll();
 
         google = new Sponsor(SponsorPackage.GOLD, "Google", "http://www.google.com", "sponsor@google.com");
         apple = new Sponsor(SponsorPackage.GOLD, "Apple", "http://www.apple.com", "sponsor@apple.com");
         sap = new Sponsor(SponsorPackage.PLATINUM, "SAP", "http://www.sap.com", "sponsor@sap.com");
         sap.setLogo(Files.readAllBytes(Paths.get("src/main/resources/static/images/sap.png")));
-        hater = new Sponsor(SponsorPackage.SILVER, "Now I hate Java", "http://hatejava.com", "hater@hatejava.com", false);
-        sponsorRepository.save(google); sponsorRepository.save(apple); sponsorRepository.save(sap); sponsorRepository.save(hater);
+        hater =
+            new Sponsor(SponsorPackage.SILVER, "Now I hate Java", "http://hatejava.com", "hater@hatejava.com",
+                false);
+        sponsorRepository.save(google);
+        sponsorRepository.save(apple);
+        sponsorRepository.save(sap);
+        sponsorRepository.save(hater);
 
-        tag1 = tagRepository.save(new Tag("tag1")); tag2 = tagRepository.save(new Tag("tag2"));
+        tag1 = tagRepository.save(new Tag("tag1"));
+        tag2 = tagRepository.save(new Tag("tag2"));
 
-        brianGoetz = new Speaker("Brian", "Goetz", "brian@oracle.com", "The Java Language Architect", "@briangoetz", true, true);
+        Branch currentBranch = branchService.getCurrentBranch();
+
+        brianGoetz =
+            new Speaker("Brian", "Goetz", "brian@oracle.com", "The Java Language Architect", "@briangoetz");
+        brianGoetz = speakerRepository.save(brianGoetz);
+        Submission submission = submissionRepository.save(
+            new Submission("title", "description", SessionLevel.BEGINNER, SessionType.CONFERENCE_SESSION,
+                brianGoetz, SubmissionStatus.SUBMITTED, true).branch(currentBranch));
+        brianGoetz.getSubmissions().add(submission);
         brianGoetz = speakerRepository.save(brianGoetz);
 
-        Speaker ivanIvanov = new Speaker("Ivan St.", "Ivanov", "ivan@jprime.io", "JBoss Forge", "@ivan_stefanov", false, false);
+        Speaker ivanIvanov =
+            new Speaker("Ivan St.", "Ivanov", "ivan@jprime.io", "JBoss Forge", "@ivan_stefanov");
+        speakerRepository.save(ivanIvanov);
+        submission = submissionRepository.save(
+            new Submission("title", "description", SessionLevel.BEGINNER, SessionType.CONFERENCE_SESSION,
+                ivanIvanov, SubmissionStatus.SUBMITTED, false).branch(currentBranch));
+        ivanIvanov.getSubmissions().add(submission);
         speakerRepository.save(ivanIvanov);
 
         devoxx = new Partner();
@@ -123,15 +153,16 @@ class IndexControllerTest {
     @Test
     void controllerShouldContainRequiredData() throws Exception {
         mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name(IndexController.PAGE_INDEX))
-                .andExpect(model().attribute("platinumSponsors", containsInAnyOrder(sap)))
-                .andExpect(model().attribute("goldSponsors", containsInAnyOrder(google, apple)))
-                .andExpect(model().attribute("silverSponsors", hasSize(0)))
-                .andExpect(model().attribute("tags", containsInAnyOrder(tag1, tag2)))
-                .andExpect(model().attribute("featuredSpeakers", contains(brianGoetz)))
-                .andExpect(model().attribute("officialSupporterPartnersChunks", IsInstanceOf.instanceOf(List.class)))
-                .andExpect(model().attribute("mediaPartnersChunks", IsInstanceOf.instanceOf(List.class)))
-                .andExpect(model().attribute("eventPartnerChunks", IsInstanceOf.instanceOf(List.class)));
+            .andExpect(status().isOk())
+            .andExpect(view().name(IndexController.PAGE_INDEX))
+            .andExpect(model().attribute("platinumSponsors", containsInAnyOrder(sap)))
+            .andExpect(model().attribute("goldSponsors", containsInAnyOrder(google, apple)))
+            .andExpect(model().attribute("silverSponsors", hasSize(0)))
+            .andExpect(model().attribute("tags", containsInAnyOrder(tag1, tag2)))
+            .andExpect(model().attribute("featuredSpeakers", contains(brianGoetz)))
+            .andExpect(
+                model().attribute("officialSupporterPartnersChunks", IsInstanceOf.instanceOf(List.class)))
+            .andExpect(model().attribute("mediaPartnersChunks", IsInstanceOf.instanceOf(List.class)))
+            .andExpect(model().attribute("eventPartnerChunks", IsInstanceOf.instanceOf(List.class)));
     }
 }

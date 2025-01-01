@@ -2,19 +2,27 @@ package site.controller;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.ZoneOffset;
 import java.util.List;
 
+import jakarta.persistence.EntityManager;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
+import site.facade.BranchService;
 import site.model.Session;
 import site.model.SessionLevel;
 import site.model.SessionType;
@@ -23,6 +31,7 @@ import site.model.Submission;
 import site.model.SubmissionStatus;
 import site.model.VenueHall;
 import site.repository.SessionRepository;
+import site.repository.SpeakerRepository;
 import site.repository.SubmissionRepository;
 import site.repository.VenueHallRepository;
 
@@ -53,67 +62,102 @@ class SessionControllerTest {
     @Autowired
     private SessionRepository sessionRepository;
 
+    private MockMvc mockMvc;
+
+    private static Submission forgeSubmission;
+
+    private static VenueHall betaHall;
+
+    private static Session bootSession;
+
     @Autowired
     private SubmissionRepository submissionRepository;
 
     @Autowired
+    private BranchService branchService;
+
+    @Autowired
+    private SpeakerRepository speakerRepository;
+
+    @Autowired
     private VenueHallRepository venueHallRepository;
 
-    private MockMvc mockMvc;
-
-    private Submission forgeSubmission;
-    private VenueHall betaHall;
-    private Session bootSession;
+    @Autowired
+    private EntityManager entityManager;
 
     @BeforeEach
     void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        this.forgeSubmission = submissionRepository.save(new Submission("Forge with me", "Forge is the best", SessionLevel.BEGINNER, SessionType.CONFERENCE_SESSION, new Speaker("Ivan St.", "Ivanov", "ivan.st.ivanov@example.com", "The Forge Guy", "@forge", false, true)));
-        forgeSubmission.setStatus(SubmissionStatus.ACCEPTED);
-        Submission bootSubmission = submissionRepository.save(new Submission("Spring Boot", "Bootiful or what?", SessionLevel.BEGINNER, SessionType.CONFERENCE_SESSION, new Speaker("Nayden", "Gochev", "nayden.gochev@example.com", "The Spring Guy", "@sprink", true, true)));
-        bootSubmission.setStatus(SubmissionStatus.ACCEPTED);
-        this.betaHall = venueHallRepository.save(new VenueHall("Beta", "600 seats"));
+
+        venueHallRepository.deleteAll();
+        sessionRepository.deleteAll();
+        submissionRepository.deleteAll();
+        speakerRepository.deleteAll();
+
+        Speaker ivan =
+            new Speaker("Ivan St.", "Ivanov", "ivan.st.ivanov@example.com", "The Forge Guy", "@forge");
+        forgeSubmission = submissionRepository.save(
+            new Submission("Forge with me", "Forge is the best", SessionLevel.BEGINNER,
+                SessionType.CONFERENCE_SESSION, ivan, SubmissionStatus.ACCEPTED, true).branch(
+                branchService.getCurrentBranch()));
+        ivan.getSubmissions().add(forgeSubmission);
+        speakerRepository.save(ivan);
+
+        Speaker nayden =
+            new Speaker("Nayden", "Gochev", "nayden.gochev@example.com", "The Spring Guy", "@sprink");
+        Submission bootSubmission = submissionRepository.save(
+            new Submission("Spring Boot", "Bootiful or what?", SessionLevel.BEGINNER,
+                SessionType.CONFERENCE_SESSION, nayden, SubmissionStatus.ACCEPTED, true).branch(
+                branchService.getCurrentBranch()));
+        nayden.getSubmissions().add(bootSubmission);
+        speakerRepository.save(nayden);
+
+        betaHall = venueHallRepository.save(new VenueHall("Beta", "600 seats"));
+        Session session =
+            new Session(submissionRepository.getReferenceById(bootSubmission.getId()), LocalDateTime.now(),
+                LocalDateTime.now(), venueHallRepository.getReferenceById(betaHall.getId()));
+        session = sessionRepository.save(session);
+        entityManager.refresh(session);
+        sessionRepository.findById(session.getId()).ifPresent(s -> bootSession = s);
         venueHallRepository.save(new VenueHall("Alpha", "400 seats"));
-        this.bootSession = sessionRepository.save(new Session(bootSubmission, LocalDateTime.now(), LocalDateTime.now(), betaHall));
     }
 
     @Test
     void getViewSessionsShouldReturnAllSessions() throws Exception {
         mockMvc.perform(get("/admin/session/view"))
-                .andExpect(status().isOk())
-                .andExpect(model().attribute("sessions", hasSize(1)))
-                .andExpect(view().name(SESSIONS_VIEW_JSP));
+            .andExpect(status().isOk())
+            .andExpect(model().attribute("sessions", hasSize(1)))
+            .andExpect(view().name(SESSIONS_VIEW_JSP));
     }
 
     @Test
     void getNewSessionShouldReturnFormWithEmptySession() throws Exception {
         mockMvc.perform(get("/admin/session/add"))
-                .andExpect(model().attribute("halls", hasSize(2)))
-                .andExpect(model().attribute("submissions", hasSize(1)))
-                .andExpect(model().attribute("session", is(new Session())))
-                .andExpect(status().isOk())
-                .andExpect(view().name(SESSIONS_EDIT_JSP));
+            .andExpect(model().attribute("halls", hasSize(2)))
+            .andExpect(model().attribute("submissions", hasSize(1)))
+            .andExpect(model().attribute("session", is(new Session())))
+            .andExpect(status().isOk())
+            .andExpect(view().name(SESSIONS_EDIT_JSP));
     }
 
     @Test
     void getEditVenueHallShouldReturnFormWithHall() throws Exception {
         mockMvc.perform(get("/admin/session/edit/" + bootSession.getId()))
-                .andExpect(model().attribute("session", is(bootSession)))
-                .andExpect(status().isOk())
-                .andExpect(view().name(SESSIONS_EDIT_JSP));
+            .andExpect(model().attribute("session", is(bootSession)))
+            .andExpect(status().isOk())
+            .andExpect(view().name(SESSIONS_EDIT_JSP));
     }
 
     @Test
     void shouldAddNewSession() throws Exception {
-        mockMvc.perform(post("/admin/session/add")
-                .param("submission", forgeSubmission.getId() + "")
+        mockMvc.perform(post("/admin/session/add").param("submission", forgeSubmission.getId() + "")
                 .param("startTime", "26.05.2017 10:15")
                 .param("endTime", "26.05.2017 11:15")
                 .param("title", "")
                 .param("hall", betaHall.getId() + "")
                 .param("id", ""))
-                .andExpect(status().isFound())
-                .andExpect(view().name("redirect:/admin/session/view"));
+            .andExpect(status().isFound())
+            .andExpect(view().name("redirect:/admin/session/view"));
         List<Session> sessions = sessionRepository.findAll();
         assertThat(sessions.size(), is(2));
 
@@ -134,8 +178,8 @@ class SessionControllerTest {
                 .param("title", "Coffee break")
                 .param("hall", "")
                 .param("id", ""))
-                .andExpect(status().isFound())
-                .andExpect(view().name("redirect:/admin/session/view"));
+            .andExpect(status().isFound())
+            .andExpect(view().name("redirect:/admin/session/view"));
         List<Session> sessions = sessionRepository.findAll();
         assertThat(sessions.size(), is(2));
 
@@ -157,29 +201,28 @@ class SessionControllerTest {
                 .param("title", "")
                 .param("hall", betaHall.getId() + "")
                 .param("id", bootSession.getId() + ""))
-                .andExpect(status().isFound())
-                .andExpect(view().name("redirect:/admin/session/view"));
-        List<Session> sessions = sessionRepository.findAll();
-        assertThat(sessions.size(), is(1));
+            .andExpect(status().isFound())
+            .andExpect(view().name("redirect:/admin/session/view"));
+            List<Session> sessions = sessionRepository.findAll();
+            assertThat(sessions.size(), is(1));
 
-        Session session = sessions.get(0);
-        assertThat(session.getSubmission().getTitle(), is(bootSubmission.getTitle()));
-        assertThat(session.getStartTime(), is(LocalDateTime.of(2017, Month.MAY, 27, 10, 15, 0, 0)));
-        assertThat(session.getEndTime(), is(LocalDateTime.of(2017, Month.MAY, 27, 11, 15, 0, 0)));
-        assertThat(session.getHall().getName(), is(betaHall.getName()));
+            Session session = sessions.get(0);
+            assertThat(session.getSubmission().getTitle(), is(bootSubmission.getTitle()));
+            assertThat(session.getStartTime(), is(LocalDateTime.of(2017, Month.MAY, 27, 10, 15, 0, 0)));
+            assertThat(session.getEndTime(), is(LocalDateTime.of(2017, Month.MAY, 27, 11, 15, 0, 0)));
+            assertThat(session.getHall().getName(), is(betaHall.getName()));
     }
 
     @Test
     void shouldChangeSessionType() throws Exception {
-        mockMvc.perform(post("/admin/session/add")
-                .param("submission", "")
+        mockMvc.perform(post("/admin/session/add").param("submission", "")
                 .param("startTime", "27.05.2017 10:15")
                 .param("endTime", "27.05.2017 11:15")
                 .param("title", "Opening")
                 .param("hall", "")
                 .param("id", bootSession.getId() + ""))
-                .andExpect(status().isFound())
-                .andExpect(view().name("redirect:/admin/session/view"));
+            .andExpect(status().isFound())
+            .andExpect(view().name("redirect:/admin/session/view"));
         List<Session> sessions = sessionRepository.findAll();
         assertThat(sessions.size(), is(1));
 

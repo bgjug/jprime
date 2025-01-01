@@ -2,6 +2,7 @@ package site.controller.invoice;
 
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -18,12 +20,10 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import org.springframework.stereotype.Service;
 
-import site.config.Globals;
+import site.facade.BranchService;
+import site.model.Branch;
 
 import static org.apache.commons.beanutils.PropertyUtils.getProperty;
-import static site.controller.invoice.InvoiceData.DEFAULT_DESCRIPTION_BG;
-import static site.controller.invoice.InvoiceData.TicketPrices;
-import static site.controller.invoice.InvoiceLanguage.EN;
 
 /**
  * Created by mitia on 10.04.15.
@@ -31,8 +31,14 @@ import static site.controller.invoice.InvoiceLanguage.EN;
 @Service
 public class InvoiceExporter {
 
-    public byte[] exportInvoice(InvoiceData data, boolean isCompany, InvoiceLanguage language)
-        throws Exception {
+    private final BranchService branchService;
+
+    public InvoiceExporter(BranchService branchService) {
+        this.branchService = branchService;
+    }
+
+    public byte[] exportInvoice(InvoiceData data, boolean isCompany, InvoiceLanguage language) throws
+        JRException {
         String resourceName = null;
         if (language == InvoiceLanguage.EN) {
             if (isCompany) {
@@ -52,7 +58,7 @@ public class InvoiceExporter {
         JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reportTemplate);
 
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("jprime.year", Globals.CURRENT_BRANCH.toString());
+        parameters.put("jprime.year", branchService.getCurrentBranch().getYear());
 
         // Fill in other parameters that have matching properties in invoice data.
         Arrays.stream(jasperReport.getParameters()).forEach(p -> {
@@ -80,16 +86,30 @@ public class InvoiceExporter {
         data.setInvoiceDate("27.05.2016");
         data.setInvoiceNumber("11234");
         data.setClient("Много дълго име на клиент за да видим как ще реагира JasperReports");
-        data.setClientAddress("1111, Sofia, some улица 1, some entrance, some floor, some appt and few more symbols");
+        data.setClientAddress(
+            "1111, Sofia, some улица 1, some entrance, some floor, some apartment and few more symbols");
         data.setClientEIK("2464387775");
         data.setClientVAT("BG2464387775");
         data.setMol("fda");
         data.setInvoiceType("Проформа");
         data.setPaymentType("пеймънт");
-        TicketPrices ticketPrices = InvoiceData.getPrices(Globals.CURRENT_BRANCH);
-        data.addInvoiceDetail(new InvoiceDetail(ticketPrices.getStudentPrice(), 3, DEFAULT_DESCRIPTION_BG));
-        data.addInvoiceDetail(new InvoiceDetail(ticketPrices.getPrice(Globals.CURRENT_BRANCH), 3, DEFAULT_DESCRIPTION_BG));
 
-        Files.write(Paths.get("invoice_test.pdf"), new InvoiceExporter().exportInvoice(data, true, EN));
+        String description = "jPrime 2025 билет за конференция";
+
+        data.addInvoiceDetail(
+            new InvoiceDetail(BigDecimal.valueOf(130.0), 3, description));
+        data.addInvoiceDetail(
+            new InvoiceDetail(BigDecimal.valueOf(320.0), 3, description));
+
+        BranchService mockedService = new BranchService(null, null) {
+
+            @Override
+            public Branch getCurrentBranch() {
+                return new Branch(2025);
+            }
+        };
+
+        Files.write(Paths.get("invoice_test.pdf"),
+            new InvoiceExporter(mockedService).exportInvoice(data, true, InvoiceLanguage.EN));
     }
 }
