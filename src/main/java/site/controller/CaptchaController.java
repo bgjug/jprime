@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Random;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import site.model.JPrimeException;
+
 @RestController
 @RequestMapping(value = "/captcha-image")
 public class CaptchaController {
@@ -28,7 +31,6 @@ public class CaptchaController {
 	 * Constants
 	 */
 	public static final String SESSION_PARAM_CAPTCHA_IMAGE = "session_captcha";
-	private static final String IMAGE_MIME_TYPE_JPG = "image/jpg";
 	private static final String CAPTCHA_FONT = "Arial";
 	private static final String REQUEST_PARAM_HEIGHT = "height";
 	private static final String REQUEST_PARAM_WIDTH = "width";
@@ -40,19 +42,13 @@ public class CaptchaController {
 	
 	private static final Logger logger = LogManager.getLogger(CaptchaController.class);
 
+	private static final Random RANDOM = new Random();
+
 	@GetMapping(produces = {
 			MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE })
 	public byte[] getCaptchaImage(HttpServletRequest request){
 		try {
-
-			Color backgroundColor = new Color(240, 244, 247);
-
-			Color textColor = new Color(131, 153, 184);
-
-			Color circleColor = new Color(195, 208, 247);
-			Font textFont = new Font(CAPTCHA_FONT, Font.PLAIN, 24);
-			int charsToPrint = 5;
-			int width = request.getParameter(REQUEST_PARAM_WIDTH) != null
+            int width = request.getParameter(REQUEST_PARAM_WIDTH) != null
 					? Integer.parseInt(request.getParameter(REQUEST_PARAM_WIDTH)) : 150;
 			int height = request.getParameter(REQUEST_PARAM_HEIGHT) != null
 					? Integer.parseInt(request.getParameter(REQUEST_PARAM_HEIGHT)) : 30;
@@ -65,40 +61,31 @@ public class CaptchaController {
 			Graphics2D g = (Graphics2D) bufferedImage.getGraphics();
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			// Draw an oval
-			g.setColor(backgroundColor);
+            Color backgroundColor = new Color(240, 244, 247);
+            g.setColor(backgroundColor);
 			g.fillRect(0, 0, width, height);
 
 			// lets make some noisy circles
-			int circlesToDraw = (int) (Math.random() * (MAX_CIRCLES_TO_DRAW - MIN_CIRCLES_TO_DRAW))
+			int circlesToDraw = (int) (RANDOM.nextDouble() * (MAX_CIRCLES_TO_DRAW - MIN_CIRCLES_TO_DRAW))
 					+ MIN_CIRCLES_TO_DRAW;
 
-			for (int i = 0; i < circlesToDraw; i++) {
+            Color circleColor = new Color(195, 208, 247);
+            for (int i = 0; i < circlesToDraw; i++) {
 				g.setColor((i % 2 == 0) ? circleColor
-						: (new Color(circleColor.getRed(), 123 + (int) (Math.random() * 122), circleColor.getGreen())));
+						: (new Color(circleColor.getRed(), 123 + (RANDOM.nextInt(122)), circleColor.getGreen())));
 
-				int circleWidth = (int) ((Math.random() * width / 2.0) * (Math.random() * 2));
-				int circleHeight = (int) ((Math.random() * height / 2.0) * (Math.random() * 2));
-				int circleX = (int) (Math.random() * width - circleWidth);
-				int circleY = (int) (Math.random() * height - circleHeight);
+				int circleWidth = (int) ((RANDOM.nextDouble() * width / 2.0) * (RANDOM.nextDouble() * 2.0));
+				int circleHeight = (int) ((RANDOM.nextDouble() * height / 2.0) * (RANDOM.nextDouble() * 2.0));
+				int circleX = (int) (RANDOM.nextDouble() * width - circleWidth);
+				int circleY = (int) (RANDOM.nextDouble() * height - circleHeight);
 
 				g.drawOval(circleX, circleY, circleWidth, circleHeight);
 			}
 
-			// // lets make some noisy lines
-			// int linesToDraw = (int) (Math.random() * (MAX_LINES_TO_DRAW -
-			// MIN_LINES_TO_DRAW)) + MIN_LINES_TO_DRAW;
-			// for (int i = 0; i < linesToDraw; i++) {
-			// g.setColor((i % 2 == 0) ? (textColor) : (new
-			// Color(textColor.getRed(), (int) (Math.random() * 255),
-			// textColor.getGreen())));
-			//
-			// g.drawLine((int) (Math.random() * width), (int) (Math.random() *
-			// height),
-			// (int) (Math.random() * width), (int) (Math.random() * height));
-			// }
-
-			g.setColor(textColor);
-			g.setFont(textFont);
+            Color textColor = new Color(131, 153, 184);
+            g.setColor(textColor);
+            Font textFont = new Font(CAPTCHA_FONT, Font.PLAIN, 24);
+            g.setFont(textFont);
 
 			FontMetrics fontMetrics = g.getFontMetrics();
 			int maxAdvance = fontMetrics.getMaxAdvance();
@@ -111,16 +98,17 @@ public class CaptchaController {
 			// this should ideally be done for every language...
 			// i like controlling the characters though because it helps prevent
 			// confusion
-			String elegibleChars = "123456789";
-			char[] chars = elegibleChars.toCharArray();
+			String eligibleChars = "123456789";
+			char[] chars = eligibleChars.toCharArray();
 
 			float spaceForLetters = -horizMargin * 2 + width;
-			float spacePerChar = spaceForLetters / (charsToPrint - 1.0f);
+            int charsToPrint = 5;
+            float spacePerChar = spaceForLetters / (charsToPrint - 1.0f);
 
 			StringBuilder finalString = new StringBuilder();
 
 			for (int i = 0; i < charsToPrint; i++) {
-				double randomValue = Math.random();
+				double randomValue = RANDOM.nextDouble();
 				int randomIndex = (int) Math.round(randomValue * (chars.length - 1));
 
 				char characterToShow = chars[randomIndex];
@@ -140,7 +128,7 @@ public class CaptchaController {
 				BufferedImage charImage = new BufferedImage(charDim, charDim, BufferedImage.TYPE_INT_ARGB);
 				Graphics2D charGraphics = charImage.createGraphics();
 				charGraphics.translate(halfCharDim, halfCharDim);
-				double angle = (Math.random() - 0.5) * rotationRange;
+				double angle = (RANDOM.nextDouble() - 0.5) * rotationRange;
 				if (!(characterToShow == '+' || characterToShow == '=')) {
 					charGraphics.transform(AffineTransform.getRotateInstance(angle));
 				}
@@ -154,10 +142,6 @@ public class CaptchaController {
 
 				float x = horizMargin + spacePerChar * i - charDim / 2.0f;
 				int y = (height - charDim) / 2;
-				// System.out.println("x=" + x + " height=" + height + "
-				// charDim=" + charDim + " y=" + y + " advance=" +
-				// maxAdvance + " fontHeight=" + fontHeight + " ascent=" +
-				// fontMetrics.getAscent());
 				g.drawImage(charImage, (int) x, y, charDim, charDim, null, null);
 
 				charGraphics.dispose();
@@ -176,9 +160,8 @@ public class CaptchaController {
 				writer.write(null, imageIO, iwp);
 			} else {
 				logger.error("doGet(HttpServletRequest, HttpServletResponse) - no encoder found for jsp.");
-				throw new RuntimeException("no encoder found for jsp");
+				throw new JPrimeException("no encoder found for jsp");
 			}
-			// ImageIO.write(bufferedImage, "jpg", response.getOutputStream());
 
 			// let's stick the final string in the session
 			int firstDigit = Integer.parseInt(finalString.substring(0, 2));
@@ -194,7 +177,7 @@ public class CaptchaController {
 			return baos.toByteArray();
 		} catch (IOException ioe) {
 			logger.error("doGet(HttpServletRequest, HttpServletResponse)", ioe);
-			throw new RuntimeException("Unable to build image", ioe);
+			throw new JPrimeException("Unable to build image", ioe);
 		}
 	}
 	

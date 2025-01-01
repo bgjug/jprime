@@ -52,8 +52,7 @@ public class PwaControllerTest {
         submission.setDescription("A description of the session");
         mockSession.setSubmission(submission);
 
-        when(sessionRepository.findSessionsForBranchAndHallOrHallIsNull(Mockito.eq(hallName), Mockito.any(
-            Branch.class)))
+        when(sessionRepository.findSessionsForBranchAndHallOrHallIsNull(Mockito.eq(hallName), Mockito.anyString()))
             .thenReturn(List.of(mockSession));
 
         // Perform GET request

@@ -3,17 +3,19 @@ package site.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
 import site.facade.BranchService;
@@ -40,11 +42,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
 @Transactional
+@AutoConfigureMockMvc
 class CfpControllerTest {
 
     @Autowired
-    private WebApplicationContext wac;
-
     private MockMvc mockMvc;
 
     @Autowired
@@ -56,34 +57,36 @@ class CfpControllerTest {
     @Autowired
     private BranchService branchService;
 
+    private MailServiceMock mailerMock;
+
     @BeforeEach
-    void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+    void cleanupSubmissionRepository () {
+        submissionRepository.deleteAll();
+
+        assertThat(mailer, instanceOf(MailServiceMock.class));
+        mailerMock = (MailServiceMock) this.mailer;
+        mailerMock.clear();
     }
 
     @Test
     void getShouldReturnEmptySubscription() throws Exception {
         String cfpPage = CfpController.CFP_CLOSED_JSP;
         Branch currentBranch = branchService.getCurrentBranch();
-        if (currentBranch.getCfpCloseDate().isAfter(LocalDateTime.now()) && currentBranch.getCfpOpenDate().isBefore(
-            LocalDateTime.now())) {
+        if (currentBranch.getCfpCloseDate().isAfter(LocalDateTime.now()) && currentBranch.getCfpOpenDate()
+            .isBefore(LocalDateTime.now())) {
             cfpPage = CfpController.CFP_OPEN_JSP;
         }
 
-        mockMvc.perform(get("/cfp"))
-                .andExpect(status().isOk())
-                .andExpect(view().name(cfpPage));
+        mockMvc.perform(get("/cfp")).andExpect(status().isOk()).andExpect(view().name(cfpPage));
     }
 
     @Test
-    @Disabled("ignored since adding captcha, has to be updated")
     void shouldSubmitSessionWithSingleSpeaker() throws Exception {
-        assertThat(mailer, instanceOf(MailServiceMock.class));
-        MailServiceMock mailer = (MailServiceMock) this.mailer;
-        mailer.recipientAddresses.clear();
+        MvcResult mvcResult = mockMvc.perform(get("/captcha-image")).andExpect(status().isOk()).andReturn();
+        HttpSession session = mvcResult.getRequest().getSession();
+        String captcha = (String) session.getAttribute("session_captcha");
 
-        mockMvc.perform(multipart("/cfp")
-                .file(new MockMultipartFile("speakerImage", new byte[] {}))
+        mockMvc.perform(multipart("/cfp").file(new MockMultipartFile("speakerImage", new byte[] {}))
                 .file(new MockMultipartFile("coSpeakerImage", new byte[] {}))
                 .param("title", "JBoss Forge")
                 .param("description", "This is the best tool")
@@ -92,9 +95,11 @@ class CfpControllerTest {
                 .param("speaker.lastName", "Ivanov")
                 .param("speaker.email", "ivan@jprime.io")
                 .param("speaker.twitter", "@ivan_stefanov")
-                .param("speaker.bio", "Ordinary decent nerd"))
+                .param("speaker.bio", "Ordinary decent nerd")
+                .param("captcha", captcha)
+                .session((MockHttpSession) session))
             .andExpect(status().isFound())
-            .andExpect(view().name("redirect:/"));
+            .andExpect(view().name("redirect:/cfp-thank-you"));
 
         final List<Submission> allSubmissions = submissionRepository.findAll();
         assertThat(allSubmissions.size(), is(1));
@@ -105,19 +110,17 @@ class CfpControllerTest {
         assertThat(submission.getSpeaker().getEmail(), is("ivan@jprime.io"));
         assertThat(submission.getCoSpeaker(), is(nullValue()));
 
-        assertThat(mailer.recipientAddresses.size(), is(2));
-        assertThat(mailer.recipientAddresses, contains("ivan@jprime.io", "conference@jprime.io"));
+        assertThat(mailerMock.getRecipientAddresses().size(), is(2));
+        assertThat(mailerMock.getRecipientAddresses(), contains("ivan@jprime.io", "conference@jprime.io"));
     }
 
     @Test
-    @Disabled("ignored since adding captcha, has to be updated")
     void shouldSubmitSessionWithCoSpeaker() throws Exception {
-        assertThat(mailer, instanceOf(MailServiceMock.class));
-        MailServiceMock mailer = (MailServiceMock) this.mailer;
-        mailer.recipientAddresses.clear();
+        MvcResult mvcResult = mockMvc.perform(get("/captcha-image")).andExpect(status().isOk()).andReturn();
+        HttpSession session = mvcResult.getRequest().getSession();
+        String captcha = (String) session.getAttribute("session_captcha");
 
-        mockMvc.perform(multipart("/cfp")
-                .file(new MockMultipartFile("speakerImage", new byte[] {}))
+        mockMvc.perform(multipart("/cfp").file(new MockMultipartFile("speakerImage", new byte[] {}))
                 .file(new MockMultipartFile("coSpeakerImage", new byte[] {}))
                 .param("title", "Boot Forge Addon")
                 .param("description", "Forge supports Spring")
@@ -131,9 +134,11 @@ class CfpControllerTest {
                 .param("coSpeaker.lastName", "Ivanov")
                 .param("coSpeaker.email", "ivan@jprime.io")
                 .param("coSpeaker.twitter", "@ivan_stefanov")
-                .param("coSpeaker.bio", "Ordinary decent nerd"))
-                .andExpect(status().isFound())
-                .andExpect(view().name("redirect:/"));
+                .param("coSpeaker.bio", "Ordinary decent nerd")
+                .param("captcha", captcha)
+                .session((MockHttpSession) session))
+            .andExpect(status().isFound())
+            .andExpect(view().name("redirect:/cfp-thank-you"));
 
         final List<Submission> allSubmissions = submissionRepository.findAll();
         assertThat(allSubmissions.size(), is(1));
@@ -144,7 +149,8 @@ class CfpControllerTest {
         assertThat(submission.getSpeaker().getEmail(), is("nayden@jprime.io"));
         assertThat(submission.getCoSpeaker().getEmail(), is("ivan@jprime.io"));
 
-        assertThat(mailer.recipientAddresses.size(), is(3));
-        assertThat(mailer.recipientAddresses, contains("nayden@jprime.io", "ivan@jprime.io", "conference@jprime.io"));
+        assertThat(mailerMock.getRecipientAddresses().size(), is(3));
+        assertThat(mailerMock.getRecipientAddresses(),
+            contains("nayden@jprime.io", "ivan@jprime.io", "conference@jprime.io"));
     }
 }

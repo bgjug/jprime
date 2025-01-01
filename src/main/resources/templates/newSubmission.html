@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<p>There is a new talk proposal submitted!</p>
+<p>
+    <strong>Session title:</strong> <span th:text="${submission.title}"></span><br/>
+    <strong>Session abstract:</strong> <span th:text="${submission.description}"></span><br/>
+    <strong>Speaker:</strong> <span
+        th:text="${submission.speaker.firstName + ' ' + submission.speaker.lastName}"></span><br/>
+    <strong>Speaker bio:</strong> <span th:text="${submission.speaker.bio}"></span><br/>
+    <div th:if="${submission.coSpeaker != null}">
+        <strong>Co-Speaker:</strong>
+        <span th:text="${submission.coSpeaker.firstName + ' ' + submission.coSpeaker.lastName}"></span><br/>
+        <strong>Co-Speaker bio:</strong> <span th:text="${submission.coSpeaker.bio}"></span><br/>
+    </div>
+</p>
+</body>
+</html>

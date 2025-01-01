@@ -55,11 +55,7 @@ public class TicketsController {
     public static final String TICKETS_RESULT_JSP = "tickets-result";
 
     @Autowired
-    @Lazy
     private MailService mailFacade;
-
-    @Autowired
-    private UserService userFacade;
 
     @Autowired
     private InvoiceExporter invoiceExporter;
@@ -81,7 +77,6 @@ public class TicketsController {
 
     @GetMapping(value = "/tickets")
     public String goToRegisterPage(Model model) {
-        model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("registrant", new Registrant());
 
         Branch currentBranch = branchService.getCurrentBranch();
@@ -117,6 +112,7 @@ public class TicketsController {
 		}
 
         //check empty users, server side validation
+        registrant.setBranch(branchService.getCurrentBranch());
         List<Visitor> toBeRemoved = registrant.getVisitors().stream().filter(v -> isEmpty(v.getEmail()) || isEmpty(v.getName())).toList();
         registrant.getVisitors().removeAll(toBeRemoved);
         registrant.getVisitors().forEach(visitor -> visitor.setStatus(VisitorStatus.REQUESTING));
@@ -128,8 +124,6 @@ public class TicketsController {
         registrant.setCreatedDate(LocalDateTime.now());
         registrant.setPaymentType(Registrant.PaymentType.BANK_TRANSFER);
         Registrant savedRegistrant = registrantFacade.save(registrant);
-
-        model.addAttribute("tags", userFacade.findAllTags());
 
         InvoiceData invoiceData = buildInvoiceData(savedRegistrant);
 
@@ -160,10 +154,8 @@ public class TicketsController {
     private void sendPDF(Registrant registrant, String pdfFilename, byte[] pdfContent) {
         try {
             mailFacade.sendEmail(registrant.getEmail(), "jPrime.io invoice", """
-                    Thank you for registering at jPrime! Your proforma invoice is attached as part of this mail.
-
-                    Once we confirm your payment, we'll send you the original invoice.
-
+                    Thank you for registering at jPrime! Your proforma invoice is attached as part of this mail.<br/>
+                    Once we confirm your payment, we'll send you the original invoice.<br/>
                     The attendees that you registered will receive the tickets a few days before the event on their emails.""",
                     pdfContent, pdfFilename);
             String registrations = registrant.getVisitors().toString();

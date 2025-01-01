@@ -58,7 +58,7 @@ public class InvoiceExporter {
         JasperReport jasperReport = (JasperReport) JRLoader.loadObject(reportTemplate);
 
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("jprime.year", branchService.getCurrentBranch().getYear());
+        parameters.put("jprime.year", Integer.toString(branchService.getCurrentBranch().getYear()));
 
         // Fill in other parameters that have matching properties in invoice data.
         Arrays.stream(jasperReport.getParameters()).forEach(p -> {

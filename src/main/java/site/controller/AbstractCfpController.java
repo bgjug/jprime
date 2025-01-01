@@ -1,6 +1,5 @@
 package site.controller;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -14,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import site.facade.MailService;
 import site.facade.ThumbnailService;
@@ -23,8 +24,6 @@ import site.model.SessionType;
 import site.model.Speaker;
 import site.model.Submission;
 
-import static site.controller.ResourceAsString.resourceAsString;
-
 /**
  * @author Ivan St. Ivanov
  */
@@ -33,6 +32,9 @@ public class AbstractCfpController {
     private static final Logger log = LogManager.getLogger(AbstractCfpController.class);
 
     public static final String JPRIME_CONF_MAIL_ADDRESS = "conference@jprime.io";
+
+    @Autowired
+    private TemplateEngine templateEngine;
 
     @Autowired
     protected UserService userFacade;
@@ -47,14 +49,14 @@ public class AbstractCfpController {
     protected void updateCfpModel(Model model, Submission submission) {
         model.addAttribute("submission", submission);
         model.addAttribute("levels", SessionLevel.values());
-        model.addAttribute("sessionTypes", Arrays.stream(SessionType.values()).collect(
-                        Collectors.toMap(Function.identity(), SessionType::toString)));
+        model.addAttribute("sessionTypes", Arrays.stream(SessionType.values())
+            .collect(Collectors.toMap(Function.identity(), SessionType::toString)));
         model.addAttribute("coSpeaker_caption", submission.getCoSpeaker() == null || StringUtils.isEmpty(
-                        submission.getCoSpeaker().getFirstName()) ? "Add co speaker" : "Remove co speaker");
+            submission.getCoSpeaker().getFirstName()) ? "Add co speaker" : "Remove co speaker");
     }
 
     protected void saveSubmission(Submission submission, MultipartFile speakerImage,
-                                  MultipartFile coSpeakerImage) {
+        MultipartFile coSpeakerImage) {
         submission.setSpeaker(handleSubmittedSpeaker(submission.getSpeaker(), speakerImage));
         if (hasCoSpeaker(submission)) {
             submission.setCoSpeaker(handleSubmittedSpeaker(submission.getCoSpeaker(), coSpeakerImage));
@@ -66,7 +68,7 @@ public class AbstractCfpController {
 
     protected boolean hasCoSpeaker(Submission submission) {
         return submission.getCoSpeaker() != null && !StringUtils.isEmpty(
-                        submission.getCoSpeaker().getLastName());
+            submission.getCoSpeaker().getLastName());
     }
 
     private Speaker handleSubmittedSpeaker(Speaker speaker, MultipartFile image) {
@@ -87,7 +89,7 @@ public class AbstractCfpController {
         try {
             byte[] bytes = image.getBytes();
             speaker.setPicture(
-                            thumbnailService.thumbImage(bytes, 280, 326, ThumbnailService.ResizeType.FIT_TO_RATIO));
+                thumbnailService.thumbImage(bytes, 280, 326, ThumbnailService.ResizeType.FIT_TO_RATIO));
         } catch (Exception e) {
             log.error("Error while processing speaker picture!!!", e);
         }
@@ -100,30 +102,26 @@ public class AbstractCfpController {
         }
     }
 
-    private String loadMailContentTemplate(String templateFileName) throws IOException {
-        return resourceAsString("/" + templateFileName);
-    }
-
-    public void sendNotificationEmails(Submission submission) throws IOException, MessagingException {
+    public void sendNotificationEmails(Submission submission) throws MessagingException {
 
         mailFacade.sendEmail(submission.getSpeaker().getEmail(), "jPrime talk proposal",
-                             loadMailContentTemplate("submissionContent.html"));
+            prepareNewSubmissionContent(submission, "submissionContent.html"));
         if (submission.getCoSpeaker() != null) {
             mailFacade.sendEmail(submission.getCoSpeaker().getEmail(), "jPrime talk proposal",
-                                 loadMailContentTemplate("submissionContent.html"));
+                prepareNewSubmissionContent(submission, "submissionContent.html"));
         }
         mailFacade.sendEmail(JPRIME_CONF_MAIL_ADDRESS, "New talk proposal",
-                             prepareNewSubmissionContent(submission, loadMailContentTemplate("newSubmission.html")
-                             ));
+            prepareNewSubmissionContent(submission, "newSubmission.html"));
 
     }
 
-    private String prepareNewSubmissionContent(Submission submission, String template) {
-        return template.replace("{session.title}", submission.getTitle())
-                       .replace("{session.abstract}", submission.getDescription())
-                       .replace("{speaker.name}",
-                                submission.getSpeaker().getFirstName() + " " + submission.getSpeaker().getLastName())
-                       .replace("{speaker.bio}", submission.getSpeaker().getBio());
+    private String prepareNewSubmissionContent(Submission submission, String templateName) {
+        // Create a context for Thymeleaf
+        Context context = new Context();
+        context.setVariable("submission", submission);
+
+        // Process the template and generate content
+        return templateEngine.process(templateName, context);
     }
 
 }
