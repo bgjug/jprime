@@ -28,7 +28,7 @@ public class Session extends AbstractEntity {
 
     @OneToOne(fetch = FetchType.EAGER, targetEntity = Submission.class,
         cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "submission", referencedColumnName = "id")
+    @JoinColumn(name = "submission", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_session_submission"))
     private Submission submission;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = VenueHall.class,
