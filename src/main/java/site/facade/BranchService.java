@@ -17,6 +17,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -24,8 +25,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import site.config.Globals;
-import site.model.BranchEnum;
 import site.model.Branch;
+import site.model.BranchEnum;
 import site.model.SponsorPackage;
 import site.model.TicketPrice;
 import site.model.TicketType;
@@ -35,6 +36,9 @@ import site.repository.TicketPriceRepository;
 @Service
 @Transactional
 public class BranchService {
+
+    @Value("${branch.data.preload:true}")
+    private boolean preloadData;
 
     private static final long FOUR_HOURS = 4 * 60 * 60 * 1000L;
 
@@ -49,6 +53,9 @@ public class BranchService {
 
     @PostConstruct
     public void init() {
+        if (!preloadData) {
+            return;
+        }
         preloadBranches();
         preloadTicketPrices();
     }
@@ -73,7 +80,7 @@ public class BranchService {
                 branch2025.getCfpCloseDate()),
             new TicketPrice(BigDecimal.valueOf(130.0), TicketType.STUDENT, branch2025));
 
-        updateTicketPrices(ticketPrices);
+        updateTicketPrices(ticketPrices, branch2025);
     }
 
     private void preloadBranches() {
@@ -176,8 +183,8 @@ public class BranchService {
             .toList();
     }
 
-    public void updateTicketPrices(List<TicketPrice> ticketPrices) {
-        ticketPrices = ticketPrices.stream()
+    public void updateTicketPrices(List<TicketPrice> ticketPrices, Branch branch) {
+        ticketPrices = ticketPrices.stream().map(ticketPrice -> ticketPrice.branchIfNotSet(branch))
             .map(ticketPrice -> Pair.of(ticketPrice,
                 ticketPriceRepository.findByBranchAndTicketType(ticketPrice.getBranch(),
                     ticketPrice.getTicketType())))
@@ -221,12 +228,13 @@ public class BranchService {
         branchRepository.delete(branch);
     }
 
-    public void createBranch(Branch branch, List<TicketPrice> ticketPrices) {
+    public Branch createBranch(Branch branch, List<TicketPrice> ticketPrices) {
         Branch existing = branchRepository.findByYear(branch.getYear());
         if (existing != null) {
             branch.setCurrentBranch(existing.isCurrentBranch());
         }
-        branchRepository.save(branch);
-        updateTicketPrices(ticketPrices);
+        branch = branchRepository.save(branch);
+        updateTicketPrices(ticketPrices, branch);
+        return branch;
     }
 }

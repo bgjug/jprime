@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.hamcrest.core.IsInstanceOf;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
 import site.facade.BranchService;
+import site.facade.DefaultBranchUtil;
 import site.model.*;
 import site.repository.ArticleRepository;
 import site.repository.PartnerRepository;
@@ -26,6 +28,7 @@ import site.repository.SponsorRepository;
 import site.repository.SubmissionRepository;
 import site.repository.TagRepository;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
@@ -71,22 +74,19 @@ class IndexControllerTest {
 
     private Sponsor sap;
 
-    private Sponsor hater;
-
     private Tag tag1;
 
     private Tag tag2;
 
     private Speaker brianGoetz;
 
-    private Partner softUni;
-
-    private Partner baristo;
-
-    private Partner devoxx;
-
     @Autowired
     private BranchService branchService;
+
+    @BeforeAll
+    public static void beforeAll(@Autowired BranchService branchService) {
+        DefaultBranchUtil.createDefaultBranch(branchService);
+    }
 
     @BeforeEach
     void setup() throws IOException {
@@ -103,7 +103,7 @@ class IndexControllerTest {
         apple = new Sponsor(SponsorPackage.GOLD, "Apple", "http://www.apple.com", "sponsor@apple.com");
         sap = new Sponsor(SponsorPackage.PLATINUM, "SAP", "http://www.sap.com", "sponsor@sap.com");
         sap.setLogo(Files.readAllBytes(Paths.get("src/main/resources/static/images/sap.png")));
-        hater =
+        Sponsor hater =
             new Sponsor(SponsorPackage.SILVER, "Now I hate Java", "http://hatejava.com", "hater@hatejava.com",
                 false);
         sponsorRepository.save(google);
@@ -115,6 +115,7 @@ class IndexControllerTest {
         tag2 = tagRepository.save(new Tag("tag2"));
 
         Branch currentBranch = branchService.getCurrentBranch();
+        assertThat(currentBranch).isNotNull();
 
         brianGoetz =
             new Speaker("Brian", "Goetz", "brian@oracle.com", "The Java Language Architect", "@briangoetz");
@@ -134,17 +135,17 @@ class IndexControllerTest {
         ivanIvanov.getSubmissions().add(submission);
         speakerRepository.save(ivanIvanov);
 
-        devoxx = new Partner();
+        Partner devoxx = new Partner();
         devoxx.setCompanyName("devoxx");
         devoxx.setPartnerPackage(PartnerPackage.SUPPORTERS);
         partnerRepository.save(devoxx);
 
-        softUni = new Partner();
+        Partner softUni = new Partner();
         softUni.setCompanyName("SoftUni");
         softUni.setPartnerPackage(PartnerPackage.MEDIA);
         partnerRepository.save(softUni);
 
-        baristo = new Partner();
+        Partner baristo = new Partner();
         baristo.setCompanyName("Baristo");
         baristo.setPartnerPackage(PartnerPackage.OTHER);
         partnerRepository.save(baristo);

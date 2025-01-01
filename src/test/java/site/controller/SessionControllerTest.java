@@ -2,7 +2,6 @@ package site.controller;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.time.ZoneOffset;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
@@ -12,17 +11,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
 import site.facade.BranchService;
+import site.facade.DefaultBranchUtil;
 import site.model.Session;
 import site.model.SessionLevel;
 import site.model.SessionType;
@@ -84,6 +81,11 @@ class SessionControllerTest {
 
     @Autowired
     private EntityManager entityManager;
+
+    @BeforeAll
+    public static void beforeAll(@Autowired BranchService branchService) {
+        DefaultBranchUtil.createDefaultBranch(branchService);
+    }
 
     @BeforeEach
     void setup() {

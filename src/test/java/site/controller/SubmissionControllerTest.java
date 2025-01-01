@@ -2,6 +2,7 @@ package site.controller;
 
 import java.io.File;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import site.app.Application;
 import site.facade.BranchService;
 import site.facade.CSVService;
+import site.facade.DefaultBranchUtil;
 import site.facade.MailService;
 import site.model.Branch;
 import site.model.SessionLevel;
@@ -74,6 +76,11 @@ class SubmissionControllerTest {
 
     @Autowired
     private SessionRepository sessionRepository;
+
+    @BeforeAll
+    public static void beforeAll(@Autowired BranchService branchService) {
+        DefaultBranchUtil.createDefaultBranch(branchService);
+    }
 
     @BeforeEach
     void setUp() {
