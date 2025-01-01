@@ -2,14 +2,12 @@ package site.controller;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import site.app.Application;
 import site.facade.BranchService;
@@ -25,11 +23,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
+@AutoConfigureMockMvc
 class TicketsControllerTest {
 
     @Autowired
-    private WebApplicationContext wac;
-
     private MockMvc mockMvc;
 
     @Autowired
@@ -38,11 +35,6 @@ class TicketsControllerTest {
     @BeforeAll
     public static void beforeAll(@Autowired BranchService branchService) {
         DefaultBranchUtil.createDefaultBranch(branchService);
-    }
-
-    @BeforeEach
-    void setup() throws Exception {
-        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
     @Test

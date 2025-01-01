@@ -94,6 +94,7 @@ class CfpControllerTest {
     void shouldSubmitSessionWithSingleSpeaker() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/captcha-image")).andExpect(status().isOk()).andReturn();
         HttpSession session = mvcResult.getRequest().getSession();
+        Assertions.assertThat(session).isNotNull();
         String captcha = (String) session.getAttribute("session_captcha");
 
         mockMvc.perform(multipart("/cfp").file(new MockMultipartFile("speakerImage", new byte[] {}))
@@ -128,6 +129,7 @@ class CfpControllerTest {
     void shouldSubmitSessionWithCoSpeaker() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/captcha-image")).andExpect(status().isOk()).andReturn();
         HttpSession session = mvcResult.getRequest().getSession();
+        Assertions.assertThat(session).isNotNull();
         String captcha = (String) session.getAttribute("session_captcha");
 
         mockMvc.perform(multipart("/cfp").file(new MockMultipartFile("speakerImage", new byte[] {}))

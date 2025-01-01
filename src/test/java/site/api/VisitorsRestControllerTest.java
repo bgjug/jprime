@@ -221,7 +221,7 @@ class VisitorsRestControllerTest {
         assertNotNull(visitor.getTicket());
     }
 
-    private Visitor createVisitorForRegistrant(Registrant r) {
+    private void createVisitorForRegistrant(Registrant r) {
         Visitor v = new Visitor();
         v.setName("Funny Name");
         v.setEmail("funny.name@funky.com");
@@ -229,17 +229,15 @@ class VisitorsRestControllerTest {
         v.setTicket("_TICKET_REFERENCE_ID_");
         v.setRegistrant(r);
         visitorRepository.save(v);
-        return v;
     }
 
-    private Visitor createVisitorForRegistrantWithoutTicket(Registrant r) {
+    private void createVisitorForRegistrantWithoutTicket(Registrant r) {
         Visitor v = new Visitor();
         v.setName("Visitor NoTicket");
         v.setEmail("no.ticket.visitor@funky.com");
         v.setCompany("Funky company Ltd.");
         v.setRegistrant(r);
         visitorRepository.save(v);
-        return v;
     }
 
     private Registrant createRegistrant(Branch currentBranch) {

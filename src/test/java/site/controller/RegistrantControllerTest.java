@@ -148,7 +148,7 @@ class RegistrantControllerTest {
         assertThat(registrants).hasSize(1);
         assertThat(registrants.stream()
             .filter(registrant -> "Ivan St. Ivanov".equals(registrant.getName()))
-            .count()).isEqualTo(0L);
+            .count()).isZero();
     }
 
     @Test

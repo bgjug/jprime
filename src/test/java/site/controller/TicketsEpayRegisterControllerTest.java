@@ -88,6 +88,7 @@ class TicketsEpayRegisterControllerTest {
     void postNonCompanyRegistrantShouldSaveVisitorDataAsRegistrant() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/captcha-image")).andExpect(status().isOk()).andReturn();
         HttpSession session = mvcResult.getRequest().getSession();
+        Assertions.assertThat(session).isNotNull();
         String captcha = (String) session.getAttribute("session_captcha");
 
         mockMvc.perform(post("/tickets").param("visitors[0].name", "John Doe")
@@ -116,6 +117,7 @@ class TicketsEpayRegisterControllerTest {
     void postCompanyRegistrantShouldSaveInvoiceData() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/captcha-image")).andExpect(status().isOk()).andReturn();
         HttpSession session = mvcResult.getRequest().getSession();
+        Assertions.assertThat(session).isNotNull();
         String captcha = (String) session.getAttribute("session_captcha");
 
         mockMvc.perform(post("/tickets").param("visitors[0].name", "John Doe")
@@ -156,6 +158,7 @@ class TicketsEpayRegisterControllerTest {
     void shouldBeAbleToSaveMoreVisitorsForOneRegistrant() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/captcha-image")).andExpect(status().isOk()).andReturn();
         HttpSession session = mvcResult.getRequest().getSession();
+        Assertions.assertThat(session).isNotNull();
         String captcha = (String) session.getAttribute("session_captcha");
 
         mockMvc.perform(post("/tickets").param("visitors[0].name", "Lurch")
