@@ -18,11 +18,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import site.controller.invoice.InvoiceLanguage;
 import site.controller.ticket.TicketData;
 import site.controller.ticket.TicketDetail;
 import site.controller.ticket.TicketExporter;
+import site.model.Branch;
 import site.model.Visitor;
 import site.model.VisitorStatus;
 
@@ -46,6 +49,9 @@ public class TicketService {
 
     @Autowired
     private BranchService branchService;
+
+    @Autowired
+    private TemplateEngine templateEngine;
 
     /**
      * Sends tickets to all visitors that have been paid or are sponsored.
@@ -94,9 +100,10 @@ public class TicketService {
      * the operation for that {@link Visitor}
      */
     public List<Pair<Visitor, Boolean>> generateAndSendTicketEmail(String email, List<Visitor> visitors) {
+        Branch currentBranch = branchService.getCurrentBranch();
         List<Pair<Visitor, Pair<byte[], byte[]>>> ticketPdfs = visitors.stream().map(visitor -> {
             TicketData ticketData = new TicketData();
-            ticketData.setEvent("JPrime " + branchService.getCurrentBranch().getYear());
+            ticketData.setEvent("JPrime " + currentBranch.getYear());
             ticketData.setOrganizer("JPrime Events");
             String ticketNumber =
                 StringUtils.isEmpty(visitor.getTicket()) ? UUID.randomUUID().toString() : visitor.getTicket();
@@ -112,7 +119,7 @@ public class TicketService {
             byte[] ticketPdf = binaryPair.getKey();
             byte[] qrImage = binaryPair.getValue();
             try {
-                mailFacade.sendEmail(email, "JPrime " + branchService.getCurrentBranch().getYear() + " Conference ticket !",
+                mailFacade.sendEmail(email, "JPrime " + currentBranch.getYear() + " Conference ticket !",
                     ticketMessage(visitor),
                     new Attachment(ticketPdf, "ticket_" + visitor.getId() + ".pdf", "utf-8", false,
                         "application/pdf"),
@@ -127,22 +134,12 @@ public class TicketService {
     }
 
     private String ticketMessage(Visitor visitor) {
-        return String.format("""
-                jPrime %d is here !<br/>
-                You will find attached to this email message your ticket for the event. Please be ready to show it on your mobile phone on the registration.\s
-                You can also print it if it will be more convenient to you.<br/>
-                 \
-                The registration is open on the first day morning. We would advise you to come early.<br/>
-                Some other information :<br/>
-                Location : <a href='https://jprime.io/venue' target='_blank'>Sofia Tech Park</a><br/>
-                Your name : %s<br/>
-                Your ticket ID : %s <br/>
-                <img alt="logo" src="cid:ticket_qr.png"/>
-                <br/>\
-                The conference website : <a href='https://jprime.io/' target='_blank'>https://jprime.io</a><br/><br/>
-                And finally, if for some reason you cannot come, a friend of yours or a colleague or someone can use your ticket.<br/><br/>
-                See you at jPrime !<br/>
-                The Gang of 6 of the Bulgarian Java User Group""", branchService.getCurrentBranch().getYear(), visitor.getName(),
-            visitor.getTicket());
+        Branch currentBranch = branchService.getCurrentBranch();
+
+        Context context = new Context();
+        context.setVariable("branch", currentBranch);
+        context.setVariable("visitor", visitor);
+
+        return templateEngine.process("ticket-message", context);
     }
 }
