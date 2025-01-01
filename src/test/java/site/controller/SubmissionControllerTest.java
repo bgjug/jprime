@@ -150,7 +150,7 @@ class SubmissionControllerTest {
     void acceptSubmissionShouldChangeTheSubmissionStatus() throws Exception {
         assertThat(mailer, instanceOf(MailServiceMock.class));
         MailServiceMock mailer = (MailServiceMock) this.mailer;
-        mailer.recipientAddresses.clear();
+        mailer.clear();
 
         mockMvc.perform(get("/admin/submission/accept/" + valhalla.getId()))
             .andExpect(status().isOk())
@@ -159,15 +159,15 @@ class SubmissionControllerTest {
         assertThat(valhalla.getStatus(), is(SubmissionStatus.ACCEPTED));
         assertThat(forge.getStatus(), is(SubmissionStatus.SUBMITTED));
 
-        assertThat(mailer.recipientAddresses.size(), is(1));
-        assertThat(mailer.recipientAddresses, contains(valhalla.getSpeaker().getEmail()));
+        assertThat(mailer.getRecipientAddresses().size(), is(1));
+        assertThat(mailer.getRecipientAddresses(), contains(valhalla.getSpeaker().getEmail()));
     }
 
     @Test
     void rejectSubmissionShouldChangeTheSubmissionStatus() throws Exception {
         assertThat(mailer, instanceOf(MailServiceMock.class));
         MailServiceMock mailer = (MailServiceMock) this.mailer;
-        mailer.recipientAddresses.clear();
+        mailer.clear();
 
         mockMvc.perform(get("/admin/submission/reject/" + forge.getId()))
             .andExpect(status().isOk())
@@ -176,22 +176,22 @@ class SubmissionControllerTest {
         assertThat(valhalla.getStatus(), is(SubmissionStatus.SUBMITTED));
         assertThat(forge.getStatus(), is(SubmissionStatus.REJECTED));
 
-        assertThat(mailer.recipientAddresses.size(), is(1));
-        assertThat(mailer.recipientAddresses, contains(forge.getSpeaker().getEmail()));
+        assertThat(mailer.getRecipientAddresses().size(), is(1));
+        assertThat(mailer.getRecipientAddresses(), contains(forge.getSpeaker().getEmail()));
     }
 
     @Test
     void submissionStatusChangeShouldSendEmailToCoSpeakerToo() throws Exception {
         assertThat(mailer, instanceOf(MailServiceMock.class));
         MailServiceMock mailer = (MailServiceMock) this.mailer;
-        mailer.recipientAddresses.clear();
+        mailer.clear();
 
         mockMvc.perform(get("/admin/submission/accept/" + bootAddon.getId()))
             .andExpect(status().isOk())
             .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP));
 
-        assertThat(mailer.recipientAddresses.size(), is(2));
-        assertThat(mailer.recipientAddresses,
+        assertThat(mailer.getRecipientAddresses().size(), is(2));
+        assertThat(mailer.getRecipientAddresses(),
             contains(bootAddon.getSpeaker().getEmail(), bootAddon.getCoSpeaker().getEmail()));
     }
 

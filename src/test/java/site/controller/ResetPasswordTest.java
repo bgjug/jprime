@@ -72,15 +72,15 @@ class ResetPasswordTest {
     void resetPasswordFullTest() throws Exception {
 		assertThat(mailService, instanceOf(MailServiceMock.class));
 		MailServiceMock mailService = (MailServiceMock) this.mailService;
-		mailService.recipientAddresses.clear();
+		mailService.clear();
 
 		 mockMvc.perform(post("/resetPassword")
 	                .param("email", "testEmail@gmail.com"))
 	                .andExpect(status().isFound())
 	                .andExpect(view().name("redirect:/resetPassword"));
 
-		 assertThat(mailService.recipientAddresses.size(), is(1));
-		 String lastMessageText = mailService.lastMessageText;
+		 assertThat(mailService.getRecipientAddresses().size(), is(1));
+		 String lastMessageText = mailService.getMessageTexts().get(0);
 		 assertThat(lastMessageText, notNullValue());
 		 String resetPassURL = getResetPassURL(lastMessageText);
 		 assertThat(resetPassURL, notNullValue());
