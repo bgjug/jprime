@@ -1,5 +1,6 @@
 package site.model;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -11,6 +12,7 @@ public class Article extends AbstractEntity{
 	/**
      * Default serial version uid.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 	
     @NotNull
