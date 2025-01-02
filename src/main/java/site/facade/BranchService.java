@@ -56,15 +56,12 @@ public class BranchService {
         if (!preloadData) {
             return;
         }
-        preloadBranches();
-        preloadTicketPrices();
+        if (preloadBranches()) {
+            preloadTicketPrices();
+        }
     }
 
     private void preloadTicketPrices() {
-        if (!ticketPriceRepository.findAll().isEmpty()) {
-            return;
-        }
-
         Branch branch2024 = findBranchByYear(2024);
         Branch branch2025 = findBranchByYear(2025);
 
@@ -83,9 +80,9 @@ public class BranchService {
         updateTicketPrices(ticketPrices, branch2025);
     }
 
-    private void preloadBranches() {
-        if (!branchRepository.findAll().isEmpty()) {
-            return;
+    private boolean preloadBranches() {
+        if (branchRepository.findByYear(2015).getStartDate() != null) {
+            return false;
         }
 
         Arrays.stream(BranchEnum.values()).forEach(branch -> {
@@ -100,6 +97,7 @@ public class BranchService {
         });
 
         setAsCurrent(branchRepository.findByYear(Globals.CURRENT_BRANCH.getYear()).getLabel());
+        return true;
     }
 
     @CacheEvict(value = "currentBranch", allEntries = true)
