@@ -1,0 +1,12 @@
+ALTER TABLE Article CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE Session CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE tags_articles convert TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE Tag CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE User convert TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE VenueHall convert TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE Visitor convert TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE Registrant convert TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE VisitorJPro convert TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE ResetPasswordToken convert TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE Submission convert TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE Partner convert TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
