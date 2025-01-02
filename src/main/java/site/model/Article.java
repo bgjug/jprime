@@ -7,32 +7,38 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class Article extends AbstractEntity{
-	/**
+public class Article extends AbstractEntity {
+
+    /**
      * Default serial version uid.
      */
     private static final long serialVersionUID = 1L;
-	
+
     @NotNull
-	private String title;
-	
-	private String description;
+    private String title;
+
+    private String description;
 
     private boolean published;
-	
-	@NotNull
+
+    @NotNull
     @Lob
-    @Column(length=10000)
-	private String text;
-	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "author", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_article_author"))
+    @Column(length = 10000)
+    private String text;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+    @JoinColumn(name = "author", referencedColumnName = "id",
+        foreignKey = @ForeignKey(name = "fk_article_author"))
     private User author;
 
     //Changed to eager, session problems! TODO:rethink!
-	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Tag.class)
-    @JoinTable(name = "tags_articles", joinColumns = @JoinColumn(name = "article_pk"), inverseJoinColumns = @JoinColumn(name = "tag_pk"), indexes = {
-                    @Index(columnList = "article_pk") })
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Tag.class)
+    @JoinTable(name = "tags_articles",
+        joinColumns = @JoinColumn(name = "article_pk", foreignKey = @ForeignKey(name = "fk_tag_article")),
+        inverseJoinColumns = @JoinColumn(name = "tag_pk", foreignKey = @ForeignKey(name = "fk_article_tag")),
+        indexes = {
+            @Index(columnList = "article_pk")
+        })
     private Collection<Tag> tags = new HashSet<>();
 
     public Article() {
@@ -44,44 +50,44 @@ public class Article extends AbstractEntity{
     }
 
     public String getTitle() {
-		return title;
-	}
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public String getText() {
-		return text;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    public void setText(String text) {
+        this.text = text;
+    }
 
-	public User getAuthor() {
-		return author;
-	}
+    public User getAuthor() {
+        return author;
+    }
 
-	public void setAuthor(User author) {
-		this.author = author;
-	}
+    public void setAuthor(User author) {
+        this.author = author;
+    }
 
-	public Collection<Tag> getTags() {
+    public Collection<Tag> getTags() {
         return tags;
-	}
+    }
 
-	public void setTags(Collection<Tag> tags) {
-		this.tags = tags;
-	}
+    public void setTags(Collection<Tag> tags) {
+        this.tags = tags;
+    }
 
     public void addTag(Tag tag) {
         this.tags.add(tag);
