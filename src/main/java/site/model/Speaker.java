@@ -120,6 +120,7 @@ public class Speaker extends User {
         return submissions;
     }
 
+    @JsonIgnore
     public List<Submission> getAllSubmissions() {
         return Stream.concat(getSubmissions().stream(), getCoSpeakerSubmissions().stream())
             .sorted(Comparator.comparing(s -> s.getBranch().getYear()))
@@ -185,6 +186,7 @@ public class Speaker extends User {
         return getFirstName() + " " + getLastName();
     }
 
+    @JsonIgnore
     public int getNumberOfSubmissions() {
         return numberOfSubmissions;
     }
@@ -234,6 +236,7 @@ public class Speaker extends User {
         this.featured = featured;
     }
 
+    @JsonIgnore
     public Branch getBranch() {
         return branch;
     }
