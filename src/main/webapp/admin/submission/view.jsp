@@ -66,10 +66,10 @@
 		&nbsp;
 		<div>
 			<c:if test="${number > 0}">
-				<span><a href="/admin/submission/view/${path}?page=${number - 1}">previous</a></span>
+				<span><a href="/admin/submission/view${path}?page=${number - 1}">previous</a></span>
 			</c:if>
 			<c:if test="${number < (totalPages - 1)}">
-				<span><a href="/admin/submission/view/${path}?page=${number + 1}">next</a></span>
+				<span><a href="/admin/submission/view${path}?page=${number + 1}">next</a></span>
 			</c:if>
 		</div>
 		<div>

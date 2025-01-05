@@ -69,7 +69,7 @@ public class SubmissionController extends AbstractCfpController {
         model.addAttribute("submissions", submissions.getContent());
         model.addAttribute("number", submissions.getNumber());
         model.addAttribute("totalPages", submissions.getTotalPages());
-        model.addAttribute("path", "all");
+        model.addAttribute("path", "/all");
         return ADMIN_SUBMISSION_VIEW_JSP;
     }
 

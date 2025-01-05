@@ -67,23 +67,23 @@ public class AdminService {
     private BranchService branchService;
 
     /* article repo */
-	public Page<Article> findAllArticles(Pageable pageable){
+    public Page<Article> findAllArticles(Pageable pageable) {
         return articleRepository.findAllLatestArticles(pageable);
     }
 
-	public List<Article> findAllArticles(){
+    public List<Article> findAllArticles() {
         return articleRepository.findAllLatestArticles();
     }
 
-	public Article findOneArticle(Long id){
+    public Article findOneArticle(Long id) {
         return articleRepository.findById(id).get();
     }
 
-	public void deleteArticle(Long id){
+    public void deleteArticle(Long id) {
         articleRepository.deleteById(id);
     }
 
-	public Article saveArticle(Article article){
+    public Article saveArticle(Article article) {
         return articleRepository.save(article);
     }
 
@@ -91,37 +91,37 @@ public class AdminService {
 
     /* sponsor repo */
 
-	public Page<Sponsor> findAllSponsors(Pageable pageable){
+    public Page<Sponsor> findAllSponsors(Pageable pageable) {
         return sponsorRepository.findAll(pageable);
     }
 
-	public Sponsor findOneSponsor(Long id){
+    public Sponsor findOneSponsor(Long id) {
         return sponsorRepository.findById(id).get();
     }
 
-	public void deleteSponsor(Long id){
+    public void deleteSponsor(Long id) {
         sponsorRepository.deleteById(id);
     }
 
-	public Sponsor saveSponsor(Sponsor sponsor){
+    public Sponsor saveSponsor(Sponsor sponsor) {
         return sponsorRepository.save(sponsor);
     }
 
     /* partner repo */
 
-	public Page<Partner> findAllPartners(Pageable pageable){
+    public Page<Partner> findAllPartners(Pageable pageable) {
         return partnerRepository.findAll(pageable);
     }
 
-	public Partner findOnePartner(Long id){
+    public Partner findOnePartner(Long id) {
         return partnerRepository.findById(id).get();
     }
 
-	public void deletePartner(Long id){
+    public void deletePartner(Long id) {
         partnerRepository.deleteById(id);
     }
 
-	public Partner savePartner(Partner partner){
+    public Partner savePartner(Partner partner) {
         return partnerRepository.save(partner);
     }
 
@@ -130,19 +130,21 @@ public class AdminService {
 
     /* speaker repo */
 
-	public Page<Speaker> findAllSpeakers(Pageable pageable){
-        return speakerRepository.findAll(pageable);
+    public Page<Speaker> findAllSpeakers(Pageable pageable) {
+        Page<Speaker> all = speakerRepository.findAll(pageable);
+        all.getContent().forEach(s -> s.updateFlags(branchService.getCurrentBranch()));
+        return all;
     }
 
-	public Speaker findOneSpeaker(Long id){
+    public Speaker findOneSpeaker(Long id) {
         return speakerRepository.findById(id).orElse(null);
     }
 
-	public void deleteSpeaker(Long id){
+    public void deleteSpeaker(Long id) {
         speakerRepository.deleteById(id);
     }
 
-	public Speaker saveSpeaker(Speaker speaker){
+    public Speaker saveSpeaker(Speaker speaker) {
         Speaker existing = speakerRepository.findByEmail(speaker.getEmail());
         if (existing != null) {
             speaker.setId(existing.getId());
@@ -155,27 +157,27 @@ public class AdminService {
 
     /* user repo */
 
-	public Page<User> findAllUsers(Pageable pageable){
+    public Page<User> findAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
-	public User findOneUser(Long id){
+    public User findOneUser(Long id) {
         return userRepository.findById(id).get();
     }
 
     //currently used for admin TODO:to be fixed with normal authentication with spring
-    public User findUserByEmail(String email){
-        if(!userRepository.findByEmail(email).isEmpty()) {
+    public User findUserByEmail(String email) {
+        if (!userRepository.findByEmail(email).isEmpty()) {
             return userRepository.findByEmail(email).get(0);
         }
         return null;
     }
 
-	public void deleteUser(Long id){
+    public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 
-	public User saveUser(User user){
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 
@@ -183,23 +185,23 @@ public class AdminService {
 
     /* tag repo */
 
-	public Page<Tag> findAllTags(Pageable pageable){
+    public Page<Tag> findAllTags(Pageable pageable) {
         return tagRepository.findAll(pageable);
     }
 
-	public Iterable<Tag> findAllTags(){
+    public Iterable<Tag> findAllTags() {
         return tagRepository.findAll();
     }
 
-	public Tag findOneTag(Long id){
+    public Tag findOneTag(Long id) {
         return tagRepository.findById(id).get();
     }
 
-	public void deleteTag(Long id){
+    public void deleteTag(Long id) {
         tagRepository.deleteById(id);
     }
 
-	public Tag saveTag(Tag tag){
+    public Tag saveTag(Tag tag) {
         return tagRepository.save(tag);
     }
 
@@ -238,15 +240,16 @@ public class AdminService {
     }
 
     public List<Submission> findAllSubmittedSubmissionsForCurrentBranch() {
-        return submissionRepository.findByBranchAndStatus(branchService.getCurrentBranch(), SubmissionStatus.SUBMITTED);
+        return submissionRepository.findByBranchAndStatus(branchService.getCurrentBranch(),
+            SubmissionStatus.SUBMITTED);
     }
 
     /* visitors repo */
-	public Page<Visitor> findAllVisitors(Pageable pageable){
+    public Page<Visitor> findAllVisitors(Pageable pageable) {
         return visitorRepository.findAll(pageable);
     }
 
-	public Iterable<Visitor> findAllVisitors(){
+    public Iterable<Visitor> findAllVisitors() {
         return visitorRepository.findAll();
     }
 
@@ -254,49 +257,50 @@ public class AdminService {
         return visitorRepository.findAllWithTicket(branch);
     }
 
-    public List<Visitor> findAllNewestVisitors(Branch branch){
+    public List<Visitor> findAllNewestVisitors(Branch branch) {
         return visitorRepository.findAllNewestUsers(branch);
     }
 
-	public Visitor findOneVisitor(Long id){
+    public Visitor findOneVisitor(Long id) {
         return visitorRepository.findById(id).get();
     }
 
-	public void deleteVisitor(Long id){
+    public void deleteVisitor(Long id) {
         Visitor visitor = visitorRepository.findById(id).get();
         Registrant registrant = visitor.getRegistrant();
         registrant.getVisitors().remove(visitor);
         visitorRepository.delete(visitor);
-		if (registrant.getEmail().equals(visitor.getEmail())&&registrant.getName().equals(visitor.getName())&&registrant.getVisitors().isEmpty()){
+        if (registrant.getEmail().equals(visitor.getEmail()) && registrant.getName()
+            .equals(visitor.getName()) && registrant.getVisitors().isEmpty()) {
             registrantRepository.delete(registrant);
-		}else {
+        } else {
             registrantRepository.save(registrant);
         }
 
     }
 
-	public Visitor saveVisitor(Visitor visitor){
+    public Visitor saveVisitor(Visitor visitor) {
         return visitorRepository.save(visitor);
     }
 
     /* registrants repo*/
-	public Page<Registrant> findAllRegistrants(Pageable pageable){
+    public Page<Registrant> findAllRegistrants(Pageable pageable) {
         return registrantRepository.findAll(pageable);
     }
 
-    public Page<Registrant> findRegistrantsByBranch(Pageable pageable, Branch branch){
+    public Page<Registrant> findRegistrantsByBranch(Pageable pageable, Branch branch) {
         return registrantRepository.findAllByBranch(pageable, branch);
     }
 
-    public Iterable<Registrant> findRegistrantsByBranch(Branch branch){
+    public Iterable<Registrant> findRegistrantsByBranch(Branch branch) {
         return registrantRepository.findAllByBranch(branch);
     }
 
-	public Registrant saveRegistrant(Registrant registrant){
+    public Registrant saveRegistrant(Registrant registrant) {
         return registrantRepository.save(registrant);
     }
 
-	public Iterable<Registrant> findAllRegistrants(){
+    public Iterable<Registrant> findAllRegistrants() {
         return registrantRepository.findAll();
     }
 
@@ -310,7 +314,8 @@ public class AdminService {
 
     /* sessions repo */
     public List<Session> findAllSessions() {
-        return sessionRepository.findBySubmissionBranchOrSubmissionIsNullOrderByStartTimeAsc(branchService.getCurrentBranch());
+        return sessionRepository.findBySubmissionBranchOrSubmissionIsNullOrderByStartTimeAsc(
+            branchService.getCurrentBranch());
     }
 
     public Session saveSession(Session session) {
@@ -343,7 +348,9 @@ public class AdminService {
     }
 
     public Page<Speaker> findSpeakersByBranch(Pageable pageable, Branch branch) {
-        return speakerRepository.findAllByBranch(pageable, branch);
+        Page<Speaker> allByBranch = speakerRepository.findAllByBranch(pageable, branch);
+        allByBranch.stream().forEach(s->s.updateFlags(branch));
+        return allByBranch;
     }
 
     public Optional<Visitor> findVisitorByTicket(String ticket) {
@@ -352,7 +359,8 @@ public class AdminService {
 
     public List<Visitor> searchVisitor(Branch branch, String email, String firstName, String lastName,
         String company) {
-        String query = "select v from Visitor as v where v.ticket is not null and v.registrant.branch = :branch and ";
+        String query =
+            "select v from Visitor as v where v.ticket is not null and v.registrant.branch = :branch and ";
         Map<String, Object> paramsMap = new HashMap<>();
         List<String> whereClauses = new ArrayList<>();
 
@@ -419,7 +427,10 @@ public class AdminService {
         TypedQuery<Speaker> searchQuery = entityManager.createQuery(query, Speaker.class);
         paramsMap.forEach(searchQuery::setParameter);
 
-        return searchQuery.getResultList().stream().map(s->s.updateFlags(branchService.getCurrentBranch())).toList();
+        return searchQuery.getResultList()
+            .stream()
+            .map(s -> s.updateFlags(branchService.getCurrentBranch()))
+            .toList();
     }
 
     public List<BackgroundJob> findBackgroundJobs() {

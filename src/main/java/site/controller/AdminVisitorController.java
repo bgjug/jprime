@@ -65,11 +65,15 @@ import site.model.VisitorType;
 public class AdminVisitorController {
 
     public static final String VISITORS_JSP = "admin/visitor/view";
+
     public static final String VISITOR_EDIT_JSP = "admin/visitor/edit";
+
     public static final String VISITOR_UPLOAD_JSP = "admin/visitor/upload";
+
     public static final String VISITOR_EDIT_SEND = "admin/visitor/send";
 
     private static final String EMAIL = "Email";
+
     private static final String EMAIL_ADDRESS = "Email Address";
 
     private static final String NAMES = "Names";
@@ -126,21 +130,29 @@ public class AdminVisitorController {
     private BranchService branchService;
 
     @GetMapping("/view")
-    public String viewVisitors(Model model, @RequestParam(required = false)String yearStr) {
-        int year = StringUtils.isNotBlank(yearStr) ? Integer.parseInt(yearStr) : branchService.getCurrentBranch().getYear();
-        Branch branch = branchService.findBranchByYear(year);
+    public String viewVisitors(Model model,
+        @RequestParam(required = false, name = "branch") String branchForm,
+        @PathVariable(required = false, name = "branch") String branchPath) {
+        String branchLabel = StringUtils.isNotBlank(branchForm) ? branchForm : branchPath;
+        Branch branch;
+        if (StringUtils.isBlank(branchLabel)) {
+            branch = branchService.getCurrentBranch();
+        } else {
+            branch = branchService.findById(branchLabel);
+        }
 
         List<Visitor> visitors = adminFacade.findAllNewestVisitors(branch);
-        long payedCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.PAYED).count();
-        long requestingCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.REQUESTING).count();
-        long sponsoredCount = visitors.stream().filter(v->v.getStatus()==VisitorStatus.SPONSORED).count();
+        long payedCount = visitors.stream().filter(v -> v.getStatus() == VisitorStatus.PAYED).count();
+        long requestingCount =
+            visitors.stream().filter(v -> v.getStatus() == VisitorStatus.REQUESTING).count();
+        long sponsoredCount = visitors.stream().filter(v -> v.getStatus() == VisitorStatus.SPONSORED).count();
         model.addAttribute("visitors", visitors);
         model.addAttribute("payedCount", payedCount);
         model.addAttribute("requestingCount", requestingCount);
         model.addAttribute("sponsoredCount", sponsoredCount);
         model.addAttribute("jobs", adminFacade.findBackgroundJobs());
         model.addAttribute("branches", branchService.allBranches());
-        model.addAttribute("selected_branch", Integer.toString(branch.getYear()));
+        model.addAttribute("selected_branch", branch.getLabel());
         return VISITORS_JSP;
     }
 
@@ -177,11 +189,11 @@ public class AdminVisitorController {
     }
 
     @GetMapping(value = "/tickets")
-    public String sendTickets(Model model, @RequestParam(required = false)String year) {
+    public String sendTickets(Model model, @RequestParam(required = false, name = "branch") String branchForm) {
         if (ticketService.sendTickets()) {
             return "redirect:/admin/jobs/view";
         }
-        return viewVisitors(model, year);
+        return viewVisitors(model, branchForm, null);
     }
 
     @GetMapping(value = "/upload")
@@ -211,7 +223,9 @@ public class AdminVisitorController {
                 if (fileModel.isEmptyVisitorsBeforeUpload()) {
                     //userServiceJPro.clearVisitors();
                 }
-                registrantsMap = StreamSupport.stream(adminFacade.findRegistrantsByBranch(branchService.getCurrentBranch()).spliterator(), false)
+                registrantsMap = StreamSupport.stream(
+                        adminFacade.findRegistrantsByBranch(branchService.getCurrentBranch()).spliterator(),
+                        false)
                     .collect(Collectors.toMap(
                         r -> StringUtils.isEmpty(r.getVatNumber()) ? r.getName() : r.getVatNumber(),
                         Function.identity(), (a, b) -> a));
@@ -230,8 +244,8 @@ public class AdminVisitorController {
         return processCsvInputStream(fileModel, result, model, csvFile, fieldsList, registrantsMap);
     }
 
-    private String processCsvInputStream(CSVFileModel fileModel, BindingResult result, Model model, MultipartFile csvFile,
-        String[] fieldsList, Map<String, Registrant> registrantsMap) {
+    private String processCsvInputStream(CSVFileModel fileModel, BindingResult result, Model model,
+        MultipartFile csvFile, String[] fieldsList, Map<String, Registrant> registrantsMap) {
         try (BufferedReader reader = new BufferedReader(
             new InputStreamReader(csvFile.getInputStream(), StandardCharsets.UTF_8))) {
             processCSVFile(fileModel, result, fieldsList, registrantsMap, reader);
@@ -250,8 +264,8 @@ public class AdminVisitorController {
                 return;
             }
 
-            if (csvLine.entrySet().stream().anyMatch(e-> !e.getKey().equalsIgnoreCase(e.getValue()))) {
-                fieldsList = Arrays.stream(fieldsList).map(csvLine::get).toList().toArray(new String[]{});
+            if (csvLine.entrySet().stream().anyMatch(e -> !e.getKey().equalsIgnoreCase(e.getValue()))) {
+                fieldsList = Arrays.stream(fieldsList).map(csvLine::get).toList().toArray(new String[] {});
             }
 
             Registrant lastRegistrant = null;
@@ -259,7 +273,9 @@ public class AdminVisitorController {
             csvLine = csvReader.read(fieldsList);
             do {
                 if (fileModel.getVisitorType() == VisitorType.JPRIME) {
-                    lastRegistrant = processJPrimeVisitor(csvLine, registrantsMap, fileModel.getVisitorStatus(), lastRegistrant);
+                    lastRegistrant =
+                        processJPrimeVisitor(csvLine, registrantsMap, fileModel.getVisitorStatus(),
+                            lastRegistrant);
                 } else {
                     processJProVisitor(csvLine);
                 }
@@ -276,8 +292,8 @@ public class AdminVisitorController {
         userServiceJPro.save(visitorJPro);
     }
 
-    private Registrant processJPrimeVisitor(Map<String, String> csvLine, Map<String, Registrant> registrantsMap,
-        VisitorStatus visitorStatus, Registrant lastRegistrant) {
+    private Registrant processJPrimeVisitor(Map<String, String> csvLine,
+        Map<String, Registrant> registrantsMap, VisitorStatus visitorStatus, Registrant lastRegistrant) {
         Registrant registrant;
         String companyName = csvLine.get(COMPANY);
         String name = csvLine.get(NAMES);
@@ -289,11 +305,12 @@ public class AdminVisitorController {
             String mol = csvLine.get(MATERIAL_RESPONSIBLE_PERSON);
             String companyEmail = csvLine.get(COMPANY_E_MAIL);
             String registrantKey = StringUtils.isEmpty(vatNumber) ? registrantName : vatNumber;
-            if (lastRegistrant != null && (StringUtils.isEmpty(registrantKey) || registrantKey.equals(StringUtils.isEmpty(lastRegistrant.getVatNumber()) ? lastRegistrant.getName() : lastRegistrant.getVatNumber()))) {
+            if (lastRegistrant != null && (StringUtils.isEmpty(registrantKey) || registrantKey.equals(
+                StringUtils.isEmpty(lastRegistrant.getVatNumber()) ? lastRegistrant.getName() :
+                lastRegistrant.getVatNumber()))) {
                 registrant = lastRegistrant;
             } else {
-                registrant =
-                    registrantsMap.computeIfAbsent(registrantKey,
+                registrant = registrantsMap.computeIfAbsent(registrantKey,
                     k -> new Registrant(true, registrantName, address, vatNumber, mol, companyEmail));
             }
         } else {
@@ -343,9 +360,9 @@ public class AdminVisitorController {
 
     @GetMapping(value = "/export", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
-    public ResponseEntity<byte[]>  exportVisitors() throws IOException{
+    public ResponseEntity<byte[]> exportVisitors() throws IOException {
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();
-    	final String[] header = new String[] { "id", "name", "email", "company", "status"};
+        final String[] header = new String[] {"id", "name", "email", "company", "status"};
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try (ICsvBeanWriter beanWriter = new CsvBeanWriter(
@@ -367,20 +384,20 @@ public class AdminVisitorController {
 
     @PostMapping(value = "/send", produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
-    public String  send(@RequestParam String subject, @RequestParam String content) throws IOException{
+    public String send(@RequestParam String subject, @RequestParam String content) throws IOException {
         Iterable<Visitor> visitors = adminFacade.findAllVisitors();
 
-         for(Visitor visitor : visitors ) {
-             if (StringUtils.isEmpty(visitor.getEmail())) {
-                 continue;
-             }
+        for (Visitor visitor : visitors) {
+            if (StringUtils.isEmpty(visitor.getEmail())) {
+                continue;
+            }
 
-             try {
-                 mailFacade.sendEmail(visitor.getEmail(), subject, content);
-             } catch (Throwable t) {
-                 log.error("issue when sending email to {}", visitor.getEmail(), t);
-             }
-         }
+            try {
+                mailFacade.sendEmail(visitor.getEmail(), subject, content);
+            } catch (Throwable t) {
+                log.error("issue when sending email to {}", visitor.getEmail(), t);
+            }
+        }
         return "Done ... all emails should be send but check the log for exceptions";
     }
 

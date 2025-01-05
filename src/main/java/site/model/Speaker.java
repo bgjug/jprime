@@ -2,11 +2,22 @@ package site.model;
 
 import java.io.Serial;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,15 +48,30 @@ public class Speaker extends User {
     @JsonIgnore
     private byte[] picture;
 
-    @OneToMany(mappedBy = "speaker", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, targetEntity = Submission.class)
+    @OneToMany(mappedBy = "speaker", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY,
+        targetEntity = Submission.class)
     @JsonIgnore
     private Set<Submission> submissions = new HashSet<>();
+
+    @OneToMany(mappedBy = "coSpeaker", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY,
+        targetEntity = Submission.class)
+    @JsonIgnore
+    private Set<Submission> coSpeakerSubmissions = new HashSet<>();
 
     @Transient
     private boolean accepted;
 
     @Transient
     private boolean featured;
+
+    @Transient
+    private Branch branch;
+
+    @Transient
+    private String speakerType;
+
+    @Transient
+    private int numberOfSubmissions;
 
     public Speaker() {
     }
@@ -94,8 +120,28 @@ public class Speaker extends User {
         return submissions;
     }
 
+    public List<Submission> getAllSubmissions() {
+        return Stream.concat(getSubmissions().stream(), getCoSpeakerSubmissions().stream())
+            .sorted(Comparator.comparing(s -> s.getBranch().getYear()))
+            .toList();
+    }
+
+    public List<Submission> branchSubmissions(String branch) {
+        return Stream.concat(getSubmissions().stream(), getCoSpeakerSubmissions().stream())
+            .filter(s -> s.getBranch().getLabel().equals(branch))
+            .toList();
+    }
+
     public void setSubmissions(final Set<Submission> submissions) {
         this.submissions = submissions;
+    }
+
+    public Set<Submission> getCoSpeakerSubmissions() {
+        return coSpeakerSubmissions;
+    }
+
+    public void setCoSpeakerSubmissions(Set<Submission> coSpeakerSubmissions) {
+        this.coSpeakerSubmissions = coSpeakerSubmissions;
     }
 
     public String getBsky() {
@@ -104,6 +150,14 @@ public class Speaker extends User {
 
     public void setBsky(String bsky) {
         this.bsky = bsky;
+    }
+
+    public String getSpeakerType() {
+        return speakerType;
+    }
+
+    public void setSpeakerType(String speakerType) {
+        this.speakerType = speakerType;
     }
 
     @Override
@@ -131,10 +185,36 @@ public class Speaker extends User {
         return getFirstName() + " " + getLastName();
     }
 
+    public int getNumberOfSubmissions() {
+        return numberOfSubmissions;
+    }
+
+    public void setNumberOfSubmissions(int numberOfSubmissions) {
+        this.numberOfSubmissions = numberOfSubmissions;
+    }
+
     public Speaker updateFlags(Branch branch) {
-        Collection<Submission> currentSubmissions = this.getSubmissions().stream().filter(s -> s.getBranch().equals(branch)).toList();
-        this.accepted = currentSubmissions.stream().anyMatch(s->s.getStatus() == SubmissionStatus.ACCEPTED);
-        this.featured = currentSubmissions.stream().anyMatch(s->Boolean.TRUE.equals(s.getFeatured()));
+        Collection<Submission> currentSubmissions =
+            Stream.concat(this.getSubmissions().stream(), this.getCoSpeakerSubmissions().stream())
+                .filter(s -> s.getBranch().equals(branch))
+                .toList();
+        this.accepted = currentSubmissions.stream().anyMatch(s -> s.getStatus() == SubmissionStatus.ACCEPTED);
+        this.featured = currentSubmissions.stream().anyMatch(s -> Boolean.TRUE.equals(s.getFeatured()));
+
+        this.branch = Stream.concat(this.getSubmissions().stream(), this.getCoSpeakerSubmissions().stream())
+            .map(Submission::getBranch)
+            .max(Comparator.comparing(Branch::getYear))
+            .orElse(null);
+
+        List<String> speakerTypeList = currentSubmissions.stream()
+            .map(s -> s.getSpeaker().getId().equals(this.getId()) ? "Speaker" : "Co-Speaker")
+            .distinct()
+            .sorted(Comparator.reverseOrder())
+            .toList();
+
+        this.speakerType = String.join("/", speakerTypeList);
+        this.numberOfSubmissions = currentSubmissions.size();
+
         return this;
     }
 
@@ -152,5 +232,13 @@ public class Speaker extends User {
 
     public void setFeatured(boolean featured) {
         this.featured = featured;
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 }

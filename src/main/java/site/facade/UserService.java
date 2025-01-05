@@ -111,10 +111,6 @@ public class UserService {
         return tagRepository.findAll();
     }
 
-    public Page<Speaker> findAllSpeakers(Pageable pageable) {
-        return speakerRepository.findAll(pageable).map(s -> s.updateFlags(branchService.getCurrentBranch()));
-    }
-
     public List<Speaker> findFeaturedSpeakers() {
         Branch currentBranch = branchService.getCurrentBranch();
         return speakerRepository.findFeaturedSpeakers(currentBranch)

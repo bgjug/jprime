@@ -19,17 +19,23 @@ public interface SpeakerRepository extends JpaRepository<Speaker, Long> {
     @Query("SELECT s FROM Speaker s WHERE s.firstName = :firstName AND s.lastName = :lastName")
     Speaker findSpeakerByName(@Param("firstName") String firstName, @Param("lastName") String lastName);
 
-    @Query("SELECT s FROM Speaker s, in(s.submissions) as sub WHERE sub.featured = true and sub.branch = :branch")
+    @Query("SELECT s FROM Speaker s left join s.submissions sub left join s.coSpeakerSubmissions as coSub " +
+        "WHERE (sub.featured = true and sub.branch = :branch) " +
+        "or (coSub.featured = true and coSub.branch = :branch)")
     List<Speaker> findFeaturedSpeakers(@Param("branch") Branch branch);
 
-    @Query("SELECT distinct s FROM Speaker s, in(s.submissions) as sub WHERE (sub.status = 'ACCEPTED' or sub.featured = true) and sub.branch = :branch")
+    @Query("SELECT distinct s FROM Speaker s left join s.submissions sub left join s.coSpeakerSubmissions as coSub " +
+        "WHERE ((sub.status = 'ACCEPTED' or sub.featured = true) and sub.branch = :branch) " +
+        "or (coSub.status = 'ACCEPTED' or coSub.featured = true) and coSub.branch = :branch")
     List<Speaker> findAcceptedSpeakers(@Param("branch") Branch branch);
 
     Speaker findByEmail(String email);
 
-    @Query("SELECT distinct s FROM Speaker s, in(s.submissions) as sub WHERE sub.branch = :branch")
+    @Query("SELECT distinct s FROM Speaker s left join s.submissions sub left join s.coSpeakerSubmissions as coSub " +
+        "WHERE sub.branch = :branch or coSub.branch = :branch")
     Page<Speaker> findAllByBranch(Pageable pageable, Branch branch);
 
-    @Query("SELECT distinct s FROM Speaker s, in(s.submissions) as sub WHERE sub.branch = :branch and sub.status = 'ACCEPTED'")
+    @Query("SELECT distinct s FROM Speaker s left join s.submissions sub left join s.coSpeakerSubmissions as coSub " +
+        "WHERE (sub.branch = :branch and sub.status = 'ACCEPTED') or (coSub.branch = :branch and coSub.status = 'ACCEPTED')")
     Optional<Speaker> findAcceptedSpeaker(Long id, Branch currentBranch);
 }

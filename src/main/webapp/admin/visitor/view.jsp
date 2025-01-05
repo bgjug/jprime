@@ -27,17 +27,21 @@
 
 		<form action="view">
 			<table>
-				<tr>
-					<td><label for="year"><strong>Year:</strong></label></td>
-					<td><select name="year" id="year">
-						<option value="" <c:if test="${selected_branch == null or selected_branch.length() == 0}">selected</c:if>>All</option>
-						<c:forEach var="branch" items="${branches}">
-							<option value="${branch.label}" <c:if test="${selected_branch != null && selected_branch.equals(branch.label)}">selected</c:if>>${branch.label}</option>
-						</c:forEach>
-					</select></td>
-					<td><input type="submit" value="Search"></td>
-				</tr>
-			</table>
+            <tr>
+                <td><label for="branch"><strong>Year:</strong></label></td>
+                <td><select name="branch" id="branch">
+                    <option value=""
+                            <c:if test="${selected_branch == null or selected_branch.length() == 0}">selected</c:if>>
+                        All
+                    </option>
+                    <c:forEach var="branch" items="${branches}">
+                        <option value="${branch.label}"
+                                <c:if test="${selected_branch != null && selected_branch.equals(branch.label)}">selected</c:if>>${branch.year}</option>
+                    </c:forEach>
+                </select></td>
+                <td><input type="submit" value="Search"></td>
+            </tr>
+        </table>
 		</form>
 
 		<div>
@@ -45,7 +49,7 @@
 			<a href="/admin/visitor/export">Export</a>&nbsp;|&nbsp;
 			<a href="/admin/visitor/send">Send email to ALL </a>&nbsp;|&nbsp;
 			<a href="/admin/visitor/upload">Upload from CSV</a>&nbsp;|&nbsp;
-			<a href="/admin/visitor/tickets?year=${selected_branch}" class="ticket_confirm">Send tickets</a>
+			<a href="/admin/visitor/tickets?branch=${selected_branch}" class="ticket_confirm">Send tickets</a>
 		</div>
 		&nbsp;
 		<br/>

@@ -22,13 +22,17 @@
     <legend>Registrants</legend>
     &nbsp;
     <form action="view">
-        <table>
+         <table>
             <tr>
-                <td><label for="year"><strong>Year:</strong></label></td>
-                <td><select name="year" id="year">
-                    <option value="" <c:if test="${selected_branch == null or selected_branch.length() == 0}">selected</c:if>>All</option>
+                <td><label for="branch"><strong>Year:</strong></label></td>
+                <td><select name="branch" id="branch">
+                    <option value=""
+                            <c:if test="${selected_branch == null or selected_branch.length() == 0}">selected</c:if>>
+                        All
+                    </option>
                     <c:forEach var="branch" items="${branches}">
-                        <option value="${branch.label}" <c:if test="${selected_branch != null && selected_branch.equals(branch.label)}">selected</c:if>>${branch.label}</option>
+                        <option value="${branch.label}"
+                                <c:if test="${selected_branch != null && selected_branch.equals(branch.label)}">selected</c:if>>${branch.year}</option>
                     </c:forEach>
                 </select></td>
                 <td><input type="submit" value="Search"></td>
@@ -71,10 +75,20 @@
     </table>
     <div>
         <c:if test="${number > 0}">
-            <span><a href="view?year=${selected_branch}&page=${number - 1}">previous</a></span>
+            <c:if test="${selected_branch != null}">
+                <span><a href="view?page=${number - 1}&branch=${selected_branch}">previous</a></span>
+            </c:if>
+            <c:if test="${selected_branch == null}">
+                <span><a href="view?page=${number - 1}">previous</a></span>
+            </c:if>
         </c:if>
         <c:if test="${number < (totalPages - 1)}">
-            <span><a href="view?year=${selected_branch}&page=${number + 1}">next</a></span>
+            <c:if test="${selected_branch != null}">
+                <span><span><a href="view?page=${number + 1}&branch=${selected_branch}">next</a></span></span>
+            </c:if>
+            <c:if test="${selected_branch == null}">
+                <span><a href="view?page=${number + 1}">next</a></span>
+            </c:if>
         </c:if>
     </div>
 </fieldset>

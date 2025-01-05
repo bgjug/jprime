@@ -36,8 +36,8 @@ public class AdminSpeakerController {
 
     private final BranchService branchService;
 
-    public AdminSpeakerController(AdminService adminService,
-        ThumbnailService thumbnailService, BranchService branchService) {
+    public AdminSpeakerController(AdminService adminService, ThumbnailService thumbnailService,
+        BranchService branchService) {
         this.adminService = adminService;
         this.thumbnailService = thumbnailService;
         this.branchService = branchService;
@@ -45,20 +45,27 @@ public class AdminSpeakerController {
 
     @Transactional
     @GetMapping(value = "/view")
-    public String view(Model model, Pageable pageable, @RequestParam(required = false)String year) {
+    public String view(Model model, Pageable pageable, @RequestParam(required = false, name = "branch") String branchForm, @PathVariable(required = false, name = "branch") String branchPath) {
         Page<Speaker> speakers;
-        if (StringUtils.isNotBlank(year)) {
-           Branch branch = branchService.findBranchByYear(Integer.parseInt(year));
-           speakers = adminService.findSpeakersByBranch(pageable, branch);
+        String branch = StringUtils.isNotBlank(branchForm) ? branchForm : branchPath;
+        Branch currentBranch = branchService.getCurrentBranch();
+        int selectedYear;
+        if (StringUtils.isNotBlank(branch)) {
+            Branch branchEntity = branchService.findById(branch);
+            selectedYear = branchEntity.getYear();
+            speakers = adminService.findSpeakersByBranch(pageable, branchEntity);
         } else {
-           speakers = adminService.findAllSpeakers(pageable);
+            speakers = adminService.findAllSpeakers(pageable);
+            selectedYear = currentBranch.getYear();
         }
 
         model.addAttribute("speakers", speakers.getContent());
         model.addAttribute("number", speakers.getNumber());
         model.addAttribute("totalPages", speakers.getTotalPages());
         model.addAttribute("branches", branchService.allBranches());
-        model.addAttribute("selected_branch", year);
+        model.addAttribute("selected_branch", branch);
+        model.addAttribute("selected_year", Integer.toString(selectedYear));
+        model.addAttribute("current_branch", currentBranch);
 
         return "admin/speaker/view";
     }
@@ -66,8 +73,9 @@ public class AdminSpeakerController {
     @Transactional
     @PostMapping(value = "/add")
     public String add(@Valid final Speaker speaker, BindingResult bindingResult,
-                      @RequestParam MultipartFile file, Model model,
-                      @RequestParam(name = "resizeImage", required = false, defaultValue = "false") boolean resize, @RequestParam(required = false) String sourcePage) {
+        @RequestParam MultipartFile file, Model model,
+        @RequestParam(name = "resizeImage", required = false, defaultValue = "false") boolean resize,
+        @RequestParam(required = false) String sourcePage) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("branches", branchService.allBranches());
             return "admin/speaker/edit";
@@ -77,7 +85,7 @@ public class AdminSpeakerController {
                 byte[] bytes = file.getBytes();
                 if (resize) {
                     speaker.setPicture(thumbnailService.thumbImage(bytes, 280, 326,
-                                                                   ThumbnailService.ResizeType.FIT_TO_RATIO));
+                        ThumbnailService.ResizeType.FIT_TO_RATIO));
                 } else {
                     speaker.setPicture(bytes);
                 }
@@ -106,7 +114,8 @@ public class AdminSpeakerController {
 
     @Transactional
     @GetMapping(value = "/edit/{itemId}")
-    public String edit(@PathVariable Long itemId, Model model, @RequestParam(required = false) String sourcePage) {
+    public String edit(@PathVariable Long itemId, Model model,
+        @RequestParam(required = false) String sourcePage) {
         Speaker speaker = adminService.findOneSpeaker(itemId);
         model.addAttribute("speaker", speaker);
         model.addAttribute("sourcePage", sourcePage);
