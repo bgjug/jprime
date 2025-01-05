@@ -59,17 +59,33 @@ public class AdminRegistrantController {
     private BranchService branchService;
 
     @GetMapping("/view")
-    public String viewRegistrants(Pageable pageable, Model model, @RequestParam(required = false)String year) {
-        int yearInt = StringUtils.isNotBlank(year) ? Integer.parseInt(year) : branchService.getCurrentBranch().getYear();
-        Branch branch = branchService.findBranchByYear(yearInt);
+    public String viewRegistrants(Pageable pageable, Model model,
+        @RequestParam(required = false, name = "branch") String branchForm,
+        @PathVariable(required = false, name = "branch") String branchPath) {
+        String branch = StringUtils.isNotBlank(branchForm) ? branchForm : branchPath;
+        Branch currentBranch = branchService.getCurrentBranch();
+        int selectedYear;
+        Branch branchEntity;
 
-        Page<Registrant> registrantsPage = adminFacade.findRegistrantsByBranch(pageable, branch);
+        if (StringUtils.isNotBlank(branch)) {
+            branchEntity = branchService.findById(branch);
+            selectedYear = branchEntity.getYear();
+        } else {
+            branchEntity = currentBranch;
+            selectedYear = currentBranch.getYear();
+        }
+
+        branch = branchEntity.getLabel();
+
+        Page<Registrant> registrantsPage = adminFacade.findRegistrantsByBranch(pageable, branchEntity);
         model.addAttribute("registrants", registrantsPage.getContent());
         model.addAttribute("totalPages", registrantsPage.getTotalPages());
         model.addAttribute("number", registrantsPage.getNumber());
 
         model.addAttribute("branches", branchService.allBranches());
-        model.addAttribute("selected_branch", Integer.toString(branch.getYear()));
+        model.addAttribute("selected_branch", branch);
+        model.addAttribute("selected_year", Integer.toString(selectedYear));
+        model.addAttribute("current_branch", currentBranch);
 
         return REGISTRANT_VIEW_JSP;
     }

@@ -235,4 +235,8 @@ public class BranchService {
         updateTicketPrices(ticketPrices, branch);
         return branch;
     }
+
+    public Branch findById(String branchLabel) {
+        return branchRepository.findById(branchLabel).orElse(null);
+    }
 }
