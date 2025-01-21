@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class BackgroundJob {
 
@@ -24,6 +26,7 @@ public class BackgroundJob {
     @Column(columnDefinition = "LONGTEXT")
     private String log;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime completed;
 
     public BackgroundJob(String jobId) {
