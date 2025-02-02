@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -68,11 +69,11 @@ public class CfpController extends AbstractCfpController {
         if (result != null) {
             return result;
         }
-        Speaker speaker = userFacade.findSpeaker(submission.getSpeaker());
-        if (speaker != null) {
+        Speaker existingSpeaker = userFacade.findSpeaker(submission.getSpeaker());
+        if (existingSpeaker != null) {
             Speaker submissionSpeaker = submission.getSpeaker();
-            copyDataFromSubmission(speaker, submissionSpeaker);
-            submission.setSpeaker(speaker);
+            copyDataFromSubmission(existingSpeaker, submissionSpeaker);
+            submission.setSpeaker(existingSpeaker);
         }
 
         if (hasCoSpeaker(submission)) {
@@ -82,11 +83,11 @@ public class CfpController extends AbstractCfpController {
                 return result;
             }
 
-            speaker = userFacade.findSpeaker(submission.getCoSpeaker());
-            if (speaker != null) {
+            existingSpeaker = userFacade.findSpeaker(submission.getCoSpeaker());
+            if (existingSpeaker != null) {
                 Speaker submissionCoSpeaker = submission.getCoSpeaker();
-                copyDataFromSubmission(speaker, submissionCoSpeaker);
-                submission.setCoSpeaker(speaker);
+                copyDataFromSubmission(existingSpeaker, submissionCoSpeaker);
+                submission.setCoSpeaker(existingSpeaker);
             }
         }
 
@@ -108,13 +109,37 @@ public class CfpController extends AbstractCfpController {
         return "redirect:/cfp-thank-you";
     }
 
+    /**
+     * Copies data from the submissionSpeaker object to the speaker object if the respective fields in
+     * submissionSpeaker are not empty or blank.
+     *
+     * @param speaker the Speaker object to which data will be copied
+     * @param submissionSpeaker the Speaker object from which data will be copied
+     */
     private static void copyDataFromSubmission(Speaker speaker, Speaker submissionSpeaker) {
-        speaker.setPicture(submissionSpeaker.getPicture());
-        speaker.setBio(submissionSpeaker.getBio());
-        speaker.setTwitter(submissionSpeaker.getTwitter());
-        speaker.setFirstName(submissionSpeaker.getFirstName());
-        speaker.setLastName(submissionSpeaker.getLastName());
-        speaker.setBsky(submissionSpeaker.getBsky());
+        if (ArrayUtils.isNotEmpty(submissionSpeaker.getPicture())) {
+            speaker.setPicture(submissionSpeaker.getPicture());
+        }
+
+        if (StringUtils.isNotBlank(submissionSpeaker.getBio())) {
+            speaker.setBio(submissionSpeaker.getBio());
+        }
+
+        if (StringUtils.isNotBlank(submissionSpeaker.getTwitter())) {
+            speaker.setTwitter(submissionSpeaker.getTwitter());
+        }
+
+        if (StringUtils.isNotBlank(submissionSpeaker.getFirstName())) {
+            speaker.setFirstName(submissionSpeaker.getFirstName());
+        }
+
+        if (StringUtils.isNotBlank(submissionSpeaker.getLastName())) {
+            speaker.setLastName(submissionSpeaker.getLastName());
+        }
+
+        if (StringUtils.isNotBlank(submissionSpeaker.getBsky())) {
+            speaker.setBsky(submissionSpeaker.getBsky());
+        }
     }
 
     @GetMapping(value = "/cfp-problem")
