@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css" />
 	<link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
-	<title>Insert title here</title>
+	<title>Visitors</title>
 </head>
 <body>
 	<admin:menu/>

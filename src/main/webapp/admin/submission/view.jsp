@@ -16,7 +16,7 @@
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css" />
-<title>Insert title here</title>
+<title>Submissions</title>
 </head>
 <body>
 	<admin:menu/>
