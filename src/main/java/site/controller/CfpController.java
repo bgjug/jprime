@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.BranchService;
 import site.model.Branch;
+import site.model.Speaker;
 import site.model.Submission;
 
 /**
@@ -33,6 +34,7 @@ public class CfpController extends AbstractCfpController {
     public static final String CFP_OPEN_JSP = "proposal";
     public static final String CFP_CLOSED_JSP = "cfp-closed";
     public static final String CFP_THANK_YOU = "cfp-thank-you";
+    public static final String CFP_PROBLEM = "cfp-problem";
 
     private final BranchService branchService;
 
@@ -42,7 +44,7 @@ public class CfpController extends AbstractCfpController {
 
     @GetMapping("/cfp")
     public String submissionForm(Model model) {
-        return goToCFP(new Submission(), model);
+        return goToCFP(new Submission(branchService.getCurrentBranch()), model);
     }
 
     @PostMapping("/cfp")
@@ -57,6 +59,7 @@ public class CfpController extends AbstractCfpController {
             invalidCaptcha = true;
             bindingResult.rejectValue("captcha", "invalid");
         }
+
         if (bindingResult.hasErrors() || invalidCaptcha) {
             return goToCFP(submission, model);
         }
@@ -65,6 +68,12 @@ public class CfpController extends AbstractCfpController {
         if (result != null) {
             return result;
         }
+        Speaker speaker = userFacade.findSpeaker(submission.getSpeaker());
+        if (speaker != null) {
+            Speaker submissionSpeaker = submission.getSpeaker();
+            copyDataFromSubmission(speaker, submissionSpeaker);
+            submission.setSpeaker(speaker);
+        }
 
         if (hasCoSpeaker(submission)) {
             result = validateEmail(bindingResult, submission, model, submission.getCoSpeaker().getEmail(),
@@ -72,13 +81,24 @@ public class CfpController extends AbstractCfpController {
             if (result != null) {
                 return result;
             }
+
+            speaker = userFacade.findSpeaker(submission.getCoSpeaker());
+            if (speaker != null) {
+                Speaker submissionCoSpeaker = submission.getCoSpeaker();
+                copyDataFromSubmission(speaker, submissionCoSpeaker);
+                submission.setCoSpeaker(speaker);
+            }
         }
+
+        submission.setBranch(branchService.getCurrentBranch());
 
         try {
             saveSubmission(submission, speakerImage, coSpeakerImage);
         } catch (Exception e) {
             logger.error("Can't save the submission", e);
+            return "redirect:/cfp-problem";
         }
+
         try {
             sendNotificationEmails(submission);
         } catch (Exception e) {
@@ -86,6 +106,21 @@ public class CfpController extends AbstractCfpController {
         }
 
         return "redirect:/cfp-thank-you";
+    }
+
+    private static void copyDataFromSubmission(Speaker speaker, Speaker submissionSpeaker) {
+        speaker.setPicture(submissionSpeaker.getPicture());
+        speaker.setBio(submissionSpeaker.getBio());
+        speaker.setTwitter(submissionSpeaker.getTwitter());
+        speaker.setFirstName(submissionSpeaker.getFirstName());
+        speaker.setLastName(submissionSpeaker.getLastName());
+        speaker.setBsky(submissionSpeaker.getBsky());
+    }
+
+    @GetMapping(value = "/cfp-problem")
+    public String cfpProblem(Model model) {
+
+        return CfpController.CFP_PROBLEM;
     }
 
     @GetMapping(value = "/cfp-thank-you")

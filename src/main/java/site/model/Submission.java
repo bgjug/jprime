@@ -50,6 +50,10 @@ public class Submission extends AbstractEntity {
     public Submission() {
     }
 
+    public Submission(Branch branch) {
+        this.branch = branch;
+    }
+
     public Submission(String title, String description, SessionLevel level, SessionType type, Speaker speaker,
         SubmissionStatus status, boolean featured) {
         this.title = title;

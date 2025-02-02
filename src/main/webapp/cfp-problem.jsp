@@ -33,7 +33,7 @@
 <div id="page-banner-area" class="page-banner">
     <div class="page-banner-title">
         <div class="text-center">
-            <h2>Register your presence for the raffle!</h2>
+            <h2>Error while processing your submission!</h2>
         </div>
     </div>
 </div>
@@ -43,18 +43,10 @@
 <section id="about" class="section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+            <div class="col-12">
                 <p>
-                    Scan the QR image:
-                </p>
-                <p>
-                    <img alt="qr" title="qr" src="images/qr.png"/>
-                </p>
-                <p> or open <a href="https://jprime.io/qr/tuk">https://jprime.io/qr/tuk</a>
-                </p>
+                <p>There was a problem processing your submission. Please contact us at <a href="mailto:conference@jprime.io"><i class="fa fa-envelope-o"></i> conference@jprime.io</a> for assistance!!!</p>
             </div>
-            <div class="col-md-4"></div>
         </div>
     </div>
 </section>
