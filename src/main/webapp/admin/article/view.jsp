@@ -14,7 +14,7 @@
 <script type="text/javascript" src="/js/niceforms.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css" />
-<title>Insert title here</title>
+<title>Articles</title>
 </head>
 <body>
 	<admin:menu/>
