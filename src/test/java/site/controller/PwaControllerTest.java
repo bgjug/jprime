@@ -3,6 +3,8 @@ package site.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import site.app.Application;
+import site.facade.BranchService;
+import site.facade.DefaultBranchUtil;
 import site.model.Branch;
 import site.model.Session;
 import site.model.Speaker;
@@ -33,6 +37,11 @@ public class PwaControllerTest {
 
     @MockitoBean
     private SessionRepository sessionRepository;
+
+    @BeforeAll
+    static void beforeAll(@Autowired BranchService branchService) {
+        DefaultBranchUtil.createDefaultBranch(branchService);
+    }
 
     @Test
     public void testGetSessionByHall() throws Exception {
