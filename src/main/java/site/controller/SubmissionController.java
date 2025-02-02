@@ -75,7 +75,7 @@ public class SubmissionController extends AbstractCfpController {
 
     @GetMapping("/view/{year}")
     public String listSubmissions(Model model, Pageable pageable, @PathVariable String year) {
-    	Branch branch = branchService.findBranchByYear(Integer.parseInt(year));
+        Branch branch = branchService.findBranchByYear(Integer.parseInt(year));
         return listSubmissionsForBranch(model, pageable, branch);
     }
 
@@ -96,7 +96,8 @@ public class SubmissionController extends AbstractCfpController {
 
     @GetMapping("/add")
     public String showSubmissionForm(Model model) {
-        updateCfpModel(model, new Submission());
+        model.addAttribute("branches", branchService.allBranches());
+        updateCfpModel(model, new Submission(branchService.getCurrentBranch()));
         return ADMIN_SUBMISSION_EDIT_JSP;
     }
 
@@ -147,74 +148,99 @@ public class SubmissionController extends AbstractCfpController {
             adminFacade.deleteSubmission(submission);
         }
 
-        return listSubmissions(model, pageable);
+        return REDIRECT + listSubmissions(model, pageable);
     }
 
     @GetMapping(path = "/exportCSV", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public void exportSubmissionsToCSV(HttpServletResponse response) {
-    	List<Submission> findAllSubmittedSubmissionsForCurrentBranch = adminFacade.findAllSubmittedSubmissionsForCurrentBranch();
-    	File submissionsCSVFile;
-		try {
-			submissionsCSVFile = csvFacade.exportSubmissions(findAllSubmittedSubmissionsForCurrentBranch);
-		} catch (IOException e) {
-			logger.error("Could not create submissions file", e);
-			return;
-		}
+        List<Submission> findAllSubmittedSubmissionsForCurrentBranch =
+            adminFacade.findAllSubmittedSubmissionsForCurrentBranch();
+        File submissionsCSVFile;
+        try {
+            submissionsCSVFile = csvFacade.exportSubmissions(findAllSubmittedSubmissionsForCurrentBranch);
+        } catch (IOException e) {
+            logger.error("Could not create submissions file", e);
+            return;
+        }
 
-		try(InputStream inputStream = new FileInputStream(submissionsCSVFile) ){
-	        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-	        response.setHeader("Content-Disposition", "attachment; filename=" + submissionsCSVFile.getName());
-	        response.setHeader("Content-Length", String.valueOf(submissionsCSVFile.length()));
-	        FileCopyUtils.copy(inputStream, response.getOutputStream());
-	        if(!submissionsCSVFile.delete()) {
-	        	logger.warn("Submission file: {} cannot be deleted", submissionsCSVFile::getAbsolutePath);
-	        }
-		} catch (IOException e) {
+        try (InputStream inputStream = new FileInputStream(submissionsCSVFile)) {
+            response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+            response.setHeader("Content-Disposition", "attachment; filename=" + submissionsCSVFile.getName());
+            response.setHeader("Content-Length", String.valueOf(submissionsCSVFile.length()));
+            FileCopyUtils.copy(inputStream, response.getOutputStream());
+            if (!submissionsCSVFile.delete()) {
+                logger.warn("Submission file: {} cannot be deleted", submissionsCSVFile::getAbsolutePath);
+            }
+        } catch (IOException e) {
             logger.error(() -> "Could not download file: " + submissionsCSVFile.getAbsolutePath(), e);
-		}
+        }
     }
 
-    private void sendEmails(Submission submission, String fileName)
-            throws IOException, MessagingException {
+    private void sendEmails(Submission submission, String fileName) throws IOException, MessagingException {
         final String mailSubject = "Your jPrime talk proposal status";
         String messageText = buildMessage(submission, fileName);
         mailService.sendEmail(submission.getSpeaker().getEmail(), mailSubject, messageText);
         if (submission.getCoSpeaker() != null) {
-            final String messageForCoSpeaker = messageText.replace(
-                    submission.getSpeaker().getFirstName(),
-                    submission.getCoSpeaker().getFirstName());
+            final String messageForCoSpeaker = messageText.replace(submission.getSpeaker().getFirstName(),
+                submission.getCoSpeaker().getFirstName());
             mailService.sendEmail(submission.getCoSpeaker().getEmail(), mailSubject, messageForCoSpeaker);
         }
     }
 
-    private String buildMessage(Submission submission, String fileName)
-            throws IOException {
+    private String buildMessage(Submission submission, String fileName) throws IOException {
         String messageText = resourceAsString(fileName);
         messageText = messageText.replace("{speaker.firstName}", submission.getSpeaker().getFirstName());
         messageText = messageText.replace("{submission.title}", submission.getTitle());
-        messageText = messageText.replace("{submission.year}", Integer.toString(branchService.getCurrentBranch().getYear()));
+        messageText = messageText.replace("{submission.year}",
+            Integer.toString(branchService.getCurrentBranch().getYear()));
         return messageText;
     }
 
     @GetMapping("/edit/{submissionId}")
-    public String editSubmissionForm(@PathVariable Long submissionId, Model model, @RequestParam(required = false) String sourcePage) {
+    public String editSubmissionForm(@PathVariable Long submissionId, Model model,
+        @RequestParam(required = false) String sourcePage) {
         updateCfpModel(model, adminFacade.findOneSubmission(submissionId));
         model.addAttribute("sourcePage", sourcePage);
         return ADMIN_SUBMISSION_EDIT_JSP;
     }
 
     @PostMapping("/edit")
-    public String editSubmission(@Valid final Submission submission,
-            BindingResult bindingResult,
-            @RequestParam MultipartFile speakerImage,
-            @RequestParam MultipartFile coSpeakerImage,
-        @RequestParam(required = false) String sourcePage,
-            Model model) {
+    public String editSubmission(@Valid final Submission submission, BindingResult bindingResult,
+        @RequestParam MultipartFile speakerImage, @RequestParam MultipartFile coSpeakerImage,
+        @RequestParam(required = false) String sourcePage, Model model) {
         if (bindingResult.hasErrors()) {
-        	updateCfpModel(model, submission);
-        	return ADMIN_SUBMISSION_EDIT_JSP;
+            updateCfpModel(model, submission);
+            return ADMIN_SUBMISSION_EDIT_JSP;
         }
-        saveSubmission(submission, speakerImage, coSpeakerImage);
+
+        String result = validateAndUpdateSpeaker(bindingResult, submission.getSpeaker(), "speaker",
+            submission::setSpeaker, () -> {
+                updateCfpModel(model, submission);
+                return ADMIN_SUBMISSION_EDIT_JSP;
+            });
+        if (result != null) {
+            return result;
+        }
+        if (hasCoSpeaker(submission)) {
+            result = validateAndUpdateSpeaker(bindingResult, submission.getCoSpeaker(), "coSpeaker",
+                submission::setCoSpeaker, () -> {
+                    updateCfpModel(model, submission);
+                    return ADMIN_SUBMISSION_EDIT_JSP;
+                });
+            if (result != null) {
+                return result;
+            }
+        }
+
+        submission.setBranch(branchService.getCurrentBranch());
+
+        try {
+            saveSubmission(submission, speakerImage, coSpeakerImage);
+        } catch (Exception e) {
+            logger.error("Can't save the submission", e);
+            updateCfpModel(model, submission);
+            return ADMIN_SUBMISSION_EDIT_JSP;
+        }
 
         return REDIRECT + (StringUtils.isEmpty(sourcePage) ? "/admin/submission/view" : sourcePage);
     }

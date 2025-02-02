@@ -5,15 +5,11 @@ import java.time.LocalDateTime;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.BranchService;
 import site.model.Branch;
-import site.model.Speaker;
 import site.model.Submission;
 
 /**
@@ -49,11 +44,9 @@ public class CfpController extends AbstractCfpController {
     }
 
     @PostMapping("/cfp")
-    public String submitSession(@Valid final Submission submission,
-            BindingResult bindingResult,
-        @RequestParam MultipartFile speakerImage,
-            @RequestParam MultipartFile coSpeakerImage,
-            Model model, HttpServletRequest request) {
+    public String submitSession(@Valid final Submission submission, BindingResult bindingResult,
+        @RequestParam MultipartFile speakerImage, @RequestParam MultipartFile coSpeakerImage, Model model,
+        HttpServletRequest request) {
         boolean invalidCaptcha = false;
         if (submission.getCaptcha() == null || !submission.getCaptcha()
             .equals(request.getSession().getAttribute(CaptchaController.SESSION_PARAM_CAPTCHA_IMAGE))) {
@@ -65,29 +58,19 @@ public class CfpController extends AbstractCfpController {
             return goToCFP(submission, model);
         }
 
-        String result = validateEmail(bindingResult, submission, model, submission.getSpeaker().getEmail(), "speaker");
+        String result =
+            validateAndUpdateSpeaker(bindingResult, submission.getSpeaker(), "speaker",
+                submission::setSpeaker,
+                () -> goToCFP(submission, model));
         if (result != null) {
             return result;
         }
-        Speaker existingSpeaker = userFacade.findSpeaker(submission.getSpeaker());
-        if (existingSpeaker != null) {
-            Speaker submissionSpeaker = submission.getSpeaker();
-            copyDataFromSubmission(existingSpeaker, submissionSpeaker);
-            submission.setSpeaker(existingSpeaker);
-        }
-
         if (hasCoSpeaker(submission)) {
-            result = validateEmail(bindingResult, submission, model, submission.getCoSpeaker().getEmail(),
-                "coSpeaker");
+            result =
+                validateAndUpdateSpeaker(bindingResult, submission.getCoSpeaker(), "coSpeaker", submission::setCoSpeaker,
+                    () -> goToCFP(submission, model));
             if (result != null) {
                 return result;
-            }
-
-            existingSpeaker = userFacade.findSpeaker(submission.getCoSpeaker());
-            if (existingSpeaker != null) {
-                Speaker submissionCoSpeaker = submission.getCoSpeaker();
-                copyDataFromSubmission(existingSpeaker, submissionCoSpeaker);
-                submission.setCoSpeaker(existingSpeaker);
             }
         }
 
@@ -109,39 +92,6 @@ public class CfpController extends AbstractCfpController {
         return "redirect:/cfp-thank-you";
     }
 
-    /**
-     * Copies data from the submissionSpeaker object to the speaker object if the respective fields in
-     * submissionSpeaker are not empty or blank.
-     *
-     * @param speaker the Speaker object to which data will be copied
-     * @param submissionSpeaker the Speaker object from which data will be copied
-     */
-    private static void copyDataFromSubmission(Speaker speaker, Speaker submissionSpeaker) {
-        if (ArrayUtils.isNotEmpty(submissionSpeaker.getPicture())) {
-            speaker.setPicture(submissionSpeaker.getPicture());
-        }
-
-        if (StringUtils.isNotBlank(submissionSpeaker.getBio())) {
-            speaker.setBio(submissionSpeaker.getBio());
-        }
-
-        if (StringUtils.isNotBlank(submissionSpeaker.getTwitter())) {
-            speaker.setTwitter(submissionSpeaker.getTwitter());
-        }
-
-        if (StringUtils.isNotBlank(submissionSpeaker.getFirstName())) {
-            speaker.setFirstName(submissionSpeaker.getFirstName());
-        }
-
-        if (StringUtils.isNotBlank(submissionSpeaker.getLastName())) {
-            speaker.setLastName(submissionSpeaker.getLastName());
-        }
-
-        if (StringUtils.isNotBlank(submissionSpeaker.getBsky())) {
-            speaker.setBsky(submissionSpeaker.getBsky());
-        }
-    }
-
     @GetMapping(value = "/cfp-problem")
     public String cfpProblem(Model model) {
 
@@ -153,20 +103,9 @@ public class CfpController extends AbstractCfpController {
         Branch currentBranch = branchService.getCurrentBranch();
 
         model.addAttribute("tags", userFacade.findAllTags());
-        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(currentBranch.getCfpCloseDate()));
+        model.addAttribute("cfp_close_date",
+            DateUtils.dateToStringWithMonth(currentBranch.getCfpCloseDate()));
         return CfpController.CFP_THANK_YOU;
-    }
-
-    private String validateEmail(BindingResult bindingResult, Submission submission, Model model, String email, String role) {
-        EmailValidator emailValidator = new EmailValidator();
-
-        if (!StringUtils.isEmpty(email) && emailValidator.isValid(email, null)) {
-            // Email is valid
-            return null;
-        }
-
-        bindingResult.addError(new FieldError("submission", role + ".email", "Invalid Email!"));
-        return goToCFP(submission, model);
     }
 
     private String goToCFP(@Valid Submission submission, Model model) {
@@ -174,7 +113,8 @@ public class CfpController extends AbstractCfpController {
 
         model.addAttribute("tags", userFacade.findAllTags());
         model.addAttribute("agenda", currentBranch.isAgendaPublished());
-        model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonth(currentBranch.getCfpCloseDate()));
+        model.addAttribute("cfp_close_date",
+            DateUtils.dateToStringWithMonth(currentBranch.getCfpCloseDate()));
         LocalDateTime startDate = currentBranch.getStartDate();
         model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
