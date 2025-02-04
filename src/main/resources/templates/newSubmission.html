@@ -5,6 +5,8 @@
 <p>
     <strong>Session title:</strong> <span th:text="${submission.title}"></span><br/>
     <strong>Session abstract:</strong> <span th:text="${submission.description}"></span><br/>
+    <strong>Session Level:</strong> <span th:text="${submission.level}"></span><br/>
+    <strong>Session type:</strong> <span th:text="${submission.type}"></span><br/>
     <strong>Speaker:</strong> <span
         th:text="${submission.speaker.firstName + ' ' + submission.speaker.lastName}"></span><br/>
     <strong>Speaker bio:</strong> <span th:text="${submission.speaker.bio}"></span><br/>
