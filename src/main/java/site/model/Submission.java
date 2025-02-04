@@ -3,7 +3,11 @@ package site.model;
 import java.util.Objects;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 
 /**
  * @author Ivan St. Ivanov
@@ -13,10 +17,12 @@ import jakarta.validation.constraints.NotBlank;
 public class Submission extends AbstractEntity {
 
     @NotBlank
+    @Size(max = 255)
     private String title;
 
     @NotBlank
-    @Column(length = 3000)
+    @Column(length = 5000)
+    @Size(max = 5000)
     private String description;
 
     @Enumerated(EnumType.STRING)
