@@ -21,8 +21,8 @@ public class Submission extends AbstractEntity {
     private String title;
 
     @NotBlank
-    @Column(length = 5000)
-    @Size(max = 5000)
+    @Column(length = 10000)
+    @Size(max = 10000)
     private String description;
 
     @Enumerated(EnumType.STRING)
