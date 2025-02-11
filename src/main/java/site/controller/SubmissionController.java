@@ -148,7 +148,7 @@ public class SubmissionController extends AbstractCfpController {
             adminFacade.deleteSubmission(submission);
         }
 
-        return REDIRECT + listSubmissions(model, pageable);
+        return REDIRECT + "/" + listSubmissions(model, pageable);
     }
 
     @GetMapping(path = "/exportCSV", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
