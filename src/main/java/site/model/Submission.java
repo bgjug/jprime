@@ -187,4 +187,9 @@ public class Submission extends AbstractEntity {
     public void setFeatured(Boolean featured) {
         this.featured = featured;
     }
+
+    @Override
+    public String toString() {
+        return "Submission{" + "title='" + title + '\'' + ", description='" + description + '\'' + ", status=" + status + ", level=" + level + ", type=" + type + ", speaker=" + speaker + ", coSpeaker=" + coSpeaker + ", branch=" + branch + '}';
+    }
 }

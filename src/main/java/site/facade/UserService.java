@@ -8,6 +8,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +31,8 @@ import static java.util.stream.Collectors.groupingBy;
 @Service
 @Transactional
 public class UserService {
+
+    private static final Logger logger = LogManager.getLogger(UserService.class);
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -169,6 +173,7 @@ public class UserService {
     }
 
     public void submitTalk(Submission submission) {
+        logger.warn("[submitTalk] {}", submission::toString);
         submissionRepository.save(submission);
     }
 
