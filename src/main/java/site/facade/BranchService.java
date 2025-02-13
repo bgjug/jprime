@@ -217,6 +217,7 @@ public class BranchService {
                ticketPrices.get(TicketType.REGULAR);
     }
 
+    @CacheEvict(value = "currentBranch", allEntries = true)
     public void deleteBranch(int year) {
         Branch branch = branchRepository.findByYear(year);
         if (branch == null) {
@@ -226,6 +227,7 @@ public class BranchService {
         branchRepository.delete(branch);
     }
 
+    @CacheEvict(value = "currentBranch", allEntries = true)
     public Branch createBranch(Branch branch, List<TicketPrice> ticketPrices) {
         Branch existing = branchRepository.findByYear(branch.getYear());
         if (existing != null) {
