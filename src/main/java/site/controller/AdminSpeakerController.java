@@ -109,7 +109,7 @@ public class AdminSpeakerController {
         model.addAttribute("speaker", new Speaker());
         model.addAttribute("sourcePage", sourcePage);
         model.addAttribute("branches", branchService.allBranches());
-        return "/admin/speaker/edit";
+        return "admin/speaker/edit";
     }
 
     @Transactional
@@ -120,7 +120,7 @@ public class AdminSpeakerController {
         model.addAttribute("speaker", speaker);
         model.addAttribute("sourcePage", sourcePage);
         model.addAttribute("branches", branchService.allBranches());
-        return "/admin/speaker/edit";
+        return "admin/speaker/edit";
     }
 
     @Transactional
