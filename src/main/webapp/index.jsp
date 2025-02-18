@@ -149,17 +149,17 @@
             </div>
         </div>
         <div class="row mb-30">
-            <!--div class="col-md-2">
+            <div class="col-md-2">
                 <div class="sponsors-logo">
-                    <a href="https://www.vmware.com"><img class="img-fluid" src="images/vmware.png" alt=""></a>
+                    <a href="https://www.ibm.com"><img class="img-fluid" src="images/ibm.png" alt=""></a>
                 </div>
-            </div-->
-<%--            <div class="col-md-2">--%>
-<%--                <div class="sponsors-logo">--%>
-<%--                    <a href="https://www.softwareag.com"><img class="img-fluid" src="images/softwareag.png"--%>
-<%--                                                             alt=""></a>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+            </div>
+            <div class="col-md-2">
+                <div class="sponsors-logo">
+                    <a href="https://www.dxc.com"><img class="img-fluid" src="images/dxc.png"
+                                                             alt=""></a>
+                </div>
+            </div>
             <div class="col-md-2">
                 <div class="sponsors-logo">
                     <a href="https://www.sap.com/bulgaria"><img class="img-fluid" src="images/sap.png" alt=""></a>
