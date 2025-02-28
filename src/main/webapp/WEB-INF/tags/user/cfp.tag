@@ -98,7 +98,6 @@
         <form:hidden path="createdDate"/>
         <form:hidden path="createdBy"/>
         <form:hidden path="speaker.id" />
-        <form:hidden path="path"/>
         <c:if test="${!admin}">
             <p>
                 <c:url var="captchaUrl" value="/captcha-image"/>
