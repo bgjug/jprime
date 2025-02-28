@@ -96,8 +96,9 @@
                                     <tr>
                                         <th width="100%">Title</th>
                                         <th>Branch</th>
-                                        <th>Accepted</th>
                                         <th>Featured</th>
+                                        <th>Accepted</th>
+                                        <th>View in</th>
                                     </tr>
                                     <c:forEach var="submission" items="${selected_branch != null ? speaker.branchSubmissions(selected_branch): speaker.allSubmissions}">
                                         <tr>
@@ -105,6 +106,7 @@
                                             <td>${submission.branch.year}</td>
                                             <td><input disabled type="checkbox" <c:if test="${submission.featured}">checked</c:if>></td>
                                             <td><input disabled type="checkbox" <c:if test="${submission.status == SubmissionStatus.ACCEPTED}">checked</c:if>></td>
+                                            <td><a href="/admin/submission/view/id/${submission.id}">Submissions</a> </td>
                                         </tr>
                                     </c:forEach>
                                 </table>

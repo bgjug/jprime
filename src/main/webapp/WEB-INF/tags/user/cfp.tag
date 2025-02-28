@@ -68,6 +68,22 @@
             <user:speaker role="coSpeaker"/>
         </div>
         <c:if test="${admin}">
+            <dl>
+                <dt>
+                    <label for="status">status</label>
+                </dt>
+                <dd>
+                    <form:input path="status" disabled="true"/>
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <label for="featured">featured</label>
+                </dt>
+                <dd>
+                    <form:checkbox path="featured"/>
+                </dd>
+            </dl>
         	<dl>
                 <dt>
                     <label for="branch">branch</label>
@@ -81,14 +97,16 @@
         <form:hidden path="id" />
         <form:hidden path="createdDate"/>
         <form:hidden path="createdBy"/>
-        <form:hidden path="status" />
         <form:hidden path="speaker.id" />
-        <p>
-	        <c:url var="captchaUrl" value="/captcha-image"/>
-	        <img src="${captchaUrl}"/>
-	        <form:input path="captcha"/>
-	        <form:errors path="captcha"/>
-        </p>
+        <form:hidden path="path"/>
+        <c:if test="${!admin}">
+            <p>
+                <c:url var="captchaUrl" value="/captcha-image"/>
+                <img src="${captchaUrl}"/>
+                <form:input path="captcha"/>
+                <form:errors path="captcha"/>
+            </p>
+        </c:if>
         <p>
         	<button type="submit">Submit</button>
         </p>

@@ -1,5 +1,7 @@
 package site.controller;
 
+import java.util.Comparator;
+
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -45,7 +47,9 @@ public class AdminSpeakerController {
 
     @Transactional
     @GetMapping(value = "/view")
-    public String view(Model model, Pageable pageable, @RequestParam(required = false, name = "branch") String branchForm, @PathVariable(required = false, name = "branch") String branchPath) {
+    public String view(Model model, Pageable pageable,
+        @RequestParam(required = false, name = "branch") String branchForm,
+        @PathVariable(required = false, name = "branch") String branchPath) {
         Page<Speaker> speakers;
         String branch = StringUtils.isNotBlank(branchForm) ? branchForm : branchPath;
         Branch currentBranch = branchService.getCurrentBranch();
@@ -62,7 +66,10 @@ public class AdminSpeakerController {
         model.addAttribute("speakers", speakers.getContent());
         model.addAttribute("number", speakers.getNumber());
         model.addAttribute("totalPages", speakers.getTotalPages());
-        model.addAttribute("branches", branchService.allBranches());
+        model.addAttribute("branches", branchService.allBranches()
+            .stream()
+            .sorted(Comparator.comparing(Branch::getYear).reversed())
+            .toList());
         model.addAttribute("selected_branch", branch);
         model.addAttribute("selected_year", Integer.toString(selectedYear));
         model.addAttribute("current_branch", currentBranch);

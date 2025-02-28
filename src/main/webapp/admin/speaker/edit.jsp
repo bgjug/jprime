@@ -92,22 +92,6 @@
 					<form:textarea path="headline" cols="70" rows="5" />
 				</dd>
 			</dl>
-            <dl>
-                <dt>
-                    <label for="featured">featured</label>
-                </dt>
-                <dd>
-                    <form:checkbox path="featured"/>
-                </dd>
-            </dl>
-			<dl>
-				<dt>
-					<label for="accepted">accepted</label>
-				</dt>
-				<dd>
-					<form:checkbox path="accepted"/>
-				</dd>
-			</dl>
 			<c:if test="${not empty multipartException}">
 				<p style="color:darkred">${multipartException}</p>
 			</c:if>
