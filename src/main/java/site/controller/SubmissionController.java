@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Comparator;
 import java.util.List;
 
 import jakarta.mail.MessagingException;
@@ -15,6 +16,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -66,10 +69,14 @@ public class SubmissionController extends AbstractCfpController {
     @GetMapping("/view/all")
     public String listAllSubmissions(Model model, Pageable pageable) {
         Page<Submission> submissions = adminFacade.findAllSubmissions(pageable);
+        return fillTheModel(model, submissions, "/all");
+    }
+
+    private static String fillTheModel(Model model, Page<Submission> submissions, String path) {
         model.addAttribute("submissions", submissions.getContent());
         model.addAttribute("number", submissions.getNumber());
         model.addAttribute("totalPages", submissions.getTotalPages());
-        model.addAttribute("path", "/all");
+        model.addAttribute("path", path);
         return ADMIN_SUBMISSION_VIEW_JSP;
     }
 
@@ -77,6 +84,13 @@ public class SubmissionController extends AbstractCfpController {
     public String listSubmissions(Model model, Pageable pageable, @PathVariable String year) {
         Branch branch = branchService.findBranchByYear(Integer.parseInt(year));
         return listSubmissionsForBranch(model, pageable, branch);
+    }
+
+    @GetMapping("/view/id/{submissionId}")
+    public String listSubmissions(Model model, @PathVariable Long submissionId) {
+        Submission submission = adminFacade.findOneSubmission(submissionId);
+        Page<Submission> page = new PageImpl<>(List.of(submission), PageRequest.of(0, 1), 1);
+        return fillTheModel(model, page, "/id/" + submissionId);
     }
 
     @GetMapping("/view")
@@ -201,6 +215,7 @@ public class SubmissionController extends AbstractCfpController {
         @RequestParam(required = false) String sourcePage) {
         updateCfpModel(model, adminFacade.findOneSubmission(submissionId));
         model.addAttribute("sourcePage", sourcePage);
+        model.addAttribute("branches", branchService.allBranches().stream().sorted(Comparator.comparing(Branch::getYear).reversed()).toList());
         return ADMIN_SUBMISSION_EDIT_JSP;
     }
 
