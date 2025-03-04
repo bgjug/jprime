@@ -60,7 +60,7 @@
             <div class="carousel-item">
                 <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
                 <div class="carousel-caption d-md-block">
-                    <h1 class="wow bounceIn heading" data-wow-delay=".7s">CFP IS STILL OPEN!</h1>
+                    <%-- <h1 class="wow bounceIn heading" data-wow-delay=".7s">CFP IS STILL OPEN!</h1> --%>
                 </div>
             </div>
         </c:if>
