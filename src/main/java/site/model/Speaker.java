@@ -59,7 +59,7 @@ public class Speaker extends User {
     private Set<Submission> coSpeakerSubmissions = new HashSet<>();
 
     @Transient
-    private boolean accepted;
+    private SubmissionStatus status;
 
     @Transient
     private boolean featured;
@@ -200,8 +200,9 @@ public class Speaker extends User {
             Stream.concat(this.getSubmissions().stream(), this.getCoSpeakerSubmissions().stream())
                 .filter(s -> s.getBranch().equals(branch))
                 .toList();
-        this.accepted = currentSubmissions.stream().anyMatch(s -> s.getStatus() == SubmissionStatus.ACCEPTED);
         this.featured = currentSubmissions.stream().anyMatch(s -> Boolean.TRUE.equals(s.getFeatured()));
+        this.status = currentSubmissions.stream().map(Submission::getStatus).max(
+            Comparator.comparing(SubmissionStatus::ordinal)).orElse(SubmissionStatus.ABORTED);
 
         this.branch = Stream.concat(this.getSubmissions().stream(), this.getCoSpeakerSubmissions().stream())
             .map(Submission::getBranch)
@@ -220,14 +221,6 @@ public class Speaker extends User {
         return this;
     }
 
-    public boolean isAccepted() {
-        return accepted;
-    }
-
-    public void setAccepted(boolean accepted) {
-        this.accepted = accepted;
-    }
-
     public boolean isFeatured() {
         return featured;
     }
@@ -243,5 +236,13 @@ public class Speaker extends User {
 
     public void setBranch(Branch branch) {
         this.branch = branch;
+    }
+
+    public SubmissionStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(SubmissionStatus status) {
+        this.status = status;
     }
 }

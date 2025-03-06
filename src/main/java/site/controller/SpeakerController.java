@@ -31,7 +31,7 @@ public class SpeakerController {
 
     @GetMapping("/speakers")
     public String speakers(Pageable pageable, Model model) {
-        List<Speaker> acceptedSpeakers = userService.findAcceptedSpeakers();
+        List<Speaker> acceptedSpeakers = userService.findConfirmedSpeakers();
         Page<Speaker> speakers = new PageImpl<>(acceptedSpeakers, pageable, acceptedSpeakers.size());
         model.addAttribute("speakers", speakers);
 
@@ -49,7 +49,7 @@ public class SpeakerController {
             return "404";
         }
 
-        if (userService.isSpeakerAccepted(speaker)) {
+        if (userService.isSpeakerConfirmed(speaker)) {
             model.addAttribute("speaker", speaker);
         }
 

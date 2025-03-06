@@ -128,6 +128,13 @@ public class SubmissionController extends AbstractCfpController {
         return listSubmissions(model, pageable);
     }
 
+    @GetMapping("/confirm/{submissionId}")
+    public String confirm(Model model, Pageable pageable, @PathVariable Long submissionId) {
+        Submission submission = adminFacade.findOneSubmission(submissionId);
+        adminFacade.confirmSubmission(submission);
+        return listSubmissions(model, pageable);
+    }
+
     @GetMapping("/notify/{submissionId}")
     public String notify(Model model, Pageable pageable, @PathVariable Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);

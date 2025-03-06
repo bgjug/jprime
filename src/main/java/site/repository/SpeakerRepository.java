@@ -25,9 +25,9 @@ public interface SpeakerRepository extends JpaRepository<Speaker, Long> {
     List<Speaker> findFeaturedSpeakers(@Param("branch") Branch branch);
 
     @Query("SELECT distinct s FROM Speaker s left join s.submissions sub left join s.coSpeakerSubmissions as coSub " +
-        "WHERE ((sub.status = 'ACCEPTED' or sub.featured = true) and sub.branch = :branch) " +
-        "or (coSub.status = 'ACCEPTED' or coSub.featured = true) and coSub.branch = :branch")
-    List<Speaker> findAcceptedSpeakers(@Param("branch") Branch branch);
+        "WHERE ((sub.status = 'CONFIRMED' or sub.featured = true) and sub.branch = :branch) " +
+        "or (coSub.status = 'CONFIRMED' or coSub.featured = true) and coSub.branch = :branch")
+    List<Speaker> findConfirmedSpeakers(@Param("branch") Branch branch);
 
     Speaker findByEmail(String email);
 
@@ -36,6 +36,6 @@ public interface SpeakerRepository extends JpaRepository<Speaker, Long> {
     Page<Speaker> findAllByBranch(Pageable pageable, @Param("branch")Branch branch);
 
     @Query("SELECT distinct s FROM Speaker s left join s.submissions sub left join s.coSpeakerSubmissions as coSub " +
-        "WHERE (sub.branch = :branch and sub.status = 'ACCEPTED') or (coSub.branch = :branch and coSub.status = 'ACCEPTED')")
-    Optional<Speaker> findAcceptedSpeaker(Long id, @Param("branch")Branch branch);
+        "WHERE (sub.branch = :branch and sub.status = 'CONFIRMED') or (coSub.branch = :branch and coSub.status = 'CONFIRMED')")
+    Optional<Speaker> findConfirmedSpeaker(Long id, @Param("branch")Branch branch);
 }
