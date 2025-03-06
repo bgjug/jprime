@@ -133,17 +133,17 @@ public class Registrant extends AbstractEntity {
     public Registrant() {
     }
 
-    public Registrant(String name, String email) {
-        this(false, name, null, null, null, email);
+    public Registrant(String name, String email, Branch branch) {
+        this(false, name, null, null, null, email, branch);
     }
 
     public Registrant(boolean isCompany, String name, String address, String vatNumber, String mol,
-        String email) {
-        this(isCompany, name, address, vatNumber, vatNumber, mol, email, PaymentType.BANK_TRANSFER);
+        String email, Branch branch) {
+        this(isCompany, name, address, vatNumber, vatNumber, mol, email, PaymentType.BANK_TRANSFER, branch);
     }
 
     public Registrant(boolean isCompany, String name, String address, String vatNumber, String eik,
-        String mol, String email, PaymentType paymentType) {
+        String mol, String email, PaymentType paymentType, Branch branch) {
         this.isCompany = isCompany;
         this.name = name;
         this.address = address;
@@ -152,6 +152,7 @@ public class Registrant extends AbstractEntity {
         this.mol = mol;
         this.email = email;
         this.paymentType = paymentType;
+        this.branch = branch;
     }
 
     public List<Visitor> getVisitors() {

@@ -164,12 +164,11 @@ public class AdminVisitorController {
         //may be it's better to use a set of registrants for sponsors?
 
         String redirectUrl = "redirect:/admin/visitor/view";
-        Registrant registrant = new Registrant();
 
+        Registrant registrant;
         if (visitor.getRegistrant().getId() == null) {
             // This means that we came here from the visitors admin panel
-            registrant.setName(visitor.getName());
-            registrant.setEmail(visitor.getEmail());
+            registrant = new Registrant(visitor.getName(), visitor.getEmail(), branchService.getCurrentBranch());
             registrant = adminFacade.saveRegistrant(registrant);
         } else {
             // This means that we came here from the registrant admin panel
@@ -311,10 +310,10 @@ public class AdminVisitorController {
                 registrant = lastRegistrant;
             } else {
                 registrant = registrantsMap.computeIfAbsent(registrantKey,
-                    k -> new Registrant(true, registrantName, address, vatNumber, mol, companyEmail));
+                    k -> new Registrant(true, registrantName, address, vatNumber, mol, companyEmail, branchService.getCurrentBranch()));
             }
         } else {
-            registrant = new Registrant(name, email);
+            registrant = new Registrant(name, email, branchService.getCurrentBranch());
         }
         Visitor visitor = new Visitor(registrant, name, email, companyName);
         visitor.setStatus(visitorStatus);

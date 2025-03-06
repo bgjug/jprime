@@ -48,26 +48,28 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
-            <%--                <div class="carousel-caption d-md-block">--%>
-            <%--                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>--%>
-            <%--                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s">The conference will be held--%>
-            <%--                        <br/>on ${conference_dates} in Sofia Tech Park</p>--%>
-            <%--                    <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
-            <%--                    <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->--%>
-            <%--                </div>--%>
+<%--            <div class="carousel-caption d-md-block">--%>
+<%--                <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>--%>
+<%--                <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s">The conference will be held--%>
+<%--                    <br/>on ${conference_dates} in Sofia Tech Park</p>--%>
+<%--                <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
+<%--                <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->--%>
+<%--            </div>--%>
         </div>
-        <c:if test="${!cfp_closed}">
-            <div class="carousel-item">
-                <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
-                <div class="carousel-caption d-md-block">
-                    <%-- <h1 class="wow bounceIn heading" data-wow-delay=".7s">CFP IS STILL OPEN!</h1> --%>
-                </div>
-            </div>
-        </c:if>
+<%--        <div class="carousel-item">--%>
+<%--            <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">--%>
+<%--            <div class="carousel-caption d-md-block">--%>
+<%--                 <c:if test="${!cfp_closed}">--%>
+<%--                 <h1 class="wow bounceIn heading" data-wow-delay=".7s">CFP IS STILL OPEN!</h1>--%>
+<%--                 </c:if>--%>
+<%--            </div>--%>
+<%--        </div>--%>
         <div class="carousel-item">
             <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide">
             <div class="carousel-caption d-md-block">
+                <c:if test="${!cfp_closed}">
                 <h1 class="wow bounceIn heading" data-wow-delay=".7s">Submit your proposal before ${cfp_close_date}!</h1>
+                </c:if>
             </div>
         </div>
         <div class="carousel-item">
