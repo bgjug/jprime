@@ -92,9 +92,9 @@ public class AdminRegistrantController {
 
     @GetMapping("/add")
     public String getNewRegistrantForm(Model model) {
-        Registrant attributeValue = new Registrant();
-        attributeValue.setBranch(branchService.getCurrentBranch());
-        model.addAttribute("registrant", attributeValue);
+        Registrant registrant = new Registrant();
+        registrant.setBranch(branchService.getCurrentBranch());
+        model.addAttribute("registrant", registrant);
         model.addAttribute("paymentTypes", Registrant.PaymentType.values());
         model.addAttribute("branches", branchService.allBranches());
         return REGISTRANT_EDIT_JSP;

@@ -77,7 +77,7 @@ class RegistrantControllerTest {
         registrantRepository.deleteAll();
 
         adamsFamily = new Registrant(true, "Adams Family", "0001 Cemetery Lane", "666", "Gomez Adamz",
-            "gomez@adams.com");
+            "gomez@adams.com", currentBranch);
         List<Visitor> adamsVisitors =
             Arrays.asList(new Visitor(adamsFamily, "Lurch Adams", "lurch@adams.com", "Adams Family"),
                 new Visitor(adamsFamily, "Morticia Adams", "morticia@adams.com", "Adams Family"));
@@ -85,7 +85,7 @@ class RegistrantControllerTest {
         adamsFamily.setBranch(currentBranch);
         adamsFamily = registrantRepository.save(adamsFamily);
 
-        ivan = new Registrant("Ivan St. Ivanov", "ivan.st.ivanov@gmail.com");
+        ivan = new Registrant("Ivan St. Ivanov", "ivan.st.ivanov@gmail.com", currentBranch);
         ivan.setVisitors(List.of(new Visitor(ivan, "Ivan St. Ivanov", "ivan.st.ivanov@gmail.com", "JUG")));
         ivan.setBranch(currentBranch);
         ivan = registrantRepository.save(ivan);
