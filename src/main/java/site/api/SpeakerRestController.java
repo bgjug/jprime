@@ -27,7 +27,7 @@ public class SpeakerRestController {
     @GetMapping
     public ResponseEntity<?> allSpeakers() {
         try {
-            return ResponseEntity.ok(userService.findAcceptedSpeakers());
+            return ResponseEntity.ok(userService.findConfirmedSpeakers());
         } catch (Exception e) {
             return ResponseEntity.status(500).contentType(MediaType.TEXT_PLAIN).body(e.getMessage());
         }

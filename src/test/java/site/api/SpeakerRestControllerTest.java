@@ -32,6 +32,7 @@ import site.repository.SubmissionRepository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -79,9 +80,9 @@ class SpeakerRestControllerTest {
     private static void createSpeakers(Branch branch, SpeakerRepository speakerRepository,
         SubmissionRepository submissionRepository) {
         createSpeaker(speakerRepository, submissionRepository, branch, "FirstSpeaker", "FirstLastName",
-            "first@jprime.io", SubmissionStatus.ACCEPTED, false);
+            "first@jprime.io", SubmissionStatus.CONFIRMED, false);
         createSpeaker(speakerRepository, submissionRepository, branch, "SecondSpeaker", "SecondLastName",
-            "second@jprime.io", SubmissionStatus.ACCEPTED, false);
+            "second@jprime.io", SubmissionStatus.CONFIRMED, false);
         createSpeaker(speakerRepository, submissionRepository, branch, "ThirdSpeaker", "ThirdLastName",
             "third@jprime.io", SubmissionStatus.SUBMITTED, true);
         createSpeaker(speakerRepository, submissionRepository, branch, "ForthSpeaker", "ForthLastName",
@@ -105,7 +106,7 @@ class SpeakerRestControllerTest {
         });
 
         assertTrue(speakerList.stream()
-            .map(sp -> sp.isFeatured() || sp.isAccepted())
+            .map(sp -> sp.isFeatured() || sp.getStatus() == SubmissionStatus.CONFIRMED)
             .reduce(false, Boolean::logicalOr));
     }
 
@@ -123,7 +124,7 @@ class SpeakerRestControllerTest {
             new ObjectMapper().readValue(result.getResponse().getContentAsString(), SPEAKER_LIST);
         assertEquals(1, speakerList.size());
         Speaker spe = speakerList.get(0);
-        assertTrue(spe.isAccepted());
+        assertSame(SubmissionStatus.CONFIRMED, spe.getStatus());
         assertFalse(spe.isFeatured());
     }
 }

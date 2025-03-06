@@ -173,6 +173,18 @@ class SubmissionControllerTest {
     }
 
     @Test
+    void confirmSubmissionShouldChangeTheSubmissionStatus() throws Exception {
+        mockMvc.perform(get("/admin/submission/confirm/" + valhalla.getId()))
+            .andExpect(status().isOk())
+            .andExpect(view().name(ADMIN_SUBMISSION_VIEW_JSP));
+
+        assertThat(valhalla.getStatus(), is(SubmissionStatus.CONFIRMED));
+        assertThat(forge.getStatus(), is(SubmissionStatus.SUBMITTED));
+
+        assertThat(mockMailer.getRecipientAddresses().size(), is(0));
+    }
+
+    @Test
     void rejectSubmissionShouldChangeTheSubmissionStatus() throws Exception {
         mockMvc.perform(get("/admin/submission/reject/" + forge.getId()))
             .andExpect(status().isOk())

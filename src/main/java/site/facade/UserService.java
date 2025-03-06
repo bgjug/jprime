@@ -123,9 +123,9 @@ public class UserService {
             .toList();
     }
 
-    public List<Speaker> findAcceptedSpeakers() {
+    public List<Speaker> findConfirmedSpeakers() {
         Branch currentBranch = branchService.getCurrentBranch();
-        List<Speaker> acceptedSpeakers = speakerRepository.findAcceptedSpeakers(currentBranch);
+        List<Speaker> acceptedSpeakers = speakerRepository.findConfirmedSpeakers(currentBranch);
         return acceptedSpeakers.stream().map(s -> s.updateFlags(currentBranch)).toList();
     }
 
@@ -158,7 +158,7 @@ public class UserService {
         return sponsorRepository.findByActive(true).stream().collect(groupingBy(Sponsor::getSponsorPackage));
     }
 
-    public List<Partner> findAllActiveOfficalSupportingPartners() {
+    public List<Partner> findAllActiveOfficialSupportingPartners() {
         return partnerRepository.findByActiveAndPartnerPackage(true, PartnerPackage.SUPPORTERS);
     }
 
@@ -219,9 +219,9 @@ public class UserService {
         return false;
     }
 
-    public boolean isSpeakerAccepted(Speaker speaker) {
-        Optional<Speaker> acceptedSpeaker =
-            speakerRepository.findAcceptedSpeaker(speaker.getId(), branchService.getCurrentBranch());
-        return acceptedSpeaker.isPresent();
+    public boolean isSpeakerConfirmed(Speaker speaker) {
+        Optional<Speaker> confirmedSpeaker =
+            speakerRepository.findConfirmedSpeaker(speaker.getId(), branchService.getCurrentBranch());
+        return confirmedSpeaker.isPresent();
     }
 }

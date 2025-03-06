@@ -59,7 +59,7 @@ public class IndexController {
         model.addAttribute("featuredSpeakers", userFacade.findFeaturedSpeakers());
 
         // split partners in groups for better display in rows
-        List<Partner> officialSupporterPartners = userFacade.findAllActiveOfficalSupportingPartners();
+        List<Partner> officialSupporterPartners = userFacade.findAllActiveOfficialSupportingPartners();
         Collections.shuffle(officialSupporterPartners);
         List<List<Partner>> officialSupporterPartnersChunks = getPartnerChunks(officialSupporterPartners);
         model.addAttribute("officialSupporterPartnersChunks", officialSupporterPartnersChunks);

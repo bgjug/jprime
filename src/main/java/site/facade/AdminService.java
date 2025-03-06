@@ -222,6 +222,10 @@ public class AdminService {
         changeStatusTo(submission, SubmissionStatus.ACCEPTED);
     }
 
+    public void confirmSubmission(Submission submission) {
+        changeStatusTo(submission, SubmissionStatus.CONFIRMED);
+    }
+
     public void rejectSubmission(Submission submission) {
         changeStatusTo(submission, SubmissionStatus.REJECTED);
     }

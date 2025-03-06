@@ -5,5 +5,5 @@ package site.model;
  */
 public enum SubmissionStatus {
 
-    SUBMITTED, ABORTED, REJECTED, ACCEPTED
+    SUBMITTED, ABORTED, REJECTED, ACCEPTED, CONFIRMED;
 }

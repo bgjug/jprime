@@ -54,12 +54,12 @@
             <c:if test="${selected_branch != null}">
                 <th><em>Submissions for ${selected_year}</em></th>
                 <th><em>Featured for ${selected_year}?</em></th>
-                <th><em>Accepted for ${selected_year}?</em></th>
+                <th><em>Status for ${selected_year}?</em></th>
             </c:if>
             <c:if test="${selected_branch == null}">
                 <th><em>Submissions</em></th>
                 <th><em>Featured?</em></th>
-                <th><em>Accepted?</em></th>
+                <th><em>Status?</em></th>
             </c:if>
             <th><em>Last submitted for?</em></th>
             <th><em>Operations</em></th>
@@ -76,7 +76,7 @@
                 <td>${speaker.speakerType}</td>
                 <td>${speaker.numberOfSubmissions}</td>
                 <td><input disabled type="checkbox" <c:if test="${speaker.featured}">checked</c:if>></td>
-                <td><input disabled type="checkbox" <c:if test="${speaker.accepted}">checked</c:if>></td>
+                <td>${speaker.status}</td>
                 <td>${speaker.branch}</td>
                 <td rowspan="2">
                     <a href="edit/${speaker.id}">Edit</a>&nbsp;|&nbsp;<a
@@ -97,7 +97,7 @@
                                         <th width="100%">Title</th>
                                         <th>Branch</th>
                                         <th>Featured</th>
-                                        <th>Accepted</th>
+                                        <th>Status</th>
                                         <th>View in</th>
                                     </tr>
                                     <c:forEach var="submission" items="${selected_branch != null ? speaker.branchSubmissions(selected_branch): speaker.allSubmissions}">
@@ -105,7 +105,7 @@
                                             <td>${submission.title}</td>
                                             <td>${submission.branch.year}</td>
                                             <td><input disabled type="checkbox" <c:if test="${submission.featured}">checked</c:if>></td>
-                                            <td><input disabled type="checkbox" <c:if test="${submission.status == SubmissionStatus.ACCEPTED}">checked</c:if>></td>
+                                            <td>${submission.status}</td>
                                             <td><a href="/admin/submission/view/id/${submission.id}">Submissions</a> </td>
                                         </tr>
                                     </c:forEach>
