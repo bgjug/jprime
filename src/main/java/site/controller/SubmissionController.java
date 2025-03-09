@@ -37,6 +37,7 @@ import site.facade.CSVService;
 import site.facade.MailService;
 import site.model.Branch;
 import site.model.Submission;
+import site.model.SubmissionByStatus;
 import site.model.SubmissionStatus;
 
 import static site.controller.ResourceAsString.resourceAsString;
@@ -51,7 +52,9 @@ public class SubmissionController extends AbstractCfpController {
     private static final Logger logger = LogManager.getLogger(SubmissionController.class);
 
     static final String ADMIN_SUBMISSION_VIEW_JSP = "admin/submission/view";
+
     static final String ADMIN_SUBMISSION_EDIT_JSP = "admin/submission/edit";
+
     public static final String REDIRECT = "redirect:";
 
     @Autowired
@@ -80,6 +83,15 @@ public class SubmissionController extends AbstractCfpController {
         return ADMIN_SUBMISSION_VIEW_JSP;
     }
 
+    @GetMapping("/view/status/{status}")
+    public String listSubmissionsByStatus(Model model, Pageable pageable,
+        @PathVariable SubmissionStatus status) {
+        Page<Submission> submissions =
+            adminFacade.findAllSubmissionsForBranchAndStatus(branchService.getCurrentBranch(), status,
+                pageable);
+        return fillTheModel(model, submissions, "/status/" + status.name());
+    }
+
     @GetMapping("/view/{year}")
     public String listSubmissions(Model model, Pageable pageable, @PathVariable String year) {
         Branch branch = branchService.findBranchByYear(Integer.parseInt(year));
@@ -100,7 +112,9 @@ public class SubmissionController extends AbstractCfpController {
 
     private String listSubmissionsForBranch(Model model, Pageable pageable, Branch branch) {
         Page<Submission> submissions = adminFacade.findAllSubmissionsForBranch(branch, pageable);
+        List<SubmissionByStatus> submissionsByStatus = adminFacade.countSubmissionsByStatusForBranch(branch);
         model.addAttribute("submissions", submissions.getContent());
+        model.addAttribute("submissionsByStatus", submissionsByStatus);
         model.addAttribute("number", submissions.getNumber());
         model.addAttribute("totalPages", submissions.getTotalPages());
         model.addAttribute("path", "");
@@ -132,6 +146,13 @@ public class SubmissionController extends AbstractCfpController {
     public String confirm(Model model, Pageable pageable, @PathVariable Long submissionId) {
         Submission submission = adminFacade.findOneSubmission(submissionId);
         adminFacade.confirmSubmission(submission);
+        return listSubmissions(model, pageable);
+    }
+
+    @GetMapping("/cancel/{submissionId}")
+    public String cancel(Model model, Pageable pageable, @PathVariable Long submissionId) {
+        Submission submission = adminFacade.findOneSubmission(submissionId);
+        adminFacade.cancelSubmission(submission);
         return listSubmissions(model, pageable);
     }
 
@@ -222,7 +243,10 @@ public class SubmissionController extends AbstractCfpController {
         @RequestParam(required = false) String sourcePage) {
         updateCfpModel(model, adminFacade.findOneSubmission(submissionId));
         model.addAttribute("sourcePage", sourcePage);
-        model.addAttribute("branches", branchService.allBranches().stream().sorted(Comparator.comparing(Branch::getYear).reversed()).toList());
+        model.addAttribute("branches", branchService.allBranches()
+            .stream()
+            .sorted(Comparator.comparing(Branch::getYear).reversed())
+            .toList());
         return ADMIN_SUBMISSION_EDIT_JSP;
     }
 

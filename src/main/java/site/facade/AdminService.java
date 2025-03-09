@@ -214,6 +214,10 @@ public class AdminService {
         return submissionRepository.findAllByBranch(branch, pageable);
     }
 
+    public Page<Submission> findAllSubmissionsForBranchAndStatus(Branch branch, SubmissionStatus status, Pageable pageable) {
+        return submissionRepository.findByBranchAndStatus(branch,status, pageable);
+    }
+
     public Submission findOneSubmission(Long submissionId) {
         return submissionRepository.findById(submissionId).get();
     }
@@ -224,6 +228,10 @@ public class AdminService {
 
     public void confirmSubmission(Submission submission) {
         changeStatusTo(submission, SubmissionStatus.CONFIRMED);
+    }
+
+    public void cancelSubmission(Submission submission) {
+        changeStatusTo(submission, SubmissionStatus.CANCELED);
     }
 
     public void rejectSubmission(Submission submission) {
@@ -442,5 +450,9 @@ public class AdminService {
         backgroundJobs.addAll(jobRepository.findPendingJobs());
         backgroundJobs.addAll(jobRepository.findCompletedJobs(LocalDateTime.now().minusHours(8)));
         return backgroundJobs;
+    }
+
+    public List<SubmissionByStatus> countSubmissionsByStatusForBranch(Branch branch) {
+        return submissionRepository.countSubmissionsByStatusForBranch(branch);
     }
 }
