@@ -36,6 +36,6 @@ public interface SpeakerRepository extends JpaRepository<Speaker, Long> {
     Page<Speaker> findAllByBranch(Pageable pageable, @Param("branch")Branch branch);
 
     @Query("SELECT distinct s FROM Speaker s left join s.submissions sub left join s.coSpeakerSubmissions as coSub " +
-        "WHERE (sub.branch = :branch and sub.status = 'CONFIRMED') or (coSub.branch = :branch and coSub.status = 'CONFIRMED')")
+        "WHERE s.id = :id and ((sub.branch = :branch and sub.status = 'CONFIRMED') or (coSub.branch = :branch and coSub.status = 'CONFIRMED'))")
     Optional<Speaker> findConfirmedSpeaker(Long id, @Param("branch")Branch branch);
 }

@@ -49,7 +49,8 @@ public class SpeakerController {
             return "404";
         }
 
-        if (userService.isSpeakerConfirmed(speaker)) {
+        speaker.updateFlags(branchService.getCurrentBranch());
+        if (userService.isSpeakerConfirmed(speaker) || speaker.isFeatured()) {
             model.addAttribute("speaker", speaker);
         }
 
