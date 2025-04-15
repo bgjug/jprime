@@ -100,7 +100,7 @@ class SessionControllerTest {
             new Speaker("Ivan St.", "Ivanov", "ivan.st.ivanov@example.com", "The Forge Guy", "@forge");
         forgeSubmission = submissionRepository.save(
             new Submission("Forge with me", "Forge is the best", SessionLevel.BEGINNER,
-                SessionType.CONFERENCE_SESSION, ivan, SubmissionStatus.ACCEPTED, true).branch(
+                SessionType.CONFERENCE_SESSION, ivan, SubmissionStatus.CONFIRMED, true).branch(
                 branchService.getCurrentBranch()));
         ivan.getSubmissions().add(forgeSubmission);
         speakerRepository.save(ivan);
@@ -109,7 +109,7 @@ class SessionControllerTest {
             new Speaker("Nayden", "Gochev", "nayden.gochev@example.com", "The Spring Guy", "@sprink");
         Submission bootSubmission = submissionRepository.save(
             new Submission("Spring Boot", "Bootiful or what?", SessionLevel.BEGINNER,
-                SessionType.CONFERENCE_SESSION, nayden, SubmissionStatus.ACCEPTED, true).branch(
+                SessionType.CONFERENCE_SESSION, nayden, SubmissionStatus.CONFIRMED, true).branch(
                 branchService.getCurrentBranch()));
         nayden.getSubmissions().add(bootSubmission);
         speakerRepository.save(nayden);
