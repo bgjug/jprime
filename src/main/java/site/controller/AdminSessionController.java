@@ -1,12 +1,12 @@
 package site.controller;
 
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import jakarta.transaction.Transactional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -54,7 +54,7 @@ public class AdminSessionController {
 
     @GetMapping("/edit/{itemId}")
     public String getEditVenueHallForm(@PathVariable Long itemId, Model model) {
-        return getModelAndView(model, adminFacade.findOneSession(itemId));
+        return getModelAndView(model, adminFacade.detachSession(adminFacade.findOneSession(itemId)));
     }
 
     @PostMapping("/add")
@@ -68,10 +68,17 @@ public class AdminSessionController {
         if (!"".equals(id)) {
             session = adminFacade.findOneSession(Long.parseLong(id));
         }
+        
         if (!isEmpty(title)) {
             session.setTitle(title);
             session.setSubmission(null);
-            session.setHall(null);
+            if (title.equals("TBA")) {
+                if (!isEmpty(hall)) {
+                    session.setHall(adminFacade.findOneVenueHall(Long.parseLong(hall)));
+                }
+            } else {
+                session.setHall(null);
+            }
         } else {
             session.setSubmission(adminFacade.findOneSubmission(Long.parseLong(submission)));
             session.setHall(adminFacade.findOneVenueHall(Long.parseLong(hall)));
@@ -95,7 +102,7 @@ public class AdminSessionController {
 
         // Reduce the list of submissions to only with those that are not scheduled yet
         List<Submission> acceptedSubmissions =
-            adminFacade.findAllAcceptedSubmissionsForBranch(branchService.getCurrentBranch());
+            adminFacade.findAllConfirmedSubmissionsForBranch(branchService.getCurrentBranch());
         List<Submission> scheduledSubmissions =
             adminFacade.findAllSessions().stream().map(Session::getSubmission).toList();
         acceptedSubmissions = acceptedSubmissions.stream()
@@ -105,6 +112,17 @@ public class AdminSessionController {
         if (session.getSubmission() != null) {
             // For edit - we need to have current submission to
             acceptedSubmissions.add(session.getSubmission());
+        } else {
+            if (!StringUtils.isEmpty(session.getTitle())) {
+                Submission submission =
+                    new Submission(session.getTitle(), null, null, null, null, null, false);
+                switch (session.getTitle()) {
+                    case "Break" : submission.setId(-1L); break;
+                    case "TBA" : submission.setId(-2L); break;
+                    default: submission = null;
+                }
+                session.setSubmission(submission);
+            }
         }
 
         model.addAttribute("submissions", acceptedSubmissions);

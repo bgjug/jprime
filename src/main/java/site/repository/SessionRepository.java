@@ -23,7 +23,7 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
         "from Session s \n" +
         "left join Submission sbm on (s.submission = sbm.id)\n" +
         "left join VenueHall vh on (s.hall = vh.id)\n" +
-        "where (vh.name=:hall and sbm.branch=:branch) or s.hall is null\n" +
+        "where (vh.name=:hall and s.title is not null) or (vh.name = :hall and sbm.branch=:branch) or s.hall is null\n" +
         "order by s.start_time asc"
     )
     List<Session> findSessionsForBranchAndHallOrHallIsNull(@Param("hall") String hall,
