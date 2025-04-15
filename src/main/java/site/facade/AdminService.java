@@ -247,8 +247,8 @@ public class AdminService {
         submissionRepository.save(submission);
     }
 
-    public List<Submission> findAllAcceptedSubmissionsForBranch(Branch branch) {
-        return submissionRepository.findByBranchAndStatus(branch, SubmissionStatus.ACCEPTED);
+    public List<Submission> findAllConfirmedSubmissionsForBranch(Branch branch) {
+        return submissionRepository.findByBranchAndStatus(branch, SubmissionStatus.CONFIRMED);
     }
 
     public List<Submission> findAllSubmittedSubmissionsForCurrentBranch() {
@@ -454,5 +454,10 @@ public class AdminService {
 
     public List<SubmissionByStatus> countSubmissionsByStatusForBranch(Branch branch) {
         return submissionRepository.countSubmissionsByStatusForBranch(branch);
+    }
+
+    public Session detachSession(Session session) {
+        entityManager.detach(session);
+        return session;
     }
 }

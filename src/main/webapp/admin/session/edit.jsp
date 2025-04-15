@@ -36,6 +36,7 @@
         <dd>
             <form:select path="submission">
                 <form:option value="-1" label="Break"/>
+                <form:option value="-2" label="TBA"/>
                 <form:options items="${submissions}" itemValue="id" itemLabel="title"/>
             </form:select>
 
@@ -103,13 +104,18 @@ $(function() {
         var selectedValue = $("#submission").val();
         var titleField = $('#titleRow');
         var hallField = $('#hallRow');
-        if (selectedValue != "-1") {
+        if (selectedValue === "-1") {
+            titleField.show();
+            $('#title').val("Break");
+            hallField.hide();
+        } else if (selectedValue === "-2") {
+            titleField.show();
+            $('#title').val("TBA");
+            hallField.show();
+        } else {
             titleField.hide();
             $('#title').val("");
             hallField.show();
-        } else {
-            titleField.show();
-            hallField.hide();
         }
     };
 

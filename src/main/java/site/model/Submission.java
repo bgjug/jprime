@@ -151,7 +151,11 @@ public class Submission extends AbstractEntity {
         if (!Objects.equals(speaker, submission.speaker)) {
             return false;
         }
-        return Objects.equals(title, submission.title);
+        if (!Objects.equals(title, submission.title)) {
+            return false;
+        }
+
+        return Objects.equals(getId(), submission.getId());
     }
 
     @Override
