@@ -68,7 +68,7 @@ public class AdminSessionController {
         if (!"".equals(id)) {
             session = adminFacade.findOneSession(Long.parseLong(id));
         }
-        
+
         if (!isEmpty(title)) {
             session.setTitle(title);
             session.setSubmission(null);
@@ -101,17 +101,17 @@ public class AdminSessionController {
         model.addAttribute("session", session);
 
         // Reduce the list of submissions to only with those that are not scheduled yet
-        List<Submission> acceptedSubmissions =
+        List<Submission> confirmedSubmissions =
             adminFacade.findAllConfirmedSubmissionsForBranch(branchService.getCurrentBranch());
         List<Submission> scheduledSubmissions =
             adminFacade.findAllSessions().stream().map(Session::getSubmission).toList();
-        acceptedSubmissions = acceptedSubmissions.stream()
+        confirmedSubmissions = confirmedSubmissions.stream()
                                                  .filter(
                                                      submission -> !scheduledSubmissions.contains(submission))
                                                  .collect(Collectors.toList());
         if (session.getSubmission() != null) {
             // For edit - we need to have current submission to
-            acceptedSubmissions.add(session.getSubmission());
+            confirmedSubmissions.add(session.getSubmission());
         } else {
             if (!StringUtils.isEmpty(session.getTitle())) {
                 Submission submission =
@@ -125,7 +125,7 @@ public class AdminSessionController {
             }
         }
 
-        model.addAttribute("submissions", acceptedSubmissions);
+        model.addAttribute("submissions", confirmedSubmissions);
         model.addAttribute("halls", adminFacade.findAllVenueHalls());
 
         return SESSIONS_EDIT_JSP;
