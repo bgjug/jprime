@@ -73,7 +73,7 @@
                     <label for="status">status</label>
                 </dt>
                 <dd>
-                    <form:input path="status" disabled="true"/>
+                    <form:input path="status" readonly="true"/>
                 </dd>
             </dl>
             <dl>
