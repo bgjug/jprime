@@ -111,6 +111,8 @@ public class AdminVisitorController {
                                                        LAST_NAME, EMAIL_ADDRESS
     };
 
+    private static final String REDIRECT_ADMIN_VISITOR_VIEW = "redirect:/admin/visitor/view";
+
     private final Logger log = LogManager.getLogger(this.getClass());
 
     @Autowired
@@ -163,7 +165,7 @@ public class AdminVisitorController {
         }
         //may be it's better to use a set of registrants for sponsors?
 
-        String redirectUrl = "redirect:/admin/visitor/view";
+        String redirectUrl = REDIRECT_ADMIN_VISITOR_VIEW;
 
         Registrant registrant;
         if (visitor.getRegistrant().getId() == null) {
@@ -336,7 +338,18 @@ public class AdminVisitorController {
     @GetMapping("/remove/{itemId}")
     public String remove(@PathVariable Long itemId) {
         adminFacade.deleteVisitor(itemId);
-        return "redirect:/admin/visitor/view";
+        return REDIRECT_ADMIN_VISITOR_VIEW;
+    }
+
+    @GetMapping("/ticket/{itemId}")
+    public String sendTicket(@PathVariable Long itemId) {
+        Visitor oneVisitor = adminFacade.findOneVisitor(itemId);
+        if (oneVisitor.getStatus() == VisitorStatus.REQUESTING) {
+            return REDIRECT_ADMIN_VISITOR_VIEW;
+        }
+
+        ticketService.sendTicketsForVisitor(oneVisitor);
+        return REDIRECT_ADMIN_VISITOR_VIEW;
     }
 
     private CellProcessor[] getProcessors() {

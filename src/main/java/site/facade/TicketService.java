@@ -79,6 +79,10 @@ public class TicketService {
         }
     }
 
+    public void sendTicketsForVisitor(Visitor visitor) {
+        generateAndSendTicketEmail(visitor.anyEmail(), Collections.singletonList(visitor));
+    }
+
     private String emailErrorLog(Visitor visitor) {
         return visitor.anyEmail();
     }

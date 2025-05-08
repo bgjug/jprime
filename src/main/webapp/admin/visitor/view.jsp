@@ -87,7 +87,7 @@
 					<td>${not empty visitor.registrant and not empty visitor.registrant.realInvoiceNumber ? visitor.registrant.realInvoiceNumber:''}</td>
 					<td>${visitor.ticket}</td>
 					<td>
-						<a href="/admin/visitor/edit/${visitor.id}">Edit</a>&nbsp;|&nbsp;<a href="/admin/visitor/remove/${visitor.id}">Remove</a>
+						<a href="/admin/visitor/edit/${visitor.id}">Edit</a>&nbsp;|&nbsp;<a href="/admin/visitor/remove/${visitor.id}">Remove</a>&nbsp;|&nbsp;<a href="/admin/visitor/ticket/${visitor.id}">Ticket</a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -103,6 +103,9 @@
 		var initTable=function(){
 			$('#visitors').DataTable( {
 				"aaSorting": [],
+				"columnDefs": [
+					{ "orderable": false, "targets": [7] }
+				],
 				initComplete: function () {
 					this.api().columns().every( function () {
 						var column = this;
