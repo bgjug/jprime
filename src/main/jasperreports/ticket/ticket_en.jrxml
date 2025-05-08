@@ -7,13 +7,13 @@
 		<defaultValueExpression><![CDATA["JPrime Events <conference@jprime.io>"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="event" class="java.lang.String">
-		<defaultValueExpression><![CDATA["JPrime 2024"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["JPrime 2025"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="location" class="java.lang.String">
 		<defaultValueExpression><![CDATA["\"John Atanasoff\" Innovation forum in Sofia Tech Park"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="dateTime" class="java.lang.String">
-		<defaultValueExpression><![CDATA["28-29 of May 2024"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["14-15 of May 2025"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[]]>
@@ -209,7 +209,7 @@
 				<textElement markup="styled">
 					<font fontName="SansSerif" size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA["We will provide you with TWO badges for the two days. You have to wear the Badge all the time while you are at the <style isBold=\"true\">JPrime 2024</style> Conference venue! You will not be allowed to enter the <style isBold=\"true\">JPrime 2024</style> conference rooms without a Badge."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["We will provide you with TWO badges for the two days. You have to wear the Badge all the time while you are at the <style isBold=\"true\">JPrime 2025</style> Conference venue! You will not be allowed to enter the <style isBold=\"true\">JPrime 2025</style> conference rooms without a Badge."]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

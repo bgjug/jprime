@@ -80,7 +80,7 @@ public class TicketExporter {
             throw new RuntimeException(e);
         }
 
-        InputStream logoStream = getClass().getResourceAsStream("/ticket/jprime_ticket_logo.svg");
+        InputStream logoStream = getClass().getResourceAsStream("/ticket/jprime_ticket_logo_2025.svg");
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("logoStream", logoStream);
