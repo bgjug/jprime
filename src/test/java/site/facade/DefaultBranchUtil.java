@@ -18,6 +18,8 @@ public class DefaultBranchUtil {
             return;
         }
 
+        branchService.createBranch(2016, LocalDateTime.of(2016, Month.MAY, 28, 0, 0, 0, 0));
+
         LocalDateTime startDate = LocalDateTime.of(2024, Month.MAY, 28, 0, 0, 0, 0);
         LocalDateTime cfpOpenDate = LocalDateTime.of(2023, Month.NOVEMBER, 1, 0, 0, 0, 0);
         LocalDateTime cfpCloseDate = LocalDateTime.of(2024, Month.FEBRUARY, 15, 23, 59, 59, 999);
