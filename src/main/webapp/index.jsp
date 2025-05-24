@@ -47,14 +47,16 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
-<%--            <div class="carousel-caption d-md-block">--%>
-<%--                <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>--%>
-<%--                <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s">The conference will be held--%>
-<%--                    <br/>on ${conference_dates} in Sofia Tech Park</p>--%>
+            <img class="d-block w-100" src="images/slider/index2025_1.jpg" alt="First slide">
+            <div class="carousel-caption d-md-block">
+                <c:if test="${jprime_year != null}">
+                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>
+                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s">The conference will be held
+                        <br/>on ${conference_dates} in Sofia Tech Park</p>
+                </c:if>
 <%--                <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
-<%--                <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->--%>
-<%--            </div>--%>
+                <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->
+            </div>
         </div>
 <%--        <div class="carousel-item">--%>
 <%--            <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">--%>
@@ -75,8 +77,24 @@
         <div class="carousel-item">
             <img class="d-block w-100" src="images/slider/index3.jpg" alt="Third slide">
             <div class="carousel-caption d-md-block">
-                <h1 class="wow fadeInUp heading" data-wow-delay=".6s">Book Your Seat Now!</h1>
-                <a href="#tickets" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">BUY a ticket</a>
+                <c:if test="${!ticket_sales_open}">
+                    <h1 class="wow fadeInUp heading" data-wow-delay=".6s">Book Your Seat Now!</h1>
+                    <a href="#tickets" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">BUY a ticket</a>
+                </c:if>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="images/slider/photo_gallery.jpg" alt="Photo gallery">
+            <div class="carousel-caption d-md-block">
+                <h1 class="wow fadeInUp heading" data-wow-delay=".6s">Check the photos from previous editions!</h1>
+                <a href="https://photos.jprime.io" target="_blank" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">Photo Gallery</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="images/slider/bgjug_channel.jpg" alt="Videos">
+            <div class="carousel-caption d-md-block">
+                <h1 class="wow fadeInUp heading" data-wow-delay=".6s">JPrime Videos!</h1>
+                <a href="https://www.youtube.com/@bgjug" target="_blank" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">Open</a>
             </div>
         </div>
     </div>
@@ -367,7 +385,7 @@
                 <div class="counter">
                     <div class="icon"><i class="icon-bulb"></i></div>
                     <p>Participants</p>
-                    <div class="counterUp">950</div>
+                    <div class="counterUp">1200</div>
                 </div>
             </div>
             <!-- Counter Item -->
@@ -375,7 +393,7 @@
                 <div class="counter">
                     <div class="icon"><i class="icon-briefcase"></i></div>
                     <p>Sponsors</p>
-                    <div class="counterUp">29</div>
+                    <div class="counterUp">28</div>
                 </div>
             </div>
             <!-- Counter Item -->

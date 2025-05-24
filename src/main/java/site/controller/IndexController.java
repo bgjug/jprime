@@ -100,12 +100,16 @@ public class IndexController {
 
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(currentBranch.getCfpCloseDate()));
         model.addAttribute("cfp_closed", currentBranch.getCfpCloseDate().isBefore(LocalDateTime.now()));
+        model.addAttribute("ticket_sales_open", currentBranch.getCfpOpenDate().isBefore(LocalDateTime.now()));
 
-        // 30th and 31st of May 2023
-        LocalDateTime startDate = currentBranch.getStartDate();
+        Branch nextBranch = branchService.getNextBranch();
+        LocalDateTime startDate = nextBranch != null ? nextBranch.getStartDate() : currentBranch.getStartDate();
         model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));
-        model.addAttribute("jprime_year", currentBranch.getStartDate().getYear());
+        Integer currentBranchYear =
+            currentBranch.getStartDate().isAfter(LocalDateTime.now()) ? currentBranch.getYear() : null;
+        Integer year = nextBranch != null ? Integer.valueOf(nextBranch.getYear()) : currentBranchYear;
+        model.addAttribute("jprime_year", year);
 
         return PAGE_INDEX;
     }
