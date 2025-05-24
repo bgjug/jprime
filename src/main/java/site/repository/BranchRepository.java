@@ -8,7 +8,7 @@ import site.model.Branch;
 
 public interface BranchRepository extends JpaRepository<Branch, String> {
 
-    Branch findByYear(int year);
+    Optional<Branch> findByYear(int year);
 
     Optional<Branch> findByCurrentBranch(boolean currentBranch);
 }

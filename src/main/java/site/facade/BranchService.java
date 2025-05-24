@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import site.config.Globals;
 import site.model.Branch;
 import site.model.BranchEnum;
 import site.model.SponsorPackage;
@@ -81,7 +81,12 @@ public class BranchService {
     }
 
     private boolean preloadBranches() {
-        if (branchRepository.findByYear(2015).getStartDate() != null) {
+        Optional<Branch> branch2015 = branchRepository.findByYear(2015);
+        if (branch2015.isEmpty()) {
+            return false;
+        }
+
+        if (branch2015.get().getStartDate() != null) {
             return false;
         }
 
@@ -96,7 +101,8 @@ public class BranchService {
             }
         });
 
-        setAsCurrent(branchRepository.findByYear(Globals.CURRENT_BRANCH.getYear()).getLabel());
+        setAsCurrent(branchRepository.findByYear(branchRepository.findAll().stream().map(Branch::getYear).reduce(Integer::max).orElseThrow(
+            IllegalStateException::new)).orElseThrow(IllegalArgumentException::new).getLabel());
         return true;
     }
 
@@ -167,7 +173,7 @@ public class BranchService {
     }
 
     public Branch findBranchByYear(int year) {
-        return branchRepository.findByYear(year);
+        return branchRepository.findByYear(year).orElseThrow( ()-> new IllegalArgumentException("Invalid branch year: " + year));
     }
 
     public Page<Branch> allBranches(Pageable pageable) {
@@ -219,26 +225,28 @@ public class BranchService {
 
     @CacheEvict(value = "currentBranch", allEntries = true)
     public void deleteBranch(int year) {
-        Branch branch = branchRepository.findByYear(year);
-        if (branch == null) {
-            throw new IllegalArgumentException("Invalid branch year: " + year);
-        }
+        Branch branch = branchRepository.findByYear(year).orElseThrow( ()-> new IllegalArgumentException("Invalid branch year: " + year));
         ticketPriceRepository.deleteByBranch(branch);
         branchRepository.delete(branch);
     }
 
     @CacheEvict(value = "currentBranch", allEntries = true)
     public Branch createBranch(Branch branch, List<TicketPrice> ticketPrices) {
-        Branch existing = branchRepository.findByYear(branch.getYear());
-        if (existing != null) {
-            branch.setCurrentBranch(existing.isCurrentBranch());
-        }
-        branch = branchRepository.save(branch);
-        updateTicketPrices(ticketPrices, branch);
-        return branch;
+        branchRepository.findByYear(branch.getYear()).ifPresent(existingBranch -> {
+            branch.setCurrentBranch(existingBranch.isCurrentBranch());
+        });
+
+        Branch savedBranch = branchRepository.save(branch);
+        updateTicketPrices(ticketPrices, savedBranch);
+        return savedBranch;
     }
 
     public Branch findById(String branchLabel) {
         return branchRepository.findById(branchLabel).orElse(null);
+    }
+
+    public Branch getNextBranch() {
+        Branch current = findCurrentBranch();
+        return branchRepository.findByYear(current.getYear() + 1).orElse(null);
     }
 }
