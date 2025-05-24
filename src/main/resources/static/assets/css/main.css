@@ -47,6 +47,15 @@ p.carousel-jprime {
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
+span.carousel-jprime {
+  font-size: 30px;
+  color: #FFC107;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  line-height: initial;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
 ul, ol {
   list-style: outside none none;
   margin: 0;
