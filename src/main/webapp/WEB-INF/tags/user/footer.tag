@@ -56,7 +56,7 @@
                                     class="icon-social-youtube"></i></a>
                         </li>
                     </ul>
-                    <p>Copyright jPrime 2015-2022</p>
+                    <p>Copyright jPrime 2015-2025</p>
                     <!-- <ul class="nav nav-inline justify-content-center ">
                       <li class="nav-item">
                         <a class="nav-link active" href="#">About Prime</a>
@@ -97,10 +97,9 @@
     </div>
 </div>
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!-- jQuery first, then Bootstrap 5 JS (includes Popper) -->
 <script src="assets/js/jquery-min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
 
 <script src="assets/js/jquery.countdown.min.js"></script>
 <script src="assets/js/jquery.counterup.min.js"></script>

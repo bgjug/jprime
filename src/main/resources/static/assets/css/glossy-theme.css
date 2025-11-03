@@ -1,0 +1,411 @@
+/* Glossy Theme - Inspired by conf.ai with glassmorphism effects */
+
+/* Root Variables for Glossy Theme */
+:root {
+    --glossy-bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    --glossy-bg-secondary: linear-gradient(135deg, #2d1b69 0%, #1e3a8a 100%);
+    --glossy-accent-purple: #4e00ff;
+    --glossy-accent-blue: #3b82f6;
+    --glossy-accent-pink: #ec4899;
+    --glossy-accent-orange: #f97316;
+    --glossy-glass-bg: rgba(255, 255, 255, 0.05);
+    --glossy-glass-border: rgba(255, 255, 255, 0.1);
+    --glossy-text-primary: #ffffff;
+    --glossy-text-secondary: rgba(255, 255, 255, 0.7);
+}
+
+/* Global Body Styling */
+body {
+    background: var(--glossy-bg-primary);
+    background-attachment: fixed;
+    color: var(--glossy-text-primary);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Glassmorphism Card Effect */
+.card, .team-item, .price-block-wrapper, .blog-item {
+    background: var(--glossy-glass-bg) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glossy-glass-border) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover, .team-item:hover, .price-block-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 48px 0 rgba(139, 92, 246, 0.3) !important;
+    border-color: rgba(139, 92, 246, 0.3) !important;
+}
+
+/* Hero/Carousel Section with Gradient Overlay */
+#main-slide, #hero-area {
+    background: var(--glossy-bg-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+#main-slide::before, #hero-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(139, 92, 246, 0.2) 0%, 
+        rgba(59, 130, 246, 0.2) 50%, 
+        rgba(236, 72, 153, 0.2) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+#main-slide .carousel-inner, #hero-area .contents {
+    position: relative;
+    z-index: 2;
+}
+
+/* Glossy Buttons */
+.btn-common, .btn-primary {
+    background: linear-gradient(135deg, var(--glossy-accent-purple) 0%, var(--glossy-accent-blue) 100%) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 14px 32px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px 0 rgba(139, 92, 246, 0.4) !important;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-common::before, .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-common:hover::before, .btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-common:hover, .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px 0 rgba(139, 92, 246, 0.6) !important;
+}
+
+.btn-border {
+    background: transparent !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px !important;
+    padding: 12px 30px !important;
+    color: var(--glossy-text-primary) !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-border:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: var(--glossy-accent-purple) !important;
+    box-shadow: 0 4px 20px 0 rgba(139, 92, 246, 0.4) !important;
+}
+
+/* Section Backgrounds with Gradients */
+section {
+    position: relative;
+}
+
+#about, #team, #pricing, #sponsors {
+    background: transparent;
+}
+
+/* Alternate section backgrounds for depth */
+section:nth-child(even) {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Glossy Navigation Bar */
+.navbar, .navbar-default {
+    background: var(--glossy-glass-bg) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--glossy-glass-border) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+.navbar-nav .nav-link {
+    color: var(--glossy-text-primary) !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--glossy-accent-purple) !important;
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+/* Typography Enhancements */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--glossy-text-primary);
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.section-title {
+    background: linear-gradient(135deg, var(--glossy-accent-purple), var(--glossy-accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+}
+
+/* Pricing Cards with Glossy Effect */
+.price-block-wrapper {
+    background: var(--glossy-glass-bg) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 20px !important;
+    overflow: hidden;
+}
+
+.pricing-list {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Team/Speaker Cards */
+.team-item {
+    overflow: hidden;
+}
+
+.team-item img {
+    transition: transform 0.3s ease;
+}
+
+.team-item:hover img {
+    transform: scale(1.05);
+}
+
+.team-item .info-text {
+    background: var(--glossy-glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Sponsor Section */
+#sponsors {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.sponsor-item {
+    background: var(--glossy-glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glossy-glass-border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.sponsor-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+}
+
+/* Footer with Glassmorphism */
+footer, #footer {
+    background: var(--glossy-glass-bg) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-top: 1px solid var(--glossy-glass-border);
+}
+
+/* Carousel Indicators */
+.carousel-indicators li {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+}
+
+.carousel-indicators .active {
+    background: var(--glossy-accent-purple);
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.8);
+}
+
+/* Input Fields with Glossy Effect */
+input, textarea, select {
+    background: var(--glossy-glass-bg) !important;
+    border: 1px solid var(--glossy-glass-border) !important;
+    border-radius: 8px !important;
+    color: var(--glossy-text-primary) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--glossy-accent-purple) !important;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3) !important;
+    outline: none;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Animated Gradient Background for Hero */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #1e3a8a, #2d1b69);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+/* Text Color Overrides */
+p, span, li, a {
+    color: var(--glossy-text-secondary);
+}
+
+a:hover {
+    color: var(--glossy-accent-purple);
+}
+
+/* Overlay Effects */
+.overlay {
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(5px);
+}
+
+/* Fix navbar on scroll - keep it glossy dark with WHITE text, not white background with black text */
+.navbar.top-nav-collapse,
+.navbar-default.top-nav-collapse {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* Keep navbar text WHITE when scrolled, not black */
+.top-nav-collapse .navbar-nav .nav-link {
+    color: var(--glossy-text-primary) !important;
+}
+
+.top-nav-collapse .navbar-nav .nav-link:hover {
+    color: var(--glossy-accent-purple) !important;
+}
+
+.top-nav-collapse .navbar-nav li.active a.nav-link {
+    color: var(--glossy-accent-purple) !important;
+}
+
+/* Bootstrap 5 Carousel Fixes - Override main.css hiding controls */
+/* Show carousel controls and indicators */
+#main-slide .carousel-control-prev,
+#main-slide .carousel-control-next {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 10;
+}
+
+#main-slide:hover .carousel-control-prev,
+#main-slide:hover .carousel-control-next {
+    opacity: 1;
+}
+
+#main-slide .carousel-control-prev {
+    left: 20px;
+}
+
+#main-slide .carousel-control-next {
+    right: 20px;
+}
+
+/* Bootstrap 5 carousel control icons with grey glossy effect */
+#main-slide .carousel-control-prev-icon,
+#main-slide .carousel-control-next-icon {
+    display: inline-block !important;
+    width: 45px;
+    height: 45px;
+    background-color: rgba(128, 128, 128, 0.6) !important;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+#main-slide .carousel-control-prev-icon:hover,
+#main-slide .carousel-control-next-icon:hover {
+    background-color: rgba(180, 180, 180, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+/* Bootstrap 5 Carousel Indicators - buttons instead of li */
+#main-slide .carousel-indicators {
+    display: flex !important;
+    justify-content: center;
+    bottom: 20px !important;
+    z-index: 10;
+    margin: 0;
+}
+
+#main-slide .carousel-indicators button {
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    background-color: rgba(128, 128, 128, 0.5) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    margin: 0 6px !important;
+    padding: 0 !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+#main-slide .carousel-indicators button.active {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    transform: scale(1.3);
+}
+
+#main-slide .carousel-indicators button:hover {
+    background-color: rgba(200, 200, 200, 0.8) !important;
+    transform: scale(1.2);
+}
+
+/* Carousel slide transition - enable sliding animation */
+#main-slide .carousel-item {
+    transition: transform 0.6s ease-in-out !important;
+}
+
+/* Remove old carousel-control class that was hiding controls */
+#main-slide .carousel-control {
+    display: block !important;
+}

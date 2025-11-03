@@ -39,12 +39,12 @@
 <user:header/>
 
 <!-- Main Carousel Section Start -->
-<div id="main-slide" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#main-slide" data-slide-to="0" class="active"></li>
-        <li data-target="#main-slide" data-slide-to="1"></li>
-        <li data-target="#main-slide" data-slide-to="2"></li>
-    </ol>
+<div id="main-slide" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#main-slide" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#main-slide" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#main-slide" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img class="d-block w-100" src="images/slider/index2025_1.jpg" alt="First slide">
@@ -85,14 +85,14 @@
             </div>
         </div>
     </div>
-    <a class="carousel-control-prev" href="#main-slide" role="button" data-slide="prev">
-        <span class="carousel-control" aria-hidden="true"><i class="icon-arrow-left"></i></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#main-slide" role="button" data-slide="next">
-        <span class="carousel-control" aria-hidden="true"><i class="icon-arrow-right"></i></span>
-        <span class="sr-only">Next</span>
-    </a>
+    <button class="carousel-control-prev" type="button" data-bs-target="#main-slide" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#main-slide" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
 <!-- Main Carousel Section End -->
 
@@ -930,7 +930,7 @@
                     <form class="text-center form-inline"
                           action="https://jprime.us13.list-manage.com/subscribe/post?u=968bc6e2a2348118b259c0df2&id=c9a8e30e18"
                           method="POST" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
-                          class="validate" target="_blank" novalidate>
+                          class="validate" target="_blank" novalidate style="display: flex;">
                         <input class="mb-20 form-control" style="text-transform: none" name="EMAIL"
                                placeholder="Your Email Here" required type="email">
                         <div class="icon-s"><i class="icon-envelope"></i></div>
@@ -1105,6 +1105,22 @@
 <!-- Sponsors Pricing Area End -->
 
 <user:footer/>
+
+<script>
+// Initialize Bootstrap 5 carousel with auto-sliding
+document.addEventListener('DOMContentLoaded', function() {
+    var carouselElement = document.querySelector('#main-slide');
+    if (carouselElement && typeof bootstrap !== 'undefined') {
+        var carousel = new bootstrap.Carousel(carouselElement, {
+            interval: 5000,
+            ride: 'carousel',
+            wrap: true,
+            keyboard: true,
+            pause: 'hover'
+        });
+    }
+});
+</script>
 
 </body>
 

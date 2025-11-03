@@ -2,8 +2,8 @@
 
     <base href="${pageContext.request.contextPath}/"/>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" >
+    <!-- Bootstrap CSS - Quartz Theme (Glossy) -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-quartz.css" >
     <!-- Fonts -->
     <link rel="stylesheet" type="text/css" href="assets/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/fontawesome/css/brands.min.css">
@@ -25,5 +25,6 @@
     <!-- Responsive Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
 
-    <link rel="stylesheet" type="text/css" href="assets/css/colors/yellow.css" media="screen" />
+    <!-- Glossy Theme - Custom glassmorphism effects -->
+    <link rel="stylesheet" type="text/css" href="assets/css/glossy-theme.css" media="screen" />
 

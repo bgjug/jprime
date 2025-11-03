@@ -15,7 +15,7 @@
                     <span class="icon-menu"></span>
                     <span class="icon-menu"></span>
                 </button>
-                <a href="/" class="navbar-brand"><img src="images/jprime-small.png" alt=""></a>
+                <a href="/" class="navbar-brand"><img src="images/jprime-small.png" alt="" style="filter: saturate(1.8) contrast(1.08) brightness(1.03) drop-shadow(0 0 0 rgba(0, 0, 0, 0))"></a>
             </div>
             <div class="collapse navbar-collapse" id="main-navbar">
                 <ul class="navbar-nav mr-auto w-100 justify-content-end">
