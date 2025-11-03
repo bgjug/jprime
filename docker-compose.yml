@@ -1,17 +1,33 @@
 services:
 
   db:
-    image: mariadb
+    image: mysql:8.0
+    container_name: jprime-mysql
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: jprime
+      MYSQL_ROOT_HOST: '%'
     ports:
       - 3306:3306
     volumes:
-      - ./mysql:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-padmin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 8180:8080
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
+    driver: local
