@@ -84,20 +84,6 @@
                 </c:if>
             </div>
         </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" src="images/slider/photo_gallery.jpg" alt="Photo gallery">
-            <div class="carousel-caption d-md-block">
-                <h1 class="wow fadeInUp heading" data-wow-delay=".6s">Check the photos from previous editions!</h1>
-                <a href="https://photos.jprime.io" target="_blank" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">Photo Gallery</a>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" src="images/slider/bgjug_channel.jpg" alt="Videos">
-            <div class="carousel-caption d-md-block">
-                <h1 class="wow fadeInUp heading" data-wow-delay=".6s">JPrime Videos!</h1>
-                <a href="https://www.youtube.com/@bgjug" target="_blank" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">Open</a>
-            </div>
-        </div>
     </div>
     <a class="carousel-control-prev" href="#main-slide" role="button" data-slide="prev">
         <span class="carousel-control" aria-hidden="true"><i class="icon-arrow-left"></i></span>
