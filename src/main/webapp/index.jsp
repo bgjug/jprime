@@ -148,7 +148,7 @@
 <!-- About Section End -->
 
 <!-- Coorganizers Section Start -->
-<section id="sponsors" class="section-padding">
+<div id="coorganizers" class="section-padding">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -499,7 +499,7 @@
 <!-- Ticket Pricing Area End -->
 
 <!-- Sponsors Section Start -->
-<section id="sponsors" class="section-padding">
+<div id="sponsors" class="section-padding">
     <div class="container">
         <c:if test="${platinumSponsors.size() > 0}">
             <div class="row">
@@ -594,7 +594,7 @@
 
 <!-- Official Supporters Partners Section Start -->
 <c:if test="${fn:length(officialSupporterPartnersChunks) gt 0}">
-    <section id="sponsors" class="section-padding">
+    <div id="sponsors" class="section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -621,7 +621,7 @@
 
 <!-- Media Partners Section Start -->
 <c:if test="${fn:length(mediaPartnersChunks) gt 0}">
-    <section id="sponsors" class="section-padding">
+    <div id="sponsors" class="section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -648,7 +648,7 @@
 
 <!-- Event Partners Section Start -->
 <c:if test="${fn:length(eventPartnerChunks) gt 0}">
-    <section id="sponsors" class="section-padding">
+    <div id="sponsors" class="section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -691,8 +691,8 @@
 <!-- remove flickr since it creates 15 mbs :D:D maybe will move it to another page but SHOULD NOT BE ON INDEX -->
 --%>
 
-<section id="sponsors" class="section-padding">
-    <div class="container" style="text-align: center">
+<%-- <div id="sponsors" class="section-padding">--%>
+<%--     <div class="container" style="text-align: center">--%>
 <%--        <div class="row">--%>
 <%--            <div class="col-12">--%>
 <%--                <h1 class="section-title">jPrime ${jprime_year} recordings</h1>--%>
@@ -758,8 +758,8 @@
 <%--                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>--%>
 <%--            </div>--%>
 <%--        </div>--%>
-    </div>
-</section>
+<%--    </div>--%>
+<%--</section>--%>
 
 <%--    <!-- Gallary Section Start -->--%>
 <%--    <section id="gallery-section" class="section-padding">--%>
