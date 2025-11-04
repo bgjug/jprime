@@ -50,7 +50,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         User user = userRepository.findUserByEmail(email);
         if (user == null) {
             user = speakerRepository.findByEmail(email);
-            if (StringUtils.isEmpty(user.getPassword())) {
+            if (user != null && StringUtils.isEmpty(user.getPassword())) {
                 user = null;
             }
         }

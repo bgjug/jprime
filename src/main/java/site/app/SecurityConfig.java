@@ -44,7 +44,8 @@ public class SecurityConfig {
                 requests.requestMatchers(HttpMethod.GET, "/halls/**", "/sessions/**", "/submissions/**")
                     .permitAll();
 
-                requests.requestMatchers("/assets/**", "/css/**", "/fonts/**", "/images/**", "/js/**",
+                requests.requestMatchers("/login", "/perform-login", "/signup", "/resetPassword", "/createNewPassword",
+                    "/successfulPasswordChange", "/assets/**", "/css/**", "/fonts/**", "/images/**", "/js/**",
                     "/nav/**", "/image/**", "/tickets/**", "/speaker/**", "/agenda/**", "/pwa/**", "/qr/**",
                     "/*").permitAll();
 
