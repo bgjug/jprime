@@ -1703,10 +1703,12 @@ blockquote {
   margin-bottom: 15px; }
 
 .counter-section {
-  background: url(../img/background/bg-1.jpg);
-  background-attachment: fixed;
+  background: url(../img/background/bg-1.jpg) !important;
+  background-attachment: fixed !important;
   overflow: hidden;
-  position: relative; }
+  position: relative;
+  background-repeat: no-repeat !important;
+   }
   .counter-section:before {
     content: '';
     position: absolute;
@@ -1714,6 +1716,8 @@ blockquote {
     bottom: 0;
     width: 100%;
     height: 100%; }
+  .counter-section:after{
+  }
   .counter-section .counter {
     padding: 30px 0; }
     .counter-section .counter .icon {
@@ -1817,9 +1821,8 @@ blockquote {
       margin-top: 15px;
       text-transform: uppercase; }
   #pricing .price-block-wrapper .pricing-list {
-    float: left;
     padding: 30px;
-    width: 354px; }
+    }
     #pricing .price-block-wrapper .pricing-list h4 {
       font-size: 16px;
       text-transform: uppercase;

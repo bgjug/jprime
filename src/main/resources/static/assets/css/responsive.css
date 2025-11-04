@@ -14,8 +14,6 @@
     width: 174px; }
   .schedule .schedule-tab-title .item-text {
     padding-left: 57px; }
-  #pricing .price-block-wrapper .prici-left {
-    width: 150px; }
   #pricing .price-block-wrapper .pricing-list {
     width: 290px; } }
 
@@ -85,9 +83,7 @@
     font-size: 12px; }
   #pricing .price-block-wrapper .prici-left {
     padding: 40px 0; }
-  #pricing .price-block-wrapper .pricing-list {
-    width: 300px;
-    padding: 20px; }
+
   #sponsors .sponsors-logo {
     text-align: center;
     margin-bottom: 15px; }
