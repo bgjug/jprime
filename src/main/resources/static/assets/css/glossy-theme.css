@@ -149,11 +149,12 @@ body::before {
     position: relative;
     isolation: isolate;
     transition: transform .22s ease, box-shadow .22s ease;
-    box-shadow:
-        0 8px 26px rgba(120,40,220,0.10),
-        0 0 40px rgba(160,50,255,0.20),
-        0 0 80px rgba(0,220,255,0.30),
-        inset 0 0 18px rgba(255,255,255,0.02);
+    box-shadow: 0 8px 26px rgba(120, 40, 220, 0.10), 0 0 40px rgb(160 50 255 / 25%), 0 0 80px rgb(0 220 255 / 70%), inset 0 0 18px rgba(255, 255, 255, 0.02);
+}
+
+.sponsors-logo .img-fluid {
+    background-color:white;
+    padding:0.5rem;
 }
 
 /* Section Backgrounds with Gradients */
