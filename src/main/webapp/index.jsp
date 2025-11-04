@@ -47,7 +47,7 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="images/slider/index2025_1.jpg" alt="First slide">
+            <img class="d-block w-100" src="images/slider/index2026_3.jpg" alt="First slide">
             <div class="carousel-caption d-md-block">
                 <c:if test="${jprime_year != null}">
                     <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>
