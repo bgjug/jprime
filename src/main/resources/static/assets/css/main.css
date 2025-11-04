@@ -1064,7 +1064,7 @@ background: #f2f2f2;}
       font-weight: 700;
       margin-bottom: 5px; }
       .team-item .info-text h3 a {
-        color: #333; }
+         }
         .team-item .info-text h3 a:hover {
           color: #E91E63; }
     .team-item .info-text p {
