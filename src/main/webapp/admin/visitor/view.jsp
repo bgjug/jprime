@@ -5,21 +5,21 @@
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:directive.include file="../../theme-colors.jsp" />
+<admin:pageJavaScriptAndCss/>
 
-	<script type="text/javascript" src="/js/niceforms.js"></script>
 	<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css"/>
-<link rel="stylesheet" type="text/css" media="all" href="/css/admin.css" />
 	<link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
 	<title>Visitors</title>
 </head>
 <body>
+<div class="admin-container">
 	<admin:menu/>
 
 	<fieldset>
@@ -164,5 +164,6 @@
 			return confirm('Please confirm that you want to send tickets to all paid and sponsored visitors?');
 		});
 	</script>
+</div>
 </body>
 </html>

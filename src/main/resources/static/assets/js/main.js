@@ -201,15 +201,6 @@
             return false;
           });
 
-          /**
-        * stellar js
-        */
-          $.stellar({
-            horizontalScrolling: false,
-            verticalOffset: 40
-          });
-
-
-  });      
+  });
 
 }(jQuery));

@@ -6,21 +6,21 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <jsp:directive.include file="../../theme-colors.jsp"/>
+<admin:pageJavaScriptAndCss/>
 
     <title>Edit branch</title>
-    <script type="text/javascript" src="/js/niceforms.js"></script>
-    <link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css"/>
-    <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css"/>
     <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="/js/datetime/jquery.datetimepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" media="all" href="/css/datetime/jquery.datetimepicker.css"/>
 </head>
 <body>
+<div class="admin-container">
 <admin:menu/>
 <form:form modelAttribute="branch" method="post"
            action="/admin/branch/add">
@@ -199,5 +199,6 @@
     });
 
 </script>
+</div>
 </body>
 </html>

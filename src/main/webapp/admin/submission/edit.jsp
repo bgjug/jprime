@@ -13,17 +13,16 @@
 <!--[if (gte IE 9)|!(IE)]><html lang="en" class="no-js"> <![endif]-->
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <jsp:directive.include file="../../theme-colors.jsp" />
+<admin:pageJavaScriptAndCss/>
 
     <title>Edit submission</title>
-    <script type="text/javascript" src="/js/niceforms.js"></script>
     <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" media="all"
-          href="/css/niceforms-default.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="/css/admin.css" />
 </head>
 <body>
+<div class="admin-container">
 <admin:menu />
 <user:cfp action="/admin/submission/edit?sourcePage=${sourcePage}"  admin="true"/>
 
@@ -50,5 +49,6 @@
     });
 </script>
 
+</div>
 </body>
 </html>

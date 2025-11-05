@@ -5,18 +5,17 @@
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <jsp:directive.include file="../../theme-colors.jsp" />
-
-<script type="text/javascript" src="/js/niceforms.js"></script>
-<link rel="stylesheet" type="text/css" media="all" href="/css/niceforms-default.css" />
-<link rel="stylesheet" type="text/css" media="all" href="/css/admin.css" />
+<admin:pageJavaScriptAndCss/>
 <title>Partners</title>
 </head>
 <body>
+<div class="admin-container">
 	<admin:menu/>
 	<fieldset>
 	<legend>Partners</legend>
@@ -35,23 +34,24 @@
 					<td>${partner.active}</td>
 					<td>${partner.partnerPackage}</td>
 					<td>
-						<a href="/admin/partner/edit/${partner.id}">Edit</a></span>&nbsp;|&nbsp;<a href="/admin/partner/remove/${partner.id}">Remove</a>
+						<a href="/admin/partner/edit/${partner.id}">Edit</a>&nbsp;|&nbsp;<a href="/admin/partner/remove/${partner.id}">Remove</a>
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
 		&nbsp;
-		<div>
+		<div class="pagination">
 			<c:if test="${number > 0}">
-				<span><a href="/admin/partner/view?page=${number - 1}">previous</a></span>
+				<a href="/admin/partner/view?page=${number - 1}">previous</a>
 			</c:if>
 			<c:if test="${number < (totalPages - 1)}">
-				<span><a href="/admin/partner/view?page=${number + 1}">next</a></span>
+				<a href="/admin/partner/view?page=${number + 1}">next</a>
 			</c:if>
 		</div>
 		<div>
 			<a style="float:right;" href="/admin/partner/add">Add</a>
 		</div>
 	</fieldset>
+</div>
 </body>
 </html>
