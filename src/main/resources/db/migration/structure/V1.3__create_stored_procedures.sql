@@ -21,10 +21,10 @@ WHERE CONSTRAINT_NAME = foreignKeyName
 
 -- If the foreign key exists, drop it
 IF fkExists > 0 THEN
-        SET @dropFkQuery = CONCAT('ALTER TABLE ', tableName, ' DROP FOREIGN KEY ', foreignKeyName);
-PREPARE stmt FROM @dropFkQuery;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
+    SET @dropFkQuery = CONCAT('ALTER TABLE ', tableName, ' DROP FOREIGN KEY ', foreignKeyName);
+    PREPARE stmt FROM @dropFkQuery;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
 END IF;
 END$$
 
@@ -45,10 +45,10 @@ WHERE TABLE_SCHEMA = DATABASE()
 
 -- If the index exists, drop it
 IF indexExists > 0 THEN
-        SET @dropIndexQuery = CONCAT('ALTER TABLE ', tableName, ' DROP INDEX ', indexName);
-PREPARE stmt FROM @dropIndexQuery;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
+    SET @dropIndexQuery = CONCAT('ALTER TABLE ', tableName, ' DROP INDEX ', indexName);
+    PREPARE stmt FROM @dropIndexQuery;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
 END IF;
 END$$
 

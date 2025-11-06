@@ -14,12 +14,17 @@
 	<parameter name="mol" class="java.lang.String"/>
 	<parameter name="invoiceType" class="java.lang.String"/>
 	<parameter name="paymentType" class="java.lang.String"/>
-	<parameter name="totalPriceWithVAT" class="java.math.BigDecimal"/>
-	<parameter name="totalPriceVAT" class="java.math.BigDecimal"/>
-	<parameter name="totalPrice" class="java.math.BigDecimal"/>
+	<parameter name="totalPriceWithVAT_BGN" class="java.math.BigDecimal"/>
+	<parameter name="totalPriceVAT_BGN" class="java.math.BigDecimal"/>
+	<parameter name="totalPrice_BGN" class="java.math.BigDecimal"/>
+	<parameter name="totalPriceWithVAT_EUR" class="java.math.BigDecimal"/>
+	<parameter name="totalPriceVAT_EUR" class="java.math.BigDecimal"/>
+	<parameter name="totalPrice_EUR" class="java.math.BigDecimal"/>
 	<field name="passQty" class="java.lang.Integer"/>
-	<field name="price" class="java.math.BigDecimal"/>
-	<field name="totalPrice" class="java.math.BigDecimal"/>
+	<field name="price_BGN" class="java.math.BigDecimal"/>
+	<field name="totalPrice_BGN" class="java.math.BigDecimal"/>
+	<field name="price_EUR" class="java.math.BigDecimal"/>
+	<field name="totalPrice_EUR" class="java.math.BigDecimal"/>
 	<field name="description" class="java.lang.String"/>
 	<field name="idx" class="java.lang.Integer"/>
 	<title>
@@ -43,7 +48,8 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="182" splitType="Stretch">
+		<band height="202" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
 				<reportElement x="0" y="9" width="555" height="21" uuid="0385fba6-2029-4e89-98e1-d517be2f7c9b"/>
 				<textElement textAlignment="Center">
@@ -74,7 +80,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<textFieldExpression><![CDATA[$P{client}+"\nАдрес: "+$P{clientAddress}+"\nЕИК: "+$P{clientEIK}+"\nДДС: "+$P{clientVAT}+"\nМОЛ: "+$P{mol}+"\n"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="162" width="23" height="20" uuid="2d118d88-29fd-4237-8efa-a21fff0ffa47"/>
+				<reportElement x="0" y="162" width="23" height="40" uuid="2d118d88-29fd-4237-8efa-a21fff0ffa47"/>
 				<box>
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -89,7 +95,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<text><![CDATA[No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="23" y="162" width="260" height="20" uuid="234ac4da-c402-4081-aa0a-45773e18083a"/>
+				<reportElement x="23" y="162" width="260" height="40" uuid="234ac4da-c402-4081-aa0a-45773e18083a"/>
 				<box>
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -104,7 +110,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<text><![CDATA[Описание]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="283" y="162" width="72" height="20" uuid="38c468b0-6f87-4021-bc13-7be9c9cb2c4b"/>
+				<reportElement x="283" y="162" width="66" height="40" uuid="38c468b0-6f87-4021-bc13-7be9c9cb2c4b"/>
 				<box>
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -119,7 +125,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<text><![CDATA[Количество (бр.)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="355" y="162" width="97" height="20" uuid="33879255-02fb-4ba1-991e-ffa7275cf756"/>
+				<reportElement x="349" y="162" width="102" height="20" uuid="33879255-02fb-4ba1-991e-ffa7275cf756"/>
 				<box>
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -134,7 +140,9 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<text><![CDATA[Цена]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="452" y="162" width="103" height="20" uuid="39dbeb95-4c20-4bf6-a47d-e12f83c90e75"/>
+				<reportElement x="451" y="162" width="104" height="20" uuid="39dbeb95-4c20-4bf6-a47d-e12f83c90e75">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -146,12 +154,77 @@ IBAN: BG59BPBI81701605596745]]></text>
 					<font fontName="DejaVu Sans"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Обща цена]]></text>
+				<text><![CDATA[Общo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="182" width="51" height="20" uuid="23fa41fa-acc9-445d-879d-b71c5f228cd3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[BGN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="182" width="51" height="20" uuid="d42013ab-598d-4016-ac09-755becd35537"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[EUR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="451" y="182" width="52" height="20" uuid="eb21feb9-3bc1-4c91-b089-568c383a0298"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[BGN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="503" y="182" width="52" height="20" uuid="3bce32da-38c6-46ce-b3b8-4caa2bf0a0fe">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[EUR]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField textAdjust="StretchHeight">
 				<reportElement x="23" y="0" width="260" height="20" uuid="7340317b-139c-4733-b8de-7ed289e404ad"/>
 				<box leftPadding="2">
@@ -168,7 +241,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="283" y="0" width="72" height="20" uuid="bd1c32c7-7a57-4586-b615-3b0cbb80c2ce"/>
+				<reportElement x="283" y="0" width="66" height="20" uuid="bd1c32c7-7a57-4586-b615-3b0cbb80c2ce"/>
 				<box>
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -183,7 +256,9 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<textFieldExpression><![CDATA[$F{passQty}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" pattern="##0.00" isBlankWhenNull="true">
-				<reportElement x="355" y="0" width="97" height="20" uuid="49f43bb9-3980-4891-9d57-db39fcc91b0b"/>
+				<reportElement x="349" y="0" width="51" height="20" uuid="49f43bb9-3980-4891-9d57-db39fcc91b0b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
 				<box>
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -191,14 +266,14 @@ IBAN: BG59BPBI81701605596745]]></text>
 					<bottomPen lineWidth="0.25"/>
 					<rightPen lineWidth="0.25"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{price_BGN}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" pattern="##0.00">
-				<reportElement x="452" y="0" width="103" height="20" uuid="2ad0a361-1deb-457c-b996-c43636e944a9"/>
+				<reportElement x="503" y="0" width="52" height="20" uuid="2ad0a361-1deb-457c-b996-c43636e944a9"/>
 				<box rightPadding="2">
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -210,7 +285,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 					<font fontName="DejaVu Sans"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{totalPrice}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{totalPrice_EUR}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="23" height="20" uuid="6514d198-80b0-4dac-8935-eb1947ec5255"/>
@@ -226,6 +301,36 @@ IBAN: BG59BPBI81701605596745]]></text>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{idx} + "."]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="##0.00" isBlankWhenNull="true">
+				<reportElement x="400" y="0" width="51" height="20" uuid="61430619-cb8f-41d9-a2d4-bcbf5cbc501b"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{price_EUR}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="##0.00">
+				<reportElement x="451" y="0" width="52" height="20" uuid="d0fbcb87-8e50-4b40-84ac-166c7b30d2ba"/>
+				<box rightPadding="2">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalPrice_BGN}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -247,7 +352,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 	<summary>
 		<band height="218" splitType="Stretch">
 			<staticText>
-				<reportElement x="355" y="0" width="97" height="20" uuid="f22a6550-03df-40ec-a763-2965f218c335"/>
+				<reportElement x="293" y="20" width="97" height="20" uuid="f22a6550-03df-40ec-a763-2965f218c335"/>
 				<box>
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -262,7 +367,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<text><![CDATA[Данъчна основа]]></text>
 			</staticText>
 			<textField pattern="##0.00">
-				<reportElement x="452" y="0" width="103" height="20" uuid="ab7a1b29-1abe-496c-8cd3-854354952e15"/>
+				<reportElement x="470" y="20" width="85" height="20" uuid="ab7a1b29-1abe-496c-8cd3-854354952e15"/>
 				<box rightPadding="2">
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -274,10 +379,10 @@ IBAN: BG59BPBI81701605596745]]></text>
 					<font fontName="DejaVu Sans"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{totalPrice}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{totalPrice_EUR}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="355" y="20" width="97" height="20" uuid="3d43dcab-d449-4622-9b6e-ca4c687dd92c"/>
+				<reportElement x="293" y="40" width="97" height="20" uuid="3d43dcab-d449-4622-9b6e-ca4c687dd92c"/>
 				<box>
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -292,7 +397,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<text><![CDATA[ДДС 20%]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="355" y="40" width="97" height="20" uuid="dce5ec94-c2f4-4309-8050-73fea56f14a1"/>
+				<reportElement x="293" y="60" width="97" height="20" uuid="dce5ec94-c2f4-4309-8050-73fea56f14a1"/>
 				<box>
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -307,7 +412,9 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<text><![CDATA[Обща цена с ДДС]]></text>
 			</staticText>
 			<textField pattern="##0.00">
-				<reportElement x="452" y="20" width="103" height="20" uuid="cf59dbb9-95fa-4abb-bd91-570ce6ee1d36"/>
+				<reportElement x="470" y="40" width="85" height="20" uuid="cf59dbb9-95fa-4abb-bd91-570ce6ee1d36">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
 				<box rightPadding="2">
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -319,10 +426,10 @@ IBAN: BG59BPBI81701605596745]]></text>
 					<font fontName="DejaVu Sans"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{totalPriceVAT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{totalPriceVAT_EUR}]]></textFieldExpression>
 			</textField>
 			<textField pattern="##0.00">
-				<reportElement x="452" y="40" width="103" height="20" uuid="ed857ca4-05cd-4d8f-b9db-fe32eae3ce1b"/>
+				<reportElement x="470" y="60" width="85" height="20" uuid="ed857ca4-05cd-4d8f-b9db-fe32eae3ce1b"/>
 				<box rightPadding="2">
 					<pen lineWidth="0.25"/>
 					<topPen lineWidth="0.25"/>
@@ -334,10 +441,10 @@ IBAN: BG59BPBI81701605596745]]></text>
 					<font fontName="DejaVu Sans"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{totalPriceWithVAT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{totalPriceWithVAT_EUR}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="378" y="104" width="177" height="21" uuid="fcc18fc5-b990-4de7-b315-216096a1777c"/>
+				<reportElement x="378" y="128" width="177" height="21" uuid="fcc18fc5-b990-4de7-b315-216096a1777c"/>
 				<textElement textAlignment="Center">
 					<font fontName="DejaVu Sans"/>
 					<paragraph lineSpacing="Single"/>
@@ -345,7 +452,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<textFieldExpression><![CDATA["София,  "+$P{invoiceDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="11" y="40" width="266" height="20" uuid="992001d0-272b-44e1-9cde-63acd7bb28f8"/>
+				<reportElement x="11" y="64" width="266" height="20" uuid="992001d0-272b-44e1-9cde-63acd7bb28f8"/>
 				<textElement>
 					<font fontName="DejaVu Sans"/>
 					<paragraph lineSpacing="Single"/>
@@ -353,7 +460,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<textFieldExpression><![CDATA["Тип плащане: "+$P{paymentType}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="11" y="20" width="279" height="20" uuid="4ff7a7b6-3b74-4e68-8131-bd5cb122547a"/>
+				<reportElement x="11" y="44" width="279" height="20" uuid="4ff7a7b6-3b74-4e68-8131-bd5cb122547a"/>
 				<textElement>
 					<font fontName="DejaVu Sans"/>
 					<paragraph lineSpacing="Single"/>
@@ -361,13 +468,68 @@ IBAN: BG59BPBI81701605596745]]></text>
 				<text><![CDATA[Всичките цени са в Български Лева]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="125" width="176" height="41" uuid="b3753de2-5698-448e-93de-d330e2b10f6c"/>
+				<reportElement x="0" y="149" width="554" height="41" uuid="b3753de2-5698-448e-93de-d330e2b10f6c"/>
 				<textElement>
 					<font fontName="DejaVu Sans"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[Печат и подпис не са задължителни по закон]]></text>
 			</staticText>
+			<textField pattern="##0.00">
+				<reportElement x="390" y="20" width="80" height="20" uuid="3c2b4181-cd05-443a-be06-85d881351cc8"/>
+				<box rightPadding="2">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalPrice_BGN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="0" width="80" height="20" uuid="791fac15-de99-4246-a81f-99aa4fb2c1f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[BGN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="84" height="20" uuid="3ffe324d-a3ae-487d-b3e0-a25134cd5b05"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[EUR]]></text>
+			</staticText>
+			<textField pattern="##0.00">
+				<reportElement x="390" y="40" width="80" height="20" uuid="33057050-afda-48e5-a86e-0b161e7c372c"/>
+				<box rightPadding="2">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalPriceVAT_BGN}]]></textFieldExpression>
+			</textField>
+			<textField pattern="##0.00">
+				<reportElement x="390" y="60" width="80" height="20" uuid="cd85eb9f-f20a-4875-bd17-7fbfe16d3fdc"/>
+				<box rightPadding="2">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalPriceWithVAT_BGN}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

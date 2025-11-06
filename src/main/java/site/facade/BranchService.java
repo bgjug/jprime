@@ -230,7 +230,7 @@ public class BranchService {
         branchRepository.delete(branch);
     }
 
-    @CacheEvict(value = "currentBranch", allEntries = true)
+    @CacheEvict(value = {"currentBranch", "ticketPrices"}, allEntries = true)
     public Branch createBranch(Branch branch, List<TicketPrice> ticketPrices) {
         branchRepository.findByYear(branch.getYear()).ifPresent(existingBranch -> {
             branch.setCurrentBranch(existingBranch.isCurrentBranch());

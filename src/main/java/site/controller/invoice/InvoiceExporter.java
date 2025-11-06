@@ -3,6 +3,7 @@ package site.controller.invoice;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import site.facade.BranchService;
 import site.model.Branch;
+import site.model.TicketPrice;
 
 import static org.apache.commons.beanutils.PropertyUtils.getProperty;
 
@@ -96,10 +98,14 @@ public class InvoiceExporter {
 
         String description = "jPrime 2025 билет за конференция";
 
+        BigDecimal singlePriceWithVAT_Student = BigDecimal.valueOf(130.0);
+        BigDecimal singlePriceWithVAT_Regular = BigDecimal.valueOf(320.0);
+
         data.addInvoiceDetail(
-            new InvoiceDetail(BigDecimal.valueOf(130.0), 3, description));
+            new InvoiceDetail(singlePriceWithVAT_Student, singlePriceWithVAT_Student.divide(TicketPrice.EUR_CONVERSION, 2, RoundingMode.HALF_UP), 3, description));
+
         data.addInvoiceDetail(
-            new InvoiceDetail(BigDecimal.valueOf(320.0), 3, description));
+            new InvoiceDetail(singlePriceWithVAT_Regular, singlePriceWithVAT_Regular.divide(TicketPrice.EUR_CONVERSION, 2, RoundingMode.HALF_UP), 3, description));
 
         BranchService mockedService = new BranchService(null, null) {
 

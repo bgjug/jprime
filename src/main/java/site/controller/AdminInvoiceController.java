@@ -87,7 +87,8 @@ public class AdminInvoiceController {
         invoiceData.setClientVAT(modelInvoiceData.getClientVAT());
         invoiceData.setMol(modelInvoiceData.getMol());
         invoiceData.setInvoiceDate(modelInvoiceData.getInvoiceDate());
-        invoiceData.setSinglePriceWithVAT(modelInvoiceData.getSinglePriceWithVAT());
+        invoiceData.setSinglePriceWithVAT_BGN(modelInvoiceData.getSinglePriceWithVAT_BGN());
+        invoiceData.setSinglePriceWithVAT_EUR(modelInvoiceData.getSinglePriceWithVAT_EUR());
         invoiceData.setDescription(modelInvoiceData.getDescription());
 
         invoiceData.setInvoiceType(InvoiceData.ORIGINAL_BG);
@@ -106,7 +107,7 @@ public class AdminInvoiceController {
             return "redirect:/admin/registrant/view";
         }
 
-        String pdfFileName = generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT());
+        String pdfFileName = generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT_BGN());
 
         try {
             mailFacade.sendEmail(registrant.getEmail(), "jPrime.io original invoice", """

@@ -408,7 +408,8 @@
             <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${early_sold_out}'/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>BGN</span>${early_bird_ticket_price}</span>
+                        <span class="price"><span>€</span>${early_bird_ticket_price_eur}</span>
+                        <span class="price"><span>BGN</span>${early_bird_ticket_price}</span><br/>
                         <h5>
                             Until ${cfp_close_date}! </h5>
                     </div>
@@ -438,7 +439,8 @@
             <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${regular_sold_out}'/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>BGN</span>${regular_ticket_price}</span>
+                        <span class="price"><span>€</span>${regular_ticket_price_eur}</span>
+                        <span class="price"><span>BGN</span>${regular_ticket_price}</span><br/>
                         <h5>After ${cfp_close_date} </h5>
                     </div>
                     <div class="pricing-list">
@@ -467,7 +469,8 @@
             <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${students_sold_out}'/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>BGN</span>${student_ticket_price}</span>
+                        <span class="price"><span>€</span>${student_ticket_price_eur}</span>
+                        <span class="price"><span>BGN</span>${student_ticket_price}</span><br/>
                         <h5>limited to students only</h5>
                     </div>
                     <div class="pricing-list">
@@ -959,7 +962,8 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('PLATINUM')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>BGN</span>8500</span>
+                        <span class="price"><span>€</span>4250</span>
+                        <span class="price"><span>BGN</span>8312.28</span>
                         <h5></h5>
                     </div>
                     <div class="pricing-list">
@@ -991,7 +995,8 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('GOLD')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>BGN</span>6500</span>
+                        <span class="price"><span>€</span>3250</span>
+                        <span class="price"><span>BGN</span>6356.45</span>
                         <h5></h5>
                     </div>
                     <div class="pricing-list">
@@ -1019,7 +1024,8 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('GOLD_LITE')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>BGN</span>5300</span>
+                        <span class="price"><span>€</span>2650</span>
+                        <span class="price"><span>BGN</span>5182.95</span>
                         <h5></h5>
                     </div>
                     <div class="pricing-list">
@@ -1049,7 +1055,8 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('GOLD_OPEN')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>BGN</span>4500</span>
+                        <span class="price"><span>€</span>2250</span>
+                        <span class="price"><span>BGN</span>4400.62</span>
                         <h5></h5>
                     </div>
                     <div class="pricing-list">
@@ -1077,7 +1084,8 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('SILVER')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>BGN</span>2000</span>
+                        <span class="price"><span>€</span>1000</span>
+                        <span class="price"><span>BGN</span>1955.83</span>
                         <h5></h5>
                     </div>
                     <div class="pricing-list">

@@ -18,7 +18,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,7 +30,6 @@ import site.facade.BranchService;
 import site.facade.InvoiceService;
 import site.facade.MailService;
 import site.facade.RegistrantService;
-import site.facade.UserService;
 import site.model.Branch;
 import site.model.Registrant;
 import site.model.TicketPrice;
@@ -128,7 +126,7 @@ public class TicketsController {
         InvoiceData invoiceData = buildInvoiceData(savedRegistrant);
 
         byte[] pdf = invoiceExporter.exportInvoice(invoiceData, registrant.isCompany(), BG);
-        sendPDF(savedRegistrant, generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT()), pdf);
+        sendPDF(savedRegistrant, generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT_BGN()), pdf);
         return result("ok", model);
     }
 
