@@ -1,6 +1,7 @@
 package site.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -16,6 +17,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "TicketPrice")
 public class TicketPrice extends AbstractEntity {
+
+    public static final BigDecimal EUR_CONVERSION = BigDecimal.valueOf(1.95583);
 
     private BigDecimal price;
 
@@ -65,6 +68,10 @@ public class TicketPrice extends AbstractEntity {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public BigDecimal eurPrice() {
+        return getPrice().divide(EUR_CONVERSION, 2, RoundingMode.HALF_UP);
     }
 
     public void setPrice(BigDecimal price) {
