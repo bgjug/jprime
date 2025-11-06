@@ -27,25 +27,44 @@ public class InvoiceData {
     private Long registrantId;
     private final List<InvoiceDetail> invoiceDetails = new ArrayList<>();
     // Used to store data from the model
-    private Double singlePriceWithVAT;
+    private Double singlePriceWithVAT_BGN;
+    private Double singlePriceWithVAT_EUR;
     private String description;
 
-    public BigDecimal getTotalPrice() {
+    public BigDecimal getTotalPrice_BGN() {
         return invoiceDetails.stream()
-            .map(InvoiceDetail::getTotalPrice)
+            .map(InvoiceDetail::getTotalPrice_BGN)
             .reduce(BigDecimal::add)
             .orElse(BigDecimal.valueOf(0.0));
     }
 
-    public BigDecimal getTotalPriceWithVAT() {
+    public BigDecimal getTotalPriceWithVAT_BGN() {
         return invoiceDetails.stream()
-            .map(d -> d.getSinglePriceWithVAT().multiply(new BigDecimal(d.getPassQty())))
+            .map(d -> d.getSinglePriceWithVAT_BGN().multiply(new BigDecimal(d.getPassQty())))
             .reduce(BigDecimal::add)
             .orElse(BigDecimal.valueOf(0.0));
     }
 
-    public BigDecimal getTotalPriceVAT() {
-        return getTotalPriceWithVAT().subtract(getTotalPrice());
+    public BigDecimal getTotalPrice_EUR() {
+        return invoiceDetails.stream()
+            .map(InvoiceDetail::getTotalPrice_EUR)
+            .reduce(BigDecimal::add)
+            .orElse(BigDecimal.valueOf(0.0));
+    }
+
+    public BigDecimal getTotalPriceWithVAT_EUR() {
+        return invoiceDetails.stream()
+            .map(d -> d.getSinglePriceWithVAT_EUR().multiply(new BigDecimal(d.getPassQty())))
+            .reduce(BigDecimal::add)
+            .orElse(BigDecimal.valueOf(0.0));
+    }
+
+    public BigDecimal getTotalPriceVAT_BGN() {
+        return getTotalPriceWithVAT_BGN().subtract(getTotalPrice_BGN());
+    }
+
+    public BigDecimal getTotalPriceVAT_EUR() {
+        return getTotalPriceWithVAT_EUR().subtract(getTotalPrice_EUR());
     }
 
     public String getInvoiceNumber() {
@@ -137,15 +156,28 @@ public class InvoiceData {
         return invoiceDetails;
     }
 
-    public Double getSinglePriceWithVAT() {
-        return invoiceDetails.isEmpty() ? singlePriceWithVAT : invoiceDetails.get(0).getSinglePriceWithVAT().doubleValue();
+    public Double getSinglePriceWithVAT_BGN() {
+        return invoiceDetails.isEmpty() ? singlePriceWithVAT_BGN : invoiceDetails.get(0).getSinglePriceWithVAT_BGN().doubleValue();
     }
 
-    public void setSinglePriceWithVAT(Double singlePriceWithVAT) {
+    public Double getSinglePriceWithVAT_EUR() {
+        return invoiceDetails.isEmpty() ? singlePriceWithVAT_EUR : invoiceDetails.get(0).getSinglePriceWithVAT_EUR().doubleValue();
+    }
+
+    public void setSinglePriceWithVAT_BGN(Double singlePriceWithVAT) {
         if (invoiceDetails.isEmpty()) {
-            this.singlePriceWithVAT = singlePriceWithVAT;
+            this.singlePriceWithVAT_BGN = singlePriceWithVAT;
         } else {
-            invoiceDetails.get(0).setSinglePriceWithVAT(singlePriceWithVAT);
+            invoiceDetails.get(0).setSinglePriceWithVAT_BGN(singlePriceWithVAT);
+        }
+    }
+
+
+    public void setSinglePriceWithVAT_EUR(Double singlePriceWithVAT) {
+        if (invoiceDetails.isEmpty()) {
+            this.singlePriceWithVAT_EUR = singlePriceWithVAT;
+        } else {
+            invoiceDetails.get(0).setSinglePriceWithVAT_EUR(singlePriceWithVAT);
         }
     }
 
