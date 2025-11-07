@@ -50,8 +50,8 @@
             <img class="d-block w-100" src="images/slider/index2026_3.jpg" alt="First slide">
             <div class="carousel-caption d-md-block">
                 <c:if test="${jprime_year != null}">
-                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>
-                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s">The conference will be held
+                    <%-- <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1> --%>
+                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s"> <br/> The conference will be held
                         <br/>on ${conference_dates} in Sofia Tech Park</p>
                     <span class="wow fadeInUp carousel-jprime" data-wow-delay=".6s">${conference_dates}<br/>in Sofia Tech Park</span>
                 </c:if>
@@ -408,7 +408,7 @@
             <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${early_sold_out}'/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>€</span>${early_bird_ticket_price_eur}</span><br/>
+                        <span class="price"><span>EUR</span>${early_bird_ticket_price_eur}</span><br/>
                         <span class="price"><span>BGN</span>${early_bird_ticket_price}</span><br/>
                         <h5>
                             Until ${cfp_close_date}! </h5>
@@ -439,7 +439,7 @@
             <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${regular_sold_out}'/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>€</span>${regular_ticket_price_eur}</span><br/>
+                        <span class="price"><span>EUR</span>${regular_ticket_price_eur}</span><br/>
                         <span class="price"><span>BGN</span>${regular_ticket_price}</span><br/>
                         <h5>After ${cfp_close_date} </h5>
                     </div>
@@ -469,7 +469,7 @@
             <div class="col-lg-4 col-md-4 col-xs-12 mb-3" style="<c:out value='${students_sold_out}'/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>€</span>${student_ticket_price_eur}</span><br/>
+                        <span class="price"><span>EUR</span>${student_ticket_price_eur}</span><br/>
                         <span class="price"><span>BGN</span>${student_ticket_price}</span><br/>
                         <h5>limited to students only</h5>
                     </div>
@@ -514,7 +514,7 @@
                 <c:forEach var="sponsor" items="${platinumSponsors}">
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="sponsors-logo">
-                            <a href="${sponsor.companyWebsite}"><img class=img-fluid"
+                            <a href="${sponsor.companyWebsite}"><img class="img-fluid"
                                                                      src="/image/sponsor/${sponsor.id}"
                                                                      alt="${sponsor.companyName}"/></a>
                         </div>
@@ -609,7 +609,7 @@
                     <c:forEach var="partner" items="${partners}">
                         <div class="col-md-3 col-sm-3 col-xs-12">
                             <div class="sponsors-logo">
-                                <a href="${partner.companyWebsite}"><img class=img-fluid"
+                                <a href="${partner.companyWebsite}"><img class="img-fluid"
                                                                          src="/image/partner/${partner.id}"
                                                                          alt="${partner.companyName}"/></a>
                             </div>
@@ -636,7 +636,7 @@
                     <c:forEach var="partner" items="${partners}">
                         <div class="col-md-3 col-sm-3 col-xs-12">
                             <div class="sponsors-logo">
-                                <a href="${partner.companyWebsite}"><img class=img-fluid"
+                                <a href="${partner.companyWebsite}"><img class="img-fluid"
                                                                          src="/image/partner/${partner.id}"
                                                                          alt="${partner.companyName}"/></a>
                             </div>
@@ -663,7 +663,7 @@
                     <c:forEach var="partner" items="${partners}">
                         <div class="col-md-3 col-sm-3 col-xs-12">
                             <div class="sponsors-logo">
-                                <a href="${partner.companyWebsite}"><img class=img-fluid"
+                                <a href="${partner.companyWebsite}"><img class="img-fluid"
                                                                          src="/image/partner/${partner.id}"
                                                                          alt="${partner.companyName}"/></a>
                             </div>
@@ -962,7 +962,7 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('PLATINUM')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>€</span>4250.00</span><br/>
+                        <span class="price"><span>EUR</span>4250.00</span><br/>
                         <span class="price"><span>BGN</span>8312.28</span>
                         <h5></h5>
                     </div>
@@ -995,7 +995,7 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('GOLD')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>€</span>3250.00</span><br/>
+                        <span class="price"><span>EUR</span>3250.00</span><br/>
                         <span class="price"><span>BGN</span>6356.45</span>
                         <h5></h5>
                     </div>
@@ -1024,7 +1024,7 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('GOLD_LITE')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>€</span>2650.00</span><br/>
+                        <span class="price"><span>EUR</span>2650.00</span><br/>
                         <span class="price"><span>BGN</span>5182.95</span>
                         <h5></h5>
                     </div>
@@ -1055,7 +1055,7 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('GOLD_OPEN')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>€</span>2250.00</span><br/>
+                        <span class="price"><span>EUR</span>2250.00</span><br/>
                         <span class="price"><span>BGN</span>4400.62</span>
                         <h5></h5>
                     </div>
@@ -1084,7 +1084,7 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('SILVER')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>€</span>1000.00</span><br/>
+                        <span class="price"><span>EUR</span>1000.00</span><br/>
                         <span class="price"><span>BGN</span>1955.83</span>
                         <h5></h5>
                     </div>

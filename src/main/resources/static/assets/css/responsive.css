@@ -84,6 +84,9 @@
   #pricing .price-block-wrapper .prici-left {
     padding: 40px 0; }
 
+  #coorganizers .sponsors-logo {
+      text-align: center;
+      margin-bottom: 15px; }
   #sponsors .sponsors-logo {
     text-align: center;
     margin-bottom: 15px; }
