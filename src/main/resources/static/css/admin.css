@@ -4,7 +4,9 @@
 body {
 	padding: 20px;
 	min-height: 100vh;
+	/* NAYDEN disable temporarily
 	background: linear-gradient(135deg, #1a1a2e, #16213e, #0b294c, #1e3a8a, #2d1b69) !important;
+	*/
 }
 
 .admin-container {
