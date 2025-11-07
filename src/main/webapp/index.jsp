@@ -47,13 +47,12 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="images/slider/index2026_3.jpg" alt="First slide">
+            <img class="d-block w-100" src="images/slider/index2026_6.jpg" alt="First slide">
             <div class="carousel-caption d-md-block">
                 <c:if test="${jprime_year != null}">
-                    <%-- <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1> --%>
-                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s"> <br/> The conference will be held
-                        <br/>on ${conference_dates} in Sofia Tech Park</p>
-                    <span class="wow fadeInUp carousel-jprime" data-wow-delay=".6s">${conference_dates}<br/>in Sofia Tech Park</span>
+                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>
+                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">THE AI AGENTS ARE AMONG US !</h1>
+                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s">${conference_dates} @ Sofia Tech Park</p>
                 </c:if>
 <%--                <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
                 <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->
@@ -71,7 +70,8 @@
             <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide">
             <div class="carousel-caption d-md-block">
                 <c:if test="${!cfp_closed}">
-                <h1 class="wow bounceIn heading" data-wow-delay=".7s">Submit your proposal before ${cfp_close_date}!</h1>
+                    <h1 class="wow bounceIn heading" data-wow-delay=".7s">Submit your proposal before ${cfp_close_date}!</h1>
+                    <a href="/cfp" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">CFP</a>
                 </c:if>
             </div>
         </div>
