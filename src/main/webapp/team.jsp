@@ -138,7 +138,7 @@
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="team-item text-center">
                 <div class="team-img">
-                    <img class="img-fluid" src="/images/team/nayden.jpg" alt="">
+                    <img class="img-fluid" src="/images/team/nayden.jpg" alt="" style="width:200px;">
                     <div class="team-overlay">
                         <div class="overlay-social-icon text-center">
                             <ul class="social-icons">
@@ -151,7 +151,7 @@
                     <h3>Nayden Gochev</h3>
                     <p>The Java.Beer guy</p>
                 </div>
-                <div class="team-text">Nayden Gochev is Solution Architect and Software Contractor with more than 15 years of experience. Developer, Trainer, consultant, whatever you want ;). He took part in many conferences, seminars, technical trainings in multiple academic and non academic structures and companies. One of the organizers of jPrime and jProfessionals conferences and the monthly Bulgarian Java User Group seminars. The main driver behind the Java Beer events which you can track at <a href="https://www.java.beer">www.java.beer</a> , huge Java fan with love for all *.java and big supporter of any Bulgarian IT community. His personal blog is no longer active, but some posts can be found at <br/><a href="https://gochev.blogspot.com">gochev.blogspot.com</a></div>
+                <div class="team-text">Java-brewed engineer with a taste for Kotlin (Compose), a tolerance for TypeScript (React), and a soft spot even for Dart and Flutter. He is our polyglot developer, organizer of several polyglot events and the main driver behind the Java Beer events which you can track at <a href="https://www.java.beer">www.java.beer</a> , co-leader of the <a href="https://jug.bg">Bulgarian Java User Group</a>, in love for all *.java technologies and stuff, but also big supporter of all Bulgarian IT communities, co-organizer of <a href="datastackconf.com">DataStackConf</a>, <a href="fullstackconf.com">FullStackConf</a>, <a href="jug.bg/jprofessionals">jProfessionals</a> and many other events. His personal blog is no longer active, but some posts can be found at <br/><a href="https://dev.to/gochev">dev.to/gochev</a></div>
             </div>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
