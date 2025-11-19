@@ -71,7 +71,7 @@
                                 line-height: 1.125rem;
                             }
                             table tr.even, table tr.alt, table tr:nth-of-type(even){
-                                background: #f9f9f9;
+                                background-image: linear-gradient(125deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2) 70%);
                             }
                             .tcenter td {
                                 text-align: center;
