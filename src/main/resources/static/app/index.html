@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/app/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="jPrime Conference - View sessions, schedule, and manage your favorites">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="jPrime">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>jPrime Conference</title>
+  <link rel="manifest" href="manifest.json">
+  
+  <style>
+    #install-prompt {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #6B46C1 0%, #553C9A 100%);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(107, 70, 193, 0.4);
+      display: none;
+      align-items: center;
+      gap: 16px;
+      z-index: 10000;
+      max-width: 90%;
+      animation: slideUp 0.3s ease-out;
+    }
+    
+    @keyframes slideUp {
+      from {
+        transform: translateX(-50%) translateY(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    #install-prompt.show {
+      display: flex;
+    }
+    
+    #install-prompt button {
+      background: white;
+      color: #6B46C1;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    #install-prompt button:hover {
+      transform: scale(1.05);
+    }
+    
+    #install-prompt .close-btn {
+      background: transparent;
+      color: white;
+      padding: 4px 8px;
+      font-size: 20px;
+    }
+    
+    #install-prompt .message {
+      flex: 1;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <!-- PWA Install Prompt -->
+  <div id="install-prompt">
+    <div class="message">
+      📱 Install jPrime app for quick access!
+    </div>
+    <button id="install-btn">Install</button>
+    <button class="close-btn" id="close-btn">✕</button>
+  </div>
+
+  <script>
+    // PWA Install Prompt
+    let deferredPrompt;
+    const installPrompt = document.getElementById('install-prompt');
+    const installBtn = document.getElementById('install-btn');
+    const closeBtn = document.getElementById('close-btn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent the mini-infobar from appearing
+      e.preventDefault();
+      // Save the event
+      deferredPrompt = e;
+      // Show the install prompt after 3 seconds
+      setTimeout(() => {
+        installPrompt.classList.add('show');
+      }, 3000);
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) {
+        return;
+      }
+      // Show the install prompt
+      deferredPrompt.prompt();
+      // Wait for the user to respond
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`User response: ${outcome}`);
+      // Clear the prompt
+      deferredPrompt = null;
+      // Hide the install prompt
+      installPrompt.classList.remove('show');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      installPrompt.classList.remove('show');
+      // Store that user dismissed it
+      localStorage.setItem('pwa-prompt-dismissed', 'true');
+    });
+
+    // Check if user already dismissed
+    if (localStorage.getItem('pwa-prompt-dismissed') === 'true') {
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+      });
+    }
+
+    // Handle successful installation
+    window.addEventListener('appinstalled', () => {
+      console.log('PWA installed successfully');
+      installPrompt.classList.remove('show');
+    });
+  </script>
+  
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

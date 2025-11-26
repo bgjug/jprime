@@ -38,6 +38,8 @@ public class SecurityConfig {
             .cors(AbstractHttpConfigurer::disable)
             .authenticationProvider(provider)
             .authorizeHttpRequests(requests -> {
+                requests.requestMatchers("/app/**").permitAll();
+
                 requests.requestMatchers("/admin/**", "/raffle/**", "/api/**", "/user/**")
                     .hasAuthority("ADMIN");
 

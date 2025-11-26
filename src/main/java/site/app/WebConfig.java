@@ -7,7 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.MediaType;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -35,6 +37,12 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
+            .addResourceHandler("/app/**")
+            .addResourceLocations("classpath:/static/app/")
+            .setCachePeriod(0)
+            .resourceChain(false);
+
+        registry
             .addResourceHandler("/js/**", "/css/**", "/images/**", "/fonts/**", "/manifest.json", "/assets/**", "/sw.js", "/favicon.ico")
             .addResourceLocations("classpath:/static", "classpath:/static/js","classpath:/static/css", "classpath:/static/images", "classpath:/static/fonts", "classpath:/static/assets")
             .setCachePeriod(3600)
@@ -53,5 +61,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new LocalDateTimeConverter());
+    }
+
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer
+            .mediaType("wasm", new MediaType("application", "wasm"))
+            .mediaType("js", MediaType.APPLICATION_JSON)
+            .mediaType("json", MediaType.APPLICATION_JSON);
     }
 }
