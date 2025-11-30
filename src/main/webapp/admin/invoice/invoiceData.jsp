@@ -36,10 +36,18 @@
         </dl>
         <dl>
             <dt>
-                <label for="singlePriceWithVAT">Single price (VAT included)</label>
+                <label for="singlePriceWithVAT_BGN">Single price (BGN) (VAT included)</label>
             </dt>
             <dd>
-                <form:input path="singlePriceWithVAT"/>
+                <form:input path="singlePriceWithVAT_BGN"/>
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                <label for="singlePriceWithVAT_EUR">Single price (EUR) (VAT included)</label>
+            </dt>
+            <dd>
+                <form:input path="singlePriceWithVAT_EUR"/>
             </dd>
         </dl>
         <dl>
