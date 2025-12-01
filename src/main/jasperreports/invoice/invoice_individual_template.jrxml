@@ -262,7 +262,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 					<rightPen lineWidth="0.25"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="true"/>
+					<font fontName="DejaVu Sans" />
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{price_BGN}]]></textFieldExpression>
@@ -307,7 +307,7 @@ IBAN: BG59BPBI81701605596745]]></text>
 					<rightPen lineWidth="0.25"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="true"/>
+					<font fontName="DejaVu Sans"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{price_EUR}]]></textFieldExpression>
