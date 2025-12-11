@@ -40,8 +40,12 @@
         <dl>
             <dt>
                 <label for="level">Session level</label>
+                <p> We aim to offer a balanced mix of sessions across all levels, so selecting the correct level is important. Here’s how we define them:</p>
+                <p> <b> Beginner </b> Designed for junior developers or those coming from other programming languages and technologies. These sessions serve as introductions, providing foundational knowledge and context to help participants get started. </p>
+                <p> <b> Intermediate </b> Targeted at mid‑level developers with Java experience who may be new to the specific framework, library, or technology being discussed. These sessions build on existing skills and bridge gaps in understanding. </p>
+                <p> <b> Advanced </b> Intended for developers already familiar with the framework, library, or technology. These sessions dive into hidden complexities, advanced techniques, internal insights, and expert tips that go beyond the basics. </p>
             </dt>
-            <dd>
+            <dd> 
                 <form:select path="level" items="${levels}"/>
                 <form:errors path="level"/>
             </dd>
@@ -50,6 +54,10 @@
             <dt>
                 <label for="type">Session type</label>
             </dt>
+            <p> <b>Conference Talk </b> – A live session where speakers share insights through presentations, demos, or live coding, tailored for beginner, intermediate, or advanced audiences. </p>
+            <p> <b>Workshop </b>– A hands‑on session with guided steps where participants follow along on their laptops. </p>
+            <p> <b>Deep Dive </b>– A longer, advanced session with detailed explanations, discussions, and time for audience questions. </p>
+
             <dd>
                 <form:select path="type" items="${sessionTypes}"/>
                 <form:errors path="type"/>

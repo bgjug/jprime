@@ -138,7 +138,7 @@
                                 <th></th>
                                 <th>Hall A</th>
                                 <th>Hall B</th>
-                                <th>Workshops</th>
+                                <th>Workshops<br/>& Deep Dives</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -223,7 +223,7 @@
                             <th></th>
                             <th>Hall A</th>
                             <th>Hall B</th>
-                            <th>Workshops</th>
+                            <th>Workshops<br/>& Deep Dives</th>
                         </tr>
                         </thead>
                         <tbody>
