@@ -329,7 +329,7 @@
         <!-- because we want to start the spring-boot as a war-->
         <start-class>site.app.Application</start-class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <log4j2.version>2.20.0</log4j2.version>
+        <log4j2.version>2.25.3</log4j2.version>
     </properties>
 
     <build>
