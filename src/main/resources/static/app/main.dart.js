@@ -64813,7 +64813,7 @@ break}p.au(new A.a7Y(p,n))
 case 1:return A.O(q,r)}})
 return A.P($async$md,r)},
 Fj(a,b){var s,r,q=6e7,p=A.dA(A.bN(b),A.bu(b),A.c2(b),A.co(a.gby()),A.dq(a.gby()),0,0),o=A.dA(A.bN(b),A.bu(b),A.c2(b),A.co(a.gl4()),A.dq(a.gl4()),0,0),n=A.dA(A.bN(b),A.bu(b),A.c2(b),A.co(b),A.dq(b),0,0)
-if(n.Aq(p)&&n.uf(o)){s=B.f.cC(o.cn(p).a,q)
+if((n.a===p.a&&n.b===p.b||n.Aq(p))&&n.uf(o)){s=B.f.cC(o.cn(p).a,q)
 r=B.f.cC(n.cn(p).a,q)
 if(r<=5||r<s*0.2)return B.j8
 else if(B.f.cC(o.cn(n).a,q)<=5||r>s*0.8)return B.ja
@@ -64965,7 +64965,7 @@ this.aG()},
 VS(a){if(this.r||this.f.f.length===0)return
 $.a8.k4$.push(new A.a8P(this,a))},
 FC(a,b){var s,r,q=6e7,p=A.dA(A.bN(b),A.bu(b),A.c2(b),A.co(a.gby()),A.dq(a.gby()),0,0),o=A.dA(A.bN(b),A.bu(b),A.c2(b),A.co(a.gl4()),A.dq(a.gl4()),0,0),n=A.dA(A.bN(b),A.bu(b),A.c2(b),A.co(b),A.dq(b),0,0)
-if(n.Aq(p)&&n.uf(o)){s=B.f.cC(o.cn(p).a,q)
+if((n.a===p.a&&n.b===p.b||n.Aq(p))&&n.uf(o)){s=B.f.cC(o.cn(p).a,q)
 r=B.f.cC(n.cn(p).a,q)
 if(r<=5||r<s*0.2)return B.j8
 else if(B.f.cC(o.cn(n).a,q)<=5||r>s*0.8)return B.ja
@@ -65237,11 +65237,11 @@ A.CS.prototype={
 L(a){var s,r,q,p,o,n=null,m=Date.now(),l=A.CU("HH:mm").ib(new A.bz(m,0,!1))
 m=t.t_
 s=A.c([B.Z.cY(0),B.Z.cY(0.5),B.Z.cY(0.8)],m)
-s=A.jS(n,n,new A.dP(n,n,n,A.eS(4),n,new A.hT(B.c6,B.bA,B.bf,s,n,n),B.av),8,n,n,n)
+s=A.jS(n,n,new A.dP(n,n,n,A.eS(2),n,new A.hT(B.c6,B.bA,B.bf,s,n,n),B.av),4,n,n,n)
 r=A.c([B.Z.cY(0),B.Z,B.Z],m)
 q=t.sq
 p=t.p
-r=A.jX(A.x1(B.a3,A.c([s,A.jS(n,n,new A.dP(n,n,n,A.eS(1.5),A.c([new A.eU(2,B.cH,B.Z.cY(0.6),B.j,8)],q),new A.hT(B.c6,B.bA,B.bf,r,n,n),B.av),3,n,n,n)],p),B.Y,B.cv,n),1)
+r=A.jX(A.x1(B.a3,A.c([s,A.jS(n,n,new A.dP(n,n,n,A.eS(0.75),A.c([new A.eU(1,B.cH,B.Z.cY(0.6),B.j,4)],q),new A.hT(B.c6,B.bA,B.bf,r,n,n),B.av),1.5,n,n,n)],p),B.Y,B.cv,n),1)
 m=A.c([B.Z.cY(0.95),B.ax.cY(0.95)],m)
 s=A.eS(12)
 o=A.aig(B.Z.cY(0.8),2)
@@ -69812,7 +69812,7 @@ B.A7=new A.aI(-38e3)
 B.A8=new A.St(0,"tonalSpot")
 B.bJ=new A.b_(0,0,0,0)
 B.Aa=new A.b_(0,0,12,0)
-B.Ab=new A.b_(0,0,16,0)
+B.Ab=new A.b_(0,0,56,0)
 B.d6=new A.b_(0,8,0,8)
 B.Ad=new A.b_(12,12,12,12)
 B.kN=new A.b_(12,6,12,6)
