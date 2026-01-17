@@ -54,7 +54,7 @@ public class InvoiceService {
         if (registrant.isStudent()) {
             BigDecimal studentPrice = ticketPrices.get(TicketType.STUDENT).getPrice();
             result.addInvoiceDetail(
-                new InvoiceDetail(studentPrice, studentPrice.divide(TicketPrice.EUR_CONVERSION, 2, RoundingMode.HALF_UP), tickets, descriptionBg));
+                new InvoiceDetail(studentPrice, tickets, descriptionBg));
         } else {
             BigDecimal ticketPrice = ticketPrices.get(TicketType.REGULAR).getPrice();
 
@@ -65,7 +65,7 @@ public class InvoiceService {
                 registrationDate, LocalDateTime.now()).abs().getSeconds() <= Duration.of(3, ChronoUnit.DAYS).getSeconds()) {
                 ticketPrice = ticketPrices.get(TicketType.EARLY_BIRD).getPrice();
             }
-            result.addInvoiceDetail(new InvoiceDetail(ticketPrice, ticketPrice.divide(TicketPrice.EUR_CONVERSION, 2, RoundingMode.HALF_UP), tickets, descriptionBg));
+            result.addInvoiceDetail(new InvoiceDetail(ticketPrice, tickets, descriptionBg));
         }
 
         return result;

@@ -64,7 +64,7 @@
                                 <div class="member-name"><b>Bulgaria</b><br/><br/>
 
                                     <b>County entrance</b>: EU citizens do not require visa. Free entrance for Schengen visa holders. For other countries check <a href="https://visaguide.world/europe/bulgaria-visa/">here</a><br/>
-                                    <b>Local currency</b>: Bulgarian Lev. Fixed rate 1,95583 Lev/Euro<br/>
+                                    <b>Local currency</b>: Euro<br/>
                                     <br/>
                                     More info: <a href="https://en.wikipedia.org/wiki/Bulgaria">in Wikipedia</a>
                                 </div>
@@ -81,7 +81,7 @@
                                     Sofia Tech Park is located 6 km away from the Sofia International Airport.<br/>
                                     It usually takes up to 10 min to reach the venue with a car.<br/>
                                     <br/>
-                                    Average taxi price <b>0,40/0,45</b> Eurocent per km.
+                                    Average taxi price <b>0,40/0,45</b> EUR per km.
                                 </div>
                             </div>
                         </div>

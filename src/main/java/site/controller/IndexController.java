@@ -95,11 +95,8 @@ public class IndexController {
         Map<TicketType, TicketPrice> prices = branchService.getTicketPrices(currentBranch);
 
         model.addAttribute("early_bird_ticket_price", String.format("%.2f", prices.get(TicketType.EARLY_BIRD).getPrice()));
-        model.addAttribute("early_bird_ticket_price_eur", String.format("%.2f", prices.get(TicketType.EARLY_BIRD).eurPrice()));
         model.addAttribute("regular_ticket_price", String.format("%.2f",prices.get(TicketType.REGULAR).getPrice()));
-        model.addAttribute("regular_ticket_price_eur", String.format("%.2f",prices.get(TicketType.REGULAR).eurPrice()));
         model.addAttribute("student_ticket_price", String.format("%.2f",prices.get(TicketType.STUDENT).getPrice()));
-        model.addAttribute("student_ticket_price_eur", String.format("%.2f",prices.get(TicketType.STUDENT).eurPrice()));
 
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(currentBranch.getCfpCloseDate()));
         model.addAttribute("cfp_closed", currentBranch.getCfpCloseDate().isBefore(LocalDateTime.now()));

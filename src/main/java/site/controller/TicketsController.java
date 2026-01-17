@@ -126,7 +126,7 @@ public class TicketsController {
         InvoiceData invoiceData = buildInvoiceData(savedRegistrant);
 
         byte[] pdf = invoiceExporter.exportInvoice(invoiceData, registrant.isCompany(), BG);
-        sendPDF(savedRegistrant, generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT_BGN()), pdf);
+        sendPDF(savedRegistrant, generatePdfFilename(registrant, invoiceData.getTotalPriceWithVAT()), pdf);
         return result("ok", model);
     }
 
