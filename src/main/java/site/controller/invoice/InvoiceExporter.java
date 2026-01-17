@@ -99,7 +99,7 @@ public class InvoiceExporter {
         String description = "jPrime 2025 билет за конференция";
 
         BigDecimal singlePriceWithVAT_Student = BigDecimal.valueOf(65.0);
-        BigDecimal singlePriceWithVAT_Regular = BigDecimal.valueOf(160.0);
+        BigDecimal singlePriceWithVAT_Regular = BigDecimal.valueOf(170.0);
 
         data.addInvoiceDetail(
             new InvoiceDetail(singlePriceWithVAT_Student, 3, description));
@@ -111,7 +111,7 @@ public class InvoiceExporter {
 
             @Override
             public Branch getCurrentBranch() {
-                return new Branch(2025);
+                return new Branch(2026);
             }
         };
 

@@ -81,7 +81,7 @@
                                     Sofia Tech Park is located 6 km away from the Sofia International Airport.<br/>
                                     It usually takes up to 10 min to reach the venue with a car.<br/>
                                     <br/>
-                                    Average taxi price <b>0,40/0,45</b> Eurocent per km.
+                                    Average taxi price <b>0,40/0,45</b> EUR per km.
                                 </div>
                             </div>
                         </div>
