@@ -64,7 +64,7 @@
                                 <div class="member-name"><b>Bulgaria</b><br/><br/>
 
                                     <b>County entrance</b>: EU citizens do not require visa. Free entrance for Schengen visa holders. For other countries check <a href="https://visaguide.world/europe/bulgaria-visa/">here</a><br/>
-                                    <b>Local currency</b>: Bulgarian Lev. Fixed rate 1,95583 Lev/Euro<br/>
+                                    <b>Local currency</b>: Euro<br/>
                                     <br/>
                                     More info: <a href="https://en.wikipedia.org/wiki/Bulgaria">in Wikipedia</a>
                                 </div>

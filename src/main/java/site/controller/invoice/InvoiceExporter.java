@@ -98,14 +98,14 @@ public class InvoiceExporter {
 
         String description = "jPrime 2025 билет за конференция";
 
-        BigDecimal singlePriceWithVAT_Student = BigDecimal.valueOf(130.0);
-        BigDecimal singlePriceWithVAT_Regular = BigDecimal.valueOf(320.0);
+        BigDecimal singlePriceWithVAT_Student = BigDecimal.valueOf(65.0);
+        BigDecimal singlePriceWithVAT_Regular = BigDecimal.valueOf(160.0);
 
         data.addInvoiceDetail(
-            new InvoiceDetail(singlePriceWithVAT_Student, singlePriceWithVAT_Student.divide(TicketPrice.EUR_CONVERSION, 2, RoundingMode.HALF_UP), 3, description));
+            new InvoiceDetail(singlePriceWithVAT_Student, 3, description));
 
         data.addInvoiceDetail(
-            new InvoiceDetail(singlePriceWithVAT_Regular, singlePriceWithVAT_Regular.divide(TicketPrice.EUR_CONVERSION, 2, RoundingMode.HALF_UP), 3, description));
+            new InvoiceDetail(singlePriceWithVAT_Regular, 3, description));
 
         BranchService mockedService = new BranchService(null, null) {
 
