@@ -47,30 +47,22 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="images/slider/index2026_6.jpg" alt="First slide">
+            <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
             <div class="carousel-caption d-md-block">
                 <c:if test="${jprime_year != null}">
-                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>
-                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s">THE AI AGENTS ARE AMONG US !</h1>
-                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s">${conference_dates} @ Sofia Tech Park</p>
+                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s" style="color: #86E0EF !important;filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));text-shadow: 0 2px 10px rgb(0 0 0 / 45%);">jPrime ${jprime_year}</h1>
+                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s" style="color: #86E0EF !important;filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));text-shadow: 0 2px 10px rgb(0 0 0 / 45%);">THE AI AGENTS ARE AMONG US !</h1>
+                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s" style="color: #86E0EF !important;filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));text-shadow: 0 2px 10px rgb(0 0 0 / 45%);">${conference_dates} @ Sofia Tech Park</p>
                 </c:if>
 <%--                <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
                 <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->
             </div>
         </div>
-<%--        <div class="carousel-item">--%>
-<%--            <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">--%>
-<%--            <div class="carousel-caption d-md-block">--%>
-<%--                 <c:if test="${!cfp_closed}">--%>
-<%--                 <h1 class="wow bounceIn heading" data-wow-delay=".7s">CFP IS STILL OPEN!</h1>--%>
-<%--                 </c:if>--%>
-<%--            </div>--%>
-<%--        </div>--%>
         <div class="carousel-item">
-            <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide">
+            <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide" style="backdrop-filter: hue-rotate(30deg);">
             <div class="carousel-caption d-md-block">
                 <c:if test="${!cfp_closed}">
-                    <h1 class="wow bounceIn heading" data-wow-delay=".7s">Submit your proposal before ${cfp_close_date}!</h1>
+                    <h1 class="wow bounceIn heading" data-wow-delay=".7s" style="color: var(--bs-red);filter: drop-shadow(0 0 2px rgba(123, 0, 0, 0.8));text-shadow: 2px 2px 7px rgb(0 0 0 / 45%);">Submit your proposal before ${cfp_close_date}!</h1>
                     <a href="/cfp" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">CFP</a>
                 </c:if>
             </div>

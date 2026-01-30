@@ -1873,8 +1873,8 @@ blockquote {
   #main-slide .carousel-item .carousel-caption .heading {
     font-size: 48px;
     font-weight: 700;
-    color: #FFC107;
-    text-shadow: 3px 3px #000000;
+    color: var(--bs-primary);
+    text-shadow: 0px 0px 1px var(--bs-primary);
     text-transform: uppercase;
     letter-spacing: 0.1rem; }
 
@@ -1885,7 +1885,7 @@ blockquote {
 
 #main-slide .carousel-caption {
   position: absolute;
-  top: 35%; }
+  top: 22%; }
   #main-slide .carousel-caption .btn {
     margin: 25px 25px 0px 0px; }
 
