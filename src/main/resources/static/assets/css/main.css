@@ -1876,7 +1876,20 @@ blockquote {
     color: var(--bs-primary);
     text-shadow: 0px 0px 1px var(--bs-primary);
     text-transform: uppercase;
-    letter-spacing: 0.1rem; }
+    letter-spacing: 0.1rem;
+  }
+
+  .tron-heading {
+    color: #86E0EF !important;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8)) !important;
+    text-shadow: 0 2px 10px rgb(0 0 0 / 45%) !important;
+  }
+
+  .tron-subheading {
+    color: #86E0EF !important;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8)) !important ;
+    text-shadow: 0 2px 10px rgb(0 0 0 / 45%) !important;
+  }
 
 #main-slide .carousel-item.active .carousel-caption {
   opacity: 1;

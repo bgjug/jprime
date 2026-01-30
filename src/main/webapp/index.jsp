@@ -50,9 +50,9 @@
             <img class="d-block w-100" src="images/slider/index2.jpg" alt="First slide">
             <div class="carousel-caption d-md-block">
                 <c:if test="${jprime_year != null}">
-                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s" style="color: #86E0EF !important;filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));text-shadow: 0 2px 10px rgb(0 0 0 / 45%);">jPrime ${jprime_year}</h1>
-                    <h1 class="wow fadeInDown heading" data-wow-delay=".4s" style="color: #86E0EF !important;filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));text-shadow: 0 2px 10px rgb(0 0 0 / 45%);">THE AI AGENTS ARE AMONG US !</h1>
-                    <p class="fadeInUp wow carousel-jprime" data-wow-delay=".6s" style="color: #86E0EF !important;filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));text-shadow: 0 2px 10px rgb(0 0 0 / 45%);">${conference_dates} @ Sofia Tech Park</p>
+                    <h1 class="wow fadeInDown heading tron-heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>
+                    <h1 class="wow fadeInDown heading tron-subheading" data-wow-delay=".4s">THE AI AGENTS ARE AMONG US !</h1>
+                    <p class="fadeInUp wow carousel-jprime tron-subheading" data-wow-delay=".6s">${conference_dates} @ Sofia Tech Park</p>
                 </c:if>
 <%--                <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
                 <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->
