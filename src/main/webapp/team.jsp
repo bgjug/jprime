@@ -104,7 +104,7 @@
                     <div class="team-overlay">
                         <div class="overlay-social-icon text-center">
                             <ul class="social-icons">
-                                <li><a href="https://x.com/mihailstoynov"><i class="fa-brands fa-x" aria-hidden="true"></i></a></li>
+                                <li><a href="https://x.com/martin_fmi"><i class="fa-brands fa-x" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                     <div class="team-overlay">
                         <div class="overlay-social-icon text-center">
                             <ul class="social-icons">
-                                <li><a href="https://x.com/martin_fmi"><i class="fa-brands fa-x" aria-hidden="true"></i></a></li>
+                                <li><a href="https://x.com/mihailstoynov"><i class="fa-brands fa-x" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </div>
