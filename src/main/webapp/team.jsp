@@ -100,25 +100,6 @@
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="team-item text-center">
                 <div class="team-img">
-                    <img class="img-fluid" src="/images/team/martin.jpg" alt="">
-                    <div class="team-overlay">
-                        <div class="overlay-social-icon text-center">
-                            <ul class="social-icons">
-                                <li><a href="https://x.com/martin_fmi"><i class="fa-brands fa-x" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-text">
-                    <h3>Martin&nbsp;Toshev</h3>
-                    <p></p>
-                </div>
-                <div class="team-text">Martin is a Java enthusiast. He is a graduate of Computer Science from the University of Sofia. He is also a certified Java professional (SCJP6) and a certified IBM cloud computing solution advisor. His areas of interest include the wide range of Java-related technologies (such as Servlets, JSP, JAXB, JAXP, JMS, JMX, JAX-RS, JAX-WS, Hibernate, Spring Framework, Liferay Portal and Eclipse RCP), cloud computing technologies, cloud-based software architectures, enterprise application integration, relational and NoSQL databases. You can reach him for any Java and FOSS-related topics (especially Eclipse and the OpenJDK).<br /><a href="https://martin-toshev.com/">martin-toshev.com/</a></div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="team-item text-center">
-                <div class="team-img">
                     <img class="img-fluid" src="/images/team/mihail.jpg" alt="">
                     <div class="team-overlay">
                         <div class="overlay-social-icon text-center">
