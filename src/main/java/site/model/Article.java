@@ -44,6 +44,7 @@ public class Article extends AbstractEntity {
     private Collection<Tag> tags = new HashSet<>();
 
     public Article() {
+        title = "";
     }
 
     public Article(String title, String text) {
