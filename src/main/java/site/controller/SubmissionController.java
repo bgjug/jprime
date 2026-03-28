@@ -231,6 +231,8 @@ public class SubmissionController extends AbstractCfpController {
 
     private String buildMessage(Submission submission, String fileName) throws IOException {
         String messageText = resourceAsString(fileName);
+        var aMonthFromCfpClose = DateUtils.dateToStringWithMonthAndYear(submission.getBranch().getCfpCloseDate().plusMonths(1));
+        messageText = messageText.replace("{due.date}", aMonthFromCfpClose);
         messageText = messageText.replace("{speaker.firstName}", submission.getSpeaker().getFirstName());
         messageText = messageText.replace("{submission.title}", submission.getTitle());
         messageText = messageText.replace("{submission.year}",
