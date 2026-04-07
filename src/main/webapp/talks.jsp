@@ -50,6 +50,7 @@
                 <h2>${talk.submission.title}</h2>
                 <c:if test="${not agenda}"><p>The agenda is not yet available </p></c:if>
                 <c:if test="${agenda}"><p>The agenda for jPrime <fmt:formatDate pattern="YYYY" value="${firstDayDate}" /> is now available!</p>
+                <p>You can track the agenda from your mobile phone also from our PWA app available at <a href="/app">https://jprime.io/app</a></p>
                     <div class="entry-content">
                         <style>
                             table{
@@ -60,12 +61,12 @@
                                 font-weight: bolder;
                             }
 
-                            media="all" tr {
+                            tr {
                                             display: table-row;
                                             vertical-align: inherit;
                                             border-color: inherit;
                                         }
-                            media="all"
+                            
                             table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, table tbody tr td, table tr td {
                                 display: table-cell;
                                 line-height: 1.125rem;
