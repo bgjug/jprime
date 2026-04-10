@@ -32,6 +32,7 @@ public class SpeakerController {
     @GetMapping("/speakers")
     public String speakers(Pageable pageable, Model model) {
         List<Speaker> acceptedSpeakers = userService.findConfirmedSpeakers();
+        acceptedSpeakers.forEach(Speaker::fixXHandle);
         Page<Speaker> speakers = new PageImpl<>(acceptedSpeakers, pageable, acceptedSpeakers.size());
         model.addAttribute("speakers", speakers);
 
@@ -50,6 +51,7 @@ public class SpeakerController {
         }
 
         speaker.updateFlags(branchService.getCurrentBranch());
+        speaker.fixXHandle();
         if (userService.isSpeakerConfirmed(speaker) || speaker.isFeatured()) {
             model.addAttribute("speaker", speaker);
         }

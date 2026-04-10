@@ -21,6 +21,7 @@ import jakarta.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.apache.commons.lang3.StringUtils;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -244,5 +245,32 @@ public class Speaker extends User {
 
     public void setStatus(SubmissionStatus status) {
         this.status = status;
+    }
+
+    public void fixXHandle() {
+        if (StringUtils.isBlank(getTwitter())) {
+            return;
+        }
+        if (getTwitter().startsWith("@")) {
+            twitter = twitter.substring(1);
+        }
+        if(getTwitter().startsWith("https://")) {
+            twitter = twitter.substring(8);
+        }
+        if(getTwitter().startsWith("http://")) {
+            twitter = twitter.substring(7);
+        }
+
+        if(getTwitter().startsWith("twitter.com/")) {
+            twitter = twitter.substring(12);
+        }
+
+        if (getTwitter().startsWith("x.com/")) {
+            twitter = twitter.substring(6);
+        }
+
+        if (getTwitter().contains("/")) {
+            twitter = null;
+        }
     }
 }
