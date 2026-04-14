@@ -73,6 +73,7 @@ class SimpleControllersTest {
         // Create test sponsor with logo
         testSponsor = new Sponsor();
         testSponsor.setCompanyName("Test Sponsor");
+        testSponsor.setEmail("sponsor@example.com");
         testSponsor.setSponsorPackage(SponsorPackage.GOLD);
         testSponsor.setLogo(new byte[]{10, 20, 30, 40, 50});
         testSponsor = sponsorRepository.save(testSponsor);
