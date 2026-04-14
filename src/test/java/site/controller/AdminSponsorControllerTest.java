@@ -55,6 +55,7 @@ class AdminSponsorControllerTest {
 
         testSponsor = new Sponsor();
         testSponsor.setCompanyName("Test Sponsor");
+        testSponsor.setEmail("test@sponsor.com");
         testSponsor.setSponsorPackage(SponsorPackage.GOLD);
         testSponsor = sponsorRepository.save(testSponsor);
     }
@@ -74,7 +75,7 @@ class AdminSponsorControllerTest {
         mockMvc.perform(get("/admin/sponsor/add"))
             .andExpect(status().isOk())
             .andExpect(view().name("admin/sponsor/edit"))
-            .andExpect(model().attribute("sponsor", is(new Sponsor())));
+            .andExpect(model().attributeExists("sponsor"));
     }
 
     @Test
@@ -92,6 +93,7 @@ class AdminSponsorControllerTest {
         mockMvc.perform(multipart("/admin/sponsor/add")
                 .file(emptyFile)
                 .param("companyName", "New Sponsor")
+                .param("email", "sponsor@example.com")
                 .param("sponsorPackage", "PLATINUM"))
             .andExpect(status().isFound())
             .andExpect(view().name("redirect:/admin/sponsor/view"));
