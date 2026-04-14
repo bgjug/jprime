@@ -1,0 +1,81 @@
+name: PR Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate:
+    name: Validate PR
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better analysis
+        
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+      
+      # Step 1: Compile
+      - name: 📦 Compile code
+        run: mvn clean compile -B -DskipTests
+        
+      # Step 2: Run HTML/JSP Validation First (Fast Fail)
+      - name: 🔍 Validate HTML/JSP files
+        run: mvn test -Dtest="HtmlJspValidationTest" -B
+        
+      # Step 3: Run Repository Integration Tests
+      - name: 🗄️ Run Repository Tests
+        run: mvn test -Dtest="*ITest" -B
+        
+      # Step 4: Run Controller Tests
+      - name: 🎮 Run Controller Tests
+        run: mvn test -Dtest="*ControllerTest" -B
+        
+      # Step 5: Run All Other Tests
+      - name: 🧪 Run All Tests
+        run: mvn test -B
+        
+      # Step 6: Generate Coverage
+      - name: 📊 Generate Coverage Report
+        if: success()
+        run: mvn jacoco:report
+        
+      # Upload Artifacts
+      - name: 📤 Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            target/surefire-reports/
+            target/site/jacoco/
+          retention-days: 30
+          
+      # Comment on PR with Results
+      - name: 💬 Comment Test Results on PR
+        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: |
+            target/surefire-reports/*.xml
+          comment_title: '🧪 Test Results Summary'
+          check_name: 'Test Results'
+          comment_mode: update last
+          
+      # Add Status Check
+      - name: ✅ Update Status
+        if: always()
+        run: |
+          if [ -f target/surefire-reports/TEST-*.xml ]; then
+            echo "Tests completed"
+          else
+            echo "No tests found"
+            exit 1
+          fi
