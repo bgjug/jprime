@@ -15,7 +15,6 @@
 
 	<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
 	<title>Visitors</title>
 </head>
 <body>
