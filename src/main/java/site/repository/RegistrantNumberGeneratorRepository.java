@@ -7,7 +7,7 @@ import site.model.Registrant;
 
 @NoRepositoryBean
 public interface RegistrantNumberGeneratorRepository<T extends Registrant.NumberGenerator> extends
-    JpaRepository<T, Long> {
+    JpaRepository<T, Integer> {
     T findFirstByOrderByIdAsc();
 
     default Class<?> repositoryClass() {
