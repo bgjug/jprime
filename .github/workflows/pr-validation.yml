@@ -67,7 +67,7 @@ jobs:
             target/surefire-reports/*.xml
           comment_title: '🧪 Test Results Summary'
           check_name: 'Test Results'
-          comment_mode: update last
+          comment_mode: always
           
       # Add Status Check
       - name: ✅ Update Status
