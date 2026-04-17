@@ -73,7 +73,7 @@ jobs:
       - name: ✅ Update Status
         if: always()
         run: |
-          if [ -f target/surefire-reports/TEST-*.xml ]; then
+          if ls target/surefire-reports/TEST-*.xml 1>/dev/null 2>&1; then
             echo "Tests completed"
           else
             echo "No tests found"
