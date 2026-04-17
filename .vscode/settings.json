@@ -1,0 +1,49 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.compile.nullAnalysis.nullable": [
+        "org.jspecify.annotations.Nullable"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.server.launchMode": "Standard",
+    "java.autobuild.enabled": false,
+    "java.edit.validateAllOpenBuffersOnChanges": "disabled",
+    "java.sharedIndexes.enabled": "auto",
+    "java.import.maven.disableTestClasspathFlag": true,
+    "java.implementationCodeLens": false,
+    "java.referencesCodeLens.enabled": false,
+    "java.inlayHints.parameterNames.enabled": "none",
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx3000m -Xms128m -Xlog:disable",
+    // "java.compile.nullAnalysis.nonnull": ["org.jspecify.annotations.NonNull"],
+    "java.maven.downloadSources": true,
+    "java.trace.server": "verbose",
+    "maven.completion.gavEnabled": false,
+    "files.exclude": {
+        "**/target": true,
+        "**/.idea": true,
+        "**/*.class": true
+    },
+    "files.watcherExclude": {
+        "**/target/**": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true
+    },
+    "search.exclude": {
+        "**/target": true,
+        "**/.idea": true
+    },
+    "java.test.config": {},
+    "java.test.defaultConfig": "",
+    "extensions.experimental.affinity": {
+        "redhat.java": 1,
+        "vscjava.vscode-maven": 1,
+        "vscjava.vscode-java-debug": 1,
+        "vscjava.vscode-java-test": 1,
+        "vscjava.vscode-java-dependency": 1,
+        "vscjava.vscode-java-pack": 1,
+        "shengchen.vscode-checkstyle": 1,
+        "vmware.vscode-spring-boot": 2,
+        "vscjava.vscode-spring-boot-dashboard": 2,
+        "VisualStudioExptTeam.vscodeintellicode": 1
+    }
+}
