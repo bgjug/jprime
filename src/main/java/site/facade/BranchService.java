@@ -1,6 +1,5 @@
 package site.facade;
 
-import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -9,16 +8,13 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -26,7 +22,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import site.model.Branch;
-import site.model.BranchEnum;
 import site.model.SponsorPackage;
 import site.model.TicketPrice;
 import site.model.TicketType;
@@ -37,9 +32,6 @@ import site.repository.TicketPriceRepository;
 @Transactional
 public class BranchService {
 
-    @Value("${branch.data.preload:true}")
-    private boolean preloadData;
-
     private static final long FOUR_HOURS = 4 * 60 * 60 * 1000L;
 
     private final BranchRepository branchRepository;
@@ -49,61 +41,6 @@ public class BranchService {
     public BranchService(BranchRepository branchRepository, TicketPriceRepository ticketPriceRepository) {
         this.branchRepository = branchRepository;
         this.ticketPriceRepository = ticketPriceRepository;
-    }
-
-    @PostConstruct
-    public void init() {
-        if (!preloadData) {
-            return;
-        }
-        if (preloadBranches()) {
-            preloadTicketPrices();
-        }
-    }
-
-    private void preloadTicketPrices() {
-        Branch branch2024 = findBranchByYear(2024);
-        Branch branch2025 = findBranchByYear(2025);
-
-        List<TicketPrice> ticketPrices = List.of(
-            new TicketPrice(BigDecimal.valueOf(280.0), TicketType.REGULAR, branch2024,
-                branch2024.getCfpCloseDate(), null),
-            new TicketPrice(BigDecimal.valueOf(180.0), TicketType.EARLY_BIRD, branch2024, null,
-                branch2024.getCfpCloseDate()),
-            new TicketPrice(BigDecimal.valueOf(100.0), TicketType.STUDENT, branch2024),
-            new TicketPrice(BigDecimal.valueOf(340.0), TicketType.REGULAR, branch2025,
-                branch2025.getCfpCloseDate(), null),
-            new TicketPrice(BigDecimal.valueOf(230.0), TicketType.EARLY_BIRD, branch2025, null,
-                branch2025.getCfpCloseDate()),
-            new TicketPrice(BigDecimal.valueOf(130.0), TicketType.STUDENT, branch2025));
-
-        updateTicketPrices(ticketPrices, branch2025);
-    }
-
-    private boolean preloadBranches() {
-        Optional<Branch> branch2015 = branchRepository.findByYear(2015);
-        if (branch2015.isEmpty()) {
-            return false;
-        }
-
-        if (branch2015.get().getStartDate() != null) {
-            return false;
-        }
-
-        Arrays.stream(BranchEnum.values()).forEach(branch -> {
-            if (branch.getYear() < 2023) {
-                createBranch(branch.getYear(), branch.getStartDate());
-            } else {
-                createBranch(branch.getYear(), branch.getStartDate(), Duration.ofDays(2),
-                    branch.getCfpOpenDate(), branch.getCfpCloseDate(), Arrays.stream(SponsorPackage.values())
-                        .filter(branch::isSoldOut)
-                        .collect(Collectors.toSet()), branch.isSoldOut());
-            }
-        });
-
-        setAsCurrent(branchRepository.findByYear(branchRepository.findAll().stream().map(Branch::getYear).reduce(Integer::max).orElseThrow(
-            IllegalStateException::new)).orElseThrow(IllegalArgumentException::new).getLabel());
-        return true;
     }
 
     @CacheEvict(value = "currentBranch", allEntries = true)
