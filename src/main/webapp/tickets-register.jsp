@@ -228,14 +228,17 @@
                 case 0:
                     $(this).attr("id", "visitors" + index + ".name");
                     $(this).attr("name", "visitors[" + index + "].name");
+                    $(this).val("");
                     break;
                 case 1:
                     $(this).attr("id", "visitors" + index + ".email");
                     $(this).attr("name", "visitors[" + index + "].email");
+                    $(this).val("");
                     break;
                 case 2:
                     $(this).attr("id", "visitors" + index + ".company");
                     $(this).attr("name", "visitors[" + index + "].company");
+                    $(this).val("");
                     break;
             }
         });

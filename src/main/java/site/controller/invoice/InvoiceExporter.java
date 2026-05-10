@@ -96,7 +96,7 @@ public class InvoiceExporter {
         data.setInvoiceType("Проформа");
         data.setPaymentType("пеймънт");
 
-        String description = "jPrime 2025 билет за конференция";
+        String description = "JPrime 2026 билет за конференция";
 
         BigDecimal singlePriceWithVAT_Student = BigDecimal.valueOf(65.0);
         BigDecimal singlePriceWithVAT_Regular = BigDecimal.valueOf(170.0);
