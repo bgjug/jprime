@@ -45,7 +45,6 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <p>
                     <h2>Buy conference tickets</h2>
                     <p>
                         <%-- <p style="text-decoration: line-through;"> --%>
@@ -120,7 +119,7 @@
                         <form:hidden path="id"/>
                         <p>
                             <c:url var="captchaUrl" value="/captcha-image"/>
-                            <img src="${captchaUrl}"/>
+                            <img src="${captchaUrl}" alt="captcha"/>
                             <form:input path="captcha"/>
                             <form:errors path="captcha"/>
                         </p>
@@ -161,7 +160,6 @@
                     <%--</form>--%>
 
                     <p>In case of questions, contact us at <a href="mailto:conference@jprime.io">conference@jprime.io</a>.</p>
-                </p>
             </div>
         </div>
     </div>
@@ -228,14 +226,17 @@
                 case 0:
                     $(this).attr("id", "visitors" + index + ".name");
                     $(this).attr("name", "visitors[" + index + "].name");
+                    $(this).val("");
                     break;
                 case 1:
                     $(this).attr("id", "visitors" + index + ".email");
                     $(this).attr("name", "visitors[" + index + "].email");
+                    $(this).val("");
                     break;
                 case 2:
                     $(this).attr("id", "visitors" + index + ".company");
                     $(this).attr("name", "visitors[" + index + "].company");
+                    $(this).val("");
                     break;
             }
         });
