@@ -36,7 +36,6 @@ import org.springframework.stereotype.Service;
 import site.controller.invoice.InvoiceLanguage;
 
 import static org.apache.commons.beanutils.PropertyUtils.getProperty;
-import static site.controller.invoice.InvoiceLanguage.BG;
 import static site.controller.invoice.InvoiceLanguage.EN;
 
 @Service
@@ -124,7 +123,7 @@ public class TicketExporter {
         data.addDetail(new TicketDetail(UUID.randomUUID().toString(), "Hristo Kolev", "Visitor - Sponsored"));
         data.addDetail(new TicketDetail(UUID.randomUUID().toString(), "Venkat Subramaniam", "Speaker"));
 
-        Files.write(Paths.get("ticket_test.pdf"), new TicketExporter().exportTicket(data, BG));
+        Files.write(Paths.get("ticket_test.pdf"), new TicketExporter().exportTicket(data, EN));
 
         Files.write(Paths.get("test_qr_code.png"), new TicketExporter().generateTicketQrCode(data));
     }
