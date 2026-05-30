@@ -1,5 +1,7 @@
 package site.facade;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -52,6 +54,8 @@ public class TicketService {
 
     @Autowired
     private TemplateEngine templateEngine;
+
+    private volatile Instant lastSendErrorTimeStamp;
 
     /**
      * Sends tickets to all visitors that have been paid or are sponsored.
@@ -132,6 +136,11 @@ public class TicketService {
                 return Pair.of(visitor, true);
             } catch (MessagingException e) {
                 log.error("Unable to send ticket {} to {}", visitor.getTicket(), email);
+                if (lastSendErrorTimeStamp == null || Duration.between(lastSendErrorTimeStamp, Instant.now())
+                    .toMinutes() > 1) {
+                    lastSendErrorTimeStamp = Instant.now();
+                    log.error("Error message: {}", e.getMessage());
+                }
                 return Pair.of(visitor, false);
             }
         }).toList();
