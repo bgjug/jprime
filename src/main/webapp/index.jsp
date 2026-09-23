@@ -51,7 +51,6 @@
             <div class="carousel-caption d-md-block">
                 <c:if test="${jprime_year != null}">
                     <h1 class="wow fadeInDown heading tron-heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>
-                    <h1 class="wow fadeInDown heading tron-subheading" data-wow-delay=".4s">THE AI AGENTS ARE AMONG US !</h1>
                     <p class="fadeInUp wow carousel-jprime tron-subheading" data-wow-delay=".6s">${conference_dates} @ Sofia Tech Park</p>
                 </c:if>
 <%--                <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>--%>
