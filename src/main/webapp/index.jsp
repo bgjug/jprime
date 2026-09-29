@@ -388,7 +388,7 @@
 <!-- Counter Area End-->
 
 <!-- Ticket Pricing Area Start -->
-<section id="pricing" class="section-padding">
+<section id="pricing" class="section-padding" style="display: none">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -938,7 +938,7 @@
 <!-- Subscribe Area End -->
 
 <!-- Sponsors Pricing Area Start -->
-<section id="pricing" class="section-padding">
+<section id="pricing" class="section-padding" style="display: none">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
