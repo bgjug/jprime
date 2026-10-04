@@ -70,16 +70,6 @@ public class CfpController extends AbstractCfpController {
         }
 
         Speaker me = accounts.currentSpeaker(auth);
-        copyDataFromSubmission(me, submission.getSpeaker());
-        formatPicture(me, speakerImage);
-        fixTwitterHandle(me);
-        submission.setSpeaker(me);
-
-        submission.setId(null);
-        submission.setStatus(SubmissionStatus.SUBMITTED);
-        submission.setFeatured(false);
-        submission.setBranch(branchService.getCurrentBranch());
-
         if (hasCoSpeaker(submission)) {
             Speaker typed = submission.getCoSpeaker();
             Supplier<String> onError = () -> goToCFP(submission, model);
@@ -111,6 +101,16 @@ public class CfpController extends AbstractCfpController {
         } else {
             submission.setCoSpeaker(null);
         }
+
+        copyDataFromSubmission(me, submission.getSpeaker());
+        formatPicture(me, speakerImage);
+        fixTwitterHandle(me);
+        submission.setSpeaker(me);
+
+        submission.setId(null);
+        submission.setStatus(SubmissionStatus.SUBMITTED);
+        submission.setFeatured(false);
+        submission.setBranch(branchService.getCurrentBranch());
 
         try {
             userFacade.submitTalk(submission);

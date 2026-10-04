@@ -3,6 +3,8 @@ package site.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpSession;
 
 import org.assertj.core.api.Assertions;
@@ -68,6 +70,9 @@ class CfpControllerTest {
 
     @Autowired
     private SpeakerRepository speakerRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private MailServiceMock mailerMock;
 
@@ -302,5 +307,25 @@ class CfpControllerTest {
         assertThat(unchanged.getFirstName(), is("Other"));
         Speaker created = speakerRepository.findByEmail("new@x.io");
         assertThat(created.getId().equals(other.getId()), is(false));
+    }
+
+    @Test
+    void rejectedSubmissionDoesNotChangeProfile() throws Exception {
+        saveSpeaker("ivan@jprime.io", "Ivan", "Original");
+        mockMvc.perform(cfp("ivan@jprime.io", "speaker.bio", "Changed", "coSpeaker.email", "new@x.io"))
+            .andExpect(model().attributeHasFieldErrors("submission", "coSpeaker.firstName"));
+
+        entityManager.flush();
+        entityManager.clear();
+        assertThat(speakerRepository.findByEmail("ivan@jprime.io").getBio(), is("Original"));
+    }
+
+    @Test
+    void getPrefillsLoggedInSpeaker() throws Exception {
+        saveSpeaker("ivan@jprime.io", "Ivan", "Original");
+        mockMvc.perform(get("/cfp").with(user("ivan@jprime.io")))
+            .andExpect(model().attribute("submission", org.hamcrest.Matchers.hasProperty("speaker",
+                org.hamcrest.Matchers.allOf(org.hamcrest.Matchers.hasProperty("email", is("ivan@jprime.io")),
+                    org.hamcrest.Matchers.hasProperty("bio", is("Original"))))));
     }
 }
