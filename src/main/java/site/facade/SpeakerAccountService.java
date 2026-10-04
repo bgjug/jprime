@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -41,6 +42,9 @@ public class SpeakerAccountService {
         } else {
             throw new IllegalStateException("Unsupported authentication: " + auth);
         }
+        if (StringUtils.isBlank(email)) {
+            throw new IllegalStateException("Authentication carries no email");
+        }
         return email.trim();
     }
 
@@ -54,7 +58,7 @@ public class SpeakerAccountService {
             return Optional.of(speaker);
         }
         userRepository.convertToSpeaker(user.getId());
-        entityManager.unwrap(org.hibernate.Session.class).evict(user);
+        entityManager.unwrap(Session.class).evict(user);
         return Optional.ofNullable(speakerRepository.findByEmail(email));
     }
 
@@ -75,7 +79,7 @@ public class SpeakerAccountService {
     private static void names(OAuth2User principal, Speaker speaker) {
         if (principal.getAttribute("given_name") != null) {
             speaker.setFirstName(principal.getAttribute("given_name"));
-            speaker.setLastName(principal.getAttribute("family_name"));
+            speaker.setLastName(StringUtils.trimToEmpty(principal.getAttribute("family_name")));
             return;
         }
         String name = StringUtils.trimToEmpty(principal.getAttribute("name"));

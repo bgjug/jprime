@@ -1,5 +1,6 @@
 package site.facade;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -94,5 +97,31 @@ class SpeakerAccountServiceTest {
     @Test
     void findOrPromoteUnknownIsEmpty() {
         assertTrue(svc.findOrPromote("nobody@x.io").isEmpty());
+    }
+
+    @Test
+    void googleOidcUsesGivenAndFamilyName() {
+        OidcIdToken token = new OidcIdToken("t", Instant.now(), Instant.now().plusSeconds(60),
+            Map.of("sub", "1", "email", "grace@x.io", "given_name", "Grace", "family_name", "Hopper"));
+        Speaker s = svc.currentSpeaker(new OAuth2AuthenticationToken(new DefaultOidcUser(List.of(), token), List.of(), "google"));
+        assertEquals("Grace", s.getFirstName());
+        assertEquals("Hopper", s.getLastName());
+    }
+
+    @Test
+    void googleOidcWithoutFamilyNameUsesEmpty() {
+        OidcIdToken token = new OidcIdToken("t", Instant.now(), Instant.now().plusSeconds(60),
+            Map.of("sub", "1", "email", "cher@x.io", "given_name", "Cher"));
+        Speaker s = svc.currentSpeaker(new OAuth2AuthenticationToken(new DefaultOidcUser(List.of(), token), List.of(), "google"));
+        assertEquals("", s.getLastName());
+    }
+
+    @Test
+    void missingOrBlankOAuthEmailRejected() {
+        Authentication none = new OAuth2AuthenticationToken(new DefaultOAuth2User(List.of(),
+            Map.of("id", 1, "name", "Ada Lovelace"), "id"), List.of(), "github");
+        assertThrows(IllegalStateException.class, () -> svc.currentSpeaker(none));
+        assertThrows(IllegalStateException.class, () -> svc.currentSpeaker(github("  ", "Ada Lovelace")));
+        assertTrue(speakerRepository.findAll().stream().noneMatch(sp -> sp.getEmail() == null || sp.getEmail().isBlank()));
     }
 }
