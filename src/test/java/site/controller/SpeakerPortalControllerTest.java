@@ -246,4 +246,24 @@ class SpeakerPortalControllerTest {
         return multipart("/my/profile").with(user("ivan@jprime.io").roles("USER")).with(csrf())
             .param("firstName", "Ivan").param("lastName", "Ivanov").param("bio", bio);
     }
+
+    @Test
+    void nonImageUploadGivesFieldErrorAndKeepsPicture() throws Exception {
+        mockMvc.perform(multipart("/my/profile")
+                .file(new org.springframework.mock.web.MockMultipartFile("picture", "a.txt", "text/plain",
+                    "not an image".getBytes()))
+                .with(user("ivan@jprime.io").roles("USER")).with(csrf())
+                .param("firstName", "Ivan").param("lastName", "Ivanov").param("bio", "B"))
+            .andExpect(status().isOk())
+            .andExpect(view().name("my-profile"))
+            .andExpect(model().attributeHasFieldErrors("profile", "picture"));
+        assertThat(speakerRepository.findByEmail("ivan@jprime.io").getPicture()).isNull();
+    }
+
+    @Test
+    void overlongHeadlineRejected() throws Exception {
+        mockMvc.perform(profilePost("B").param("headline", "x".repeat(256)))
+            .andExpect(view().name("my-profile"))
+            .andExpect(model().attributeHasFieldErrors("profile", "headline"));
+    }
 }

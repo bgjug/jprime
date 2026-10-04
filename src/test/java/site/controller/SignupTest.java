@@ -130,4 +130,13 @@ class SignupTest {
 		User a = userRepository.findUserByEmail("attacker@x.io");
 		assertThat(a.getId(), not(equalTo(victim.getId())));
 	}
+
+	@Test
+	void firstNameIsHtmlEscapedInMail() throws Exception {
+		mockMvc.perform(post("/signup").param("firstName", "<b>x</b>").param("lastName", "L").param("email", "ada@x.io"))
+				.andExpect(status().isOk());
+		String text = mailer.getMessageTexts().get(0);
+		assertThat(text, containsString("&lt;b&gt;x&lt;/b&gt;"));
+		assertThat(text, not(containsString("<b>x</b>")));
+	}
 }

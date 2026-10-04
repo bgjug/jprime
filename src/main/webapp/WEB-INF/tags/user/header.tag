@@ -1,5 +1,6 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <!-- Header Area wrapper Starts -->
@@ -91,6 +92,13 @@
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
+                    <sec:authorize access="isAuthenticated()">
+                        <li class="nav-item"><a class="nav-link" href="/my">My talks</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                    </sec:authorize>
+                    <sec:authorize access="isAnonymous()">
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    </sec:authorize>
                 </ul>
             </div>
         </div>
@@ -143,6 +151,13 @@
                     <a href="/nav/${tag.name}"><c:out value="${tag.name}"/></a>
                 </li>
             </c:forEach>
+            <sec:authorize access="isAuthenticated()">
+                <li><a href="/my">My talks</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+                <li><a href="/login">Login</a></li>
+            </sec:authorize>
         </ul>
         <!-- Mobile Menu End -->
     </nav>

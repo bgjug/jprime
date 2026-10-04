@@ -69,11 +69,21 @@ public class CfpController extends AbstractCfpController {
             return goToCFP(submission, model);
         }
 
-        Speaker me = accounts.currentSpeaker(auth);
+        Supplier<String> onError = () -> goToCFP(submission, model);
+        Speaker current = accounts.currentSpeaker(auth);
+        Speaker scratch = new Speaker();
+        scratch.setFirstName(current.getFirstName());
+        scratch.setLastName(current.getLastName());
+        scratch.setBio(current.getBio());
+        copyDataFromSubmission(scratch, submission.getSpeaker());
+        String invalid = validateSpeaker(scratch, bindingResult, "speaker", onError);
+        if (invalid != null) {
+            return invalid;
+        }
+        String myEmail = accounts.email(auth);
         if (hasCoSpeaker(submission)) {
             Speaker typed = submission.getCoSpeaker();
-            Supplier<String> onError = () -> goToCFP(submission, model);
-            if (typed.getEmail().trim().equalsIgnoreCase(me.getEmail())) {
+            if (typed.getEmail().trim().equalsIgnoreCase(myEmail)) {
                 bindingResult.addError(
                     new FieldError("submission", "coSpeaker.email", "You can't be your own co-speaker"));
                 return onError.get();
@@ -102,6 +112,8 @@ public class CfpController extends AbstractCfpController {
             submission.setCoSpeaker(null);
         }
 
+        // promoting a plain-User co-speaker clears the persistence context, so re-resolve
+        Speaker me = accounts.currentSpeaker(auth);
         copyDataFromSubmission(me, submission.getSpeaker());
         formatPicture(me, speakerImage);
         fixTwitterHandle(me);

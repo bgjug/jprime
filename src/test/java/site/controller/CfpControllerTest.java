@@ -31,8 +31,10 @@ import site.model.SessionLevel;
 import site.model.Submission;
 import site.model.SubmissionStatus;
 import site.model.Speaker;
+import site.model.User;
 import site.repository.SpeakerRepository;
 import site.repository.SubmissionRepository;
+import site.repository.UserRepository;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -70,6 +72,9 @@ class CfpControllerTest {
 
     @Autowired
     private SpeakerRepository speakerRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -327,5 +332,40 @@ class CfpControllerTest {
             .andExpect(model().attribute("submission", org.hamcrest.Matchers.hasProperty("speaker",
                 org.hamcrest.Matchers.allOf(org.hamcrest.Matchers.hasProperty("email", is("ivan@jprime.io")),
                     org.hamcrest.Matchers.hasProperty("bio", is("Original"))))));
+    }
+
+    @Test
+    void plainUserCoSpeakerIsPromotedAndLinked() throws Exception {
+        saveSpeaker("ivan@jprime.io", "Ivan", "Original");
+        User plain = new User();
+        plain.setEmail("plain@x.io");
+        plain.setFirstName("Plain");
+        plain.setLastName("User");
+        userRepository.save(plain);
+
+        mockMvc.perform(cfp("ivan@jprime.io", "speaker.bio", "New bio", "coSpeaker.email", "plain@x.io"))
+            .andExpect(view().name("redirect:/cfp-thank-you"));
+
+        List<Submission> all = submissionRepository.findAll();
+        assertThat(all.size(), is(1));
+        assertThat(all.get(0).getCoSpeaker().getEmail(), is("plain@x.io"));
+        assertThat(speakerRepository.findByEmail("plain@x.io") != null, is(true));
+        assertThat(speakerRepository.findByEmail("ivan@jprime.io").getBio(), is("New bio"));
+    }
+
+    @Test
+    void primarySpeakerWithoutBioMustProvideOne() throws Exception {
+        saveSpeaker("ivan@jprime.io", "Ivan", null);
+        mockMvc.perform(cfp("ivan@jprime.io", "speaker.bio", ""))
+            .andExpect(model().attributeHasFieldErrors("submission", "speaker.bio"));
+        assertThat(submissionRepository.findAll().size(), is(0));
+    }
+
+    @Test
+    void primarySpeakerKeepsExistingBioWhenPostedBlank() throws Exception {
+        saveSpeaker("ivan@jprime.io", "Ivan", "Original");
+        mockMvc.perform(cfp("ivan@jprime.io", "speaker.bio", ""))
+            .andExpect(view().name("redirect:/cfp-thank-you"));
+        assertThat(speakerRepository.findByEmail("ivan@jprime.io").getBio(), is("Original"));
     }
 }

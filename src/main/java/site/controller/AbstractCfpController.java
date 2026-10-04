@@ -135,7 +135,7 @@ public class AbstractCfpController {
         }
     }
 
-    void fixTwitterHandle(Speaker speaker) {
+    static void fixTwitterHandle(Speaker speaker) {
         String twitterHandle = speaker.getTwitter();
         if (twitterHandle != null && twitterHandle.startsWith("@")) {
             speaker.setTwitter(twitterHandle.substring(1));

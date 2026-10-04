@@ -54,7 +54,7 @@ pageEncoding="UTF-8"%>
             <p><label>Bio <form:textarea path="bio" rows="6"/></label> <form:errors path="bio"/></p>
             <p><label>Twitter <form:input path="twitter"/></label></p>
             <p><label>Bluesky <form:input path="bsky"/></label></p>
-            <p><label>Photo <input type="file" name="picture" accept="image/*"/></label></p>
+            <p><label>Photo <input type="file" name="picture" accept="image/*"/></label> <form:errors path="picture"/></p>
             <button type="submit" class="btn btn-common">Save</button>
             <a href="<c:url value='/my'/>">Cancel</a>
         </form:form>
