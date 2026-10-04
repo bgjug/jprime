@@ -11,11 +11,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.transaction.annotation.Transactional;
 
 import site.app.Application;
 import site.facade.BranchService;
 import site.facade.DefaultBranchUtil;
+import site.facade.MailService;
 import site.model.Branch;
 import site.model.SessionLevel;
 import site.model.SessionType;
@@ -58,7 +60,7 @@ class SpeakerPortalControllerTest {
     private SubmissionRepository submissionRepository;
 
     @Autowired
-    private site.facade.MailService mailer;
+    private MailService mailer;
 
     private Branch current;
     private Speaker ivan;
@@ -157,7 +159,7 @@ class SpeakerPortalControllerTest {
             .andExpect(status().isForbidden());
     }
 
-    private org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder editPost(Submission s,
+    private MockHttpServletRequestBuilder editPost(Submission s,
                                                                                                String email, String title) {
         return post("/my/submissions/" + s.getId()).with(user(email).roles("USER")).with(csrf())
             .param("title", title).param("description", "D2").param("level", "ADVANCED")
@@ -223,14 +225,24 @@ class SpeakerPortalControllerTest {
     }
 
     @Test
+    void missingLevelRejected() throws Exception {
+        mockMvc.perform(post("/my/submissions/" + s1.getId()).with(user("ivan@jprime.io").roles("USER")).with(csrf())
+                .param("title", "T2").param("description", "D2").param("type", SessionType.WORKSHOP.name()))
+            .andExpect(status().isOk()).andExpect(view().name("my-submission"))
+            .andExpect(model().attributeHasFieldErrors("form", "level"));
+        assertThat(submissionRepository.findById(s1.getId()).orElseThrow().getLevel())
+            .isEqualTo(SessionLevel.BEGINNER);
+    }
+
+    @Test
     void editSendsNoMail() throws Exception {
-        org.junit.jupiter.api.Assumptions.assumeTrue(mailer instanceof MailServiceMock);
+        assertThat(mailer).isInstanceOf(MailServiceMock.class);
         ((MailServiceMock) mailer).clear();
         mockMvc.perform(editPost(s1, "ivan@jprime.io", "T2")).andExpect(redirectedUrl("/my"));
         assertThat(((MailServiceMock) mailer).getRecipientAddresses()).isEmpty();
     }
 
-    private org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder profilePost(String bio) {
+    private MockHttpServletRequestBuilder profilePost(String bio) {
         return multipart("/my/profile").with(user("ivan@jprime.io").roles("USER")).with(csrf())
             .param("firstName", "Ivan").param("lastName", "Ivanov").param("bio", bio);
     }
