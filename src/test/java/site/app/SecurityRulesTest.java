@@ -3,6 +3,10 @@ package site.app;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -51,6 +55,16 @@ class SecurityRulesTest {
                 .param("firstName", "Jane").param("lastName", "Smith").param("email", "jane@example.com")
                 .param("headline", "Spring Expert").param("twitter", "@janesmith").param("bio", "Bio"))
             .andExpect(status().isFound());
+    }
+
+    @Test
+    void getLogoutEndsAdminSession() throws Exception {
+        var session = new MockHttpSession();
+        session.setAttribute("SPRING_SECURITY_CONTEXT", new SecurityContextImpl(
+            UsernamePasswordAuthenticationToken.authenticated("admin", "x", AuthorityUtils.createAuthorityList("ADMIN"))));
+        mockMvc.perform(get("/logout").session(session));
+        mockMvc.perform(get("/admin").session(session)).andExpect(status().is3xxRedirection())
+            .andExpect(redirectedUrlPattern("**/login"));
     }
 
     @Test

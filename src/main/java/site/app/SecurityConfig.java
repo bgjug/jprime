@@ -57,6 +57,7 @@ public class SecurityConfig {
         http.formLogin(loginForm -> loginForm.successHandler(loginSuccessHandler)
             .loginPage("/login")
             .permitAll());
+        http.logout(l -> l.logoutRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/logout")));
         http.oauth2Login(o -> o.loginPage("/login")
             .successHandler(loginSuccessHandler)
             .userInfoEndpoint(u -> u.userService(gitHubService).oidcUserService(oidcService)));

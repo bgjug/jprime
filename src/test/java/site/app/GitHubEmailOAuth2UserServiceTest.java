@@ -38,4 +38,12 @@ class GitHubEmailOAuth2UserServiceTest {
             .isInstanceOfSatisfying(OAuth2AuthenticationException.class,
                 e -> assertThat(e.getError().getErrorCode()).isEqualTo("unverified_email"));
     }
+
+    @Test
+    void apiFailureBecomesLoginError() {
+        server.expect(requestTo("https://api.github.com/user/emails"))
+            .andRespond(org.springframework.test.web.client.response.MockRestResponseCreators.withForbiddenRequest());
+        assertThatThrownBy(() -> service.primaryVerifiedEmail("tok"))
+            .isInstanceOf(OAuth2AuthenticationException.class);
+    }
 }
