@@ -73,7 +73,12 @@ public class UserController {
 		// Same response whether or not the email exists, so signup cannot be used to enumerate accounts.
 		User target = userRepository.findUserByEmail(user.getEmail());
 		if (target == null) {
-			target = userRepository.save(user);
+			// Copy only the whitelisted fields: never persist the bound object (mass assignment of id/password).
+			target = new User();
+			target.setFirstName(user.getFirstName());
+			target.setLastName(user.getLastName());
+			target.setEmail(user.getEmail());
+			target = userRepository.save(target);
 		}
 
 		String tokenId = resetPassService.createNewToken(target);

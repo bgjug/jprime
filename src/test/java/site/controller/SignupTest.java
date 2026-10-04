@@ -21,6 +21,7 @@ import site.repository.UserRepository;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -98,5 +99,35 @@ class SignupTest {
 		mockMvc.perform(post("/signup").param("firstName", "Ada").param("lastName", "L").param("email", ""))
 				.andExpect(view().name("signup"))
 				.andExpect(model().attributeHasFieldErrors("user", "email"));
+	}
+
+	@Test
+	void signupIgnoresPasswordParam() throws Exception {
+		mockMvc.perform(post("/signup").param("firstName", "Ada").param("lastName", "Lovelace")
+				.param("email", "ada@x.io").param("password", "secret"))
+				.andExpect(view().name("successScreen"));
+		assertThat(userRepository.findUserByEmail("ada@x.io").getPassword(), nullValue());
+	}
+
+	@Test
+	void signupIgnoresIdParamAndLeavesExistingUserUntouched() throws Exception {
+		User victim = new User();
+		victim.setEmail("victim@x.io");
+		victim.setFirstName("Vic");
+		victim.setLastName("Tim");
+		victim.setPassword("hash");
+		victim = userRepository.save(victim);
+
+		mockMvc.perform(post("/signup").param("id", String.valueOf(victim.getId())).param("firstName", "Eve")
+				.param("lastName", "Attacker").param("email", "attacker@x.io"))
+				.andExpect(view().name("successScreen"));
+
+		User v = userRepository.findById(victim.getId()).orElseThrow();
+		assertThat(v.getEmail(), equalTo("victim@x.io"));
+		assertThat(v.getFirstName(), equalTo("Vic"));
+		assertThat(v.getLastName(), equalTo("Tim"));
+		assertThat(v.getPassword(), equalTo("hash"));
+		User a = userRepository.findUserByEmail("attacker@x.io");
+		assertThat(a.getId(), not(equalTo(victim.getId())));
 	}
 }
