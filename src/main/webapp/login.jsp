@@ -92,9 +92,10 @@
 					</table>
 
 				</form>
-				<p>
-					<a href="/oauth2/authorization/google">Continue with Google</a><br/>
-					<a href="/oauth2/authorization/github">Continue with GitHub</a>
+				<p style="margin-top: 3em;">
+					or sign in with
+					<a href="/oauth2/authorization/google" class="btn btn-common" style="margin-left: 1em;">Google</a>
+					<a href="/oauth2/authorization/github" class="btn btn-common" style="margin-left: 1em;">GitHub</a>
 				</p>
 			</div>
 		</div>

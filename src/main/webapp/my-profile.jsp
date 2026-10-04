@@ -47,16 +47,44 @@ pageEncoding="UTF-8"%>
     <div class="container">
         <form:form modelAttribute="profile" method="post" enctype="multipart/form-data">
             <sec:csrfInput/>
-            <p>Email: <c:out value="${email}"/></p>
-            <p><label>First name <form:input path="firstName"/></label> <form:errors path="firstName"/></p>
-            <p><label>Last name <form:input path="lastName"/></label> <form:errors path="lastName"/></p>
-            <p><label>Headline <form:input path="headline"/></label></p>
-            <p><label>Bio <form:textarea path="bio" rows="6"/></label> <form:errors path="bio"/></p>
-            <p><label>Twitter <form:input path="twitter"/></label></p>
-            <p><label>Bluesky <form:input path="bsky"/></label></p>
-            <p><label>Photo <input type="file" name="picture" accept="image/*"/></label> <form:errors/></p>
-            <button type="submit" class="btn btn-common">Save</button>
-            <a href="<c:url value='/my'/>">Cancel</a>
+            <fieldset>
+                <dl>
+                    <dt>Email</dt>
+                    <dd><c:out value="${email}"/></dd>
+                </dl>
+                <dl>
+                    <dt><label for="firstName">First name</label></dt>
+                    <dd><form:input path="firstName"/> <form:errors path="firstName"/></dd>
+                </dl>
+                <dl>
+                    <dt><label for="lastName">Last name</label></dt>
+                    <dd><form:input path="lastName"/> <form:errors path="lastName"/></dd>
+                </dl>
+                <dl>
+                    <dt><label for="headline">Headline</label></dt>
+                    <dd><form:input path="headline"/> <form:errors path="headline"/></dd>
+                </dl>
+                <dl>
+                    <dt><label for="bio">Bio</label></dt>
+                    <dd><form:textarea path="bio" style="width:80%" rows="5"/> <form:errors path="bio"/></dd>
+                </dl>
+                <dl>
+                    <dt><label for="twitter">Twitter</label></dt>
+                    <dd><form:input path="twitter"/> <form:errors path="twitter"/></dd>
+                </dl>
+                <dl>
+                    <dt><label for="bsky">Bluesky Profile</label></dt>
+                    <dd><form:input path="bsky"/> <form:errors path="bsky"/></dd>
+                </dl>
+                <dl>
+                    <dt><label for="picture">Photo</label></dt>
+                    <dd><input id="picture" type="file" name="picture" accept="image/*"/> <form:errors/></dd>
+                </dl>
+                <p>
+                    <button type="submit" class="btn btn-common">Save</button>
+                    <a href="<c:url value='/my'/>">Cancel</a>
+                </p>
+            </fieldset>
         </form:form>
     </div>
 </section>

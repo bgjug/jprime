@@ -49,21 +49,52 @@ pageEncoding="UTF-8"%>
         <c:when test="${editable}">
         <form:form modelAttribute="form" method="post">
             <sec:csrfInput/>
-            <p><label>Title <form:input path="title"/></label> <form:errors path="title"/></p>
-            <p><label>Description <form:textarea path="description" rows="10"/></label> <form:errors path="description"/></p>
-            <p><label>Level <form:select path="level" items="${levels}"/></label></p>
-            <p><label>Type <form:select path="type" items="${sessionTypes}"/></label></p>
-            <button type="submit" class="btn btn-common">Save</button>
-            <a href="<c:url value='/my'/>">Cancel</a>
+            <fieldset>
+                <dl>
+                    <dt><label for="title">Title</label></dt>
+                    <dd><form:input path="title"/> <form:errors path="title"/></dd>
+                </dl>
+                <dl>
+                    <dt><label for="description">Abstract</label></dt>
+                    <dd><form:textarea path="description" style="width:80%" rows="5"/> <form:errors path="description"/></dd>
+                </dl>
+                <dl>
+                    <dt><label for="level">Level</label></dt>
+                    <dd><form:select path="level" items="${levels}"/> <form:errors path="level"/></dd>
+                </dl>
+                <dl>
+                    <dt><label for="type">Type</label></dt>
+                    <dd><form:select path="type" items="${sessionTypes}"/> <form:errors path="type"/></dd>
+                </dl>
+                <p>
+                    <button type="submit" class="btn btn-common">Save</button>
+                    <a href="<c:url value='/my'/>">Cancel</a>
+                </p>
+            </fieldset>
         </form:form>
         </c:when>
         <c:otherwise>
-            <p>Status: <c:out value="${submission.status}"/></p>
-            <p>Title: <c:out value="${submission.title}"/></p>
-            <p>Description: <c:out value="${submission.description}"/></p>
-            <p>Level: <c:out value="${submission.level}"/></p>
-            <p>Type: <c:out value="${submission.type}"/></p>
-            <a href="<c:url value='/my'/>">Back</a>
+            <dl>
+                <dt>Status</dt>
+                <dd><c:out value="${submission.status}"/></dd>
+            </dl>
+            <dl>
+                <dt>Title</dt>
+                <dd><c:out value="${submission.title}"/></dd>
+            </dl>
+            <dl>
+                <dt>Abstract</dt>
+                <dd><c:out value="${submission.description}"/></dd>
+            </dl>
+            <dl>
+                <dt>Level</dt>
+                <dd><c:out value="${submission.level}"/></dd>
+            </dl>
+            <dl>
+                <dt>Type</dt>
+                <dd><c:out value="${submission.type}"/></dd>
+            </dl>
+            <p><a href="<c:url value='/my'/>">Back</a></p>
         </c:otherwise>
         </c:choose>
     </div>
