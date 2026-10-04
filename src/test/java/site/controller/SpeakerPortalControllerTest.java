@@ -34,6 +34,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oauth2Login;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -55,6 +56,9 @@ class SpeakerPortalControllerTest {
     private SpeakerRepository speakerRepository;
     @Autowired
     private SubmissionRepository submissionRepository;
+
+    @Autowired
+    private site.facade.MailService mailer;
 
     private Branch current;
     private Speaker ivan;
@@ -151,6 +155,79 @@ class SpeakerPortalControllerTest {
     void adminOnMyIsForbidden() throws Exception {
         mockMvc.perform(get("/my").with(user("admin").authorities(new SimpleGrantedAuthority("ADMIN"))))
             .andExpect(status().isForbidden());
+    }
+
+    private org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder editPost(Submission s,
+                                                                                               String email, String title) {
+        return post("/my/submissions/" + s.getId()).with(user(email).roles("USER")).with(csrf())
+            .param("title", title).param("description", "D2").param("level", "ADVANCED")
+            .param("type", SessionType.WORKSHOP.name());
+    }
+
+    @Test
+    void ownerEditsSubmittedSubmission() throws Exception {
+        mockMvc.perform(editPost(s1, "ivan@jprime.io", "T2"))
+            .andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/my"));
+        Submission saved = submissionRepository.findById(s1.getId()).orElseThrow();
+        assertThat(saved.getTitle()).isEqualTo("T2");
+        assertThat(saved.getDescription()).isEqualTo("D2");
+        assertThat(saved.getLevel()).isEqualTo(SessionLevel.ADVANCED);
+        assertThat(saved.getType()).isEqualTo(SessionType.WORKSHOP);
+    }
+
+    @Test
+    void coSpeakerCanEdit() throws Exception {
+        Speaker co = speakerRepository.save(new Speaker("Co", "S", "co@jprime.io", "h", "co"));
+        s1.setCoSpeaker(co);
+        submissionRepository.save(s1);
+        mockMvc.perform(editPost(s1, "co@jprime.io", "T2")).andExpect(redirectedUrl("/my"));
+        assertThat(submissionRepository.findById(s1.getId()).orElseThrow().getTitle()).isEqualTo("T2");
+    }
+
+    @Test
+    void strangerGets404() throws Exception {
+        speakerRepository.save(new Speaker("Str", "A", "str@jprime.io", "h", "str"));
+        mockMvc.perform(get("/my/submissions/" + s1.getId()).with(user("str@jprime.io").roles("USER")))
+            .andExpect(status().isNotFound());
+        mockMvc.perform(editPost(s1, "str@jprime.io", "")).andExpect(status().isNotFound());
+        mockMvc.perform(editPost(s1, "str@jprime.io", "T2")).andExpect(status().isNotFound());
+        assertThat(submissionRepository.findById(s1.getId()).orElseThrow().getTitle()).isEqualTo("S1");
+    }
+
+    @Test
+    void acceptedSubmissionIsReadOnly() throws Exception {
+        mockMvc.perform(get("/my/submissions/" + s2.getId()).with(user("ivan@jprime.io").roles("USER")))
+            .andExpect(status().isOk()).andExpect(view().name("my-submission"))
+            .andExpect(model().attribute("editable", false));
+        mockMvc.perform(editPost(s2, "ivan@jprime.io", "T2")).andExpect(status().isForbidden());
+        assertThat(submissionRepository.findById(s2.getId()).orElseThrow().getTitle()).isEqualTo("S2");
+    }
+
+    @Test
+    void editIgnoresOtherFields() throws Exception {
+        Speaker stranger = speakerRepository.save(new Speaker("Str", "A", "str@jprime.io", "h", "str"));
+        mockMvc.perform(editPost(s1, "ivan@jprime.io", "T2").param("status", "ACCEPTED")
+                .param("featured", "true").param("speaker.id", String.valueOf(stranger.getId())))
+            .andExpect(redirectedUrl("/my"));
+        Submission saved = submissionRepository.findById(s1.getId()).orElseThrow();
+        assertThat(saved.getStatus()).isEqualTo(SubmissionStatus.SUBMITTED);
+        assertThat(saved.getFeatured()).isNotEqualTo(true);
+        assertThat(saved.getSpeaker().getId()).isEqualTo(ivan.getId());
+    }
+
+    @Test
+    void blankTitleRejected() throws Exception {
+        mockMvc.perform(editPost(s1, "ivan@jprime.io", ""))
+            .andExpect(status().isOk()).andExpect(view().name("my-submission"))
+            .andExpect(model().attributeHasFieldErrors("form", "title"));
+    }
+
+    @Test
+    void editSendsNoMail() throws Exception {
+        org.junit.jupiter.api.Assumptions.assumeTrue(mailer instanceof MailServiceMock);
+        ((MailServiceMock) mailer).clear();
+        mockMvc.perform(editPost(s1, "ivan@jprime.io", "T2")).andExpect(redirectedUrl("/my"));
+        assertThat(((MailServiceMock) mailer).getRecipientAddresses()).isEmpty();
     }
 
     private org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder profilePost(String bio) {
