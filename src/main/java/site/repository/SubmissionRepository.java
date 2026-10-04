@@ -6,10 +6,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 import site.model.Branch;
+import site.model.Speaker;
 import site.model.Submission;
 import site.model.SubmissionByStatus;
 import site.model.SubmissionStatus;
@@ -31,4 +33,7 @@ public interface SubmissionRepository extends JpaRepository<Submission, Long> {
 
     @Query("select new site.model.SubmissionByStatus(s.status, count(s)) from Submission as s where s.branch = :branch group by s.status order by s.status")
     List<SubmissionByStatus> countSubmissionsByStatusForBranch(Branch branch);
+
+    @Query("select s from Submission s where (s.speaker = :speaker or s.coSpeaker = :speaker) and s.branch = :branch")
+    List<Submission> findBySpeakerOrCoSpeakerAndBranch(@Param("speaker") Speaker speaker, @Param("branch") Branch branch);
 }

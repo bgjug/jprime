@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.util.HtmlUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,38 +66,33 @@ public class UserController {
 	}
 
 	@PostMapping("/signup")
-	public String signip(@Valid final User user, BindingResult bindingResult, HttpServletRequest request) {
+	public String signup(@Valid final User user, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			return "signup";
 		}
 
-		if (StringUtils.isEmpty(user.getPassword()) || !user.getPassword().equals(user.getCpassword())) {
-			bindingResult.rejectValue("cpassword", "notmatch.password", "Passwords dont match!");
-
-			return "signup";
+		// Same response whether or not the email exists, so signup cannot be used to enumerate accounts.
+		User target = userRepository.findUserByEmail(user.getEmail());
+		if (target == null) {
+			// Copy only the whitelisted fields: never persist the bound object (mass assignment of id/password).
+			target = new User();
+			target.setFirstName(user.getFirstName());
+			target.setLastName(user.getLastName());
+			target.setEmail(user.getEmail());
+			target = userRepository.save(target);
 		}
 
-		User existingUser = userRepository.findUserByEmail(user.getEmail());
-		if (existingUser != null) {
-			bindingResult.rejectValue("email", "email.exists", "This email already exists, please use forgot password");
-
-			return "signup";
-		}
-
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-		userRepository.save(user);
-
+		String tokenId = resetPassService.createNewToken(target);
 		try {
-			String mailContent = buildWelcomeMailContent(user, "/welcomingMail.html");
-			String mailTitle = "Welcome to JPrime!";
-			mailService.sendEmail(user.getEmail(), mailTitle, mailContent);
+			String mailContent = buildResetMailContent(target, tokenId, "/setPasswordMail.html");
+			mailService.sendEmail(target.getEmail(), "Set your JPrime password", mailContent);
 		} catch (MessagingException | IOException e) {
-			logger.error(new FormattedMessage("Error while sending Welcoming Mail to {}", user), e);
+			logger.error(new FormattedMessage("Error while sending SetPassword Mail to {}", target), e);
 		}
 
-		request.getSession().setAttribute("user", user);
-		return "redirect:/home";
+		model.addAttribute("msg", "We sent a link to " + user.getEmail() + ". Open it to set your password.");
+		model.addAttribute("jprime_year", branchService.getCurrentBranch().getStartDate().getYear());
+		return SUCCESS_SCREEN_JSP;
 	}
 
 	@GetMapping("/login")
@@ -192,16 +188,9 @@ public class UserController {
     private String buildResetMailContent(User user, String tokenId, String fileName)
             throws IOException {
         String messageText = resourceAsString(fileName);
-        messageText = messageText.replace("{user.firstName}", user.getFirstName());
+        messageText = messageText.replace("{user.firstName}", HtmlUtils.htmlEscape(StringUtils.defaultString(user.getFirstName())));
         String url = createNewPasswordUrl+tokenId;
         messageText = messageText.replace("{url}", url);
-        return messageText;
-    }
-    
-    private String buildWelcomeMailContent(User user, String fileName)
-            throws IOException {
-        String messageText = resourceAsString(fileName);
-        messageText = messageText.replace("{user.firstName}", user.getFirstName());
         return messageText;
     }
 }

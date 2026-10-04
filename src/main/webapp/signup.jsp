@@ -65,16 +65,6 @@
                     <input type="email" name="email" id="email">
                     <form:errors path="email"/>
                 </div>
-                <div class="form-wrapper">
-                    <label for="password">Password *</label><br/>
-                    <input type="password" name="password" id="password">
-                    <form:errors path="password"/>
-                </div>
-                <div class="form-wrapper">
-                    <label for="password">Confirm password *</label><br/>
-                    <input type="password" name="cpassword" id="cpassword">
-                    <form:errors path="cpassword"/>
-                </div>
                 <br/>
                 <input type="submit" value="Register" class="btn">
                 <a href="<c:out value='/login'/>" style="margin-left: 30px; position: absolute;">Back to Login?</a>
