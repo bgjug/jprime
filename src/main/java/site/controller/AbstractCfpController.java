@@ -60,7 +60,7 @@ public class AbstractCfpController {
      * @param speaker           the Speaker object to which data will be copied
      * @param submissionSpeaker the Speaker object from which data will be copied
      */
-    private static void copyDataFromSubmission(Speaker speaker, Speaker submissionSpeaker) {
+    protected static void copyDataFromSubmission(Speaker speaker, Speaker submissionSpeaker) {
         if (ArrayUtils.isNotEmpty(submissionSpeaker.getPicture())) {
             speaker.setPicture(submissionSpeaker.getPicture());
         }
@@ -121,7 +121,7 @@ public class AbstractCfpController {
         return speaker;
     }
 
-    private void formatPicture(Speaker speaker, MultipartFile image) {
+    protected void formatPicture(Speaker speaker, MultipartFile image) {
         if (image.isEmpty()) {
             return;
         }
@@ -183,7 +183,7 @@ public class AbstractCfpController {
         return null;
     }
 
-    private String validateSpeaker(Speaker speaker, BindingResult bindingResult, String role,
+    protected String validateSpeaker(Speaker speaker, BindingResult bindingResult, String role,
         Supplier<String> errorSupplier) {
         String msg;
         String field;
@@ -208,7 +208,7 @@ public class AbstractCfpController {
         return errorSupplier.get();
     }
 
-    private String validateEmail(BindingResult bindingResult, String email, String role,
+    protected String validateEmail(BindingResult bindingResult, String email, String role,
         Supplier<String> errorSupplier) {
         EmailValidator emailValidator = new EmailValidator();
 

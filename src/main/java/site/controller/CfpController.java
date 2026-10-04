@@ -1,23 +1,30 @@
 package site.controller;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.function.Supplier;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import site.facade.BranchService;
+import site.facade.SpeakerAccountService;
 import site.model.Branch;
+import site.model.Speaker;
 import site.model.Submission;
+import site.model.SubmissionStatus;
 
 /**
  * @author Ivan St. Ivanov
@@ -33,20 +40,24 @@ public class CfpController extends AbstractCfpController {
     public static final String CFP_PROBLEM = "cfp-problem";
 
     private final BranchService branchService;
+    private final SpeakerAccountService accounts;
 
-    public CfpController(BranchService branchService) {
+    public CfpController(BranchService branchService, SpeakerAccountService accounts) {
         this.branchService = branchService;
+        this.accounts = accounts;
     }
 
     @GetMapping("/cfp")
-    public String submissionForm(Model model) {
-        return goToCFP(new Submission(branchService.getCurrentBranch()), model);
+    public String submissionForm(Model model, Authentication auth) {
+        Submission submission = new Submission(branchService.getCurrentBranch());
+        submission.setSpeaker(accounts.currentSpeaker(auth));
+        return goToCFP(submission, model);
     }
 
     @PostMapping("/cfp")
     public String submitSession(@Valid final Submission submission, BindingResult bindingResult,
         @RequestParam MultipartFile speakerImage, @RequestParam MultipartFile coSpeakerImage, Model model,
-        HttpServletRequest request) {
+        HttpServletRequest request, Authentication auth) {
         boolean invalidCaptcha = false;
         if (submission.getCaptcha() == null || !submission.getCaptcha()
             .equals(request.getSession().getAttribute(CaptchaController.SESSION_PARAM_CAPTCHA_IMAGE))) {
@@ -58,26 +69,51 @@ public class CfpController extends AbstractCfpController {
             return goToCFP(submission, model);
         }
 
-        String result =
-            validateAndUpdateSpeaker(bindingResult, submission.getSpeaker(), "speaker",
-                submission::setSpeaker,
-                () -> goToCFP(submission, model));
-        if (result != null) {
-            return result;
-        }
+        Speaker me = accounts.currentSpeaker(auth);
+        copyDataFromSubmission(me, submission.getSpeaker());
+        formatPicture(me, speakerImage);
+        fixTwitterHandle(me);
+        submission.setSpeaker(me);
+
+        submission.setId(null);
+        submission.setStatus(SubmissionStatus.SUBMITTED);
+        submission.setFeatured(false);
+        submission.setBranch(branchService.getCurrentBranch());
+
         if (hasCoSpeaker(submission)) {
-            result =
-                validateAndUpdateSpeaker(bindingResult, submission.getCoSpeaker(), "coSpeaker", submission::setCoSpeaker,
-                    () -> goToCFP(submission, model));
+            Speaker typed = submission.getCoSpeaker();
+            Supplier<String> onError = () -> goToCFP(submission, model);
+            if (typed.getEmail().trim().equalsIgnoreCase(me.getEmail())) {
+                bindingResult.addError(
+                    new FieldError("submission", "coSpeaker.email", "You can't be your own co-speaker"));
+                return onError.get();
+            }
+            String result = validateEmail(bindingResult, typed.getEmail(), "coSpeaker", onError);
             if (result != null) {
                 return result;
             }
+            Optional<Speaker> existing = accounts.findOrPromote(typed.getEmail().trim());
+            if (existing.isPresent()) {
+                submission.setCoSpeaker(existing.get());
+            } else {
+                result = validateSpeaker(typed, bindingResult, "coSpeaker", onError);
+                if (result != null) {
+                    return result;
+                }
+                // fresh row: the bound object may carry a posted id or password
+                Speaker coSpeaker = new Speaker();
+                coSpeaker.setEmail(typed.getEmail().trim());
+                copyDataFromSubmission(coSpeaker, typed);
+                formatPicture(coSpeaker, coSpeakerImage);
+                fixTwitterHandle(coSpeaker);
+                submission.setCoSpeaker(coSpeaker);
+            }
+        } else {
+            submission.setCoSpeaker(null);
         }
 
-        submission.setBranch(branchService.getCurrentBranch());
-
         try {
-            saveSubmission(submission, speakerImage, coSpeakerImage);
+            userFacade.submitTalk(submission);
         } catch (Exception e) {
             logger.error("Can't save the submission", e);
             return "redirect:/cfp-problem";

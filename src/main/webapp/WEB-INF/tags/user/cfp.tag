@@ -66,7 +66,7 @@
         <dl>
             <dt>Speaker</dt>
         </dl>
-        <user:speaker role="speaker"/>
+        <user:speaker role="speaker" admin="${admin}"/>
         <button id="toggleCoSpeaker" type="button">${coSpeaker_caption}</button>
         <dl></dl>
         <div id="coSpeaker" style="display: none;">
