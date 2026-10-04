@@ -34,6 +34,8 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -87,7 +89,7 @@ class CfpControllerTest {
             cfpPage = CfpController.CFP_OPEN_JSP;
         }
 
-        mockMvc.perform(get("/cfp")).andExpect(status().isOk()).andExpect(view().name(cfpPage));
+        mockMvc.perform(get("/cfp").with(user("ivan@jprime.io"))).andExpect(status().isOk()).andExpect(view().name(cfpPage));
     }
 
     @Test
@@ -108,7 +110,8 @@ class CfpControllerTest {
                 .param("speaker.twitter", "@ivan_stefanov")
                 .param("speaker.bio", "Ordinary decent nerd")
                 .param("captcha", captcha)
-                .session((MockHttpSession) session))
+                .session((MockHttpSession) session)
+                .with(user("ivan@jprime.io")).with(csrf()))
             .andExpect(status().isFound())
             .andExpect(view().name("redirect:/cfp-thank-you"));
 
@@ -148,7 +151,8 @@ class CfpControllerTest {
                 .param("coSpeaker.twitter", "@ivan_stefanov")
                 .param("coSpeaker.bio", "Ordinary decent nerd")
                 .param("captcha", captcha)
-                .session((MockHttpSession) session))
+                .session((MockHttpSession) session)
+                .with(user("nayden@jprime.io")).with(csrf()))
             .andExpect(status().isFound())
             .andExpect(view().name("redirect:/cfp-thank-you"));
 

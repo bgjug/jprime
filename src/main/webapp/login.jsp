@@ -51,6 +51,9 @@
 				<c:if test="${not empty msg}">
 					<div class="msg">${msg}</div>
 				</c:if>
+				<c:if test="${param.error != null}">
+					<div class="error"><c:out value="${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}"/></div>
+				</c:if>
 				<sec:authorize access="hasRole('USER')">
 					welcome USER
 				</sec:authorize>
@@ -89,6 +92,10 @@
 					</table>
 
 				</form>
+				<p>
+					<a href="/oauth2/authorization/google">Continue with Google</a><br/>
+					<a href="/oauth2/authorization/github">Continue with GitHub</a>
+				</p>
 			</div>
 		</div>
 	</div>

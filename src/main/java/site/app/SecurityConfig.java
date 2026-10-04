@@ -1,10 +1,5 @@
 package site.app;
 
-import java.io.IOException;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,11 +9,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
+import org.springframework.security.web.util.matcher.OrRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -31,14 +26,20 @@ public class SecurityConfig {
     }
 
     @Bean
-    SecurityFilterChain filterChain(final HttpSecurity http, final AuthenticationProvider provider)
+    SecurityFilterChain filterChain(final HttpSecurity http, final AuthenticationProvider provider,
+        LoginSuccessHandler loginSuccessHandler, GitHubEmailOAuth2UserService gitHubService,
+        VerifiedOidcUserService oidcService)
         throws Exception {
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
-            .csrf(AbstractHttpConfigurer::disable)
+            .csrf(c -> c.requireCsrfProtectionMatcher(new OrRequestMatcher(
+                PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/my/**"),
+                PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/cfp"))))
             .cors(AbstractHttpConfigurer::disable)
             .authenticationProvider(provider)
             .authorizeHttpRequests(requests -> {
                 requests.requestMatchers("/app/**").permitAll();
+
+                requests.requestMatchers("/my/**", "/cfp").authenticated();
 
                 requests.requestMatchers("/admin/**", "/raffle/**", "/api/**", "/user/**")
                     .hasAuthority("ADMIN");
@@ -53,23 +54,13 @@ public class SecurityConfig {
 
             });
 
-        http.formLogin(loginForm -> loginForm.successHandler(SecurityConfig::redirectToAdmin)
+        http.formLogin(loginForm -> loginForm.successHandler(loginSuccessHandler)
             .loginPage("/login")
             .permitAll());
+        http.oauth2Login(o -> o.loginPage("/login")
+            .successHandler(loginSuccessHandler)
+            .userInfoEndpoint(u -> u.userService(gitHubService).oidcUserService(oidcService)));
         return http.build(); // #5
-    }
-
-    private static void redirectToAdmin(HttpServletRequest request, HttpServletResponse response,
-        Authentication authentication) throws IOException {
-        if (response.isCommitted()) {
-            return;
-        }
-
-        boolean isAdmin =
-            authentication.getAuthorities().stream().anyMatch(p -> "ADMIN".equals(p.getAuthority()));
-        if (isAdmin) {
-            new DefaultRedirectStrategy().sendRedirect(request, response, "/admin");
-        }
     }
 
     @Bean
