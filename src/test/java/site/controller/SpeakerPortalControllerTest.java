@@ -248,7 +248,7 @@ class SpeakerPortalControllerTest {
     }
 
     @Test
-    void nonImageUploadGivesFieldErrorAndKeepsPicture() throws Exception {
+    void nonImageUploadGivesGlobalErrorAndKeepsPicture() throws Exception {
         mockMvc.perform(multipart("/my/profile")
                 .file(new org.springframework.mock.web.MockMultipartFile("picture", "a.txt", "text/plain",
                     "not an image".getBytes()))
@@ -256,7 +256,13 @@ class SpeakerPortalControllerTest {
                 .param("firstName", "Ivan").param("lastName", "Ivanov").param("bio", "B"))
             .andExpect(status().isOk())
             .andExpect(view().name("my-profile"))
-            .andExpect(model().attributeHasFieldErrors("profile", "picture"));
+            .andExpect(model().attributeHasErrors("profile"))
+            .andExpect(result -> {
+                var br = (org.springframework.validation.BindingResult) result.getModelAndView().getModel()
+                    .get(org.springframework.validation.BindingResult.MODEL_KEY_PREFIX + "profile");
+                assertThat(br.getFieldErrors("picture")).isEmpty();
+                assertThat(br.getGlobalError().getCode()).isEqualTo("picture.invalid");
+            });
         assertThat(speakerRepository.findByEmail("ivan@jprime.io").getPicture()).isNull();
     }
 

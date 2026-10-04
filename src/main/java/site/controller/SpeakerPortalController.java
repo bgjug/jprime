@@ -15,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -96,7 +95,7 @@ public class SpeakerPortalController {
                 speaker.setPicture(thumbnailService.thumbImage(picture.getBytes(), 280, 326,
                     ThumbnailService.ResizeType.FIT_TO_RATIO));
             } catch (RuntimeException e) {
-                errors.addError(new FieldError("profile", "picture", "Please upload an image (JPG or PNG)"));
+                errors.reject("picture.invalid", "Please upload an image (JPG or PNG)");
                 model.addAttribute("email", speaker.getEmail());
                 return "my-profile";
             }
