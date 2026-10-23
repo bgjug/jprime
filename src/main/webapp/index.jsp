@@ -952,7 +952,7 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('PLATINUM')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>EUR</span>4250.00</span><br/>
+                        <span class="price"><span>EUR</span>4000.00</span><br/>
                         <h5></h5>
                     </div>
                     <div class="pricing-list">
@@ -1012,7 +1012,7 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('GOLD_LITE')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>EUR</span>2650.00</span><br/>
+                        <span class="price"><span>EUR</span>2850.00</span><br/>
                         <h5></h5>
                     </div>
                     <div class="pricing-list">
@@ -1070,7 +1070,7 @@
                  style="<c:out value="${sold_out_sponsor_packages.get('SILVER')}"/>">
                 <div class="price-block-wrapper">
                     <div class="prici-left">
-                        <span class="price"><span>EUR</span>1000.00</span><br/>
+                        <span class="price"><span>EUR</span>1200.00</span><br/>
                         <h5></h5>
                     </div>
                     <div class="pricing-list">
