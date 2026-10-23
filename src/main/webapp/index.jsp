@@ -940,7 +940,7 @@
 <!-- Subscribe Area End -->
 
 <!-- Sponsors Pricing Area Start -->
-<section id="pricing" class="section-padding" style="display: none">
+<section id="pricing" class="section-padding">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
