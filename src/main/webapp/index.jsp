@@ -1037,6 +1037,7 @@
                 </div>
             </div>
         </div>
+        <%--
         <div class="row" id="sponsor1">
             <div class="col-lg-4 col-md-4 col-xs-12 mb-4"
                  style="<c:out value="${sold_out_sponsor_packages.get('GOLD_OPEN')}"/>">
@@ -1066,6 +1067,7 @@
                     </div>
                 </div>
             </div>
+            --%>
             <div class="col-lg-4 col-md-4 col-xs-12 mb-4"
                  style="<c:out value="${sold_out_sponsor_packages.get('SILVER')}"/>">
                 <div class="price-block-wrapper">
