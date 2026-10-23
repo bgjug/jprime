@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-12">
                 <p>
-                <p>${msg}</p>
+                <p><c:out value="${msg}"/></p>
             </div>
         </div>
     </div>

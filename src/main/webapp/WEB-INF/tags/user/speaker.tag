@@ -1,6 +1,7 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 
 <%@ attribute name="role" %>
+<%@ attribute name="admin" required="false" type="java.lang.Boolean"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <dl>
@@ -24,7 +25,7 @@
         <label for="${role}.email">Email</label>
     </dt>
     <dd>
-        <form:input path="${role}.email" />
+        <form:input path="${role}.email" readonly="${role == 'speaker' && !admin}" />
         <form:errors style="color:#ff0000" path="${role}.email"/>
     </dd>
 </dl>
