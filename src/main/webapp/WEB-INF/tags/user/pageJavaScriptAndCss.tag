@@ -23,6 +23,6 @@
     <!-- Responsive Style -->
     <link rel="stylesheet" type="text/css" href="/assets/css/responsive.css">
 
-    <!-- Glossy Theme - Custom glassmorphism effects -->
-    <link rel="stylesheet" type="text/css" href="/assets/css/glossy-theme.css" media="screen" />
+    <!-- Shared public conference theme -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/glossy-theme.css?v=midnight2" media="screen" />
 
