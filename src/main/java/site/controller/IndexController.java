@@ -75,6 +75,11 @@ public class IndexController {
         model.addAttribute("eventPartnerChunks", eventPartnerChunks);
 
         Branch currentBranch = branchService.getCurrentBranch();
+        if (currentBranch == null || currentBranch.getStartDate() == null
+            || currentBranch.getCfpOpenDate() == null || currentBranch.getCfpCloseDate() == null) {
+            return PAGE_INDEX;
+        }
+
         if (currentBranch.getCfpCloseDate().isAfter(LocalDateTime.now()) && currentBranch.getCfpOpenDate().minusDays(30)
             .isBefore(LocalDateTime.now())) {
             model.addAttribute("early_sold_out", "");
@@ -94,15 +99,23 @@ public class IndexController {
 
         Map<TicketType, TicketPrice> prices = branchService.getTicketPrices(currentBranch);
 
-        model.addAttribute("early_bird_ticket_price", String.format("%.2f", prices.get(TicketType.EARLY_BIRD).getPrice()));
-        model.addAttribute("regular_ticket_price", String.format("%.2f",prices.get(TicketType.REGULAR).getPrice()));
-        model.addAttribute("student_ticket_price", String.format("%.2f",prices.get(TicketType.STUDENT).getPrice()));
+        TicketPrice earlyBird = prices.get(TicketType.EARLY_BIRD);
+        TicketPrice regular = prices.get(TicketType.REGULAR);
+        TicketPrice student = prices.get(TicketType.STUDENT);
+        if (earlyBird != null && regular != null && student != null) {
+            model.addAttribute("early_bird_ticket_price", String.format("%.2f", earlyBird.getPrice()));
+            model.addAttribute("regular_ticket_price", String.format("%.2f", regular.getPrice()));
+            model.addAttribute("student_ticket_price", String.format("%.2f", student.getPrice()));
+        }
 
         model.addAttribute("cfp_close_date", DateUtils.dateToStringWithMonthAndYear(currentBranch.getCfpCloseDate()));
         model.addAttribute("cfp_closed", currentBranch.getCfpCloseDate().isBefore(LocalDateTime.now()));
         model.addAttribute("ticket_sales_open", currentBranch.getCfpOpenDate().isBefore(LocalDateTime.now()));
 
         Branch nextBranch = branchService.getNextBranch();
+        if (nextBranch != null && nextBranch.getStartDate() == null) {
+            nextBranch = null;
+        }
         LocalDateTime startDate = nextBranch != null ? nextBranch.getStartDate() : currentBranch.getStartDate();
         model.addAttribute("conference_dates", String.format("%s and %s", DateUtils.dateToString(startDate),
             DateUtils.dateToStringWithMonthAndYear(startDate.plusDays(1))));

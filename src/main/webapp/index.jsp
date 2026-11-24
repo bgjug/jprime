@@ -62,7 +62,7 @@
         <div class="carousel-item">
             <img class="d-block w-100" src="images/slider/index1.jpg" alt="Second slide" style="backdrop-filter: hue-rotate(30deg);">
             <div class="carousel-caption d-md-block">
-                <c:if test="${!cfp_closed}">
+                <c:if test="${not empty cfp_close_date and !cfp_closed}">
                     <h1 class="wow bounceIn heading" data-wow-delay=".7s" style="color: var(--bs-red);filter: drop-shadow(0 0 2px rgba(123, 0, 0, 0.8));text-shadow: 2px 2px 7px rgb(0 0 0 / 45%);">Submit your proposal before ${cfp_close_date}!</h1>
                     <a href="/cfp" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">CFP</a>
                 </c:if>
@@ -78,11 +78,13 @@
                         <h1 class="wow fadeInDown heading tron-heading" data-wow-delay=".4s">jPrime ${jprime_year}</h1>
                         <p class="fadeInUp wow carousel-jprime tron-subheading" data-wow-delay=".6s">${conference_dates} @ Sofia Tech Park</p>
                     </c:if>
-                    <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>
+                    <c:if test="${not empty regular_ticket_price}">
+                        <a href="#" class="fadeInLeft wow btn btn-common" data-wow-delay=".6s">Get Ticket</a>
+                    </c:if>
                     <!-- <a href="#" class="fadeInRight wow btn btn-border" data-wow-delay=".6s">Contact</a> -->
                 </div>
 
-                <c:if test="${!ticket_sales_open}">
+                <c:if test="${not empty regular_ticket_price and !ticket_sales_open}">
                     <h1 class="wow fadeInUp heading" data-wow-delay=".6s">Book Your Seat Now!</h1>
                     <a href="#tickets" class="fadeInUp wow btn btn-common" data-wow-delay=".8s">BUY a ticket</a>
                 </c:if>
@@ -400,6 +402,7 @@
 </section>
 <!-- Counter Area End-->
 
+<c:if test="${not empty regular_ticket_price}">
 <!-- Ticket Pricing Area Start -->
 <section id="pricing" class="section-padding" style="display: none">
     <div class="container">
@@ -501,6 +504,7 @@
     </div>
 </section>
 <!-- Ticket Pricing Area End -->
+</c:if>
 
 <!-- Sponsors Section Start -->
 <div id="sponsors" class="section-padding">
@@ -950,6 +954,7 @@
 </div>
 <!-- Subscribe Area End -->
 
+<c:if test="${not empty sold_out_sponsor_packages}">
 <!-- Sponsors Pricing Area Start -->
 <section id="pricing" class="section-padding">
     <div class="container">
@@ -1109,6 +1114,7 @@
     </div>
 </section>
 <!-- Sponsors Pricing Area End -->
+</c:if>
 
 <user:footer/>
 
