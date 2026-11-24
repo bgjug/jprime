@@ -1,0 +1,19 @@
+#main-slide,.jprime-atmosphere{position:relative;isolation:isolate}
+#main-slide::after,.jprime-atmosphere::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at var(--light-x,80%) var(--light-y,65%),rgba(80,163,255,.14),transparent 43%);z-index:1}
+#main-slide .carousel-indicators,#main-slide .carousel-control-prev,#main-slide .carousel-control-next{z-index:3}
+.jprime-atmosphere::before{z-index:-1}
+#why-attend{background:radial-gradient(ellipse at 80% 15%,#0b2445,transparent 55%),linear-gradient(125deg,#101128,#080f20 75%);color:#e5f0ff;overflow:hidden}
+#why-attend .attend-intro{display:grid;grid-template-columns:.9fr 1.3fr;align-items:center;position:relative;min-height:300px}
+#why-attend .attend-intro .section-title-header{text-align:left!important;margin:0}
+#why-attend .attend-intro h1{font-size:clamp(44px,6.5vw,94px);line-height:1;letter-spacing:-.055em;color:#eef6ff;margin-bottom:18px}
+#why-attend .attend-intro p{color:#b7c9df;line-height:1.65;font-size:16px}
+.duke-observatory{position:relative;height:clamp(290px,27vw,395px)}
+#why-attend .services-item{height:calc(100% - 20px);margin:10px 0;padding:26px;border:1px solid rgba(132,185,245,.22);border-radius:16px;background:linear-gradient(135deg,#a1d6ff0e,#556cd606);box-shadow:inset 0 1px 0 #d1ecff0c;transition:border-color .2s,background .2s}
+#why-attend .services-item:hover,#why-attend .services-item:focus-within{border-color:#669acf;background:radial-gradient(ellipse at var(--light-x,50%) var(--light-y,50%),#529cff26,transparent 78%),#11213a}
+#why-attend .services-item h3 a{color:#e6f3ff}#why-attend .services-item p{color:#bfccdf}#why-attend .services-item .icon i{color:#8edaff}
+@media(max-width:700px){#why-attend .attend-intro{grid-template-columns:1fr}.duke-observatory{height:270px}.duke-caption{bottom:1%}}
+@media(prefers-reduced-motion:reduce){#why-attend .services-item{transition:none}}
+
+.duke-observatory{isolation:isolate;overflow:hidden}
+#duke-field,.duke-still{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.duke-still{object-fit:contain;padding:6%}

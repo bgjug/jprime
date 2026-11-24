@@ -32,6 +32,7 @@
 
     <user:pageJavaScriptAndCss/>
 
+<link rel="stylesheet" href="/css/duke-hero.css?v=cloud5">
 </head>
 
 <body>
@@ -260,15 +261,16 @@
 
 
 <!-- Services Section Start -->
-<section class="section-padding">
+<section id="why-attend" class="section-padding jprime-atmosphere">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 attend-intro">
                 <div class="section-title-header text-center">
                     <h1 class="section-title">Why Attend</h1>
                     <p>The community driven Java conference in Bulgaria ! <br> Come and become part of the
                         community.</p>
                 </div>
+                <%@ include file="/WEB-INF/duke-hero.jspf" %>
             </div>
         </div>
         <div class="row">
@@ -310,7 +312,7 @@
                     </div>
                     <div class="services-content">
                         <h3><a href="/agenda">Workshops</a></h3>
-                        <p>Since 2017 we have also workshops. To participate a workshop just <b>bring your
+                        <p>Since 2017 we have also workshops. To participate a workshop just <b>bring you
                             laptop</b> with you, there is no extra cost, there is no pre-workshop signing,
                             just visit the workshop and participate in the training.</p>
                     </div>

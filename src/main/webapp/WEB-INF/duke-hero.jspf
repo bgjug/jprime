@@ -1,0 +1,5 @@
+<div class="duke-observatory">
+    <img class="duke-still" src="/images/jug-duke-glass.svg" alt="Bulgarian JUG Duke with cap, flower, moustache and vest">
+    <canvas id="duke-field" hidden role="img" aria-label="Slowly rotating point-cloud Bulgarian JUG Duke"></canvas>
+</div>
+<script defer src="/js/duke-scene.js?v=cloud8"></script>
