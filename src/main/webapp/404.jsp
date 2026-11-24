@@ -22,7 +22,7 @@
     <jsp:directive.include file="theme-colors.jsp" />
 
     <!-- Page Description and Author -->
-    <meta name="description" content="jPrime ${jprime_year}">
+    <meta name="description" content="jPrime">
     <meta name="author" content="jPrime">
 
     <user:pageJavaScriptAndCss/>
@@ -36,7 +36,7 @@
 <div id="page-banner-area" class="page-banner">
     <div class="page-banner-title">
         <div class="text-center">
-            <h2>404</h2>
+            <h2>${empty errorStatus ? 404 : errorStatus}</h2>
         </div>
     </div>
 </div>
@@ -47,9 +47,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h1 class="wow animated fadeInRight" data-wow-delay=".2s">404</h1>
-                <h2 class="wow animated fadeInRight" data-wow-delay=".4s">Page not found! :(</h2>
-                <a href="javascript:void(0)" class="wow animated fadeInUp btn btn-common mt-5" data-wow-delay=".6s"><i class="material-icons mdi mdi-home"></i> Back to home<div class="ripple-container"></div></a>
+                <h1 class="wow animated fadeInRight" data-wow-delay=".2s">${empty errorStatus ? 404 : errorStatus}</h1>
+                <h2 class="wow animated fadeInRight" data-wow-delay=".4s">${empty errorStatus or errorStatus == 404 ? "Page not found" : "The request could not be completed"}</h2>
+                <a href="<c:url value='/'/>" class="wow animated fadeInUp btn btn-common mt-5" data-wow-delay=".6s"><i class="material-icons mdi mdi-home"></i> Back to home<div class="ripple-container"></div></a>
             </div>
         </div>
     </div>
